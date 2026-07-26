@@ -248,3 +248,14 @@ O Portal Doge Manga Evolution está sendo construído para conectar projetos, in
 # 🐕 Doge Manga Evolution
 
 **A evolução das memecoins começa aqui. 🚀**
+<p align="center">
+  <img src="assets/images/banner.png" width="100%">
+</p>
+
+<h1 align="center">
+🚀 Portal Doge Manga Evolution
+</h1>
+
+<p align="center">
+A próxima geração de Launchpad Web3
+</p>
