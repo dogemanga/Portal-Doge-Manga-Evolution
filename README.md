@@ -7,7 +7,13 @@ A próxima geração de Launchpad Web3
 O **Portal Doge Manga Evolution** é uma plataforma Web3 criada para conectar projetos inovadores, desenvolvedores, investidores e comunidades dentro do ecossistema blockchain.
 
 Nossa missão é criar um ambiente moderno, transparente e seguro para descoberta, divulgação e crescimento de novos projetos digitais.
+# 🐕 Doge Manga Token
 
+Token oficial do ecossistema Doge Manga na blockchain Solana.
+
+Contrato:
+
+E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 ---
 
 # 🐕 Doge Manga Token
