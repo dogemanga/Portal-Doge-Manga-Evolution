@@ -45,7 +45,33 @@ Recursos planejados:
 - 🔄 Futuras transações dentro da plataforma
 
 Carteira oficial:
+<!-- PHANTOM DOGE MANGA -->
 
+<section class="card">
+
+<h2>🐕 Comprar Doge Manga</h2>
+
+<p>
+Acesse o Doge Manga através da carteira Phantom dentro do Portal Doge Manga Evolution.
+</p>
+
+<div class="contract">
+Contrato Doge Manga:
+<br>
+E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
+</div>
+
+<br>
+
+<a href="https://phantom.app/" target="_blank">
+
+<button>
+🟣 Abrir Phantom Wallet - Doge Manga
+</button>
+
+</a>
+
+</section>
 https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 
 ---
