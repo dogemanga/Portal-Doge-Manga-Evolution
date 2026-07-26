@@ -1,7 +1,13 @@
 ![Portal Doge Manga Evolution](file_00000000b510820ea690243d5980576c.png)
 # 🚀 Portal Doge Manga Evolution
 
+<p align="center">
+  <img src="file_00000000b510820ea690243d5980576c.png" width="100%">
+</p>
 
+# 🚀 Portal Doge Manga Evolution
+
+A próxima geração de Launchpad Web3
 # 🌎 A próxima geração de Launchpad Web3
 
 O **Portal Doge Manga Evolution** é uma plataforma Web3 criada para conectar projetos inovadores, desenvolvedores, investidores e comunidades dentro do ecossistema blockchain.
