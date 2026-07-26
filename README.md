@@ -215,7 +215,7 @@ Tecnologias utilizadas e planejadas:
 🔄 Expansão global
 
 ---
-
+https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 # 🌐 Links Oficiais
 
 🌍 Website:
