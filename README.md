@@ -46,7 +46,7 @@ Recursos planejados:
 
 Carteira oficial:
 
-https://phantom.app/
+https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 
 ---
 
