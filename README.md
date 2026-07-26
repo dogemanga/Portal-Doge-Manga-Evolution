@@ -259,3 +259,10 @@ O Portal Doge Manga Evolution está sendo construído para conectar projetos, in
 <p align="center">
 A próxima geração de Launchpad Web3
 </p>
+[ IMAGEM GRANDE DO PROJETO ]
+     
+🚀 Portal Doge Manga Evolution
+
+A próxima geração de Launchpad Web3
+
+Sobre o Projeto...
