@@ -1,8 +1,4 @@
-# Portal Doge Manga Evolution
 
-<p align="center">
-  <img src="assets/images/logo.png" alt="Portal Doge Manga Evolution" width="700">
-</p>
 
 # Portal Doge Manga Evolution
 
