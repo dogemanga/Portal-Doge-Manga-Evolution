@@ -214,7 +214,10 @@ Tecnologias utilizadas e planejadas:
 
 🔄 Expansão global
 
----
+---🐕 Doge Manga Token
+Agora a comunidade pode acessar o Doge Manga diretamente pelo Portal Doge Manga Evolution.
+Através da carteira Phantom, os usuários podem conhecer o projeto, acessar o token oficial na rede Solana e fazer parte do ecossistema Doge Manga Web3.
+🚀 Doge Manga — a evolução da comunidade começa aqui.
 https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 # 🌐 Links Oficiais
 
