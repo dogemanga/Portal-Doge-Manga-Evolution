@@ -1,1 +1,24 @@
+.card{
+background:#111827;
+padding:25px;
+margin:20px;
+border-radius:20px;
+text-align:center;
+}
 
+.contract{
+background:#020617;
+padding:15px;
+border-radius:10px;
+word-break:break-all;
+color:#38bdf8;
+}
+
+button{
+background:#14f195;
+padding:15px 25px;
+border:none;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+}
