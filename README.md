@@ -64,9 +64,4 @@ Dentro do portal, usuários poderão encontrar:
 
 ```text
 E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
-https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
-<a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-<button>
-🦊 Ver Doge Manga na Phantom
-</button>
-</a>
+
