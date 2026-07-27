@@ -275,3 +275,29 @@ setInterval(atualizarPrecos, 60000);
 </form>
 
 </section>
+<button id="connectWallet" class="btn">
+🔗 Conectar Carteira Phantom
+</button>
+
+<p id="walletStatus">Carteira: Não conectada</p>
+<script>
+const connectButton = document.getElementById("connectWallet");
+const walletStatus = document.getElementById("walletStatus");
+
+async function connectWallet() {
+    if (!window.solana || !window.solana.isPhantom) {
+        alert("Instale a Phantom Wallet para continuar.");
+        return;
+    }
+
+    try {
+        const response = await window.solana.connect();
+        walletStatus.innerHTML =
+            "✅ Carteira: " + response.publicKey.toString();
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+connectButton.addEventListener("click", connectWallet);
+</script>
