@@ -241,3 +241,32 @@ font-size:18px;
     color:#ffffff;
     margin:8px 0;
 }
+.dashboard{
+padding:60px 20px;
+text-align:center;
+}
+
+.dashboard-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+max-width:1000px;
+margin:auto;
+}
+
+.dashboard .card{
+background:#111827;
+padding:25px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(0,0,0,.4);
+}
+
+.dashboard .card h3{
+color:#facc15;
+margin-bottom:10px;
+}
+
+.dashboard .card h1{
+font-size:36px;
+color:#22c55e;
+}
