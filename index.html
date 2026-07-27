@@ -1,91 +1,104 @@
-<header class="hero">
-    <img src="banner.jpg" alt="Portal Doge Manga Evolution">
-</header>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Doge Manga Evolution</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Doge Manga Evolution</title>
+<style>
+*{margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
 
-        body {
-            color: white;
-            line-height: 1.6;
-            background: linear-gradient(rgba(2, 6, 23, 0.82), rgba(2, 6, 23, 0.82)), url("banner.jpg");
-            background-size: cover;
-            background-position: center top;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            min-height: 100vh;
-        }
+body {
+    color: white; line-height: 1.6;
+    /* Usa a arte como fundo, com leve escurecimento só para o texto ficar legível */
+    background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.75)), url("banner.jpg");
+    background-size: cover; background-position: center;
+    background-attachment: fixed; background-repeat: no-repeat;
+    min-height: 100vh;
+}
 
-        nav { background: rgba(2, 6, 23, 0.95); padding: 18px; text-align: center; position: sticky; top: 0; z-index: 999; border-bottom: 1px solid #facc15; }
-        nav a { color: white; text-decoration: none; margin: 8px; font-weight: bold; display: inline-block; padding: 5px; position: relative; z-index: 9999; }
-        nav a:hover { color: #facc15; }
+nav {
+    background: rgba(2, 6, 23, 0.95); padding: 18px; text-align: center;
+    position: sticky; top: 0; z-index: 999;
+    border-bottom: 2px solid #facc15;
+}
+nav a {
+    color: white; text-decoration: none; margin: 6px;
+    font-weight: bold; display: inline-block; padding: 5px;
+}
+nav a:hover { color: #facc15; }
 
-        header { text-align: center; padding: 60px 20px; }
-        .logo { width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 3px solid #facc15; margin-bottom: 15px; }
-        h1 { font-size: 42px; color: #facc15; text-shadow: 0 0 15px rgba(250, 204, 21, 0.5); }
-        header p { margin-top: 15px; font-size: 18px; color: #e5e7eb; }
+header { text-align: center; padding: 60px 20px; }
+.logo {
+    width: 180px; height: 180px; object-fit: cover;
+    border-radius: 50%; border: 3px solid #facc15; margin-bottom: 15px;
+    box-shadow: 0 0 20px rgba(250,204,21,0.3);
+}
+h1 { font-size: 48px; color: #facc15; text-shadow: 0 0 20px rgba(250,204,21,0.6); }
+header p { margin-top: 15px; font-size: 20px; color: #f0f0f0; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        .card { background: rgba(17, 24, 39, 0.92); padding: 25px; margin: 20px 0; border-radius: 20px; box-shadow: 0 0 25px rgba(250, 204, 21, 0.2); border: 1px solid rgba(250, 204, 21, 0.3); }
-        h2 { color: #facc15; margin-bottom: 15px; border-bottom: 2px solid #facc15; padding-bottom: 8px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.card {
+    background: rgba(17, 24, 39, 0.9); padding: 25px; margin: 20px 0;
+    border-radius: 20px; box-shadow: 0 0 25px rgba(250,204,21,0.2);
+    border: 1px solid rgba(250,204,21,0.4);
+}
+h2 { color: #facc15; margin-bottom: 15px; border-bottom: 2px solid #facc15; padding-bottom: 8px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 15px; margin-top: 15px; }
-        .box { background: rgba(2, 6, 23, 0.9); padding: 15px; border-radius: 12px; border-left: 3px solid #facc15; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 15px; margin-top: 15px; }
+.box { background: rgba(2, 6, 23, 0.9); padding: 15px; border-radius: 12px; border-left: 3px solid #facc15; }
 
-        .contract { background: rgba(2, 6, 23, 0.9); padding: 12px; border-radius: 8px; color: #22c55e; font-family: monospace; word-break: break-all; margin: 15px 0; }
+.contract {
+    background: rgba(2, 6, 23, 0.9); padding: 12px; border-radius: 8px;
+    color: #22c55e; font-family: monospace; word-break: break-all; margin: 15px 0;
+}
 
-        .btn {
-            display: inline-block;
-            margin: 8px 5px;
-            padding: 12px 25px;
-            background: #facc15;
-            color: #050816;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 16px;
-            box-shadow: 0 0 12px rgba(250, 204, 21, 0.4);
-            position: relative;
-            z-index: 9999;
-        }
-        .btn:hover { transform: scale(1.05); background: white; box-shadow: 0 0 20px rgba(250, 204, 21, 0.6); }
+.btn {
+    display: inline-block; margin: 8px 5px; padding: 12px 25px;
+    background: #facc15; color: #050816; text-decoration: none;
+    font-weight: bold; border-radius: 12px; cursor: pointer;
+    transition: 0.3s; font-size: 16px; box-shadow: 0 0 15px rgba(250,204,21,0.5);
+}
+.btn:hover { transform: scale(1.08); background: white; box-shadow: 0 0 25px rgba(250,204,21,0.7); }
 
-        .btn-tel { background: #229ED9; color: white; }
-        .btn-tel:hover { background: #1b8ac0; }
-        .btn-x { background: #1DA1F2; color: white; }
-        .btn-x:hover { background: #1991da; }
-        .btn-site { background: #2563eb; color: white; }
-        .btn-site:hover { background: #1d4ed8; }
-        .btn-portal { background: #8b5cf6; color: white; }
-        .btn-portal:hover { background: #7c3aed; }
-        .btn-chain { background: #10b981; color: white; }
-        .btn-chain:hover { background: #059669; }
-        .btn-trade { background: #f97316; color: white; }
-        .btn-trade:hover { background: #ea580c; }
-        .btn-git { background: #6e5494; color: white; }
-        .btn-git:hover { background: #5a447a; }
+.btn-tel { background: #229ED9; color: white; }
+.btn-tel:hover { background: #1b8ac0; }
+.btn-x { background: #1DA1F2; color: white; }
+.btn-x:hover { background: #1991da; }
+.btn-site { background: #2563eb; color: white; }
+.btn-site:hover { background: #1d4ed8; }
+.btn-portal { background: #8b5cf6; color: white; }
+.btn-portal:hover { background: #7c3aed; }
+.btn-chain { background: #10b981; color: white; }
+.btn-chain:hover { background: #059669; }
+.btn-trade { background: #f97316; color: white; }
+.btn-trade:hover { background: #ea580c; }
+.btn-git { background: #6e5494; color: white; }
+.btn-git:hover { background: #5a447a; }
 
-        .crypto-market { background: rgba(17, 24, 39, 0.92); padding: 25px; border-radius: 18px; text-align: center; margin-top: 20px; border: 1px solid rgba(250, 204, 21, 0.3); }
-        .crypto-market h2 { color: #facc15; border-bottom-color: #facc15; }
-        .crypto-card { background: rgba(2, 6, 23, 0.9); padding: 18px; border-radius: 12px; display: inline-block; width: 200px; margin: 8px; }
-        .crypto-card h3 { color: #facc15; }
-        .crypto-card p { font-size: 20px; font-weight: bold; margin: 5px 0; }
-        .verde { color: #22c55e; }
-        .vermelho { color: #ef4444; }
+.crypto-market {
+    background: rgba(17, 24, 39, 0.9); padding: 25px; border-radius: 18px;
+    text-align: center; margin-top: 20px; border: 1px solid rgba(250,204,21,0.4);
+}
+.crypto-card {
+    background: rgba(2, 6, 23, 0.9); padding: 18px; border-radius: 12px;
+    display: inline-block; width: 200px; margin: 8px;
+}
+.crypto-card h3 { color: #facc15; }
+.crypto-card p { font-size: 20px; font-weight: bold; margin: 5px 0; }
+.verde { color: #22c55e; }
+.vermelho { color: #ef4444; }
 
-        footer { text-align: center; padding: 30px; background: rgba(2, 6, 23, 0.95); margin-top: 20px; color: #94a3b8; border-top: 1px solid #facc15; }
+footer {
+    text-align: center; padding: 30px; background: rgba(2, 6, 23, 0.95);
+    margin-top: 20px; color: #94a3b8; border-top: 2px solid #facc15;
+}
 
-        @media(max-width:700px){
-            header h1 { font-size: 30px; }
-            .btn { width: 90%; margin: 5px 0; }
-            .crypto-card { width: 90%; }
-            body { background-position: center top; }
-        }
-    </style>
+@media(max-width:700px){
+    header h1 { font-size: 32px; }
+    .btn { width: 90%; margin: 5px 0; }
+    .crypto-card { width: 90%; }
+}
+</style>
 </head>
 <body>
 
@@ -93,22 +106,25 @@
     <a href="#">🏠 Início</a>
     <a href="#">🚀 Launchpad</a>
     <a href="#">🐕 Token</a>
-    <a href="#">💎 Comprar</a>
-    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer">🌐 Site Oficial</a>
-    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener noreferrer">👥 Comunidade</a>
+    <a href="comprar.html">💎 Comprar</a>
+    <a href="nft.html">🎨 NFT</a>
+    <a href="jogo-bolinhas.html">🎮 Jogo</a>
+    <a href="whitepaper.html">📄 Whitepaper</a>
+    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener">🌐 Site Oficial</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener">👥 Comunidade</a>
 </nav>
 
 <header>
-    <img src="logo.png" class="logo" alt="Doge Manga Evolution">
+    <img src="logo.png" class="logo" alt="Portal Doge Manga Evolution">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>A evolução das memecoins começa aqui</p>
+    <p>O hub definitivo para lançar, listar e promover sua memecoin</p>
 </header>
 
 <div class="container">
 
 <div class="card">
     <h2>🌎 Sobre o Projeto</h2>
-    <p>Plataforma oficial de lançamento, listagem e promoção de memecoins na rede Solana. O hub definitivo para a nova geração de projetos!</p>
+    <p>Plataforma oficial de lançamento, listagem e promoção de memecoins na rede Solana. Rápida, segura e escalável — a nova geração de projetos começa aqui!</p>
 </div>
 
 <div class="card">
@@ -122,7 +138,7 @@
     <br>
     <strong>Contrato Oficial:</strong>
     <div class="contract">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</div>
-    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-chain">🔎 Ver na Solscan</a>
+    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-chain">🔎 Ver na Solscan</a>
 </div>
 
 <div class="card">
@@ -136,23 +152,32 @@
 
 <div class="card">
     <h2>🌐 Todos os Links Oficiais</h2>
-
     <h3 style="margin-bottom:10px; color:#facc15;">📢 Redes e Site</h3>
-    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer" class="btn btn-site">🌍 Site Oficial</a>
-    <a href="https://dogemanga.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn btn-portal">🐕 Portal Evolution</a>
-    <a href="https://x.com/dogemanga96508" target="_blank" rel="noopener noreferrer" class="btn btn-x">🐦 X Twitter</a>
-    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener noreferrer" class="btn btn-tel">💬 Telegram</a>
-    <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" rel="noopener noreferrer" class="btn btn-git">📂 GitHub Oficial</a>
+    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener" class="btn btn-site">🌍 Site Oficial</a>
+    <a href="https://dogemanga.netlify.app/" target="_blank" rel="noopener" class="btn btn-portal">🐕 Portal Evolution</a>
+    <a href="https://x.com/dogemanga96508" target="_blank" rel="noopener" class="btn btn-x">🐦 X Twitter</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener" class="btn btn-tel">💬 Telegram</a>
+    <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" rel="noopener" class="btn btn-git">📂 GitHub Oficial</a>
 
     <br><br>
     <h3 style="margin-bottom:10px; color:#facc15;">🔎 Exploradores e Mercado</h3>
-    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-chain">📉 DexScreener</a>
-    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener noreferrer" class="btn btn-chain">📈 Birdeye</a>
+    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-chain">📉 DexScreener</a>
+    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener" class="btn btn-chain">📈 Birdeye</a>
 
     <br><br>
     <h3 style="margin-bottom:10px; color:#facc15;">💱 Negociação e Carteira</h3>
-    <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-trade">🌊 Raydium</a>
-    <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-trade">👻 Phantom Wallet</a>
+    <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-trade">🌊 Raydium</a>
+    <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-trade">👻 Phantom Wallet</a>
+</div>
+
+<div class="card">
+    <h2>🚀 Ecossistema Doge Manga</h2>
+    <div class="grid">
+        <div class="box">🐕 <strong>Token</strong><br>Doge Manga na rede Solana.</div>
+        <div class="box">🚀 <strong>Launchpad</strong><br>Plataforma para lançar sua memecoin.</div>
+        <div class="box">🎨 <strong>NFT</strong><br>Coleções digitais exclusivas.</div>
+        <div class="box">🦊 <strong>Comunidade</strong><br>Conexão global e engajada.</div>
+    </div>
 </div>
 
 <div class="crypto-market">
@@ -200,615 +225,3 @@ setInterval(atualizarPrecos, 60000);
 
 </body>
 </html>
-<div class="card">
-<h2>🚀 Ecossistema Doge Manga</h2>
-
-<div class="grid">
-
-<div class="box">
-🐕 <strong>Token</strong><br>
-Doge Manga na rede Solana.
-</div>
-
-<div class="box">
-🚀 <strong>Launchpad</strong><br>
-Plataforma para novos projetos Web3.
-</div>
-
-<div class="box">
-🎨 <strong>NFT</strong><br>
-Coleções digitais e experiências.
-</div>
-
-<div class="box">
-🦊 <strong>Web3</strong><br>
-Integrações com carteiras e blockchain.
-</div>
-
-</div>
-</div><div class="crypto-market">
-    <h2>📈 Mercado ao Vivo</h2><div class="card">
-
-<h2>📌 Estatísticas Doge Manga</h2>
-
-<div class="grid">
-
-<div class="box">
-🐕 <strong>Token:</strong><br>
-Doge Manga ($DGM)
-</div>
-
-<div class="box">
-⛓️ <strong>Blockchain:</strong><br>
-Solana SPL
-</div>
-
-<div class="box">
-💎 <strong>Supply:</strong><br>
-420.000.000.000
-</div>
-
-<div class="box">
-🚀 <strong>Status:</strong><br>
-Em desenvolvimento
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>🚀 Ecossistema Doge Manga</h2>
-
-<div class="grid">
-
-<div class="box">
-🚀 <strong>Launchpad Web3</strong><br>
-Apresentação e divulgação de novos projetos blockchain.
-</div>
-
-<div class="box">
-🎨 <strong>NFT Collection</strong><br>
-Arte digital e futuras experiências dentro do ecossistema.
-</div>
-
-<div class="box">
-🦊 <strong>Web3 Wallet</strong><br>
-Integração com carteiras e tecnologias descentralizadas.
-</div>
-
-<div class="box">
-🌎 <strong>Comunidade Global</strong><br>
-Conectando usuários e projetos do mundo inteiro.
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>📰 Atualizações do Projeto</h2>
-
-<p>✅ Identidade visual criada</p>
-<p>✅ Token na rede Solana</p>
-<p>✅ Portal Web3 em desenvolvimento</p>
-<p>🔄 Integrações blockchain</p>
-<p>🔄 Expansão do ecossistema</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h2>🤝 Comunidade Doge Manga</h2>
-
-<p>
-Faça parte da evolução do ecossistema Doge Manga.
-</p>
-
-<br>
-
-<a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="btn btn-tel">
-💬 Telegram
-</a>
-
-<a href="https://x.com/dogemanga96508" target="_blank" class="btn btn-x">
-🐦 X
-</a>
-
-<a href="https://dogemangaofficial.xyz" target="_blank" class="btn btn-site">
-🌐 Site
-</a>
-
-</div><div class="card">
-
-<h2>🚀 Doge Manga Launchpad</h2>
-
-<p>
-Uma plataforma criada para conectar novos projetos Web3,
-comunidades e investidores dentro do ecossistema blockchain.
-</p>
-
-<br>
-
-<div class="grid">
-
-<div class="box">
-🚀 <strong>Novos Projetos</strong><br>
-Apresentação de projetos digitais e tokens inovadores.
-</div>
-
-<div class="box">
-📊 <strong>Informações Blockchain</strong><br>
-Dados de tokens, redes e comunidades oficiais.
-</div>
-
-<div class="box">
-👥 <strong>Comunidades</strong><br>
-Conexão entre desenvolvedores e usuários.
-</div>
-
-<div class="box">
-🌎 <strong>Expansão Global</strong><br>
-Construindo uma plataforma Web3 internacional.
-</div>
-
-</div>
-
-</div><div class="card">
-
-<h2>📄 Documentação Doge Manga</h2>
-
-<p>
-Conheça a visão, tecnologia e planejamento do ecossistema Doge Manga Evolution.
-</p>
-
-<div class="grid">
-
-<div class="box">
-📘 <strong>Whitepaper</strong><br>
-Documento com visão do projeto, tokenomics e futuro do ecossistema.
-</div>
-
-<div class="box">
-🧩 <strong>Tecnologia</strong><br>
-Construído na blockchain Solana com foco em Web3.
-</div>
-
-<div class="box">
-🗺️ <strong>Roadmap</strong><br>
-Acompanhe as próximas fases de desenvolvimento.
-</div>
-
-<div class="box">
-🔗 <strong>Transparência</strong><br>
-Informações públicas sobre contrato e integrações.
-</div>
-
-</div>
-
-<br>
-
-<a href="#" class="btn btn-site">
-📄 Ver Whitepaper
-</a>
-
-</div>
-<div class="card">
-
-<h2>🎨 Galeria Doge Manga NFT</h2>
-
-<p>
-Explore a identidade visual do ecossistema Doge Manga Evolution.
-Coleções digitais, artes e futuras experiências Web3.
-</p>
-
-<div class="grid">
-
-<div class="box">
-<img src="logo.png" style="width:100%;border-radius:12px;">
-<br><br>
-🐕 Doge Manga Logo
-</div>
-
-<div class="box">
-<img src="nft1.png" style="width:100%;border-radius:12px;">
-<br><br>
-🎨 NFT Collection
-</div>
-
-<div class="box">
-<img src="nft2.png" style="width:100%;border-radius:12px;">
-<br><br>
-💎 Digital Art
-</div>
-
-</div>
-
-</div>
-<div class="card">
-
-<h2>🤝 Parceiros e Integrações Web3</h2>
-
-<p>
-O ecossistema Doge Manga Evolution busca conectar tecnologias,
-comunidades e ferramentas da nova geração blockchain.
-</p>
-
-<br>
-
-<div class="grid">
-
-<div class="box">
-⛓️ <strong>Solana</strong><br>
-Blockchain principal do ecossistema Doge Manga.
-</div>
-
-<div class="box">
-🦊 <strong>Phantom Wallet</strong><br>
-Integração com carteira Web3 na rede Solana.
-</div>
-
-<div class="box">
-📊 <strong>DexScreener</strong><br>
-Acompanhamento de dados e mercado do token.
-</div>
-
-<div class="box">
-📈 <strong>Birdeye</strong><br>
-Análise e informações blockchain.
-</div>
-
-</div>
-
-</div>
-<header>
-    <img src="logo.png" class="logo" alt="Doge Manga Evolution">
-    <h1>🚀 Doge Manga Evolution</h1>
-    <p>A evolução das memecoins começa aqui</p>
-</header><header>
-
-<img src="logo.png" class="logo" alt="Doge Manga Evolution">
-
-<h1>🚀 Doge Manga Evolution</h1>
-
-<p>
-A próxima geração de memecoin e Web3 construída na blockchain Solana.
-</p>
-
-<br>
-
-<a href="https://dogemangaofficial.xyz" target="_blank" class="btn btn-site">
-🌐 Conhecer o Projeto
-</a>
-
-<a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="btn btn-tel">
-💬 Entrar na Comunidade
-</a>
-
-</header><div class="container"><div class="container">
-
-<div class="card">
-
-<h2>📊 Dados do Ecossistema</h2>
-
-<div class="grid">
-
-<div class="box">
-🐕 <strong>Token</strong><br>
-Doge Manga ($DGM)
-</div>
-
-<div class="box">
-⛓️ <strong>Rede</strong><br>
-Solana SPL
-</div>
-
-<div class="box">
-💎 <strong>Supply</strong><br>
-420.000.000.000
-</div>
-
-<div class="box">
-🚀 <strong>Status</strong><br>
-Em desenvolvimento
-</div>
-
-</div>
-
-</div>
-<div class="card">
-
-<h2>📢 Últimas Atualizações</h2>
-
-<div class="grid">
-
-<div class="box">
-✅ <strong>Portal Web3</strong><br>
-Plataforma oficial em desenvolvimento.
-</div>
-
-<div class="box">
-⛓️ <strong>Integração Solana</strong><br>
-Ecossistema construído na rede Solana.
-</div>
-
-<div class="box">
-🎨 <strong>NFT & Arte Digital</strong><br>
-Expansão futura com coleções digitais.
-</div>
-
-<div class="box">
-🌎 <strong>Comunidade Global</strong><br>
-Construindo uma comunidade Web3.
-</div>
-
-</div>
-
-</div>
-<div class="card">
-
-<h2>🚀 Acesse o Ecossistema Doge Manga</h2>
-
-<p>
-Participe da evolução do projeto e acompanhe todas as novidades do ecossistema.
-</p>
-
-<br>
-
-<a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-trade">
-💎 Comprar Doge Manga
-</a>
-
-<a href="#" class="btn btn-site">
-📄 Whitepaper
-</a>
-
-<a href="https://dogemangaofficial.xyz" target="_blank" class="btn btn-portal">
-🐕 Explorar Projeto
-</a>
-
-</div>
-href="#"<a href="#" class="btn btn-site">
-📄 Whitepaper
-</a><a href="whitepaper.html" class="btn btn-site">
-📄 Whitepaper
-</a>
-<a href="whitepaper.html" class="btn btn-site">
-📄 Whitepaper
-</a><a href="#" class="btn btn-trade">
-💎 Comprar Doge Manga
-</a>
-<a href="comprar.html" class="btn btn-trade">
-💎 Comprar Doge Manga
-</a>
-<a href="nft.html" class="btn btn-site">
-🎨 NFT Collection
-</a>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doge Manga NFT - Coleção Oficial</title>
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#050816;
-color:white;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:25px;
-}
-
-.card{
-background:#111827;
-padding:25px;
-margin:20px 0;
-border-radius:18px;
-border:1px solid #facc15;
-box-shadow:0 0 20px rgba(250,204,21,0.15);
-}
-
-h1,h2{
-color:#facc15;
-margin-bottom:15px;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-margin-top:15px;
-}
-
-.box{
-background:#020617;
-padding:15px;
-border-radius:12px;
-}
-
-.nft-card{
-background:#020617;
-border-radius:12px;
-padding:12px;
-text-align:center;
-border:1px solid rgba(250,204,21,0.2);
-transition:0.3s;
-}
-
-.nft-card:hover{
-transform:scale(1.05);
-border-color:#facc15;
-box-shadow:0 0 15px rgba(250,204,21,0.25);
-}
-
-.nft-card img{
-width:100%;
-border-radius:10px;
-margin-bottom:10px;
-}
-
-.raridade{
-padding:5px 10px;
-border-radius:8px;
-font-size:13px;
-font-weight:bold;
-display:inline-block;
-margin-top:10px;
-}
-
-.classico{
-background:#3b82f6;
-}
-
-.evoluido{
-background:#8b5cf6;
-}
-
-.raro{
-background:#ef4444;
-}
-
-.lendario{
-background:#facc15;
-color:#050816;
-}
-
-.btn{
-display:inline-block;
-padding:12px 25px;
-margin:8px 5px;
-background:#facc15;
-color:#050816;
-font-weight:bold;
-text-decoration:none;
-border-radius:12px;
-transition:0.2s;
-}
-
-.btn:hover{
-background:white;
-transform:scale(1.05);
-}
-
-.telegram{
-background:#229ED9;
-color:white;
-}
-.telegram:hover{
-background:#1b8ac0;
-}
-
-.x{
-background:#1DA1F2;
-color:white;
-}
-.x:hover{
-background:#1991da;
-}
-
-.site{
-background:#2563eb;
-color:white;
-}
-.site:hover{
-background:#1d4ed8;
-}
-</style>
-</head>
-<body>
-
-<div class="container">
-
-<div class="card">
-<h1>🎨 Doge Manga NFT — Coleção Oficial</h1>
-<p><strong>Coleção:</strong> Doge Manga Origins</p>
-<p>🐕 Total: <strong>1.000 NFTs Únicos</strong><br>⛓️ Rede: <strong>Solana</strong></p>
-<p>A primeira coleção digital oficial do ecossistema Doge Manga Evolution, unindo arte, comunidade e tecnologia Web3.</p>
-</div>
-
-<div class="card">
-<h2>📊 Detalhes da Coleção</h2>
-<div class="grid">
-<div class="box">📦 <strong>Total:</strong><br>1.000 NFTs</div>
-<div class="box">⛓️ <strong>Blockchain:</strong><br>Solana SPL</div>
-<div class="box">🎨 <strong>Características:</strong><br>NFTs únicos</div>
-<div class="box">🔒 <strong>Propriedade:</strong><br>Registrada na blockchain</div>
-</div>
-</div>
-
-<div class="card">
-<h2>🖼️ Raridades da Coleção</h2>
-<div class="grid">
-<div class="nft-card">
-<img src="nft-classico.png" alt="Clássico">
-<h3>🐕 Clássico</h3>
-<p>Personagem original Doge Manga.</p>
-<span class="raridade classico">Comum — 600 unidades</span>
-</div>
-
-<div class="nft-card">
-<img src="nft-evoluido.png" alt="Evoluído">
-<h3>⚡ Evoluído</h3>
-<p>Versões especiais com detalhes únicos.</p>
-<span class="raridade evoluido">Incomum — 250 unidades</span>
-</div>
-
-<div class="nft-card">
-<img src="nft-raro.png" alt="Raro">
-<h3>💎 Raro</h3>
-<p>Edições limitadas exclusivas.</p>
-<span class="raridade raro">Raro — 100 unidades</span>
-</div>
-
-<div class="nft-card">
-<img src="nft-lendario.png" alt="Lendário">
-<h3>🚀 Lendário</h3>
-<p>Os NFTs mais exclusivos da coleção.</p>
-<span class="raridade lendario">Lendário — 50 unidades</span>
-</div>
-</div>
-</div>
-
-<div class="card">
-<h2>🎁 Benefícios dos Detentores</h2>
-<div class="grid">
-<div class="box">✅ Acesso antecipado ao ecossistema</div>
-<div class="box">✅ Participação na comunidade</div>
-<div class="box">✅ Possíveis recompensas futuras</div>
-<div class="box">✅ Eventos e experiências Web3</div>
-<div class="box">✅ Integrações futuras com o projeto</div>
-<div class="box">✅ Arte digital exclusiva</div>
-</div>
-</div>
-
-<div class="card">
-<h2>🚀 Lançamento</h2>
-<p>A data de lançamento, marketplace e detalhes de venda serão anunciados oficialmente pelos canais Doge Manga.</p>
-
-<a class="btn x" href="https://x.com/dogemanga96508" target="_blank" rel="noopener noreferrer">🐦 X</a>
-<a class="btn telegram" href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener noreferrer">💬 Telegram</a>
-<a class="btn site" href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer">🌐 Site</a>
-
-<br><br>
-<a class="btn" href="index.html">⬅️ Voltar ao Portal</a>
-</div>
-
-</div>
-</body>
-</html>
-<nav><a href="nft.html">🎨 NFT Collection</a><a href="nft.html" class="btn btn-site">
-🎨 Ver Coleção NFT
-</a>
