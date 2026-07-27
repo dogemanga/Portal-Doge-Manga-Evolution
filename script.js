@@ -61,3 +61,71 @@ if(connectButton){
     );
 
 }
+// 🐕 Doge Manga Evolution
+// Phantom Wallet Connection
+
+
+const button = document.getElementById("connectWallet");
+
+
+if(button){
+
+button.addEventListener("click", async () => {
+
+
+if(window.solana && window.solana.isPhantom){
+
+
+try{
+
+
+const wallet = await window.solana.connect();
+
+
+const address = wallet.publicKey.toString();
+
+
+alert(
+"Carteira conectada:\n" + address
+);
+
+
+console.log(
+"Wallet:",
+address
+);
+
+
+}
+
+
+catch(error){
+
+console.log(error);
+
+}
+
+
+}
+
+else{
+
+
+alert(
+"Instale a Phantom Wallet para conectar."
+);
+
+
+window.open(
+"https://phantom.app/",
+"_blank"
+);
+
+
+}
+
+
+});
+
+
+}
