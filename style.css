@@ -183,3 +183,35 @@ header h1{
     display:block;
     border-radius:0 0 20px 20px;
 }
+.launchpad{
+padding:60px 20px;
+text-align:center;
+}
+
+.launch-form{
+max-width:700px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:15px;
+}
+
+.launch-form input,
+.launch-form textarea{
+padding:15px;
+border:none;
+border-radius:10px;
+background:#111827;
+color:white;
+font-size:16px;
+}
+
+.launch-form textarea{
+height:120px;
+resize:none;
+}
+
+.launch-form button{
+padding:15px;
+font-size:18px;
+}
