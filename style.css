@@ -1,4 +1,4 @@
-.card{
+i.card{
 background:#111827;
 padding:25px;
 margin:20px;
@@ -243,5 +243,35 @@ footer{
         height:130px;
 
     }
+
+}
+.menu{
+
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+padding:20px;
+background:#020617;
+
+}
+
+
+.menu a{
+
+color:white;
+text-decoration:none;
+padding:12px 20px;
+border-radius:25px;
+background:#1e3a8a;
+transition:0.3s;
+
+}
+
+
+.menu a:hover{
+
+background:#14f195;
+color:#020617;
 
 }
