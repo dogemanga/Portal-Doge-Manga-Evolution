@@ -1,619 +1,142 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Doge Manga Evolution</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #050816; color: white; line-height: 1.6; }
 
-<title>Portal Doge Manga Evolution</title>
+        nav { background: #020617; padding: 18px; text-align: center; position: sticky; top: 0; z-index: 999; }
+        nav a { color: white; text-decoration: none; margin: 8px; font-weight: bold; }
+        nav a:hover { color: #38bdf8; }
 
-<style>
+        header { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #111827, #2563eb); }
+        .logo { width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 3px solid #38bdf8; }
+        h1 { font-size: 38px; margin: 15px 0; }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        .card { background: #111827; padding: 25px; margin: 20px 0; border-radius: 18px; }
+        h2 { color: #38bdf8; margin-bottom: 12px; border-bottom: 2px solid #2563eb; padding-bottom: 5px; }
 
-body{
-background:#050816;
-color:white;
-}
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+        .box { background: #020617; padding: 15px; border-radius: 12px; border-left: 3px solid #14f195; }
 
-nav{
-background:#020617;
-padding:20px;
-text-align:center;
-}
+        .contract { background: #020617; padding: 12px; border-radius: 8px; color: #14f195; font-family: monospace; word-break: break-all; margin: 10px 0; }
 
-nav a{
-color:white;
-text-decoration:none;
-margin:10px;
-font-weight:bold;
-}
+        button { background: #14f195; color: black; border: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; }
+        button:hover { transform: scale(1.03); }
+        .btn-tel { background: #229ED9; color: white; }
+        .btn-x { background: #1DA1F2; color: white; }
 
-header{
-text-align:center;
-padding:60px 20px;
-background:linear-gradient(135deg,#111827,#2563eb);
-}
+        .crypto-market { background: #111827; padding: 25px; border-radius: 18px; text-align: center; margin-top: 20px; }
+        .crypto-market h2 { color: #facc15; border-bottom-color: #facc15; }
+        .crypto-card { background: #020617; padding: 18px; border-radius: 12px; display: inline-block; width: 200px; margin: 8px; }
+        .crypto-card p { font-size: 20px; font-weight: bold; margin: 5px 0; }
+        .verde { color: #22c55e; }
+        .vermelho { color: #ef4444; }
 
-.logo{
-width:180px;
-height:180px;
-object-fit:cover;
-border-radius:50%;
-}
-
-h1{
-font-size:40px;
-margin:20px 0;
-}
-
-h2{
-color:#38bdf8;
-margin-bottom:15px;
-}
-
-.container{
-max-width:1100px;
-margin:auto;
-padding:20px;
-}
-
-.card{
-background:#111827;
-padding:30px;
-margin:25px 0;
-border-radius:20px;
-box-shadow:0 0 20px #000;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.box{
-background:#020617;
-padding:20px;
-border-radius:15px;
-}
-
-.contract{
-background:#020617;
-padding:15px;
-border-radius:10px;
-word-break:break-all;
-color:#14f195;
-}
-
-button{
-background:#14f195;
-color:#000;
-border:0;
-padding:15px 30px;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-margin-top:15px;
-}
-
-button:hover{
-transform:scale(1.05);
-}
-
-footer{
-text-align:center;
-padding:30px;
-background:#020617;
-}
-
-</style>
-
+        footer { text-align: center; padding: 30px; background: #020617; margin-top: 20px; }
+    </style>
 </head>
-
-
 <body>
 
-
 <nav>
-
-<a href="index.html">🏠 Home</a>
-
-<a href="projects.html">🚀 Launchpad</a>
-
-<a href="token.html">🐕 Token</a>
-
-<a href="buy.html">💎 Comprar</a>
-
-<a href="doge-manga.html">🐕 Doge Manga</a>
-
+    <a href="#">🏠 Home</a>
+    <a href="#">🚀 Launchpad</a>
+    <a href="#">🐕 Token</a>
+    <a href="#">💎 Comprar</a>
+    <a href="#">🐕 Doge Manga</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank">👥 Comunidade</a>
 </nav>
 
-
-
 <header>
-
-<img src="file_00000000b510820ea690243d5980576c.png" class="logo">
-
-<h1>🚀 Portal Doge Manga Evolution</h1>
-
-<p>
-A próxima geração de Launchpad Web3
-</p>
-
+    <img src="logo.png" class="logo" alt="Doge Manga">
+    <h1>🚀 Portal Doge Manga Evolution</h1>
+    <p>A evolução das memecoins começa aqui</p>
 </header>
-
-
 
 <div class="container">
 
-
-<section class="card">
-
-<h2>🌎 Sobre o Portal</h2>
-
-<p>
-O Portal Doge Manga Evolution é uma plataforma Web3 criada para conectar projetos, desenvolvedores, investidores e comunidades dentro do ecossistema blockchain.
-</p>
-
-</section>
-
-
-
-
-<section class="card">
-
-<h2>🚀 Launchpad Web3</h2>
-
-<p>
-Um ambiente para descoberta, divulgação e crescimento de novos projetos digitais.
-</p>
-
-
-<div class="grid">
-
-<div class="box">
-
-<h3>🪙 Projetos</h3>
-
-<p>
-Listagem de novos projetos de criptomoedas.
-</p>
-
+<div class="card">
+    <h2>🌎 Sobre</h2>
+    <p>Plataforma Web3 que conecta projetos, comunidade e investidores na rede Solana.</p>
 </div>
 
-
-<div class="box">
-
-<h3>👥 Comunidade</h3>
-
-<p>
-Conexão entre criadores e investidores.
-</p>
-
+<div class="card">
+    <h2>📊 Tokenomics</h2>
+    <div class="grid">
+        <div class="box"><strong>Nome:</strong> Doge Manga ($DGM)</div>
+        <div class="box"><strong>Rede:</strong> Solana SPL</div>
+        <div class="box"><strong>Supply:</strong> 420.000.000.000</div>
+        <div class="box"><strong>Decimais:</strong> 6</div>
+    </div>
+    <br>
+    <strong>Contrato Oficial:</strong>
+    <div class="contract">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</div>
+    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank"><button>🔎 Ver na Solscan</button></a>
 </div>
 
+<div class="card">
+    <h2>🗺️ Roadmap</h2>
+    <p>✅ Identidade e comunidade</p>
+    <p>✅ Token criado na Solana</p>
+    <p>🔄 Portal e site oficial</p>
+    <p>🔄 Launchpad e NFTs</p>
+    <p>🔄 Expansão global</p>
+</div>
 
-<div class="box">
+<div class="card">
+    <h2>🌐 Oficiais</h2>
+    <p>Site: <a href="https://dogemangaofficial.xyz" target="_blank" style="color:#38bdf8">dogemangaofficial.xyz</a></p>
+    <p>X: <a href="https://x.com/dogemanga96508" target="_blank" style="color:#38bdf8">@dogemanga96508</a></p>
+    <br>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank"><button class="btn-tel">💬 Telegram</button></a>
+    <a href="https://x.com/dogemanga96508" target="_blank"><button class="btn-x">🐦 X</button></a>
+</div>
 
-<h3>🔗 Blockchain</h3>
-
-<p>
-Foco inicial no ecossistema Solana.
-</p>
-
+<div class="crypto-market">
+    <h2>📈 Mercado ao Vivo</h2>
+    <div class="crypto-card">
+        <h3>₿ Bitcoin</h3>
+        <p id="btc">Carregando...</p>
+        <span id="btcvar"></span>
+    </div>
+    <div class="crypto-card">
+        <h3>◎ Solana</h3>
+        <p id="sol">Carregando...</p>
+        <span id="solvar"></span>
+    </div>
 </div>
 
 </div>
-
-</section>
-
-
-
-
-<section class="card">
-
-<h2>🐕 Doge Manga Token</h2>
-
-<p>
-Projeto principal do ecossistema Doge Manga Evolution.
-</p>
-
-<br>
-
-<p>
-<strong>Blockchain:</strong> Solana
-</p>
-
-<p>
-<strong>Supply:</strong> 420.000.000.000 DOGE MANGA
-</p>
-
-
-<h3>Contrato Oficial:</h3>
-
-<div class="contract">
-
-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
-
-</div>
-
-
-<a href="doge-manga.html">
-
-<button>
-🐕 Ver Projeto Doge Manga
-</button>
-
-</a>
-
-
-</section>
-
-
-
-
-<section class="card">
-
-<h2>💎 Comprar Doge Manga</h2>
-
-<p>
-Acesse a página oficial para informações de compra e integração com carteira Phantom.
-</p>
-
-
-<a href="buy.html">
-
-<button>
-🚀 Comprar Doge Manga
-</button>
-
-</a>
-
-
-</section>
-
-
-
-
-<section class="card">
-
-<h2>🌐 Comunidade Oficial</h2>
-
-
-<a href="https://t.me/+fRrBfGscm9Y3OWEx">
-
-<button>
-💬 Telegram
-</button>
-
-</a>
-
-
-<a href="https://x.com/dogemanga96508">
-
-<button>
-🐦 X Twitter
-</button>
-
-</a>
-
-
-</section>
-
-
-
-</div>
-
-
 
 <footer>
-
 🐕 Doge Manga Evolution
-
-<br><br>
-
-A evolução das memecoins começa aqui 🚀
-
 </footer>
 
+<script>
+async function preco(){
+try{
+let r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
+let d = await r.json();
 
+document.getElementById("btc").innerText = "R$ " + d.bitcoin.brl.toLocaleString("pt-BR");
+let bv = d.bitcoin.brl_24h_change.toFixed(2);
+document.getElementById("btcvar").innerText = bv + "% 24h";
+document.getElementById("btcvar").className = bv >=0 ? "verde" : "vermelho";
+
+document.getElementById("sol").innerText = "R$ " + d.solana.brl.toLocaleString("pt-BR");
+let sv = d.solana.brl_24h_change.toFixed(2);
+document.getElementById("solvar").innerText = sv + "% 24h";
+document.getElementById("solvar").className = sv >=0 ? "verde" : "vermelho";
+}catch(e){console.log("Sem preços no momento");}
+}
+preco();
+setInterval(preco, 60000);
+</script>
 
 </body>
-
 </html>
-<footer><section class="card">
 
-<h2>📊 Tokenomics Doge Manga</h2>
-
-<div class="grid">
-
-<div class="box">
-<h3>🐕 Token</h3>
-<p>
-Doge Manga
-</p>
-</div>
-
-
-<div class="box">
-<h3>⛓️ Blockchain</h3>
-<p>
-Solana (SPL Token)
-</p>
-</div>
-
-
-<div class="box">
-<h3>💰 Supply</h3>
-<p>
-420.000.000.000 DOGE MANGA
-</p>
-</div>
-
-
-<div class="box">
-<h3>🔢 Decimais</h3>
-<p>
-6
-</p>
-</div>
-
-
-</div>
-
-
-<br>
-
-<h3>📜 Contrato Oficial</h3>
-
-<div class="contract">
-
-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
-
-</div>
-
-
-</section>
-<footer><section class="card">
-
-<h2>🗺️ Roadmap Doge Manga Evolution</h2>
-
-<div class="grid">
-
-<div class="box">
-
-<h3>✅ Fase 1</h3>
-
-<p>
-Fundação do projeto, criação da identidade visual, comunidade e estrutura inicial Web3.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h3>🔄 Fase 2</h3>
-
-<p>
-Desenvolvimento do Portal Doge Manga Evolution, páginas do token e integração da plataforma.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h3>🔄 Fase 3</h3>
-
-<p>
-Lançamento do Launchpad Web3 para novos projetos e comunidades.
-</p>
-
-</div>
-
-
-<div class="box">
-
-<h3>🌎 Fase 4</h3>
-
-<p>
-Expansão do ecossistema, NFTs, parcerias e novas aplicações blockchain.
-</p>
-
-</div>
-
-
-</div>
-
-</section>
-<nav>
-
-<a href="index.html">🏠 Home</a>
-
-<a href="projects.html">🚀 Launchpad</a>
-
-<a href="token.html">📊 Token</a>
-
-<a href="buy.html">💎 Comprar</a>
-
-<a href="doge-manga.html">🐕 Doge Manga</a>
-
-<a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank">
-👥 Comunidade
-</a>
-
-</nav>
-<div class="card">
-
-<h2>🌐 Links Oficiais</h2>
-
-<p>
-🌍 Website:
-<br>
-<a href="https://dogemangaofficial.xyz" target="_blank">
-dogemangaofficial.xyz
-</a>
-</p>
-
-<br>
-
-<p>
-🐦 X:
-<br>
-<a href="https://x.com/dogemanga96508" target="_blank">
-@dogemanga96508
-</a>
-</p>
-
-<br>
-
-<p>
-💬 Telegram:
-<br>
-<a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank">
-Comunidade Doge Manga
-</a>
-</p>
-
-</div>
-<a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-<button>
-🦊 Ver Doge Manga na Phantom
-</button>
-</a>
-🔗 Contrato Oficial<footer>
-<!-- DOGE MANGA CRYPTO MARKET -->
-
-<section class="crypto-market">
-
-<h2>📈 Doge Manga Crypto Market</h2>
-
-<div class="crypto-container">
-
-<div class="crypto-card">
-<h3>₿ Bitcoin</h3>
-<p id="btc-price">Carregando...</p>
-<span id="btc-change"></span>
-</div>
-
-<div class="crypto-card">
-<h3>Ξ Ethereum</h3>
-<p id="eth-price">Carregando...</p>
-<span id="eth-change"></span>
-</div>
-
-<div class="crypto-card">
-<h3>◎ Solana</h3>
-<p id="sol-price">Carregando...</p>
-<span id="sol-change"></span>
-</div>
-
-</div>
-
-</section>
-
-
-<style>
-
-.crypto-market{
-margin:40px auto;
-padding:30px;
-max-width:1000px;
-background:#111827;
-border-radius:20px;
-text-align:center;
-}
-
-.crypto-market h2{
-color:#facc15;
-font-size:28px;
-}
-
-.crypto-container{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.crypto-card{
-background:#050816;
-padding:25px;
-border-radius:15px;
-width:220px;
-box-shadow:0 0 15px #000;
-}
-
-.crypto-card h3{
-color:white;
-}
-
-.crypto-card p{
-font-size:22px;
-color:#22c55e;
-font-weight:bold;
-}
-
-.crypto-card span{
-color:#94a3b8;
-}
-
-</style>
-
-
-<script>
-
-async function atualizarCrypto(){
-
-try{
-
-let resposta = await fetch(
-"https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd,brl&include_24hr_change=true"
-);
-
-let dados = await resposta.json();
-
-
-document.getElementById("btc-price").innerHTML =
-"R$ " + dados.bitcoin.brl.toLocaleString("pt-BR");
-
-document.getElementById("btc-change").innerHTML =
-dados.bitcoin.usd_24h_change.toFixed(2)+"% 24h";
-
-
-document.getElementById("eth-price").innerHTML =
-"R$ " + dados.ethereum.brl.toLocaleString("pt-BR");
-
-document.getElementById("eth-change").innerHTML =
-dados.ethereum.usd_24h_change.toFixed(2)+"% 24h";
-
-
-document.getElementById("sol-price").innerHTML =
-"R$ " + dados.solana.brl.toLocaleString("pt-BR");
-
-document.getElementById("sol-change").innerHTML =
-dados.solana.usd_24h_change.toFixed(2)+"% 24h";
-
-
-}catch(error){
-
-console.log("Erro ao carregar preços");
-
-}
-
-}
-
-
-atualizarCrypto();
-
-setInterval(atualizarCrypto,60000);
-
-
-</script>
