@@ -1,277 +1,175 @@
-i.card{
-background:#111827;
-padding:25px;
-margin:20px;
-border-radius:20px;
-text-align:center;
-}
+/* DOGE MANGA EVOLUTION - STYLE CSS */
 
-.contract{
-background:#020617;
-padding:15px;
-border-radius:10px;
-word-break:break-all;
-color:#38bdf8;
-}
-
-button{
-background:#14f195;
-padding:15px 25px;
-border:none;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-}
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-
 body{
-
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-    radial-gradient(circle at top,#1e3a8a,#020617 60%);
+    font-family:Arial, sans-serif;
+    background:#050816;
     color:white;
-    min-height:100vh;
-
 }
 
+
+/* HEADER */
 
 header{
-
     text-align:center;
     padding:50px 20px;
-    background:
-    linear-gradient(135deg,#0f172a,#1d4ed8);
-
+    background:linear-gradient(135deg,#111827,#050816);
 }
 
-
-.logo{
-
-    width:180px;
-    height:180px;
-    object-fit:contain;
-    border-radius:50%;
-    margin-bottom:20px;
-    box-shadow:0 0 30px #38bdf8;
-
-}
-
-
-h1{
-
+header h1{
     font-size:42px;
-    margin-bottom:15px;
-
+    color:#facc15;
 }
-
 
 header p{
-
-    font-size:20px;
-    color:#cbd5e1;
-
+    margin-top:15px;
+    font-size:18px;
 }
 
+
+/* BOTÕES */
+
+.btn{
+    display:inline-block;
+    margin:10px;
+    padding:14px 25px;
+    background:#facc15;
+    color:#050816;
+    text-decoration:none;
+    font-weight:bold;
+    border-radius:12px;
+    cursor:pointer;
+    position:relative;
+    z-index:10;
+    transition:0.3s;
+}
+
+
+.btn:hover{
+    transform:scale(1.05);
+    background:white;
+}
+
+
+/* SEÇÕES */
+
+section{
+    padding:40px 20px;
+    position:relative;
+}
 
 
 .container{
-
     max-width:1100px;
     margin:auto;
-    padding:30px 20px;
-
 }
 
 
+/* CARDS */
 
 .card{
-
-    background:
-    rgba(15,23,42,0.9);
-
-    border:1px solid #1e40af;
-
+    background:#111827;
+    padding:25px;
     border-radius:20px;
-
-    padding:30px;
-
-    margin-bottom:25px;
-
-    box-shadow:
-    0 0 25px rgba(0,0,0,0.5);
-
+    margin:20px;
+    box-shadow:0 0 20px #000;
 }
 
 
+/* CRYPTO MARKET */
 
-.card h2{
-
-    color:#38bdf8;
-    margin-bottom:15px;
-
+.crypto-market{
+    text-align:center;
 }
 
 
-.card p{
-
-    line-height:1.7;
-    color:#e2e8f0;
-
-}
-
-
-
-.contract{
-
-    background:#020617;
-
-    padding:15px;
-
-    border-radius:10px;
-
-    word-break:break-all;
-
-    color:#14f195;
-
-    margin:15px 0;
-
-}
-
-
-
-button{
-
-    background:
-    linear-gradient(90deg,#14f195,#38bdf8);
-
-    color:#020617;
-
-    border:none;
-
-    padding:15px 30px;
-
-    border-radius:30px;
-
-    font-size:16px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:0.3s;
-
-}
-
-
-
-button:hover{
-
-    transform:scale(1.05);
-
-    box-shadow:0 0 20px #14f195;
-
-}
-
-
-
-a{
-
-    text-decoration:none;
-
-}
-
-
-
-.grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(250px,1fr));
-
+.crypto-container{
+    display:flex;
+    justify-content:center;
     gap:20px;
-
+    flex-wrap:wrap;
 }
 
 
-
-.grid div{
-
-    background:#020617;
-
-    padding:20px;
-
+.crypto-card{
+    background:#111827;
+    padding:25px;
+    width:220px;
     border-radius:15px;
-
-    border:1px solid #334155;
-
 }
 
 
+.crypto-card h3{
+    color:#facc15;
+}
+
+
+.crypto-card p{
+    font-size:22px;
+    color:#22c55e;
+    margin-top:15px;
+}
+
+
+/* ROLETA */
+
+.roleta-box{
+    text-align:center;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+}
+
+
+/* NFT */
+
+.nft-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+
+.nft-card{
+    background:#111827;
+    width:250px;
+    margin:15px;
+    padding:20px;
+    border-radius:20px;
+}
+
+
+/* FOOTER */
 
 footer{
-
     text-align:center;
-
     padding:30px;
-
     background:#020617;
-
     color:#94a3b8;
-
 }
 
 
+/* MOBILE */
 
-@media(max-width:600px){
+@media(max-width:700px){
 
-    h1{
-
-        font-size:30px;
-
-    }
-
-
-    .logo{
-
-        width:130px;
-        height:130px;
-
-    }
-
-}
-.menu{
-
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-padding:20px;
-background:#020617;
-
+header h1{
+    font-size:30px;
 }
 
 
-.menu a{
-
-color:white;
-text-decoration:none;
-padding:12px 20px;
-border-radius:25px;
-background:#1e3a8a;
-transition:0.3s;
-
+.btn{
+    width:90%;
 }
 
 
-.menu a:hover{
-
-background:#14f195;
-color:#020617;
+.crypto-card{
+    width:90%;
+}
 
 }
