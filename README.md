@@ -155,6 +155,31 @@ O Whitepaper Doge Manga Evolution apresentará:
 - Desenvolvimento futuro
 
 ---
+# 📊 Rastreamento e Informações do Token
+
+Acompanhe o Doge Manga Evolution através das plataformas de análise blockchain.
+
+🔎 Solscan:
+
+https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
+
+
+🟣 Phantom Wallet:
+
+https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
+
+
+📈 Birdeye:
+
+https://birdeye.so
+
+
+📊 Dexscreener:
+
+https://dexscreener.com
+
+
+---
 
 # 🌐 Links Oficiais
 
@@ -162,13 +187,11 @@ O Whitepaper Doge Manga Evolution apresentará:
 
 https://dogemangaofficial.xyz
 
----
 
 🐦 X:
 
 https://x.com/dogemanga96508
 
----
 
 💬 Telegram:
 
