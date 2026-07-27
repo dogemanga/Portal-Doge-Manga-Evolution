@@ -173,3 +173,13 @@ header h1{
 }
 
 }
+.hero{
+    width:100%;
+    overflow:hidden;
+}
+
+.hero img{
+    width:100%;
+    display:block;
+    border-radius:0 0 20px 20px;
+}
