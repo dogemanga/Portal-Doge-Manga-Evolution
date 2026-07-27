@@ -6,62 +6,109 @@
     <title>Portal Doge Manga Evolution</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #050816; color: white; line-height: 1.6; }
 
-        nav { background: #020617; padding: 18px; text-align: center; position: sticky; top: 0; z-index: 999; }
-        nav a { color: white; text-decoration: none; margin: 8px; font-weight: bold; }
-        nav a:hover { color: #38bdf8; }
+        body {
+            color: white;
+            line-height: 1.6;
+            background: linear-gradient(rgba(2, 6, 23, 0.82), rgba(2, 6, 23, 0.82)), url("banner.jpg");
+            background-size: cover;
+            background-position: center top;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
 
-        header { text-align: center; padding: 50px 20px; background: linear-gradient(135deg, #111827, #2563eb); }
-        .logo { width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 3px solid #38bdf8; }
-        h1 { font-size: 38px; margin: 15px 0; }
+        nav { background: rgba(2, 6, 23, 0.95); padding: 18px; text-align: center; position: sticky; top: 0; z-index: 999; border-bottom: 1px solid #facc15; }
+        nav a { color: white; text-decoration: none; margin: 8px; font-weight: bold; display: inline-block; padding: 5px; position: relative; z-index: 9999; }
+        nav a:hover { color: #facc15; }
+
+        header { text-align: center; padding: 60px 20px; }
+        .logo { width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 3px solid #facc15; margin-bottom: 15px; }
+        h1 { font-size: 42px; color: #facc15; text-shadow: 0 0 15px rgba(250, 204, 21, 0.5); }
+        header p { margin-top: 15px; font-size: 18px; color: #e5e7eb; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        .card { background: #111827; padding: 25px; margin: 20px 0; border-radius: 18px; }
-        h2 { color: #38bdf8; margin-bottom: 12px; border-bottom: 2px solid #2563eb; padding-bottom: 5px; }
+        .card { background: rgba(17, 24, 39, 0.92); padding: 25px; margin: 20px 0; border-radius: 20px; box-shadow: 0 0 25px rgba(250, 204, 21, 0.2); border: 1px solid rgba(250, 204, 21, 0.3); }
+        h2 { color: #facc15; margin-bottom: 15px; border-bottom: 2px solid #facc15; padding-bottom: 8px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
-        .box { background: #020617; padding: 15px; border-radius: 12px; border-left: 3px solid #14f195; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 15px; margin-top: 15px; }
+        .box { background: rgba(2, 6, 23, 0.9); padding: 15px; border-radius: 12px; border-left: 3px solid #facc15; }
 
-        .contract { background: #020617; padding: 12px; border-radius: 8px; color: #14f195; font-family: monospace; word-break: break-all; margin: 10px 0; }
+        .contract { background: rgba(2, 6, 23, 0.9); padding: 12px; border-radius: 8px; color: #22c55e; font-family: monospace; word-break: break-all; margin: 15px 0; }
 
-        button { background: #14f195; color: black; border: none; padding: 12px 22px; border-radius: 25px; font-weight: bold; cursor: pointer; margin: 5px; }
-        button:hover { transform: scale(1.03); }
+        .btn {
+            display: inline-block;
+            margin: 8px 5px;
+            padding: 12px 25px;
+            background: #facc15;
+            color: #050816;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+            box-shadow: 0 0 12px rgba(250, 204, 21, 0.4);
+            position: relative;
+            z-index: 9999;
+        }
+        .btn:hover { transform: scale(1.05); background: white; box-shadow: 0 0 20px rgba(250, 204, 21, 0.6); }
+
         .btn-tel { background: #229ED9; color: white; }
+        .btn-tel:hover { background: #1b8ac0; }
         .btn-x { background: #1DA1F2; color: white; }
+        .btn-x:hover { background: #1991da; }
+        .btn-site { background: #2563eb; color: white; }
+        .btn-site:hover { background: #1d4ed8; }
+        .btn-portal { background: #8b5cf6; color: white; }
+        .btn-portal:hover { background: #7c3aed; }
+        .btn-chain { background: #10b981; color: white; }
+        .btn-chain:hover { background: #059669; }
+        .btn-trade { background: #f97316; color: white; }
+        .btn-trade:hover { background: #ea580c; }
+        .btn-git { background: #6e5494; color: white; }
+        .btn-git:hover { background: #5a447a; }
 
-        .crypto-market { background: #111827; padding: 25px; border-radius: 18px; text-align: center; margin-top: 20px; }
+        .crypto-market { background: rgba(17, 24, 39, 0.92); padding: 25px; border-radius: 18px; text-align: center; margin-top: 20px; border: 1px solid rgba(250, 204, 21, 0.3); }
         .crypto-market h2 { color: #facc15; border-bottom-color: #facc15; }
-        .crypto-card { background: #020617; padding: 18px; border-radius: 12px; display: inline-block; width: 200px; margin: 8px; }
+        .crypto-card { background: rgba(2, 6, 23, 0.9); padding: 18px; border-radius: 12px; display: inline-block; width: 200px; margin: 8px; }
+        .crypto-card h3 { color: #facc15; }
         .crypto-card p { font-size: 20px; font-weight: bold; margin: 5px 0; }
         .verde { color: #22c55e; }
         .vermelho { color: #ef4444; }
 
-        footer { text-align: center; padding: 30px; background: #020617; margin-top: 20px; }
+        footer { text-align: center; padding: 30px; background: rgba(2, 6, 23, 0.95); margin-top: 20px; color: #94a3b8; border-top: 1px solid #facc15; }
+
+        @media(max-width:700px){
+            header h1 { font-size: 30px; }
+            .btn { width: 90%; margin: 5px 0; }
+            .crypto-card { width: 90%; }
+            body { background-position: center top; }
+        }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#">🏠 Home</a>
+    <a href="#">🏠 Início</a>
     <a href="#">🚀 Launchpad</a>
     <a href="#">🐕 Token</a>
     <a href="#">💎 Comprar</a>
-    <a href="#">🐕 Doge Manga</a>
-    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank">👥 Comunidade</a>
+    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer">🌐 Site Oficial</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener noreferrer">👥 Comunidade</a>
 </nav>
 
 <header>
-    <img src="logo.png" class="logo" alt="Doge Manga">
-    <h1>🚀 Portal Doge Manga Evolution</h1>
+    <img src="logo.png" class="logo" alt="Doge Manga Evolution">
+    <h1>🚀 Doge Manga Evolution</h1>
     <p>A evolução das memecoins começa aqui</p>
 </header>
 
 <div class="container">
 
 <div class="card">
-    <h2>🌎 Sobre</h2>
-    <p>Plataforma Web3 que conecta projetos, comunidade e investidores na rede Solana.</p>
+    <h2>🌎 Sobre o Projeto</h2>
+    <p>Plataforma oficial de lançamento, listagem e promoção de memecoins na rede Solana. O hub definitivo para a nova geração de projetos!</p>
 </div>
 
 <div class="card">
@@ -75,25 +122,37 @@
     <br>
     <strong>Contrato Oficial:</strong>
     <div class="contract">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</div>
-    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank"><button>🔎 Ver na Solscan</button></a>
+    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-chain">🔎 Ver na Solscan</a>
 </div>
 
 <div class="card">
     <h2>🗺️ Roadmap</h2>
-    <p>✅ Identidade e comunidade</p>
-    <p>✅ Token criado na Solana</p>
-    <p>🔄 Portal e site oficial</p>
-    <p>🔄 Launchpad e NFTs</p>
-    <p>🔄 Expansão global</p>
+    <p>✅ Identidade visual e comunidade</p>
+    <p>✅ Token lançado na Solana</p>
+    <p>🔄 Portal e plataforma oficial</p>
+    <p>🔄 Launchpad exclusivo</p>
+    <p>🔄 Expansão global e parcerias</p>
 </div>
 
 <div class="card">
-    <h2>🌐 Oficiais</h2>
-    <p>Site: <a href="https://dogemangaofficial.xyz" target="_blank" style="color:#38bdf8">dogemangaofficial.xyz</a></p>
-    <p>X: <a href="https://x.com/dogemanga96508" target="_blank" style="color:#38bdf8">@dogemanga96508</a></p>
-    <br>
-    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank"><button class="btn-tel">💬 Telegram</button></a>
-    <a href="https://x.com/dogemanga96508" target="_blank"><button class="btn-x">🐦 X</button></a>
+    <h2>🌐 Todos os Links Oficiais</h2>
+
+    <h3 style="margin-bottom:10px; color:#facc15;">📢 Redes e Site</h3>
+    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer" class="btn btn-site">🌍 Site Oficial</a>
+    <a href="https://dogemanga.netlify.app/" target="_blank" rel="noopener noreferrer" class="btn btn-portal">🐕 Portal Evolution</a>
+    <a href="https://x.com/dogemanga96508" target="_blank" rel="noopener noreferrer" class="btn btn-x">🐦 X Twitter</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener noreferrer" class="btn btn-tel">💬 Telegram</a>
+    <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" rel="noopener noreferrer" class="btn btn-git">📂 GitHub Oficial</a>
+
+    <br><br>
+    <h3 style="margin-bottom:10px; color:#facc15;">🔎 Exploradores e Mercado</h3>
+    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-chain">📉 DexScreener</a>
+    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener noreferrer" class="btn btn-chain">📈 Birdeye</a>
+
+    <br><br>
+    <h3 style="margin-bottom:10px; color:#facc15;">💱 Negociação e Carteira</h3>
+    <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-trade">🌊 Raydium</a>
+    <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-trade">👻 Phantom Wallet</a>
 </div>
 
 <div class="crypto-market">
@@ -113,36 +172,31 @@
 </div>
 
 <footer>
-🐕 Doge Manga Evolution
+🐕 Doge Manga Evolution | © 2026 • Solana Powered
 </footer>
 
 <script>
-async function preco(){
-try{
-let r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
-let d = await r.json();
+async function atualizarPrecos(){
+    try{
+        let resposta = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
+        let dados = await resposta.json();
 
-document.getElementById("btc").innerText = "R$ " + d.bitcoin.brl.toLocaleString("pt-BR");
-let bv = d.bitcoin.brl_24h_change.toFixed(2);
-document.getElementById("btcvar").innerText = bv + "% 24h";
-document.getElementById("btcvar").className = bv >=0 ? "verde" : "vermelho";
+        document.getElementById("btc").innerText = "R$ " + dados.bitcoin.brl.toLocaleString("pt-BR");
+        let btcVar = dados.bitcoin.brl_24h_change.toFixed(2);
+        document.getElementById("btcvar").innerText = btcVar + "% 24h";
+        document.getElementById("btcvar").className = btcVar >= 0 ? "verde" : "vermelho";
 
-document.getElementById("sol").innerText = "R$ " + d.solana.brl.toLocaleString("pt-BR");
-let sv = d.solana.brl_24h_change.toFixed(2);
-document.getElementById("solvar").innerText = sv + "% 24h";
-document.getElementById("solvar").className = sv >=0 ? "verde" : "vermelho";
-}catch(e){console.log("Sem preços no momento");}
+        document.getElementById("sol").innerText = "R$ " + dados.solana.brl.toLocaleString("pt-BR");
+        let solVar = dados.solana.brl_24h_change.toFixed(2);
+        document.getElementById("solvar").innerText = solVar + "% 24h";
+        document.getElementById("solvar").className = solVar >= 0 ? "verde" : "vermelho";
+    }catch(e){
+        console.log("Erro ao carregar preços");
+    }
 }
-preco();
-setInterval(preco, 60000);
+atualizarPrecos();
+setInterval(atualizarPrecos, 60000);
 </script>
 
 </body>
 </html>
-
-<button>Site Doge Manga</button>
-<a href="https://dogemanga.netlify.app/" target="_blank" class="btn">
-Site Doge Manga
-</a><a href="https://x.com/dogemanga96508" target="_blank" class="btn">
-X (Twitter)
-</a>
