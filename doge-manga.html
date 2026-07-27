@@ -10,26 +10,56 @@
 
 <style>
 
-body{
+*{
 margin:0;
-font-family:Arial, sans-serif;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
 background:#050816;
 color:white;
 }
 
+nav{
+background:#020617;
+padding:20px;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
+}
+
 header{
 text-align:center;
-padding:50px 20px;
+padding:60px 20px;
 background:linear-gradient(135deg,#111827,#2563eb);
 }
 
 .logo{
 width:180px;
+height:180px;
+object-fit:cover;
 border-radius:50%;
 }
 
+h1{
+font-size:42px;
+margin:20px;
+}
+
+h2{
+color:#38bdf8;
+margin-bottom:15px;
+}
+
 .container{
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 padding:20px;
 }
@@ -40,32 +70,6 @@ padding:30px;
 margin:25px 0;
 border-radius:20px;
 box-shadow:0 0 20px #000;
-}
-
-h1,h2{
-color:#38bdf8;
-}
-
-.contract{
-background:#020617;
-padding:15px;
-border-radius:10px;
-word-break:break-all;
-color:#14f195;
-}
-
-button{
-background:#14f195;
-border:0;
-padding:15px 30px;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-margin-top:15px;
-}
-
-a{
-text-decoration:none;
 }
 
 .grid{
@@ -80,6 +84,29 @@ padding:20px;
 border-radius:15px;
 }
 
+.contract{
+background:#020617;
+padding:15px;
+border-radius:10px;
+word-break:break-all;
+color:#14f195;
+}
+
+button{
+background:#14f195;
+color:#000;
+border:none;
+padding:15px 30px;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+margin-top:15px;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
 footer{
 text-align:center;
 padding:30px;
@@ -92,6 +119,20 @@ background:#020617;
 
 
 <body>
+
+
+<nav>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="projects.html">🚀 Launchpad</a>
+
+<a href="token.html">💎 Token</a>
+
+<a href="buy.html">🛒 Comprar</a>
+
+</nav>
+
 
 
 <header>
@@ -111,12 +152,29 @@ Projeto principal do Portal Doge Manga Evolution
 <div class="container">
 
 
+
 <div class="card">
 
 <h2>🌎 Sobre o Projeto</h2>
 
 <p>
-O Doge Manga Evolution é um projeto Web3 desenvolvido para unir comunidade, tecnologia blockchain, cultura digital e novas experiências dentro do ecossistema Solana.
+O Doge Manga Evolution é um ecossistema Web3 desenvolvido para unir comunidade, tecnologia blockchain, cultura digital e novas experiências dentro da rede Solana.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>📖 História Doge Manga</h2>
+
+<p>
+O Doge Manga nasceu com a visão de criar uma comunidade forte dentro do universo cripto, combinando a força das memecoins com inovação, criatividade e desenvolvimento Web3.
+</p>
+
+<p>
+O objetivo é construir um ecossistema envolvendo token, comunidade, NFTs, aplicações digitais e novas oportunidades blockchain.
 </p>
 
 </div>
@@ -128,13 +186,29 @@ O Doge Manga Evolution é um projeto Web3 desenvolvido para unir comunidade, tec
 
 <h2>💎 Informações do Token</h2>
 
-<p><strong>Nome:</strong> Doge Manga</p>
+<div class="grid">
 
-<p><strong>Blockchain:</strong> Solana</p>
+<div class="box">
+<h3>🐕 Nome</h3>
+<p>Doge Manga</p>
+</div>
 
-<p><strong>Padrão:</strong> SPL Token</p>
+<div class="box">
+<h3>⛓️ Blockchain</h3>
+<p>Solana</p>
+</div>
 
-<p><strong>Supply:</strong> 420.000.000.000 DOGE MANGA</p>
+<div class="box">
+<h3>💰 Supply</h3>
+<p>420.000.000.000</p>
+</div>
+
+<div class="box">
+<h3>🔢 Decimais</h3>
+<p>6</p>
+</div>
+
+</div>
 
 </div>
 
@@ -155,7 +229,19 @@ E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
 
 <button>
-🔎 Ver Token na Solana
+🔎 Ver na Solscan
+</button>
+
+</a>
+
+
+<br>
+
+
+<a href="https://phantom.app/" target="_blank">
+
+<button>
+🟣 Abrir Phantom Wallet
 </button>
 
 </a>
@@ -166,10 +252,10 @@ E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 
 
 
-
 <div class="card">
 
-<h2>🚀 Ecossistema</h2>
+<h2>🚀 Utilidade do Ecossistema</h2>
+
 
 <div class="grid">
 
@@ -178,7 +264,7 @@ E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 <h3>🚀 Launchpad</h3>
 
 <p>
-Suporte para novos projetos Web3.
+Suporte e divulgação de novos projetos Web3.
 </p>
 
 </div>
@@ -205,10 +291,11 @@ Construção de uma comunidade global.
 
 </div>
 
-</div>
 
 </div>
 
+
+</div>
 
 
 
@@ -217,26 +304,28 @@ Construção de uma comunidade global.
 
 <h2>🗺️ Roadmap</h2>
 
-<p>✅ Criação do projeto</p>
+<p>✅ Criação da identidade do projeto</p>
 
-<p>✅ Token Solana</p>
+<p>✅ Desenvolvimento inicial do ecossistema</p>
 
-<p>🔄 Portal Web3</p>
+<p>🔄 Portal Doge Manga Evolution</p>
 
-<p>🔄 Launchpad</p>
+<p>🔄 Launchpad Web3</p>
 
-<p>🔄 Expansão do ecossistema</p>
+<p>🔄 Expansão de NFTs e aplicações</p>
+
 
 </div>
 
 
 
+
 <div class="card">
 
-<h2>🚀 Visão de Futuro</h2>
+<h2>🌎 Visão de Futuro</h2>
 
 <p>
-O objetivo do Doge Manga Evolution é construir um ecossistema completo unindo token, comunidade, projetos Web3 e inovação blockchain.
+Construir um ecossistema Web3 completo, conectando comunidades, projetos digitais e novas tecnologias blockchain.
 </p>
 
 </div>
@@ -244,6 +333,7 @@ O objetivo do Doge Manga Evolution é construir um ecossistema completo unindo t
 
 
 </div>
+
 
 
 <footer>
@@ -257,7 +347,7 @@ A evolução das memecoins começa aqui 🚀
 </footer>
 
 
+
 </body>
 
 </html>
-<footer>
