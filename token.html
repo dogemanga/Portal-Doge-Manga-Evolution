@@ -14,7 +14,7 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
@@ -22,85 +22,85 @@ background:#050816;
 color:white;
 }
 
+nav{
+background:#020617;
+padding:20px;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
+}
 
 header{
 text-align:center;
-padding:40px 20px;
-background:linear-gradient(135deg,#111827,#1d4ed8);
+padding:60px 20px;
+background:linear-gradient(135deg,#111827,#2563eb);
 }
-
 
 .logo{
-width:150px;
+width:180px;
+height:180px;
 border-radius:50%;
+object-fit:cover;
 }
-
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
-
-
-.card{
-
-background:#111827;
-padding:30px;
-margin:20px 0;
-border-radius:20px;
-box-shadow:0 0 20px #000;
-
-}
-
 
 h1,h2{
 color:#38bdf8;
 }
 
+.container{
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#111827;
+padding:30px;
+margin:25px 0;
+border-radius:20px;
+box-shadow:0 0 20px #000;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.box{
+background:#020617;
+padding:20px;
+border-radius:15px;
+}
 
 .contract{
-
 background:#020617;
 padding:15px;
 border-radius:10px;
 word-break:break-all;
 color:#14f195;
-
 }
 
-
 button{
-
 background:#14f195;
+color:#000;
 border:none;
-padding:15px 25px;
+padding:15px 30px;
 border-radius:30px;
 font-weight:bold;
 cursor:pointer;
 margin-top:15px;
-
 }
-
-
-button:hover{
-
-transform:scale(1.05);
-
-}
-
-
-a{
-text-decoration:none;
-}
-
 
 footer{
-
 text-align:center;
 padding:30px;
 background:#020617;
-
 }
 
 </style>
@@ -111,6 +111,22 @@ background:#020617;
 <body>
 
 
+<nav>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="projects.html">🚀 Launchpad</a>
+
+<a href="doge-manga.html">🐕 Doge Manga</a>
+
+<a href="buy.html">💎 Comprar</a>
+
+<a href="token.html">📊 Token</a>
+
+</nav>
+
+
+
 <header>
 
 <img src="file_00000000b510820ea690243d5980576c.png" class="logo">
@@ -118,7 +134,7 @@ background:#020617;
 <h1>🐕 Doge Manga Token</h1>
 
 <p>
-Token oficial do ecossistema Doge Manga Evolution
+Informações oficiais do token do ecossistema Doge Manga Evolution
 </p>
 
 </header>
@@ -130,11 +146,58 @@ Token oficial do ecossistema Doge Manga Evolution
 
 <div class="card">
 
-<h2>💎 Sobre o Token</h2>
+<h2>💎 Informações Gerais</h2>
+
+<div class="grid">
+
+
+<div class="box">
+<h3>Nome</h3>
+<p>Doge Manga</p>
+</div>
+
+
+<div class="box">
+<h3>Blockchain</h3>
+<p>Solana</p>
+</div>
+
+
+<div class="box">
+<h3>Padrão</h3>
+<p>SPL Token</p>
+</div>
+
+
+<div class="box">
+<h3>Decimais</h3>
+<p>6</p>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h2>💰 Tokenomics</h2>
 
 <p>
-O Doge Manga Token é um ativo digital desenvolvido na blockchain Solana,
-criado para fortalecer o ecossistema, comunidade e futuras aplicações Web3.
+Supply Total:
+</p>
+
+<h3>
+420.000.000.000 DOGE MANGA
+</h3>
+
+<br>
+
+<p>
+O token faz parte do ecossistema Doge Manga Evolution, com foco em comunidade, Web3, NFTs e futuras integrações blockchain.
 </p>
 
 </div>
@@ -144,40 +207,7 @@ criado para fortalecer o ecossistema, comunidade e futuras aplicações Web3.
 
 <div class="card">
 
-<h2>🔗 Informações do Token</h2>
-
-<p>
-<strong>Nome:</strong> Doge Manga
-</p>
-
-<br>
-
-<p>
-<strong>Blockchain:</strong> Solana
-</p>
-
-<br>
-
-<p>
-<strong>Padrão:</strong> SPL Token
-</p>
-
-<br>
-
-<p>
-<strong>Supply Total:</strong> 420.000.000.000 DOGE MANGA
-</p>
-
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>📜 Contrato Oficial</h2>
-
+<h2>🔗 Contrato Oficial</h2>
 
 <div class="contract">
 
@@ -186,49 +216,16 @@ E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
 </div>
 
 
-<br>
-
-
 <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
 
 <button>
-
 🔎 Ver na Solscan
-
 </button>
 
 </a>
 
 
 </div>
-
-
-
-
-
-<div class="card">
-
-<h2>👛 Phantom Wallet</h2>
-
-
-<p>
-Conecte sua carteira Phantom para futuras integrações Web3.
-</p>
-
-
-<a href="https://phantom.app/" target="_blank">
-
-<button>
-
-🟣 Abrir Phantom Wallet
-
-</button>
-
-</a>
-
-
-</div>
-
 
 
 
@@ -238,25 +235,69 @@ Conecte sua carteira Phantom para futuras integrações Web3.
 <h2>🚀 Utilidade do Token</h2>
 
 
-<p>
-🐕 Comunidade Doge Manga</p>
+<div class="grid">
+
+
+<div class="box">
+
+<h3>👥 Comunidade</h3>
 
 <p>
-🎨 Futuras integrações NFT</p>
+Participação no ecossistema Doge Manga.
+</p>
+
+</div>
+
+
+<div class="box">
+
+<h3>🎨 NFTs</h3>
 
 <p>
-🚀 Participação no ecossistema Web3</p>
+Futuras experiências digitais.
+</p>
+
+</div>
+
+
+<div class="box">
+
+<h3>🚀 Web3</h3>
 
 <p>
-🌎 Expansão da plataforma</p>
+Integração com novas aplicações.
+</p>
+
+</div>
+
+
+</div>
 
 
 </div>
 
 
 
+
+<div class="card">
+
+<h2>🗺️ Roadmap</h2>
+
+<p>✅ Criação do projeto</p>
+
+<p>✅ Token na Solana</p>
+
+<p>🔄 Desenvolvimento do Portal</p>
+
+<p>🔄 Launchpad Web3</p>
+
+<p>🔄 Expansão do ecossistema</p>
+
 </div>
 
+
+
+</div>
 
 
 
