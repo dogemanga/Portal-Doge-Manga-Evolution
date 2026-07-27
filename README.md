@@ -234,3 +234,48 @@ O Whitepaper Doge Manga Evolution apresentará a visão do projeto, tecnologia, 
 </p>
 
 </div>https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
+🎨 Ecossistema NFT
+O projeto possui visão de expansão para:
+🖼️ Coleções NFT
+🎨 Arte digital
+💎 Utilidades dentro do ecossistema
+🚀 Experiências Web3
+🗺️ Roadmap da Plataforma
+✅ Fase 1 — Fundação
+Criação da identidade visual
+Desenvolvimento do conceito
+Criação do token
+Estrutura inicial do projeto
+🔄 Fase 2 — Plataforma
+Portal Web3
+Páginas oficiais
+Integração Phantom Wallet
+Estrutura Launchpad
+🔄 Fase 3 — Expansão
+Listagem de projetos
+NFTsNovas ferramentas Web3
+Crescimento da comunidade
+🔄 Fase 4 — Ecossistema Global
+Parcerias
+Expansão internacional
+Novas tecnologias blockchain
+📄 Whitepaper
+O Whitepaper Doge Manga Evolution apresentará:
+Visão do projeto
+Tecnologia utilizada
+Tokenomics
+Roadmap
+Ecossistema
+Desenvolvimento futuro
+🌐 Links Oficiais
+🌍 Website:
+https://dogemangaofficial.xyz⁠�
+🐦 X:
+https://x.com/dogemanga96508⁠
+💬 Telegram:
+https://t.me/+fRrBfGscm9Y3OWEx⁠�
+📢 Status do Projeto
+🚧 Em desenvolvimento.
+O Portal Doge Manga Evolution está sendo construído para se tornar uma plataforma Web3 completa, conectando projetos, comunidades e inovação blockchain.
+🐕 Doge Manga Evolution
+A evolução das memecoins começa aqui 🚀
