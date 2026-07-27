@@ -270,3 +270,26 @@ margin-bottom:10px;
 font-size:36px;
 color:#22c55e;
 }
+.wizard{
+    max-width:1000px;
+    margin:60px auto;
+    padding:30px;
+    text-align:center;
+}
+
+.step{
+    background:#111827;
+    margin:15px 0;
+    padding:20px;
+    border-radius:12px;
+    border-left:5px solid #facc15;
+    transition:.3s;
+}
+
+.step.active{
+    background:#1f2937;
+}
+
+.step:hover{
+    transform:translateY(-3px);
+}
