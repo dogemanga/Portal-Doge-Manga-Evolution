@@ -1,41 +1,288 @@
-<!-- ... todo o resto do código continua igual ... -->
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-<!-- ÁREA COMPRAR - COM CONTRATO CLICÁVEL -->
-<div class="card destaque" id="comprar">
-    <h2>🛒 Comprar Doge Manga ($DGM)</h2>
-    <div class="contrato-destaque">
-        🔑 Contrato Oficial:
-        <br>
-        <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" style="color:var(--primaria); font-weight:bold; text-decoration:underline;">
-            E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
-        </a>
-    </div>
-    <p>Clique no código acima para ver a moeda na rede Solana. Acesse também:</p>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:15px;">
-        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-phantom">👻 Ver na Phantom</a>
-        <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-secundario">🔎 Ver no Solscan</a>
-        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn btn-secundario">👁️ Ver no Birdeye</a>
-        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-raydium">💱 Comprar no Raydium</a>
-        <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="btn btn-secundario">📈 CoinGecko</a>
-        <a href="https://coinmarketcap.com/pt-br/currencies/doge-manga/" target="_blank" class="btn btn-secundario">📊 CoinMarketCap</a>
-    </div>
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Comprar Doge Manga</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#050816;
+color:white;
+}
+
+nav{
+background:#020617;
+padding:20px;
+text-align:center;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:10px;
+font-weight:bold;
+}
+
+header{
+text-align:center;
+padding:60px 20px;
+background:linear-gradient(135deg,#111827,#2563eb);
+}
+
+.logo{
+width:180px;
+height:180px;
+border-radius:50%;
+object-fit:cover;
+}
+
+h1,h2{
+color:#38bdf8;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#111827;
+padding:30px;
+margin:25px 0;
+border-radius:20px;
+box-shadow:0 0 20px #000;
+}
+
+.contract{
+background:#020617;
+padding:15px;
+border-radius:10px;
+word-break:break-all;
+color:#14f195;
+}
+
+button{
+
+background:#14f195;
+color:#000;
+border:none;
+padding:15px 30px;
+border-radius:30px;
+font-weight:bold;
+cursor:pointer;
+margin-top:15px;
+
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.warning{
+background:#422006;
+padding:20px;
+border-radius:15px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+background:#020617;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="projects.html">🚀 Launchpad</a>
+
+<a href="doge-manga.html">🐕 Doge Manga</a>
+
+<a href="buy.html">💎 Comprar</a>
+
+</nav>
+
+
+
+<header>
+
+<img src="file_00000000b510820ea690243d5980576c.png" class="logo">
+
+<h1>💎 Comprar Doge Manga</h1>
+
+<p>
+Token oficial do ecossistema Doge Manga Evolution
+</p>
+
+</header>
+
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+<h2>🐕 Doge Manga Token</h2>
+
+<p>
+Adquira Doge Manga através da rede Solana utilizando sua carteira Web3.
+</p>
+
+<br>
+
+<p><strong>Blockchain:</strong> Solana</p>
+
+<p><strong>Padrão:</strong> SPL Token</p>
+
+<p><strong>Supply:</strong> 420.000.000.000 DOGE MANGA</p>
+
 </div>
 
-<!-- BARRA GIRATÓRIA NO FINAL COM TODOS OS LINKS -->
-<div class="barra-girar" style="margin-bottom:30px;">
-    <div class="barra-conteudo">
-        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="item-barra"><div class="item-icone">👻</div><div><div class="item-nome">Phantom</div><div class="item-detalhe">Ver carteira</div></div></a>
-        <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="item-barra"><div class="item-icone">🔎</div><div><div class="item-nome">Solscan</div><div class="item-detalhe">Rede Solana</div></div></a>
-        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="item-barra"><div class="item-icone">👁️</div><div><div class="item-nome">Birdeye</div><div class="item-detalhe">Dados ao vivo</div></div></a>
-        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="item-barra"><div class="item-icone">💱</div><div><div class="item-nome">Raydium</div><div class="item-detalhe">Comprar $DGM</div></div></a>
-        <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="item-barra"><div class="item-icone">📈</div><div><div class="item-nome">CoinGecko</div><div class="item-detalhe">Preços</div></div></a>
-        <a href="https://coinmarketcap.com/pt-br/currencies/doge-manga/" target="_blank" class="item-barra"><div class="item-icone">📊</div><div><div class="item-nome">CoinMarketCap</div><div class="item-detalhe">Mercado</div></div></a>
-        <a href="https://dogemangaofficial.xyz" target="_blank" class="item-barra"><div class="item-icone">🌐</div><div><div class="item-nome">Site Oficial</div><div class="item-detalhe">Saiba mais</div></div></a>
-        <!-- Repete para continuar girando sem parar -->
-        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="item-barra"><div class="item-icone">👻</div><div><div class="item-nome">Phantom</div><div class="item-detalhe">Ver carteira</div></div></a>
-        <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="item-barra"><div class="item-icone">🔎</div><div><div class="item-nome">Solscan</div><div class="item-detalhe">Rede Solana</div></div></a>
-        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="item-barra"><div class="item-icone">👁️</div><div><div class="item-nome">Birdeye</div><div class="item-detalhe">Dados ao vivo</div></div></a>
-    </div>
+
+
+
+
+<div class="card">
+
+<h2>🔗 Contrato Oficial</h2>
+
+
+<div class="contract">
+
+E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
+
 </div>
 
-<!-- ... resto do código igual ... -->
+
+<a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
+
+<button>
+🔎 Ver Token na Solscan
+</button>
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>🟣 Carteira Phantom</h2>
+
+
+<p>
+Use sua carteira Phantom conectada à rede Solana para interagir com o ecossistema.
+</p>
+
+
+<a href="https://phantom.app/" target="_blank">
+
+<button>
+🟣 Abrir Phantom Wallet
+</button>
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h2>🚀 Comprar Doge Manga</h2>
+
+
+<p>
+Acesse o agregador Jupiter para realizar a troca de tokens na rede Solana.
+</p>
+
+
+<a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
+
+<button>
+🚀 Comprar no Jupiter
+</button>
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card warning">
+
+<h2>⚠️ Atenção</h2>
+
+<p>
+Antes de realizar qualquer operação, confira sempre o contrato oficial do token e utilize apenas links oficiais do projeto.
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<footer>
+
+🐕 Doge Manga Evolution
+
+<br><br>
+
+A evolução das memecoins começa aqui 🚀
+
+</footer>
+
+
+
+</body>
+
+</html>
+<div class="trackers">
+
+<a href="https://coinmarketcap.com/dexscan/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
+    🟡 CoinMarketCap
+</a>
+
+<a href="https://www.coingecko.com/en/coins/solana?contract_address=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
+    🦎 CoinGecko
+</a>
+
+</div>
