@@ -325,3 +325,28 @@ font-size:24px;
 font-weight:bold;
 color:#22c55e;
 }
+.trending{
+padding:60px 20px;
+text-align:center;
+}
+
+.trend-grid{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.trend-card{
+width:250px;
+padding:25px;
+background:#111827;
+border:2px solid #facc15;
+border-radius:20px;
+box-shadow:0 0 20px rgba(250,204,21,.4);
+}
+
+.trend-card h3{
+color:#facc15;
+margin-bottom:10px;
+}
