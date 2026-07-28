@@ -8,102 +8,105 @@
 *{margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
 
 body {
-    color: white; line-height: 1.6;
-    /* ✅ NOME EXATO DA IMAGEM */
-    background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.75)), url("IMG-20260727-WA0036(7).jpg");
+    color: white; line-height: 1.7;
+    background: linear-gradient(rgba(2, 6, 23, 0.78), rgba(2, 6, 23, 0.78)), url("IMG-20260727-WA0036(7).jpg");
     background-size: cover; background-position: center;
     background-attachment: fixed; background-repeat: no-repeat;
     min-height: 100vh;
 }
 
 nav {
-    background: rgba(2, 6, 23, 0.95); padding: 18px; text-align: center;
+    background: rgba(2, 6, 23, 0.95); padding: 16px; text-align: center;
     position: sticky; top: 0; z-index: 999;
     border-bottom: 2px solid #facc15;
 }
 nav a {
-    color: white; text-decoration: none; margin: 6px;
-    font-weight: bold; display: inline-block; padding: 5px;
+    color: white; text-decoration: none; margin: 8px 12px;
+    font-weight: bold; padding: 6px 8px; font-size: 15px;
 }
 nav a:hover { color: #facc15; }
 
-header { text-align: center; padding: 60px 20px; }
-.logo {
-    width: 180px; height: 180px; object-fit: cover;
-    border-radius: 50%; border: 3px solid #facc15; margin-bottom: 15px;
-    box-shadow: 0 0 20px rgba(250,204,21,0.3);
+header { 
+    text-align: center; 
+    padding: 70px 20px 50px;
 }
-h1 { font-size: 48px; color: #facc15; text-shadow: 0 0 20px rgba(250,204,21,0.6); }
-header p { margin-top: 15px; font-size: 20px; color: #f0f0f0; }
+header h1 { 
+    font-size: 52px; color: #facc15; 
+    text-shadow: 0 0 25px rgba(250,204,21,0.6); margin-bottom: 12px;
+}
+header p { font-size: 20px; color: #f0f0f0; font-weight: 500; }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.container { max-width: 1150px; margin: 0 auto; padding: 20px 25px; }
 .card {
-    background: rgba(17, 24, 39, 0.9); padding: 25px; margin: 20px 0;
-    border-radius: 20px; box-shadow: 0 0 25px rgba(250,204,21,0.2);
-    border: 1px solid rgba(250,204,21,0.4);
+    background: rgba(17, 24, 39, 0.92); padding: 30px; margin: 25px 0;
+    border-radius: 18px; border: 1px solid rgba(250,204,21,0.35);
 }
-h2 { color: #facc15; margin-bottom: 15px; border-bottom: 2px solid #facc15; padding-bottom: 8px; }
+h2 { 
+    color: #facc15; margin-bottom: 20px; 
+    border-bottom: 2px solid rgba(250,204,21,0.4); 
+    padding-bottom: 10px; font-size: 24px;
+}
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 15px; }
-.box { background: rgba(2, 6, 23, 0.9); padding: 15px; border-radius: 12px; border-left: 3px solid #facc15; }
+/* ✅ ORGANIZADO LADO A LADO, PROFISSIONAL */
+.grid-info { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
+    gap: 18px; margin-top: 15px;
+}
+.info-item { 
+    background: rgba(2, 6, 23, 0.9); padding: 18px; border-radius: 12px; 
+    border-left: 3px solid #facc15; font-size: 16px;
+}
+.info-item strong { color: #facc15; display: block; margin-bottom: 4px; font-size: 15px; }
 
 .contract {
-    background: rgba(2, 6, 23, 0.9); padding: 12px; border-radius: 8px;
-    color: #22c55e; font-family: monospace; word-break: break-all; margin: 15px 0;
-    font-size: 14px;
+    background: rgba(2, 6, 23, 0.9); padding: 14px; border-radius: 8px;
+    color: #22c55e; font-family: monospace; word-break: break-all; 
+    margin: 18px 0; font-size: 14px; border: 1px solid #22c55e;
 }
 
 .btn {
-    display: inline-block; margin: 8px 5px; padding: 12px 25px;
+    display: inline-block; margin: 10px 6px; padding: 14px 28px;
     background: #facc15; color: #050816; text-decoration: none;
     font-weight: bold; border-radius: 12px; cursor: pointer;
     transition: 0.3s; font-size: 16px; border:none;
 }
-.btn:hover { transform: scale(1.08); background: white; box-shadow: 0 0 15px rgba(250,204,21,0.5); }
+.btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(250,204,21,0.5); }
 
 .btn-tel { background: #229ED9; color: white; }
-.btn-tel:hover { background: #1b8ac0; }
 .btn-x { background: #1DA1F2; color: white; }
-.btn-x:hover { background: #1991da; }
 .btn-site { background: #2563eb; color: white; }
-.btn-site:hover { background: #1d4ed8; }
-btn-portal { background: #8b5cf6; color: white; }
-.btn-portal:hover { background: #7c3aed; }
 .btn-chain { background: #10b981; color: white; }
-.btn-chain:hover { background: #059669; }
-.btn-trade { background: #f97316; color: white; }
-.btn-trade:hover { background: #ea580c; }
 .btn-git { background: #6e5494; color: white; }
-.btn-git:hover { background: #5a447a; }
-.btn-buy { background: #16a34a; color: white; font-size:17px; padding:14px 30px; }
-.btn-buy:hover { background: #15803d; box-shadow: 0 0 20px rgba(22,163,74,0.5); }
+.btn-buy { background: #16a34a; color: white; font-size:17px; padding:15px 35px; }
+.btn-buy:hover { background: #15803d; box-shadow: 0 0 25px rgba(22,163,74,0.5); }
 
 .status-wallet {
-    background:rgba(2,6,23,0.9); padding:12px; border-radius:8px; margin:10px 0;
-    font-family:monospace;
+    background:rgba(2,6,23,0.9); padding:14px; border-radius:8px; 
+    margin:15px 0; font-family:monospace; font-size:15px;
 }
 
 .crypto-market {
-    background: rgba(17, 24, 39, 0.9); padding: 25px; border-radius: 18px;
-    text-align: center; margin-top: 20px; border: 1px solid rgba(250,204,21,0.4);
+    background: rgba(17, 24, 39, 0.92); padding: 30px; border-radius: 18px;
+    text-align: center; margin-top: 25px; border: 1px solid rgba(250,204,21,0.35);
 }
 .crypto-card {
-    background: rgba(2, 6, 23, 0.9); padding: 18px; border-radius: 12px;
-    display: inline-block; width: 200px; margin: 8px;
+    background: rgba(2, 6, 23, 0.9); padding: 20px; border-radius: 12px;
+    display: inline-block; width: 220px; margin: 10px;
 }
-.crypto-card h3 { color: #facc15; }
-.crypto-card p { font-size: 20px; font-weight: bold; margin: 5px 0; }
+.crypto-card h3 { color: #facc15; margin-bottom: 8px; }
+.crypto-card p { font-size: 22px; font-weight: bold; margin: 5px 0; }
 .verde { color: #22c55e; }
 .vermelho { color: #ef4444; }
 
 footer {
-    text-align: center; padding: 30px; background: rgba(2, 6, 23, 0.95);
-    margin-top: 20px; color: #94a3b8; border-top: 2px solid #facc15;
+    text-align: center; padding: 35px; background: rgba(2, 6, 23, 0.95);
+    margin-top: 30px; color: #94a3b8; border-top: 2px solid #facc15; font-size: 14px;
 }
 
-@media(max-width:700px){
-    header h1 { font-size: 32px; }
-    .btn { width: 90%; margin: 5px 0; }
+@media(max-width:768px){
+    header h1 { font-size: 36px; }
+    .grid-info { grid-template-columns: 1fr; }
+    .btn { width: 90%; margin: 6px 0; }
     .crypto-card { width: 90%; }
 }
 </style>
@@ -116,52 +119,45 @@ footer {
     <a href="#comprar">💎 Comprar</a>
     <a href="nft.html">🎨 NFT</a>
     <a href="whitepaper.html">📄 Whitepaper</a>
-    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener">🌐 Site Oficial</a>
-    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener">👥 Comunidade</a>
+    <a href="https://dogemangaofficial.xyz" target="_blank">🌐 Site Oficial</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank">👥 Comunidade</a>
 </nav>
 
 <header id="home">
-    <img src="logo.png" class="logo" alt="Portal Doge Manga Evolution">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Conecte sua carteira e compre diretamente o $DGM</p>
+    <p>Conecte sua carteira e adquira diretamente o token oficial $DGM</p>
 </header>
 
 <div class="container">
 
 <div class="card" id="token">
-    <h2>📊 Token Oficial Doge Manga ($DGM)</h2>
-    <div class="grid">
-        <div class="box"><strong>Nome:</strong> Doge Manga</div>
-        <div class="box"><strong>Símbolo:</strong> $DGM</div>
-        <div class="box"><strong>Rede:</strong> Solana SPL</div>
-        <div class="box"><strong>Supply:</strong> 420.000.000.000</div>
-        <div class="box"><strong>Decimais:</strong> 6</div>
+    <h2>📊 Dados Oficiais do Token</h2>
+    <div class="grid-info">
+        <div class="info-item"><strong>Nome</strong>Doge Manga</div>
+        <div class="info-item"><strong>Símbolo</strong>$DGM</div>
+        <div class="info-item"><strong>Rede</strong>Solana (SPL)</div>
+        <div class="info-item"><strong>Supply Total</strong>420.000.000.000</div>
+        <div class="info-item"><strong>Decimais</strong>6</div>
+        <div class="info-item"><strong>Tipo</strong>Memecoin Comunitária</div>
     </div>
     <br>
-    <strong>Contrato:</strong>
+    <strong>📜 Contrato Oficial:</strong>
     <div class="contract">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</div>
-    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">🔎 Ver na Solscan</a>
+    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">🔎 Verificar na Solscan</a>
 </div>
 
 <div class="card" id="comprar">
-    <h2>💱 Comprar Doge Manga ($DGM)</h2>
-    <p>Conecte sua carteira Phantom e vá direto para a negociação do token.</p>
-
-    <div class="status-wallet" id="walletStatus">
-        📌 Carteira: <strong>Não conectada</strong>
-    </div>
-
-    <button id="btnConectar" class="btn">🔗 Conectar Phantom</button>
+    <h2>💱 Adquirir $DGM</h2>
+    <p>Conecte a Phantom e vá direto para a negociação com o contrato já preenchido.</p>
+    <div class="status-wallet" id="walletStatus">📌 Situação: Carteira não conectada</div>
+    <button id="btnConectar" class="btn">🔗 Conectar Carteira Phantom</button>
     <br><br>
-    <a id="btnComprar" href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-buy" style="display:none;">💸 Comprar $DGM Agora</a>
-
-    <p style="margin-top:15px; font-size:14px; color:#94a3b8;">
-        *Ao clicar em comprar, você será direcionado para a troca na Raydium, já com o endereço do Doge Manga preenchido automaticamente.
-    </p>
+    <a id="btnComprar" href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-buy" style="display:none;">💸 Comprar Agora</a>
+    <p style="margin-top:18px; font-size:14px; color:#94a3b8;">*Sempre confira o endereço do contrato antes de confirmar transações.</p>
 </div>
 
 <div class="card">
-    <h2>🌐 Links Oficiais</h2>
+    <h2>🌐 Canais Oficiais</h2>
     <a href="https://dogemangaofficial.xyz" target="_blank" class="btn btn-site">🌍 Site</a>
     <a href="https://x.com/dogemanga96508" target="_blank" class="btn btn-x">🐦 X</a>
     <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="btn btn-tel">💬 Telegram</a>
@@ -172,7 +168,7 @@ footer {
 </div>
 
 <div class="crypto-market">
-    <h2>📈 Mercado ao Vivo</h2>
+    <h2>📈 Mercado em Tempo Real</h2>
     <div class="crypto-card">
         <h3>₿ Bitcoin</h3>
         <p id="btc">Carregando...</p>
@@ -187,62 +183,46 @@ footer {
 
 </div>
 
-<footer>
-🐕 Doge Manga Evolution | © 2026 • Solana Powered
-</footer>
+<footer>🐕 Doge Manga Evolution | © 2026 • Rede Solana</footer>
 
 <script>
 const btnConectar = document.getElementById("btnConectar");
 const btnComprar = document.getElementById("btnComprar");
 const walletStatus = document.getElementById("walletStatus");
 
-// Ação ao clicar em conectar
 btnConectar.addEventListener("click", async () => {
-    // Verifica se tem a Phantom instalada
     if (!window.solana || !window.solana.isPhantom) {
-        alert("⚠️ Instale a carteira Phantom primeiro!\nAcesse: phantom.com/download");
-        window.open("https://phantom.com/download", "_blank");
-        return;
+        alert("⚠️ Instale a Phantom primeiro: phantom.com/download");
+        window.open("https://phantom.com/download","_blank"); return;
     }
-
     try {
-        // Conecta a carteira
-        const carteira = await window.solana.connect({ onlyIfTrusted: false });
-        const endereco = carteira.publicKey.toString();
-
-        // Atualiza o status na tela
-        walletStatus.innerHTML = "✅ Carteira Conectada: <strong>" + endereco.slice(0,10) + "..." + "</strong>";
+        const carteira = await window.solana.connect();
+        walletStatus.innerHTML = "✅ Conectado: " + carteira.publicKey.toString().slice(0,12)+"...";
         btnConectar.innerText = "✅ Conectado";
         btnConectar.style.background = "#16a34a";
-
-        // Mostra o botão de comprar
         btnComprar.style.display = "inline-block";
-
-    } catch (erro) {
+    } catch(e) {
         walletStatus.innerHTML = "❌ Falha na conexão";
-        console.log(erro);
     }
 });
 
-// Atualiza preços do mercado
 async function atualizarPrecos(){
     try{
-        const api = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
-        const dados = await api.json();
+        const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
+        const d = await r.json();
+        document.getElementById("btc").innerText = "R$ " + d.bitcoin.brl.toLocaleString("pt-BR");
+        const btcV = d.bitcoin.brl_24h_change.toFixed(2);
+        document.getElementById("btcvar").innerText = btcV+"% 24h";
+        document.getElementById("btcvar").className = btcV>=0?"verde":"vermelho";
 
-        document.getElementById("btc").innerText = "R$ " + dados.bitcoin.brl.toLocaleString("pt-BR");
-        const btcVar = dados.bitcoin.brl_24h_change.toFixed(2);
-        document.getElementById("btcvar").innerText = btcVar + "% 24h";
-        document.getElementById("btcvar").className = btcVar >= 0 ? "verde" : "vermelho";
-
-        document.getElementById("sol").innerText = "R$ " + dados.solana.brl.toLocaleString("pt-BR");
-        const solVar = dados.solana.brl_24h_change.toFixed(2);
-        document.getElementById("solvar").innerText = solVar + "% 24h";
-        document.getElementById("solvar").className = solVar >= 0 ? "verde" : "vermelho";
+        document.getElementById("sol").innerText = "R$ " + d.solana.brl.toLocaleString("pt-BR");
+        const solV = d.solana.brl_24h_change.toFixed(2);
+        document.getElementById("solvar").innerText = solV+"% 24h";
+        document.getElementById("solvar").className = solV>=0?"verde":"vermelho";
     }catch(e){}
 }
 atualizarPrecos();
-setInterval(atualizarPrecos, 60000);
+setInterval(atualizarPrecos,60000);
 </script>
 
 </body>
