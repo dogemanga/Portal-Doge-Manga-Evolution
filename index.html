@@ -37,19 +37,38 @@ body{
 .destaque-portal{color:var(--primaria); font-weight:700; display:flex; align-items:center; gap:6px;}
 .mini-logo{width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria); object-fit:cover;}
 
-.barra-topo{background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:78px; z-index:999;}
+.barra-topo{background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:999;}
 .perfil{display:flex; gap:10px; align-items:center;}
 .perfil img{width:40px; height:40px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover;}
 .perfil span{font-weight:600; color:var(--primaria);}
+
+/* ✅ NOVO MENU COM TRÊS PONTINHOS */
+.menu-botao{
+    font-size:28px; color:var(--primaria); cursor:pointer; padding:6px 12px; border-radius:8px; transition:0.2s;
+    background:rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.2);
+}
+.menu-botao:hover{background:rgba(250,204,21,0.15); transform:scale(1.05);}
+.menu-navegacao{
+    display:none; position:absolute; top:100%; right:20px; width:280px;
+    background:rgba(5,8,22,0.98); backdrop-filter:blur(10px); border-radius:14px;
+    border:1px solid rgba(250,204,21,0.25); margin-top:8px; overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,0.3); z-index:999;
+}
+.menu-navegacao.mostrar{display:block; animation:abrirMenu 0.2s ease;}
+@keyframes abrirMenu{from{opacity:0; transform:translateY(-8px);}to{opacity:1; transform:translateY(0);}}
+.menu-item{
+    display:block; padding:12px 20px; color:var(--texto); text-decoration:none; font-weight:500;
+    border-bottom:1px solid rgba(250,204,21,0.1); transition:0.2s;
+}
+.menu-item:last-child{border-bottom:none;}
+.menu-item:hover, .menu-item.ativo{
+    color:var(--primaria); background:rgba(250,204,21,0.08); padding-left:24px;
+}
 
 .abas{display:flex; gap:15px; padding:0 20px 15px; overflow-x:auto; margin-top:10px;}
 .aba{font-size:15px; font-weight:500; color:var(--claro); cursor:pointer; white-space:nowrap; transition:0.2s; padding-bottom:4px;}
 .aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria);}
 .aba:hover{color:var(--primaria);}
-
-nav{background:rgba(2,6,23,0.95); padding:14px; text-align:center; position:sticky; top:138px; z-index:998; border-bottom:1px solid rgba(250,204,21,0.3);}
-nav a{color:var(--texto); text-decoration:none; margin:6px 8px; font-weight:500; padding:6px 8px; border-radius:6px; transition:0.2s; cursor:pointer;}
-nav a:hover, nav a.ativo{color:var(--primaria); background:rgba(250,204,21,0.08);}
 
 header{text-align:center; padding:40px 20px 60px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:75vh;}
 .logo-principal{width:240px; height:240px; border-radius:50%; border:4px solid var(--primaria); box-shadow:0 0 40px rgba(250,204,21,0.4); margin-bottom:25px; object-fit:cover;}
@@ -72,7 +91,6 @@ header p{font-size:19px; color:var(--claro); max-width:900px; margin:0 auto 20px
 .card.destaque{border-color:var(--primaria); box-shadow:0 0 30px rgba(250,204,21,0.15);}
 h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:12px; font-size:24px;}
 
-/* ✅ FORMULÁRIO ESTRUTURADO COM PRÉVIA DE LOGO */
 .form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:15px; margin-bottom:20px;}
 .grupo-form{display:flex; flex-direction:column; gap:6px;}
 .grupo-form label{font-size:13px; color:var(--claro); font-weight:500;}
@@ -82,7 +100,6 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .btn-enviar{background:var(--primaria); color:var(--fundo); padding:12px 24px; border-radius:10px; font-weight:700; border:none; cursor:pointer; transition:0.2s; width:100%; margin-top:10px;}
 .btn-enviar:hover{transform:scale(1.02);}
 
-/* ✅ LISTA DE MOEDAS LISTADAS — ORGANIZADA COMO NFT */
 .grid-moedas{display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; margin-top:20px;}
 .card-moeda{background:rgba(2,6,23,0.9); padding:20px; border-radius:16px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s;}
 .card-moeda.destaque{border-color:var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.2);}
@@ -106,27 +123,15 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 
 .alerta{color:#f97316; font-size:14px; padding:12px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid #f97316; margin:15px 0;}
 
-/* ✅ FORMULÁRIO — APARECE SÓ AO CLICAR */
 #formCadastrar{
-    display:none;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    width:92%;
-    max-width:950px;
-    max-height:92vh;
-    overflow-y:auto;
-    z-index:9999;
-    background:rgba(5,8,22,0.98);
-    backdrop-filter:blur(12px);
+    display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+    width:92%; max-width:950px; max-height:92vh; overflow-y:auto; z-index:9999;
+    background:rgba(5,8,22,0.98); backdrop-filter:blur(12px);
 }
 #formCadastrar.mostrar{display:block; animation:aparecer 0.3s ease;}
 @keyframes aparecer{from{opacity:0; transform:translate(-50%,-45%);}to{opacity:1; transform:translate(-50%,-50%);}}
 .fundo-escuro{
-    display:none;
-    position:fixed;
-    top:0; left:0; width:100%; height:100%;
+    display:none; position:fixed; top:0; left:0; width:100%; height:100%;
     background:rgba(0,0,0,0.75); z-index:9998;
 }
 .fundo-escuro.mostrar{display:block;}
@@ -158,8 +163,22 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
     </div>
 </div>
 
+<!-- ✅ BARRA SUPERIOR COM TRÊS PONTINHOS -->
 <div class="barra-topo">
     <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg"><span>Portal Doge Manga</span></div>
+    <!-- Ícone do Menu -->
+    <div class="menu-botao" id="botaoMenu">⋮⋮⋮</div>
+    <!-- Lista completa que abre ao clicar -->
+    <nav class="menu-navegacao" id="menuNavegacao">
+        <a href="#inicio" class="menu-item ativo">🏠 Início</a>
+        <a href="#lancadas" class="menu-item">📢 Lançadas</a>
+        <a href="#" id="botaoCadastrarNav" class="menu-item">📤 Cadastrar</a>
+        <a href="roadmap.html" class="menu-item">🗺️ Roadmap</a>
+        <a href="launchpad.html" class="menu-item">🚀 Launchpad</a>
+        <a href="tokenizacao.html" class="menu-item">💎 Tokenização</a>
+        <a href="nft.html" class="menu-item">🎨 NFT</a>
+        <a href="whitepaper.html" class="menu-item">📄 Whitepaper</a>
+    </nav>
 </div>
 
 <div class="abas">
@@ -168,17 +187,6 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
     <div class="aba" id="botaoCadastrar">📤 Cadastrar</div>
     <div class="aba">📊 Dados</div>
 </div>
-
-<nav>
-    <a href="#inicio" class="ativo">🏠 Início</a>
-    <a href="#lancadas">📢 Lançadas</a>
-    <a href="#" id="botaoCadastrarNav">📤 Cadastrar</a>
-    <a href="roadmap.html">🗺️ Roadmap</a>
-    <a href="launchpad.html">🚀 Launchpad</a>
-    <a href="tokenizacao.html">💎 Tokenização</a>
-    <a href="nft.html">🎨 NFT</a>
-    <a href="whitepaper.html">📄 Whitepaper</a>
-</nav>
 
 <header id="inicio">
     <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga Evolution">
@@ -198,13 +206,11 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 </header>
 
 <div class="container">
-    <!-- ✅ MOEDAS LANÇADAS — ESTRUTURADA E ORGANIZADA -->
     <div class="card destaque" id="lancadas">
         <a href="#inicio" class="voltar">← Voltar ao Portal</a>
         <h2>📢 Moedas Lançadas</h2>
         <p class="alerta">Projetos verificados e aprovados pela comunidade Doge Manga.</p>
         <div class="grid-moedas" id="listaMoedas">
-            <!-- MOEDA PRINCIPAL JÁ CADASTRADA -->
             <div class="card-moeda destaque">
                 <div class="logo-moeda"><img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga"></div>
                 <div class="nome-moeda">Doge Manga</div>
@@ -222,7 +228,6 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
     </div>
 </div>
 
-<!-- ✅ FUNDO ESCURO E FORMULÁRIO -->
 <div class="fundo-escuro" id="fundoEscuro"></div>
 <div class="card" id="formCadastrar">
     <a href="#" class="voltar" id="fecharForm">← Voltar ao Portal</a>
@@ -257,6 +262,20 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <footer>🐕 Doge Manga Evolution © 2026 • Preços via CoinGecko • Não é conselho financeiro</footer>
 
 <script>
+// ✅ ABRIR E FECHAR O MENU DOS TRÊS PONTINHOS
+const botaoMenu = document.getElementById('botaoMenu');
+const menuNavegacao = document.getElementById('menuNavegacao');
+botaoMenu.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menuNavegacao.classList.toggle('mostrar');
+});
+// Fecha se clicar fora do menu
+document.addEventListener('click', (e) => {
+    if(!menuNavegacao.contains(e.target) && e.target !== botaoMenu){
+        menuNavegacao.classList.remove('mostrar');
+    }
+});
+
 // 📊 PREÇOS EM TEMPO REAL
 async function atualizarPrecos(){
     try{
@@ -292,6 +311,7 @@ const fecharForm = document.getElementById('fecharForm');
 botoesCadastrar.forEach(botao => {
     botao.addEventListener('click', (e) => {
         e.preventDefault();
+        menuNavegacao.classList.remove('mostrar'); // Fecha o menu ao clicar em cadastrar
         formCadastrar.classList.add('mostrar');
         fundoEscuro.classList.add('mostrar');
     });
@@ -319,7 +339,7 @@ linkLogo.addEventListener('input', () => {
     }
 });
 
-// ✅ CADASTRO SIMPLES — ADICIONA MOEDA NA LISTA (PARA EXPANDIR DEPOIS)
+// ✅ CADASTRO DE MOEDA
 document.querySelector('.btn-enviar').addEventListener('click', (e) => {
     e.preventDefault();
     const nome = document.getElementById('nomeMoeda').value;
@@ -350,7 +370,6 @@ document.querySelector('.btn-enviar').addEventListener('click', (e) => {
         formCadastrar.classList.remove('mostrar');
         fundoEscuro.classList.remove('mostrar');
         alert('✅ Projeto enviado com sucesso! Em breve será publicado após análise.');
-        // LIMPA O FORMULÁRIO
         document.querySelectorAll('#formCadastrar input').forEach(i => i.value = '');
         previaLogo.innerHTML = "Prévia";
     }else{
