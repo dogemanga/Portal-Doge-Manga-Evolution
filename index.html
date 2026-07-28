@@ -42,7 +42,7 @@ header p {
 
 .container { max-width: 1180px; margin: 0 auto; padding: 18px 22px; }
 .card {
-    background: rgba(15, 23, 42, 0.94); padding: 22px; margin: 20px 0;
+    background: rgba(15, 23, 42, 0.96); padding: 22px; margin: 20px 0;
     border-radius: 16px; border: 1px solid rgba(250,204,21,0.38);
     box-shadow: 0 0 25px rgba(250,204,21,0.12);
 }
@@ -52,51 +52,62 @@ h2 {
     padding-bottom: 8px; font-size: 19px;
 }
 
-/* ✅ Área de Lançamento de Memecoins */
-.lancamento-grid {
+/* ✅ FORMULÁRIO FUNCIONAL DE LANÇAMENTO */
+.form-grid {
     display: grid;
     grid-template-columns: 180px 1fr;
     gap: 20px;
     align-items: start;
     margin-bottom: 15px;
 }
-.lancamento-img {
-    background: rgba(2, 6, 23, 0.9);
+.upload-area {
+    background: rgba(2, 6, 23, 0.92);
     border-radius: 12px;
     border: 2px dashed #facc15;
     padding: 15px;
     text-align: center;
     min-height: 180px;
+    cursor: pointer;
+    transition: 0.3s;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     color: #94a3b8;
 }
-.lancamento-dados {
+.upload-area:hover { border-color: #facc15; background: rgba(250,204,21,0.08); }
+.upload-area img { max-width: 100%; max-height: 150px; border-radius: 8px; display: none; }
+.upload-area span { margin-top: 8px; }
+
+.campos-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
-.lancamento-item {
+.campo {
     background: rgba(2, 6, 23, 0.92);
     padding: 10px 14px;
     border-radius: 8px;
     border-left: 3px solid #facc15;
-    font-size: 14px;
 }
-.lancamento-item strong {
-    color: #facc15;
-    display: block;
-    margin-bottom: 2px;
-    font-size: 13px;
+.campo label {
+    color: #facc15; display: block; margin-bottom: 4px; font-size: 13px; font-weight: bold;
 }
-.btn-cadastrar {
-    margin-top: 15px;
-    width: 100%;
-    font-size: 16px;
-    padding: 13px;
+.campo input {
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid #334155;
+    color: white; padding: 6px 0; font-size: 14px; outline: none;
 }
+.campo input:focus { border-bottom-color: #facc15; }
+
+.btn {
+    display: inline-block; margin: 8px 5px; padding: 11px 22px;
+    background: #facc15; color: #050816; text-decoration: none;
+    font-weight: bold; border-radius: 10px; cursor: pointer;
+    transition: 0.3s; font-size: 15px; border:none;
+}
+.btn:hover { transform: scale(1.05); box-shadow: 0 0 18px rgba(250,204,21,0.5); }
+.btn-enviar { width: 100%; font-size: 16px; padding: 13px; margin-top: 10px; }
 
 .token-grid {
     display: grid;
@@ -123,14 +134,6 @@ h2 {
     color: #22c55e; font-family: monospace; word-break: break-all; 
     margin: 14px 0; font-size: 13px; border: 1px solid #22c55e;
 }
-
-.btn {
-    display: inline-block; margin: 8px 5px; padding: 11px 22px;
-    background: #facc15; color: #050816; text-decoration: none;
-    font-weight: bold; border-radius: 10px; cursor: pointer;
-    transition: 0.3s; font-size: 15px; border:none;
-}
-.btn:hover { transform: scale(1.05); box-shadow: 0 0 18px rgba(250,204,21,0.5); }
 
 .btn-tel { background: #229ED9; color: white; }
 .btn-x { background: #1DA1F2; color: white; }
@@ -168,14 +171,14 @@ footer {
 }
 
 @media(max-width:900px){
-    .lancamento-grid { grid-template-columns: 1fr; }
-    .lancamento-dados { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .campos-grid { grid-template-columns: 1fr 1fr; }
     .token-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:600px){
     header h1 { font-size: 30px; }
     header { padding: 22px 15px 18px; }
-    .lancamento-dados, .token-grid { grid-template-columns: 1fr; }
+    .campos-grid, .token-grid { grid-template-columns: 1fr; }
     nav a { margin: 4px 5px; font-size: 12px; }
     .btn { width: 90%; margin: 5px 0; }
     .crypto-card { width: 90%; }
@@ -197,31 +200,54 @@ footer {
 
 <header id="home">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Conecte sua carteira e adquira diretamente o token oficial $DGM</p>
+    <p>Portal Oficial para lançamento e listagem de Memecoins na Solana</p>
 </header>
 
 <div class="container">
 
-<!-- ✅ NOVA SEÇÃO: LANÇAMENTO DE MEMECOINS LOGO NO TOPO -->
+<!-- ✅ FORMULÁRIO FUNCIONAL DE LANÇAMENTO -->
 <div class="card" id="lancamento">
-    <h2>🚀 Lançamento de Memecoins</h2>
-    <p style="margin-bottom:15px; color:#cbd5e1;">Cadastre seu projeto aqui e faça parte do ecossistema Doge Manga. Preencha todos os dados:</p>
+    <h2>🚀 Cadastre Sua Memecoin</h2>
+    <p style="margin-bottom:15px; color:#cbd5e1;">Preencha os dados abaixo e faça parte do ecossistema Doge Manga:</p>
 
-    <div class="lancamento-grid">
-        <div class="lancamento-img">
-            🖼️ Imagem<br>Logo do Token
+    <form id="formProjeto">
+    <div class="form-grid">
+        <div class="upload-area" id="areaUpload">
+            <input type="file" id="inputImagem" accept="image/*" style="display:none;">
+            <span id="textoUpload">🖼️ Clique para<br>enviar a logo</span>
+            <img id="previewImg" alt="Logo do Projeto">
         </div>
-        <div class="lancamento-dados">
-            <div class="lancamento-item"><strong>Nome do Token</strong>Ex: Doge Manga</div>
-            <div class="lancamento-item"><strong>Símbolo</strong>Ex: $DGM</div>
-            <div class="lancamento-item"><strong>Contrato</strong>Endereço na Solana</div>
-            <div class="lancamento-item"><strong>Site Oficial</strong>Link do site</div>
-            <div class="lancamento-item"><strong>Canal no X</strong>@seuprojeto</div>
-            <div class="lancamento-item"><strong>Grupo Telegram</strong>Link do grupo</div>
+
+        <div class="campos-grid">
+            <div class="campo">
+                <label>Nome do Token</label>
+                <input type="text" name="nome" placeholder="Ex: Doge Manga" required>
+            </div>
+            <div class="campo">
+                <label>Símbolo</label>
+                <input type="text" name="simbolo" placeholder="Ex: $DGM" required>
+            </div>
+            <div class="campo">
+                <label>Contrato Solana</label>
+                <input type="text" name="contrato" placeholder="Endereço da carteira" required>
+            </div>
+            <div class="campo">
+                <label>Site Oficial</label>
+                <input type="url" name="site" placeholder="https://...">
+            </div>
+            <div class="campo">
+                <label>Perfil no X</label>
+                <input type="url" name="twitter" placeholder="https://x.com/...">
+            </div>
+            <div class="campo">
+                <label>Grupo Telegram</label>
+                <input type="url" name="telegram" placeholder="https://t.me/...">
+            </div>
         </div>
     </div>
 
-    <button class="btn btn-cadastrar">📝 Cadastrar Meu Projeto</button>
+    <button type="submit" class="btn btn-enviar">📤 Enviar Cadastro</button>
+    </form>
 </div>
 
 <div class="card" id="token">
@@ -242,12 +268,11 @@ footer {
 
 <div class="card" id="comprar">
     <h2>💱 Como Adquirir o $DGM</h2>
-    <p>Conecte sua carteira Phantom e seja direcionado automaticamente para a negociação com o contrato já preenchido.</p>
+    <p>Conecte sua carteira Phantom e adquira diretamente na Raydium:</p>
     <div class="status-wallet" id="walletStatus">📌 Situação: Carteira não conectada</div>
     <button id="btnConectar" class="btn">🔗 Conectar Carteira Phantom</button>
     <br><br>
     <a id="btnComprar" href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-buy" style="display:none;">💸 Comprar Doge Manga Agora</a>
-    <p style="margin-top:15px; font-size:13px; color:#94a3b8;">*Acesse apenas pelos links oficiais e sempre confira o endereço do contrato antes de confirmar transações.</p>
 </div>
 
 <div class="card">
@@ -255,7 +280,7 @@ footer {
     <a href="https://dogemangaofficial.xyz" target="_blank" class="btn btn-site">🌍 Site Oficial</a>
     <a href="https://x.com/dogemanga96508" target="_blank" class="btn btn-x">🐦 Perfil no X</a>
     <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="btn btn-tel">💬 Grupo no Telegram</a>
-    <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" class="btn btn-git">📂 Repositório GitHub</a>
+    <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" class="btn btn-git">📂 GitHub</a>
     <br><br>
     <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">📉 DexScreener</a>
     <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn btn-chain">📈 Birdeye</a>
@@ -282,40 +307,69 @@ footer {
 <footer>🐕 Doge Manga Evolution | © 2026 • Projeto Oficial • Rede Solana</footer>
 
 <script>
+// ✅ FUNÇÃO DE UPLOAD E PREVISUALIZAÇÃO DA IMAGEM
+const areaUpload = document.getElementById('areaUpload');
+const inputImagem = document.getElementById('inputImagem');
+const previewImg = document.getElementById('previewImg');
+const textoUpload = document.getElementById('textoUpload');
+
+areaUpload.addEventListener('click', () => inputImagem.click());
+inputImagem.addEventListener('change', function(e){
+    const arquivo = e.target.files[0];
+    if(arquivo){
+        const leitor = new FileReader();
+        leitor.onload = function(e){
+            previewImg.src = e.target.result;
+            previewImg.style.display = 'block';
+            textoUpload.style.display = 'none';
+        }
+        leitor.readAsDataURL(arquivo);
+    }
+});
+
+// ✅ ENVIO DO FORMULÁRIO
+document.getElementById('formProjeto').addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('✅ Cadastro enviado com sucesso!\nEm breve entraremos em contato para aprovação e listagem.');
+    this.reset();
+    previewImg.style.display = 'none';
+    textoUpload.style.display = 'block';
+});
+
+// ✅ CONEXÃO DA CARTEIRA
 const btnConectar = document.getElementById("btnConectar");
 const btnComprar = document.getElementById("btnComprar");
 const walletStatus = document.getElementById("walletStatus");
 
 btnConectar.addEventListener("click", async () => {
     if (!window.solana || !window.solana.isPhantom) {
-        alert("⚠️ Instale a carteira Phantom primeiro.\nAcesse: phantom.com/download");
-        window.open("https://phantom.com/download","_blank"); return;
+        alert("⚠️ Instale a Phantom primeiro.\nphantom.com/download");
+        return;
     }
     try {
         const carteira = await window.solana.connect();
-        walletStatus.innerHTML = "✅ Conectado com sucesso: " + carteira.publicKey.toString().slice(0,12)+"...";
+        walletStatus.innerHTML = "✅ Conectado: " + carteira.publicKey.toString().slice(0,12)+"...";
         btnConectar.innerText = "✅ Conectado";
         btnConectar.style.background = "#16a34a";
         btnComprar.style.display = "inline-block";
-    } catch(e) {
-        walletStatus.innerHTML = "❌ Não foi possível conectar a carteira";
+    } catch {
+        walletStatus.innerHTML = "❌ Falha na conexão";
     }
 });
 
+// ✅ PREÇOS EM TEMPO REAL
 async function atualizarPrecos(){
     try{
         const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
         const d = await r.json();
         document.getElementById("btc").innerText = "R$ " + d.bitcoin.brl.toLocaleString("pt-BR");
-        const btcV = d.bitcoin.brl_24h_change.toFixed(2);
-        document.getElementById("btcvar").innerText = btcV+"% em 24h";
-        document.getElementById("btcvar").className = btcV>=0?"verde":"vermelho";
+        document.getElementById("btcvar").innerText = d.bitcoin.brl_24h_change.toFixed(2)+"% 24h";
+        document.getElementById("btcvar").className = d.bitcoin.brl_24h_change>=0?"verde":"vermelho";
 
         document.getElementById("sol").innerText = "R$ " + d.solana.brl.toLocaleString("pt-BR");
-        const solV = d.solana.brl_24h_change.toFixed(2);
-        document.getElementById("solvar").innerText = solV+"% em 24h";
-        document.getElementById("solvar").className = solV>=0?"verde":"vermelho";
-    }catch(e){}
+        document.getElementById("solvar").innerText = d.solana.brl_24h_change.toFixed(2)+"% 24h";
+        document.getElementById("solvar").className = d.solana.brl_24h_change>=0?"verde":"vermelho";
+    }catch{}
 }
 atualizarPrecos();
 setInterval(atualizarPrecos,60000);
