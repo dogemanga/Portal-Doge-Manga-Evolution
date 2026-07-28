@@ -1,5 +1,3 @@
-jbackground: linear-gradient(rgba(2,6,23,0.75), rgba(2,6,23,0.75)), url("IMG-20260727-WA0036(7).jpg");
-IMG-20260727-WA0036(7).jpg
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -11,8 +9,8 @@ IMG-20260727-WA0036(7).jpg
 
 body {
     color: white; line-height: 1.6;
-    /* Usa a arte como fundo, com leve escurecimento só para o texto ficar legível */
-    background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.75)), url("banner.jpg");
+    /* ✅ NOME EXATO DA IMAGEM */
+    background: linear-gradient(rgba(2, 6, 23, 0.75), rgba(2, 6, 23, 0.75)), url("IMG-20260727-WA0036(7).jpg");
     background-size: cover; background-position: center;
     background-attachment: fixed; background-repeat: no-repeat;
     min-height: 100vh;
@@ -46,21 +44,22 @@ header p { margin-top: 15px; font-size: 20px; color: #f0f0f0; }
 }
 h2 { color: #facc15; margin-bottom: 15px; border-bottom: 2px solid #facc15; padding-bottom: 8px; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 15px; margin-top: 15px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 15px; }
 .box { background: rgba(2, 6, 23, 0.9); padding: 15px; border-radius: 12px; border-left: 3px solid #facc15; }
 
 .contract {
     background: rgba(2, 6, 23, 0.9); padding: 12px; border-radius: 8px;
     color: #22c55e; font-family: monospace; word-break: break-all; margin: 15px 0;
+    font-size: 14px;
 }
 
 .btn {
     display: inline-block; margin: 8px 5px; padding: 12px 25px;
     background: #facc15; color: #050816; text-decoration: none;
     font-weight: bold; border-radius: 12px; cursor: pointer;
-    transition: 0.3s; font-size: 16px; box-shadow: 0 0 15px rgba(250,204,21,0.5);
+    transition: 0.3s; font-size: 16px; border:none;
 }
-.btn:hover { transform: scale(1.08); background: white; box-shadow: 0 0 25px rgba(250,204,21,0.7); }
+.btn:hover { transform: scale(1.08); background: white; box-shadow: 0 0 15px rgba(250,204,21,0.5); }
 
 .btn-tel { background: #229ED9; color: white; }
 .btn-tel:hover { background: #1b8ac0; }
@@ -68,7 +67,7 @@ h2 { color: #facc15; margin-bottom: 15px; border-bottom: 2px solid #facc15; padd
 .btn-x:hover { background: #1991da; }
 .btn-site { background: #2563eb; color: white; }
 .btn-site:hover { background: #1d4ed8; }
-.btn-portal { background: #8b5cf6; color: white; }
+btn-portal { background: #8b5cf6; color: white; }
 .btn-portal:hover { background: #7c3aed; }
 .btn-chain { background: #10b981; color: white; }
 .btn-chain:hover { background: #059669; }
@@ -76,6 +75,13 @@ h2 { color: #facc15; margin-bottom: 15px; border-bottom: 2px solid #facc15; padd
 .btn-trade:hover { background: #ea580c; }
 .btn-git { background: #6e5494; color: white; }
 .btn-git:hover { background: #5a447a; }
+.btn-buy { background: #16a34a; color: white; font-size:17px; padding:14px 30px; }
+.btn-buy:hover { background: #15803d; box-shadow: 0 0 20px rgba(22,163,74,0.5); }
+
+.status-wallet {
+    background:rgba(2,6,23,0.9); padding:12px; border-radius:8px; margin:10px 0;
+    font-family:monospace;
+}
 
 .crypto-market {
     background: rgba(17, 24, 39, 0.9); padding: 25px; border-radius: 18px;
@@ -105,81 +111,64 @@ footer {
 <body>
 
 <nav>
-    <a href="#">🏠 Início</a>
-    <a href="#">🚀 Launchpad</a>
-    <a href="#">🐕 Token</a>
-    <a href="comprar.html">💎 Comprar</a>
+    <a href="#home">🏠 Início</a>
+    <a href="#token">🐕 Token</a>
+    <a href="#comprar">💎 Comprar</a>
     <a href="nft.html">🎨 NFT</a>
-    <a href="jogo-bolinhas.html">🎮 Jogo</a>
     <a href="whitepaper.html">📄 Whitepaper</a>
     <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener">🌐 Site Oficial</a>
     <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener">👥 Comunidade</a>
 </nav>
 
-<header>
+<header id="home">
     <img src="logo.png" class="logo" alt="Portal Doge Manga Evolution">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>O hub definitivo para lançar, listar e promover sua memecoin</p>
+    <p>Conecte sua carteira e compre diretamente o $DGM</p>
 </header>
 
 <div class="container">
 
-<div class="card">
-    <h2>🌎 Sobre o Projeto</h2>
-    <p>Plataforma oficial de lançamento, listagem e promoção de memecoins na rede Solana. Rápida, segura e escalável — a nova geração de projetos começa aqui!</p>
-</div>
-
-<div class="card">
-    <h2>📊 Tokenomics</h2>
+<div class="card" id="token">
+    <h2>📊 Token Oficial Doge Manga ($DGM)</h2>
     <div class="grid">
-        <div class="box"><strong>Nome:</strong> Doge Manga ($DGM)</div>
+        <div class="box"><strong>Nome:</strong> Doge Manga</div>
+        <div class="box"><strong>Símbolo:</strong> $DGM</div>
         <div class="box"><strong>Rede:</strong> Solana SPL</div>
         <div class="box"><strong>Supply:</strong> 420.000.000.000</div>
         <div class="box"><strong>Decimais:</strong> 6</div>
     </div>
     <br>
-    <strong>Contrato Oficial:</strong>
+    <strong>Contrato:</strong>
     <div class="contract">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</div>
-    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-chain">🔎 Ver na Solscan</a>
+    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">🔎 Ver na Solscan</a>
 </div>
 
-<div class="card">
-    <h2>🗺️ Roadmap</h2>
-    <p>✅ Identidade visual e comunidade</p>
-    <p>✅ Token lançado na Solana</p>
-    <p>🔄 Portal e plataforma oficial</p>
-    <p>🔄 Launchpad exclusivo</p>
-    <p>🔄 Expansão global e parcerias</p>
-</div>
+<div class="card" id="comprar">
+    <h2>💱 Comprar Doge Manga ($DGM)</h2>
+    <p>Conecte sua carteira Phantom e vá direto para a negociação do token.</p>
 
-<div class="card">
-    <h2>🌐 Todos os Links Oficiais</h2>
-    <h3 style="margin-bottom:10px; color:#facc15;">📢 Redes e Site</h3>
-    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener" class="btn btn-site">🌍 Site Oficial</a>
-    <a href="https://dogemanga.netlify.app/" target="_blank" rel="noopener" class="btn btn-portal">🐕 Portal Evolution</a>
-    <a href="https://x.com/dogemanga96508" target="_blank" rel="noopener" class="btn btn-x">🐦 X Twitter</a>
-    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener" class="btn btn-tel">💬 Telegram</a>
-    <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" rel="noopener" class="btn btn-git">📂 GitHub Oficial</a>
-
-    <br><br>
-    <h3 style="margin-bottom:10px; color:#facc15;">🔎 Exploradores e Mercado</h3>
-    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-chain">📉 DexScreener</a>
-    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener" class="btn btn-chain">📈 Birdeye</a>
-
-    <br><br>
-    <h3 style="margin-bottom:10px; color:#facc15;">💱 Negociação e Carteira</h3>
-    <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-trade">🌊 Raydium</a>
-    <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-trade">👻 Phantom Wallet</a>
-</div>
-
-<div class="card">
-    <h2>🚀 Ecossistema Doge Manga</h2>
-    <div class="grid">
-        <div class="box">🐕 <strong>Token</strong><br>Doge Manga na rede Solana.</div>
-        <div class="box">🚀 <strong>Launchpad</strong><br>Plataforma para lançar sua memecoin.</div>
-        <div class="box">🎨 <strong>NFT</strong><br>Coleções digitais exclusivas.</div>
-        <div class="box">🦊 <strong>Comunidade</strong><br>Conexão global e engajada.</div>
+    <div class="status-wallet" id="walletStatus">
+        📌 Carteira: <strong>Não conectada</strong>
     </div>
+
+    <button id="btnConectar" class="btn">🔗 Conectar Phantom</button>
+    <br><br>
+    <a id="btnComprar" href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-buy" style="display:none;">💸 Comprar $DGM Agora</a>
+
+    <p style="margin-top:15px; font-size:14px; color:#94a3b8;">
+        *Ao clicar em comprar, você será direcionado para a troca na Raydium, já com o endereço do Doge Manga preenchido automaticamente.
+    </p>
+</div>
+
+<div class="card">
+    <h2>🌐 Links Oficiais</h2>
+    <a href="https://dogemangaofficial.xyz" target="_blank" class="btn btn-site">🌍 Site</a>
+    <a href="https://x.com/dogemanga96508" target="_blank" class="btn btn-x">🐦 X</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="btn btn-tel">💬 Telegram</a>
+    <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" class="btn btn-git">📂 GitHub</a>
+    <br><br>
+    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">📉 DexScreener</a>
+    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn btn-chain">📈 Birdeye</a>
 </div>
 
 <div class="crypto-market">
@@ -203,23 +192,54 @@ footer {
 </footer>
 
 <script>
+const btnConectar = document.getElementById("btnConectar");
+const btnComprar = document.getElementById("btnComprar");
+const walletStatus = document.getElementById("walletStatus");
+
+// Ação ao clicar em conectar
+btnConectar.addEventListener("click", async () => {
+    // Verifica se tem a Phantom instalada
+    if (!window.solana || !window.solana.isPhantom) {
+        alert("⚠️ Instale a carteira Phantom primeiro!\nAcesse: phantom.com/download");
+        window.open("https://phantom.com/download", "_blank");
+        return;
+    }
+
+    try {
+        // Conecta a carteira
+        const carteira = await window.solana.connect({ onlyIfTrusted: false });
+        const endereco = carteira.publicKey.toString();
+
+        // Atualiza o status na tela
+        walletStatus.innerHTML = "✅ Carteira Conectada: <strong>" + endereco.slice(0,10) + "..." + "</strong>";
+        btnConectar.innerText = "✅ Conectado";
+        btnConectar.style.background = "#16a34a";
+
+        // Mostra o botão de comprar
+        btnComprar.style.display = "inline-block";
+
+    } catch (erro) {
+        walletStatus.innerHTML = "❌ Falha na conexão";
+        console.log(erro);
+    }
+});
+
+// Atualiza preços do mercado
 async function atualizarPrecos(){
     try{
-        let resposta = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
-        let dados = await resposta.json();
+        const api = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,solana&vs_currencies=brl&include_24hr_change=true");
+        const dados = await api.json();
 
         document.getElementById("btc").innerText = "R$ " + dados.bitcoin.brl.toLocaleString("pt-BR");
-        let btcVar = dados.bitcoin.brl_24h_change.toFixed(2);
+        const btcVar = dados.bitcoin.brl_24h_change.toFixed(2);
         document.getElementById("btcvar").innerText = btcVar + "% 24h";
         document.getElementById("btcvar").className = btcVar >= 0 ? "verde" : "vermelho";
 
         document.getElementById("sol").innerText = "R$ " + dados.solana.brl.toLocaleString("pt-BR");
-        let solVar = dados.solana.brl_24h_change.toFixed(2);
+        const solVar = dados.solana.brl_24h_change.toFixed(2);
         document.getElementById("solvar").innerText = solVar + "% 24h";
         document.getElementById("solvar").className = solVar >= 0 ? "verde" : "vermelho";
-    }catch(e){
-        console.log("Erro ao carregar preços");
-    }
+    }catch(e){}
 }
 atualizarPrecos();
 setInterval(atualizarPrecos, 60000);
@@ -227,226 +247,3 @@ setInterval(atualizarPrecos, 60000);
 
 </body>
 </html>
-<nav class="navbar">
-    <div class="logo">🐕 Doge Manga</div>
-
-    <ul class="menu">
-        <li><a href="#home">🏠 Home</a></li>
-        <li><a href="#market">📈 Crypto Market</a></li>
-        <li><a href="#launchpad">🚀 Launchpad</a></li>
-        <li><a href="#swap">💱 DogeSwap</a></li>
-        <li><a href="#games">🎮 Games</a></li>
-        <li><a href="#nfts">🖼 NFTs</a></li>
-        <li><a href="#community">💬 Comunidade</a></li>
-        <li><a href="#dogeai">🤖 Doge AI</a></li>
-        <li><a href="#roadmap">🛣 Roadmap</a></li>
-        <li><a href="#whitepaper">📄 Whitepaper</a></li>
-    </ul>
-</nav>
-<section id="launchpad" class="launchpad">
-
-<h2>🚀 Doge Manga Launchpad</h2>
-<p>Crie sua Memecoin na Solana.</p>
-
-<form class="launch-form">
-
-<input type="text" placeholder="Nome da Memecoin" required>
-
-<input type="text" placeholder="Símbolo" required>
-
-<textarea placeholder="Descrição do Projeto"></textarea>
-
-<input type="url" placeholder="Site Oficial">
-
-<input type="url" placeholder="Link do X (Twitter)">
-
-<input type="url" placeholder="Link do Telegram">
-
-<input type="number" placeholder="Supply Total">
-
-<input type="number" placeholder="Decimais" value="6">
-
-<input type="file">
-
-<button type="submit" class="btn">
-🚀 Lançar Memecoin
-</button>
-
-</form>
-
-</section>
-<button id="connectWallet" class="btn">
-🔗 Conectar Carteira Phantom
-</button>
-
-<p id="walletStatus">Carteira: Não conectada</p>
-<script>
-const connectButton = document.getElementById("connectWallet");
-const walletStatus = document.getElementById("walletStatus");
-
-async function connectWallet() {
-    if (!window.solana || !window.solana.isPhantom) {
-        alert("Instale a Phantom Wallet para continuar.");
-        return;
-    }
-
-    try {
-        const response = await window.solana.connect();
-        walletStatus.innerHTML =
-            "✅ Carteira: " + response.publicKey.toString();
-    } catch (err) {
-        console.log(err);
-    }
-}
-
-connectButton.addEventListener("click", connectWallet);
-</script>
-<h2>🔥 Memecoins Lançadas</h2>
-
-<div class="token-grid">
-
-  <div class="token-card">
-    <h3>🐕 Doge Manga</h3>
-    <p>Símbolo: DOGM</p>
-    <p>Rede: Solana</p>
-    <button class="btn">Ver Projeto</button>
-  </div>
-
-  <div class="token-card">
-    <h3>🚀 Próximo Projeto</h3>
-    <p>Em breve...</p>
-    <button class="btn">Em Desenvolvimento</button>
-  </div>
-
-</div>
-<section id="wizard" class="wizard">
-
-<h2>🚀 Doge Manga Launch Wizard</h2>
-
-<div class="step active">
-<h3>✅ Etapa 1</h3>
-<p>Conectar Carteira Phantom</p>
-</div>
-
-<div class="step">
-<h3>🪙 Etapa 2</h3>
-<p>Nome e Símbolo</p>
-</div>
-
-<div class="step">
-<h3>📦 Etapa 3</h3>
-<p>Supply e Decimais</p>
-</div>
-
-<div class="step">
-<h3>🖼 Etapa 4</h3>
-<p>Logo e Descrição</p>
-</div>
-
-<div class="step">
-<h3>🚀 Etapa 5</h3>
-<p>Revisar e Lançar</p>
-</div>
-
-</section>
-<section id="wizard" class="wizard">
-
-<h2>🚀 Doge Manga Launch Wizard</h2>
-
-<div class="step active">
-<h3>✅ Etapa 1</h3>
-<p>Conectar Carteira Phantom</p>
-</div>
-<section id="market" class="crypto-market">
-
-<h2>📈 Doge Manga Crypto Market</h2>
-<p>Acompanhe o mercado em tempo real.</p>
-
-<div class="market-grid">
-
-<div class="coin-card">
-<h3>₿ Bitcoin</h3>
-<p id="btc">Carregando...</p>
-</div>
-
-<div class="coin-card">
-<h3>Ξ Ethereum</h3>
-<p id="eth">Carregando...</p>
-</div>
-
-<div class="coin-card">
-<h3>◎ Solana</h3>
-<p id="sol">Carregando...</p>
-</div>
-
-</div>
-
-</section>
-
-<script>
-async function carregarMercado(){
-
-const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd,brl");
-
-const d = await r.json();
-
-document.getElementById("btc").innerHTML =
-"R$ " + d.bitcoin.brl.toLocaleString("pt-BR");
-
-document.getElementById("eth").innerHTML =
-"R$ " + d.ethereum.brl.toLocaleString("pt-BR");
-
-document.getElementById("sol").innerHTML =
-"R$ " + d.solana.brl.toLocaleString("pt-BR");
-
-}
-
-carregarMercado();
-
-setInterval(carregarMercado,60000);
-</script>
-<div class="step">
-<h3>🪙 Etapa 2</h3>
-<p>Nome e Símbolo</p>
-</div>
-
-<div class="step">
-<h3>📦 Etapa 3</h3>
-<p>Supply e Decimais</p>
-</div>
-
-<div class="step">
-<h3>🖼 Etapa 4</h3>
-<p>Logo e Descrição</p>
-</div>
-
-<div class="step">
-<h3>🚀 Etapa 5</h3>
-<p>Revisar e Lançar</p>
-</div>
-
-</section>
-<section id="trending" class="trending">
-
-<h2>🔥 Trending Memecoins</h2>
-
-<div class="trend-grid">
-
-<div class="trend-card">
-<h3>🐕 Doge Manga</h3>
-<p>Status: Em desenvolvimento</p>
-</div>
-
-<div class="trend-card">
-<h3>🚀 Próxima Memecoin</h3>
-<p>Em breve</p>
-</div>
-
-<div class="trend-card">
-<h3>⭐ Comunidade</h3>
-<p>Vote nos projetos favoritos</p>
-</div>
-
-</div>
-
-</section>
