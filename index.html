@@ -1,288 +1,229 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Comprar Doge Manga</title>
-
+<title>Doge Manga Evolution | Portal Oficial Solana</title>
+<link rel="icon" href="IMG-20260727-WA0036(7).jpg">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif;}
+:root{
+    --primaria:#facc15; --fundo:#050816; --secundaria:#111827;
+    --sucesso:#22c55e; --texto:#e2e8f0; --texto-claro:#94a3b8;
 }
-
 body{
-background:#050816;
-color:white;
+    color:var(--texto); line-height:1.7;
+    background:linear-gradient(rgba(5,8,22,0.88),rgba(2,6,23,0.92)),url("IMG-20260727-WA0036(7).jpg");
+    background-size:cover; background-position:center; background-attachment:fixed;
+    min-height:100vh; padding-bottom:80px;
 }
 
-nav{
-background:#020617;
-padding:20px;
-text-align:center;
+/* BARRA SUPERIOR */
+.barra-topo{background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:999;}
+.perfil{display:flex; gap:10px; align-items:center;}
+.perfil img{width:40px; height:40px; border-radius:50%; border:2px solid var(--primaria);}
+.perfil span{font-weight:600; color:var(--primaria);}
+.filtros{display:flex; gap:8px; flex-wrap:wrap;}
+.filtro{padding:6px 14px; border-radius:20px; font-size:14px; cursor:pointer; transition:0.2s;}
+.filtro.ativo{background:var(--primaria); color:var(--fundo); box-shadow:0 0 12px rgba(250,204,21,0.3);}
+.filtro:not(.ativo){background:rgba(255,255,255,0.08); color:var(--texto-claro);}
+.btn-deposito{background:var(--primaria); color:var(--fundo); padding:8px 20px; border-radius:20px; font-weight:700; border:none; cursor:pointer; transition:0.2s;}
+.btn-deposito:hover{transform:scale(1.05); box-shadow:0 0 15px rgba(250,204,21,0.4);}
+
+/* BARRA ROLANDO SÓ COM DOGE MANGA — FUNCIONANDO 100% */
+.barra-moedas{margin:15px; border-radius:16px; background:rgba(2,6,23,0.95); border:1px solid rgba(250,204,21,0.15); overflow:hidden;}
+.barra-conteudo{display:flex; gap:40px; padding:18px; animation: rolarBarra 24s linear infinite; width:max-content;}
+.barra-moedas:hover .barra-conteudo{animation-play-state:paused;}
+@keyframes rolarBarra{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.item-barra{display:flex; align-items:center; gap:12px; padding:10px 20px; border-radius:12px; background:rgba(17,24,39,0.9); border:1px solid var(--primaria); cursor:pointer; white-space:nowrap; transition:0.2s;}
+.item-barra:hover{transform:scale(1.03);}
+.item-logo{width:45px; height:45px; border-radius:50%; background:var(--primaria); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; color:var(--fundo);}
+.item-nome{font-weight:700; font-size:16px; color:var(--primaria);}
+.item-simbolo{font-size:13px; color:var(--texto-claro);}
+.item-valor{font-size:15px; color:var(--sucesso); font-weight:600;}
+
+.abas{display:flex; gap:15px; padding:0 20px 15px; overflow-x:auto;}
+.aba{font-size:15px; font-weight:500; color:var(--texto-claro); cursor:pointer; white-space:nowrap; transition:0.2s; padding-bottom:4px;}
+.aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria);}
+.aba:hover{color:var(--primaria);}
+
+nav{background:rgba(2,6,23,0.95); padding:14px; text-align:center; position:sticky; top:60px; z-index:998; border-bottom:1px solid rgba(250,204,21,0.3);}
+nav a{color:var(--texto); text-decoration:none; margin:6px 8px; font-weight:500; padding:6px 8px; border-radius:6px; transition:0.2s;}
+nav a:hover, nav a.ativo{color:var(--primaria); background:rgba(250,204,21,0.08);}
+
+header{text-align:center; padding:50px 20px 40px;}
+header h1{font-size:44px; color:var(--primaria); text-shadow:0 0 30px rgba(250,204,21,0.35); margin-bottom:12px;}
+header p{font-size:18px; color:var(--texto-claro); max-width:850px; margin:0 auto;}
+
+.container{max-width:1450px; margin:0 auto; padding:20px 24px;}
+.card{background:rgba(17,24,39,0.92); padding:28px; margin:30px 0; border-radius:20px; border:1px solid rgba(250,204,21,0.2); backdrop-filter:blur(6px);}
+.card.destaque{border-color:var(--primaria); box-shadow:0 0 30px rgba(250,204,21,0.15);}
+h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:12px; font-size:24px;}
+
+/* TODOS OS LINKS JUNTOS, ORGANIZADOS E COM CONTRATO CORRETO */
+.links-oficiais{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; justify-content:center;}
+.links-oficiais a{
+    padding:8px 14px; border-radius:8px; color:white; text-decoration:none;
+    font-size:13px; font-weight:500; transition:0.2s;
 }
+.links-oficiais a:hover{transform:translateY(-2px); box-shadow:0 0 10px rgba(255,255,255,0.15);}
+.link-site{background:#2563eb;}
+.link-x{background:#1DA1F2;}
+.link-telegram{background:#229ED9;}
+.link-coingecko{background:#0052ff;}
+.link-marketcap{background:#10b981;}
+.link-commercecheck{background:#7c3aed;}
+.link-solscan{background:#f97316;}
+.link-dexscreener{background:#ef4444;}
+.link-birdeye{background:#8b5cf6;}
+.link-raydium{background:#000; border:1px solid #fff;}
+.link-phantom{background:#16a34a;}
 
-nav a{
-color:white;
-text-decoration:none;
-margin:10px;
-font-weight:bold;
-}
+.stats-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:20px;}
+.stat-box{background:rgba(2,6,23,0.94); padding:18px; border-radius:12px; text-align:center; border:1px solid rgba(250,204,21,0.2);}
+.stat-valor{font-size:22px; font-weight:700; color:var(--primaria); margin-bottom:5px;}
+.stat-nome{font-size:13px; color:var(--texto-claro);}
 
-header{
-text-align:center;
-padding:60px 20px;
-background:linear-gradient(135deg,#111827,#2563eb);
-}
+.menu-inferior{position:fixed; bottom:0; left:0; width:100%; background:rgba(2,6,23,0.98); display:flex; justify-content:space-around; padding:12px 0; border-top:1px solid rgba(250,204,21,0.2); z-index:999;}
+.menu-item{text-align:center; color:var(--texto-claro); text-decoration:none; font-size:12px; transition:0.2s;}
+.menu-item.ativo{color:var(--primaria); font-weight:600;}
+.menu-item span{display:block; font-size:18px; margin-bottom:2px;}
 
-.logo{
-width:180px;
-height:180px;
-border-radius:50%;
-object-fit:cover;
-}
-
-h1,h2{
-color:#38bdf8;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
-
-.card{
-background:#111827;
-padding:30px;
-margin:25px 0;
-border-radius:20px;
-box-shadow:0 0 20px #000;
-}
-
-.contract{
-background:#020617;
-padding:15px;
-border-radius:10px;
-word-break:break-all;
-color:#14f195;
-}
-
-button{
-
-background:#14f195;
-color:#000;
-border:none;
-padding:15px 30px;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-margin-top:15px;
-
-}
-
-button:hover{
-transform:scale(1.05);
-}
-
-.warning{
-background:#422006;
-padding:20px;
-border-radius:15px;
-}
-
-footer{
-text-align:center;
-padding:30px;
-background:#020617;
-}
-
+.btn{display:inline-block; padding:12px 24px; background:var(--primaria); color:var(--fundo); text-decoration:none; font-weight:700; border-radius:10px; border:none; cursor:pointer; transition:0.2s;}
+.btn:hover{transform:scale(1.05); box-shadow:0 0 20px rgba(250,204,21,0.4);}
+.alerta{color:#f97316; font-size:14px; padding:10px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid #f97316; margin:15px 0;}
+footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--texto-claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 </style>
-
 </head>
-
-
 <body>
 
+<!-- BARRA SUPERIOR -->
+<div class="barra-topo">
+    <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg"><span>@dogemanga96508</span></div>
+    <div class="filtros"><div class="filtro ativo">24h</div><div class="filtro">7d</div><div class="filtro">30d</div><div class="filtro">Todos</div></div>
+    <button class="btn-deposito" onclick="alert('🔐 Sistema de pagamentos Solana em desenvolvimento — em breve!')">💳 Depositar</button>
+</div>
 
+<!-- BARRA ROLANDO — SÓ DOGE MANGA, FUNCIONANDO PERFEITAMENTE -->
+<div class="barra-moedas">
+    <div class="barra-conteudo">
+        <div class="item-barra">
+            <div class="item-logo">🐕</div>
+            <div class="item-dados">
+                <div class="item-nome">Doge Manga</div>
+                <div class="item-simbolo">$DGM</div>
+                <div class="item-valor">🚀 Lançamento</div>
+            </div>
+        </div>
+        <div class="item-barra">
+            <div class="item-logo">🐕</div>
+            <div class="item-dados">
+                <div class="item-nome">Doge Manga</div>
+                <div class="item-simbolo">$DGM</div>
+                <div class="item-valor">Rede Solana</div>
+            </div>
+        </div>
+        <div class="item-barra">
+            <div class="item-logo">🐕</div>
+            <div class="item-dados">
+                <div class="item-nome">Doge Manga</div>
+                <div class="item-simbolo">$DGM</div>
+                <div class="item-valor">Comunidade</div>
+            </div>
+        </div>
+        <div class="item-barra">
+            <div class="item-logo">🐕</div>
+            <div class="item-dados">
+                <div class="item-nome">Doge Manga</div>
+                <div class="item-simbolo">$DGM</div>
+                <div class="item-valor">Transparente</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ABAS -->
+<div class="abas">
+    <div class="aba" onclick="mudarAba(this)">⭐ Favoritos</div>
+    <div class="aba" onclick="mudarAba(this)">✅ Verificados</div>
+    <div class="aba" onclick="mudarAba(this)">📈 Em Alta</div>
+    <div class="aba ativo" onclick="mudarAba(this)">🆕 Recém-Adicionados</div>
+</div>
+
+<!-- MENU -->
 <nav>
-
-<a href="index.html">🏠 Home</a>
-
-<a href="projects.html">🚀 Launchpad</a>
-
-<a href="doge-manga.html">🐕 Doge Manga</a>
-
-<a href="buy.html">💎 Comprar</a>
-
+    <a href="#inicio" class="ativo">🏠 Início</a>
+    <a href="#dados">📊 $DGM</a>
+    <a href="#cadastrar">🚀 Cadastrar</a>
+    <a href="nft.html">🎨 NFT</a>
+    <a href="whitepaper.html">📄 Whitepaper</a>
 </nav>
 
-
-
-<header>
-
-<img src="file_00000000b510820ea690243d5980576c.png" class="logo">
-
-<h1>💎 Comprar Doge Manga</h1>
-
-<p>
-Token oficial do ecossistema Doge Manga Evolution
-</p>
-
+<header id="inicio">
+    <h1>🚀 Doge Manga Evolution</h1>
+    <p>Portal Oficial • Rede Solana • Todos os links e verificações em um só lugar</p>
 </header>
-
-
-
 
 <div class="container">
 
+<!-- DADOS E TODOS OS LINKS — COMPLETOS E UNIDOS AO CONTRATO -->
+<div class="card destaque" id="dados">
+    <h2>📊 Doge Manga $DGM — Dados Oficiais</h2>
+    <div class="stats-grid">
+        <div class="stat-box"><div class="stat-valor">--</div><div class="stat-nome">Preço</div></div>
+        <div class="stat-box"><div class="stat-valor">420 Bi</div><div class="stat-nome">Supply Total</div></div>
+        <div class="stat-box"><div class="stat-valor">--</div><div class="stat-nome">Market Cap</div></div>
+        <div class="stat-box"><div class="stat-valor">--</div><div class="stat-nome">Volume 24h</div></div>
+    </div>
 
+    <div class="alerta">🔑 Contrato Oficial: <strong>E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</strong></div>
 
-<div class="card">
+    <!-- ✅ TODOS OS LINKS JUNTOS, ORGANIZADOS E COM O CONTRATO CERTO -->
+    <div class="links-oficiais">
+        <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">🌐 Site Oficial</a>
+        <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">🐦 X / Twitter</a>
+        <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-telegram">💬 Telegram</a>
+        <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="link-coingecko">📈 CoinGecko</a>
+        <a href="https://coinmarketcap.com/pt-br/currencies/doge-manga/" target="_blank" class="link-marketcap">📊 CoinMarketCap</a>
+        <a href="https://commercecheck.io/verify/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-commercecheck">🔍 CommerceCheck</a>
+        <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-solscan">🔎 Solscan</a>
+        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-dexscreener">📊 DexScreener</a>
+        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="link-birdeye">👁️ Birdeye</a>
+        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-raydium">💱 Raydium</a>
+        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-phantom">👻 Phantom</a>
+    </div>
+</div>
 
-<h2>🐕 Doge Manga Token</h2>
-
-<p>
-Adquira Doge Manga através da rede Solana utilizando sua carteira Web3.
-</p>
-
-<br>
-
-<p><strong>Blockchain:</strong> Solana</p>
-
-<p><strong>Padrão:</strong> SPL Token</p>
-
-<p><strong>Supply:</strong> 420.000.000.000 DOGE MANGA</p>
+<!-- CADASTRO -->
+<div class="card" id="cadastrar">
+    <h2>🚀 Cadastre Seu Projeto</h2>
+    <p style="color:#94a3b8;">Quando novos projetos forem aprovados, aparecerão automaticamente na barra e lista com todos os links organizados.</p>
+    <button class="btn">📤 Enviar Projeto</button>
+</div>
 
 </div>
 
-
-
-
-
-<div class="card">
-
-<h2>🔗 Contrato Oficial</h2>
-
-
-<div class="contract">
-
-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
-
+<!-- MENU INFERIOR -->
+<div class="menu-inferior">
+    <a href="#inicio" class="menu-item ativo"><span>🏠</span>Início</a>
+    <a href="#dados" class="menu-item"><span>📊</span>Dados</a>
+    <a href="#cadastrar" class="menu-item"><span>🚀</span>Cadastrar</a>
+    <a href="#" class="menu-item"><span>⏳</span>Em Breve</a>
 </div>
-
-
-<a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-
-<button>
-🔎 Ver Token na Solscan
-</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h2>🟣 Carteira Phantom</h2>
-
-
-<p>
-Use sua carteira Phantom conectada à rede Solana para interagir com o ecossistema.
-</p>
-
-
-<a href="https://phantom.app/" target="_blank">
-
-<button>
-🟣 Abrir Phantom Wallet
-</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h2>🚀 Comprar Doge Manga</h2>
-
-
-<p>
-Acesse o agregador Jupiter para realizar a troca de tokens na rede Solana.
-</p>
-
-
-<a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-
-<button>
-🚀 Comprar no Jupiter
-</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-<div class="card warning">
-
-<h2>⚠️ Atenção</h2>
-
-<p>
-Antes de realizar qualquer operação, confira sempre o contrato oficial do token e utilize apenas links oficiais do projeto.
-</p>
-
-</div>
-
-
-
-</div>
-
-
-
 
 <footer>
-
-🐕 Doge Manga Evolution
-
-<br><br>
-
-A evolução das memecoins começa aqui 🚀
-
+🐕 Doge Manga Evolution © 2026 • Rede Solana<br>
+⚠️ Apenas divulgação. Não é conselho financeiro. Cripto tem riscos — invista com responsabilidade.
 </footer>
 
-
+<script>
+// ABAS FUNCIONANDO
+function mudarAba(el){
+    document.querySelectorAll('.aba').forEach(a=>a.classList.remove('ativo'));
+    el.classList.add('ativo');
+    alert('🔄 Exibindo: ' + el.innerText);
+}
+</script>
 
 </body>
-
 </html>
-<div class="trackers">
-
-<a href="https://coinmarketcap.com/dexscan/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-    🟡 CoinMarketCap
-</a>
-
-<a href="https://www.coingecko.com/en/coins/solana?contract_address=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-    🦎 CoinGecko
-</a>
-
-</div>
