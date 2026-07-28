@@ -3,432 +3,402 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doge Manga Evolution</title>
+<title>Doge Manga Evolution | Portal Oficial Solana</title>
+<meta name="description" content="Portal oficial de lançamento, listagem, estatísticas e negociação de memecoins na Rede Solana.">
+<link rel="icon" href="IMG-20260727-WA0036(7).jpg">
 <style>
-*{margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif;}
+
+:root{
+    --primaria:#facc15;
+    --fundo:#050816;
+    --secundaria:#111827;
+    --destaque:#2563eb;
+    --sucesso:#22c55e;
+    --alerta:#f97316;
+    --perigo:#ef4444;
+    --texto:#e2e8f0;
+    --texto-claro:#94a3b8;
+}
 
 body {
-    color: white; line-height: 1.7;
-    background: linear-gradient(rgba(2, 6, 23, 0.60), rgba(2, 6, 23, 0.60)), url("IMG-20260727-WA0036(7).jpg");
+    color: var(--texto); line-height: 1.7;
+    background: linear-gradient(rgba(5, 8, 22, 0.88), rgba(2, 6, 23, 0.92)), url("IMG-20260727-WA0036(7).jpg");
     background-size: cover; background-position: center top;
     background-attachment: fixed; background-repeat: no-repeat;
     min-height: 100vh;
 }
 
 nav {
-    background: rgba(2, 6, 23, 0.94); padding: 12px; text-align: center;
+    background: rgba(2, 6, 23, 0.95); padding: 14px; text-align: center;
     position: sticky; top: 0; z-index: 999;
-    border-bottom: 2px solid #facc15;
-    box-shadow: 0 2px 15px rgba(250,204,21,0.15);
+    border-bottom: 1px solid rgba(250,204,21,0.3);
+    backdrop-filter: blur(8px);
 }
 nav a {
-    color: white; text-decoration: none; margin: 5px 8px;
-    font-weight: bold; padding: 4px 6px; font-size: 13px;
-    transition: 0.2s;
+    color: var(--texto); text-decoration: none; margin: 6px 8px;
+    font-weight: 500; padding: 6px 8px; font-size: 13px;
+    transition: all 0.25s ease; border-radius: 6px;
 }
-nav a:hover { color: #facc15; text-shadow: 0 0 8px rgba(250,204,21,0.6); }
+nav a:hover { color: var(--primaria); background: rgba(250,204,21,0.08); }
+nav a.ativo { color: var(--primaria); border-bottom: 2px solid var(--primaria); }
 
 header { 
     text-align: center; 
-    padding: 35px 20px 30px;
+    padding: 50px 20px 40px;
 }
 header h1 { 
-    font-size: 40px; color: #facc15; 
-    text-shadow: 0 0 25px rgba(250,204,21,0.8); 
-    margin-bottom: 8px;
+    font-size: 44px; color: var(--primaria); 
+    text-shadow: 0 0 30px rgba(250,204,21,0.35); 
+    margin-bottom: 12px; font-weight:700;
 }
 header p { 
-    font-size: 17px; color: #e2e8f0; 
-    font-weight: 500; max-width: 800px; margin: 0 auto;
+    font-size: 18px; color: var(--texto-claro); 
+    max-width: 850px; margin: 0 auto; font-weight:400;
 }
 
-.container { max-width: 1200px; margin: 0 auto; padding: 20px 22px; }
+.container { max-width: 1450px; margin: 0 auto; padding: 20px 24px; }
 .card {
-    background: rgba(15, 23, 42, 0.96); padding: 25px; margin: 25px 0;
-    border-radius: 18px; border: 1px solid rgba(250,204,21,0.40);
-    box-shadow: 0 0 30px rgba(250,204,21,0.10);
-    transition: 0.3s;
+    background: rgba(17, 24, 39, 0.92); padding: 28px; margin: 30px 0;
+    border-radius: 20px; border: 1px solid rgba(250,204,21,0.2);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(6px);
 }
-.card:hover { box-shadow: 0 0 35px rgba(250,204,21,0.18); }
+.card.destaque { border-color: var(--primaria); box-shadow: 0 0 30px rgba(250,204,21,0.15); }
+.card:hover { box-shadow: 0 15px 50px rgba(250,204,21,0.08); border-color: rgba(250,204,21,0.35); }
 h2 { 
-    color: #facc15; margin-bottom: 18px; 
-    border-bottom: 2px solid rgba(250,204,21,0.50); 
-    padding-bottom: 10px; font-size: 20px;
+    color: var(--primaria); margin-bottom: 20px; 
+    border-bottom: 1px solid rgba(250,204,21,0.25); 
+    padding-bottom: 12px; font-size: 24px; font-weight:600;
 }
-.aviso { color:#94a3b8; font-size:14px; margin-bottom:15px; }
-.destaque-principal { border-color:#facc15; box-shadow:0 0 25px rgba(250,204,21,0.25); }
+.aviso { color: var(--texto-claro); font-size:15px; margin-bottom:18px; line-height:1.6; }
+.alerta { color: var(--alerta); font-size:14px; margin:12px 0; padding:10px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid var(--alerta); }
 
-.pagamento-box { 
-    background:rgba(2,6,23,0.95); padding:25px; border-radius:12px; 
-    border:2px solid #22c55e; margin-bottom:20px; text-align:center;
+.stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:16px; margin-bottom:20px;
 }
-.pagamento-box h3 { color:#22c55e; margin-bottom:12px; font-size:19px; }
-.valor-destaque { color:#facc15; font-size:24px; font-weight:bold; margin:15px 0; }
-.qr-area { margin:18px auto; padding:12px; background:white; border-radius:10px; display:inline-block; }
-.carteira-pag { 
-    font-family:monospace; font-size:13px; color:#94a3b8; 
-    margin:12px auto; word-break:break-all; background:rgba(0,0,0,0.25); padding:10px; border-radius:6px; max-width:100%;
+.stat-box {
+    background:rgba(2,6,23,0.94); padding:18px; border-radius:12px; text-align:center;
+    border:1px solid rgba(250,204,21,0.2);
 }
-.aviso-pag { color:#fde047; font-size:13px; margin-top:12px; line-height:1.6; }
-.checkbox-confirm { margin:15px 0; font-size:15px; cursor:pointer; }
+.stat-valor { font-size:22px; font-weight:700; color:var(--primaria); margin-bottom:5px; }
+.stat-nome { font-size:13px; color:var(--texto-claro); }
 
-.form-desativado { opacity:0.3; pointer-events:none; filter:grayscale(60%); }
+.todas-moedas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 24px;
+    margin-top: 24px;
+    padding-bottom: 10px;
+}
+.moeda-card {
+    background: rgba(2, 6, 23, 0.94);
+    padding: 24px;
+    border-radius: 18px;
+    text-align: center;
+    border: 1px solid rgba(250,204,21,0.18);
+    transition: all 0.3s ease;
+    position:relative;
+}
+.moeda-card.destaque::after {
+    content:"⭐ DESTAQUE";
+    position:absolute; top:12px; right:12px;
+    background:var(--primaria); color:var(--fundo);
+    font-size:10px; font-weight:700; padding:4px 8px; border-radius:6px;
+}
+.moeda-card:hover { 
+    transform: translateY(-8px); 
+    border-color: var(--primaria); 
+    box-shadow: 0 12px 35px rgba(250,204,21,0.12); 
+}
+.moeda-logo {
+    width: 110px; height: 110px; border-radius: 50%;
+    object-fit: cover; margin-bottom: 15px;
+    border: 2px solid var(--primaria);
+    box-shadow: 0 0 20px rgba(250,204,21,0.2);
+}
+.moeda-nome { color: var(--primaria); font-size:20px; font-weight:700; margin-bottom:6px; }
+.moeda-simbolo { color: var(--texto-claro); font-size:15px; margin-bottom:15px; font-weight:500; }
+.moeda-links { margin-top:12px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.moeda-links a, .btn-compra {
+    display: inline-block;
+    margin: 2px;
+    padding: 7px 12px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size:13px; font-weight:500;
+    transition: all 0.2s ease;
+    border:none; cursor:pointer;
+}
+.link-site { background:#2563eb; }
+.link-tel { background:#229ED9; }
+.link-x { background:#1DA1F2; }
+.link-contract { background:#10b981; }
+.link-dex { background:#7c3aed; }
+.btn-compra { background:var(--sucesso); font-weight:600; padding:8px 14px; }
+.btn-compra:hover { background:#15803d; transform:scale(1.08); box-shadow:0 0 15px rgba(34,197,94,0.3); }
+.btn-compra:disabled { opacity:0.35; cursor:not-allowed; transform:none; }
 
-/* FORMULÁRIO */
 .form-grid {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 20px;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
     align-items: start;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
 }
 .upload-area {
-    background: rgba(2, 6, 23, 0.92);
-    border-radius: 12px;
-    border: 2px dashed #facc15;
-    padding: 15px;
+    background: rgba(2, 6, 23, 0.94);
+    border-radius: 16px;
+    border: 2px dashed var(--primaria);
+    padding: 20px;
     text-align: center;
-    min-height: 180px;
+    min-height: 200px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    color: #94a3b8;
+    font-size:15px;
+    color: var(--texto-claro);
 }
-.upload-area:hover { border-color: #facc15; background: rgba(250,204,21,0.10); }
-.upload-area img { max-width: 100%; max-height: 150px; border-radius: 8px; display: none; }
+.upload-area:hover { border-color: var(--primaria); background: rgba(250,204,21,0.06); }
+.upload-area img { max-width: 100%; max-height: 170px; border-radius: 12px; display: none; margin-top:10px; }
 
 .campos-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 12px;
 }
 .campo {
-    background: rgba(2, 6, 23, 0.92);
-    padding: 12px 14px;
-    border-radius: 8px;
-    border-left: 3px solid #facc15;
-    transition: 0.2s;
+    background: rgba(2, 6, 23, 0.94);
+    padding: 14px 16px;
+    border-radius: 10px;
+    border-left: 3px solid var(--primaria);
+    transition: all 0.2s ease;
 }
 .campo:hover { border-left-color: #fde047; }
 .campo label {
-    color: #facc15; display: block; margin-bottom: 5px; font-size: 13px; font-weight: bold;
+    color: var(--primaria); display: block; margin-bottom:6px; font-size:13px; font-weight:600;
 }
 .campo input {
-    width: 100%; background: transparent; border: none; border-bottom: 1px solid #334155;
-    color: white; padding: 7px 0; font-size: 14px; outline: none; transition: 0.2s;
+    width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.15);
+    color: var(--texto); padding:8px 0; font-size:15px; outline: none; transition:0.2s;
 }
-.campo input:focus { border-bottom-color: #facc15; }
-
-/* PROJETOS LISTADOS */
-.projetos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 18px;
-    margin-top: 18px;
-}
-.projeto-card {
-    background: rgba(2, 6, 23, 0.92);
-    padding: 18px;
-    border-radius: 14px;
-    text-align: center;
-    border: 1px solid rgba(250,204,21,0.25);
-    transition: 0.3s;
-}
-.projeto-card:hover { transform: translateY(-5px); border-color: #facc15; box-shadow: 0 5px 20px rgba(250,204,21,0.15); }
-.projeto-card.destaque { border-color: #facc15; box-shadow: 0 0 20px rgba(250,204,21,0.20); }
-.projeto-card img {
-    width: 90px; height: 90px; border-radius: 50%;
-    object-fit: cover; margin-bottom: 12px;
-    border: 2px solid #facc15;
-}
-.projeto-card h3 { color: #facc15; font-size: 17px; margin-bottom: 6px; }
-.projeto-card p { font-size: 13px; color:#cbd5e1; margin-bottom: 10px; }
-.projeto-links a {
-    color: #94a3b8; margin: 0 5px; font-size: 20px;
-    text-decoration: none; transition: 0.2s;
-}
-.projeto-links a:hover { color: #facc15; transform: scale(1.2); }
+.campo input:focus { border-bottom-color: var(--primaria); }
 
 .btn {
-    display: inline-block; margin: 8px 5px; padding: 12px 24px;
-    background: #facc15; color: #050816; text-decoration: none;
-    font-weight: bold; border-radius: 10px; cursor: pointer;
-    transition: 0.3s; font-size: 15px; border:none;
+    display: inline-block; margin:10px 6px; padding:13px 28px;
+    background: var(--primaria); color: var(--fundo); text-decoration: none;
+    font-weight:700; border-radius:10px; cursor:pointer;
+    transition: all 0.3s ease; font-size:15px; border:none;
 }
-.btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(250,204,21,0.5); }
-.btn-enviar { width: 100%; font-size: 16px; padding: 14px; margin-top: 12px; }
-.btn-copiar { background:#1e40af; color:white; padding:8px 12px; font-size:13px; }
-.btn-verde { background:#22c55e; color:white; }
-.btn-verde:hover { background:#16a34a; box-shadow:0 0 15px rgba(34,197,94,0.4); }
+.btn:hover { transform:scale(1.05); box-shadow:0 0 25px rgba(250,204,21,0.4); }
+.btn-enviar { width:100%; font-size:16px; padding:15px; margin-top:15px; }
+.btn-copiar { background:#1e40af; color:white; padding:9px 14px; font-size:13px; }
+.btn-verde { background:var(--sucesso); color:white; }
+.btn-verde:hover { background:#16a34a; box-shadow:0 0 20px rgba(34,197,94,0.35); }
 
-.token-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 15px;
+.conexao-wallet {
+    background:rgba(2,6,23,0.94); padding:18px; border-radius:12px; margin-bottom:20px;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    border:1px solid rgba(255,255,255,0.1);
 }
-.token-item {
-    background: rgba(2, 6, 23, 0.92); padding: 12px 15px; border-radius: 8px;
-    border-left: 3px solid #facc15; font-size:14px; transition:0.2s;
+.status-wallet { font-size:14px; color: var(--texto-claro); font-family:'Courier New', monospace; }
+
+.faq-item { margin-bottom:15px; }
+.faq-pergunta {
+    background:rgba(2,6,23,0.94); padding:14px; border-radius:10px; cursor:pointer;
+    font-weight:600; color:var(--primaria); display:flex; justify-content:space-between; align-items:center;
 }
-.token-item:hover { border-left-color:#fde047; }
-.token-item strong { color: #facc15; display:block; margin-bottom:3px; font-size:13px; }
-
-.contract {
-    background: rgba(2, 6, 23, 0.92); padding: 12px; border-radius: 8px;
-    color: #22c55e; font-family: monospace; word-break: break-all; 
-    margin: 15px 0; font-size: 13px; border: 1px solid #22c55e;
-    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-}
-
-.btn-tel { background: #229ED9; color: white; }
-.btn-x { background: #1DA1F2; color: white; }
-.btn-site { background: #2563eb; color: white; }
-.btn-chain { background: #10b981; color: white; }
-.btn-git { background: #6e5494; color: white; }
-.btn-buy { background: #16a34a; color: white; font-size:16px; padding:12px 30px; }
-.btn-buy:hover { background: #15803d; box-shadow: 0 0 22px rgba(22,163,74,0.5); }
-.btn-cmc { background: #f7931a; color: white; }
-.btn-cmc:hover { background: #e68310; }
-.btn-cg { background: #16c784; color: white; }
-.btn-cg:hover { background: #12a86e; }
-
-.status-wallet {
-    background:rgba(2,6,23,0.92); padding:12px; border-radius:8px; 
-    margin:15px 0; font-family:monospace; font-size:14px;
+.faq-resposta {
+    padding:14px; background:rgba(0,0,0,0.2); border-radius:0 0 10px 10px; display:none;
+    color:var(--texto-claro); font-size:14px;
 }
 
 footer {
-    text-align: center; padding: 30px 20px; background: rgba(2, 6, 23, 0.96);
-    margin-top: 30px; color: #94a3b8; border-top: 2px solid #facc15; font-size: 13px;
+    text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96);
+    margin-top:40px; color: var(--texto-claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;
 }
-.aviso-seguranca { color:#f87171; font-size:13px; margin-top:10px; }
+.aviso-legal { margin-top:10px; font-size:12px; color:#78869e; line-height:1.5; }
 
 @media(max-width:900px){
-    .form-grid { grid-template-columns: 1fr; }
-    .campos-grid { grid-template-columns: 1fr 1fr; }
-    .token-grid { grid-template-columns: 1fr 1fr; }
+    .form-grid { grid-template-columns:1fr; }
+    .campos-grid { grid-template-columns:1fr 1fr; }
+    .todas-moedas-grid { grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); }
+    header h1 { font-size:36px; }
 }
 @media(max-width:600px){
-    header h1 { font-size: 32px; }
-    header { padding: 25px 15px 20px; }
-    .campos-grid, .token-grid, .projetos-grid { grid-template-columns: 1fr; }
-    nav a { margin: 4px 5px; font-size: 12px; }
-    .btn { width: 100%; margin: 5px 0; }
+    header h1 { font-size:30px; }
+    header { padding:35px 15px 25px; }
+    .campos-grid, .todas-moedas-grid, .stats-grid { grid-template-columns:1fr; }
+    nav a { margin:4px 5px; font-size:11px; }
+    .btn { width:100%; margin:6px 0; }
+    .conexao-wallet { flex-direction:column; text-align:center; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-    <a href="#home">🏠 Início</a>
-    <a href="#lancamento">🚀 Lançar Moeda</a>
-    <a href="#listados">📋 Projetos</a>
-    <a href="#token">🐕 Nosso Token</a>
-    <a href="#comprar">💎 Comprar</a>
+    <a href="#inicio" class="ativo">🏠 Início</a>
+    <a href="#estatisticas">📊 $DGM</a>
+    <a href="#cadastrar">🚀 Cadastrar</a>
+    <a href="#projetos">📋 Projetos</a>
+    <a href="#faq">❓ Dúvidas</a>
     <a href="nft.html">🎨 NFT</a>
     <a href="whitepaper.html">📄 Whitepaper</a>
     <a href="https://dogemangaofficial.xyz" target="_blank">🌐 Site</a>
-    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank">👥 Comunidade</a>
+    <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank">👥 Grupo</a>
 </nav>
 
-<header id="home">
+<header id="inicio">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Portal Oficial de Lançamento, Aprovação e Listagem de Memecoins na Rede Solana</p>
+    <p>Portal Oficial • Lançamento • Verificação • Negociação Direta na Rede Solana</p>
 </header>
 
 <div class="container">
 
-<div class="card" id="lancamento">
-    <h2>🚀 Cadastre Sua Memecoin</h2>
-    <p class="aviso">Primeiro efetue o pagamento, depois confirme abaixo para liberar o formulário de cadastro.</p>
-
-    <div class="pagamento-box">
-        <h3>💳 Valor de Listagem e Aprovação</h3>
-        <p style="font-size:14px; color:#cbd5e1;">Para garantir qualidade, segurança e dedicação a cada projeto, cobramos o valor equivalente a:</p>
-        <div class="valor-destaque">≈ US$ 5,00 (cinco dólares) em SOL</div>
-        <p style="font-size:14px; color:#cbd5e1;">Esse valor cobre análise completa, verificação, espaço exclusivo no portal e suporte durante todo o processo.</p>
-        
-        <div class="qr-area">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=AHWms4HXb9rrDBFTPGRrvqdQvPMNAFqgiPmGvDMbHgSq" alt="QR Code Carteira Solana">
-        </div>
-
-        <p style="margin-top:10px; font-weight:bold;">Ou envie para a carteira oficial:</p>
-        <div class="carteira-pag">AHWms4HXb9rrDBFTPGRrvqdQvPMNAFqgiPmGvDMbHgSq</div>
-        <button class="btn btn-copiar" onclick="navigator.clipboard.writeText('AHWms4HXb9rrDBFTPGRrvqdQvPMNAFqgiPmGvDMbHgSq').then(()=>alert('✅ Carteira copiada com sucesso!'))">📋 Copiar Carteira</button>
-        
-        <div class="checkbox-confirm">
-            <label style="color:#facc15;"><input type="checkbox" id="confirmaPagamento"> ✅ Já enviei o valor, quero liberar o cadastro</label>
-        </div>
-
-        <p class="aviso-pag">⚠️ Após confirmação da transação, analisaremos os dados e publicaremos o projeto em até 24h.</p>
+<div class="card destaque" id="estatisticas">
+    <h2>📊 Dados Oficiais do $DGM</h2>
+    <div class="stats-grid">
+        <div class="stat-box"><div class="stat-valor">--</div><div class="stat-nome">Preço (SOL)</div></div>
+        <div class="stat-box"><div class="stat-valor">420 Bi</div><div class="stat-nome">Supply Total</div></div>
+        <div class="stat-box"><div class="stat-valor">--</div><div class="stat-nome">Market Cap</div></div>
+        <div class="stat-box"><div class="stat-valor">--</div><div class="stat-nome">Volume 24h</div></div>
     </div>
+    <div class="moeda-links" style="justify-content:center;">
+        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-dex">DexScreener</a>
+        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="link-dex">Birdeye</a>
+        <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-contract">Solscan</a>
+        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra">Comprar $DGM</a>
+    </div>
+</div>
 
+<div class="card" id="cadastrar">
+    <h2>🚀 Submeta Seu Projeto</h2>
+    <p class="aviso">Pagamento → Análise → Aprovação → Listagem automática aqui com todos os recursos.</p>
+    <div class="alerta">⚠️ Verifique o contrato oficial antes de enviar qualquer valor.</div>
+    <div class="pagamento-box">
+        <h3>💳 Valor: ≈ US$ 5,00 em SOL</h3>
+        <div class="qr-area"><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=AHWms4HXb9rrDBFTPGRrvqdQvPMNAFqgiPmGvDMbHgSq"></div>
+        <div class="carteira-pag">AHWms4HXb9rrDBFTPGRrvqdQvPMNAFqgiPmGvDMbHgSq</div>
+        <button class="btn btn-copiar" onclick="navigator.clipboard.writeText('AHWms4HXb9rrDBFTPGRrvqdQvPMNAFqgiPmGvDMbHgSq').then(()=>alert('✅ Copiado!'))">📋 Copiar</button>
+        <div class="checkbox-confirm"><label><input type="checkbox" id="confirmaPagamento"> ✅ Já enviei o valor</label></div>
+    </div>
     <form action="https://formspree.io/f/mknkqdqa" method="POST" enctype="multipart/form-data" id="formProjeto" class="form-desativado">
     <div class="form-grid">
-        <div class="upload-area" id="areaUpload">
-            <input type="file" name="logo" id="inputImagem" accept="image/*" style="display:none;" required>
-            <span id="textoUpload">🖼️ Clique para enviar a logo</span>
-            <img id="previewImg" alt="Logo do Projeto">
-        </div>
-
+        <div class="upload-area" id="areaUpload"><input type="file" name="logo" id="inputImagem" accept="image/*" required><span id="textoUpload">🖼️ Enviar logo</span><img id="previewImg"></div>
         <div class="campos-grid">
-            <div class="campo">
-                <label>Nome do Token</label>
-                <input type="text" name="nome" placeholder="Ex: Doge Manga" required>
-            </div>
-            <div class="campo">
-                <label>Símbolo</label>
-                <input type="text" name="simbolo" placeholder="Ex: $DGM" required>
-            </div>
-            <div class="campo">
-                <label>Contrato Solana</label>
-                <input type="text" name="contrato" placeholder="Endereço completo" required>
-            </div>
-            <div class="campo">
-                <label>Site Oficial</label>
-                <input type="url" name="site" placeholder="https://...">
-            </div>
-            <div class="campo">
-                <label>Perfil no X</label>
-                <input type="url" name="twitter" placeholder="https://x.com/...">
-            </div>
-            <div class="campo">
-                <label>Grupo Telegram</label>
-                <input type="url" name="telegram" placeholder="https://t.me/...">
-            </div>
-            <div class="campo" style="grid-column: 1 / -1;">
-                <label>Comprovante de Pagamento (Imagem ou PDF)</label>
-                <input type="file" name="comprovante" accept="image/*,.pdf" required>
-            </div>
-            <input type="hidden" name="_replyto" value="dogemanga687@gmail.com">
-            <input type="hidden" name="_subject" value="Novo Cadastro + Pagamento - Doge Manga">
+            <div class="campo"><label>Nome</label><input type="text" name="nome" required></div>
+            <div class="campo"><label>Símbolo</label><input type="text" name="simbolo" required></div>
+            <div class="campo"><label>Contrato</label><input type="text" name="contrato" required></div>
+            <div class="campo"><label>Site</label><input type="url" name="site"></div>
+            <div class="campo"><label>Telegram</label><input type="url" name="telegram"></div>
+            <div class="campo"><label>X</label><input type="url" name="twitter"></div>
+            <div class="campo" style="grid-column:1/-1;"><label>Comprovante</label><input type="file" name="comprovante" accept="image/*,.pdf" required></div>
         </div>
     </div>
-
-    <button type="submit" class="btn btn-verde btn-enviar">📤 Enviar para Análise</button>
+    <button type="submit" class="btn btn-verde btn-enviar">📤 Enviar</button>
     </form>
 </div>
 
-<div class="card destaque-principal" id="listados">
-    <h2>📋 Projetos Oficiais e Aprovados</h2>
-    <p class="aviso">Apenas projetos verificados e parceiros do ecossistema Doge Manga.</p>
-
-    <div class="projetos-grid">
-        <div class="projeto-card destaque">
-            <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
-            <h3>🐕 Doge Manga</h3>
-            <p>$DGM • Solana</p>
-            <div class="projeto-links">
-                <a href="https://dogemangaofficial.xyz" target="_blank" title="Site Oficial">🌐</a>
-                <a href="https://x.com/dogemanga96508" target="_blank" title="Perfil no X">🐦</a>
-                <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" title="Comunidade">💬</a>
-                <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" title="Ver Contrato">🔍</a>
+<div class="card" id="projetos">
+    <h2>📋 Projetos Oficiais</h2>
+    <div class="conexao-wallet">
+        <div class="status-wallet" id="statusWallet">🔌 Carteira não conectada</div>
+        <button class="btn" id="btnConectar">🔗 Conectar Phantom</button>
+    </div>
+    <p class="aviso">Área preparada para milhares de projetos. Conecte para habilitar compra.</p>
+    <div class="todas-moedas-grid">
+        <div class="moeda-card destaque">
+            <img src="IMG-20260727-WA0036(7).jpg" class="moeda-logo">
+            <h3 class="moeda-nome">Doge Manga</h3>
+            <p class="moeda-simbolo">$DGM • Solana</p>
+            <div class="moeda-links">
+                <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">Site</a>
+                <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-tel">Tel</a>
+                <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">X</a>
+                <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-contract">Contrato</a>
+                <button class="btn-compra" data-contrato="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" disabled>💸 Comprar</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="card" id="token">
-    <h2>📊 Dados Oficiais do $DGM</h2>
-    <div class="token-grid">
-        <div class="token-item"><strong>Nome</strong>Doge Manga</div>
-        <div class="token-item"><strong>Símbolo</strong>$DGM</div>
-        <div class="token-item"><strong>Rede</strong>Solana (SPL)</div>
-        <div class="token-item"><strong>Supply Total</strong>420.000.000.000</div>
-        <div class="token-item"><strong>Decimais</strong>6</div>
-        <div class="token-item"><strong>Tipo</strong>Memecoin Comunitária</div>
+<div class="card" id="faq">
+    <h2>❓ Dúvidas Frequentes</h2>
+    <div class="faq-item">
+        <div class="faq-pergunta" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">💳 Como funciona o pagamento? <span>▼</span></div>
+        <div class="faq-resposta">Valor fixo de aproximadamente US$5 em SOL para análise, verificação e listagem. Envia para a carteira oficial e anexa o comprovante.</div>
     </div>
-    <strong>📜 Contrato Oficial:</strong>
-    <div class="contract">
-        <span id="contratoTexto">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</span>
-        <button class="btn btn-copiar" onclick="navigator.clipboard.writeText('E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE').then(()=>alert('✅ Contrato copiado!'))">📋 Copiar</button>
+    <div class="faq-item">
+        <div class="faq-pergunta" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">⏱️ Quanto tempo para listar? <span>▼</span></div>
+        <div class="faq-resposta">Até 24 horas úteis após confirmação do pagamento e aprovação do projeto.</div>
     </div>
-    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">🔎 Verificar na Solscan</a>
-    <p class="aviso-seguranca">⚠️ Sempre confira o contrato oficial antes de fazer qualquer transação.</p>
+    <div class="faq-item">
+        <div class="faq-pergunta" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block'">⚠️ É seguro? <span>▼</span></div>
+        <div class="faq-resposta">Tudo na rede Solana. Sempre confira o contrato oficial e entenda os riscos de mercado antes de investir.</div>
+    </div>
 </div>
 
-<div class="card" id="comprar">
-    <h2>💱 Como Adquirir o $DGM</h2>
-    <p>Conecte sua carteira Phantom e negocie diretamente na Raydium.</p>
-    <div class="status-wallet" id="walletStatus">📌 Situação: Carteira não conectada</div>
-    <button id="btnConectar" class="btn">🔗 Conectar Carteira Phantom</button>
-    <br><br>
-    <a id="btnComprar" href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-buy" style="display:none;">💸 Comprar Agora</a>
-</div>
-
-<div class="card">
-    <h2>🌐 Acompanhe em Tempo Real</h2>
-    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">📉 DexScreener</a>
-    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn btn-chain">📈 Birdeye</a>
-    <a href="https://coinmarketcap.com/dexscan/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-cmc">🟡 CoinMarketCap</a>
-    <a href="https://www.coingecko.com/en/coins/solana?contract_address=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-cg">🦎 CoinGecko</a>
+<!-- 🤝 CHAMADA PARA NOVOS PROJETOS -->
+<div class="card destaque" style="text-align:center;">
+    <h2>🤝 Faça Parte do Ecossistema Doge Manga</h2>
+    <p style="font-size:16px; max-width:900px; margin:0 auto 20px; line-height:1.8;">
+        Você que criou seu projeto na Rede Solana e busca visibilidade, comunidade engajada e um espaço seguro para apresentar sua memecoin ao mundo: o <strong>Portal Doge Manga Evolution</strong> é o lugar certo para você.
+    </p>
+    <p style="font-size:16px; max-width:900px; margin:0 auto 25px; line-height:1.8;">
+        Ao cadastrar sua moeda aqui, você ganha exposição direta com nossa comunidade, todos os links oficiais organizados, botão de compra integrado diretamente na rede Solana e a confiança de estar ao lado de projetos verificados.
+    </p>
+    <p style="font-weight:600; color:var(--primaria); margin-bottom:25px;">
+        Seja parte dessa evolução. Cresça conosco!
+    </p>
+    <a href="#cadastrar" class="btn">🚀 Cadastrar Meu Projeto Agora</a>
 </div>
 
 </div>
 
 <footer>
-🐕 Doge Manga Evolution © 2026 • Todos os direitos reservados<br>
-Projeto Oficial • Rede Solana • Segurança e Transparência sempre
+🐕 Doge Manga Evolution © 2026 • Rede Solana<br>
+<p class="aviso-legal">⚠️ Esta plataforma é apenas de divulgação. Não é conselho financeiro. Criptoativos têm riscos — invista com responsabilidade.</p>
 </footer>
 
 <script>
-// LIBERA SOMENTE O FORMULÁRIO DE CADASTRO
-const checkPag = document.getElementById('confirmaPagamento');
-const form = document.getElementById('formProjeto');
-
-checkPag.addEventListener('change', () => {
-    if(checkPag.checked){
-        form.classList.remove('form-desativado');
-        alert('✅ Formulário liberado! Preencha os dados e envie o comprovante.');
-    }else{
-        form.classList.add('form-desativado');
-    }
+document.getElementById('confirmaPagamento').addEventListener('change', e => {
+    document.getElementById('formProjeto').classList.toggle('form-desativado', !e.target.checked);
+    if(e.target.checked) alert('✅ Formulário liberado!');
 });
 
-// PREVIA DA IMAGEM
-const areaUpload = document.getElementById('areaUpload');
-const inputImagem = document.getElementById('inputImagem');
-const previewImg = document.getElementById('previewImg');
-const textoUpload = document.getElementById('textoUpload');
+const areaUpload = document.getElementById('areaUpload'), inputImagem = document.getElementById('inputImagem'), previewImg = document.getElementById('previewImg'), textoUpload = document.getElementById('textoUpload');
+areaUpload.onclick = () => inputImagem.click();
+inputImagem.onchange = e => {
+    const r = new FileReader();
+    r.onload = e => { previewImg.src = e.target.result; previewImg.style.display='block'; textoUpload.style.display='none'; };
+    r.readAsDataURL(e.target.files[0]);
+};
 
-areaUpload.addEventListener('click', () => inputImagem.click());
-inputImagem.addEventListener('change', e => {
-    const arq = e.target.files[0];
-    if(arq){
-        const leitor = new FileReader();
-        leitor.onload = e => {
-            previewImg.src = e.target.result;
-            previewImg.style.display = 'block';
-            textoUpload.style.display = 'none';
-        };
-        leitor.readAsDataURL(arq);
-    }
+const statusWallet = document.getElementById('statusWallet'), btnConectar = document.getElementById('btnConectar');
+let carteiraConectada = null;
+btnConectar.onclick = async () => {
+    if(!window.solana || !window.solana.isPhantom){ alert('Instale a Phantom: phantom.com/download'); return; }
+    try{
+        const r = await window.solana.connect();
+        carteiraConectada = r.publicKey.toString();
+        statusWallet.innerText = '✅ Conectada: ' + carteiraConectada.slice(0,14)+'...';
+        btnConectar.innerText = '✅ Desconectar';
+        document.querySelectorAll('.btn-compra').forEach(b=>b.disabled=false);
+    }catch{ statusWallet.innerText='❌ Falha na conexão'; }
+};
+
+document.querySelectorAll('.btn-compra').forEach(b=>b.onclick=()=>{
+    if(!carteiraConectada) return alert('🔌 Conecte sua carteira primeiro!');
+    window.open(`https://raydium.io/swap/?inputMint=sol&outputMint=${b.dataset.contrato}`,'_blank','noopener');
 });
 
-// CONFIRMAÇÃO DE ENVIO
-form.addEventListener('submit', () => {
-    alert('✅ Cadastro enviado com sucesso!\n📩 Em breve entraremos em contato pelo e-mail.');
-});
-
-// CONEXÃO CARTEIRA
-const btnConectar = document.getElementById("btnConectar");
-const btnComprar = document.getElementById("btnComprar");
-const walletStatus = document.getElementById("walletStatus");
-btnConectar.addEventListener("click", async () => {
-    if (!window.solana || !window.solana.isPhantom) {
-        alert("⚠️ Instale a carteira Phantom primeiro:\nphantom.com/download");
-        return;
-    }
-    try {
-        const c = await window.solana.connect();
-        walletStatus.innerText = "✅ Conectado: " + c.publicKey.toString().slice(0,12)+"...";
-        btnConectar.innerText = "✅ Conectado";
-        btnConectar.style.background = "#16a34a";
-        btnComprar.style.display = "inline-block";
-    } catch { walletStatus.innerText = "❌ Não foi possível conectar"; }
-});
+document.getElementById('formProjeto').onsubmit=()=>alert('✅ Cadastro enviado com sucesso!');
 </script>
 
 </body>
