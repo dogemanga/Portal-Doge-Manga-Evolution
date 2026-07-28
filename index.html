@@ -357,7 +357,54 @@ connectButton.addEventListener("click", connectWallet);
 <h3>✅ Etapa 1</h3>
 <p>Conectar Carteira Phantom</p>
 </div>
+<section id="market" class="crypto-market">
 
+<h2>📈 Doge Manga Crypto Market</h2>
+<p>Acompanhe o mercado em tempo real.</p>
+
+<div class="market-grid">
+
+<div class="coin-card">
+<h3>₿ Bitcoin</h3>
+<p id="btc">Carregando...</p>
+</div>
+
+<div class="coin-card">
+<h3>Ξ Ethereum</h3>
+<p id="eth">Carregando...</p>
+</div>
+
+<div class="coin-card">
+<h3>◎ Solana</h3>
+<p id="sol">Carregando...</p>
+</div>
+
+</div>
+
+</section>
+
+<script>
+async function carregarMercado(){
+
+const r = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd,brl");
+
+const d = await r.json();
+
+document.getElementById("btc").innerHTML =
+"R$ " + d.bitcoin.brl.toLocaleString("pt-BR");
+
+document.getElementById("eth").innerHTML =
+"R$ " + d.ethereum.brl.toLocaleString("pt-BR");
+
+document.getElementById("sol").innerHTML =
+"R$ " + d.solana.brl.toLocaleString("pt-BR");
+
+}
+
+carregarMercado();
+
+setInterval(carregarMercado,60000);
+</script>
 <div class="step">
 <h3>🪙 Etapa 2</h3>
 <p>Nome e Símbolo</p>
