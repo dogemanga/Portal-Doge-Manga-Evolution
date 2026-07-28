@@ -44,7 +44,7 @@ body{
 
 .menu-botao{font-size:28px; color:var(--primaria); cursor:pointer; padding:6px 12px; border-radius:8px; transition:0.2s; background:rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.2);}
 .menu-botao:hover{background:rgba(250,204,21,0.15); transform:scale(1.05);}
-.menu-navegacao{display:none; position:absolute; top:100%; right:20px; width:280px; background:rgba(5,8,22,0.98); backdrop-filter:blur(10px); border-radius:14px; border:1px solid rgba(250,204,21,0.25); margin-top:8px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.3); z-index:999;}
+.menu-navegacao{display:none; position:absolute; top:100%; right:20px; width:300px; background:rgba(5,8,22,0.98); backdrop-filter:blur(10px); border-radius:14px; border:1px solid rgba(250,204,21,0.25); margin-top:8px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.3); z-index:999;}
 .menu-navegacao.mostrar{display:block; animation:abrirMenu 0.2s ease;}
 @keyframes abrirMenu{from{opacity:0; transform:translateY(-8px);}to{opacity:1; transform:translateY(0);}}
 .menu-item{display:block; padding:11px 20px; color:var(--texto); text-decoration:none; font-weight:500; border-bottom:1px solid rgba(250,204,21,0.1); transition:0.2s; font-size:14px;}
@@ -67,7 +67,6 @@ header p{font-size:19px; color:var(--claro); max-width:900px; margin:0 auto 20px
 .btn-compra:hover{transform:translateY(-3px); box-shadow:0 0 15px rgba(250,204,21,0.35);}
 .btn-phantom{background:#AB9FF2; color:#050816;}
 .btn-hash{background:#00C6FF; color:#050816;}
-.btn-raydium{background:#000; border:1px solid var(--primaria);}
 
 .botoes-redes{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:15px;}
 .btn-tiktok{background:#000000; color:#25F4EE; border:1px solid #FE2C55;}
@@ -92,7 +91,7 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .area-andamento:hover .lista-andando{animation-play-state:paused;}
 @keyframes rolarMoedas{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-.card-moeda{background:rgba(2,6,23,0.9); padding:20px; border-radius:16px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:280px;}
+.card-moeda{background:rgba(2,6,23,0.9); padding:20px; border-radius:16px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:320px;}
 .card-moeda.destaque{border-color:var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.2);}
 .card-moeda:hover{transform:translateY(-4px); box-shadow:0 8px 20px rgba(250,204,21,0.1);}
 .logo-moeda{width:90px; height:90px; border-radius:50%; margin:0 auto 15px; background:rgba(250,204,21,0.1); display:flex; align-items:center; justify-content:center; overflow:hidden; border:3px solid var(--primaria);}
@@ -105,9 +104,8 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .link-site{background:#2563eb;}
 .link-x{background:#1DA1F2;}
 .link-tg{background:#229ED9;}
-.link-tiktok{background:#000; color:#25F4EE; border:1px solid #FE2C55;}
-.link-github{background:#161b22;}
 .link-dex{background:#ef4444;}
+.link-birdeye{background:#16a34a;}
 
 .voltar{display:inline-flex; align-items:center; gap:6px; color:var(--primaria); text-decoration:none; font-weight:600; margin-bottom:15px; transition:0.2s;}
 .voltar:hover{gap:10px;}
@@ -149,10 +147,10 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 
         <div class="menu-divisao"></div>
 
-        <!-- ✅ 100% ATUALIZADO: TUDO PARA PHANTOM, CONTRATO EXATO -->
         <a href="nft.html" class="menu-item">🎨 Ver Coleção NFT</a>
-        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🛒 Ver/Comprar na Phantom</a>
-        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 Consultar Contrato Solana</a>
+        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🛒 Comprar na Phantom</a>
+        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 DexScreener</a>
+        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="menu-item">🔎 Birdeye</a>
 
         <div class="menu-divisao"></div>
 
@@ -164,7 +162,6 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
         <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">👻 Phantom</a>
         <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="menu-item">📊 CoinGecko</a>
         <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" class="menu-item">📈 CoinMarketCap</a>
-        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="menu-item">🔎 Birdeye</a>
     </nav>
 </div>
 
@@ -173,11 +170,11 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <header id="inicio">
     <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga Evolution">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Preços em tempo real • CoinGecko + CoinMarketCap</p>
+    <p>Preços em tempo real • Phantom • DexScreener • Birdeye</p>
     <div class="botoes-compra">
         <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-phantom">👻 Phantom</a>
-        <a href="https://hash.com/trade/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">💳 Hash</a>
-        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-raydium">💱 Raydium</a>
+        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">🔍 DexScreener</a>
+        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn-compra btn-raydium">🔎 Birdeye</a>
     </div>
 </header>
 
@@ -197,7 +194,8 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
                         <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">Site</a>
                         <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">X</a>
                         <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-tg">Telegram</a>
-                        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-dex">Dex</a>
+                        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-dex">DexScreener</a>
+                        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="link-birdeye">Birdeye</a>
                     </div>
                 </div>
             </div>
@@ -217,7 +215,8 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
         <div class="grupo-form"><label>Site</label><input type="url" id="siteMoeda" required></div>
         <div class="grupo-form"><label>X</label><input type="url" id="xMoeda" required></div>
         <div class="grupo-form"><label>Telegram</label><input type="url" id="tgMoeda" required></div>
-        <div class="grupo-form"><label>Link DEX</label><input type="url" id="dexMoeda" required></div>
+        <div class="grupo-form"><label>DexScreener</label><input type="url" id="dexMoeda" required></div>
+        <div class="grupo-form"><label>Birdeye</label><input type="url" id="birdeyeMoeda" required></div>
     </div>
     <button class="btn-enviar">📤 Enviar</button>
 </div>
@@ -286,11 +285,12 @@ document.querySelector('.btn-enviar').addEventListener('click',e=>{
     const x = document.getElementById('xMoeda').value;
     const tg = document.getElementById('tgMoeda').value;
     const dx = document.getElementById('dexMoeda').value;
-    if(n&&s&&l&&c&&st&&x&&tg&&dx){
+    const by = document.getElementById('birdeyeMoeda').value;
+    if(n&&s&&l&&c&&st&&x&&tg&&dx&&by){
         const lista = document.getElementById('listaMoedas');
         const nova = document.createElement('div');
         nova.className='card-moeda';
-        nova.innerHTML = `<div class="logo-moeda"><img src="${l}"></div><div class="nome-moeda">${n}</div><div class="simbolo-moeda">${s} • Solana</div><div class="links-moeda"><a href="${st}" target="_blank" class="link-site">Site</a><a href="${x}" target="_blank" class="link-x">X</a><a href="${tg}" target="_blank" class="link-tg">TG</a><a href="${dx}" target="_blank" class="link-dex">DEX</a></div>`;
+        nova.innerHTML = `<div class="logo-moeda"><img src="${l}"></div><div class="nome-moeda">${n}</div><div class="simbolo-moeda">${s} • Solana</div><div class="links-moeda"><a href="${st}" target="_blank" class="link-site">Site</a><a href="${x}" target="_blank" class="link-x">X</a><a href="${tg}" target="_blank" class="link-tg">TG</a><a href="${dx}" target="_blank" class="link-dex">DexScreener</a><a href="${by}" target="_blank" class="link-birdeye">Birdeye</a></div>`;
         lista.appendChild(nova);
         formCadastrar.classList.remove('mostrar');fundoEscuro.classList.remove('mostrar');
         alert('✅ Enviado com sucesso!');
