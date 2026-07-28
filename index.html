@@ -52,6 +52,52 @@ h2 {
     padding-bottom: 8px; font-size: 19px;
 }
 
+/* ✅ Área de Lançamento de Memecoins */
+.lancamento-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 15px;
+}
+.lancamento-img {
+    background: rgba(2, 6, 23, 0.9);
+    border-radius: 12px;
+    border: 2px dashed #facc15;
+    padding: 15px;
+    text-align: center;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #94a3b8;
+}
+.lancamento-dados {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.lancamento-item {
+    background: rgba(2, 6, 23, 0.92);
+    padding: 10px 14px;
+    border-radius: 8px;
+    border-left: 3px solid #facc15;
+    font-size: 14px;
+}
+.lancamento-item strong {
+    color: #facc15;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 13px;
+}
+.btn-cadastrar {
+    margin-top: 15px;
+    width: 100%;
+    font-size: 16px;
+    padding: 13px;
+}
+
 .token-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -122,12 +168,14 @@ footer {
 }
 
 @media(max-width:900px){
+    .lancamento-grid { grid-template-columns: 1fr; }
+    .lancamento-dados { grid-template-columns: 1fr 1fr; }
     .token-grid { grid-template-columns: 1fr 1fr; }
 }
 @media(max-width:600px){
     header h1 { font-size: 30px; }
     header { padding: 22px 15px 18px; }
-    .token-grid { grid-template-columns: 1fr; }
+    .lancamento-dados, .token-grid { grid-template-columns: 1fr; }
     nav a { margin: 4px 5px; font-size: 12px; }
     .btn { width: 90%; margin: 5px 0; }
     .crypto-card { width: 90%; }
@@ -138,7 +186,8 @@ footer {
 
 <nav>
     <a href="#home">🏠 Início</a>
-    <a href="#token">🐕 Token</a>
+    <a href="#lancamento">🚀 Lançar Moeda</a>
+    <a href="#token">🐕 Nosso Token</a>
     <a href="#comprar">💎 Comprar</a>
     <a href="nft.html">🎨 NFT</a>
     <a href="whitepaper.html">📄 Whitepaper</a>
@@ -153,8 +202,30 @@ footer {
 
 <div class="container">
 
+<!-- ✅ NOVA SEÇÃO: LANÇAMENTO DE MEMECOINS LOGO NO TOPO -->
+<div class="card" id="lancamento">
+    <h2>🚀 Lançamento de Memecoins</h2>
+    <p style="margin-bottom:15px; color:#cbd5e1;">Cadastre seu projeto aqui e faça parte do ecossistema Doge Manga. Preencha todos os dados:</p>
+
+    <div class="lancamento-grid">
+        <div class="lancamento-img">
+            🖼️ Imagem<br>Logo do Token
+        </div>
+        <div class="lancamento-dados">
+            <div class="lancamento-item"><strong>Nome do Token</strong>Ex: Doge Manga</div>
+            <div class="lancamento-item"><strong>Símbolo</strong>Ex: $DGM</div>
+            <div class="lancamento-item"><strong>Contrato</strong>Endereço na Solana</div>
+            <div class="lancamento-item"><strong>Site Oficial</strong>Link do site</div>
+            <div class="lancamento-item"><strong>Canal no X</strong>@seuprojeto</div>
+            <div class="lancamento-item"><strong>Grupo Telegram</strong>Link do grupo</div>
+        </div>
+    </div>
+
+    <button class="btn btn-cadastrar">📝 Cadastrar Meu Projeto</button>
+</div>
+
 <div class="card" id="token">
-    <h2>📊 Dados Oficiais do Token</h2>
+    <h2>📊 Dados Oficiais do Doge Manga</h2>
     <div class="token-grid">
         <div class="token-item"><strong>Nome</strong>Doge Manga</div>
         <div class="token-item"><strong>Símbolo</strong>$DGM</div>
