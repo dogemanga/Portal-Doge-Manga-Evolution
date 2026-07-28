@@ -18,11 +18,9 @@ body{
     min-height:100vh; padding-bottom:80px;
 }
 
-/* 📊 BARRA MERCADO GERAL COM PREÇOS AO VIVO */
 .barra-geral{background:rgba(2,6,23,0.95); padding:10px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2);}
 .barra-conteudo-geral{display:flex; gap:40px; animation:rolar 28s linear infinite; width:max-content;}
 .barra-geral:hover .barra-conteudo-geral{animation-play-state:paused;}
-
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
 .item-moeda{display:flex; align-items:center; gap:8px; white-space:nowrap; font-size:14px;}
@@ -33,7 +31,6 @@ body{
 .btn-cg{background:#0052ff; padding:3px 8px; border-radius:4px; font-size:11px; color:white; text-decoration:none;}
 .btn-cmc{background:#10b981; padding:3px 8px; border-radius:4px; font-size:11px; color:white; text-decoration:none;}
 
-/* 📈 BARRA MOEDAS DO PORTAL */
 .barra-portal{background:rgba(5,8,22,0.9); padding:8px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.15);}
 .barra-conteudo-portal{display:flex; gap:30px; animation:rolar 35s linear infinite; width:max-content;}
 .barra-portal:hover .barra-conteudo-portal{animation-play-state:paused;}
@@ -66,6 +63,11 @@ header p{font-size:19px; color:var(--claro); max-width:900px; margin:0 auto 20px
 .btn-hash{background:#00C6FF; color:#050816;}
 .btn-raydium{background:#000; border:1px solid var(--primaria);}
 
+/* ✅ NOVOS BOTÕES: TIKTOK + GITHUB */
+.botoes-redes{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:15px;}
+.btn-tiktok{background:#000000; color:#25F4EE; border:1px solid #FE2C55;}
+.btn-github{background:#161b22; color:white; border:1px solid #30363d;}
+
 .botoes-projeto{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
 .btn-projeto{padding:10px 18px; border-radius:8px; background:rgba(250,204,21,0.1); color:var(--primaria); text-decoration:none; font-weight:600; font-size:14px; border:1px solid var(--primaria); transition:0.2s;}
 .btn-projeto:hover{background:var(--primaria); color:var(--fundo); transform:translateY(-2px);}
@@ -96,6 +98,8 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .link-site{background:#2563eb;}
 .link-x{background:#1DA1F2;}
 .link-tg{background:#229ED9;}
+.link-tiktok{background:#000; color:#25F4EE; border:1px solid #FE2C55;}
+.link-github{background:#161b22;}
 .link-dex{background:#ef4444;}
 
 .voltar{display:inline-flex; align-items:center; gap:6px; color:var(--primaria); text-decoration:none; font-weight:600; margin-bottom:15px; transition:0.2s;}
@@ -195,12 +199,18 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <header id="inicio">
     <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga Evolution">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Preços em tempo real via CoinGecko + Links CoinMarketCap</p>
+    <p>Preços em tempo real + todas as redes oficiais</p>
     
     <div class="botoes-compra">
-        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-phantom">👻 Comprar na Phantom</a>
-        <a href="https://hash.com/trade/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">💳 Comprar na Hash</a>
+        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-phantom">👻 Phantom</a>
+        <a href="https://hash.com/trade/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">💳 Hash</a>
         <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-raydium">💱 Raydium</a>
+    </div>
+
+    <!-- ✅ LINKS TIKTOK E GITHUB ADICIONADOS -->
+    <div class="botoes-redes">
+        <a href="https://tiktok.com/@dogemangaofficial" target="_blank" class="btn-compra btn-tiktok">🎵 TikTok Oficial</a>
+        <a href="https://github.com/dogemanga" target="_blank" class="btn-compra btn-github">💻 GitHub DogeManga</a>
     </div>
 </header>
 
@@ -218,11 +228,9 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
                 <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">Site</a>
                 <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">X</a>
                 <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-tg">Telegram</a>
+                <a href="https://tiktok.com/@dogemangaofficial" target="_blank" class="link-tiktok">TikTok</a>
+                <a href="https://github.com/dogemanga" target="_blank" class="link-github">GitHub</a>
                 <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-dex">Dex</a>
-            </div>
-            <div class="botoes-compra" style="margin-top:12px;">
-                <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-phantom">👻 Phantom</a>
-                <a href="https://hash.com/trade/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">💳 Hash</a>
             </div>
         </div>
     </div>
@@ -231,16 +239,18 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <div class="card" id="cadastrar">
     <a href="#inicio" class="voltar">← Voltar ao Portal</a>
     <h2>📤 Cadastrar Memecoin</h2>
-    <p style="color:var(--claro); margin-bottom:15px;">Coloque logo e links para aparecer na barra e lista.</p>
+    <p style="color:var(--claro); margin-bottom:15px;">Coloque todos os links oficiais para aparecerem no portal.</p>
     <div class="form-grid">
         <div class="grupo-form"><label>Nome</label><input type="text" required></div>
         <div class="grupo-form"><label>Símbolo</label><input type="text" required></div>
         <div class="grupo-form"><label>Link Logo</label><input type="url" required></div>
         <div class="grupo-form"><label>Contrato Solana</label><input type="text" required></div>
         <div class="grupo-form"><label>Site</label><input type="url" required></div>
-        <div class="grupo-form"><label>X</label><input type="url" required></div>
+        <div class="grupo-form"><label>X / Twitter</label><input type="url" required></div>
         <div class="grupo-form"><label>Telegram</label><input type="url" required></div>
-        <div class="grupo-form"><label>Link Compra</label><input type="url" required></div>
+        <div class="grupo-form"><label>TikTok</label><input type="url"></div>
+        <div class="grupo-form"><label>GitHub</label><input type="url"></div>
+        <div class="grupo-form"><label>Link Compra/DEX</label><input type="url" required></div>
     </div>
     <button class="btn-enviar">📤 Enviar</button>
 </div>
@@ -257,56 +267,22 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <footer>🐕 Doge Manga Evolution © 2026 • Preços via CoinGecko • Não é conselho financeiro</footer>
 
 <script>
-// 🚀 ATUALIZA PREÇOS AUTOMATICAMENTE A CADA 30 SEGUNDOS
 async function atualizarPrecos(){
     try{
         const api = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,dogecoin,pepe&vs_currencies=usd&include_24hr_change=true');
         const dados = await api.json();
         
         document.getElementById('barraPrecos').innerHTML = `
-            <div class="item-moeda">
-                <a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">BTC:</a>
-                <span>$ ${dados.bitcoin.usd.toLocaleString()}</span>
-                <span class="${dados.bitcoin.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.bitcoin.usd_24h_change.toFixed(2)}%</span>
-                <a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank" class="btn-cg">CG</a>
-                <a href="https://coinmarketcap.com/currencies/bitcoin/" target="_blank" class="btn-cmc">CMC</a>
-            </div>
-            <div class="item-moeda">
-                <a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">ETH:</a>
-                <span>$ ${dados.ethereum.usd.toLocaleString()}</span>
-                <span class="${dados.ethereum.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.ethereum.usd_24h_change.toFixed(2)}%</span>
-                <a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank" class="btn-cg">CG</a>
-                <a href="https://coinmarketcap.com/currencies/ethereum/" target="_blank" class="btn-cmc">CMC</a>
-            </div>
-            <div class="item-moeda">
-                <a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">SOL:</a>
-                <span>$ ${dados.solana.usd.toLocaleString()}</span>
-                <span class="${dados.solana.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.solana.usd_24h_change.toFixed(2)}%</span>
-                <a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank" class="btn-cg">CG</a>
-                <a href="https://coinmarketcap.com/currencies/solana/" target="_blank" class="btn-cmc">CMC</a>
-            </div>
-            <div class="item-moeda">
-                <a href="https://www.coingecko.com/pt-br/moedas/dogecoin" target="_blank">DOGE:</a>
-                <span>$ ${dados.dogecoin.usd.toFixed(4)}</span>
-                <span class="${dados.dogecoin.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.dogecoin.usd_24h_change.toFixed(2)}%</span>
-                <a href="https://www.coingecko.com/pt-br/moedas/dogecoin" target="_blank" class="btn-cg">CG</a>
-                <a href="https://coinmarketcap.com/currencies/dogecoin/" target="_blank" class="btn-cmc">CMC</a>
-            </div>
-            <div class="item-moeda">
-                <a href="https://www.coingecko.com/pt-br/moedas/pepe" target="_blank">PEPE:</a>
-                <span>$ ${dados.pepe.usd.toFixed(6)}</span>
-                <span class="${dados.pepe.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.pepe.usd_24h_change.toFixed(2)}%</span>
-                <a href="https://www.coingecko.com/pt-br/moedas/pepe" target="_blank" class="btn-cg">CG</a>
-                <a href="https://coinmarketcap.com/currencies/pepe/" target="_blank" class="btn-cmc">CMC</a>
-            </div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">BTC:</a><span>$ ${dados.bitcoin.usd.toLocaleString()}</span><span class="${dados.bitcoin.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.bitcoin.usd_24h_change.toFixed(2)}%</span><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank" class="btn-cg">CG</a><a href="https://coinmarketcap.com/currencies/bitcoin/" target="_blank" class="btn-cmc">CMC</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">ETH:</a><span>$ ${dados.ethereum.usd.toLocaleString()}</span><span class="${dados.ethereum.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.ethereum.usd_24h_change.toFixed(2)}%</span><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank" class="btn-cg">CG</a><a href="https://coinmarketcap.com/currencies/ethereum/" target="_blank" class="btn-cmc">CMC</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">SOL:</a><span>$ ${dados.solana.usd.toLocaleString()}</span><span class="${dados.solana.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.solana.usd_24h_change.toFixed(2)}%</span><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank" class="btn-cg">CG</a><a href="https://coinmarketcap.com/currencies/solana/" target="_blank" class="btn-cmc">CMC</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/dogecoin" target="_blank">DOGE:</a><span>$ ${dados.dogecoin.usd.toFixed(4)}</span><span class="${dados.dogecoin.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.dogecoin.usd_24h_change.toFixed(2)}%</span><a href="https://www.coingecko.com/pt-br/moedas/dogecoin" target="_blank" class="btn-cg">CG</a><a href="https://coinmarketcap.com/currencies/dogecoin/" target="_blank" class="btn-cmc">CMC</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/pepe" target="_blank">PEPE:</a><span>$ ${dados.pepe.usd.toFixed(6)}</span><span class="${dados.pepe.usd_24h_change>=0?'valor-pos':'valor-neg'}">${dados.pepe.usd_24h_change.toFixed(2)}%</span><a href="https://www.coingecko.com/pt-br/moedas/pepe" target="_blank" class="btn-cg">CG</a><a href="https://coinmarketcap.com/currencies/pepe/" target="_blank" class="btn-cmc">CMC</a></div>
         `;
-    }catch(erro){
-        console.log('Aguardando dados...');
-    }
+    }catch(erro){console.log('Aguardando dados...');}
 }
-
 atualizarPrecos();
-setInterval(atualizarPrecos, 30000); // Atualiza a cada 30 segundos
+setInterval(atualizarPrecos, 30000);
 </script>
 
 </body>
