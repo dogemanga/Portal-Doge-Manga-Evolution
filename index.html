@@ -27,11 +27,86 @@ body {
     background-size: cover; background-position: center top;
     background-attachment: fixed; background-repeat: no-repeat;
     min-height: 100vh;
+    padding-bottom: 80px; /* Espaço pro menu inferior */
 }
 
+/* ====================== NOVO: BARRA SUPERIOR ====================== */
+.barra-topo{
+    background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between;
+    border-bottom:1px solid rgba(250,204,21,0.2);
+    position:sticky; top:0; z-index:999;
+}
+.perfil{display:flex; align-items:center; gap:10px;}
+.perfil img{width:40px; height:40px; border-radius:50%; border:2px solid var(--primaria);}
+.perfil span{font-weight:600; color:var(--primaria);}
+.filtros{display:flex; gap:10px;}
+.filtro{padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; cursor:pointer; transition:0.2s;}
+.filtro.ativo{background:var(--primaria); color:var(--fundo);}
+.filtro:not(.ativo){background:rgba(255,255,255,0.08); color:var(--texto-claro);}
+.btn-deposito{background:var(--primaria); color:var(--fundo); padding:8px 20px; border-radius:20px; font-weight:700; border:none; cursor:pointer;}
+
+/* ====================== NOVO: RANKING SEMANAL ====================== */
+.ranking{
+    padding:20px; background:rgba(2,6,23,0.95); margin:15px; border-radius:16px;
+    border:1px solid rgba(250,204,21,0.15);
+}
+.ranking h2{color:var(--primaria); margin-bottom:15px; font-size:18px; display:flex; align-items:center; gap:8px;}
+.top-lista{display:flex; gap:12px; overflow-x:auto; padding-bottom:8px;}
+.top-item{
+    min-width:130px; padding:12px; background:rgba(17,24,39,0.9); border-radius:12px; text-align:center;
+    border:1px solid rgba(250,204,21,0.1);
+}
+.top-logo{width:50px; height:50px; border-radius:50%; margin:0 auto 8px; border:2px solid var(--primaria); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; color:var(--fundo);}
+.top-nome{font-weight:600; font-size:13px; margin-bottom:4px;}
+.top-valor{font-size:12px; color:var(--texto-claro);}
+
+/* ====================== NOVO: ABAS DE NAVEGAÇÃO ====================== */
+.abas{display:flex; gap:15px; padding:0 20px 15px; overflow-x:auto;}
+.aba{font-size:15px; font-weight:500; color:var(--texto-claro); cursor:pointer; white-space:nowrap; transition:0.2s;}
+.aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria); padding-bottom:4px;}
+.aba:hover{color:var(--primaria);}
+
+/* ====================== NOVO: LISTA DE MOEDAS COM MOVIMENTO ====================== */
+.lista-moedas{margin:0 15px; border-radius:16px; overflow:hidden;}
+.moeda-linha{
+    display:flex; align-items:center; justify-content:space-between; padding:14px 18px;
+    background:rgba(17,24,39,0.9); border-bottom:1px solid rgba(255,255,255,0.05);
+    transition:0.2s;
+    /* Efeito de movimento suave */
+    animation: deslizar 18s linear infinite;
+}
+.moeda-linha:hover{background:rgba(250,204,21,0.08); animation-play-state:paused;}
+@keyframes deslizar{
+    0%{transform:translateX(0);}
+    50%{transform:translateX(-10px);}
+    100%{transform:translateX(0);}
+}
+.moeda-esq{display:flex; align-items:center; gap:12px;}
+.moeda-logo{width:36px; height:36px; border-radius:50%; border:1px solid var(--primaria); display:flex; align-items:center; justify-content:center; font-weight:bold; color:var(--fundo);}
+.moeda-dados{}
+.moeda-nome{font-weight:600; font-size:15px;}
+.moeda-cap{font-size:12px; color:var(--texto-claro);}
+.moeda-dir{text-align:right;}
+.moeda-preco{font-weight:600; font-size:15px;}
+.moeda-variacao{font-size:13px; font-weight:500; margin-top:2px;}
+.queda{color:var(--perigo);}
+.alta{color:var(--sucesso);}
+
+/* ====================== NOVO: MENU INFERIOR ====================== */
+.menu-inferior{
+    position:fixed; bottom:0; left:0; width:100%; background:rgba(2,6,23,0.98);
+    display:flex; justify-content:space-around; padding:12px 0; border-top:1px solid rgba(250,204,21,0.2);
+    z-index:999;
+}
+.menu-item{text-align:center; color:var(--texto-claro); text-decoration:none; font-size:12px; transition:0.2s;}
+.menu-item.ativo{color:var(--primaria); font-weight:600;}
+.menu-item span{display:block; font-size:18px; margin-bottom:2px;}
+.menu-item:hover{color:var(--primaria);}
+
+/* ====================== SEU CÓDIGO ORIGINAL (TUDO MANTIDO) ====================== */
 nav {
     background: rgba(2, 6, 23, 0.95); padding: 14px; text-align: center;
-    position: sticky; top: 0; z-index: 999;
+    position: sticky; top: 60px; z-index:998; /* Abaixo da barra superior */
     border-bottom: 1px solid rgba(250,204,21,0.3);
     backdrop-filter: blur(8px);
 }
@@ -75,11 +150,9 @@ h2 {
 .aviso { color: var(--texto-claro); font-size:15px; margin-bottom:18px; line-height:1.6; }
 .alerta { color: var(--alerta); font-size:14px; margin:12px 0; padding:10px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid var(--alerta); }
 
-/* 📑 SOBRE O PROJETO */
 .sobre-lista { margin-top:15px; padding-left:20px; }
 .sobre-lista li { margin:8px 0; color:var(--texto); }
 
-/* 🗺️ ROADMAP */
 .roadmap { margin-top:20px; border-left:2px solid var(--primaria); padding-left:20px; }
 .roadmap-item { margin-bottom:22px; position:relative; }
 .roadmap-item::before {
@@ -245,6 +318,7 @@ footer {
     .campos-grid { grid-template-columns:1fr 1fr; }
     .todas-moedas-grid { grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); }
     header h1 { font-size:36px; }
+    .barra-topo{flex-wrap:wrap; gap:10px;}
 }
 @media(max-width:600px){
     header h1 { font-size:30px; }
@@ -253,11 +327,115 @@ footer {
     nav a { margin:4px 5px; font-size:11px; }
     .btn { width:100%; margin:6px 0; }
     .conexao-wallet { flex-direction:column; text-align:center; }
+    .filtros{gap:6px;}
+    .filtro{padding:5px 10px; font-size:12px;}
 }
 </style>
 </head>
 <body>
 
+<!-- ====================== BARRA SUPERIOR ====================== -->
+<div class="barra-topo">
+    <div class="perfil">
+        <img src="IMG-20260727-WA0036(7).jpg" alt="Perfil Doge Manga">
+        <span>@dogemanga687</span>
+    </div>
+    <div class="filtros">
+        <div class="filtro ativo">24h</div>
+        <div class="filtro">7d</div>
+        <div class="filtro">30d</div>
+        <div class="filtro">Todos</div>
+    </div>
+    <button class="btn-deposito">Depositar</button>
+</div>
+
+<!-- ====================== RANKING SEMANAL ====================== -->
+<div class="ranking">
+    <h2>🔥 Maiores da Semana</h2>
+    <div class="top-lista">
+        <div class="top-item">
+            <div class="top-logo">🐕</div>
+            <div class="top-nome">Doge Manga</div>
+            <div class="top-valor">$DGM</div>
+        </div>
+        <div class="top-item">
+            <div class="top-logo" style="background:#22c55e;">🐸</div>
+            <div class="top-nome">Pepe Coin</div>
+            <div class="top-valor">$PEPE</div>
+        </div>
+        <div class="top-item">
+            <div class="top-logo" style="background:#2563eb;">🚀</div>
+            <div class="top-nome">Projeto X</div>
+            <div class="top-valor">$XXX</div>
+        </div>
+    </div>
+</div>
+
+<!-- ====================== ABAS ====================== -->
+<div class="abas">
+    <div class="aba">Favoritos</div>
+    <div class="aba">Verificados</div>
+    <div class="aba">Em Alta</div>
+    <div class="aba ativo">Recém-Adicionados</div>
+</div>
+
+<!-- ====================== LISTA DE MOEDAS COM MOVIMENTO ====================== -->
+<div class="lista-moedas">
+    <div class="moeda-linha">
+        <div class="moeda-esq">
+            <div class="moeda-logo">🐕</div>
+            <div class="moeda-dados">
+                <div class="moeda-nome">Doge Manga</div>
+                <div class="moeda-cap">-- Market Cap</div>
+            </div>
+        </div>
+        <div class="moeda-dir">
+            <div class="moeda-preco">--</div>
+            <div class="moeda-variacao queda">--%</div>
+        </div>
+    </div>
+    <div class="moeda-linha">
+        <div class="moeda-esq">
+            <div class="moeda-logo" style="background:#22c55e;">🐸</div>
+            <div class="moeda-dados">
+                <div class="moeda-nome">Pepe Coin</div>
+                <div class="moeda-cap">$420.000</div>
+            </div>
+        </div>
+        <div class="moeda-dir">
+            <div class="moeda-preco">$0.000...20</div>
+            <div class="moeda-variacao queda">-2,82%</div>
+        </div>
+    </div>
+    <div class="moeda-linha">
+        <div class="moeda-esq">
+            <div class="moeda-logo" style="background:#f97316;">⚡</div>
+            <div class="moeda-dados">
+                <div class="moeda-nome">FUEGO</div>
+                <div class="moeda-cap">$69.7K</div>
+            </div>
+        </div>
+        <div class="moeda-dir">
+            <div class="moeda-preco">$0.00096</div>
+            <div class="moeda-variacao queda">-2,82%</div>
+        </div>
+    </div>
+    <div class="moeda-linha">
+        <div class="moeda-esq">
+            <div class="moeda-logo" style="background:#7c3aed;">💎</div>
+            <div class="moeda-dados">
+                <div class="moeda-nome">RFUEL</div>
+                <div class="moeda-cap">$141.8K</div>
+            </div>
+        </div>
+        <div class="moeda-dir">
+            <div class="moeda-preco">$0.00063</div>
+            <div class="moeda-variacao queda">-1,39%</div>
+        </div>
+    </div>
+</div>
+
+<!-- ====================== SEU MENU ORIGINAL ====================== -->
 <nav>
     <a href="#inicio" class="ativo">🏠 Início</a>
     <a href="#sobre">📖 Sobre</a>
@@ -428,6 +606,14 @@ footer {
     <a href="#cadastrar" class="btn">🚀 Cadastrar Meu Projeto Agora</a>
 </div>
 
+</div>
+
+<!-- ====================== MENU INFERIOR ====================== -->
+<div class="menu-inferior">
+    <a href="#inicio" class="menu-item ativo"><span>🏠</span>Início</a>
+    <a href="#projetos" class="menu-item"><span>📋</span>Projetos</a>
+    <a href="#cadastrar" class="menu-item"><span>🚀</span>Cadastrar</a>
+    <a href="#" class="menu-item"><span>⏳</span>Em Breve</a>
 </div>
 
 <footer>
