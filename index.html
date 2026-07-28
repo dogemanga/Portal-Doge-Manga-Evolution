@@ -44,7 +44,7 @@ body{
 
 .menu-botao{font-size:28px; color:var(--primaria); cursor:pointer; padding:6px 12px; border-radius:8px; transition:0.2s; background:rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.2);}
 .menu-botao:hover{background:rgba(250,204,21,0.15); transform:scale(1.05);}
-.menu-navegacao{display:none; position:absolute; top:100%; right:20px; width:300px; background:rgba(5,8,22,0.98); backdrop-filter:blur(10px); border-radius:14px; border:1px solid rgba(250,204,21,0.25); margin-top:8px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.3); z-index:999;}
+.menu-navegacao{display:none; position:absolute; top:100%; right:20px; width:280px; background:rgba(5,8,22,0.98); backdrop-filter:blur(10px); border-radius:14px; border:1px solid rgba(250,204,21,0.25); margin-top:8px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.3); z-index:999;}
 .menu-navegacao.mostrar{display:block; animation:abrirMenu 0.2s ease;}
 @keyframes abrirMenu{from{opacity:0; transform:translateY(-8px);}to{opacity:1; transform:translateY(0);}}
 .menu-item{display:block; padding:11px 20px; color:var(--texto); text-decoration:none; font-weight:500; border-bottom:1px solid rgba(250,204,21,0.1); transition:0.2s; font-size:14px;}
@@ -87,7 +87,7 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .btn-enviar{background:var(--primaria); color:var(--fundo); padding:12px 24px; border-radius:10px; font-weight:700; border:none; cursor:pointer; transition:0.2s; width:100%; margin-top:10px;}
 .btn-enviar:hover{transform:scale(1.02);}
 
-/* ✅ AQUI É A PARTE QUE MUDOU: MOEDAS LANÇADAS ANDANDO */
+/* ✅ MOEDAS LANÇADAS ANDANDO NA TELA */
 .area-andamento{overflow:hidden; padding:15px 0; border-radius:12px;}
 .lista-andando{display:flex; gap:25px; width:max-content; animation:rolarMoedas 55s linear infinite;}
 .area-andamento:hover .lista-andando{animation-play-state:paused;}
@@ -147,7 +147,16 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
         <a href="tokenizacao.html" class="menu-item">💎 Tokenização</a>
         <a href="nft.html" class="menu-item">🎨 NFT</a>
         <a href="whitepaper.html" class="menu-item">📄 Whitepaper</a>
+
         <div class="menu-divisao"></div>
+
+        <!-- ✅ BOTÕES NOVOS COM CONTRATO JÁ PRONTO -->
+        <a href="nft.html" class="menu-item">🎨 Ver Coleção NFT</a>
+        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🛒 Comprar Doge Manga</a>
+        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 Consultar Contrato Solana</a>
+
+        <div class="menu-divisao"></div>
+
         <a href="https://dogemangaofficial.xyz" target="_blank" class="menu-item">🌐 Site Oficial</a>
         <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="menu-item">💬 Telegram</a>
         <a href="https://x.com/dogemanga96508" target="_blank" class="menu-item">🐦 X / Twitter</a>
@@ -155,9 +164,8 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
         <a href="https://github.com/dogemanga" target="_blank" class="menu-item">💻 GitHub</a>
         <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">👻 Phantom</a>
         <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="menu-item">📊 CoinGecko</a>
-        <a href="https://coinmarketcap.com/pt-br/moedas/doge-manga" target="_blank" class="menu-item">📈 MarketCap</a>
-        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="menu-item">🔍 Birdeye</a>
-        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">💱 DEX / Raydium</a>
+        <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" class="menu-item">📈 CoinMarketCap</a>
+        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="menu-item">🔎 Birdeye</a>
     </nav>
 </div>
 
@@ -166,7 +174,7 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <header id="inicio">
     <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga Evolution">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Preços ao vivo • CoinGecko + CoinMarketCap</p>
+    <p>Preços em tempo real • CoinGecko + CoinMarketCap</p>
     <div class="botoes-compra">
         <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-phantom">👻 Phantom</a>
         <a href="https://hash.com/trade/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">💳 Hash</a>
@@ -177,7 +185,7 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <div class="container">
     <div class="card destaque" id="lancadas">
         <a href="#inicio" class="voltar">← Voltar</a>
-        <h2>📢 Projetos Lançados</h2>
+        <h2>📢 Moedas Lançadas</h2>
         <p class="alerta">Projetos verificados pela comunidade.</p>
 
         <!-- ✅ ÁREA AGORA COM ANIMAÇÃO ANDANDO -->
@@ -260,7 +268,7 @@ async function atualizarPrecos(){
 atualizarPrecos();
 setInterval(atualizarPrecos, 30000);
 
-// CADASTRO — NOVAS MOEDAS JÁ ENTRAM ANDANDO AUTOMATICAMENTE
+// CADASTRO — NOVAS MOEDAS JÁ ENTRAM ANDANDO
 const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastrarNav,#botaoCadastrarMenu');
 const formCadastrar = document.getElementById('formCadastrar');
 const fundoEscuro = document.getElementById('fundoEscuro');
