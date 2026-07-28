@@ -27,25 +27,27 @@ body {
     background-size: cover; background-position: center top;
     background-attachment: fixed; background-repeat: no-repeat;
     min-height: 100vh;
-    padding-bottom: 80px; /* Espaço pro menu inferior */
+    padding-bottom: 80px;
 }
 
-/* ====================== NOVO: BARRA SUPERIOR ====================== */
+/* ====================== BARRA SUPERIOR ====================== */
 .barra-topo{
-    background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between;
+    background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
     border-bottom:1px solid rgba(250,204,21,0.2);
     position:sticky; top:0; z-index:999;
 }
 .perfil{display:flex; align-items:center; gap:10px;}
 .perfil img{width:40px; height:40px; border-radius:50%; border:2px solid var(--primaria);}
 .perfil span{font-weight:600; color:var(--primaria);}
-.filtros{display:flex; gap:10px;}
-.filtro{padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; cursor:pointer; transition:0.2s;}
-.filtro.ativo{background:var(--primaria); color:var(--fundo);}
+.filtros{display:flex; gap:8px; flex-wrap:wrap;}
+.filtro{padding:6px 14px; border-radius:20px; font-size:14px; font-weight:500; cursor:pointer; transition:0.2s; user-select:none;}
+.filtro.ativo{background:var(--primaria); color:var(--fundo); box-shadow:0 0 12px rgba(250,204,21,0.3);}
 .filtro:not(.ativo){background:rgba(255,255,255,0.08); color:var(--texto-claro);}
-.btn-deposito{background:var(--primaria); color:var(--fundo); padding:8px 20px; border-radius:20px; font-weight:700; border:none; cursor:pointer;}
+.filtro:hover:not(.ativo){background:rgba(250,204,21,0.1); color:var(--primaria);}
+.btn-deposito{background:var(--primaria); color:var(--fundo); padding:8px 20px; border-radius:20px; font-weight:700; border:none; cursor:pointer; transition:0.2s;}
+.btn-deposito:hover{transform:scale(1.05); box-shadow:0 0 15px rgba(250,204,21,0.4);}
 
-/* ====================== NOVO: RANKING SEMANAL ====================== */
+/* ====================== RANKING ====================== */
 .ranking{
     padding:20px; background:rgba(2,6,23,0.95); margin:15px; border-radius:16px;
     border:1px solid rgba(250,204,21,0.15);
@@ -54,173 +56,108 @@ body {
 .top-lista{display:flex; gap:12px; overflow-x:auto; padding-bottom:8px;}
 .top-item{
     min-width:130px; padding:12px; background:rgba(17,24,39,0.9); border-radius:12px; text-align:center;
-    border:1px solid rgba(250,204,21,0.1);
+    border:1px solid rgba(250,204,21,0.1); transition:0.2s; cursor:pointer;
 }
+.top-item:hover{transform:translateY(-3px); border-color:var(--primaria);}
+.top-item.destaque-top{border-color:var(--primaria); box-shadow:0 0 15px rgba(250,204,21,0.2);}
 .top-logo{width:50px; height:50px; border-radius:50%; margin:0 auto 8px; border:2px solid var(--primaria); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; color:var(--fundo);}
 .top-nome{font-weight:600; font-size:13px; margin-bottom:4px;}
 .top-valor{font-size:12px; color:var(--texto-claro);}
 
-/* ====================== NOVO: ABAS DE NAVEGAÇÃO ====================== */
+/* ====================== ABAS ====================== */
 .abas{display:flex; gap:15px; padding:0 20px 15px; overflow-x:auto;}
-.aba{font-size:15px; font-weight:500; color:var(--texto-claro); cursor:pointer; white-space:nowrap; transition:0.2s;}
-.aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria); padding-bottom:4px;}
+.aba{font-size:15px; font-weight:500; color:var(--texto-claro); cursor:pointer; white-space:nowrap; transition:0.2s; padding-bottom:4px; user-select:none;}
+.aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria);}
 .aba:hover{color:var(--primaria);}
 
-/* ====================== NOVO: LISTA DE MOEDAS COM MOVIMENTO ====================== */
-.lista-moedas{margin:0 15px; border-radius:16px; overflow:hidden;}
+/* ====================== LISTA MOEDAS + MOVIMENTO GARANTIDO ====================== */
+.lista-moedas{margin:0 15px; border-radius:16px; overflow:hidden; background:rgba(17,24,39,0.9);}
 .moeda-linha{
     display:flex; align-items:center; justify-content:space-between; padding:14px 18px;
     background:rgba(17,24,39,0.9); border-bottom:1px solid rgba(255,255,255,0.05);
-    transition:0.2s;
-    /* Efeito de movimento suave */
-    animation: deslizar 18s linear infinite;
+    transition:0.2s; cursor:pointer;
+    /* ANIMAÇÃO SUAVE ROLANDO DE UM LADO PRO OUTRO */
+    animation: rolarMoedas 22s ease-in-out infinite alternate;
 }
-.moeda-linha:hover{background:rgba(250,204,21,0.08); animation-play-state:paused;}
-@keyframes deslizar{
-    0%{transform:translateX(0);}
-    50%{transform:translateX(-10px);}
-    100%{transform:translateX(0);}
+.moeda-linha:hover{background:rgba(250,204,21,0.08); animation-play-state:paused; transform:scale(1.01);}
+@keyframes rolarMoedas{
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(-12px); }
+    100% { transform: translateX(0); }
 }
+.moeda-destaque-linha{background:rgba(250,204,21,0.06); border-left:3px solid var(--primaria);}
 .moeda-esq{display:flex; align-items:center; gap:12px;}
-.moeda-logo{width:36px; height:36px; border-radius:50%; border:1px solid var(--primaria); display:flex; align-items:center; justify-content:center; font-weight:bold; color:var(--fundo);}
-.moeda-dados{}
+.moeda-logo{width:36px; height:36px; border-radius:50%; border:1px solid var(--primaria); display:flex; align-items:center; justify-content:center; font-weight:bold; color:var(--fundo); flex-shrink:0;}
 .moeda-nome{font-weight:600; font-size:15px;}
 .moeda-cap{font-size:12px; color:var(--texto-claro);}
-.moeda-dir{text-align:right;}
-.moeda-preco{font-weight:600; font-size:15px;}
-.moeda-variacao{font-size:13px; font-weight:500; margin-top:2px;}
+.moeda-preco{font-weight:600; font-size:15px; text-align:right;}
+.moeda-variacao{font-size:13px; font-weight:500; margin-top:2px; text-align:right;}
 .queda{color:var(--perigo);}
 .alta{color:var(--sucesso);}
 
-/* ====================== NOVO: MENU INFERIOR ====================== */
+/* ====================== MENU INFERIOR ====================== */
 .menu-inferior{
     position:fixed; bottom:0; left:0; width:100%; background:rgba(2,6,23,0.98);
     display:flex; justify-content:space-around; padding:12px 0; border-top:1px solid rgba(250,204,21,0.2);
     z-index:999;
 }
-.menu-item{text-align:center; color:var(--texto-claro); text-decoration:none; font-size:12px; transition:0.2s;}
+.menu-item{text-align:center; color:var(--texto-claro); text-decoration:none; font-size:12px; transition:0.2s; cursor:pointer;}
 .menu-item.ativo{color:var(--primaria); font-weight:600;}
 .menu-item span{display:block; font-size:18px; margin-bottom:2px;}
-.menu-item:hover{color:var(--primaria);}
+.menu-item:hover{color:var(--primaria); transform:translateY(-2px);}
 
-/* ====================== SEU CÓDIGO ORIGINAL (TUDO MANTIDO) ====================== */
+/* ====================== SEU CÓDIGO ORIGINAL COMPLETO ====================== */
 nav {
     background: rgba(2, 6, 23, 0.95); padding: 14px; text-align: center;
-    position: sticky; top: 60px; z-index:998; /* Abaixo da barra superior */
+    position: sticky; top: 60px; z-index:998;
     border-bottom: 1px solid rgba(250,204,21,0.3);
     backdrop-filter: blur(8px);
 }
 nav a {
     color: var(--texto); text-decoration: none; margin: 6px 8px;
-    font-weight: 500; padding: 6px 8px; font-size: 13px;
-    transition: all 0.25s ease; border-radius: 6px;
+    font-weight: 500; padding: 6px 8px; font-size:13px;
+    transition: all 0.25s ease; border-radius:6px;
 }
 nav a:hover { color: var(--primaria); background: rgba(250,204,21,0.08); }
 nav a.ativo { color: var(--primaria); border-bottom: 2px solid var(--primaria); }
 
-header { 
-    text-align: center; 
-    padding: 50px 20px 40px;
-}
-header h1 { 
-    font-size: 44px; color: var(--primaria); 
-    text-shadow: 0 0 30px rgba(250,204,21,0.35); 
-    margin-bottom: 12px; font-weight:700;
-}
-header p { 
-    font-size: 18px; color: var(--texto-claro); 
-    max-width: 850px; margin: 0 auto; font-weight:400;
-}
+header { text-align:center; padding:50px 20px 40px; }
+header h1 { font-size:44px; color:var(--primaria); text-shadow:0 0 30px rgba(250,204,21,0.35); margin-bottom:12px; font-weight:700; }
+header p { font-size:18px; color:var(--texto-claro); max-width:850px; margin:0 auto; font-weight:400; }
 
-.container { max-width: 1450px; margin: 0 auto; padding: 20px 24px; }
-.card {
-    background: rgba(17, 24, 39, 0.92); padding: 28px; margin: 30px 0;
-    border-radius: 20px; border: 1px solid rgba(250,204,21,0.2);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    backdrop-filter: blur(6px);
-}
-.card.destaque { border-color: var(--primaria); box-shadow: 0 0 30px rgba(250,204,21,0.15); }
-.card:hover { box-shadow: 0 15px 50px rgba(250,204,21,0.08); border-color: rgba(250,204,21,0.35); }
-h2 { 
-    color: var(--primaria); margin-bottom: 20px; 
-    border-bottom: 1px solid rgba(250,204,21,0.25); 
-    padding-bottom: 12px; font-size:24px; font-weight:600;
-}
-.aviso { color: var(--texto-claro); font-size:15px; margin-bottom:18px; line-height:1.6; }
-.alerta { color: var(--alerta); font-size:14px; margin:12px 0; padding:10px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid var(--alerta); }
+.container { max-width:1450px; margin:0 auto; padding:20px 24px; }
+.card { background:rgba(17,24,39,0.92); padding:28px; margin:30px 0; border-radius:20px; border:1px solid rgba(250,204,21,0.2); box-shadow:0 10px 40px rgba(0,0,0,0.3); transition:0.3s; backdrop-filter:blur(6px); }
+.card.destaque { border-color:var(--primaria); box-shadow:0 0 30px rgba(250,204,21,0.15); }
+.card:hover { box-shadow:0 15px 50px rgba(250,204,21,0.08); border-color:rgba(250,204,21,0.35); }
+h2 { color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:12px; font-size:24px; font-weight:600; }
+.aviso { color:var(--texto-claro); font-size:15px; margin-bottom:18px; line-height:1.6; }
+.alerta { color:var(--alerta); font-size:14px; margin:12px 0; padding:10px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid var(--alerta); }
 
 .sobre-lista { margin-top:15px; padding-left:20px; }
 .sobre-lista li { margin:8px 0; color:var(--texto); }
 
 .roadmap { margin-top:20px; border-left:2px solid var(--primaria); padding-left:20px; }
 .roadmap-item { margin-bottom:22px; position:relative; }
-.roadmap-item::before {
-    content:''; width:12px; height:12px; background:var(--primaria); border-radius:50%;
-    position:absolute; left:-26px; top:4px;
-}
+.roadmap-item::before { content:''; width:12px; height:12px; background:var(--primaria); border-radius:50%; position:absolute; left:-26px; top:4px; }
 .roadmap-concluido::before { background:var(--sucesso); }
 .roadmap-futuro::before { background:var(--alerta); }
 .roadmap-titulo { font-weight:600; font-size:17px; margin-bottom:4px; }
 .roadmap-texto { color:var(--texto-claro); font-size:14px; }
 
-.stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:16px; margin-bottom:20px;
-}
-.stat-box {
-    background:rgba(2,6,23,0.94); padding:18px; border-radius:12px; text-align:center;
-    border:1px solid rgba(250,204,21,0.2);
-}
+.stats-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:16px; margin-bottom:20px; }
+.stat-box { background:rgba(2,6,23,0.94); padding:18px; border-radius:12px; text-align:center; border:1px solid rgba(250,204,21,0.2); }
 .stat-valor { font-size:22px; font-weight:700; color:var(--primaria); margin-bottom:5px; }
 .stat-nome { font-size:13px; color:var(--texto-claro); }
 
-.todas-moedas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-    padding-bottom: 10px;
-}
-.moeda-card {
-    background: rgba(2, 6, 23, 0.94);
-    padding: 24px;
-    border-radius: 18px;
-    text-align: center;
-    border: 1px solid rgba(250,204,21,0.18);
-    transition: all 0.3s ease;
-    position:relative;
-}
-.moeda-card.destaque::after {
-    content:"⭐ DESTAQUE";
-    position:absolute; top:12px; right:12px;
-    background:var(--primaria); color:var(--fundo);
-    font-size:10px; font-weight:700; padding:4px 8px; border-radius:6px;
-}
-.moeda-card:hover { 
-    transform: translateY(-8px); 
-    border-color: var(--primaria); 
-    box-shadow: 0 12px 35px rgba(250,204,21,0.12); 
-}
-.moeda-logo {
-    width: 110px; height: 110px; border-radius: 50%;
-    object-fit: cover; margin-bottom: 15px;
-    border: 2px solid var(--primaria);
-    box-shadow: 0 0 20px rgba(250,204,21,0.2);
-}
-.moeda-nome { color: var(--primaria); font-size:20px; font-weight:700; margin-bottom:6px; }
-.moeda-simbolo { color: var(--texto-claro); font-size:15px; margin-bottom:15px; font-weight:500; }
+.todas-moedas-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:24px; margin-top:24px; padding-bottom:10px; }
+.moeda-card { background:rgba(2,6,23,0.94); padding:24px; border-radius:18px; text-align:center; border:1px solid rgba(250,204,21,0.18); transition:0.3s; position:relative; }
+.moeda-card.destaque::after { content:"⭐ DESTAQUE"; position:absolute; top:12px; right:12px; background:var(--primaria); color:var(--fundo); font-size:10px; font-weight:700; padding:4px 8px; border-radius:6px; }
+.moeda-card:hover { transform:translateY(-8px); border-color:var(--primaria); box-shadow:0 12px 35px rgba(250,204,21,0.12); }
+.moeda-logo { width:110px; height:110px; border-radius:50%; object-fit:cover; margin-bottom:15px; border:2px solid var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.2); }
+.moeda-nome { color:var(--primaria); font-size:20px; font-weight:700; margin-bottom:6px; }
+.moeda-simbolo { color:var(--texto-claro); font-size:15px; margin-bottom:15px; font-weight:500; }
 .moeda-links { margin-top:12px; display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
-.moeda-links a, .btn-compra {
-    display: inline-block;
-    margin: 2px;
-    padding: 7px 12px;
-    border-radius: 8px;
-    color: white;
-    text-decoration: none;
-    font-size:13px; font-weight:500;
-    transition: all 0.2s ease;
-    border:none; cursor:pointer;
-}
+.moeda-links a, .btn-compra { display:inline-block; margin:2px; padding:7px 12px; border-radius:8px; color:white; text-decoration:none; font-size:13px; font-weight:500; transition:0.2s; border:none; cursor:pointer; }
 .link-site { background:#2563eb; }
 .link-tel { background:#229ED9; }
 .link-x { background:#1DA1F2; }
@@ -230,95 +167,43 @@ h2 {
 .btn-compra:hover { background:#15803d; transform:scale(1.08); box-shadow:0 0 15px rgba(34,197,94,0.3); }
 .btn-compra:disabled { opacity:0.35; cursor:not-allowed; transform:none; }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 24px;
-    align-items: start;
-    margin-bottom: 18px;
-}
-.upload-area {
-    background: rgba(2, 6, 23, 0.94);
-    border-radius: 16px;
-    border: 2px dashed var(--primaria);
-    padding: 20px;
-    text-align: center;
-    min-height: 200px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size:15px;
-    color: var(--texto-claro);
-}
-.upload-area:hover { border-color: var(--primaria); background: rgba(250,204,21,0.06); }
-.upload-area img { max-width: 100%; max-height: 170px; border-radius: 12px; display: none; margin-top:10px; }
+.form-grid { display:grid; grid-template-columns:200px 1fr; gap:24px; align-items:start; margin-bottom:18px; }
+.upload-area { background:rgba(2,6,23,0.94); border-radius:16px; border:2px dashed var(--primaria); padding:20px; text-align:center; min-height:200px; cursor:pointer; transition:0.3s; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:15px; color:var(--texto-claro); }
+.upload-area:hover { border-color:var(--primaria); background:rgba(250,204,21,0.06); }
+.upload-area img { max-width:100%; max-height:170px; border-radius:12px; display:none; margin-top:10px; }
 
-.campos-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-.campo {
-    background: rgba(2, 6, 23, 0.94);
-    padding: 14px 16px;
-    border-radius: 10px;
-    border-left: 3px solid var(--primaria);
-    transition: all 0.2s ease;
-}
-.campo:hover { border-left-color: #fde047; }
-.campo label {
-    color: var(--primaria); display: block; margin-bottom:6px; font-size:13px; font-weight:600;
-}
-.campo input {
-    width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.15);
-    color: var(--texto); padding:8px 0; font-size:15px; outline: none; transition:0.2s;
-}
-.campo input:focus { border-bottom-color: var(--primaria); }
+.campos-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.campo { background:rgba(2,6,23,0.94); padding:14px 16px; border-radius:10px; border-left:3px solid var(--primaria); transition:0.2s; }
+.campo:hover { border-left-color:#fde047; }
+.campo label { color:var(--primaria); display:block; margin-bottom:6px; font-size:13px; font-weight:600; }
+.campo input { width:100%; background:transparent; border:none; border-bottom:1px solid rgba(255,255,255,0.15); color:var(--texto); padding:8px 0; font-size:15px; outline:none; transition:0.2s; }
+.campo input:focus { border-bottom-color:var(--primaria); }
 
-.btn {
-    display: inline-block; margin:10px 6px; padding:13px 28px;
-    background: var(--primaria); color: var(--fundo); text-decoration: none;
-    font-weight:700; border-radius:10px; cursor:pointer;
-    transition: all 0.3s ease; font-size:15px; border:none;
-}
+.btn { display:inline-block; margin:10px 6px; padding:13px 28px; background:var(--primaria); color:var(--fundo); text-decoration:none; font-weight:700; border-radius:10px; cursor:pointer; transition:0.3s; font-size:15px; border:none; }
 .btn:hover { transform:scale(1.05); box-shadow:0 0 25px rgba(250,204,21,0.4); }
 .btn-enviar { width:100%; font-size:16px; padding:15px; margin-top:15px; }
 .btn-copiar { background:#1e40af; color:white; padding:9px 14px; font-size:13px; }
 .btn-verde { background:var(--sucesso); color:white; }
 .btn-verde:hover { background:#16a34a; box-shadow:0 0 20px rgba(34,197,94,0.35); }
 
-.conexao-wallet {
-    background:rgba(2,6,23,0.94); padding:18px; border-radius:12px; margin-bottom:20px;
-    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
-    border:1px solid rgba(255,255,255,0.1);
-}
-.status-wallet { font-size:14px; color: var(--texto-claro); font-family:'Courier New', monospace; }
+.conexao-wallet { background:rgba(2,6,23,0.94); padding:18px; border-radius:12px; margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; border:1px solid rgba(255,255,255,0.1); }
+.status-wallet { font-size:14px; color:var(--texto-claro); font-family:'Courier New',monospace; }
 
 .faq-item { margin-bottom:15px; }
-.faq-pergunta {
-    background:rgba(2,6,23,0.94); padding:14px; border-radius:10px; cursor:pointer;
-    font-weight:600; color:var(--primaria); display:flex; justify-content:space-between; align-items:center;
-}
-.faq-resposta {
-    padding:14px; background:rgba(0,0,0,0.2); border-radius:0 0 10px 10px; display:none;
-    color:var(--texto-claro); font-size:14px;
-}
+.faq-pergunta { background:rgba(2,6,23,0.94); padding:14px; border-radius:10px; cursor:pointer; font-weight:600; color:var(--primaria); display:flex; justify-content:space-between; align-items:center; }
+.faq-resposta { padding:14px; background:rgba(0,0,0,0.2); border-radius:0 0 10px 10px; display:none; color:var(--texto-claro); font-size:14px; }
 
-footer {
-    text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96);
-    margin-top:40px; color: var(--texto-claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;
-}
+footer { text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--texto-claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px; }
 .aviso-legal { margin-top:10px; font-size:12px; color:#78869e; line-height:1.5; }
+
+.form-desativado { opacity:0.4; pointer-events:none; filter:grayscale(0.5); }
 
 @media(max-width:900px){
     .form-grid { grid-template-columns:1fr; }
     .campos-grid { grid-template-columns:1fr 1fr; }
     .todas-moedas-grid { grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); }
     header h1 { font-size:36px; }
-    .barra-topo{flex-wrap:wrap; gap:10px;}
+    .barra-topo { flex-wrap:wrap; gap:10px; }
 }
 @media(max-width:600px){
     header h1 { font-size:30px; }
@@ -327,8 +212,8 @@ footer {
     nav a { margin:4px 5px; font-size:11px; }
     .btn { width:100%; margin:6px 0; }
     .conexao-wallet { flex-direction:column; text-align:center; }
-    .filtros{gap:6px;}
-    .filtro{padding:5px 10px; font-size:12px;}
+    .filtros { gap:6px; }
+    .filtro { padding:5px 10px; font-size:12px; }
 }
 </style>
 </head>
@@ -338,7 +223,7 @@ footer {
 <div class="barra-topo">
     <div class="perfil">
         <img src="IMG-20260727-WA0036(7).jpg" alt="Perfil Doge Manga">
-        <span>@dogemanga687</span>
+        <span>@dogemanga96508</span>
     </div>
     <div class="filtros">
         <div class="filtro ativo">24h</div>
@@ -346,14 +231,14 @@ footer {
         <div class="filtro">30d</div>
         <div class="filtro">Todos</div>
     </div>
-    <button class="btn-deposito">Depositar</button>
+    <button class="btn-deposito" onclick="alert('🔐 Em breve: carteira e pagamentos Solana')">Depositar</button>
 </div>
 
-<!-- ====================== RANKING SEMANAL ====================== -->
+<!-- ====================== RANKING COM DOGE MANGA EM DESTAQUE ====================== -->
 <div class="ranking">
     <h2>🔥 Maiores da Semana</h2>
     <div class="top-lista">
-        <div class="top-item">
+        <div class="top-item destaque-top">
             <div class="top-logo">🐕</div>
             <div class="top-nome">Doge Manga</div>
             <div class="top-valor">$DGM</div>
@@ -365,33 +250,33 @@ footer {
         </div>
         <div class="top-item">
             <div class="top-logo" style="background:#2563eb;">🚀</div>
-            <div class="top-nome">Projeto X</div>
-            <div class="top-valor">$XXX</div>
+            <div class="top-nome">Solana</div>
+            <div class="top-valor">$SOL</div>
         </div>
     </div>
 </div>
 
 <!-- ====================== ABAS ====================== -->
 <div class="abas">
-    <div class="aba">Favoritos</div>
-    <div class="aba">Verificados</div>
-    <div class="aba">Em Alta</div>
-    <div class="aba ativo">Recém-Adicionados</div>
+    <div class="aba" onclick="mudarAba(this)">⭐ Favoritos</div>
+    <div class="aba" onclick="mudarAba(this)">✅ Verificados</div>
+    <div class="aba" onclick="mudarAba(this)">📈 Em Alta</div>
+    <div class="aba ativo" onclick="mudarAba(this)">🆕 Recém-Adicionados</div>
 </div>
 
-<!-- ====================== LISTA DE MOEDAS COM MOVIMENTO ====================== -->
+<!-- ====================== LISTA COM DOGE MANGA ROLANDO ====================== -->
 <div class="lista-moedas">
-    <div class="moeda-linha">
+    <div class="moeda-linha moeda-destaque-linha">
         <div class="moeda-esq">
             <div class="moeda-logo">🐕</div>
             <div class="moeda-dados">
-                <div class="moeda-nome">Doge Manga</div>
-                <div class="moeda-cap">-- Market Cap</div>
+                <div class="moeda-nome"><strong>Doge Manga</strong></div>
+                <div class="moeda-cap">Supply: 420 Bi • Rede Solana</div>
             </div>
         </div>
         <div class="moeda-dir">
             <div class="moeda-preco">--</div>
-            <div class="moeda-variacao queda">--%</div>
+            <div class="moeda-variacao alta">🚀 Lançamento</div>
         </div>
     </div>
     <div class="moeda-linha">
@@ -399,7 +284,7 @@ footer {
             <div class="moeda-logo" style="background:#22c55e;">🐸</div>
             <div class="moeda-dados">
                 <div class="moeda-nome">Pepe Coin</div>
-                <div class="moeda-cap">$420.000</div>
+                <div class="moeda-cap">Market Cap: $420.000</div>
             </div>
         </div>
         <div class="moeda-dir">
@@ -417,7 +302,7 @@ footer {
         </div>
         <div class="moeda-dir">
             <div class="moeda-preco">$0.00096</div>
-            <div class="moeda-variacao queda">-2,82%</div>
+            <div class="moeda-variacao queda">-1,20%</div>
         </div>
     </div>
     <div class="moeda-linha">
@@ -430,7 +315,7 @@ footer {
         </div>
         <div class="moeda-dir">
             <div class="moeda-preco">$0.00063</div>
-            <div class="moeda-variacao queda">-1,39%</div>
+            <div class="moeda-variacao alta">+3,45%</div>
         </div>
     </div>
 </div>
@@ -622,6 +507,13 @@ footer {
 </footer>
 
 <script>
+// FUNÇÃO DAS ABAS FUNCIONANDO
+function mudarAba(el){
+    document.querySelectorAll('.aba').forEach(a=>a.classList.remove('ativo'));
+    el.classList.add('ativo');
+    alert('🔄 Exibindo: ' + el.innerText);
+}
+
 document.getElementById('confirmaPagamento').addEventListener('change', e => {
     document.getElementById('formProjeto').classList.toggle('form-desativado', !e.target.checked);
     if(e.target.checked) alert('✅ Formulário liberado!');
