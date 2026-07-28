@@ -70,10 +70,26 @@ header p {
 h2 { 
     color: var(--primaria); margin-bottom: 20px; 
     border-bottom: 1px solid rgba(250,204,21,0.25); 
-    padding-bottom: 12px; font-size: 24px; font-weight:600;
+    padding-bottom: 12px; font-size:24px; font-weight:600;
 }
 .aviso { color: var(--texto-claro); font-size:15px; margin-bottom:18px; line-height:1.6; }
 .alerta { color: var(--alerta); font-size:14px; margin:12px 0; padding:10px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid var(--alerta); }
+
+/* 📑 SOBRE O PROJETO */
+.sobre-lista { margin-top:15px; padding-left:20px; }
+.sobre-lista li { margin:8px 0; color:var(--texto); }
+
+/* 🗺️ ROADMAP */
+.roadmap { margin-top:20px; border-left:2px solid var(--primaria); padding-left:20px; }
+.roadmap-item { margin-bottom:22px; position:relative; }
+.roadmap-item::before {
+    content:''; width:12px; height:12px; background:var(--primaria); border-radius:50%;
+    position:absolute; left:-26px; top:4px;
+}
+.roadmap-concluido::before { background:var(--sucesso); }
+.roadmap-futuro::before { background:var(--alerta); }
+.roadmap-titulo { font-weight:600; font-size:17px; margin-bottom:4px; }
+.roadmap-texto { color:var(--texto-claro); font-size:14px; }
 
 .stats-grid {
     display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:16px; margin-bottom:20px;
@@ -244,6 +260,8 @@ footer {
 
 <nav>
     <a href="#inicio" class="ativo">🏠 Início</a>
+    <a href="#sobre">📖 Sobre</a>
+    <a href="#roadmap">🗺️ Roadmap</a>
     <a href="#estatisticas">📊 $DGM</a>
     <a href="#cadastrar">🚀 Cadastrar</a>
     <a href="#projetos">📋 Projetos</a>
@@ -260,6 +278,58 @@ footer {
 </header>
 
 <div class="container">
+
+<!-- 📖 SOBRE O DOGE MANGA -->
+<div class="card" id="sobre">
+    <h2>📖 Sobre o Doge Manga</h2>
+    <p class="aviso">
+        O <strong>Doge Manga ($DGM)</strong> é mais do que uma memecoin: é um ecossistema construído na blockchain Solana, que une a força da cultura de memes com a paixão pelo universo dos mangás.
+    </p>
+    <p class="aviso">
+        Nossa missão é criar uma comunidade unida, transparente e divertida, onde todos crescem juntos — com projetos organizados, parcerias e muito respeito com cada pessoa que acredita no nosso trabalho.
+    </p>
+    <ul class="sobre-lista">
+        <li>✅ Projeto 100% transparente e na rede Solana</li>
+        <li>✅ Código e contrato públicos e verificáveis</li>
+        <li>✅ Construído pela comunidade e para a comunidade</li>
+        <li>✅ Sem promessas de lucro fácil — só trabalho e evolução</li>
+    </ul>
+</div>
+
+<!-- 🗺️ ROADMAP -->
+<div class="card" id="roadmap">
+    <h2>🗺️ Nosso Caminho</h2>
+    <div class="roadmap">
+        <div class="roadmap-item roadmap-concluido">
+            <div class="roadmap-titulo">✅ Lançamento do Token $DGM</div>
+            <div class="roadmap-texto">Contrato público, distribuição justa e início da comunidade.</div>
+        </div>
+        <div class="roadmap-item roadmap-concluido">
+            <div class="roadmap-titulo">✅ Portal Oficial Doge Manga Evolution</div>
+            <div class="roadmap-texto">Espaço para listagem, divulgação e fortalecimento de projetos.</div>
+        </div>
+        <div class="roadmap-item roadmap-concluido">
+            <div class="roadmap-titulo">✅ Whitepaper e Estrutura Oficial</div>
+            <div class="roadmap-texto">Toda a documentação organizada e acessível.</div>
+        </div>
+        <div class="roadmap-item roadmap-futuro">
+            <div class="roadmap-titulo">⏳ Coleção NFT Oficial</div>
+            <div class="roadmap-texto">Artes exclusivas e benefícios para membros da comunidade.</div>
+        </div>
+        <div class="roadmap-item roadmap-futuro">
+            <div class="roadmap-titulo">⏳ Listagem em Plataformas Maiores</div>
+            <div class="roadmap-texto">Expansão para mais pessoas conhecerem o Doge Manga.</div>
+        </div>
+        <div class="roadmap-item roadmap-futuro">
+            <div class="roadmap-titulo">⏳ Parcerias e Novos Projetos</div>
+            <div class="roadmap-texto">Unir forças com outros projetos sérios da Solana.</div>
+        </div>
+        <div class="roadmap-item roadmap-futuro">
+            <div class="roadmap-titulo">🚀 Futuro: Jogos e Aplicativos</div>
+            <div class="roadmap-texto">Levar o Doge Manga para cada vez mais lugares.</div>
+        </div>
+    </div>
+</div>
 
 <div class="card destaque" id="estatisticas">
     <h2>📊 Dados Oficiais do $DGM</h2>
@@ -344,7 +414,6 @@ footer {
     </div>
 </div>
 
-<!-- 🤝 CHAMADA PARA NOVOS PROJETOS -->
 <div class="card destaque" style="text-align:center;">
     <h2>🤝 Faça Parte do Ecossistema Doge Manga</h2>
     <p style="font-size:16px; max-width:900px; margin:0 auto 20px; line-height:1.8;">
