@@ -28,7 +28,7 @@ nav a:hover { color: #facc15; }
 
 header { 
     text-align: center; 
-    padding: 30px 20px 25px; /* ✅ Mais pra cima, acima da orelha */
+    padding: 30px 20px 25px;
 }
 header h1 { 
     font-size: 38px; color: #facc15; 
@@ -52,7 +52,6 @@ h2 {
     padding-bottom: 8px; font-size: 19px;
 }
 
-/* ✅ Dados organizados em 3 colunas, compactos e bem estruturados */
 .token-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -94,6 +93,10 @@ h2 {
 .btn-git { background: #6e5494; color: white; }
 .btn-buy { background: #16a34a; color: white; font-size:16px; padding:12px 28px; }
 .btn-buy:hover { background: #15803d; box-shadow: 0 0 20px rgba(22,163,74,0.5); }
+.btn-cmc { background: #f7931a; color: white; }
+.btn-cmc:hover { background: #e68310; }
+.btn-cg { background: #16c784; color: white; }
+.btn-cg:hover { background: #12a86e; }
 
 .status-wallet {
     background:rgba(2,6,23,0.92); padding:11px; border-radius:8px; 
@@ -177,14 +180,16 @@ footer {
 </div>
 
 <div class="card">
-    <h2>🌐 Canais Oficiais</h2>
+    <h2>🌐 Canais Oficiais & Rastreamento</h2>
     <a href="https://dogemangaofficial.xyz" target="_blank" class="btn btn-site">🌍 Site Oficial</a>
     <a href="https://x.com/dogemanga96508" target="_blank" class="btn btn-x">🐦 Perfil no X</a>
     <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="btn btn-tel">💬 Grupo no Telegram</a>
     <a href="https://github.com/dogemanga/Wapapper.git" target="_blank" class="btn btn-git">📂 Repositório GitHub</a>
     <br><br>
-    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">📉 Gráfico DexScreener</a>
-    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn btn-chain">📈 Dados Birdeye</a>
+    <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">📉 DexScreener</a>
+    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn btn-chain">📈 Birdeye</a>
+    <a href="https://coinmarketcap.com/dexscan/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-cmc">🟡 CoinMarketCap</a>
+    <a href="https://www.coingecko.com/en/coins/solana?contract_address=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-cg">🦎 CoinGecko</a>
 </div>
 
 <div class="crypto-market">
@@ -247,14 +252,3 @@ setInterval(atualizarPrecos,60000);
 
 </body>
 </html>
-<div class="trackers">
-
-<a href="https://coinmarketcap.com/dexscan/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-🟡 CoinMarketCap
-</a>
-
-<a href="https://www.coingecko.com/en/coins/solana?contract_address=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-🦎 CoinGecko
-</a>
-
-</div>
