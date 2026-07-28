@@ -3,110 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Doge Manga Evolution</title>
+<title>Doge Manga Evolution</title>
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
 
 body {
     color: white; line-height: 1.7;
-    background: linear-gradient(rgba(2, 6, 23, 0.78), rgba(2, 6, 23, 0.78)), url("IMG-20260727-WA0036(7).jpg");
+    background: linear-gradient(rgba(2, 6, 23, 0.60), rgba(2, 6, 23, 0.60)), url("IMG-20260727-WA0036(7).jpg");
     background-size: cover; background-position: center;
     background-attachment: fixed; background-repeat: no-repeat;
     min-height: 100vh;
 }
 
 nav {
-    background: rgba(2, 6, 23, 0.95); padding: 16px; text-align: center;
+    background: rgba(2, 6, 23, 0.95); padding: 14px; text-align: center;
     position: sticky; top: 0; z-index: 999;
     border-bottom: 2px solid #facc15;
 }
 nav a {
-    color: white; text-decoration: none; margin: 8px 12px;
-    font-weight: bold; padding: 6px 8px; font-size: 15px;
+    color: white; text-decoration: none; margin: 6px 10px;
+    font-weight: bold; padding: 5px 8px; font-size: 14px;
 }
 nav a:hover { color: #facc15; }
 
 header { 
     text-align: center; 
-    padding: 70px 20px 50px;
+    padding: 45px 20px 35px;
 }
 header h1 { 
-    font-size: 52px; color: #facc15; 
-    text-shadow: 0 0 25px rgba(250,204,21,0.6); margin-bottom: 12px;
+    font-size: 40px; color: #facc15; 
+    text-shadow: 0 0 20px rgba(250,204,21,0.7); margin-bottom: 8px;
 }
-header p { font-size: 20px; color: #f0f0f0; font-weight: 500; }
+header p { font-size: 17px; color: #f0f0f0; font-weight: 500; }
 
 .container { max-width: 1150px; margin: 0 auto; padding: 20px 25px; }
 .card {
-    background: rgba(17, 24, 39, 0.92); padding: 30px; margin: 25px 0;
+    background: rgba(17, 24, 39, 0.90); padding: 25px; margin: 22px 0;
     border-radius: 18px; border: 1px solid rgba(250,204,21,0.35);
 }
 h2 { 
-    color: #facc15; margin-bottom: 20px; 
+    color: #facc15; margin-bottom: 18px; 
     border-bottom: 2px solid rgba(250,204,21,0.4); 
-    padding-bottom: 10px; font-size: 24px;
+    padding-bottom: 8px; font-size: 20px;
 }
 
-/* ✅ ORGANIZADO LADO A LADO, PROFISSIONAL */
-.grid-info { 
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
-    gap: 18px; margin-top: 15px;
+/* ✅ TUDO ORGANIZADO LADO A LADO, COMPACTO E BEM ALINHADO */
+.token-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 15px;
 }
-.info-item { 
-    background: rgba(2, 6, 23, 0.9); padding: 18px; border-radius: 12px; 
-    border-left: 3px solid #facc15; font-size: 16px;
+.token-item {
+    background: rgba(2, 6, 23, 0.9);
+    padding: 12px 15px;
+    border-radius: 8px;
+    border-left: 3px solid #facc15;
+    font-size: 15px;
 }
-.info-item strong { color: #facc15; display: block; margin-bottom: 4px; font-size: 15px; }
+.token-item strong {
+    color: #facc15;
+    display: block;
+    margin-bottom: 2px;
+    font-size: 14px;
+}
 
 .contract {
-    background: rgba(2, 6, 23, 0.9); padding: 14px; border-radius: 8px;
+    background: rgba(2, 6, 23, 0.9); padding: 12px; border-radius: 8px;
     color: #22c55e; font-family: monospace; word-break: break-all; 
-    margin: 18px 0; font-size: 14px; border: 1px solid #22c55e;
+    margin: 15px 0; font-size: 13px; border: 1px solid #22c55e;
 }
 
 .btn {
-    display: inline-block; margin: 10px 6px; padding: 14px 28px;
+    display: inline-block; margin: 8px 5px; padding: 12px 24px;
     background: #facc15; color: #050816; text-decoration: none;
-    font-weight: bold; border-radius: 12px; cursor: pointer;
-    transition: 0.3s; font-size: 16px; border:none;
+    font-weight: bold; border-radius: 10px; cursor: pointer;
+    transition: 0.3s; font-size: 15px; border:none;
 }
-.btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(250,204,21,0.5); }
+.btn:hover { transform: scale(1.05); box-shadow: 0 0 18px rgba(250,204,21,0.5); }
 
 .btn-tel { background: #229ED9; color: white; }
 .btn-x { background: #1DA1F2; color: white; }
 .btn-site { background: #2563eb; color: white; }
 .btn-chain { background: #10b981; color: white; }
 .btn-git { background: #6e5494; color: white; }
-.btn-buy { background: #16a34a; color: white; font-size:17px; padding:15px 35px; }
-.btn-buy:hover { background: #15803d; box-shadow: 0 0 25px rgba(22,163,74,0.5); }
+.btn-buy { background: #16a34a; color: white; font-size:16px; padding:13px 30px; }
+.btn-buy:hover { background: #15803d; box-shadow: 0 0 20px rgba(22,163,74,0.5); }
 
 .status-wallet {
-    background:rgba(2,6,23,0.9); padding:14px; border-radius:8px; 
-    margin:15px 0; font-family:monospace; font-size:15px;
+    background:rgba(2,6,23,0.9); padding:12px; border-radius:8px; 
+    margin:12px 0; font-family:monospace; font-size:14px;
 }
 
 .crypto-market {
-    background: rgba(17, 24, 39, 0.92); padding: 30px; border-radius: 18px;
-    text-align: center; margin-top: 25px; border: 1px solid rgba(250,204,21,0.35);
+    background: rgba(17, 24, 39, 0.90); padding: 25px; border-radius: 18px;
+    text-align: center; margin-top: 22px; border: 1px solid rgba(250,204,21,0.35);
 }
 .crypto-card {
-    background: rgba(2, 6, 23, 0.9); padding: 20px; border-radius: 12px;
-    display: inline-block; width: 220px; margin: 10px;
+    background: rgba(2, 6, 23, 0.9); padding: 18px; border-radius: 12px;
+    display: inline-block; width: 200px; margin: 8px;
 }
-.crypto-card h3 { color: #facc15; margin-bottom: 8px; }
-.crypto-card p { font-size: 22px; font-weight: bold; margin: 5px 0; }
+.crypto-card h3 { color: #facc15; margin-bottom: 6px; font-size: 17px; }
+.crypto-card p { font-size: 20px; font-weight: bold; margin: 4px 0; }
 .verde { color: #22c55e; }
 .vermelho { color: #ef4444; }
 
 footer {
-    text-align: center; padding: 35px; background: rgba(2, 6, 23, 0.95);
-    margin-top: 30px; color: #94a3b8; border-top: 2px solid #facc15; font-size: 14px;
+    text-align: center; padding: 30px; background: rgba(2, 6, 23, 0.95);
+    margin-top: 25px; color: #94a3b8; border-top: 2px solid #facc15; font-size: 13px;
 }
 
-@media(max-width:768px){
-    header h1 { font-size: 36px; }
-    .grid-info { grid-template-columns: 1fr; }
-    .btn { width: 90%; margin: 6px 0; }
+@media(max-width:900px){
+    .token-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:600px){
+    header h1 { font-size: 30px; }
+    header { padding: 35px 15px 25px; }
+    .token-grid { grid-template-columns: 1fr; }
+    .btn { width: 90%; margin: 5px 0; }
     .crypto-card { width: 90%; }
 }
 </style>
@@ -125,35 +139,36 @@ footer {
 
 <header id="home">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Conecte sua carteira e adquira diretamente o token oficial $DGM</p>
+    <p>Conecte sua carteira e adquira o token oficial $DGM</p>
 </header>
 
 <div class="container">
 
 <div class="card" id="token">
     <h2>📊 Dados Oficiais do Token</h2>
-    <div class="grid-info">
-        <div class="info-item"><strong>Nome</strong>Doge Manga</div>
-        <div class="info-item"><strong>Símbolo</strong>$DGM</div>
-        <div class="info-item"><strong>Rede</strong>Solana (SPL)</div>
-        <div class="info-item"><strong>Supply Total</strong>420.000.000.000</div>
-        <div class="info-item"><strong>Decimais</strong>6</div>
-        <div class="info-item"><strong>Tipo</strong>Memecoin Comunitária</div>
+    <!-- ✅ TUDO LADO A LADO, COMPACTO E ORGANIZADO -->
+    <div class="token-grid">
+        <div class="token-item"><strong>Nome</strong>Doge Manga</div>
+        <div class="token-item"><strong>Símbolo</strong>$DGM</div>
+        <div class="token-item"><strong>Rede</strong>Solana (SPL)</div>
+        <div class="token-item"><strong>Supply Total</strong>420.000.000.000</div>
+        <div class="token-item"><strong>Decimais</strong>6</div>
+        <div class="token-item"><strong>Tipo</strong>Memecoin Comunitária</div>
     </div>
-    <br>
+
     <strong>📜 Contrato Oficial:</strong>
     <div class="contract">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</div>
     <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-chain">🔎 Verificar na Solscan</a>
 </div>
 
 <div class="card" id="comprar">
-    <h2>💱 Adquirir $DGM</h2>
+    <h2>💱 Como Adquirir</h2>
     <p>Conecte a Phantom e vá direto para a negociação com o contrato já preenchido.</p>
     <div class="status-wallet" id="walletStatus">📌 Situação: Carteira não conectada</div>
     <button id="btnConectar" class="btn">🔗 Conectar Carteira Phantom</button>
     <br><br>
-    <a id="btnComprar" href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-buy" style="display:none;">💸 Comprar Agora</a>
-    <p style="margin-top:18px; font-size:14px; color:#94a3b8;">*Sempre confira o endereço do contrato antes de confirmar transações.</p>
+    <a id="btnComprar" href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-buy" style="display:none;">💸 Comprar $DGM Agora</a>
+    <p style="margin-top:15px; font-size:13px; color:#94a3b8;">*Sempre confira o endereço do contrato antes de confirmar transações.</p>
 </div>
 
 <div class="card">
