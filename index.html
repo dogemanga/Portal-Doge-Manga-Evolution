@@ -87,7 +87,6 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .btn-enviar{background:var(--primaria); color:var(--fundo); padding:12px 24px; border-radius:10px; font-weight:700; border:none; cursor:pointer; transition:0.2s; width:100%; margin-top:10px;}
 .btn-enviar:hover{transform:scale(1.02);}
 
-/* ✅ MOEDAS LANÇADAS ANDANDO NA TELA */
 .area-andamento{overflow:hidden; padding:15px 0; border-radius:12px;}
 .lista-andando{display:flex; gap:25px; width:max-content; animation:rolarMoedas 55s linear infinite;}
 .area-andamento:hover .lista-andando{animation-play-state:paused;}
@@ -150,9 +149,9 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 
         <div class="menu-divisao"></div>
 
-        <!-- ✅ BOTÕES NOVOS COM CONTRATO JÁ PRONTO -->
+        <!-- ✅ 100% ATUALIZADO: TUDO PARA PHANTOM, CONTRATO EXATO -->
         <a href="nft.html" class="menu-item">🎨 Ver Coleção NFT</a>
-        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🛒 Comprar Doge Manga</a>
+        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🛒 Ver/Comprar na Phantom</a>
         <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 Consultar Contrato Solana</a>
 
         <div class="menu-divisao"></div>
@@ -188,7 +187,6 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
         <h2>📢 Moedas Lançadas</h2>
         <p class="alerta">Projetos verificados pela comunidade.</p>
 
-        <!-- ✅ ÁREA AGORA COM ANIMAÇÃO ANDANDO -->
         <div class="area-andamento">
             <div class="lista-andando" id="listaMoedas">
                 <div class="card-moeda destaque">
@@ -234,13 +232,11 @@ footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margi
 <footer>🐕 Doge Manga Evolution © 2026 • Não é conselho financeiro</footer>
 
 <script>
-// MENU
 const botaoMenu = document.getElementById('botaoMenu');
 const menuNavegacao = document.getElementById('menuNavegacao');
 botaoMenu.addEventListener('click', e => {e.stopPropagation(); menuNavegacao.classList.toggle('mostrar');});
 document.addEventListener('click', e => {if(!menuNavegacao.contains(e.target) && e.target !== botaoMenu) menuNavegacao.classList.remove('mostrar');});
 
-// PREÇOS AO VIVO
 async function atualizarPrecos(){
     try{
         const ids = 'bitcoin,binancecoin,ethereum,solana,cardano,ripple,dogecoin,pepe,zcash,gala,dexe';
@@ -268,7 +264,6 @@ async function atualizarPrecos(){
 atualizarPrecos();
 setInterval(atualizarPrecos, 30000);
 
-// CADASTRO — NOVAS MOEDAS JÁ ENTRAM ANDANDO
 const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastrarNav,#botaoCadastrarMenu');
 const formCadastrar = document.getElementById('formCadastrar');
 const fundoEscuro = document.getElementById('fundoEscuro');
