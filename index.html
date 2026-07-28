@@ -31,9 +31,9 @@ body{
 .alta{color:var(--sucesso);}
 .baixa{color:var(--vermelho);}
 
-/* ANIMAÇÃO DOS PERSONAGENS */
+/* ANIMAÇÃO COM A FOTO EXATA DO DOGE MANGA */
 .area-personagens{display:flex; justify-content:center; gap:60px; padding:20px; margin:10px 0;}
-.personagem{width:80px; height:80px; animation: mexer 1.2s infinite alternate ease-in-out;}
+.personagem{width:90px; height:90px; object-fit:contain; animation: mexer 1.2s infinite alternate ease-in-out;}
 .personagem:nth-child(2){animation-delay:0.2s;}
 @keyframes mexer{from{transform:translateY(0);}to{transform:translateY(-8px);}}
 
@@ -63,7 +63,6 @@ header h1{font-size:44px; color:var(--primaria); text-shadow:0 0 30px rgba(250,2
 h2{color:var(--primaria); margin-bottom:18px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:10px; font-size:22px;}
 h3{color:var(--texto); margin-bottom:12px; font-size:17px;}
 
-/* BOTÕES */
 .btn{display:inline-block; padding:10px 20px; border-radius:10px; text-decoration:none; font-weight:600; border:none; cursor:pointer; transition:var(--transicao); margin:5px;}
 .btn:hover{transform:translateY(-2px); box-shadow:0 0 12px rgba(250,204,21,0.25);}
 .btn-primario{background:var(--primaria); color:var(--fundo);}
@@ -117,9 +116,9 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <div class="filtros"><div class="filtro ativo">24h</div><div class="filtro">7d</div><div class="filtro">30d</div><div class="filtro">Todos</div></div>
 </div>
 
-<!-- ANIMAÇÃO: DOGECOIN + DOGE MANGA -->
+<!-- AQUI: SÓ A FOTO EXATA DO SEU DOGE MANGA, NENHUMA OUTRA -->
 <div class="area-personagens">
-    <img src="https://assets.coingecko.com/coins/images/5/small/dogecoin.png" alt="Dogecoin" class="personagem">
+    <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga" class="personagem">
     <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga" class="personagem">
 </div>
 
