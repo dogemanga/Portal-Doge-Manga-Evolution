@@ -19,7 +19,7 @@ body{
     min-height:100vh; padding-bottom:80px;
 }
 
-/* BARRA DE PREÇOS */
+/* BARRA DE PREÇOS PRINCIPAL - GIRANDO */
 .barra-precos{background:rgba(17,24,39,0.95); border-bottom:1px solid rgba(250,204,21,0.2); padding:10px; overflow:hidden;}
 .barra-precos-conteudo{display:flex; gap:30px; animation: rolarPrecos 24s linear infinite; width:max-content;}
 .barra-precos:hover .barra-precos-conteudo{animation-play-state:paused;}
@@ -31,7 +31,17 @@ body{
 .alta{color:var(--sucesso);}
 .baixa{color:var(--vermelho);}
 
-/* ANIMAÇÃO COM A FOTO EXATA DO DOGE MANGA */
+/* BARRA DE MOEDAS LISTADAS DOGE MANGA - GIRANDO IGUAL A DE CIMA */
+.barra-projetos{margin:15px; border-radius:16px; background:rgba(2,6,23,0.95); border:1px solid rgba(250,204,21,0.15); overflow:hidden;}
+.barra-projetos-conteudo{display:flex; gap:40px; padding:18px; animation: rolarProjetos 30s linear infinite; width:max-content;}
+.barra-projetos:hover .barra-projetos-conteudo{animation-play-state:paused;}
+@keyframes rolarProjetos{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.item-projeto{display:flex; align-items:center; gap:12px; padding:10px 20px; border-radius:12px; background:rgba(17,24,39,0.9); border:1px solid var(--primaria); cursor:pointer; white-space:nowrap; transition:var(--transicao);}
+.item-projeto-logo{width:45px; height:45px; border-radius:50%; background:var(--primaria); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:bold; color:var(--fundo);}
+.item-projeto-nome{font-weight:700; font-size:16px; color:var(--primaria);}
+.item-projeto-simbolo{font-size:13px; color:var(--texto-claro);}
+
+/* ANIMAÇÃO SÓ COM O SEU DOGE MANGA */
 .area-personagens{display:flex; justify-content:center; gap:60px; padding:20px; margin:10px 0;}
 .personagem{width:90px; height:90px; object-fit:contain; animation: mexer 1.2s infinite alternate ease-in-out;}
 .personagem:nth-child(2){animation-delay:0.2s;}
@@ -41,10 +51,6 @@ body{
 .perfil{display:flex; gap:10px; align-items:center;}
 .perfil img{width:40px; height:40px; border-radius:50%; border:2px solid var(--primaria);}
 .perfil span{font-weight:600; color:var(--primaria);}
-.filtros{display:flex; gap:8px; flex-wrap:wrap;}
-.filtro{padding:6px 14px; border-radius:20px; font-size:14px; cursor:pointer; transition:var(--transicao);}
-.filtro.ativo{background:var(--primaria); color:var(--fundo);}
-.filtro:not(.ativo){background:rgba(255,255,255,0.08); color:var(--texto-claro);}
 
 .abas{display:flex; gap:15px; padding:0 20px 15px; overflow-x:auto;}
 .aba{font-size:15px; font-weight:500; color:var(--texto-claro); cursor:pointer; white-space:nowrap; transition:var(--transicao); padding-bottom:4px;}
@@ -61,17 +67,16 @@ header h1{font-size:44px; color:var(--primaria); text-shadow:0 0 30px rgba(250,2
 .card{background:rgba(17,24,39,0.92); padding:28px; margin:25px 0; border-radius:20px; border:1px solid rgba(250,204,21,0.2);}
 .card.destaque{border-color:var(--primaria); box-shadow:0 0 30px rgba(250,204,21,0.15);}
 h2{color:var(--primaria); margin-bottom:18px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:10px; font-size:22px;}
-h3{color:var(--texto); margin-bottom:12px; font-size:17px;}
 
 .btn{display:inline-block; padding:10px 20px; border-radius:10px; text-decoration:none; font-weight:600; border:none; cursor:pointer; transition:var(--transicao); margin:5px;}
 .btn:hover{transform:translateY(-2px); box-shadow:0 0 12px rgba(250,204,21,0.25);}
 .btn-primario{background:var(--primaria); color:var(--fundo);}
 .btn-secundario{background:rgba(250,204,21,0.15); color:var(--primaria); border:1px solid var(--primaria);}
-.btn-solana{background:#00ffa3; color:#050816;}
-.btn-usdt{background:#26a17b; color:white;}
-.btn-bnb{background:#F3BA2F; color:#050816;}
-.btn-ada{background:#0033AD; color:white;}
-.btn-hbar{background:#00A1FF; color:white;}
+.btn-phantom{background:#16a34a; color:white;}
+.btn-raydium{background:#000; color:white; border:1px solid #fff;}
+
+.campo{width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid rgba(250,204,21,0.3); background:rgba(2,6,23,0.8); color:white;}
+.campo:focus{outline:none; border-color:var(--primaria); box-shadow:0 0 8px rgba(250,204,21,0.3);}
 
 .contrato-destaque{background:rgba(250,204,21,0.1); border:1px solid var(--primaria); border-radius:10px; padding:12px; text-align:center; margin:15px 0; font-size:14px; color:var(--primaria);}
 
@@ -84,7 +89,7 @@ h3{color:var(--texto); margin-bottom:12px; font-size:17px;}
 .link-coingecko{background:#0052ff;}
 .link-solscan{background:#f97316;}
 .link-dexscreener{background:#ef4444;}
-.link-raydium{background:#000; border:1px solid #fff;}
+.link-birdeye{background:#8b5cf6;}
 
 .menu-inferior{position:fixed; bottom:0; left:0; width:100%; background:rgba(2,6,23,0.98); display:flex; justify-content:space-around; padding:12px 0; border-top:1px solid rgba(250,204,21,0.2); z-index:999;}
 .menu-item{text-align:center; color:var(--texto-claro); text-decoration:none; font-size:12px; transition:var(--transicao);}
@@ -92,17 +97,17 @@ h3{color:var(--texto); margin-bottom:12px; font-size:17px;}
 .menu-item span{display:block; font-size:18px; margin-bottom:2px;}
 
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:30px; color:var(--texto-claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
+.oculto{display:none;}
 </style>
 </head>
 <body>
 
-<!-- BARRA DE PREÇOS -->
+<!-- BARRA DE PREÇOS GIRANDO -->
 <div class="barra-precos">
     <div class="barra-precos-conteudo" id="precosAoVivo">
         <div class="item-preco"><span class="coin-nome">BTC:</span><span class="coin-valor">Carregando...</span></div>
         <div class="item-preco"><span class="coin-nome">ETH:</span><span class="coin-valor">Carregando...</span></div>
         <div class="item-preco"><span class="coin-nome">DOGE:</span><span class="coin-valor">Carregando...</span></div>
-        <div class="item-preco"><span class="coin-nome">BNB:</span><span class="coin-valor">Carregando...</span></div>
         <div class="item-preco"><span class="coin-nome">SOL:</span><span class="coin-valor">Carregando...</span></div>
         <div class="item-preco"><span class="coin-nome">DEXE:</span><span class="coin-valor">Carregando...</span></div>
         <div class="item-preco"><span class="coin-nome">DECK:</span><span class="coin-valor">Carregando...</span></div>
@@ -113,91 +118,103 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 
 <div class="barra-topo">
     <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg"><span>@dogemanga96508</span></div>
-    <div class="filtros"><div class="filtro ativo">24h</div><div class="filtro">7d</div><div class="filtro">30d</div><div class="filtro">Todos</div></div>
 </div>
 
-<!-- AQUI: SÓ A FOTO EXATA DO SEU DOGE MANGA, NENHUMA OUTRA -->
+<!-- BARRA DE MOEDAS LISTADAS - GIRANDO IGUAL A DE CIMA -->
+<div class="barra-projetos">
+    <div class="barra-projetos-conteudo">
+        <div class="item-projeto"><div class="item-projeto-logo">🐕</div><div><div class="item-projeto-nome">Doge Manga</div><div class="item-projeto-simbolo">$DGM</div></div></div>
+        <div class="item-projeto"><div class="item-projeto-logo">🚀</div><div><div class="item-projeto-nome">Em breve</div><div class="item-projeto-simbolo">Novos projetos</div></div></div>
+        <div class="item-projeto"><div class="item-projeto-logo">✅</div><div><div class="item-projeto-nome">Projetos Verificados</div><div class="item-projeto-simbolo">Aprovados</div></div></div>
+        <div class="item-projeto"><div class="item-projeto-logo">🐕</div><div><div class="item-projeto-nome">Doge Manga</div><div class="item-projeto-simbolo">$DGM</div></div></div>
+    </div>
+</div>
+
+<!-- ANIMAÇÃO DO SEU DOGE MANGA -->
 <div class="area-personagens">
     <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga" class="personagem">
     <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga" class="personagem">
 </div>
 
 <div class="abas">
-    <div class="aba ativo" onclick="mudarAba(this)">🏠 Início</div>
-    <div class="aba" onclick="mudarAba(this)">🛒 Comprar</div>
-    <div class="aba" onclick="mudarAba(this)">🎨 NFT</div>
-    <div class="aba" onclick="mudarAba(this)">📄 Whitepaper</div>
-    <div class="aba" onclick="mudarAba(this)">📋 Listar Projeto</div>
+    <div class="aba ativo" onclick="mudarAba(this,'inicio')">🏠 Início</div>
+    <div class="aba" onclick="mudarAba(this,'comprar')">🛒 Comprar</div>
+    <div class="aba" onclick="mudarAba(this,'listar')">📋 Solicitar Listagem</div>
+    <div class="aba" onclick="mudarAba(this,'projetos')">✅ Projetos Listados</div>
+    <div class="aba" onclick="mudarAba(this,'nft')">🎨 NFT</div>
 </div>
 
 <nav>
     <a href="#inicio" class="ativo">🏠 Início</a>
-    <a href="#deposito">💳 Depósito</a>
     <a href="#comprar">🛒 Comprar $DGM</a>
+    <a href="#listar">📋 Listar Projeto</a>
+    <a href="#projetos">✅ Projetos</a>
     <a href="nft.html">🎨 NFT</a>
-    <a href="whitepaper.html">📄 Whitepaper</a>
-    <a href="#listar">🚀 Listar Projeto</a>
 </nav>
 
 <header id="inicio">
     <h1>🚀 Doge Manga Evolution</h1>
-    <p>Portal Oficial • Rede Solana • Tudo organizado e funcionando</p>
+    <p>Portal Oficial • Rede Solana • Listagem e Lançamento de Projetos</p>
 </header>
 
 <div class="container">
 
-<!-- 1️⃣ ÁREA DE DEPÓSITO - SEPARADA -->
-<div class="card" id="deposito">
-    <h2>💳 Depósito de Moedas</h2>
-    <p>Escolha a moeda para enviar para a carteira oficial do projeto:</p>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:15px;">
-        <button class="btn btn-solana" onclick="alert('Envie SOL para a carteira oficial do projeto')">◎ Solana (SOL)</button>
-        <button class="btn btn-usdt" onclick="alert('Envie USDT (Solana) para a carteira oficial')">💵 USDT</button>
-        <button class="btn btn-bnb" onclick="alert('Envie BNB conforme orientação da equipe')">🔶 BNB</button>
-        <button class="btn btn-ada" onclick="alert('Envie ADA conforme orientação da equipe')">🔷 Cardano</button>
-        <button class="btn btn-hbar" onclick="alert('Envie HBAR conforme orientação da equipe')">💠 HBAR</button>
-    </div>
-</div>
-
-<!-- 2️⃣ ÁREA DE COMPRA DO DOGE MANGA -->
+<!-- ÁREA COMPRAR - COM PHANTOM ACRESCENTADA -->
 <div class="card destaque" id="comprar">
     <h2>🛒 Comprar Doge Manga ($DGM)</h2>
     <div class="contrato-destaque">🔑 Contrato: E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</div>
     <p>Compre diretamente nas plataformas oficiais:</p>
     <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:15px;">
-        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">💱 Comprar no Raydium</a>
+        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-phantom">👻 Ver na Phantom</a>
+        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-raydium">💱 Comprar no Raydium</a>
         <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-secundario">📊 Ver no DexScreener</a>
-        <a href="#" class="btn btn-secundario">📱 Loja Doge Manga</a>
     </div>
 </div>
 
-<!-- 3️⃣ LINKS OFICIAIS E MERCADO -->
+<!-- FORMULÁRIO COMPLETO DE LISTAGEM -->
+<div class="card oculto" id="listar">
+    <h2>📋 Solicitar Listagem do Seu Projeto</h2>
+    <p>Preencha todos os dados abaixo para análise:</p>
+    <form onsubmit="alert('Solicitação enviada com sucesso! Em breve entraremos em contato.'); return false;">
+        <input type="text" class="campo" placeholder="Nome da Moeda" required>
+        <input type="text" class="campo" placeholder="Símbolo (ex: $DGM)" required>
+        <input type="text" class="campo" placeholder="Código do Contrato na Solana" required>
+        <input type="url" class="campo" placeholder="Link da imagem/logo da moeda" required>
+        <input type="url" class="campo" placeholder="Link do X (Twitter)" required>
+        <input type="url" class="campo" placeholder="Link do Telegram" required>
+        <input type="url" class="campo" placeholder="Link do Site Oficial">
+        <textarea class="campo" rows="3" placeholder="Breve descrição do projeto" required></textarea>
+        <button type="submit" class="btn btn-primario">📤 Enviar Solicitação</button>
+    </form>
+</div>
+
+<!-- PROJETOS JÁ LISTADOS -->
+<div class="card oculto" id="projetos">
+    <h2>✅ Projetos Já Listados</h2>
+    <div class="item-projeto" style="margin:10px 0;">
+        <div class="item-projeto-logo">🐕</div>
+        <div>
+            <div class="item-projeto-nome">Doge Manga</div>
+            <div class="item-projeto-simbolo">$DGM • Solana</div>
+            <div class="links-oficiais" style="justify-content:flex-start; margin-top:5px;">
+                <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">X</a>
+                <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-telegram">Telegram</a>
+                <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">Site</a>
+            </div>
+        </div>
+    </div>
+    <p style="margin-top:15px; color:var(--texto-claro);">Mais projetos aprovados aparecerão aqui em breve!</p>
+</div>
+
+<!-- LINKS E CONTATO -->
 <div class="card">
-    <h2>🔗 Links Oficiais & Mercado</h2>
+    <h2>🔗 Contato & Links Oficiais</h2>
     <div class="links-oficiais">
-        <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">🌐 Site Oficial</a>
-        <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">🐦 X / Twitter</a>
+        <a href="mailto:contato@dogemangaofficial.xyz" class="link-site">📧 contato@dogemangaofficial.xyz</a>
+        <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">🌐 Site</a>
+        <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">🐦 X</a>
         <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-telegram">💬 Telegram</a>
-        <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="link-coingecko">📈 CoinGecko</a>
         <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-solscan">🔎 Solscan</a>
-        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="link-coingecko">👁️ Birdeye</a>
-    </div>
-</div>
-
-<!-- 4️⃣ LISTAGEM DE PROJETOS -->
-<div class="card" id="listar">
-    <h2>🚀 Lançamento & Listagem de Projetos</h2>
-    <p>Quer listar seu projeto aqui no Portal Doge Manga?</p>
-    <button class="btn btn-primario" style="margin-top:10px;">📋 Solicitar Listagem</button>
-</div>
-
-<!-- 5️⃣ ACESSO ÀS PÁGINAS -->
-<div class="card">
-    <h2>📂 Páginas do Projeto</h2>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-        <a href="nft.html" class="btn btn-secundario">🎨 Coleção NFT</a>
-        <a href="whitepaper.html" class="btn btn-secundario">📄 Whitepaper</a>
-        <a href="#" class="btn btn-secundario">📞 Contato / Suporte</a>
     </div>
 </div>
 
@@ -206,24 +223,28 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 <div class="menu-inferior">
     <a href="#inicio" class="menu-item ativo"><span>🏠</span>Início</a>
     <a href="#comprar" class="menu-item"><span>🛒</span>Comprar</a>
-    <a href="nft.html" class="menu-item"><span>🎨</span>NFT</a>
-    <a href="#listar" class="menu-item"><span>🚀</span>Listar</a>
+    <a href="#listar" class="menu-item"><span>📋</span>Listar</a>
+    <a href="#projetos" class="menu-item"><span>✅</span>Projetos</a>
 </div>
 
 <footer>🐕 Doge Manga Evolution © 2026 • Preços via CoinGecko • Invista com responsabilidade</footer>
 
 <script>
-function mudarAba(el){document.querySelectorAll('.aba').forEach(a=>a.classList.remove('ativo')); el.classList.add('ativo');}
+function mudarAba(el, id){
+    document.querySelectorAll('.aba').forEach(a=>a.classList.remove('ativo'));
+    el.classList.add('ativo');
+    document.querySelectorAll('.card').forEach(c=>c.classList.add('oculto'));
+    document.getElementById(id).classList.remove('oculto');
+}
 
 async function carregarPrecos(){
     try{
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin,binancecoin,solana,dexe,deck-games,gala-games&vs_currencies=usd&include_24hr_change=true');
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,dogecoin,solana,dexe,deck-games,gala-games&vs_currencies=usd&include_24hr_change=true');
         const d = await res.json();
         const html = `
             <div class="item-preco"><span class="coin-nome">BTC:</span><span class="coin-valor">$${d.bitcoin?.usd?.toLocaleString()||'--'}</span><span class="coin-variacao ${d.bitcoin?.usd_24h_change>=0?'alta':'baixa'}">${d.bitcoin?.usd_24h_change?.toFixed(2)||'--'}%</span></div>
             <div class="item-preco"><span class="coin-nome">ETH:</span><span class="coin-valor">$${d.ethereum?.usd?.toLocaleString()||'--'}</span><span class="coin-variacao ${d.ethereum?.usd_24h_change>=0?'alta':'baixa'}">${d.ethereum?.usd_24h_change?.toFixed(2)||'--'}%</span></div>
             <div class="item-preco"><span class="coin-nome">DOGE:</span><span class="coin-valor">$${d.dogecoin?.usd?.toLocaleString()||'--'}</span><span class="coin-variacao ${d.dogecoin?.usd_24h_change>=0?'alta':'baixa'}">${d.dogecoin?.usd_24h_change?.toFixed(2)||'--'}%</span></div>
-            <div class="item-preco"><span class="coin-nome">BNB:</span><span class="coin-valor">$${d.binancecoin?.usd?.toLocaleString()||'--'}</span><span class="coin-variacao ${d.binancecoin?.usd_24h_change>=0?'alta':'baixa'}">${d.binancecoin?.usd_24h_change?.toFixed(2)||'--'}%</span></div>
             <div class="item-preco"><span class="coin-nome">SOL:</span><span class="coin-valor">$${d.solana?.usd?.toLocaleString()||'--'}</span><span class="coin-variacao ${d.solana?.usd_24h_change>=0?'alta':'baixa'}">${d.solana?.usd_24h_change?.toFixed(2)||'--'}%</span></div>
             <div class="item-preco"><span class="coin-nome">DEXE:</span><span class="coin-valor">$${d.dexe?.usd?.toLocaleString()||'--'}</span><span class="coin-variacao ${d.dexe?.usd_24h_change>=0?'alta':'baixa'}">${d.dexe?.usd_24h_change?.toFixed(2)||'--'}%</span></div>
             <div class="item-preco"><span class="coin-nome">DECK:</span><span class="coin-valor">$${d['deck-games']?.usd?.toLocaleString()||'--'}</span><span class="coin-variacao ${d['deck-games']?.usd_24h_change>=0?'alta':'baixa'}">${d['deck-games']?.usd_24h_change?.toFixed(2)||'--'}%</span></div>
