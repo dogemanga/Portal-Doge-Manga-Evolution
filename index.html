@@ -19,7 +19,6 @@ body{
     min-height:100vh; padding-bottom:80px;
 }
 
-/* ✅ BARRA PRINCIPAL DE PREÇOS ROLANDO */
 .barra-geral{background:rgba(2,6,23,0.95); padding:8px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2);}
 .barra-conteudo-geral{display:flex; gap:40px; animation:rolar 50s linear infinite; width:max-content; font-size:12px;}
 .barra-geral:hover .barra-conteudo-geral{animation-play-state:paused;}
@@ -33,7 +32,6 @@ body{
 .btn-cg{background:#0052ff; padding:1px 5px; border-radius:3px; font-size:10px; color:white; text-decoration:none;}
 .btn-cmc{background:#10b981; padding:1px 5px; border-radius:3px; font-size:10px; color:white; text-decoration:none;}
 
-/* ✅ BARRA PEQUENA DO DOGE MANGA + PREÇO + CONTRATO */
 .barra-dm{background:rgba(250,204,21,0.08); border-bottom:1px solid rgba(250,204,21,0.2); padding:6px 15px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:12px;}
 .dm-info{display:flex; align-items:center; gap:8px;}
 .dm-info img{width:20px; height:20px; border-radius:50%; border:1px solid var(--primaria); object-fit:cover;}
@@ -104,9 +102,10 @@ h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,2
 @keyframes rolarMoedas{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
 .card-moeda{background:rgba(2,6,23,0.9); padding:16px; border-radius:12px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:300px;}
-.card-moeda.destaque{border-color:var(--primaria);}
+.card-moeda.destaque{border-color:var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.15);}
 .card-moeda:hover{transform:translateY(-3px);}
 .logo-moeda{width:80px; height:80px; border-radius:50%; margin:0 auto 12px; border:3px solid var(--primaria); object-fit:cover;}
+.logo-moeda img{width:100%; height:100%; object-fit:cover; border-radius:50%;}
 .nome-moeda{font-size:18px; font-weight:700; color:var(--primaria); margin-bottom:4px;}
 .simbolo-moeda{font-size:13px; color:var(--claro); margin-bottom:10px;}
 .links-moeda{display:flex; flex-wrap:wrap; gap:6px; justify-content:center;}
@@ -143,9 +142,8 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 </head>
 <body>
 
-<div class="aviso-copiado" id="avisoCopiado">✅ CÓPIA FEITA!</div>
+<div class="aviso-copiado" id="avisoCopiado">✅ CONTRATO COPIADO!</div>
 
-<!-- BARRA DE MOEDAS ROLANDO -->
 <div class="barra-geral">
     <div class="barra-conteudo-geral" id="barraPrecos">
         <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">₿ BTC:</a><strong id="btc-valor">...</strong><span id="btc-var"></span><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" class="btn-cg" target="_blank">CG</a><a href="https://coinmarketcap.com/currencies/bitcoin/" class="btn-cmc" target="_blank">CMC</a></div>
@@ -156,7 +154,6 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     </div>
 </div>
 
-<!-- ✅ BARRA PEQUENA DO DOGE MANGA -->
 <div class="barra-dm">
     <div class="dm-info">
         <img src="IMG-20260727-WA0036(7).jpg">
@@ -172,7 +169,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 
 <div class="barra-topo">
     <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg"><span>Portal Doge Manga</span></div>
-    <div class="caixa-pesquisa"><span class="lupa">🔍</span><input type="text" id="pesquisaMoeda" placeholder="Pesquisar..."></div>
+    <div class="caixa-pesquisa"><span class="lupa">🔍</span><input type="text" id="pesquisaMoeda" placeholder="Pesquisar projeto..."></div>
     <div style="position:relative;"><div class="compartilhar-botao" id="btnCompartilhar">🔗 Compartilhar</div><div class="menu-compartilhar" id="menuCompartilhar"><a href="https://www.facebook.com/sharer/sharer.php?u=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">📘 Facebook</a><a href="https://twitter.com/intent/tweet?text=Portal%20Doge%20Manga&url=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">🐦 X</a><a href="https://api.whatsapp.com/send?text=Portal%20Doge%20Manga:%20https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">💬 WhatsApp</a><a href="https://t.me/share/url?url=https://dogemangaofficial.xyz&text=Portal%20Doge%20Manga" target="_blank" class="item-compartilhar">📢 Telegram</a><div class="menu-divisao"></div><a href="#" id="copiarLinkPagina" class="item-compartilhar">📋 Copiar Link</a></div></div>
     <div class="menu-botao" id="btnMenu">⋮⋮⋮</div>
     <nav class="menu-navegacao" id="menuNavegacao">
@@ -199,7 +196,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="menu-item">📊 CoinGecko</a>
         <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" class="menu-item">📈 CoinMarketCap</a>
         <div class="menu-divisao"></div>
-        <a href="mailto:dogemanga687@gmil.com?subject=Contato%20Portal" class="menu-item" style="color:var(--primaria); font-weight:700;">📩 Contato</a>
+        <a href="mailto:dogemanga687@gmil.com?subject=Falar%20com%20Equipe%20Doge%20Manga" class="menu-item">📩 Falar com a Equipe</a>
     </nav>
 </div>
 
@@ -219,18 +216,22 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
         <h2>📢 Projetos Listados</h2>
-        <p class="alerta">Projetos verificados — pesquise ou navegue:</p>
+        <p class="alerta">Digite nome, símbolo ou contrato para encontrar:</p>
         <div class="area-andamento">
             <div class="lista-andando" id="listaMoedas">
-                <div class="card-moeda destaque">
-                    <div class="logo-moeda"><img src="IMG-20260727-WA0036(7).jpg"></div>
+                <!-- DOGE MANGA - IMAGEM OFICIAL E CONTRATO -->
+                <div class="card-moeda destaque" data-contrato="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">
+                    <div class="logo-moeda">
+                        <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
+                    </div>
                     <div class="nome-moeda">Doge Manga</div>
-                    <div class="simbolo-moeda">$DGM • Solana</div>
+                    <div class="simbolo-moeda">$DGM • Rede Solana</div>
                     <div class="links-moeda">
                         <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">Site</a>
                         <a href="https://x.com/dogemanga96508" target="_blank" class="link-x">X</a>
-                        <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-tg">TG</a>
+                        <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" class="link-tg">Telegram</a>
                         <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="link-dex">Dex</a>
+                        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="link-birdeye">Birdeye</a>
                     </div>
                 </div>
             </div>
@@ -261,7 +262,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <div class="grupo-form"><label>Link Logo *</label><input type="url" id="linkLogo" required><div class="previa-logo" id="previaLogo">Prévia</div></div>
         <div class="grupo-form"><label>Contrato Solana *</label><input type="text" id="contratoMoeda" required></div>
         <div class="grupo-form"><label>Site</label><input type="url" id="siteMoeda"></div>
-        <div class="grupo-form"><label>X / Twitter</label><input type="url" id="xMoeda"></div>
+        <div class="grupo-form"><label>X</label><input type="url" id="xMoeda"></div>
         <div class="grupo-form"><label>Telegram</label><input type="url" id="tgMoeda"></div>
         <div class="grupo-form"><label>DexScreener</label><input type="url" id="dexMoeda"></div>
     </div>
@@ -290,7 +291,7 @@ document.addEventListener('click', e => {
     if(!menuCompartilhar.contains(e.target) && e.target !== btnCompartilhar) menuCompartilhar.classList.remove('mostrar');
 });
 
-// COPIAR CONTRATO
+// COPIAR CONTRATO CORRETO
 const avisoCopiado = document.getElementById('avisoCopiado');
 function mostrarAviso(){avisoCopiado.style.display='block'; setTimeout(()=>avisoCopiado.style.display='none', 2000);}
 document.getElementById('btnCopiarContrato').addEventListener('click', ()=>{
@@ -301,16 +302,22 @@ document.getElementById('copiarLinkPagina').addEventListener('click', e=>{
     menuCompartilhar.classList.remove('mostrar');
 });
 
-// PESQUISA
+// 🔍 PESQUISA COMPLETA: NOME, SÍMBOLO E CONTRATO
 const campoPesquisa = document.getElementById('pesquisaMoeda');
 const listaMoedas = document.getElementById('listaMoedas');
 const todosCards = listaMoedas.querySelectorAll('.card-moeda');
+
 campoPesquisa.addEventListener('input', () => {
-    const termo = campoPesquisa.value.toLowerCase();
+    const termo = campoPesquisa.value.toLowerCase().trim();
+    if(!termo){
+        todosCards.forEach(card => card.style.display = 'block');
+        return;
+    }
     todosCards.forEach(card => {
         const nome = card.querySelector('.nome-moeda').textContent.toLowerCase();
-        const simb = card.querySelector('.simbolo-moeda').textContent.toLowerCase();
-        card.style.display = (nome.includes(termo) || simb.includes(termo)) ? 'block' : 'none';
+        const simbolo = card.querySelector('.simbolo-moeda').textContent.toLowerCase();
+        const contrato = card.getAttribute('data-contrato').toLowerCase();
+        card.style.display = (nome.includes(termo) || simbolo.includes(termo) || contrato.includes(termo)) ? 'block' : 'none';
     });
 });
 
@@ -319,7 +326,7 @@ const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastr
 const formCadastrar = document.getElementById('formCadastrar');
 const fundoEscuro = document.getElementById('fundoEscuro');
 const fecharForm = document.getElementById('fecharForm');
-function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar');}
+function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar'); menuCompartilhar.classList.remove('mostrar');}
 function fechar(){formCadastrar.classList.remove('mostrar'); fundoEscuro.classList.remove('mostrar');}
 botoesCadastrar.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); abrirForm();}));
 fecharForm.addEventListener('click',e=>{e.preventDefault(); fechar();});
@@ -327,51 +334,8 @@ fundoEscuro.addEventListener('click',fechar);
 
 // PRÉVIA IMAGEM
 document.getElementById('linkLogo').addEventListener('input',function(){
-    const v=this.value;
-    document.getElementById('previaLogo').innerHTML=v?`<img src="${v}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:'Prévia';
-});
-
-// PREÇOS EM TEMPO REAL
-async function atualizarPrecos(){
-    try{
-        const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,dogecoin,doge-manga&vs_currencies=brl,usd&include_24hr_change=true');
-        if(!res.ok) return;
-        const d=await res.json();
-        function mostrar(id,elV,elVar){
-            if(d[id]){
-                document.getElementById(elV).textContent=`R$ ${d[id].brl.toLocaleString('pt-BR')}`;
-                const v=d[id].brl_24h_change;
-                document.getElementById(elVar).textContent=` (${v>=0?'+':''}${v.toFixed(2)}%)`;
-                document.getElementById(elVar).className=v>=0?'valor-pos':'valor-neg';
-            }
-        }
-        mostrar('bitcoin','btc-valor','btc-var');
-        mostrar('ethereum','eth-valor','eth-var');
-        mostrar('solana','sol-valor','sol-var');
-        mostrar('binancecoin','bnb-valor','bnb-var');
-        mostrar('dogecoin','doge-valor','doge-var');
-        if(d['doge-manga']){
-            document.getElementById('dgm-brl').textContent=`R$ ${d['doge-manga'].brl.toLocaleString('pt-BR',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
-            document.getElementById('dgm-usd').textContent=`$ ${d['doge-manga'].usd.toLocaleString('en-US',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
-            const v=d['doge-manga'].brl_24h_change;
-            document.getElementById('dgm-var').textContent=`${v>=0?'📈 +':'📉 '}${v.toFixed(2)}%`;
-            document.getElementById('dgm-var').style.color = v>=0 ? 'var(--sucesso)' : 'var(--queda)';
-        }
-    }catch{}
-}
-atualizarPrecos();
-setInterval(atualizarPrecos,30000);
-
-// ENVIO
-document.querySelector('.btn-enviar').addEventListener('click',e=>{
-    e.preventDefault();
-    const ids=['nomeMoeda','simboloMoeda','linkLogo','contratoMoeda','siteMoeda','xMoeda','tgMoeda','dexMoeda'];
-    if(ids.every(id=>document.getElementById(id).value.trim()!=='')){
-        alert('✅ Enviado com sucesso!');
-        fechar(); ids.forEach(id=>document.getElementById(id).value='');
-        document.getElementById('previaLogo').innerHTML='Prévia';
-        campoPesquisa.value=''; todosCards.forEach(c=>c.style.display='block');
-    }else alert('⚠️ Preencha todos os campos obrigatórios!');
+    const v=this.value.trim();
+    document.getElementById('previaLogo').innerHTML=v?`<img src="${v}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`:'Prévia';
 });
 </script>
 
