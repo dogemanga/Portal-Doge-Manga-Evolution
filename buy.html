@@ -1,288 +1,351 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Comprar Doge Manga</title>
-
+<title>Doge Manga Evolution | Portal Oficial Solana</title>
+<link rel="icon" href="IMG-20260727-WA0036(7).jpg">
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif;}
+:root{
+    --primaria:#facc15; --fundo:#050816; --secundaria:#111827;
+    --sucesso:#22c55e; --queda:#ef4444; --texto:#e2e8f0; --claro:#94a3b8;
 }
-
 body{
-background:#050816;
-color:white;
+    color:var(--texto); line-height:1.7;
+    background:linear-gradient(rgba(5,8,22,0.7), rgba(2,6,23,0.75)), url("IMG-20260727-WA0036(7).jpg");
+    background-size:cover; background-position:center;
+    background-attachment:fixed; background-repeat:no-repeat;
+    min-height:100vh; padding-bottom:80px;
 }
 
-nav{
-background:#020617;
-padding:20px;
-text-align:center;
+.barra-geral{background:rgba(2,6,23,0.95); padding:10px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2);}
+.barra-conteudo-geral{display:flex; gap:35px; animation:rolar 45s linear infinite; width:max-content;}
+.barra-geral:hover .barra-conteudo-geral{animation-play-state:paused;}
+@keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+.item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap; font-size:13px;}
+.item-moeda a{color:inherit; text-decoration:none; font-weight:500;}
+.item-moeda a:hover{color:var(--primaria);}
+.valor-pos{color:var(--sucesso); font-weight:600;}
+.valor-neg{color:var(--queda); font-weight:600;}
+.btn-cg{background:#0052ff; padding:2px 6px; border-radius:3px; font-size:10px; color:white; text-decoration:none;}
+.btn-cmc{background:#10b981; padding:2px 6px; border-radius:3px; font-size:10px; color:white; text-decoration:none;}
+
+.barra-portal{background:rgba(5,8,22,0.9); padding:8px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.15);}
+.barra-conteudo-portal{display:flex; gap:30px; animation:rolar 35s linear infinite; width:max-content;}
+.barra-portal:hover .barra-conteudo-portal{animation-play-state:paused;}
+.destaque-portal{color:var(--primaria); font-weight:700; display:flex; align-items:center; gap:6px;}
+.mini-logo{width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria); object-fit:cover;}
+
+.barra-topo{background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:999;}
+.perfil{display:flex; gap:10px; align-items:center;}
+.perfil img{width:40px; height:40px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover;}
+.perfil span{font-weight:600; color:var(--primaria);}
+
+.menu-botao{font-size:28px; color:var(--primaria); cursor:pointer; padding:6px 12px; border-radius:8px; transition:0.2s; background:rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.2);}
+.menu-botao:hover{background:rgba(250,204,21,0.15); transform:scale(1.05);}
+
+.menu-navegacao{
+    display:none; position:absolute; top:100%; right:20px; width:300px;
+    max-height:75vh; overflow-y:auto;
+    background:rgba(5,8,22,0.98); backdrop-filter:blur(10px);
+    border-radius:14px; border:1px solid rgba(250,204,21,0.25);
+    margin-top:8px; box-shadow:0 8px 25px rgba(0,0,0,0.3); z-index:999;
+    scrollbar-width:thin;
 }
+.menu-navegacao::-webkit-scrollbar{width:6px;}
+.menu-navegacao::-webkit-scrollbar-thumb{background:rgba(250,204,21,0.4); border-radius:3px;}
+.menu-navegacao::-webkit-scrollbar-track{background:transparent;}
+.menu-navegacao.mostrar{display:block; animation:abrirMenu 0.2s ease;}
+@keyframes abrirMenu{from{opacity:0; transform:translateY(-8px);}to{opacity:1; transform:translateY(0);}}
+.menu-item{display:block; padding:11px 20px; color:var(--texto); text-decoration:none; font-weight:500; border-bottom:1px solid rgba(250,204,21,0.1); transition:0.2s; font-size:14px;}
+.menu-item:last-child{border-bottom:none;}
+.menu-item:hover{color:var(--primaria); background:rgba(250,204,21,0.08); padding-left:24px;}
+.menu-divisao{height:1px; background:rgba(250,204,21,0.2); margin:6px 0;}
 
-nav a{
-color:white;
-text-decoration:none;
-margin:10px;
-font-weight:bold;
-}
+.abas{display:flex; gap:15px; padding:0 20px 15px; overflow-x:auto; margin-top:10px;}
+.aba{font-size:15px; font-weight:500; color:var(--claro); cursor:pointer; white-space:nowrap; transition:0.2s; padding-bottom:4px;}
+.aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria);}
+.aba:hover{color:var(--primaria);}
 
-header{
-text-align:center;
-padding:60px 20px;
-background:linear-gradient(135deg,#111827,#2563eb);
-}
+header{text-align:center; padding:40px 20px 60px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:75vh;}
+.logo-principal{width:240px; height:240px; border-radius:50%; border:4px solid var(--primaria); box-shadow:0 0 40px rgba(250,204,21,0.4); margin-bottom:25px; object-fit:cover;}
+header h1{font-size:50px; color:var(--primaria); text-shadow:0 0 30px rgba(250,204,21,0.35); margin-bottom:12px;}
+header p{font-size:19px; color:var(--claro); max-width:900px; margin:0 auto 20px;}
 
-.logo{
-width:180px;
-height:180px;
-border-radius:50%;
-object-fit:cover;
-}
+.botoes-compra{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:15px 0;}
+.btn-compra{padding:12px 22px; border-radius:10px; color:white; text-decoration:none; font-weight:700; font-size:15px; transition:0.2s; border:none; cursor:pointer;}
+.btn-compra:hover{transform:translateY(-3px); box-shadow:0 0 15px rgba(250,204,21,0.35);}
+.btn-phantom{background:#AB9FF2; color:#050816;}
+.btn-hash{background:#00C6FF; color:#050816;}
 
-h1,h2{
-color:#38bdf8;
-}
+.container{max-width:1450px; margin:0 auto; padding:20px 24px;}
+.card{background:rgba(17,24,39,0.95); padding:28px; margin:30px 0; border-radius:20px; border:1px solid rgba(250,204,21,0.2); backdrop-filter:blur(8px);}
+.card.destaque{border-color:var(--primaria); box-shadow:0 0 30px rgba(250,204,21,0.15);}
+h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:12px; font-size:24px;}
 
-.container{
-max-width:1000px;
-margin:auto;
-padding:20px;
-}
+.form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:15px; margin-bottom:20px;}
+.grupo-form{display:flex; flex-direction:column; gap:6px;}
+.grupo-form label{font-size:13px; color:var(--claro); font-weight:500;}
+.grupo-form input{padding:10px 12px; border-radius:8px; border:1px solid rgba(250,204,21,0.3); background:rgba(2,6,23,0.8); color:var(--texto); font-size:14px;}
+.grupo-form input:focus{outline:none; border-color:var(--primaria);}
+.previa-logo{width:80px; height:80px; border-radius:50%; margin-top:8px; border:2px solid var(--primaria); object-fit:cover; background:rgba(250,204,21,0.1); display:flex; align-items:center; justify-content:center; color:var(--claro); font-size:12px;}
+.btn-enviar{background:var(--primaria); color:var(--fundo); padding:12px 24px; border-radius:10px; font-weight:700; border:none; cursor:pointer; transition:0.2s; width:100%; margin-top:10px;}
+.btn-enviar:hover{transform:scale(1.02);}
 
-.card{
-background:#111827;
-padding:30px;
-margin:25px 0;
-border-radius:20px;
-box-shadow:0 0 20px #000;
-}
+.area-andamento{overflow:hidden; padding:15px 0; border-radius:12px;}
+.lista-andando{display:flex; gap:25px; width:max-content; animation:rolarMoedas 55s linear infinite;}
+.area-andamento:hover .lista-andando{animation-play-state:paused;}
+@keyframes rolarMoedas{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-.contract{
-background:#020617;
-padding:15px;
-border-radius:10px;
-word-break:break-all;
-color:#14f195;
-}
+.card-moeda{background:rgba(2,6,23,0.9); padding:20px; border-radius:16px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:320px;}
+.card-moeda.destaque{border-color:var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.2);}
+.card-moeda:hover{transform:translateY(-4px); box-shadow:0 8px 20px rgba(250,204,21,0.1);}
+.logo-moeda{width:90px; height:90px; border-radius:50%; margin:0 auto 15px; background:rgba(250,204,21,0.1); display:flex; align-items:center; justify-content:center; overflow:hidden; border:3px solid var(--primaria);}
+.logo-moeda img{width:100%; height:100%; object-fit:cover;}
+.nome-moeda{font-size:20px; font-weight:700; color:var(--primaria); margin-bottom:5px;}
+.simbolo-moeda{font-size:14px; color:var(--claro); margin-bottom:12px; font-weight:500;}
+.links-moeda{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-top:10px;}
+.links-moeda a{padding:6px 12px; border-radius:8px; color:white; text-decoration:none; font-size:12px; font-weight:500; transition:0.2s;}
+.links-moeda a:hover{transform:translateY(-2px);}
+.link-site{background:#2563eb;}
+.link-x{background:#1DA1F2;}
+.link-tg{background:#229ED9;}
+.link-dex{background:#ef4444;}
+.link-birdeye{background:#16a34a;}
 
-button{
+.voltar{display:inline-flex; align-items:center; gap:6px; color:var(--primaria); text-decoration:none; font-weight:600; margin-bottom:15px; transition:0.2s;}
+.voltar:hover{gap:10px;}
 
-background:#14f195;
-color:#000;
-border:none;
-padding:15px 30px;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-margin-top:15px;
+.alerta{color:#f97316; font-size:14px; padding:12px; border-radius:8px; background:rgba(249,115,22,0.08); border-left:3px solid #f97316; margin:15px 0;}
 
-}
+#formCadastrar{display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); width:92%; max-width:950px; max-height:92vh; overflow-y:auto; z-index:9999; background:rgba(5,8,22,0.98); backdrop-filter:blur(12px); border-radius:16px; border:1px solid var(--primaria); padding:24px;}
+#formCadastrar.mostrar{display:block; animation:aparecer 0.3s ease;}
+@keyframes aparecer{from{opacity:0; transform:translate(-50%,-45%);}to{opacity:1; transform:translate(-50%,-50%);}}
+.fundo-escuro{display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:9998;}
+.fundo-escuro.mostrar{display:block;}
 
-button:hover{
-transform:scale(1.05);
-}
+.menu-inferior{position:fixed; bottom:0; left:0; width:100%; background:rgba(2,6,23,0.98); display:flex; justify-content:space-around; padding:12px 0; border-top:1px solid rgba(250,204,21,0.2); z-index:999;}
+.menu-item-inf{text-align:center; color:var(--claro); text-decoration:none; font-size:12px; transition:0.2s;}
+.menu-item-inf.ativo{color:var(--primaria); font-weight:600;}
+.menu-item-inf span{display:block; font-size:18px; margin-bottom:2px;}
 
-.warning{
-background:#422006;
-padding:20px;
-border-radius:15px;
-}
+footer{text-align:center; padding:35px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 
-footer{
-text-align:center;
-padding:30px;
-background:#020617;
-}
-
+.motivo-lancamento{display:flex; gap:20px; align-items:center; flex-wrap:wrap; margin-bottom:25px; padding-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.2);}
+.motivo-logo{width:110px; height:110px; border-radius:50%; border:3px solid var(--primaria); object-fit:cover; box-shadow:0 0 15px rgba(250,204,21,0.25); flex-shrink:0;}
+.motivo-texto{flex:1; min-width:280px; color:var(--claro); line-height:1.8;}
+.motivo-texto h3{color:var(--primaria); margin-bottom:12px; font-size:20px;}
+.motivo-texto ul{padding-left:20px; margin-top:8px;}
+.motivo-texto li{margin-bottom:6px;}
 </style>
-
 </head>
-
-
 <body>
 
+<div class="barra-geral">
+    <div class="barra-conteudo-geral" id="barraPrecos">
+        <div class="item-moeda">
+            <a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank" rel="noopener">₿ BTC:</a>
+            <strong id="btc-valor">Carregando...</strong>
+            <span id="btc-var"></span>
+            <a href="https://www.coingecko.com/pt-br/moedas/bitcoin" class="btn-cg" target="_blank" rel="noopener">CG</a>
+            <a href="https://coinmarketcap.com/currencies/bitcoin/" class="btn-cmc" target="_blank" rel="noopener">CMC</a>
+        </div>
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank" rel="noopener">Ξ ETH:</a><strong id="eth-valor">Carregando...</strong><span id="eth-var"></span></div>
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank" rel="noopener">◎ SOL:</a><strong id="sol-valor">Carregando...</strong><span id="sol-var"></span></div>
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/binancecoin" target="_blank" rel="noopener">🔶 BNB:</a><strong id="bnb-valor">Carregando...</strong><span id="bnb-var"></span></div>
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/dogecoin" target="_blank" rel="noopener">🐕 DOGE:</a><strong id="doge-valor">Carregando...</strong><span id="doge-var"></span></div>
+    </div>
+</div>
 
-<nav>
+<div class="barra-portal">
+    <div class="barra-conteudo-portal">
+        <div class="destaque-portal"><img src="IMG-20260727-WA0036(7).jpg" class="mini-logo">⭐ DOGE MANGA ($DGM)</div>
+        <div class="item-moeda">Preços em tempo real</div>
+        <div class="destaque-portal"><img src="IMG-20260727-WA0036(7).jpg" class="mini-logo">⭐ DOGE MANGA ($DGM)</div>
+        <div class="item-moeda">Cadastre sua memecoin!</div>
+    </div>
+</div>
 
-<a href="index.html">🏠 Home</a>
+<div class="barra-topo">
+    <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg"><span>Portal Doge Manga</span></div>
+    <div class="menu-botao" id="btnMenu">⋮⋮⋮</div>
 
-<a href="projects.html">🚀 Launchpad</a>
+    <nav class="menu-navegacao" id="menuNavegacao">
+        <a href="#inicio" class="menu-item ativo">🏠 Início</a>
+        <a href="#lancadas" class="menu-item">📢 Moedas Lançadas</a>
+        <a href="#" id="botaoCadastrarNav" class="menu-item">📤 Cadastrar Moeda</a>
+        <a href="roadmap.html" class="menu-item">🗺️ Roadmap</a>
+        <a href="launchpad.html" class="menu-item">🚀 Launchpad</a>
+        <a href="tokenizacao.html" class="menu-item">💎 Tokenização</a>
+        <a href="nft.html" class="menu-item">🎨 NFTs</a>
+        <a href="whitepaper.html" class="menu-item">📄 Whitepaper</a>
 
-<a href="doge-manga.html">🐕 Doge Manga</a>
+        <div class="menu-divisao"></div>
 
-<a href="buy.html">💎 Comprar</a>
+        <a href="nft.html" class="menu-item">🎨 Ver Coleção NFT</a>
+        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="menu-item">🛒 Comprar na Phantom</a>
+        <a href="https://metamask.io/" target="_blank" rel="noopener" class="menu-item">🦊 MetaMask</a>
+        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="menu-item">🔍 DexScreener</a>
+        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener" class="menu-item">🔎 Birdeye</a>
+        <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="menu-item">🔬 Solscan</a>
 
-</nav>
+        <div class="menu-divisao"></div>
 
+        <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener" class="menu-item">🌐 Site Oficial</a>
+        <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener" class="menu-item">💬 Telegram</a>
+        <a href="https://x.com/dogemanga96508" target="_blank" rel="noopener" class="menu-item">🐦 X / Twitter</a>
+        <a href="https://tiktok.com/@dogemangaofficial" target="_blank" rel="noopener" class="menu-item">🎵 TikTok</a>
+        <a href="https://github.com/dogemanga" target="_blank" rel="noopener" class="menu-item">💻 GitHub</a>
+        <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" rel="noopener" class="menu-item">📊 CoinGecko</a>
+        <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" rel="noopener" class="menu-item">📈 CoinMarketCap</a>
 
+        <div class="menu-divisao"></div>
 
-<header>
+        <!-- ✅ E-MAIL CORRIGIDO: AGORA ABRE DIRETO NO APLICATIVO -->
+        <a href="mailto:dogemanga687@gmil.com?subject=Contato%20Portal%20Doge%20Manga" class="menu-item" style="color:var(--primaria); font-weight:700;" onclick="event.stopPropagation();">📩 ENVIAR E-MAIL DIRETO</a>
+        <a href="mailto:dogemanga687@gmil.com?subject=Solicitação%20de%20Listagem%20de%20Projeto" class="menu-item" onclick="event.stopPropagation();">📤 Enviar Projeto para Listagem</a>
+    </nav>
+</div>
 
-<img src="file_00000000b510820ea690243d5980576c.png" class="logo">
+<div class="abas"><div class="aba ativo">🏠 Início</div><div class="aba">📢 Lançadas</div><div class="aba" id="botaoCadastrar">📤 Cadastrar</div><div class="aba">📊 Dados</div></div>
 
-<h1>💎 Comprar Doge Manga</h1>
-
-<p>
-Token oficial do ecossistema Doge Manga Evolution
-</p>
-
+<header id="inicio">
+    <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga">
+    <h1>🚀 Doge Manga Evolution</h1>
+    <p>Portal Oficial • Rede Solana • Memecoins e NFTs</p>
+    <div class="botoes-compra">
+        <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn-compra btn-phantom">👻 Comprar na Phantom</a>
+        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn-compra btn-hash">📊 Ver no Mercado</a>
+    </div>
 </header>
 
-
-
-
-<div class="container">
-
-
-
-<div class="card">
-
-<h2>🐕 Doge Manga Token</h2>
-
-<p>
-Adquira Doge Manga através da rede Solana utilizando sua carteira Web3.
-</p>
-
-<br>
-
-<p><strong>Blockchain:</strong> Solana</p>
-
-<p><strong>Padrão:</strong> SPL Token</p>
-
-<p><strong>Supply:</strong> 420.000.000.000 DOGE MANGA</p>
-
+<div class="container" id="lancadas">
+    <div class="card destaque">
+        <a href="#inicio" class="voltar">← Voltar ao Início</a>
+        <h2>📢 Projetos Listados</h2>
+        <p class="alerta">Projetos verificados e aprovados pelo Portal Doge Manga.</p>
+        <div class="area-andamento">
+            <div class="lista-andando" id="listaMoedas">
+                <div class="card-moeda destaque">
+                    <div class="logo-moeda"><img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga"></div>
+                    <div class="nome-moeda">Doge Manga</div>
+                    <div class="simbolo-moeda">$DGM • Rede Solana</div>
+                    <div class="links-moeda">
+                        <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener" class="link-site">Site</a>
+                        <a href="https://x.com/dogemanga96508" target="_blank" rel="noopener" class="link-x">X</a>
+                        <a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener" class="link-tg">Telegram</a>
+                        <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="link-dex">Dex</a>
+                        <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener" class="link-birdeye">Birdeye</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-
-
-
-<div class="card">
-
-<h2>🔗 Contrato Oficial</h2>
-
-
-<div class="contract">
-
-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
-
+<div class="fundo-escuro" id="fundoEscuro"></div>
+<div class="card" id="formCadastrar">
+    <a href="#" class="voltar" id="fecharForm">← Voltar</a>
+    <h2>📤 Solicitar Listagem de Memecoin</h2>
+    <div class="motivo-lancamento">
+        <img src="IMG-20260727-WA0036(7).jpg" class="motivo-logo" alt="Doge Manga">
+        <div class="motivo-texto">
+            <h3>🐾 Por que lançar no Portal Doge Manga?</h3>
+            <p>Somos uma comunidade forte, com visibilidade real e total segurança na rede Solana. Tudo feito para crescer junto com o seu projeto!</p>
+            <ul>
+                <li>✅ Divulgação direta para público de memecoins</li>
+                <li>✅ Processo simples e rápido</li>
+                <li>✅ Suporte dedicado</li>
+                <li>✅ Integração com CoinGecko, CoinMarketCap e mais</li>
+            </ul>
+        </div>
+    </div>
+    <div class="form-grid">
+        <div class="grupo-form"><label>Nome Completo do Projeto *</label><input type="text" id="nomeMoeda" required></div>
+        <div class="grupo-form"><label>Símbolo/Ticker *</label><input type="text" id="simboloMoeda" required></div>
+        <div class="grupo-form"><label>Link do Logo/Imagem *</label><input type="url" id="linkLogo" required><div class="previa-logo" id="previaLogo">Prévia da Imagem</div></div>
+        <div class="grupo-form"><label>Endereço do Contrato Solana *</label><input type="text" id="contratoMoeda" required></div>
+        <div class="grupo-form"><label>Site Oficial</label><input type="url" id="siteMoeda"></div>
+        <div class="grupo-form"><label>Link X / Twitter</label><input type="url" id="xMoeda"></div>
+        <div class="grupo-form"><label>Link Grupo Telegram</label><input type="url" id="tgMoeda"></div>
+        <div class="grupo-form"><label>Link DexScreener</label><input type="url" id="dexMoeda"></div>
+    </div>
+    <button class="btn-enviar">📩 Enviar para Análise</button>
 </div>
 
-
-<a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-
-<button>
-🔎 Ver Token na Solscan
-</button>
-
-</a>
-
-
+<div class="menu-inferior">
+    <a href="#inicio" class="menu-item-inf ativo"><span>🏠</span>Início</a>
+    <a href="#lancadas" class="menu-item-inf"><span>📢</span>Projetos</a>
+    <a href="#" id="botaoCadastrarMenu" class="menu-item-inf"><span>📤</span>Cadastrar</a>
+    <a href="#dados" class="menu-item-inf"><span>📊</span>Dados</a>
 </div>
 
+<footer>🐕 Doge Manga Evolution © 2026 • Contato: dogemanga687@gmil.com • Todos os direitos reservados</footer>
 
+<script>
+// MENU: NÃO FECHA AO CLICAR NOS BOTÕES
+const btnMenu = document.getElementById('btnMenu');
+const menuNavegacao = document.getElementById('menuNavegacao');
+btnMenu.addEventListener('click', e => {e.stopPropagation(); menuNavegacao.classList.toggle('mostrar');});
+document.addEventListener('click', e => {if (!menuNavegacao.contains(e.target) && e.target !== btnMenu) menuNavegacao.classList.remove('mostrar');});
 
+// FORMULÁRIO
+const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastrarNav,#botaoCadastrarMenu');
+const formCadastrar = document.getElementById('formCadastrar');
+const fundoEscuro = document.getElementById('fundoEscuro');
+const fecharForm = document.getElementById('fecharForm');
+function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar');}
+function fechar(){formCadastrar.classList.remove('mostrar'); fundoEscuro.classList.remove('mostrar');}
+botoesCadastrar.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); abrirForm();}));
+fecharForm.addEventListener('click',e=>{e.preventDefault(); fechar();});
+fundoEscuro.addEventListener('click',fechar);
 
+// PRÉVIA DA IMAGEM
+document.getElementById('linkLogo').addEventListener('input',function(){
+    const v=this.value;
+    document.getElementById('previaLogo').innerHTML=v?`<img src="${v}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:'Prévia da Imagem';
+});
 
-<div class="card">
+// PREÇOS EM TEMPO REAL
+async function atualizarPrecos(){
+    try{
+        const res=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,dogecoin&vs_currencies=brl&include_24hr_change=true');
+        if(!res.ok) return;
+        const d=await res.json();
+        function mostrar(id,elV,elVar){
+            if(d[id]){
+                document.getElementById(elV).textContent=`R$ ${d[id].brl.toLocaleString('pt-BR')}`;
+                const v=d[id].brl_24h_change;
+                document.getElementById(elVar).textContent=` (${v>=0?'+':''}${v.toFixed(2)}%)`;
+                document.getElementById(elVar).className=v>=0?'valor-pos':'valor-neg';
+            }
+        }
+        mostrar('bitcoin','btc-valor','btc-var');
+        mostrar('ethereum','eth-valor','eth-var');
+        mostrar('solana','sol-valor','sol-var');
+        mostrar('binancecoin','bnb-valor','bnb-var');
+        mostrar('dogecoin','doge-valor','doge-var');
+    }catch{}
+}
+atualizarPrecos();
+setInterval(atualizarPrecos,30000);
 
-<h2>🟣 Carteira Phantom</h2>
-
-
-<p>
-Use sua carteira Phantom conectada à rede Solana para interagir com o ecossistema.
-</p>
-
-
-<a href="https://phantom.app/" target="_blank">
-
-<button>
-🟣 Abrir Phantom Wallet
-</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h2>🚀 Comprar Doge Manga</h2>
-
-
-<p>
-Acesse o agregador Jupiter para realizar a troca de tokens na rede Solana.
-</p>
-
-
-<a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-
-<button>
-🚀 Comprar no Jupiter
-</button>
-
-</a>
-
-
-</div>
-
-
-
-
-
-<div class="card warning">
-
-<h2>⚠️ Atenção</h2>
-
-<p>
-Antes de realizar qualquer operação, confira sempre o contrato oficial do token e utilize apenas links oficiais do projeto.
-</p>
-
-</div>
-
-
-
-</div>
-
-
-
-
-<footer>
-
-🐕 Doge Manga Evolution
-
-<br><br>
-
-A evolução das memecoins começa aqui 🚀
-
-</footer>
-
-
+// ENVIO FORMULÁRIO
+document.querySelector('.btn-enviar').addEventListener('click',e=>{
+    e.preventDefault();
+    const campos=['nomeMoeda','simboloMoeda','linkLogo','contratoMoeda','siteMoeda','xMoeda','tgMoeda','dexMoeda'];
+    if(campos.every(id=>document.getElementById(id).value.trim()!=='')){
+        alert('✅ Dados enviados com sucesso! Em breve entraremos em contato pelo e-mail.');
+        fechar();
+        campos.forEach(id=>document.getElementById(id).value='');
+        document.getElementById('previaLogo').innerHTML='Prévia da Imagem';
+    }else{
+        alert('⚠️ Preencha todos os campos obrigatórios!');
+    }
+});
+</script>
 
 </body>
-
 </html>
-<div class="trackers">
-
-<a href="https://coinmarketcap.com/dexscan/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-    🟡 CoinMarketCap
-</a>
-
-<a href="https://www.coingecko.com/en/coins/solana?contract_address=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank">
-    🦎 CoinGecko
-</a>
-
-</div>
