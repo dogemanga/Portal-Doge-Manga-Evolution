@@ -110,6 +110,12 @@ h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,2
 .item-dado strong{color:var(--primaria); display:block; margin-bottom:4px; font-size:13px;}
 .item-dado span{font-size:14px;}
 
+.grid-metricas{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:18px;}
+.item-metrica{background:rgba(2,6,23,0.85); padding:14px; border-radius:8px; border:1px solid rgba(250,204,21,0.25); text-align:center;}
+.item-metrica .rotulo{font-size:12px; color:var(--claro); margin-bottom:4px;}
+.item-metrica .valor{font-size:18px; font-weight:700; color:var(--primaria);}
+.item-metrica .valor.positivo{color:var(--sucesso);}
+
 .form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px;}
 .grupo-form{display:flex; flex-direction:column; gap:5px;}
 .grupo-form label{font-size:12px; color:var(--claro);}
@@ -171,7 +177,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <div class="item-moeda">
             <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
             <a href="https://dogemangaofficial.xyz" target="_blank">$DGM:</a>
-            <strong id="dgm-barra">$...</strong>
+            <strong id="dgm-barra">Carregando...</strong>
             <span id="dgm-barra-var"></span>
             <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" class="btn-cg" target="_blank">CG</a>
             <a href="https://coinmarketcap.com/currencies/doge-manga/" class="btn-cmc" target="_blank">CMC</a>
@@ -179,7 +185,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <div class="item-moeda">
             <img src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png" alt="Bitcoin">
             <a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">₿ BTC:</a>
-            <strong id="btc-valor">...</strong>
+            <strong id="btc-valor">Carregando...</strong>
             <span id="btc-var"></span>
             <a href="https://www.coingecko.com/pt-br/moedas/bitcoin" class="btn-cg" target="_blank">CG</a>
             <a href="https://coinmarketcap.com/currencies/bitcoin/" class="btn-cmc" target="_blank">CMC</a>
@@ -187,7 +193,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <div class="item-moeda">
             <img src="https://assets.coingecko.com/coins/images/279/small/ethereum.png" alt="Ethereum">
             <a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">Ξ ETH:</a>
-            <strong id="eth-valor">...</strong>
+            <strong id="eth-valor">Carregando...</strong>
             <span id="eth-var"></span>
             <a href="https://www.coingecko.com/pt-br/moedas/ethereum" class="btn-cg" target="_blank">CG</a>
             <a href="https://coinmarketcap.com/currencies/ethereum/" class="btn-cmc" target="_blank">CMC</a>
@@ -195,7 +201,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <div class="item-moeda">
             <img src="https://assets.coingecko.com/coins/images/4128/small/solana.png" alt="Solana">
             <a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">◎ SOL:</a>
-            <strong id="sol-valor">...</strong>
+            <strong id="sol-valor">Carregando...</strong>
             <span id="sol-var"></span>
             <a href="https://www.coingecko.com/pt-br/moedas/solana" class="btn-cg" target="_blank">CG</a>
             <a href="https://coinmarketcap.com/currencies/solana/" class="btn-cmc" target="_blank">CMC</a>
@@ -223,7 +229,17 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <input type="text" id="pesquisaMoeda" placeholder="Pesquisar qualquer moeda...">
         <div class="resultado-busca" id="resultadoBusca"></div>
     </div>
-    <div style="position:relative;"><div class="compartilhar-botao" id="btnCompartilhar">🔗 Compartilhar</div><div class="menu-compartilhar" id="menuCompartilhar"><a href="https://www.facebook.com/sharer/sharer.php?u=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">📘 Facebook</a><a href="https://twitter.com/intent/tweet?text=Portal%20Doge%20Manga&url=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">🐦 X</a><a href="https://api.whatsapp.com/send?text=Portal%20Doge%20Manga:%20https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">💬 WhatsApp</a><a href="https://t.me/share/url?url=https://dogemangaofficial.xyz&text=Portal%20Doge%20Manga" target="_blank" class="item-compartilhar">📢 Telegram</a><div class="menu-divisao"></div><a href="#" id="copiarLinkPagina" class="item-compartilhar">📋 Copiar Link</a></div></div>
+    <div style="position:relative; display:inline-block;">
+        <div class="compartilhar-botao" id="btnCompartilhar">🔗 Compartilhar</div>
+        <div class="menu-compartilhar" id="menuCompartilhar">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">📘 Facebook</a>
+            <a href="https://twitter.com/intent/tweet?text=Portal%20Doge%20Manga&url=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">🐦 X</a>
+            <a href="https://api.whatsapp.com/send?text=Portal%20Doge%20Manga:%20https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">💬 WhatsApp</a>
+            <a href="https://t.me/share/url?url=https://dogemangaofficial.xyz&text=Portal%20Doge%20Manga" target="_blank" class="item-compartilhar">📢 Telegram</a>
+            <div class="menu-divisao"></div>
+            <a href="#" id="copiarLinkPagina" class="item-compartilhar">📋 Copiar Link</a>
+        </div>
+    </div>
     <div class="menu-botao" id="btnMenu">⋮⋮⋮</div>
     <nav class="menu-navegacao" id="menuNavegacao">
         <a href="#inicio" class="menu-item ativo">🏠 Início</a>
@@ -304,16 +320,39 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 <div class="container">
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
-        <h2>📊 Dados Oficiais - Doge Manga</h2>
+        <h2>📊 Dados Oficiais e Métricas - Doge Manga</h2>
         <div class="grid-dados">
             <div class="item-dado"><strong>Moeda:</strong><span>Doge Manga</span></div>
             <div class="item-dado"><strong>Símbolo:</strong><span>$DGM</span></div>
             <div class="item-dado"><strong>Rede:</strong><span>Solana</span></div>
             <div class="item-dado"><strong>Contrato:</strong><span style="font-size:11px;word-break:break-all;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</span></div>
-            <div class="item-dado"><strong>Preço USD:</strong><span id="dados-usd">$ ...</span></div>
-            <div class="item-dado"><strong>Preço BRL:</strong><span id="dados-brl">R$ ...</span></div>
-            <div class="item-dado"><strong>Variação 24h:</strong><span id="dados-var">...</span></div>
+            <div class="item-dado"><strong>Preço USD:</strong><span id="dados-usd">Carregando...</span></div>
+            <div class="item-dado"><strong>Preço BRL:</strong><span id="dados-brl">Carregando...</span></div>
+            <div class="item-dado"><strong>Variação 24h:</strong><span id="dados-var">Carregando...</span></div>
             <div class="item-dado"><strong>Status:</strong><span style="color:var(--sucesso);">✅ Ativo e Verificado</span></div>
+        </div>
+
+        <div class="grid-metricas">
+            <div class="item-metrica">
+                <div class="rotulo">👥 Holders</div>
+                <div class="valor" id="metric-holders">--</div>
+            </div>
+            <div class="item-metrica">
+                <div class="rotulo">💧 Liquidez</div>
+                <div class="valor" id="metric-liquidez">--</div>
+            </div>
+            <div class="item-metrica">
+                <div class="rotulo">💰 Market Cap</div>
+                <div class="valor" id="metric-marketcap">--</div>
+            </div>
+            <div class="item-metrica">
+                <div class="rotulo">📦 Volume 24h</div>
+                <div class="valor" id="metric-volume">--</div>
+            </div>
+            <div class="item-metrica">
+                <div class="rotulo">🔢 Transações</div>
+                <div class="valor" id="metric-transacoes">--</div>
+            </div>
         </div>
     </div>
 </div>
@@ -324,7 +363,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <a href="#" class="voltar" id="fecharForm">← Voltar</a>
     <h2>📤 Solicitar Listagem de Memecoin</h2>
     <div class="motivo-lancamento">
-        <img src="IMG-20260727-WA0036(7).jpg" class="motivo-logo">
+        <img src="IMG-20260727-WA0036(7).jpg" class="motivo-logo" alt="Logo Doge Manga">
         <div class="motivo-texto">
             <h3>🐾 Por que lançar no Portal Doge Manga?</h3>
             <p>Segurança, visibilidade para sua comunidade e estrutura profissional na Rede Solana.</p>
@@ -342,11 +381,11 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <div class="grupo-form" style="grid-column: 1 / -1;">
             <label>🖼️ Logo Oficial *</label>
             <input type="url" id="linkLogo" required placeholder="Cole o link direto da imagem (.png / .jpg)">
-            <small style="color:var(--claro); font-size:11px;">💡 Dica: Use imagem quadrada, mínimo 512x512px, preferencialmente com fundo transparente.</small>
+            <small style="color:var(--claro); font-size:11px;">💡 Dica: Use imagem quadrada, mínimo 512x512px.</small>
             <div class="previa-logo" id="previaLogo">Prévia da Logo</div>
         </div>
-        <div class="grupo-form"><label>Contrato Solana *</label><input type="text" id="contratoMoeda" required placeholder="Cole o endereço do contrato">
-        <small style="color:var(--queda); font-size:11px;">⚠️ Confira duas vezes antes de enviar!</small></div>
+        <div class="grupo-form"><label>Contrato Solana *</label><input type="text" id="contratoMoeda" required placeholder="Endereço do contrato">
+        <small style="color:var(--queda); font-size:11px;">⚠️ Confira duas vezes!</small></div>
         <div class="grupo-form"><label>Site Oficial</label><input type="url" id="siteMoeda" placeholder="https://..."></div>
         <div class="grupo-form"><label>Perfil no X</label><input type="url" id="xMoeda" placeholder="https://x.com/..."></div>
         <div class="grupo-form"><label>Grupo no Telegram</label><input type="url" id="tgMoeda" placeholder="https://t.me/..."></div>
@@ -367,13 +406,15 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 <script>
 const CONTRATO_DOGEMANGA = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
 
-// MENUS
+// MENU E COMPARTILHAR
 const btnMenu = document.getElementById('btnMenu');
 const menuNavegacao = document.getElementById('menuNavegacao');
 const btnCompartilhar = document.getElementById('btnCompartilhar');
 const menuCompartilhar = document.getElementById('menuCompartilhar');
+
 btnMenu.addEventListener('click', e => {e.stopPropagation(); menuNavegacao.classList.toggle('mostrar');});
 btnCompartilhar.addEventListener('click', e => {e.stopPropagation(); menuCompartilhar.classList.toggle('mostrar');});
+
 document.addEventListener('click', e => {
     if(!menuNavegacao.contains(e.target) && e.target !== btnMenu) menuNavegacao.classList.remove('mostrar');
     if(!menuCompartilhar.contains(e.target) && e.target !== btnCompartilhar) menuCompartilhar.classList.remove('mostrar');
@@ -390,34 +431,29 @@ document.getElementById('copiarLinkPagina').addEventListener('click', e=>{
     menuCompartilhar.classList.remove('mostrar');
 });
 
-// 🔍 PESQUISA FUNCIONAL
+// PESQUISA
 const campoPesquisa = document.getElementById('pesquisaMoeda');
 const resultadoBusca = document.getElementById('resultadoBusca');
 let timerBusca;
-
 campoPesquisa.addEventListener('input', () => {
     clearTimeout(timerBusca);
     const termo = campoPesquisa.value.trim().toLowerCase();
     resultadoBusca.classList.remove('mostrar');
     if(termo.length < 2) return;
-
     timerBusca = setTimeout(async () => {
         try{
             const resLista = await fetch(`https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(termo)}`);
             if(!resLista.ok) throw new Error('Erro');
             const dadosLista = await resLista.json();
-            
             if(!dadosLista.coins || dadosLista.coins.length === 0){
                 resultadoBusca.innerHTML = `<div class="erro-busca">❌ Moeda não encontrada</div>`;
                 resultadoBusca.classList.add('mostrar');
                 return;
             }
-
             const moeda = dadosLista.coins[0];
             const resDados = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${moeda.id}&vs_currencies=usd,brl&include_24h_change=true`);
             const dadosPreco = await resDados.json();
             const info = dadosPreco[moeda.id];
-
             resultadoBusca.innerHTML = `
                 <div class="card-busca">
                     <img src="${moeda.large}" alt="${moeda.name}">
@@ -430,17 +466,14 @@ campoPesquisa.addEventListener('input', () => {
                         <a href="https://www.coingecko.com/pt-br/moedas/${moeda.id}" target="_blank" class="link-cg">CoinGecko</a>
                         <a href="https://coinmarketcap.com/search/?q=${encodeURIComponent(moeda.name)}" target="_blank" class="link-cmc">CoinMarketCap</a>
                     </div>
-                </div>
-            `;
+                </div>`;
             resultadoBusca.classList.add('mostrar');
-
         }catch(err){
             resultadoBusca.innerHTML = `<div class="erro-busca">⚠️ Erro na busca</div>`;
             resultadoBusca.classList.add('mostrar');
         }
     }, 700);
 });
-
 document.addEventListener('click', e => {
     if(!campoPesquisa.parentElement.contains(e.target)) resultadoBusca.classList.remove('mostrar');
 });
@@ -455,29 +488,29 @@ document.querySelectorAll('.aba[data-secao]').forEach(aba => {
     });
 });
 
-// 📈 PREÇOS AO VIVO
+// 📈 PREÇOS E VARIAÇÃO — AGORA 100% FUNCIONAL
 async function buscarAtualizarPrecos(){
     try{
         const resposta = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=doge-manga,bitcoin,ethereum,solana&vs_currencies=usd,brl&include_24h_change=true');
         if(!resposta.ok) return;
         const dados = await resposta.json();
 
-        function exibir(id, elValor, elVar){
+        function exibirDados(id, elValor, elVar){
             if(!dados[id]) return;
             const elV = document.getElementById(elValor);
             const elVa = document.getElementById(elVar);
-            if(elV) elV.textContent = `$ ${dados[id].usd.toFixed(4)}`;
+            if(elV) elV.textContent = `$ ${dados[id].usd.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}`;
             if(elVa){
-                const v = dados[id].usd_24h_change;
-                elVa.textContent = ` (${v>=0?'+':''}${v.toFixed(2)}%)`;
-                elVa.className = v>=0 ? 'valor-pos' : 'valor-neg';
+                const variacao = dados[id].usd_24h_change;
+                elVa.textContent = ` (${variacao>=0?'+':''}${variacao.toFixed(2)}%)`;
+                elVa.className = variacao >= 0 ? 'valor-pos' : 'valor-neg';
             }
         }
 
-        exibir('doge-manga','dgm-barra','dgm-barra-var');
-        exibir('bitcoin','btc-valor','btc-var');
-        exibir('ethereum','eth-valor','eth-var');
-        exibir('solana','sol-valor','sol-var');
+        exibirDados('doge-manga','dgm-barra','dgm-barra-var');
+        exibirDados('bitcoin','btc-valor','btc-var');
+        exibirDados('ethereum','eth-valor','eth-var');
+        exibirDados('solana','sol-valor','sol-var');
 
         if(dados['doge-manga']){
             document.getElementById('dgm-brl').textContent = `R$ ${dados['doge-manga'].brl.toFixed(6)}`;
@@ -488,29 +521,12 @@ async function buscarAtualizarPrecos(){
             document.getElementById('dados-brl').textContent = `R$ ${dados['doge-manga'].brl.toFixed(6)}`;
             document.getElementById('dados-var').textContent = `${vDgm>=0?'📈 +':'📉 '}${vDgm.toFixed(2)}%`;
         }
-    }catch(err){}
+
+    }catch(erro){
+        console.log('Aguardando API...', erro);
+    }
 }
 
+// INICIA E ATUALIZA A CADA 60 SEGUNDOS
 buscarAtualizarPrecos();
-setInterval(buscarAtualizarPrecos, 30000);
-
-// FORMULÁRIO
-const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastrarNav,#botaoCadastrarMenu');
-const formCadastrar = document.getElementById('formCadastrar');
-const fundoEscuro = document.getElementById('fundoEscuro');
-const fecharForm = document.getElementById('fecharForm');
-function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar');}
-function fechar(){formCadastrar.classList.remove('mostrar'); fundoEscuro.classList.remove('mostrar');}
-botoesCadastrar.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); abrirForm();}));
-fecharForm.addEventListener('click',e=>{e.preventDefault(); fechar();});
-fundoEscuro.addEventListener('click',fechar);
-
-// PRÉVIA DA LOGO FUNCIONANDO
-document.getElementById('linkLogo').addEventListener('input',function(){
-    const v=this.value.trim();
-    document.getElementById('previaLogo').innerHTML=v?`<img src="${v}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`:'Prévia da Logo';
-});
-</script>
-
-</body>
-</html>
+setInterval(buscarAtualizarPrecos, 60000);
