@@ -20,11 +20,12 @@ body{
 }
 
 .barra-geral{background:rgba(2,6,23,0.95); padding:8px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2);}
-.barra-conteudo-geral{display:flex; gap:40px; animation:rolar 50s linear infinite; width:max-content; font-size:12px;}
+.barra-conteudo-geral{display:flex; gap:35px; animation:rolar 55s linear infinite; width:max-content; font-size:12px; align-items:center;}
 .barra-geral:hover .barra-conteudo-geral{animation-play-state:paused;}
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-.item-moeda{display:flex; align-items:center; gap:5px; white-space:nowrap;}
+.item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap;}
+.item-moeda img{width:18px; height:18px; border-radius:50%; object-fit:cover; border:1px solid var(--primaria);}
 .item-moeda a{color:inherit; text-decoration:none; font-weight:500;}
 .item-moeda a:hover{color:var(--primaria);}
 .valor-pos{color:var(--sucesso); font-weight:600;}
@@ -34,8 +35,8 @@ body{
 
 .barra-dm{background:rgba(250,204,21,0.08); border-bottom:1px solid rgba(250,204,21,0.2); padding:6px 15px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:12px;}
 .dm-info{display:flex; align-items:center; gap:8px;}
-.dm-info img{width:20px; height:20px; border-radius:50%; border:1px solid var(--primaria); object-fit:cover;}
-.dm-nome{color:var(--primaria); font-weight:600;}
+.dm-info img{width:22px; height:22px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover;}
+.dm-nome{color:var(--primaria); font-weight:bold; font-size:13px;}
 .dm-valores{display:flex; gap:12px; align-items:center;}
 .dm-var{font-weight:600;}
 .btn-copiar{background:var(--primaria); color:var(--fundo); border:none; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:700; cursor:pointer;}
@@ -51,14 +52,7 @@ body{
 .caixa-pesquisa input{background:transparent; border:none; outline:none; color:var(--texto); font-size:13px; width:180px;}
 .caixa-pesquisa input::placeholder{color:var(--claro);}
 .lupa{color:var(--primaria); font-size:15px; margin-right:6px;}
-
-/* CAIXA DE RESULTADO QUE APARECE DENTRO DO PORTAL */
-.resultado-busca{
-    position:absolute; top:120%; left:0; width:320px;
-    background:rgba(5,8,22,0.98); border:1px solid var(--primaria);
-    border-radius:10px; display:none; z-index:999; padding:12px;
-    box-shadow:0 0 20px rgba(250,204,21,0.15);
-}
+.resultado-busca{position:absolute; top:120%; left:0; width:320px; background:rgba(5,8,22,0.98); border:1px solid var(--primaria); border-radius:10px; display:none; z-index:999; padding:12px; box-shadow:0 0 20px rgba(250,204,21,0.15);}
 .resultado-busca.mostrar{display:block;}
 .card-busca{text-align:center;}
 .card-busca img{width:60px; height:60px; border-radius:50%; border:2px solid var(--primaria); margin-bottom:8px;}
@@ -69,7 +63,6 @@ body{
 .links-busca a{padding:5px 10px; border-radius:6px; color:white; text-decoration:none; font-size:11px; font-weight:500;}
 .link-cg{background:#0052ff;}
 .link-cmc{background:#10b981;}
-.link-dex{background:#ef4444;}
 .erro-busca{text-align:center; color:var(--claro); font-size:12px; padding:10px;}
 
 .compartilhar-botao{background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); border-radius:8px; padding:5px 8px; color:var(--primaria); cursor:pointer; font-size:13px; font-weight:600;}
@@ -174,7 +167,17 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral" id="barraPrecos">
+        <!-- DOGE MANGA PRIMEIRO NA BARRA -->
         <div class="item-moeda">
+            <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
+            <a href="https://dogemangaofficial.xyz" target="_blank">$DGM:</a>
+            <strong id="dgm-barra">$...</strong>
+            <span id="dgm-barra-var"></span>
+            <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" class="btn-cg" target="_blank">CG</a>
+            <a href="https://coinmarketcap.com/currencies/doge-manga/" class="btn-cmc" target="_blank">CMC</a>
+        </div>
+        <div class="item-moeda">
+            <img src="https://assets.coingecko.com/coins/images/1/small/bitcoin.png" alt="Bitcoin">
             <a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">₿ BTC:</a>
             <strong id="btc-valor">...</strong>
             <span id="btc-var"></span>
@@ -182,6 +185,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
             <a href="https://coinmarketcap.com/currencies/bitcoin/" class="btn-cmc" target="_blank">CMC</a>
         </div>
         <div class="item-moeda">
+            <img src="https://assets.coingecko.com/coins/images/279/small/ethereum.png" alt="Ethereum">
             <a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">Ξ ETH:</a>
             <strong id="eth-valor">...</strong>
             <span id="eth-var"></span>
@@ -189,6 +193,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
             <a href="https://coinmarketcap.com/currencies/ethereum/" class="btn-cmc" target="_blank">CMC</a>
         </div>
         <div class="item-moeda">
+            <img src="https://assets.coingecko.com/coins/images/4128/small/solana.png" alt="Solana">
             <a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">◎ SOL:</a>
             <strong id="sol-valor">...</strong>
             <span id="sol-var"></span>
@@ -196,18 +201,12 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
             <a href="https://coinmarketcap.com/currencies/solana/" class="btn-cmc" target="_blank">CMC</a>
         </div>
         <div class="item-moeda">
+            <img src="https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png" alt="BNB">
             <a href="https://www.coingecko.com/pt-br/moedas/binancecoin" target="_blank">🔶 BNB:</a>
             <strong id="bnb-valor">...</strong>
             <span id="bnb-var"></span>
             <a href="https://www.coingecko.com/pt-br/moedas/binancecoin" class="btn-cg" target="_blank">CG</a>
             <a href="https://coinmarketcap.com/currencies/bnb/" class="btn-cmc" target="_blank">CMC</a>
-        </div>
-        <div class="item-moeda">
-            <a href="https://www.coingecko.com/pt-br/moedas/dogecoin" target="_blank">🐕 DOGE:</a>
-            <strong id="doge-valor">...</strong>
-            <span id="doge-var"></span>
-            <a href="https://www.coingecko.com/pt-br/moedas/dogecoin" class="btn-cg" target="_blank">CG</a>
-            <a href="https://coinmarketcap.com/currencies/dogecoin/" class="btn-cmc" target="_blank">CMC</a>
         </div>
     </div>
 </div>
@@ -230,7 +229,6 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <div class="caixa-pesquisa">
         <span class="lupa">🔍</span>
         <input type="text" id="pesquisaMoeda" placeholder="Pesquisar qualquer moeda...">
-        <!-- RESULTADO VAI APARECER AQUI DENTRO -->
         <div class="resultado-busca" id="resultadoBusca"></div>
     </div>
     <div style="position:relative;"><div class="compartilhar-botao" id="btnCompartilhar">🔗 Compartilhar</div><div class="menu-compartilhar" id="menuCompartilhar"><a href="https://www.facebook.com/sharer/sharer.php?u=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">📘 Facebook</a><a href="https://twitter.com/intent/tweet?text=Portal%20Doge%20Manga&url=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">🐦 X</a><a href="https://api.whatsapp.com/send?text=Portal%20Doge%20Manga:%20https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">💬 WhatsApp</a><a href="https://t.me/share/url?url=https://dogemangaofficial.xyz&text=Portal%20Doge%20Manga" target="_blank" class="item-compartilhar">📢 Telegram</a><div class="menu-divisao"></div><a href="#" id="copiarLinkPagina" class="item-compartilhar">📋 Copiar Link</a></div></div>
@@ -287,7 +285,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
         <h2>📢 Projetos Listados</h2>
-        <p class="alerta">Digite nome, símbolo ou contrato para encontrar:</p>
+        <p class="alerta">Aqui está o Doge Manga em destaque, já listado oficialmente:</p>
         <div class="area-andamento">
             <div class="lista-andando" id="listaMoedas">
                 <div class="card-moeda destaque" data-contrato="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">
@@ -315,7 +313,6 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
         <h2>📊 Dados Oficiais - Doge Manga</h2>
-        <p>Todas as informações em tempo real:</p>
         <div class="grid-dados">
             <div class="item-dado"><strong>Moeda:</strong><span>Doge Manga</span></div>
             <div class="item-dado"><strong>Símbolo:</strong><span>$DGM</span></div>
@@ -395,9 +392,7 @@ document.getElementById('copiarLinkPagina').addEventListener('click', e=>{
     menuCompartilhar.classList.remove('mostrar');
 });
 
-// ==============================
-// 🔍 BUSCA QUE MOSTRA TUDO DENTRO DO PORTAL
-// ==============================
+// 🔍 PESQUISA TOTALMENTE ARRUMADA E FUNCIONAL
 const campoPesquisa = document.getElementById('pesquisaMoeda');
 const resultadoBusca = document.getElementById('resultadoBusca');
 let timerBusca;
@@ -410,26 +405,26 @@ campoPesquisa.addEventListener('input', () => {
 
     timerBusca = setTimeout(async () => {
         try{
-            // Busca lista de moedas na CoinGecko
-            const resLista = await fetch('https://api.coingecko.com/api/v3/search?query='+encodeURIComponent(termo));
+            const resLista = await fetch(`https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(termo)}`);
+            if(!resLista.ok) throw new Error('Erro na busca');
             const dadosLista = await resLista.json();
+            
             if(!dadosLista.coins || dadosLista.coins.length === 0){
                 resultadoBusca.innerHTML = `<div class="erro-busca">❌ Moeda não encontrada</div>`;
                 resultadoBusca.classList.add('mostrar');
                 return;
             }
 
-            const moeda = dadosLista.coins[0]; // pega a mais relevante
-            // Busca preço e dados completos
-            const resDados = await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+moeda.id+'&vs_currencies=usd,brl&include_24h_change=true');
+            const moeda = dadosLista.coins[0];
+            const resDados = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${moeda.id}&vs_currencies=usd,brl&include_24h_change=true`);
             const dadosPreco = await resDados.json();
-            const info = dadosPreco[moeda.id];
+            const info = dadosPreco[moeda.id] || null;
 
             resultadoBusca.innerHTML = `
                 <div class="card-busca">
                     <img src="${moeda.large}" alt="${moeda.name}">
                     <h4>${moeda.name} (${moeda.symbol.toUpperCase()})</h4>
-                    <div class="preco">${info ? `$ ${info.usd.toFixed(6)}` : 'Carregando...'}</div>
+                    <div class="preco">${info ? `$ ${info.usd.toFixed(6)}` : 'Carregando preço...'}</div>
                     <div class="variacao ${info && info.usd_24h_change >=0 ? 'valor-pos' : 'valor-neg'}">
                         ${info ? `${info.usd_24h_change >=0 ? '📈 +' : '📉 '}${info.usd_24h_change.toFixed(2)}%` : ''}
                     </div>
@@ -442,10 +437,10 @@ campoPesquisa.addEventListener('input', () => {
             resultadoBusca.classList.add('mostrar');
 
         }catch(err){
-            resultadoBusca.innerHTML = `<div class="erro-busca">⚠️ Erro ao buscar</div>`;
+            resultadoBusca.innerHTML = `<div class="erro-busca">⚠️ Erro ao buscar, tente novamente</div>`;
             resultadoBusca.classList.add('mostrar');
         }
-    }, 600);
+    }, 700);
 });
 
 document.addEventListener('click', e => {
@@ -462,38 +457,39 @@ document.querySelectorAll('.aba[data-secao]').forEach(aba => {
     });
 });
 
-// PREÇOS EM TEMPO REAL
+// 📈 PREÇOS AO VIVO - ATUALIZA 30S
 async function buscarAtualizarPrecos(){
     try{
-        const resposta = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,dogecoin,doge-manga&vs_currencies=usd,brl&include_24h_change=true');
+        const resposta = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=doge-manga,bitcoin,ethereum,solana,binancecoin&vs_currencies=usd,brl&include_24h_change=true');
         if(!resposta.ok) return;
         const dados = await resposta.json();
 
-        function exibirPreco(id, elValor, elVariacao){
-            if(dados[id]){
-                document.getElementById(elValor).textContent = `$ ${dados[id].usd.toLocaleString('en-US',{minimumFractionDigits:2})}`;
-                const variacao = dados[id].usd_24h_change;
-                document.getElementById(elVariacao).textContent = ` (${variacao>=0?'+':''}${variacao.toFixed(2)}%)`;
-                document.getElementById(elVariacao).className = variacao>=0 ? 'valor-pos' : 'valor-neg';
+        function exibir(id, elValor, elVar){
+            if(!dados[id]) return;
+            const elV = document.getElementById(elValor);
+            const elVa = document.getElementById(elVar);
+            if(elV) elV.textContent = `$ ${dados[id].usd.toLocaleString('en-US',{minimumFractionDigits:2})}`;
+            if(elVa){
+                const v = dados[id].usd_24h_change;
+                elVa.textContent = ` (${v>=0?'+':''}${v.toFixed(2)}%)`;
+                elVa.className = v>=0 ? 'valor-pos' : 'valor-neg';
             }
         }
 
-        exibirPreco('bitcoin','btc-valor','btc-var');
-        exibirPreco('ethereum','eth-valor','eth-var');
-        exibirPreco('solana','sol-valor','sol-var');
-        exibirPreco('binancecoin','bnb-valor','bnb-var');
-        exibirPreco('dogecoin','doge-valor','doge-var');
+        exibir('doge-manga','dgm-barra','dgm-barra-var');
+        exibir('bitcoin','btc-valor','btc-var');
+        exibir('ethereum','eth-valor','eth-var');
+        exibir('solana','sol-valor','sol-var');
+        exibir('binancecoin','bnb-valor','bnb-var');
 
         if(dados['doge-manga']){
-            document.getElementById('dgm-brl').textContent = `R$ ${dados['doge-manga'].brl.toLocaleString('pt-BR',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
-            document.getElementById('dgm-usd').textContent = `$ ${dados['doge-manga'].usd.toLocaleString('en-US',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
+            document.getElementById('dgm-brl').textContent = `R$ ${dados['doge-manga'].brl.toFixed(6)}`;
+            document.getElementById('dgm-usd').textContent = `$ ${dados['doge-manga'].usd.toFixed(6)}`;
             const vDgm = dados['doge-manga'].usd_24h_change;
             document.getElementById('dgm-var').textContent = `${vDgm>=0?'📈 +':'📉 '}${vDgm.toFixed(2)}%`;
-            document.getElementById('dgm-var').style.color = vDgm>=0 ? 'var(--sucesso)' : 'var(--queda)';
             document.getElementById('dados-usd').textContent = `$ ${dados['doge-manga'].usd.toFixed(6)}`;
             document.getElementById('dados-brl').textContent = `R$ ${dados['doge-manga'].brl.toFixed(6)}`;
             document.getElementById('dados-var').textContent = `${vDgm>=0?'📈 +':'📉 '}${vDgm.toFixed(2)}%`;
-            document.getElementById('dados-var').style.color = vDgm>=0 ? 'var(--sucesso)' : 'var(--queda)';
         }
     }catch(err){}
 }
@@ -506,7 +502,7 @@ const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastr
 const formCadastrar = document.getElementById('formCadastrar');
 const fundoEscuro = document.getElementById('fundoEscuro');
 const fecharForm = document.getElementById('fecharForm');
-function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar'); menuCompartilhar.classList.remove('mostrar');}
+function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar');}
 function fechar(){formCadastrar.classList.remove('mostrar'); fundoEscuro.classList.remove('mostrar');}
 botoesCadastrar.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); abrirForm();}));
 fecharForm.addEventListener('click',e=>{e.preventDefault(); fechar();});
