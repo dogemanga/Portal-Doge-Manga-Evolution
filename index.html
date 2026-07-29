@@ -200,14 +200,6 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
             <a href="https://www.coingecko.com/pt-br/moedas/solana" class="btn-cg" target="_blank">CG</a>
             <a href="https://coinmarketcap.com/currencies/solana/" class="btn-cmc" target="_blank">CMC</a>
         </div>
-        <div class="item-moeda">
-            <img src="https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png" alt="BNB">
-            <a href="https://www.coingecko.com/pt-br/moedas/binancecoin" target="_blank">🔶 BNB:</a>
-            <strong id="bnb-valor">...</strong>
-            <span id="bnb-var"></span>
-            <a href="https://www.coingecko.com/pt-br/moedas/binancecoin" class="btn-cg" target="_blank">CG</a>
-            <a href="https://coinmarketcap.com/currencies/bnb/" class="btn-cmc" target="_blank">CMC</a>
-        </div>
     </div>
 </div>
 
@@ -285,14 +277,15 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
         <h2>📢 Projetos Listados</h2>
-        <p class="alerta">Aqui está o Doge Manga em destaque, já listado oficialmente:</p>
+        <p class="alerta">🚀 DOGE MANGA JÁ ESTÁ LISTADO AQUI COMO PROJETO OFICIAL:</p>
         <div class="area-andamento">
             <div class="lista-andando" id="listaMoedas">
+                <!-- DOGE MANGA LISTADO AQUI COM LOGO E TODOS OS DADOS -->
                 <div class="card-moeda destaque" data-contrato="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">
                     <div class="logo-moeda">
                         <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
                     </div>
-                    <div class="nome-moeda">Doge Manga</div>
+                    <div class="nome-moeda">🐶 Doge Manga</div>
                     <div class="simbolo-moeda">$DGM • Rede Solana</div>
                     <div class="links-moeda">
                         <a href="https://dogemangaofficial.xyz" target="_blank" class="link-site">Site</a>
@@ -302,6 +295,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
                         <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="link-birdeye">Birdeye</a>
                     </div>
                 </div>
+                <!-- AQUI VÃO APARECER OS OUTROS PROJETOS NO FUTURO -->
             </div>
         </div>
     </div>
@@ -392,7 +386,7 @@ document.getElementById('copiarLinkPagina').addEventListener('click', e=>{
     menuCompartilhar.classList.remove('mostrar');
 });
 
-// 🔍 PESQUISA TOTALMENTE ARRUMADA E FUNCIONAL
+// 🔍 PESQUISA FUNCIONAL
 const campoPesquisa = document.getElementById('pesquisaMoeda');
 const resultadoBusca = document.getElementById('resultadoBusca');
 let timerBusca;
@@ -406,7 +400,7 @@ campoPesquisa.addEventListener('input', () => {
     timerBusca = setTimeout(async () => {
         try{
             const resLista = await fetch(`https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(termo)}`);
-            if(!resLista.ok) throw new Error('Erro na busca');
+            if(!resLista.ok) throw new Error('Erro');
             const dadosLista = await resLista.json();
             
             if(!dadosLista.coins || dadosLista.coins.length === 0){
@@ -418,13 +412,13 @@ campoPesquisa.addEventListener('input', () => {
             const moeda = dadosLista.coins[0];
             const resDados = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${moeda.id}&vs_currencies=usd,brl&include_24h_change=true`);
             const dadosPreco = await resDados.json();
-            const info = dadosPreco[moeda.id] || null;
+            const info = dadosPreco[moeda.id];
 
             resultadoBusca.innerHTML = `
                 <div class="card-busca">
                     <img src="${moeda.large}" alt="${moeda.name}">
                     <h4>${moeda.name} (${moeda.symbol.toUpperCase()})</h4>
-                    <div class="preco">${info ? `$ ${info.usd.toFixed(6)}` : 'Carregando preço...'}</div>
+                    <div class="preco">${info ? `$ ${info.usd.toFixed(6)}` : 'Carregando...'}</div>
                     <div class="variacao ${info && info.usd_24h_change >=0 ? 'valor-pos' : 'valor-neg'}">
                         ${info ? `${info.usd_24h_change >=0 ? '📈 +' : '📉 '}${info.usd_24h_change.toFixed(2)}%` : ''}
                     </div>
@@ -437,7 +431,7 @@ campoPesquisa.addEventListener('input', () => {
             resultadoBusca.classList.add('mostrar');
 
         }catch(err){
-            resultadoBusca.innerHTML = `<div class="erro-busca">⚠️ Erro ao buscar, tente novamente</div>`;
+            resultadoBusca.innerHTML = `<div class="erro-busca">⚠️ Erro na busca</div>`;
             resultadoBusca.classList.add('mostrar');
         }
     }, 700);
@@ -457,10 +451,10 @@ document.querySelectorAll('.aba[data-secao]').forEach(aba => {
     });
 });
 
-// 📈 PREÇOS AO VIVO - ATUALIZA 30S
+// 📈 PREÇOS AO VIVO
 async function buscarAtualizarPrecos(){
     try{
-        const resposta = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=doge-manga,bitcoin,ethereum,solana,binancecoin&vs_currencies=usd,brl&include_24h_change=true');
+        const resposta = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=doge-manga,bitcoin,ethereum,solana&vs_currencies=usd,brl&include_24h_change=true');
         if(!resposta.ok) return;
         const dados = await resposta.json();
 
@@ -468,7 +462,7 @@ async function buscarAtualizarPrecos(){
             if(!dados[id]) return;
             const elV = document.getElementById(elValor);
             const elVa = document.getElementById(elVar);
-            if(elV) elV.textContent = `$ ${dados[id].usd.toLocaleString('en-US',{minimumFractionDigits:2})}`;
+            if(elV) elV.textContent = `$ ${dados[id].usd.toFixed(4)}`;
             if(elVa){
                 const v = dados[id].usd_24h_change;
                 elVa.textContent = ` (${v>=0?'+':''}${v.toFixed(2)}%)`;
@@ -480,7 +474,6 @@ async function buscarAtualizarPrecos(){
         exibir('bitcoin','btc-valor','btc-var');
         exibir('ethereum','eth-valor','eth-var');
         exibir('solana','sol-valor','sol-var');
-        exibir('binancecoin','bnb-valor','bnb-var');
 
         if(dados['doge-manga']){
             document.getElementById('dgm-brl').textContent = `R$ ${dados['doge-manga'].brl.toFixed(6)}`;
