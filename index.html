@@ -17,7 +17,6 @@
     --sucesso:#22c55e; --erro:#ef4444; --texto:#e2e8f0; --claro:#94a3b8;
     --destaque:#fbbf24; --borda:#1e293b;
 }
-/* MODO CLARO AUTOMÁTICO */
 .tema-claro{
     --fundo:#f8fafc; --secundaria:#e2e8f0; --texto:#0f172a; --claro:#475569;
 }
@@ -152,9 +151,14 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <button class="menu-botao" id="btnMenu">☰</button>
         <nav class="menu-navegacao" id="menuNavegacao">
             <div class="titulo-menu">⚙️ CONFIGURAÇÕES</div>
-            <!-- NOVOS BOTÕES ADICIONADOS AQUI -->
             <a class="menu-item" id="btnTema">💡 Iluminação: Modo Escuro</a>
             <a class="menu-item" id="btnIdioma">🌐 Idioma: Português</a>
+            <div class="menu-divisao"></div>
+
+            <div class="titulo-menu">🔗 PLATAFORMAS OFICIAIS</div>
+            <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" class="menu-item">📊 CoinMarketCap</a>
+            <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="menu-item">📈 CoinGecko</a>
+            <a href="https://www.binance.com/pt-BR" target="_blank" class="menu-item">💱 Binance</a>
             <div class="menu-divisao"></div>
 
             <div class="titulo-menu">🏠 PRINCIPAL</div>
@@ -266,7 +270,40 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div id="mensagemSucesso" style="display:none; margin-top:15px; padding:12px; background:rgba(34,197,94,0.1); border:1px solid var(--sucesso); border-radius:8px; color:var(--sucesso);">✅ SOLICITAÇÃO ENVIADA COM SUCESSO! Iremos analisar e retornar em breve.</div>
 </div></div></section>
 
-<section id="listados" class="secao"><div class="container"><div class="card"><h2>📋 Projetos Listados</h2><p>Pesquisa, filtros, ranking, selos de verificação, novos projetos e mais visitados — Doge Manga como primeiro projeto oficial.</p></div></div></section>
+<section id="listados" class="secao"><div class="container">
+    <div class="card">
+        <h2>📋 Projetos Listados Oficialmente</h2>
+        <p>Todos os projetos verificados, aprovados e ativos no Portal Doge Manga Evolution — espaço preparado para milhares de memecoins.</p>
+
+        <div class="card destaque" style="margin:20px 0; padding:20px; border:2px solid var(--primaria);">
+            <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap;">
+                <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga" style="width:60px; height:60px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover;">
+                <div>
+                    <h3 style="color:var(--primaria); margin:0; font-size:20px;">DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO • PROJETO OFICIAL</span></h3>
+                    <p style="margin:5px 0; color:var(--claro);">Primeiro projeto do ecossistema, inspirado na força da Dogecoin e na comunidade da Pepe Coin, construído na Rede Solana.</p>
+                </div>
+            </div>
+            <div class="botoes-acao" style="margin-top:15px;">
+                <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">👻 Ver na Phantom</a>
+                <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-secundario">🔍 DexScreener</a>
+                <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="btn btn-secundario">🔎 Birdeye</a>
+                <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-secundario">🔗 Solscan</a>
+                <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" class="btn btn-secundario">📊 CoinMarketCap</a>
+                <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="btn btn-secundario">📈 CoinGecko</a>
+            </div>
+        </div>
+
+        <div style="margin-top:30px;">
+            <h3 style="color:var(--primaria); margin-bottom:15px;">📂 Todos os Projetos Aprovados</h3>
+            <div class="grid-dados" id="listaProjetos">
+                <div style="grid-column: 1 / -1; text-align:center; padding:30px; color:var(--claro);">
+                    🚀 Em breve novos projetos aprovados pelo Launchpad aparecerão aqui — espaço preparado para milhares de listagens!
+                </div>
+            </div>
+        </div>
+    </div>
+</div></section>
+
 <section id="roadmap" class="secao"><div class="container"><div class="card"><h2>🗺️ Roadmap Completo</h2><p>Fase 1 • Fase 2 • Fase 3 • Fase 4 — atualizado constantemente.</p></div></div></section>
 <section id="whitepaper" class="secao"><div class="container"><div class="card"><h2>📄 Whitepaper Oficial</h2><p>Documento completo com objetivos, segurança, economia e regras do ecossistema.</p></div></div></section>
 <section id="comunidade" class="secao"><div class="container"><div class="card"><h2>👥 Nossa Comunidade</h2><p><a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" style="color:var(--primaria);">Telegram</a> • <a href="https://x.com/dogemanga96508" target="_blank" style="color:var(--primaria);">X</a> • <a href="https://tiktok.com/@dogemangaofficial" target="_blank" style="color:var(--primaria);">TikTok</a> • Discord • YouTube.</p></div></div></section>
@@ -307,14 +344,12 @@ document.addEventListener('click', (e)=>{
     if(!menu.contains(e.target) && e.target !== botao) menu.classList.remove('mostrar');
 });
 
-// BOTÃO DE ILUMINAÇÃO
 document.getElementById('btnTema').onclick = ()=>{
     temaEscuro = !temaEscuro;
     document.body.classList.toggle('tema-claro');
     document.getElementById('btnTema').innerText = temaEscuro ? '💡 Iluminação: Modo Escuro' : '💡 Iluminação: Modo Claro';
 };
 
-// BOTÃO DE IDIOMA (TRADUÇÃO)
 document.getElementById('btnIdioma').onclick = ()=>{
     idiomaAtual = idiomaAtual === 'pt' ? 'en' : idiomaAtual === 'en' ? 'es' : 'pt';
     document.getElementById('btnIdioma').innerText = `🌐 Idioma: ${idiomaAtual === 'pt' ? 'Português' : idiomaAtual === 'en' ? 'English' : 'Español'}`;
@@ -338,7 +373,6 @@ document.querySelectorAll('.aba, .menu-item, #btnVoltarMenu').forEach(item=>{
     });
 });
 
-// DADOS EM TEMPO REAL — COM TRATAMENTO DE ERRO
 async function atualizarDados(){
     try{
         const resCG = await fetch('https://api.coingecko.com/api/v3/coins/doge-manga?localization=pt-br&tickers=false&community_data=false&developer_data=false');
@@ -380,7 +414,6 @@ async function atualizarDados(){
 atualizarDados();
 setInterval(atualizarDados, 30000);
 
-// CONEXÃO CARTEIRAS
 document.getElementById('btnConectarCarteira').onclick = async ()=>{
     if(window.phantom?.solana){
         try{
