@@ -47,10 +47,30 @@ body{
 .perfil img{width:38px; height:38px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover;}
 .perfil span{font-weight:600; color:var(--primaria); font-size:15px;}
 
-.caixa-pesquisa{display:flex; align-items:center; background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); border-radius:20px; padding:5px 10px;}
-.caixa-pesquisa input{background:transparent; border:none; outline:none; color:var(--texto); font-size:13px; width:160px;}
+.caixa-pesquisa{display:flex; align-items:center; background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); border-radius:20px; padding:5px 10px; position:relative;}
+.caixa-pesquisa input{background:transparent; border:none; outline:none; color:var(--texto); font-size:13px; width:180px;}
 .caixa-pesquisa input::placeholder{color:var(--claro);}
 .lupa{color:var(--primaria); font-size:15px; margin-right:6px;}
+
+/* CAIXA DE RESULTADO QUE APARECE DENTRO DO PORTAL */
+.resultado-busca{
+    position:absolute; top:120%; left:0; width:320px;
+    background:rgba(5,8,22,0.98); border:1px solid var(--primaria);
+    border-radius:10px; display:none; z-index:999; padding:12px;
+    box-shadow:0 0 20px rgba(250,204,21,0.15);
+}
+.resultado-busca.mostrar{display:block;}
+.card-busca{text-align:center;}
+.card-busca img{width:60px; height:60px; border-radius:50%; border:2px solid var(--primaria); margin-bottom:8px;}
+.card-busca h4{color:var(--primaria); font-size:16px; margin-bottom:4px;}
+.card-busca .preco{font-size:15px; font-weight:700; margin-bottom:4px;}
+.card-busca .variacao{font-size:13px; font-weight:600; margin-bottom:10px;}
+.links-busca{display:flex; gap:6px; justify-content:center; flex-wrap:wrap;}
+.links-busca a{padding:5px 10px; border-radius:6px; color:white; text-decoration:none; font-size:11px; font-weight:500;}
+.link-cg{background:#0052ff;}
+.link-cmc{background:#10b981;}
+.link-dex{background:#ef4444;}
+.erro-busca{text-align:center; color:var(--claro); font-size:12px; padding:10px;}
 
 .compartilhar-botao{background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); border-radius:8px; padding:5px 8px; color:var(--primaria); cursor:pointer; font-size:13px; font-weight:600;}
 .compartilhar-botao:hover{background:rgba(250,204,21,0.2);}
@@ -73,6 +93,9 @@ body{
 .aba{font-size:14px; font-weight:500; color:var(--claro); cursor:pointer; white-space:nowrap; padding-bottom:3px;}
 .aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria);}
 
+.secao{display:none;}
+.secao.ativa{display:block;}
+
 header{text-align:center; padding:35px 20px; display:flex; flex-direction:column; align-items:center; justify-content:center;}
 .logo-principal{width:210px; height:210px; border-radius:50%; border:4px solid var(--primaria); box-shadow:0 0 35px rgba(250,204,21,0.35); margin-bottom:18px; object-fit:cover;}
 header h1{font-size:40px; color:var(--primaria); text-shadow:0 0 25px rgba(250,204,21,0.3); margin-bottom:8px;}
@@ -88,6 +111,11 @@ header p{font-size:16px; color:var(--claro); max-width:850px; margin:0 auto 15px
 .card{background:rgba(17,24,39,0.95); padding:22px; margin:25px 0; border-radius:16px; border:1px solid rgba(250,204,21,0.2);}
 .card.destaque{border-color:var(--primaria);}
 h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:10px; font-size:20px;}
+
+.grid-dados{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:15px;}
+.item-dado{background:rgba(2,6,23,0.8); padding:12px; border-radius:8px; border:1px solid rgba(250,204,21,0.2);}
+.item-dado strong{color:var(--primaria); display:block; margin-bottom:4px; font-size:13px;}
+.item-dado span{font-size:14px;}
 
 .form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px;}
 .grupo-form{display:flex; flex-direction:column; gap:5px;}
@@ -168,13 +196,6 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
             <a href="https://coinmarketcap.com/currencies/solana/" class="btn-cmc" target="_blank">CMC</a>
         </div>
         <div class="item-moeda">
-            <a href="https://www.coingecko.com/pt-br/moedas/ripple" target="_blank">✕ XRP:</a>
-            <strong id="xrp-valor">...</strong>
-            <span id="xrp-var"></span>
-            <a href="https://www.coingecko.com/pt-br/moedas/ripple" class="btn-cg" target="_blank">CG</a>
-            <a href="https://coinmarketcap.com/currencies/xrp/" class="btn-cmc" target="_blank">CMC</a>
-        </div>
-        <div class="item-moeda">
             <a href="https://www.coingecko.com/pt-br/moedas/binancecoin" target="_blank">🔶 BNB:</a>
             <strong id="bnb-valor">...</strong>
             <span id="bnb-var"></span>
@@ -206,7 +227,12 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 
 <div class="barra-topo">
     <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg"><span>Portal Doge Manga</span></div>
-    <div class="caixa-pesquisa"><span class="lupa">🔍</span><input type="text" id="pesquisaMoeda" placeholder="Pesquisar projeto..."></div>
+    <div class="caixa-pesquisa">
+        <span class="lupa">🔍</span>
+        <input type="text" id="pesquisaMoeda" placeholder="Pesquisar qualquer moeda...">
+        <!-- RESULTADO VAI APARECER AQUI DENTRO -->
+        <div class="resultado-busca" id="resultadoBusca"></div>
+    </div>
     <div style="position:relative;"><div class="compartilhar-botao" id="btnCompartilhar">🔗 Compartilhar</div><div class="menu-compartilhar" id="menuCompartilhar"><a href="https://www.facebook.com/sharer/sharer.php?u=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">📘 Facebook</a><a href="https://twitter.com/intent/tweet?text=Portal%20Doge%20Manga&url=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">🐦 X</a><a href="https://api.whatsapp.com/send?text=Portal%20Doge%20Manga:%20https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">💬 WhatsApp</a><a href="https://t.me/share/url?url=https://dogemangaofficial.xyz&text=Portal%20Doge%20Manga" target="_blank" class="item-compartilhar">📢 Telegram</a><div class="menu-divisao"></div><a href="#" id="copiarLinkPagina" class="item-compartilhar">📋 Copiar Link</a></div></div>
     <div class="menu-botao" id="btnMenu">⋮⋮⋮</div>
     <nav class="menu-navegacao" id="menuNavegacao">
@@ -237,9 +263,15 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     </nav>
 </div>
 
-<div class="abas"><div class="aba ativo">🏠 Início</div><div class="aba">📢 Lançadas</div><div class="aba" id="botaoCadastrar">📤 Cadastrar</div><div class="aba">📊 Dados</div></div>
+<div class="abas">
+    <div class="aba ativo" data-secao="inicio">🏠 Início</div>
+    <div class="aba" data-secao="lancadas">📢 Lançadas</div>
+    <div class="aba" id="botaoCadastrar">📤 Cadastrar</div>
+    <div class="aba" data-secao="dados">📊 Dados</div>
+</div>
 
-<header id="inicio">
+<section id="inicio" class="secao ativa">
+<header>
     <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga">
     <h1>🚀 Doge Manga Evolution</h1>
     <p>Portal Oficial • Rede Solana • Memecoins e NFTs</p>
@@ -248,8 +280,10 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">📊 Ver Mercado</a>
     </div>
 </header>
+</section>
 
-<div class="container" id="lancadas">
+<section id="lancadas" class="secao">
+<div class="container">
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
         <h2>📢 Projetos Listados</h2>
@@ -274,6 +308,27 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         </div>
     </div>
 </div>
+</section>
+
+<section id="dados" class="secao">
+<div class="container">
+    <div class="card destaque">
+        <a href="#inicio" class="voltar">← Voltar</a>
+        <h2>📊 Dados Oficiais - Doge Manga</h2>
+        <p>Todas as informações em tempo real:</p>
+        <div class="grid-dados">
+            <div class="item-dado"><strong>Moeda:</strong><span>Doge Manga</span></div>
+            <div class="item-dado"><strong>Símbolo:</strong><span>$DGM</span></div>
+            <div class="item-dado"><strong>Rede:</strong><span>Solana</span></div>
+            <div class="item-dado"><strong>Contrato:</strong><span style="font-size:11px;word-break:break-all;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</span></div>
+            <div class="item-dado"><strong>Preço USD:</strong><span id="dados-usd">$ ...</span></div>
+            <div class="item-dado"><strong>Preço BRL:</strong><span id="dados-brl">R$ ...</span></div>
+            <div class="item-dado"><strong>Variação 24h:</strong><span id="dados-var">...</span></div>
+            <div class="item-dado"><strong>Status:</strong><span style="color:var(--sucesso);">✅ Ativo e Verificado</span></div>
+        </div>
+    </div>
+</div>
+</section>
 
 <div class="fundo-escuro" id="fundoEscuro"></div>
 <div class="card" id="formCadastrar">
@@ -315,10 +370,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 <footer>🐕 Doge Manga Evolution © 2026 • Contato: dogemanga687@gmil.com</footer>
 
 <script>
-// ==============================
-// 🔒 CONTRATO TRAVADO - NÃO ALTERÁVEL
-// ==============================
-const CONTRATO_FIXO = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
+const CONTRATO_DOGEMANGA = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
 
 // MENUS
 const btnMenu = document.getElementById('btnMenu');
@@ -332,75 +384,122 @@ document.addEventListener('click', e => {
     if(!menuCompartilhar.contains(e.target) && e.target !== btnCompartilhar) menuCompartilhar.classList.remove('mostrar');
 });
 
-// ==============================
-// 📋 COPIAR CONTRATO - SOMENTE O FIXO
-// ==============================
+// COPIAR CONTRATO
 const avisoCopiado = document.getElementById('avisoCopiado');
 function mostrarAviso(){avisoCopiado.style.display='block'; setTimeout(()=>avisoCopiado.style.display='none', 2000);}
-
 document.getElementById('btnCopiarContrato').addEventListener('click', ()=>{
-    navigator.clipboard.writeText(CONTRATO_FIXO).then(mostrarAviso);
+    navigator.clipboard.writeText(CONTRATO_DOGEMANGA).then(mostrarAviso);
 });
-
 document.getElementById('copiarLinkPagina').addEventListener('click', e=>{
     e.preventDefault(); navigator.clipboard.writeText(window.location.href).then(mostrarAviso);
     menuCompartilhar.classList.remove('mostrar');
 });
 
-// 🔍 PESQUISA - SÓ ENCONTRA O CONTRATO OFICIAL
+// ==============================
+// 🔍 BUSCA QUE MOSTRA TUDO DENTRO DO PORTAL
+// ==============================
 const campoPesquisa = document.getElementById('pesquisaMoeda');
-const listaMoedas = document.getElementById('listaMoedas');
-const todosCards = listaMoedas.querySelectorAll('.card-moeda');
+const resultadoBusca = document.getElementById('resultadoBusca');
+let timerBusca;
 
 campoPesquisa.addEventListener('input', () => {
-    const termo = campoPesquisa.value.toLowerCase().trim();
-    if(!termo){
-        todosCards.forEach(card => card.style.display = 'block');
-        return;
-    }
-    todosCards.forEach(card => {
-        const nome = card.querySelector('.nome-moeda').textContent.toLowerCase();
-        const simbolo = card.querySelector('.simbolo-moeda').textContent.toLowerCase();
-        const contrato = CONTRATO_FIXO.toLowerCase();
-        card.style.display = (nome.includes(termo) || simbolo.includes(termo) || contrato.includes(termo)) ? 'block' : 'none';
+    clearTimeout(timerBusca);
+    const termo = campoPesquisa.value.trim().toLowerCase();
+    resultadoBusca.classList.remove('mostrar');
+    if(termo.length < 2) return;
+
+    timerBusca = setTimeout(async () => {
+        try{
+            // Busca lista de moedas na CoinGecko
+            const resLista = await fetch('https://api.coingecko.com/api/v3/search?query='+encodeURIComponent(termo));
+            const dadosLista = await resLista.json();
+            if(!dadosLista.coins || dadosLista.coins.length === 0){
+                resultadoBusca.innerHTML = `<div class="erro-busca">❌ Moeda não encontrada</div>`;
+                resultadoBusca.classList.add('mostrar');
+                return;
+            }
+
+            const moeda = dadosLista.coins[0]; // pega a mais relevante
+            // Busca preço e dados completos
+            const resDados = await fetch('https://api.coingecko.com/api/v3/simple/price?ids='+moeda.id+'&vs_currencies=usd,brl&include_24h_change=true');
+            const dadosPreco = await resDados.json();
+            const info = dadosPreco[moeda.id];
+
+            resultadoBusca.innerHTML = `
+                <div class="card-busca">
+                    <img src="${moeda.large}" alt="${moeda.name}">
+                    <h4>${moeda.name} (${moeda.symbol.toUpperCase()})</h4>
+                    <div class="preco">${info ? `$ ${info.usd.toFixed(6)}` : 'Carregando...'}</div>
+                    <div class="variacao ${info && info.usd_24h_change >=0 ? 'valor-pos' : 'valor-neg'}">
+                        ${info ? `${info.usd_24h_change >=0 ? '📈 +' : '📉 '}${info.usd_24h_change.toFixed(2)}%` : ''}
+                    </div>
+                    <div class="links-busca">
+                        <a href="https://www.coingecko.com/pt-br/moedas/${moeda.id}" target="_blank" class="link-cg">CoinGecko</a>
+                        <a href="https://coinmarketcap.com/search/?q=${encodeURIComponent(moeda.name)}" target="_blank" class="link-cmc">CoinMarketCap</a>
+                    </div>
+                </div>
+            `;
+            resultadoBusca.classList.add('mostrar');
+
+        }catch(err){
+            resultadoBusca.innerHTML = `<div class="erro-busca">⚠️ Erro ao buscar</div>`;
+            resultadoBusca.classList.add('mostrar');
+        }
+    }, 600);
+});
+
+document.addEventListener('click', e => {
+    if(!campoPesquisa.parentElement.contains(e.target)) resultadoBusca.classList.remove('mostrar');
+});
+
+// TROCA DE ABAS
+document.querySelectorAll('.aba[data-secao]').forEach(aba => {
+    aba.addEventListener('click', () => {
+        document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativo'));
+        document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
+        aba.classList.add('ativo');
+        document.getElementById(aba.dataset.secao).classList.add('ativa');
     });
 });
 
-// 📊 PREÇOS EM TEMPO REAL - ATUALIZA 30S
-async function atualizarPrecos(){
+// PREÇOS EM TEMPO REAL
+async function buscarAtualizarPrecos(){
     try{
-        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,ripple,binancecoin,dogecoin,doge-manga&vs_currencies=usd,brl&include_24h_change=true');
-        if(!res.ok) return;
-        const d = await res.json();
+        const resposta = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,binancecoin,dogecoin,doge-manga&vs_currencies=usd,brl&include_24h_change=true');
+        if(!resposta.ok) return;
+        const dados = await resposta.json();
 
-        function mostrar(id, elV, elVar){
-            if(d[id]){
-                document.getElementById(elV).textContent = `$ ${d[id].usd.toLocaleString('en-US',{minimumFractionDigits:2})}`;
-                const v = d[id].usd_24h_change;
-                document.getElementById(elVar).textContent = ` (${v>=0?'+':''}${v.toFixed(2)}%)`;
-                document.getElementById(elVar).className = v>=0 ? 'valor-pos' : 'valor-neg';
+        function exibirPreco(id, elValor, elVariacao){
+            if(dados[id]){
+                document.getElementById(elValor).textContent = `$ ${dados[id].usd.toLocaleString('en-US',{minimumFractionDigits:2})}`;
+                const variacao = dados[id].usd_24h_change;
+                document.getElementById(elVariacao).textContent = ` (${variacao>=0?'+':''}${variacao.toFixed(2)}%)`;
+                document.getElementById(elVariacao).className = variacao>=0 ? 'valor-pos' : 'valor-neg';
             }
         }
 
-        mostrar('bitcoin','btc-valor','btc-var');
-        mostrar('ethereum','eth-valor','eth-var');
-        mostrar('solana','sol-valor','sol-var');
-        mostrar('ripple','xrp-valor','xrp-var');
-        mostrar('binancecoin','bnb-valor','bnb-var');
-        mostrar('dogecoin','doge-valor','doge-var');
+        exibirPreco('bitcoin','btc-valor','btc-var');
+        exibirPreco('ethereum','eth-valor','eth-var');
+        exibirPreco('solana','sol-valor','sol-var');
+        exibirPreco('binancecoin','bnb-valor','bnb-var');
+        exibirPreco('dogecoin','doge-valor','doge-var');
 
-        if(d['doge-manga']){
-            document.getElementById('dgm-brl').textContent = `R$ ${d['doge-manga'].brl.toLocaleString('pt-BR',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
-            document.getElementById('dgm-usd').textContent = `$ ${d['doge-manga'].usd.toLocaleString('en-US',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
-            const v = d['doge-manga'].usd_24h_change;
-            document.getElementById('dgm-var').textContent = `${v>=0?'📈 +':'📉 '}${v.toFixed(2)}%`;
-            document.getElementById('dgm-var').style.color = v>=0 ? 'var(--sucesso)' : 'var(--queda)';
+        if(dados['doge-manga']){
+            document.getElementById('dgm-brl').textContent = `R$ ${dados['doge-manga'].brl.toLocaleString('pt-BR',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
+            document.getElementById('dgm-usd').textContent = `$ ${dados['doge-manga'].usd.toLocaleString('en-US',{minimumFractionDigits:6,maximumFractionDigits:8})}`;
+            const vDgm = dados['doge-manga'].usd_24h_change;
+            document.getElementById('dgm-var').textContent = `${vDgm>=0?'📈 +':'📉 '}${vDgm.toFixed(2)}%`;
+            document.getElementById('dgm-var').style.color = vDgm>=0 ? 'var(--sucesso)' : 'var(--queda)';
+            document.getElementById('dados-usd').textContent = `$ ${dados['doge-manga'].usd.toFixed(6)}`;
+            document.getElementById('dados-brl').textContent = `R$ ${dados['doge-manga'].brl.toFixed(6)}`;
+            document.getElementById('dados-var').textContent = `${vDgm>=0?'📈 +':'📉 '}${vDgm.toFixed(2)}%`;
+            document.getElementById('dados-var').style.color = vDgm>=0 ? 'var(--sucesso)' : 'var(--queda)';
         }
-    }catch{}
+    }catch(err){}
 }
 
-atualizarPrecos();
-setInterval(atualizarPrecos, 30000);
+buscarAtualizarPrecos();
+setInterval(buscarAtualizarPrecos, 30000);
 
 // FORMULÁRIO
 const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastrarNav,#botaoCadastrarMenu');
