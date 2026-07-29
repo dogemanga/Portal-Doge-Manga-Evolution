@@ -375,3 +375,85 @@ margin-bottom:10px;
     transform:scale(1.05);
     background:white;
 }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doge Manga Evolution | Portal Oficial Solana</title>
+<link rel="icon" href="IMG-20260727-WA0036(7).jpg">
+<style>
+*{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif;}
+:root{
+    --primaria:#facc15; --fundo:#050816; --secundaria:#111827;
+    --sucesso:#22c55e; --queda:#ef4444; --texto:#e2e8f0; --claro:#94a3b8;
+}
+body{
+    color:var(--texto); line-height:1.7;
+    background:linear-gradient(rgba(5,8,22,0.7), rgba(2,6,23,0.75)), url("IMG-20260727-WA0036(7).jpg");
+    background-size:cover; background-position:center; background-attachment:fixed; background-repeat:no-repeat;
+    min-height:100vh; padding-bottom:80px;
+}
+
+.barra-geral{background:rgba(2,6,23,0.95); padding:10px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2);}
+.barra-conteudo-geral{display:flex; gap:35px; animation:rolar 45s linear infinite; width:max-content;}
+.barra-geral:hover .barra-conteudo-geral{animation-play-state:paused;}
+@keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+.item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap; font-size:13px;}
+.item-moeda a{color:inherit; text-decoration:none; font-weight:500;}
+.item-moeda a:hover{color:var(--primaria);}
+.valor-pos{color:var(--sucesso); font-weight:600;}
+.valor-neg{color:var(--queda); font-weight:600;}
+.btn-cg{background:#0052ff; padding:2px 6px; border-radius:3px; font-size:10px; color:white; text-decoration:none;}
+.btn-cmc{background:#10b981; padding:2px 6px; border-radius:3px; font-size:10px; color:white; text-decoration:none;}
+
+.barra-portal{background:rgba(5,8,22,0.9); padding:8px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.15);}
+.barra-conteudo-portal{display:flex; gap:30px; animation:rolar 35s linear infinite; width:max-content;}
+.barra-portal:hover .barra-conteudo-portal{animation-play-state:paused;}
+.destaque-portal{color:var(--primaria); font-weight:700; display:flex; align-items:center; gap:6px;}
+.mini-logo{width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria); object-fit:cover;}
+
+.barra-topo{background:rgba(2,6,23,0.98); padding:16px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:999;}
+.perfil{display:flex; gap:10px; align-items:center;}
+.perfil img{width:40px; height:40px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover;}
+.perfil span{font-weight:600; color:var(--primaria);}
+
+.menu-botao{font-size:28px; color:var(--primaria); cursor:pointer; padding:6px 12px; border-radius:8px; transition:0.2s; background:rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.2);}
+.menu-botao:hover{background:rgba(250,204,21,0.15); transform:scale(1.05);}
+.menu-navegacao{display:none; position:absolute; top:100%; right:20px; width:320px; background:rgba(5,8,22,0.98); backdrop-filter:blur(10px); border-radius:14px; border:1px solid rgba(250,204,21,0.25); margin-top:8px; overflow:hidden; box-shadow:0 8px 25px rgba(0,0,0,0.3); z-index:999;}
+.menu-navegacao.mostrar{display:block; animation:abrirMenu 0.2s ease;}
+@keyframes abrirMenu{from{opacity:0; transform:translateY(-8px);}to{opacity:1; transform:translateY(0);}}
+.menu-item{display:block; padding:11px 20px; color:var(--texto); text-decoration:none; font-weight:500; border-bottom:1px solid rgba(250,204,21,0.1); transition:0.2s; font-size:14px;}
+.menu-item:last-child{border-bottom:none;}
+.menu-item:hover, .menu-item.ativo{color:var(--primaria); background:rgba(250,204,21,0.08); padding-left:24px;}
+.menu-divisao{height:1px; background:rgba(250,204,21,0.2); margin:6px 0;}
+
+.abas{display:flex; gap:15px; padding:0 20px 15px; overflow-x:auto; margin-top:10px;}
+.aba{font-size:15px; font-weight:500; color:var(--claro); cursor:pointer; white-space:nowrap; transition:0.2s; padding-bottom:4px;}
+.aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria);}
+.aba:hover{color:var(--primaria);}
+
+header{text-align:center; padding:40px 20px 60px; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:70vh;}
+.logo-principal{width:220px; height:220px; border-radius:50%; border:4px solid var(--primaria); box-shadow:0 0 40px rgba(250,204,21,0.4); margin-bottom:20px; object-fit:cover;}
+header h1{font-size:48px; color:var(--primaria); text-shadow:0 0 25px rgba(250,204,21,0.35); margin-bottom:8px;}
+.preco-dgm{font-size:22px; color:var(--texto); margin-bottom:15px;}
+.preco-dgm span{color:var(--primaria); font-weight:700; font-size:26px;}
+.variacao-dgm{font-size:15px; margin-bottom:20px;}
+
+.botoes-compra{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:15px 0;}
+.btn-compra{padding:12px 22px; border-radius:10px; color:white; text-decoration:none; font-weight:700; font-size:15px; transition:0.2s; border:none; cursor:pointer;}
+.btn-compra:hover{transform:translateY(-3px); box-shadow:0 0 15px rgba(250,204,21,0.35);}
+.btn-phantom{background:#AB9FF2; color:#050816;}
+.btn-dex{background:#ef4444; color:white;}
+.btn-birdeye{background:#16a34a; color:white;}
+.btn-metamask{background:#E8831E; color:white;}
+
+.container{max-width:1450px; margin:0 auto; padding:20px 24px;}
+.card{background:rgba(17,24,39,0.95); padding:28px; margin:30px 0; border-radius:20px; border:1px solid rgba(250,204,21,0.2); backdrop-filter:blur(8px);}
+.card.destaque{border-color:var(--primaria); box-shadow:0 0 30px rgba(250,204,21,0.15);}
+h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:12px; font-size:24px;}
+
+.card-moeda{background:rgba(2,6,23,0.9); padding:20px; border-radius:16px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:320px; cursor:pointer;}
+.card-moeda.destaque{border-color:var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.2);}
+.card-moeda:hover{transform:translateY(-4p
