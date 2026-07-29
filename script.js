@@ -129,3 +129,18 @@ window.open(
 
 
 }
+const janelaGrafico = document.getElementById('janelaGrafico');
+const iframeGrafico = document.getElementById('iframeGrafico');
+const fecharGrafico = document.getElementById('fecharGrafico');
+const fundoGrafico = document.getElementById('fundoGrafico');
+
+function abrirGrafico(link){
+    iframeGrafico.src = link;
+    janelaGrafico.classList.add('mostrar');
+    fundoGrafico.classList.add('mostrar');
+}
+fecharGrafico.addEventListener('click', ()=>{
+    janelaGrafico.classList.remove('mostrar');
+    fundoGrafico.classList.remove('mostrar');
+    iframeGrafico.src = '';
+});
