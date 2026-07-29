@@ -73,6 +73,9 @@ body{
 .aba{font-size:14px; font-weight:500; color:var(--claro); cursor:pointer; white-space:nowrap; padding-bottom:3px;}
 .aba.ativo{color:var(--primaria); font-weight:700; border-bottom:2px solid var(--primaria);}
 
+.secao{display:none;}
+.secao.ativa{display:block;}
+
 header{text-align:center; padding:35px 20px; display:flex; flex-direction:column; align-items:center; justify-content:center;}
 .logo-principal{width:210px; height:210px; border-radius:50%; border:4px solid var(--primaria); box-shadow:0 0 35px rgba(250,204,21,0.35); margin-bottom:18px; object-fit:cover;}
 header h1{font-size:40px; color:var(--primaria); text-shadow:0 0 25px rgba(250,204,21,0.3); margin-bottom:8px;}
@@ -89,6 +92,11 @@ header p{font-size:16px; color:var(--claro); max-width:850px; margin:0 auto 15px
 .card.destaque{border-color:var(--primaria);}
 h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:10px; font-size:20px;}
 
+.grid-dados{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-top:15px;}
+.item-dado{background:rgba(2,6,23,0.8); padding:12px; border-radius:8px; border:1px solid rgba(250,204,21,0.2); text-align:center;}
+.item-dado strong{color:var(--primaria); display:block; margin-bottom:4px; font-size:12px;}
+.item-dado span{font-size:14px; font-weight:600;}
+
 .form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px;}
 .grupo-form{display:flex; flex-direction:column; gap:5px;}
 .grupo-form label{font-size:12px; color:var(--claro);}
@@ -101,7 +109,7 @@ h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,2
 .area-andamento:hover .lista-andando{animation-play-state:paused;}
 @keyframes rolarMoedas{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-.card-moeda{background:rgba(2,6,23,0.9); padding:16px; border-radius:12px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:300px;}
+.card-moeda{background:rgba(2,6,23,0.9); padding:16px; border-radius:12px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:300px; position:relative;}
 .card-moeda.destaque{border-color:var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.15);}
 .card-moeda:hover{transform:translateY(-3px);}
 .logo-moeda{width:80px; height:80px; border-radius:50%; margin:0 auto 12px; border:3px solid var(--primaria); object-fit:cover;}
@@ -115,6 +123,8 @@ h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,2
 .link-tg{background:#229ED9;}
 .link-dex{background:#ef4444;}
 .link-birdeye{background:#16a34a;}
+.btn-fav{position:absolute; top:10px; right:10px; background:transparent; border:none; color:var(--claro); font-size:18px; cursor:pointer;}
+.btn-fav.ativo{color:#facc15;}
 
 .voltar{display:inline-flex; align-items:center; gap:5px; color:var(--primaria); text-decoration:none; font-weight:600; margin-bottom:12px; font-size:14px;}
 .voltar:hover{gap:8px;}
@@ -132,6 +142,17 @@ h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,2
 .motivo-texto h3{color:var(--primaria); margin-bottom:10px; font-size:17px;}
 .motivo-texto ul{padding-left:18px; margin-top:6px; font-size:13px;}
 
+.btn-conectar{background:linear-gradient(135deg,#AB9FF2,#9333ea); color:#050816; border:none; padding:8px 16px; border-radius:8px; font-weight:700; cursor:pointer; font-size:13px;}
+.btn-conectar.conectado{background:var(--sucesso); color:white;}
+
+.ranking{margin-top:15px;}
+.item-rank{display:flex; align-items:center; justify-content:space-between; padding:8px 12px; background:rgba(2,6,23,0.8); border-radius:6px; margin-bottom:6px; font-size:13px;}
+.rank-posicao{font-weight:700; color:var(--primaria); width:25px;}
+.rank-nome{flex:1; padding-left:8px;}
+.rank-valor{font-weight:600;}
+
+.aviso-novidades{background:rgba(250,204,21,0.08); border-left:3px solid var(--primaria); padding:10px; border-radius:6px; margin:15px 0; font-size:13px;}
+
 .menu-inferior{position:fixed; bottom:0; left:0; width:100%; background:rgba(2,6,23,0.98); display:flex; justify-content:space-around; padding:10px 0; border-top:1px solid rgba(250,204,21,0.2); z-index:999;}
 .menu-item-inf{text-align:center; color:var(--claro); text-decoration:none; font-size:11px;}
 .menu-item-inf.ativo{color:var(--primaria); font-weight:600;}
@@ -146,6 +167,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral" id="barraPrecos">
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank">$DGM:</a><strong id="dgm-barra">...</strong><span id="dgm-barra-var"></span><a href="https://www.coingecko.com/pt-br/moedas/doge-manga" class="btn-cg" target="_blank">CG</a><a href="https://coinmarketcap.com/currencies/doge-manga/" class="btn-cmc" target="_blank">CMC</a></div>
         <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">₿ BTC:</a><strong id="btc-valor">...</strong><span id="btc-var"></span><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" class="btn-cg" target="_blank">CG</a><a href="https://coinmarketcap.com/currencies/bitcoin/" class="btn-cmc" target="_blank">CMC</a></div>
         <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">Ξ ETH:</a><strong id="eth-valor">...</strong><span id="eth-var"></span></div>
         <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">◎ SOL:</a><strong id="sol-valor">...</strong><span id="sol-var"></span></div>
@@ -170,10 +192,12 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 <div class="barra-topo">
     <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg"><span>Portal Doge Manga</span></div>
     <div class="caixa-pesquisa"><span class="lupa">🔍</span><input type="text" id="pesquisaMoeda" placeholder="Pesquisar projeto..."></div>
+    <button class="btn-conectar" id="btnConectarCarteira">👛 Conectar Phantom</button>
     <div style="position:relative;"><div class="compartilhar-botao" id="btnCompartilhar">🔗 Compartilhar</div><div class="menu-compartilhar" id="menuCompartilhar"><a href="https://www.facebook.com/sharer/sharer.php?u=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">📘 Facebook</a><a href="https://twitter.com/intent/tweet?text=Portal%20Doge%20Manga&url=https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">🐦 X</a><a href="https://api.whatsapp.com/send?text=Portal%20Doge%20Manga:%20https://dogemangaofficial.xyz" target="_blank" class="item-compartilhar">💬 WhatsApp</a><a href="https://t.me/share/url?url=https://dogemangaofficial.xyz&text=Portal%20Doge%20Manga" target="_blank" class="item-compartilhar">📢 Telegram</a><div class="menu-divisao"></div><a href="#" id="copiarLinkPagina" class="item-compartilhar">📋 Copiar Link</a></div></div>
     <div class="menu-botao" id="btnMenu">⋮⋮⋮</div>
     <nav class="menu-navegacao" id="menuNavegacao">
         <a href="#inicio" class="menu-item ativo">🏠 Início</a>
+        <a href="#dashboard" class="menu-item">📊 Dashboard</a>
         <a href="#lancadas" class="menu-item">📢 Moedas Lançadas</a>
         <a href="#" id="botaoCadastrarNav" class="menu-item">📤 Cadastrar Moeda</a>
         <a href="roadmap.html" class="menu-item">🗺️ Roadmap</a>
@@ -200,27 +224,62 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     </nav>
 </div>
 
-<div class="abas"><div class="aba ativo">🏠 Início</div><div class="aba">📢 Lançadas</div><div class="aba" id="botaoCadastrar">📤 Cadastrar</div><div class="aba">📊 Dados</div></div>
+<div class="abas">
+    <div class="aba ativo" data-secao="inicio">🏠 Início</div>
+    <div class="aba" data-secao="dashboard">📊 Dashboard</div>
+    <div class="aba" data-secao="lancadas">📢 Lançadas</div>
+    <div class="aba" id="botaoCadastrar">📤 Cadastrar</div>
+</div>
 
-<header id="inicio">
+<section id="inicio" class="secao ativa">
+<header>
     <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga">
     <h1>🚀 Doge Manga Evolution</h1>
     <p>Portal Oficial • Rede Solana • Memecoins e NFTs</p>
+    <div class="aviso-novidades">📢 Em breve: Integração completa com gráficos em tempo real e negociação direta!</div>
     <div class="botoes-compra">
         <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-phantom">👻 Comprar na Phantom</a>
         <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn-compra btn-hash">📊 Ver Mercado</a>
     </div>
 </header>
+</section>
 
-<div class="container" id="lancadas">
+<section id="dashboard" class="secao">
+<div class="container">
+    <div class="card destaque">
+        <a href="#inicio" class="voltar">← Voltar</a>
+        <h2>📊 Dados Oficiais - Doge Manga</h2>
+        <div class="grid-dados">
+            <div class="item-dado"><strong>Moeda</strong><span>Doge Manga</span></div>
+            <div class="item-dado"><strong>Símbolo</strong><span>$DGM</span></div>
+            <div class="item-dado"><strong>Rede</strong><span>Solana</span></div>
+            <div class="item-dado"><strong>Preço USD</strong><span id="dash-usd">Carregando...</span></div>
+            <div class="item-dado"><strong>Preço BRL</strong><span id="dash-brl">Carregando...</span></div>
+            <div class="item-dado"><strong>Variação 24h</strong><span id="dash-var">Carregando...</span></div>
+            <div class="item-dado"><strong>Cap. Mercado</strong><span id="dash-cap">Em breve</span></div>
+            <div class="item-dado"><strong>Volume 24h</strong><span id="dash-vol">Em breve</span></div>
+            <div class="item-dado"><strong>Holders</strong><span id="dash-hol">Em breve</span></div>
+            <div class="item-dado"><strong>Status</strong><span style="color:var(--sucesso);">✅ Verificado</span></div>
+        </div>
+        <div class="ranking">
+            <h3 style="color:var(--primaria); margin:20px 0 10px;">🔥 Ranking de Projetos</h3>
+            <div class="item-rank"><span class="rank-posicao">1°</span><span class="rank-nome">Doge Manga</span><span class="rank-valor">⭐ Oficial</span></div>
+            <div class="item-rank"><span class="rank-posicao">2°</span><span class="rank-nome">Aguardando novos</span><span class="rank-valor">...</span></div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section id="lancadas" class="secao">
+<div class="container">
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
         <h2>📢 Projetos Listados</h2>
         <p class="alerta">Digite nome, símbolo ou contrato para encontrar:</p>
         <div class="area-andamento">
             <div class="lista-andando" id="listaMoedas">
-                <!-- DOGE MANGA - IMAGEM OFICIAL E CONTRATO -->
                 <div class="card-moeda destaque" data-contrato="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">
+                    <button class="btn-fav" onclick="this.classList.toggle('ativo')">⭐</button>
                     <div class="logo-moeda">
                         <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
                     </div>
@@ -238,6 +297,7 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
         </div>
     </div>
 </div>
+</section>
 
 <div class="fundo-escuro" id="fundoEscuro"></div>
 <div class="card" id="formCadastrar">
@@ -271,15 +331,15 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 
 <div class="menu-inferior">
     <a href="#inicio" class="menu-item-inf ativo"><span>🏠</span>Início</a>
+    <a href="#dashboard" class="menu-item-inf"><span>📊</span>Dashboard</a>
     <a href="#lancadas" class="menu-item-inf"><span>📢</span>Projetos</a>
     <a href="#" id="botaoCadastrarMenu" class="menu-item-inf"><span>📤</span>Cadastrar</a>
-    <a href="#dados" class="menu-item-inf"><span>📊</span>Dados</a>
 </div>
 
 <footer>🐕 Doge Manga Evolution © 2026 • Contato: dogemanga687@gmil.com</footer>
 
 <script>
-// MENUS
+// ========== MENUS E BOTÕES ==========
 const btnMenu = document.getElementById('btnMenu');
 const menuNavegacao = document.getElementById('menuNavegacao');
 const btnCompartilhar = document.getElementById('btnCompartilhar');
@@ -291,7 +351,18 @@ document.addEventListener('click', e => {
     if(!menuCompartilhar.contains(e.target) && e.target !== btnCompartilhar) menuCompartilhar.classList.remove('mostrar');
 });
 
-// COPIAR CONTRATO CORRETO
+// ========== TROCA DE ABAS ==========
+document.querySelectorAll('.aba[data-secao]').forEach(aba => {
+    aba.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativo'));
+        document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
+        aba.classList.add('ativo');
+        document.getElementById(aba.dataset.secao).classList.add('ativa');
+    });
+});
+
+// ========== COPIAR CONTRATO ==========
 const avisoCopiado = document.getElementById('avisoCopiado');
 function mostrarAviso(){avisoCopiado.style.display='block'; setTimeout(()=>avisoCopiado.style.display='none', 2000);}
 document.getElementById('btnCopiarContrato').addEventListener('click', ()=>{
@@ -302,41 +373,85 @@ document.getElementById('copiarLinkPagina').addEventListener('click', e=>{
     menuCompartilhar.classList.remove('mostrar');
 });
 
-// 🔍 PESQUISA COMPLETA: NOME, SÍMBOLO E CONTRATO
+// ========== CONEXÃO PHANTOM ==========
+const btnConectarCarteira = document.getElementById('btnConectarCarteira');
+btnConectarCarteira.addEventListener('click', async () => {
+    if(!window.solana || !window.solana.isPhantom){
+        alert('👛 Instale a carteira Phantom primeiro!');
+        window.open('https://phantom.app/', '_blank');
+        return;
+    }
+    try{
+        await window.solana.connect();
+        btnConectarCarteira.textContent = '✅ Conectado';
+        btnConectarCarteira.classList.add('conectado');
+    }catch(err){alert('Falha na conexão: ' + err.message);}
+});
+
+// ========== PESQUISA ==========
 const campoPesquisa = document.getElementById('pesquisaMoeda');
 const listaMoedas = document.getElementById('listaMoedas');
 const todosCards = listaMoedas.querySelectorAll('.card-moeda');
-
 campoPesquisa.addEventListener('input', () => {
     const termo = campoPesquisa.value.toLowerCase().trim();
-    if(!termo){
-        todosCards.forEach(card => card.style.display = 'block');
-        return;
-    }
+    if(!termo){todosCards.forEach(card => card.style.display = 'block'); return;}
     todosCards.forEach(card => {
-        const nome = card.querySelector('.nome-moeda').textContent.toLowerCase();
-        const simbolo = card.querySelector('.simbolo-moeda').textContent.toLowerCase();
-        const contrato = card.getAttribute('data-contrato').toLowerCase();
-        card.style.display = (nome.includes(termo) || simbolo.includes(termo) || contrato.includes(termo)) ? 'block' : 'none';
+        const n = card.querySelector('.nome-moeda').textContent.toLowerCase();
+        const s = card.querySelector('.simbolo-moeda').textContent.toLowerCase();
+        const c = card.getAttribute('data-contrato').toLowerCase();
+        card.style.display = (n.includes(termo) || s.includes(termo) || c.includes(termo)) ? 'block' : 'none';
     });
 });
 
-// FORMULÁRIO
+// ========== FORMULÁRIO ==========
 const botoesCadastrar = document.querySelectorAll('#botaoCadastrar,#botaoCadastrarNav,#botaoCadastrarMenu');
 const formCadastrar = document.getElementById('formCadastrar');
 const fundoEscuro = document.getElementById('fundoEscuro');
 const fecharForm = document.getElementById('fecharForm');
-function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar'); menuCompartilhar.classList.remove('mostrar');}
+function abrirForm(){formCadastrar.classList.add('mostrar'); fundoEscuro.classList.add('mostrar'); menuNavegacao.classList.remove('mostrar');}
 function fechar(){formCadastrar.classList.remove('mostrar'); fundoEscuro.classList.remove('mostrar');}
 botoesCadastrar.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); abrirForm();}));
 fecharForm.addEventListener('click',e=>{e.preventDefault(); fechar();});
 fundoEscuro.addEventListener('click',fechar);
-
-// PRÉVIA IMAGEM
 document.getElementById('linkLogo').addEventListener('input',function(){
     const v=this.value.trim();
     document.getElementById('previaLogo').innerHTML=v?`<img src="${v}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`:'Prévia';
 });
+
+// ========== PREÇOS AO VIVO COINGECKO ==========
+async function atualizarPrecos(){
+    try{
+        const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=doge-manga,bitcoin,ethereum,solana,binancecoin,dogecoin&vs_currencies=usd,brl&include_24h_change=true');
+        if(!res.ok) return;
+        const d = await res.json();
+        function preencher(id, elV, elVar){
+            if(!d[id]) return;
+            const v = d[id].usd_24h_change;
+            if(document.getElementById(elV)) document.getElementById(elV).textContent = `$ ${d[id].usd.toFixed(4)}`;
+            if(document.getElementById(elVar)){
+                document.getElementById(elVar).textContent = ` (${v>=0?'+':''}${v.toFixed(2)}%)`;
+                document.getElementById(elVar).className = v>=0 ? 'valor-pos' : 'valor-neg';
+            }
+        }
+        preencher('doge-manga','dgm-barra','dgm-barra-var');
+        preencher('bitcoin','btc-valor','btc-var');
+        preencher('ethereum','eth-valor','eth-var');
+        preencher('solana','sol-valor','sol-var');
+        preencher('binancecoin','bnb-valor','bnb-var');
+        preencher('dogecoin','doge-valor','doge-var');
+        if(d['doge-manga']){
+            document.getElementById('dgm-usd').textContent = `$ ${d['doge-manga'].usd.toFixed(6)}`;
+            document.getElementById('dgm-brl').textContent = `R$ ${d['doge-manga'].brl.toFixed(6)}`;
+            const vd = d['doge-manga'].usd_24h_change;
+            document.getElementById('dgm-var').textContent = `${vd>=0?'📈 +':'📉 '}${vd.toFixed(2)}%`;
+            document.getElementById('dash-usd').textContent = `$ ${d['doge-manga'].usd.toFixed(6)}`;
+            document.getElementById('dash-brl').textContent = `R$ ${d['doge-manga'].brl.toFixed(6)}`;
+            document.getElementById('dash-var').textContent = `${vd>=0?'📈 +':'📉 '}${vd.toFixed(2)}%`;
+        }
+    }catch(e){console.log('Erro preços:',e);}
+}
+atualizarPrecos();
+setInterval(atualizarPrecos, 60000); // Atualiza a cada 1 minuto
 </script>
 
 </body>
