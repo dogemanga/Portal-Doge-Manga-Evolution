@@ -36,6 +36,7 @@ body{
 .barra-geral{background:rgba(2,6,23,0.95); padding:8px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:997;}
 .barra-conteudo-geral{display:flex; gap:40px; animation:rolar 50s linear infinite; width:max-content; font-size:13px;}
 .item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap;}
+.item-moeda.destaque{font-weight:700; color:var(--primaria);}
 .item-moeda a{color:inherit; text-decoration:none;}
 .item-moeda a:hover{color:var(--primaria);}
 
@@ -116,7 +117,18 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral" id="barraPrecos">
-        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank">$DGM: Carregando...</a></div>
+        <div class="item-moeda destaque">
+            <img src="IMG-20260727-WA0036(7).jpg" style="width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria);">
+            <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank"><strong>$DGM</strong>: Aguardando listagem...</a>
+        </div>
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">BTC: Carregando...</a></div>
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">ETH: Carregando...</a></div>
+        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">SOL: Carregando...</a></div>
+        <!-- Repetição para animação contínua -->
+        <div class="item-moeda destaque">
+            <img src="IMG-20260727-WA0036(7).jpg" style="width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria);">
+            <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank"><strong>$DGM</strong>: Aguardando listagem...</a>
+        </div>
         <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">BTC: Carregando...</a></div>
         <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">ETH: Carregando...</a></div>
         <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">SOL: Carregando...</a></div>
@@ -179,15 +191,15 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <p>Portal oficial completo do ecossistema Doge Manga na Rede Solana. Dados em tempo real, negociação, lançamento de projetos, NFTs e total transparência.</p>
             
             <div class="grid-dados">
-                <div class="dado"><strong>Preço $DGM</strong><span id="precoDGM">Carregando...</span></div>
-                <div class="dado"><strong>Market Cap</strong><span id="marketCap">Carregando...</span></div>
-                <div class="dado"><strong>Liquidez</strong><span id="liquidez">Carregando...</span></div>
-                <div class="dado"><strong>FDV</strong><span id="fdv">Carregando...</span></div>
-                <div class="dado"><strong>Holders</strong><span id="holders">Carregando...</span></div>
-                <div class="dado"><strong>Volume 24h</strong><span id="volume24">Carregando...</span></div>
+                <div class="dado"><strong>Preço $DGM</strong><span id="precoDGM">Aguardando listagem...</span></div>
+                <div class="dado"><strong>Market Cap</strong><span id="marketCap">Aguardando listagem...</span></div>
+                <div class="dado"><strong>Liquidez</strong><span id="liquidez">Aguardando listagem...</span></div>
+                <div class="dado"><strong>FDV</strong><span id="fdv">Aguardando listagem...</span></div>
+                <div class="dado"><strong>Holders</strong><span id="holders">Aguardando listagem...</span></div>
+                <div class="dado"><strong>Volume 24h</strong><span id="volume24">Aguardando listagem...</span></div>
                 <div class="dado"><strong>Supply Total</strong><span>1.000.000.000</span></div>
-                <div class="dado"><strong>Circulante</strong><span id="circulante">Carregando...</span></div>
-                <div class="dado"><strong>Queimados</strong><span id="queimados">Carregando...</span></div>
+                <div class="dado"><strong>Circulante</strong><span id="circulante">Aguardando listagem...</span></div>
+                <div class="dado"><strong>Queimados</strong><span id="queimados">Aguardando listagem...</span></div>
             </div>
 
             <div class="botoes-acao">
@@ -236,22 +248,26 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 <section id="launchpad" class="secao"><div class="container"><div class="card">
     <h2>🚀 Solicitar Listagem</h2>
     <div class="form-grid">
-        <div class="grupo-form"><label>Nome do Projeto *</label><input type="text" required></div>
-        <div class="grupo-form"><label>Símbolo *</label><input type="text" maxlength="10" required></div>
-        <div class="grupo-form"><label>Contrato Solana *</label><input type="text" required></div>
-        <div class="grupo-form"><label>Logo Oficial *</label><input type="file" accept="image/*"></div>
-        <div class="grupo-form"><label>Site / Redes</label><input type="url"></div>
-        <div class="grupo-form"><label>Descrição</label><textarea rows="3"></textarea></div>
+        <div class="grupo-form"><label>Nome do Projeto *</label><input type="text" id="nomeProjeto" required placeholder="Ex: Doge Manga"></div>
+        <div class="grupo-form"><label>Símbolo *</label><input type="text" id="simbolo" maxlength="10" required placeholder="Ex: $DGM"></div>
+        <div class="grupo-form"><label>Contrato Solana *</label><input type="text" id="contrato" required placeholder="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE"></div>
+        <div class="grupo-form"><label>Logo Oficial *</label><input type="file" id="logoProjeto" accept="image/png, image/jpeg, image/webp" required></div>
+        <div class="grupo-form"><label>Site / Redes</label><input type="url" id="redes" placeholder="Link do site, Telegram, X..."></div>
+        <div class="grupo-form" style="grid-column: 1 / -1;"><label>Descrição</label><textarea id="descricao" rows="3" placeholder="Conte um pouco sobre o projeto..."></textarea></div>
     </div>
-    <button class="btn btn-primario">📤 Enviar Solicitação</button>
-    <p style="margin-top:15px; font-size:13px; color:var(--claro);">Status: Em análise / Aprovado / Rejeitado — resposta em até 24h.</p>
+    <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;">
+        <button type="button" class="btn btn-secundario" id="btnVoltarMenu">↩️ Voltar ao Menu</button>
+        <button type="submit" class="btn btn-primario">📤 Enviar Solicitação</button>
+    </div>
+    <p style="margin-top:15px; font-size:13px; color:var(--claro);">Status: Em análise / Aprovado / Rejeitado — resposta em até 24h úteis.</p>
+    <div id="mensagemSucesso" style="display:none; margin-top:15px; padding:12px; background:rgba(34,197,94,0.1); border:1px solid var(--sucesso); border-radius:8px; color:var(--sucesso);">✅ SOLICITAÇÃO ENVIADA COM SUCESSO! Iremos analisar e retornar em breve.</div>
 </div></div></section>
 
 <!-- DEMAIS SEÇÕES COMPLETAS -->
-<section id="listados" class="secao"><div class="container"><div class="card"><h2>📋 Projetos Listados</h2><p>Pesquisa, filtros, ranking, selos de verificação, novos projetos e mais visitados.</p></div></div></section>
+<section id="listados" class="secao"><div class="container"><div class="card"><h2>📋 Projetos Listados</h2><p>Pesquisa, filtros, ranking, selos de verificação, novos projetos e mais visitados — Doge Manga como primeiro projeto oficial.</p></div></div></section>
 <section id="roadmap" class="secao"><div class="container"><div class="card"><h2>🗺️ Roadmap Completo</h2><p>Fase 1 • Fase 2 • Fase 3 • Fase 4 — atualizado constantemente.</p></div></div></section>
 <section id="whitepaper" class="secao"><div class="container"><div class="card"><h2>📄 Whitepaper Oficial</h2><p>Documento completo com objetivos, segurança, economia e regras do ecossistema.</p></div></div></section>
-<section id="comunidade" class="secao"><div class="container"><div class="card"><h2>👥 Nossa Comunidade</h2><p>Telegram, X, TikTok, Discord e YouTube.</p></div></div></section>
+<section id="comunidade" class="secao"><div class="container"><div class="card"><h2>👥 Nossa Comunidade</h2><p><a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" style="color:var(--primaria);">Telegram</a> • <a href="https://x.com/dogemanga96508" target="_blank" style="color:var(--primaria);">X</a> • <a href="https://tiktok.com/@dogemangaofficial" target="_blank" style="color:var(--primaria);">TikTok</a> • Discord • YouTube.</p></div></div></section>
 <section id="faq" class="secao"><div class="container"><div class="card"><h2>❓ Perguntas Frequentes</h2></div></div></section>
 <section id="suporte" class="secao"><div class="container"><div class="card"><h2>📞 Suporte e Contato</h2><p>dogemanga687@gmail.com | Canais oficiais.</p></div></div></section>
 <section id="admin" class="secao"><div class="container"><div class="card"><h2>🔐 Painel Administrador</h2><p>Login seguro, aprovar/rejeitar projetos, editar conteúdo, estatísticas e backups.</p></div></div></section>
@@ -283,27 +299,28 @@ document.getElementById('btnCopiarContrato').onclick = ()=>{
 document.getElementById('btnMenu').onclick = (e)=>{e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('mostrar');};
 document.onclick = ()=>document.getElementById('menuNavegacao').classList.remove('mostrar');
 
-document.querySelectorAll('.aba, .menu-item').forEach(item=>{
+document.querySelectorAll('.aba, .menu-item, #btnVoltarMenu').forEach(item=>{
     item.addEventListener('click', (e)=>{
         e.preventDefault();
         document.querySelectorAll('.aba, .menu-item').forEach(i=>i.classList.remove('ativo'));
         document.querySelectorAll('.secao').forEach(s=>s.classList.remove('ativa'));
         
-        if(item.id === 'btnVoltar'){
-            document.querySelector('[data-secao="inicio"]').classList.add('ativo');
-            document.getElementById('inicio').classList.add('ativa');
-        }else if(item.dataset.secao){
+        if(item.dataset.secao){
             document.querySelector(`[data-secao="${item.dataset.secao}"]`).classList.add('ativo');
             document.getElementById(item.dataset.secao).classList.add('ativa');
+        }else{
+            document.querySelector('[data-secao="inicio"]').classList.add('ativo');
+            document.getElementById('inicio').classList.add('ativa');
         }
         document.getElementById('menuNavegacao').classList.remove('mostrar');
     });
 });
 
-// DADOS EM TEMPO REAL — CoinGecko + DexScreener
+// DADOS EM TEMPO REAL — COM TRATAMENTO DE ERRO
 async function atualizarDados(){
     try{
         const resCG = await fetch('https://api.coingecko.com/api/v3/coins/doge-manga?localization=pt-br&tickers=false&community_data=false&developer_data=false');
+        if(!resCG.ok) throw new Error('Aguardando listagem');
         const dadosCG = await resCG.json();
         const resDS = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO}`);
         const dadosDS = await resDS.json();
@@ -319,12 +336,24 @@ async function atualizarDados(){
         document.getElementById('holders').innerText = 'Atualizando...';
 
         document.getElementById('barraPrecos').innerHTML = `
-            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank">$DGM: $${parseFloat(dadosCG.market_data.current_price.usd).toFixed(6)}</a></div>
-            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">BTC: $${dadosCG.market_data.current_price.btc ? '---' : 'Carregando'}</a></div>
-            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">ETH: $${dadosCG.market_data.current_price.eth ? '---' : 'Carregando'}</a></div>
-            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">SOL: $${dadosCG.market_data.current_price.sol ? '---' : 'Carregando'}</a></div>
+            <div class="item-moeda destaque">
+                <img src="IMG-20260727-WA0036(7).jpg" style="width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria);">
+                <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank"><strong>$DGM</strong>: $${parseFloat(dadosCG.market_data.current_price.usd).toFixed(6)}</a>
+            </div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">BTC: $${parseFloat(dadosCG.market_data.current_price.btc || 0).toLocaleString('pt-BR')}</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">ETH: $${parseFloat(dadosCG.market_data.current_price.eth || 0).toLocaleString('pt-BR')}</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">SOL: $${parseFloat(dadosCG.market_data.current_price.sol || 0).toLocaleString('pt-BR')}</a></div>
+            <div class="item-moeda destaque">
+                <img src="IMG-20260727-WA0036(7).jpg" style="width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria);">
+                <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank"><strong>$DGM</strong>: $${parseFloat(dadosCG.market_data.current_price.usd).toFixed(6)}</a>
+            </div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank">BTC: $${parseFloat(dadosCG.market_data.current_price.btc || 0).toLocaleString('pt-BR')}</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank">ETH: $${parseFloat(dadosCG.market_data.current_price.eth || 0).toLocaleString('pt-BR')}</a></div>
+            <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank">SOL: $${parseFloat(dadosCG.market_data.current_price.sol || 0).toLocaleString('pt-BR')}</a></div>
         `;
-    }catch(e){console.log('Aguardando disponibilidade nas APIs...');}
+    }catch(e){
+        console.log('Aguardando listagem oficial do token nas plataformas...');
+    }
 }
 atualizarDados();
 setInterval(atualizarDados, 30000);
