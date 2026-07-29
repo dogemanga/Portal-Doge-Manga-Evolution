@@ -114,7 +114,8 @@ h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,2
 .grupo-form{display:flex; flex-direction:column; gap:5px;}
 .grupo-form label{font-size:12px; color:var(--claro);}
 .grupo-form input{padding:9px 11px; border-radius:6px; border:1px solid rgba(250,204,21,0.3); background:rgba(2,6,23,0.8); color:var(--texto); font-size:13px;}
-.previa-logo{width:70px; height:70px; border-radius:50%; margin-top:6px; border:2px solid var(--primaria); object-fit:cover; background:rgba(250,204,21,0.1); display:flex; align-items:center; justify-content:center; color:var(--claro); font-size:11px;}
+.previa-logo{width:100px; height:100px; border-radius:50%; margin-top:8px; border:3px solid var(--primaria); object-fit:cover; background:rgba(250,204,21,0.1); display:flex; align-items:center; justify-content:center; color:var(--claro); font-size:12px; transition:0.2s;}
+.previa-logo img{width:100%; height:100%; object-fit:cover; border-radius:50%;}
 .btn-enviar{background:var(--primaria); color:var(--fundo); padding:10px 20px; border-radius:8px; font-weight:700; border:none; cursor:pointer; width:100%; margin-top:8px;}
 
 .area-andamento{overflow:hidden; padding:12px 0; border-radius:10px;}
@@ -122,7 +123,7 @@ h2{color:var(--primaria); margin-bottom:15px; border-bottom:1px solid rgba(250,2
 .area-andamento:hover .lista-andando{animation-play-state:paused;}
 @keyframes rolarMoedas{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-.card-moeda{background:rgba(2,6,23,0.9); padding:16px; border-radius:12px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:300px;}
+.card-moeda{background:rgba(2,6,23,0.9); padding:16px; border-radius:12px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s; min-width:300px; position:relative;}
 .card-moeda.destaque{border-color:var(--primaria); box-shadow:0 0 20px rgba(250,204,21,0.15);}
 .card-moeda:hover{transform:translateY(-3px);}
 .logo-moeda{width:80px; height:80px; border-radius:50%; margin:0 auto 12px; border:3px solid var(--primaria); object-fit:cover;}
@@ -167,7 +168,6 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral" id="barraPrecos">
-        <!-- DOGE MANGA PRIMEIRO NA BARRA -->
         <div class="item-moeda">
             <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
             <a href="https://dogemangaofficial.xyz" target="_blank">$DGM:</a>
@@ -277,10 +277,9 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
     <div class="card destaque">
         <a href="#inicio" class="voltar">← Voltar</a>
         <h2>📢 Projetos Listados</h2>
-        <p class="alerta">🚀 DOGE MANGA JÁ ESTÁ LISTADO AQUI COMO PROJETO OFICIAL:</p>
+        <p class="alerta">🚀 DOGE MANGA — PROJETO OFICIAL E VERIFICADO:</p>
         <div class="area-andamento">
             <div class="lista-andando" id="listaMoedas">
-                <!-- DOGE MANGA LISTADO AQUI COM LOGO E TODOS OS DADOS -->
                 <div class="card-moeda destaque" data-contrato="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">
                     <div class="logo-moeda">
                         <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
@@ -295,7 +294,6 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
                         <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="link-birdeye">Birdeye</a>
                     </div>
                 </div>
-                <!-- AQUI VÃO APARECER OS OUTROS PROJETOS NO FUTURO -->
             </div>
         </div>
     </div>
@@ -324,29 +322,35 @@ footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margi
 <div class="fundo-escuro" id="fundoEscuro"></div>
 <div class="card" id="formCadastrar">
     <a href="#" class="voltar" id="fecharForm">← Voltar</a>
-    <h2>📤 Solicitar Listagem</h2>
+    <h2>📤 Solicitar Listagem de Memecoin</h2>
     <div class="motivo-lancamento">
         <img src="IMG-20260727-WA0036(7).jpg" class="motivo-logo">
         <div class="motivo-texto">
-            <h3>🐾 Por que lançar aqui?</h3>
-            <p>Comunidade forte, visibilidade real e segurança total na Solana.</p>
+            <h3>🐾 Por que lançar no Portal Doge Manga?</h3>
+            <p>Segurança, visibilidade para sua comunidade e estrutura profissional na Rede Solana.</p>
             <ul>
-                <li>✅ Divulgação direta</li>
-                <li>✅ Processo rápido</li>
-                <li>✅ Suporte dedicado</li>
-                <li>✅ Integração CG/CMC</li>
+                <li>✅ Divulgação para todos os visitantes</li>
+                <li>✅ Listagem rápida e organizada</li>
+                <li>✅ Integração CoinGecko e CoinMarketCap</li>
+                <li>✅ Suporte dedicado da equipe</li>
             </ul>
         </div>
     </div>
     <div class="form-grid">
-        <div class="grupo-form"><label>Nome do Projeto *</label><input type="text" id="nomeMoeda" required></div>
-        <div class="grupo-form"><label>Símbolo *</label><input type="text" id="simboloMoeda" required></div>
-        <div class="grupo-form"><label>Link Logo *</label><input type="url" id="linkLogo" required><div class="previa-logo" id="previaLogo">Prévia</div></div>
-        <div class="grupo-form"><label>Contrato Solana *</label><input type="text" id="contratoMoeda" required></div>
-        <div class="grupo-form"><label>Site</label><input type="url" id="siteMoeda"></div>
-        <div class="grupo-form"><label>X</label><input type="url" id="xMoeda"></div>
-        <div class="grupo-form"><label>Telegram</label><input type="url" id="tgMoeda"></div>
-        <div class="grupo-form"><label>DexScreener</label><input type="url" id="dexMoeda"></div>
+        <div class="grupo-form"><label>Nome do Projeto *</label><input type="text" id="nomeMoeda" required placeholder="Ex: Doge Manga"></div>
+        <div class="grupo-form"><label>Símbolo *</label><input type="text" id="simboloMoeda" required placeholder="Ex: $DGM"></div>
+        <div class="grupo-form" style="grid-column: 1 / -1;">
+            <label>🖼️ Logo Oficial *</label>
+            <input type="url" id="linkLogo" required placeholder="Cole o link direto da imagem (.png / .jpg)">
+            <small style="color:var(--claro); font-size:11px;">💡 Dica: Use imagem quadrada, mínimo 512x512px, preferencialmente com fundo transparente.</small>
+            <div class="previa-logo" id="previaLogo">Prévia da Logo</div>
+        </div>
+        <div class="grupo-form"><label>Contrato Solana *</label><input type="text" id="contratoMoeda" required placeholder="Cole o endereço do contrato">
+        <small style="color:var(--queda); font-size:11px;">⚠️ Confira duas vezes antes de enviar!</small></div>
+        <div class="grupo-form"><label>Site Oficial</label><input type="url" id="siteMoeda" placeholder="https://..."></div>
+        <div class="grupo-form"><label>Perfil no X</label><input type="url" id="xMoeda" placeholder="https://x.com/..."></div>
+        <div class="grupo-form"><label>Grupo no Telegram</label><input type="url" id="tgMoeda" placeholder="https://t.me/..."></div>
+        <div class="grupo-form"><label>DexScreener</label><input type="url" id="dexMoeda" placeholder="https://dexscreener.com/..."></div>
     </div>
     <button class="btn-enviar">📩 Enviar para Análise</button>
 </div>
@@ -501,10 +505,10 @@ botoesCadastrar.forEach(b=>b.addEventListener('click',e=>{e.preventDefault(); ab
 fecharForm.addEventListener('click',e=>{e.preventDefault(); fechar();});
 fundoEscuro.addEventListener('click',fechar);
 
-// PRÉVIA IMAGEM
+// PRÉVIA DA LOGO FUNCIONANDO
 document.getElementById('linkLogo').addEventListener('input',function(){
     const v=this.value.trim();
-    document.getElementById('previaLogo').innerHTML=v?`<img src="${v}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`:'Prévia';
+    document.getElementById('previaLogo').innerHTML=v?`<img src="${v}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`:'Prévia da Logo';
 });
 </script>
 
