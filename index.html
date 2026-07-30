@@ -344,7 +344,54 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 <section id="faq" class="secao"><div class="container"><div class="card"><h2>❓ FAQ</h2></div></div></section>
 <section id="suporte" class="secao"><div class="container"><div class="card"><h2>📞 Suporte</h2></div></div></section>
 <section id="admin" class="secao"><div class="container"><div class="card"><h2>🔐 Painel Admin</h2></div></div></section>
-<section id="seguranca" class="secao"><div class="container"><div class="card"><h2>🛡️ Segurança</h2></div></div></section>
+
+<section id="seguranca" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn btn-secundario btn-pequeno" data-secao="inicio" style="margin-bottom:18px; display:inline-flex; align-items:center; gap:8px;">
+                ↩️ Voltar ao Portal
+            </a>
+
+            <h2>🛡️ SEGURANÇA DO PORTAL DOGE MANGA</h2>
+
+            <div class="aviso-risco" style="background:rgba(250,204,21,0.08); border-color:rgba(250,204,21,0.4); color:#fde047;">
+                ⚠️ **ALERTA OFICIAL:** Nunca confie em contratos, links ou grupos que não sejam os listados aqui. O único site oficial é:
+                <br><br>
+                <strong style="color:var(--primaria); font-size:15px;">🌐 https://dogemangaofficial.xyz</strong>
+            </div>
+
+            <div style="margin-top:20px; padding:18px; background:rgba(2,6,23,0.85); border-radius:10px; border:1px solid rgba(250,204,21,0.25);">
+                <h3 style="color:var(--primaria); font-size:16px; margin-bottom:10px;">🔐 CONTRATO OFICIAL VERIFICADO</h3>
+                <p style="font-size:13px; color:var(--claro); margin-bottom:8px;">Confira sempre este endereço — é o único verdadeiro:</p>
+                <code style="font-size:12px; color:#d1d5db; word-break:break-all; display:block; padding:10px; background:rgba(0,0,0,0.3); border-radius:6px;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code>
+                <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="btn-copiar" onclick="navigator.clipboard.writeText('E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE'); document.getElementById('avisoCopiado').style.display='block'; setTimeout(()=>document.getElementById('avisoCopiado').style.display='none',2500);">📋 Copiar Contrato</button>
+                    <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-secundario btn-pequeno">🔗 Verificar no Solscan</a>
+                    <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener noreferrer" class="btn btn-secundario btn-pequeno">🔎 Verificar no Birdeye</a>
+                </div>
+            </div>
+
+            <div style="margin-top:20px;">
+                <h3 style="color:var(--primaria); font-size:16px; margin-bottom:12px;">✅ DICAS DE SEGURANÇA</h3>
+                <ul style="color:var(--claro); font-size:13px; line-height:1.8; padding-left:18px;">
+                    <li>🔹 Acesse apenas pelo site oficial: <strong>dogemangaofficial.xyz</strong></li>
+                    <li>🔹 Nunca compartilhe sua chave privada ou frase secreta</li>
+                    <li>🔹 Sempre confira o contrato antes de enviar qualquer valor</li>
+                    <li>🔹 Nossa equipe NUNCA pede senhas ou dinheiro</li>
+                    <li>🔹 Verifique o cadeado de segurança no navegador antes de inserir dados</li>
+                </ul>
+            </div>
+
+            <div style="margin-top:20px; padding:15px; background:rgba(34,197,94,0.08); border:1px solid rgba(34,197,94,0.3); border-radius:8px;">
+                <p style="color:var(--sucesso); font-weight:600; text-align:center;">
+                    🔒 Portal seguro e verificado • Todos os direitos reservados ao Doge Manga Evolution
+                    <br>
+                    <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer" style="color:var(--primaria);">Acessar Site Oficial →</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <footer>
     <p>© 2026 DOGE MANGA EVOLUTION | 
@@ -413,15 +460,4 @@ document.addEventListener('DOMContentLoaded', function(){
                 document.getElementById('descricao').value='';
             },3000);
         }else{
-            document.getElementById('avisoErroListagem').style.display='block';
-        }
-    };
-
-    document.getElementById('btnConectarCarteira').onclick = async ()=>{
-        if(window?.solana?.isPhantom){await window.solana.connect(); alert('Conectado!');}
-        else window.open('https://phantom.app/','_blank');
-    };
-});
-</script>
-</body>
-</html>
+            document.getElementById('avisoErroListagem').style
