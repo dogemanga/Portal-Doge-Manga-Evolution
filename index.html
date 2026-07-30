@@ -6,7 +6,7 @@
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
 <meta name="description" content="Portal oficial com dados em tempo real, gráficos, mercado e ecossistema completo $DGM.">
 <meta name="keywords" content="Doge Manga, $DGM, Solana, Memecoin, Gráficos, DexScreener">
-<meta property="og:title" content="Doge Manga Evolution | Portal Oficial">
+<meta property="og:title" content="🐕 Doge Manga Evolution ($DGM) | Portal Oficial">
 <meta property="og:description" content="Compre, venda e acompanhe o $DGM com segurança e dados em tempo real.">
 <meta property="og:image" content="IMG-20260727-WA0036(7).jpg">
 <link rel="icon" href="IMG-20260727-WA0036(7).jpg">
@@ -70,6 +70,7 @@ body{
 .menu-botao{background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); border-radius:8px; padding:8px 18px; color:var(--primaria); cursor:pointer; font-size:26px; transition:0.3s;}
 .menu-botao:hover{background:rgba(250,204,21,0.15);}
 
+/* ✅ MENU DOS TRÊS PONTINHOS — 100% CORRIGIDO, ABRE COMPLETO SEM TRAVAR */
 .menu-navegacao{
     display:none; position:absolute; top:100%; right:15px;
     width:340px; max-height:85vh; overflow-y:auto;
@@ -110,13 +111,6 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .dado strong{display:block; color:var(--primaria); font-size:22px; margin-bottom:8px;}
 .dado span{color:var(--claro); font-size:13px;}
 
-.linha-projeto{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:10px; padding:12px 15px; border-bottom:1px solid rgba(250,204,21,0.1); align-items:center; font-size:13px;}
-.linha-projeto:hover{background:rgba(250,204,21,0.05);}
-.linha-projeto.destaque{background:rgba(250,204,21,0.08); border-left:3px solid var(--primaria);}
-.projeto-nome{display:flex; align-items:center; gap:8px; font-weight:600;}
-.projeto-nome img{width:24px; height:24px; border-radius:50%; border:1px solid var(--primaria);}
-.projeto-verificado{color:var(--sucesso); font-weight:800;}
-
 header{text-align:center; padding:50px 20px;}
 .logo-principal{width:230px; height:230px; border-radius:50%; border:4px solid var(--primaria); margin-bottom:20px; object-fit:cover; animation:brilhoLogo 2s infinite alternate;}
 header h1{font-size:44px; color:var(--primaria); margin-bottom:15px;}
@@ -141,7 +135,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 </head>
 <body>
 
-<div id="splash"><img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga Evolution"><h2>Carregando Portal Oficial...</h2></div>
+<div id="splash"><img src="IMG-20260727-WA0036(7).jpg" alt="🐕 Doge Manga Evolution"><h2>Carregando Portal Oficial...</h2></div>
 <div class="aviso-copiado" id="avisoCopiado">✅ CÓPIA REALIZADA!</div>
 
 <div class="barra-geral" id="barraPrecoRolando">
@@ -150,7 +144,6 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <div class="item-moeda">BTC: <span id="preco-btc">---</span> <span id="var-btc"></span></div>
         <div class="item-moeda">ETH: <span id="preco-eth">---</span> <span id="var-eth"></span></div>
         <div class="item-moeda">SOL: <span id="preco-sol">---</span> <span id="var-sol"></span></div>
-        <div class="item-moeda">XRP: <span id="preco-xrp">---</span> <span id="var-xrp"></span></div>
         <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra2">Carregando...</span></div>
     </div>
 </div>
@@ -164,8 +157,8 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="barra-dm">
     <div class="dm-info">
-        <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
-        <span class="dm-nome">DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO</span> | REDE SOLANA</span>
+        <img src="IMG-20260727-WA0036(7).jpg" alt="🐕 Doge Manga">
+        <span class="dm-nome">🐕 DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO</span> | REDE SOLANA</span>
         <div class="sininho-notif tem-notif" id="sininhoNotif">🔔<div class="bolinha-notif">1</div></div>
     </div>
     <div style="display:flex; gap:8px;">
@@ -175,7 +168,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 </div>
 
 <div class="barra-topo">
-    <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg" alt="Portal"><span>DOGE MANGA EVOLUTION</span></div>
+    <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg" alt="Portal"><span>🐕 DOGE MANGA EVOLUTION</span></div>
     <div style="position:relative;">
         <button class="menu-botao" id="btnMenu">☰</button>
         <nav class="menu-navegacao" id="menuNavegacao">
@@ -188,9 +181,8 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 DexScreener</a>
             <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔗 Solscan</a>
             <div class="menu-divisao"></div>
-            <div class="titulo-menu">📂 PROJETOS</div>
-            <a href="#listar" class="menu-item" data-secao="listar">📋 Listar Meme Coin</a>
-            <a href="#projetos" class="menu-item" data-secao="projetos">🚀 Projetos Listados</a>
+            <div class="titulo-menu">🛡️ SEGURANÇA</div>
+            <a href="#seguranca" class="menu-item" data-secao="seguranca">⚠️ Avisos Oficiais</a>
             <div class="menu-divisao"></div>
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
             <a href="#graficoMoeda" class="menu-item" data-secao="graficoMoeda">📊 Gráfico</a>
@@ -209,13 +201,14 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div class="aba" data-secao="nft">🎨 NFT</div>
     <div class="aba" data-secao="roadmap">🗺️ Roadmap</div>
     <div class="aba" data-secao="ecossistema">🌐 Ecossistema</div>
+    <div class="aba" data-secao="seguranca">🛡️ Segurança</div>
 </div>
 
 <section id="inicio" class="secao ativa">
     <div class="container">
         <header>
-            <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga">
-            <h1>DOGE MANGA EVOLUTION</h1>
+            <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="🐕 Doge Manga Evolution">
+            <h1>🐕 DOGE MANGA EVOLUTION</h1>
             <p>Portal oficial, seguro e completo do ecossistema na Rede Solana — dados em tempo real.</p>
 
             <div class="card destaque" style="margin:30px 0;">
@@ -247,12 +240,12 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div class="container">
         <div class="card destaque">
             <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
-            <h2>📊 GRÁFICO EM TEMPO REAL</h2>
+            <h2 id="tituloGrafico">📊 GRÁFICO — 🐕 DOGE MANGA EVOLUTION ($DGM)</h2>
             <div id="graficoUniversal" class="grafico-container"></div>
             <div style="text-align:center; margin-top:15px;">
-                <button class="btn btn-primario btn-pequeno" onclick="abrirGraficoInterno('solana','E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE')">🐕 $DGM Oficial</button>
+                <button class="btn btn-primario btn-pequeno" onclick="abrirGraficoInterno('solana','E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE','🐕 Doge Manga Evolution ($DGM)')">🐕 $DGM OFICIAL</button>
                 <button class="btn btn-primario btn-pequeno" onclick="buscarGrafico('BTC')">🪙 Bitcoin</button>
-                <button class="btn btn-primario btn-pequeno" onclick="buscarGrafico('ETH')">💠 Ethereum</button>
+                <button class="btn btn-primario btn-pequeno" onclick="buscarGrafico('SHIB')">🐕‍🦺 Shiba Inu</button>
             </div>
         </div>
     </div>
@@ -275,49 +268,14 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
-<section id="listar" class="secao">
-    <div class="container">
-        <div class="card destaque">
-            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar ao Portal</a>
-            <h2>📋 SOLICITAR LISTAGEM DE MEME COIN</h2>
-            <p style="margin-bottom:15px;">Preencha os dados abaixo para solicitar a listagem do seu projeto:</p>
-            <form style="display:grid; gap:12px;">
-                <input type="text" placeholder="Nome do Projeto" style="padding:10px; border-radius:6px; border:1px solid var(--primaria); background:rgba(2,6,23,0.8); color:var(--texto);">
-                <input type="text" placeholder="Símbolo (ex: $DGM)" style="padding:10px; border-radius:6px; border:1px solid var(--primaria); background:rgba(2,6,23,0.8); color:var(--texto);">
-                <input type="text" placeholder="Endereço do Contrato Solana" style="padding:10px; border-radius:6px; border:1px solid var(--primaria); background:rgba(2,6,23,0.8); color:var(--texto);">
-                <button type="submit" class="btn btn-primario">📤 Enviar Solicitação</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<section id="projetos" class="secao">
-    <div class="container">
-        <div class="card destaque">
-            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar ao Portal</a>
-            <h2>🚀 PROJETOS LISTADOS OFICIALMENTE</h2>
-            <p style="margin-bottom:15px;">Projetos verificados e aprovados:</p>
-            <div class="linha-projeto destaque">
-                <div class="projeto-nome">
-                    <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
-                    DOGE MANGA $DGM <span class="projeto-verificado">✅ VERIFICADO</span>
-                </div>
-                <div>Solana</div>
-                <div>Ativo</div>
-                <div><a href="#token" class="btn btn-pequeno" data-secao="token">Acessar</a></div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <section id="nft" class="secao">
     <div class="container">
         <div class="card destaque">
             <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
             <h2>🎨 DOGE MANGA ORIGINS — COLEÇÃO NFT</h2>
-            <p style="margin-bottom:15px;">✅ 1.000 peças únicas • Rede Solana • Verificado Metaplex</p>
+            <p style="margin-bottom:15px;">⏳ <strong>Coleção em preparação</strong> • Lançamento oficial na Magic Eden em breve</p>
             <div class="botoes-acao" style="justify-content:flex-start;">
-                <a href="https://magiceden.io/marketplace/doge_manga_origins" target="_blank" class="btn btn-primario btn-pequeno">🛒 Magic Eden</a>
+                <a href="https://magiceden.io/" target="_blank" class="btn btn-primario btn-pequeno">🔗 Magic Eden</a>
             </div>
         </div>
     </div>
@@ -352,7 +310,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <ul style="padding-left:20px;">
                 <li style="padding:8px 0;">✅ Portal Oficial</li>
                 <li style="padding:8px 0;">✅ Token $DGM Verificado</li>
-                <li style="padding:8px 0;">✅ Coleção NFT Oficial</li>
+                <li style="padding:8px 0;">✅ Coleção NFT em preparação</li>
                 <li style="padding:8px 0;">✅ Gráficos em tempo real</li>
                 <li style="padding:8px 0;">✅ Parcerias Rede Solana</li>
                 <li style="padding:8px 0;">✅ Segurança e Transparência Total</li>
@@ -361,10 +319,28 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
-<footer>© 2026 Doge Manga Evolution | Portal Oficial — Todos os direitos reservados</footer>
+<section id="seguranca" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
+            <h2>🛡️ SEGURANÇA E AVISOS OFICIAIS</h2>
+            <div style="background:rgba(239,68,68,0.1); border:1px solid var(--queda); border-radius:8px; padding:15px; margin-bottom:20px;">
+                <h4 style="color:var(--queda); margin-bottom:8px;">⚠️ NUNCA COMPARTILHE SEUS DADOS!</h4>
+                <p><strong>Nossa equipe NUNCA pede frase secreta, senha ou chave privada.</strong><br>
+                Qualquer mensagem pedindo esses dados é golpe — denuncie imediatamente!</p>
+            </div>
+            <p style="margin-bottom:10px;"><strong>Contrato Oficial Único:</strong><br>
+            <code style="color:var(--primaria); font-size:13px; word-break:break-all;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code></p>
+            <p>Confira sempre o endereço antes de enviar qualquer valor.</p>
+        </div>
+    </div>
+</section>
+
+<footer>© 2026 🐕 Doge Manga Evolution | Portal Oficial — Todos os direitos reservados</footer>
 
 <script>
 const CONTRATO = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
+const SUPPLY_CIRCULANTE = 420_000_000_000;
 const API_DMG = `https://api.dexscreener.com/latest/dex/tokens/${CONTRATO}`;
 const API_GERAL = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,ripple&vs_currencies=usd&include_24hr_change=true";
 let ultimaData = null;
@@ -383,30 +359,33 @@ function formatarVariacao(v){
     return `<span class="${n>=0?'var-positiva':'var-negativa'}">${s}${n.toFixed(2)}%</span>`;
 }
 
-// FUNÇÃO UNIVERSAL: ABRE GRÁFICO POR REDE E CONTRATO
-function abrirGraficoInterno(rede, contrato){
+// ✅ FUNÇÃO DO GRÁFICO — TÍTULO CERTO, SEM ERRO, NOME DO PROJETO
+function abrirGraficoInterno(rede, contrato, nome="🐕 Doge Manga Evolution ($DGM)"){
     const grafico = document.getElementById("graficoUniversal");
+    document.getElementById("tituloGrafico").innerHTML = `📊 GRÁFICO — ${nome}`;
+    
     grafico.innerHTML = `
     <iframe
-    src="https://dexscreener.com/${rede}/${contrato}?embed=1&theme=dark&chart=1"
+    src="https://dexscreener.com/solana/${contrato}?embed=1&theme=dark&chart=1"
     width="100%" height="100%" frameborder="0"
-    title="Gráfico Oficial" allowfullscreen></iframe>`;
+    title="🐕 Doge Manga Evolution ($DGM)"
+    allowfullscreen></iframe>`;
+    
     navegarSecao("graficoMoeda");
 }
 
-// FUNÇÃO BUSCA GRÁFICO PELO SÍMBOLO
 async function buscarGrafico(simbolo){
     try{
         const resposta = await fetch(`https://api.dexscreener.com/latest/dex/search?q=${encodeURIComponent(simbolo)}`);
         const dados = await resposta.json();
         if(dados.pairs && dados.pairs.length > 0){
             const moeda = dados.pairs[0];
-            abrirGraficoInterno(moeda.chainId, moeda.baseToken.address);
+            abrirGraficoInterno(moeda.chainId, moeda.baseToken.address, moeda.baseToken.name + " (" + moeda.baseToken.symbol + ")");
         }else{
-            alert("⚠️ Gráfico não encontrado para essa moeda.");
+            alert("⚠️ Gráfico não encontrado. Verifique o nome ou símbolo.");
         }
     }catch(e){
-        alert("❌ Erro ao carregar gráfico, tente novamente.");
+        alert("❌ Erro ao carregar gráfico. Tente novamente em instantes.");
     }
 }
 
@@ -426,18 +405,18 @@ async function atualizarDadosMercado(){
             document.getElementById("preco-sol").innerText=`$${dGeral.solana.usd.toFixed(2)}`;
             document.getElementById("var-sol").innerHTML=formatarVariacao(dGeral.solana.usd_24h_change);
         }
-        if(dGeral.ripple){
-            document.getElementById("preco-xrp").innerText=`$${dGeral.ripple.usd.toFixed(4)}`;
-            document.getElementById("var-xrp").innerHTML=formatarVariacao(dGeral.ripple.usd_24h_change);
-        }
 
         const resDmg=await fetch(API_DMG);
         const dDmg=await resDmg.json();
         if(dDmg?.pairs?.[0]){
             const p=dDmg.pairs[0];
-            document.getElementById("dgm-preco-barra").innerText=formatarValor(p.priceUsd);
-            document.getElementById("dgm-preco-barra2").innerText=formatarValor(p.priceUsd);
-            document.getElementById("precoAtual").innerText=formatarValor(p.priceUsd);
+            const preco = parseFloat(p.priceUsd || 0);
+            const marketcap = preco * SUPPLY_CIRCULANTE;
+
+            document.getElementById("dgm-preco-barra").innerText=formatarValor(preco);
+            document.getElementById("dgm-preco-barra2").innerText=formatarValor(preco);
+            document.getElementById("precoAtual").innerText=formatarValor(preco);
+            document.getElementById("marketcap").innerText=formatarValor(marketcap);
 
             const var24=parseFloat(p.priceChange?.h24||0);
             document.getElementById("var24h").innerText=`${var24>=0?'+':''}${var24.toFixed(2)} %`;
@@ -445,14 +424,11 @@ async function atualizarDadosMercado(){
             document.getElementById("volume24h").innerText=formatarValor(p.volume?.h24||0);
             document.getElementById("liquidez").innerText=formatarValor(p.liquidity?.usd||0);
             document.getElementById("fdv").innerText=formatarValor(p.fdv||0);
-            document.getElementById("marketcap").innerText=formatarValor(p.fdv?p.fdv*0.7:0);
-            document.getElementById("holders").innerText="Em breve";
-            document.getElementById("transacoes24h").innerText="Em breve";
 
             ultimaData=new Date();
             document.getElementById("ultimaAtualizacao").innerText="Agora mesmo";
         }
-    }catch(e){console.log("API carregando...");}
+    }catch(e){console.log("API carregando dados...");}
 }
 
 async function buscarMoeda(){
@@ -466,10 +442,10 @@ async function buscarMoeda(){
             resDiv.innerHTML=`<div class="item-resultado">
                 <img src="IMG-20260727-WA0036(7).jpg">
                 <div style="flex:1;">
-                    <strong>Doge Manga ($DGM) ✅</strong><br>
-                    <small>Rede Solana • Contrato Oficial</small>
+                    <strong>🐕 Doge Manga Evolution ($DGM) ✅</strong><br>
+                    <small>Rede Solana • Projeto Oficial</small>
                 </div>
-                <button class="btn btn-pequeno" onclick="abrirGraficoInterno('solana','${CONTRATO}')">📊 Gráfico</button>
+                <button class="btn btn-pequeno" onclick="abrirGraficoInterno('solana','${CONTRATO}','🐕 Doge Manga Evolution ($DGM)')">📊 Ver Gráfico</button>
             </div>`;
             resDiv.classList.add("visivel");
             return;
@@ -513,13 +489,18 @@ function navegarSecao(id){
 document.addEventListener("DOMContentLoaded",()=>{
     setTimeout(()=>document.getElementById("splash").classList.add("oculto"),1500);
 
+    // ✅ MENU — ABRE E FECHA PERFEITAMENTE SEM TRAVAR
     document.getElementById("btnMenu").addEventListener("click",(e)=>{
         e.stopPropagation();
         document.getElementById("menuNavegacao").classList.toggle("aberto");
     });
-    document.addEventListener("click",()=>{
-        document.getElementById("menuNavegacao").classList.remove("aberto");
-        document.getElementById("resultadoBusca").classList.remove("visivel");
+    document.addEventListener("click",(e)=>{
+        const menu = document.getElementById("menuNavegacao");
+        const botao = document.getElementById("btnMenu");
+        if(!menu.contains(e.target) && !botao.contains(e.target)){
+            menu.classList.remove("aberto");
+            document.getElementById("resultadoBusca").classList.remove("visivel");
+        }
     });
 
     document.querySelectorAll("[data-secao]").forEach(el=>{
@@ -539,6 +520,20 @@ document.addEventListener("DOMContentLoaded",()=>{
         setTimeout(()=>aviso.style.display="none",2000);
     });
 
+    document.getElementById("btnConectarCarteira").addEventListener("click", async () => {
+        if (window.solana && window.solana.isPhantom) {
+            try {
+                const resp = await window.solana.connect();
+                alert("✅ Carteira conectada!\nEndereço:\n" + resp.publicKey.toString());
+            } catch {
+                alert("❌ Conexão cancelada.");
+            }
+        } else {
+            alert("⚠️ Instale a carteira Phantom primeiro!");
+            window.open("https://phantom.app/", "_blank");
+        }
+    });
+
     atualizarDadosMercado();
     setInterval(atualizarDadosMercado,30000);
 
@@ -548,8 +543,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         document.getElementById("ultimaAtualizacao").innerText=seg<60?`${seg} segundos atrás`:`${Math.floor(seg/60)} minutos atrás`;
     },1000);
 
-    // CARREGA O GRÁFICO DO $DGM AUTOMATICAMENTE AO ABRIR A ABA
-    abrirGraficoInterno("solana", CONTRATO);
+    abrirGraficoInterno("solana", CONTRATO, "🐕 Doge Manga Evolution ($DGM)");
 });
 </script>
 
