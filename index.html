@@ -6,10 +6,21 @@
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
 <meta name="description" content="Portal oficial — Dados reais, Tokenomics, NFT, Holders, Roadmap e todo o ecossistema $DGM.">
 <meta name="keywords" content="Doge Manga, $DGM, Solana, Memecoin, NFT, Launchpad, DexScreener, Birdeye">
+<meta name="author" content="Doge Manga Evolution">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#050816">
+<meta http-equiv="Cache-Control" content="max-age=86400">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dogemangaofficial.xyz">
 <meta property="og:title" content="Doge Manga Evolution | Portal Oficial">
 <meta property="og:description" content="O ecossistema completo na Rede Solana.">
 <meta property="og:image" content="IMG-20260727-WA0036(7).jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Doge Manga Evolution">
+<meta name="twitter:description" content="Ecossistema Web3 na Solana com Token, NFT e Comunidade">
 <link rel="icon" href="IMG-20260727-WA0036(7).jpg">
+<link rel="preload" href="IMG-20260727-WA0036(7).jpg" as="image">
+<link rel="manifest" href="manifest.json">
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif; scroll-behavior:smooth;}
 :root{
@@ -103,8 +114,8 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .projeto-nome{display:flex; align-items:center; gap:8px; font-weight:600;}
 .projeto-nome img{width:24px; height:24px; border-radius:50%; border:1px solid var(--primaria);}
 .projeto-verificado{color:var(--sucesso); font-weight:800;}
-.preco-alta{color:var(--sucesso); font-weight-weight:700;}
-.preco-queda{color:var(--queda); font-weight-weight:700;}
+.preco-alta{color:var(--sucesso); font-weight:700;}
+.preco-queda{color:var(--queda); font-weight:700;}
 
 .noticia-item{padding:15px; border-bottom:1px solid rgba(250,204,21,0.1); transition:0.2s;}
 .noticia-item.nova{background:rgba(250,204,21,0.08);}
@@ -154,9 +165,9 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral">
-        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra">Carregando...</span></div>
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="precoReal">---</span></div>
         <div class="item-moeda">BTC</div><div class="item-moeda">ETH</div><div class="item-moeda">SOL</div><div class="item-moeda">XRP</div>
-        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra2">Carregando...</span></div>
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="precoReal2">---</span></div>
     </div>
 </div>
 
@@ -175,7 +186,8 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
     <div style="display:flex; gap:8px;">
         <button class="btn-copiar" id="btnCopiarContrato">📋 CONTRATO</button>
-        <button class="btn-conectar" id="btnConectarCarteira">👻 Conectar</button>
+        <button class="btn-conectar" onclick="conectarPhantom()">👻 Conectar</button>
+        <button class="btn btn-primario btn-pequeno" onclick="compartilhar()">📲 Compartilhar</button>
     </div>
 </div>
 
@@ -232,14 +244,12 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <h1>DOGE MANGA EVOLUTION</h1>
             <p>Portal oficial e seguro do ecossistema na Rede Solana.</p>
             <div class="grid-dados">
-                <div class="dado"><strong>Preço $DGM</strong><span id="dgm-preco">Carregando...</span></div>
-                <div class="dado"><strong>Market Cap</strong><span id="dgm-marketcap">Carregando...</span></div>
-                <div class="dado"><strong>Liquidez</strong><span id="dgm-liquidez">Carregando...</span></div>
+                <div class="dado"><strong>Preço</strong><span id="precoReal">---</span></div>
+                <div class="dado"><strong>Market Cap</strong><span id="marketReal">---</span></div>
+                <div class="dado"><strong>Volume 24h</strong><span id="volumeReal">---</span></div>
+                <div class="dado"><strong>Holders</strong><span id="holdersReal">---</span></div>
                 <div class="dado"><strong>Oferta Total</strong><span>420.000.000.000</span></div>
-                <div class="dado"><strong>Holders</strong><span id="dgm-holders">Carregando...</span></div>
-                <div class="dado"><strong>Volume 24h</strong><span id="dgm-volume">Carregando...</span></div>
-                <div class="dado"><strong>FDV</strong><span id="dgm-fdv">Carregando...</span></div>
-                <div class="dado"><strong>ATH</strong><span id="dgm-ath">Carregando...</span></div>
+                <div class="dado"><strong>FDV</strong><span id="fdvReal">---</span></div>
             </div>
             <div class="botoes-acao">
                 <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">🔄 Comprar na Jupiter</a>
@@ -297,7 +307,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <thead>
                     <tr><th class="posicao">#</th><th>Carteira</th><th>Quantidade</th><th class="porcento">%</th></tr>
                 </thead>
-                <tbody>
+                <tbody id="listaHolders">
                     <tr><td colspan="4" style="text-align:center; color:var(--claro); padding:20px;">Carregando dados da Solana...</td></tr>
                 </tbody>
             </table>
@@ -314,7 +324,12 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="#" class="btn btn-secundario btn-pequeno" data-secao="inicio" style="margin-bottom:15px;">↩️ Voltar</a>
             <h2>🎨 DOGE MANGA ORIGINS — COLEÇÃO NFT</h2>
             <p style="margin-bottom:15px;">✅ 1.000 peças únicas • Rede Solana • Verificado Metaplex</p>
-            <div class="botoes-acao" style="justify-content:flex-start;">
+            <div class="grid-dados">
+                <div class="dado"><strong>Mint</strong><span>0/1000</span></div>
+                <div class="dado"><strong>Rede</strong><span>Solana</span></div>
+                <div class="dado"><strong>Marketplace</strong><span>Magic Eden</span></div>
+            </div>
+            <div class="botoes-acao" style="justify-content:flex-start; margin-top:15px;">
                 <a href="https://magiceden.io/marketplace/doge_manga_origins" target="_blank" class="btn btn-primario btn-pequeno">🛒 Magic Eden</a>
                 <a href="https://www.tensor.trade/collections/doge_manga_origins" target="_blank" class="btn btn-secundario btn-pequeno">📊 Tensor</a>
             </div>
@@ -420,25 +435,74 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <script>
 const CONTRATO = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
-const PADRAO = "Carregando...";
-let temaEscuro = true;
+const PADRAO = "---";
+
+// TEMA SALVO NO NAVEGADOR
+let temaSalvo = localStorage.getItem("tema");
+if(temaSalvo === "claro"){ document.body.classList.add("tema-claro"); }
+document.getElementById("btnTema").onclick = () => {
+    document.body.classList.toggle("tema-claro");
+    localStorage.setItem("tema", document.body.classList.contains("tema-claro") ? "claro" : "escuro");
+    document.getElementById("btnTema").innerText = document.body.classList.contains("tema-claro") ? "☀️ Modo Claro" : "💡 Modo Escuro";
+};
 
 function tocarSininho(){
     try{const som=new AudioContext();const nota=som.createOscillator();const vol=som.createGain();nota.connect(vol);vol.connect(som.destination);nota.type='sine';nota.frequency.setValueAtTime(880,som.currentTime);vol.gain.setValueAtTime(0.25,som.currentTime);nota.start();nota.stop(som.currentTime+0.3);}catch(e){}
 }
 
-function formatarValor(v){if(!v||isNaN(v)||parseFloat(v)<=0)return PADRAO;const n=parseFloat(v);return n>=1e9?`$ ${(n/1e9).toFixed(2)}B`:n>=1e6?`$ ${(n/1e6).toFixed(2)}M`:n>=1e3?`$ ${(n/1e3).toFixed(2)}K`:`$ ${n.toFixed(8)}`;}
+function formatarValor(v){
+    if(!v || isNaN(v) || parseFloat(v) <= 0) return PADRAO;
+    const n = parseFloat(v);
+    if(n >= 1e9) return `$ ${(n/1e9).toFixed(2)}B`;
+    if(n >= 1e6) return `$ ${(n/1e6).toFixed(2)}M`;
+    if(n >= 1e3) return `$ ${(n/1e3).toFixed(2)}K`;
+    return `$ ${n.toFixed(8)}`;
+}
 
-async function atualizarDadosReais(){
-    let preco=null,mc=null,liq=null,vol=null,fdv=null;
-    try{const r=await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO}`);const d=await r.json();if(d?.pairs?.[0]){const p=d.pairs[0];preco=formatarValor(p.priceUsd);liq=formatarValor(p.liquidity?.usd);vol=formatarValor(p.volume?.h24);fdv=formatarValor(p.fdv);mc=fdv;}}catch(e){}
-    document.getElementById("dgm-preco").textContent=preco||PADRAO;
-    document.getElementById("dgm-preco-barra").textContent=preco||PADRAO;
-    document.getElementById("dgm-preco-barra2").textContent=preco||PADRAO;
-    document.getElementById("dgm-marketcap").textContent=mc||PADRAO;
-    document.getElementById("dgm-liquidez").textContent=liq||PADRAO;
-    document.getElementById("dgm-volume").textContent=vol||PADRAO;
-    document.getElementById("dgm-fdv").textContent=fdv||PADRAO;
+// DADOS EM TEMPO REAL
+async function dadosToken(){
+    try{
+        let resposta = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO}`);
+        let dados = await resposta.json();
+        if(dados.pairs && dados.pairs.length > 0){
+            let token = dados.pairs[0];
+            document.getElementById("precoReal").innerHTML = formatarValor(token.priceUsd);
+            document.getElementById("precoReal2").innerHTML = formatarValor(token.priceUsd);
+            document.getElementById("volumeReal").innerHTML = formatarValor(token.volume?.h24);
+            document.getElementById("marketReal").innerHTML = formatarValor(token.fdv);
+            document.getElementById("fdvReal").innerHTML = formatarValor(token.fdv);
+        }
+    }catch(e){
+        console.log("API DexScreener indisponível no momento:", e);
+    }
+}
+
+// COMPARTILHAR
+function compartilhar(){
+    if(navigator.share){
+        navigator.share({
+            title:"Doge Manga Evolution",
+            text:"Conheça o ecossistema Doge Manga na Solana",
+            url:"https://dogemangaofficial.xyz"
+        });
+    }else{
+        alert("Copie o link para compartilhar: https://dogemangaofficial.xyz");
+    }
+}
+
+// CONECTAR PHANTOM
+async function conectarPhantom(){
+    if(window.solana && window.solana.isPhantom){
+        try{
+            let carteira = await window.solana.connect();
+            alert("✅ Carteira conectada: " + carteira.publicKey.toString().slice(0,10) + "...");
+        }catch(e){
+            alert("❌ Conexão cancelada ou erro.");
+        }
+    }else{
+        alert("Instale a carteira Phantom primeiro!");
+        window.open("https://phantom.app","_blank");
+    }
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -448,13 +512,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.getElementById('sininhoNotif').onclick=()=>{tocarSininho();document.getElementById('sininhoNotif').classList.remove('tem-notif');document.querySelector('.bolinha-notif').style.display='none';document.querySelector('[data-secao="noticias"]').click();};
     document.getElementById('btnMenu').onclick=e=>{e.stopPropagation();document.getElementById('menuNavegacao').classList.toggle('aberto');};
     document.addEventListener('click',e=>{if(!document.getElementById('menuNavegacao').contains(e.target)&&e.target!==document.getElementById('btnMenu'))document.getElementById('menuNavegacao').classList.remove('aberto');});
-    document.getElementById('btnTema').onclick=()=>{temaEscuro=!temaEscuro;document.body.classList.toggle('tema-claro');document.getElementById('btnTema').innerText=temaEscuro?'💡 Modo Escuro':'☀️ Modo Claro';};
     document.getElementById('btnCopiarContrato').onclick=()=>{navigator.clipboard.writeText(CONTRATO).then(()=>{const a=document.getElementById('avisoCopiado');a.style.display='block';setTimeout(()=>a.style.display='none',2500);});};
-    document.getElementById('btnConectarCarteira').onclick=async()=>{try{if(window.solana?.isPhantom){const c=await window.solana.connect();alert(`✅ Conectado: ${c.publicKey.toString().slice(0,8)}...`);document.getElementById('btnConectarCarteira').innerHTML=`✅ ${c.publicKey.toString().slice(0,4)}...`;}else{alert('Instale a Phantom!');window.open('https://phantom.app','_blank');}}catch(e){alert('Erro ou cancelado.');}};
 
     document.querySelectorAll('.menu-item[data-secao], .aba, .btn[data-secao]').forEach(b=>{b.onclick=e=>{e.preventDefault();document.querySelectorAll('.menu-item,.aba').forEach(x=>x.classList.remove('ativo'));document.querySelectorAll('.secao').forEach(x=>x.classList.remove('ativa'));const s=b.dataset.secao;document.querySelectorAll(`[data-secao="${s}"]`).forEach(x=>x.classList.add('ativo'));document.getElementById(s).classList.add('ativa');document.getElementById('menuNavegacao').classList.remove('aberto');window.scrollTo(0,0);};});
 
-    atualizarDadosReais(); setInterval(atualizarDadosReais,30000);
+    dadosToken(); setInterval(dadosToken,30000);
 });
 </script>
 </body>
