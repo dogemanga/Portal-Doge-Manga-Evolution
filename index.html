@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
-<meta name="description" content="Portal oficial do ecossistema Doge Manga na Rede Solana — Dados em tempo real, Gráficos, NFT e Parceiros.">
+<meta name="description" content="Portal oficial do ecossistema Doge Manga na Rede Solana — Dados em tempo real, Gráficos, Holders, NFT e Parceiros.">
 <link rel="icon" href="IMG-20260727-WA0036(7).jpg">
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif; scroll-behavior:smooth;}
@@ -88,14 +88,14 @@ header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px
 
 .grafico-container{width:100%; height:480px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0;}
 
-.form-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:15px; margin-bottom:20px;}
-.grupo-form{display:flex; flex-direction:column; gap:6px;}
-.grupo-form label{font-size:13px; color:var(--claro); font-weight:500;}
-.grupo-form input, .grupo-form textarea{padding:10px 12px; border-radius:8px; border:1px solid rgba(250,204,21,0.3); background:rgba(2,6,23,0.8); color:var(--texto); font-size:14px; outline:none;}
+.tabela-holders{width:100%; border-collapse:collapse; margin-top:15px;}
+.tabela-holders th, .tabela-holders td{padding:10px 8px; text-align:left; border-bottom:1px solid rgba(250,204,21,0.1);}
+.tabela-holders th{color:var(--primaria); font-weight:700; background:rgba(250,204,21,0.08);}
+.tabela-holders td{font-size:13px;}
+.tabela-holders .posicao{text-align:center; font-weight:700; width:50px;}
+.tabela-holders .qtd{text-align:right; font-family:monospace;}
 
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
-.aviso-sucesso-form{display:none; background:rgba(34,197,94,0.1); border:1px solid var(--sucesso); padding:15px; border-radius:10px; margin:15px 0; color:#bbf7d0;}
-.aviso-erro-form{display:none; background:rgba(239,68,68,0.1); border:1px solid var(--queda); padding:15px; border-radius:10px; margin:15px 0; color:#fca5a5;}
 .aviso-risco{background:rgba(239,68,68,0.1); border:1px solid var(--queda); padding:15px; border-radius:10px; margin:20px 0; color:#fca5a5;}
 
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
@@ -104,16 +104,14 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 </head>
 <body>
 
-<div id="splash"><img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga Evolution"><h2>Carregando Portal Profissional...</h2></div>
+<div id="splash"><img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga Evolution"><h2>Carregando Portal Oficial...</h2></div>
 <div class="aviso-copiado" id="avisoCopiado">✅ CÓPIA REALIZADA!</div>
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral">
-        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" rel="noopener noreferrer"><strong>$DGM</strong> <span id="dgm-preco-barra">Aguardando...</span></a></div>
-        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/bitcoin" target="_blank" rel="noopener noreferrer">BTC</a></div>
-        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/ethereum" target="_blank" rel="noopener noreferrer">ETH</a></div>
-        <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank" rel="noopener noreferrer">SOL</a></div>
-        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" rel="noopener noreferrer"><strong>$DGM</strong> <span id="dgm-preco-barra2">Aguardando...</span></a></div>
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra">Aguardando...</span></div>
+        <div class="item-moeda">BTC</div><div class="item-moeda">ETH</div><div class="item-moeda">SOL</div><div class="item-moeda">XRP</div>
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra2">Aguardando...</span></div>
     </div>
 </div>
 
@@ -130,46 +128,31 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div style="position:relative;">
         <button class="menu-botao" id="btnMenu">☰</button>
         <nav class="menu-navegacao" id="menuNavegacao">
-            <div class="titulo-menu">🌐 Idioma: Português</div>
-            <button class="menu-item" id="btnTema">💡 Iluminação: Modo Escuro</button>
+            <div class="titulo-menu">🌐 Idioma</div>
+            <button class="menu-item" onclick="alert('Idioma: Português • Em breve Inglês e Espanhol')">🇧🇷 Português</button>
+            <button class="menu-item" id="btnTema">💡 Modo Escuro</button>
             <div class="menu-divisao"></div>
-            <div class="titulo-menu">🔗 PLATAFORMAS OFICIAIS</div>
-            <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer" class="menu-item">🌐 Site Oficial</a>
-            <a href="https://dogemangaofficial.xyz/nft" target="_blank" rel="noopener noreferrer" class="menu-item">🎨 Coleção NFT Origins</a>
-            <a href="https://www.binance.com/pt-BR" target="_blank" rel="noopener noreferrer" class="menu-item">💱 Binance</a>
-            <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" rel="noopener noreferrer" class="menu-item">📊 CoinMarketCap</a>
-            <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" rel="noopener noreferrer" class="menu-item">📈 CoinGecko</a>
-            <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer" class="menu-item">👻 Phantom Wallet</a>
-            <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="menu-item">🔍 DexScreener</a>
-            <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener noreferrer" class="menu-item">🔎 Birdeye</a>
-            <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="menu-item">🔗 Solscan</a>
+            <div class="titulo-menu">🔗 PLATAFORMAS</div>
+            <a href="https://dogemangaofficial.xyz" target="_blank" class="menu-item">🌐 Site Oficial</a>
+            <a href="https://www.binance.com/pt-BR" target="_blank" class="menu-item">💱 Binance</a>
+            <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" class="menu-item">📊 CoinMarketCap</a>
+            <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" class="menu-item">📈 CoinGecko</a>
+            <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="menu-item">🔎 Birdeye</a>
+            <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 DexScreener</a>
+            <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔗 Solscan</a>
             <div class="menu-divisao"></div>
-            <div class="titulo-menu" id="btnParceiros">🤝 PARCEIROS DO ECOSSISTEMA</div>
-            <div id="listaParceiros">
-                <a href="https://solana.com" target="_blank" rel="noopener noreferrer" class="menu-item">Solana</a>
-                <a href="https://phantom.app/" target="_blank" rel="noopener noreferrer" class="menu-item">Phantom Wallet</a>
-                <a href="https://jup.ag" target="_blank" rel="noopener noreferrer" class="menu-item">Jupiter</a>
-                <a href="https://raydium.io" target="_blank" rel="noopener noreferrer" class="menu-item">Raydium</a>
-                <a href="https://magiceden.io/marketplace/doge_manga_origins" target="_blank" rel="noopener noreferrer" class="menu-item">Magic Eden</a>
-                <a href="https://www.tensor.trade/collections/doge_manga_origins" target="_blank" rel="noopener noreferrer" class="menu-item">Tensor</a>
-                <a href="https://www.metaplex.com/" target="_blank" rel="noopener noreferrer" class="menu-item">Metaplex</a>
-            </div>
-            <div class="menu-divisao"></div>
-            <div class="titulo-menu">🏠 PRINCIPAL</div>
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
-            <a href="#mercado" class="menu-item" data-secao="mercado">📈 Mercado & Gráfico</a>
-            <a href="#comprar" class="menu-item" data-secao="comprar">🚀 Comprar $DGM</a>
-            <a href="#tokenomics" class="menu-item" data-secao="tokenomics">📊 Tokenomics</a>
-            <a href="#nft" class="menu-item" data-secao="nft">🎨 NFT Origins</a>
-            <a href="#listados" class="menu-item" data-secao="listados">📋 Projetos Listados</a>
-            <a href="#seguranca" class="menu-item" data-secao="seguranca">🛡️ Segurança</a>
+            <a href="#mercado" class="menu-item" data-secao="mercado">📈 Mercado & Holders</a>
+            <a href="#comprar" class="menu-item" data-secao="comprar">🚀 Comprar</a>
+            <a href="#nft" class="menu-item" data-secao="nft">🎨 NFT</a>
+            <a href="#listados" class="menu-item" data-secao="listados">📋 Listados</a>
         </nav>
     </div>
 </div>
 
 <div class="abas">
     <div class="aba" data-secao="inicio">🏠 Início</div>
-    <div class="aba" data-secao="mercado">📈 Mercado</div>
+    <div class="aba" data-secao="mercado">📈 Mercado & Holders</div>
     <div class="aba" data-secao="comprar">🚀 Comprar</div>
     <div class="aba" data-secao="nft">🎨 NFT</div>
     <div class="aba" data-secao="listados">📋 Listados</div>
@@ -180,7 +163,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <header>
             <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="Doge Manga">
             <h1>DOGE MANGA EVOLUTION</h1>
-            <p>Portal profissional oficial do ecossistema Doge Manga na Rede Solana.</p>
+            <p>Portal oficial e profissional do ecossistema na Rede Solana.</p>
             <div class="grid-dados">
                 <div class="dado"><strong>Preço $DGM</strong><span id="dgm-preco">Aguardando...</span></div>
                 <div class="dado"><strong>Market Cap</strong><span id="dgm-marketcap">Aguardando...</span></div>
@@ -190,225 +173,116 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <div class="dado"><strong>Volume 24h</strong><span id="dgm-volume">Aguardando...</span></div>
             </div>
             <div class="botoes-acao">
-                <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-primario">🔄 Jupiter</a>
-                <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-secundario">🔁 Raydium</a>
-                <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-secundario">🔍 DexScreener</a>
+                <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">🔄 Jupiter</a>
+                <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-secundario">🔁 Raydium</a>
             </div>
         </header>
     </div>
 </section>
 
-<section id="mercado" class="secao"><div class="container"><div class="card destaque">
-    <h2>📈 Mercado em Tempo Real — Histórico de Preço</h2>
-    <div class="grafico-container">
-        <iframe src="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?embed=1&theme=dark&chart=1&trades=1" width="100%" height="100%" frameborder="0" title="Gráfico Histórico $DGM"></iframe>
+<section id="mercado" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <h2>📈 Gráfico em Tempo Real</h2>
+            <div class="grafico-container">
+                <iframe src="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <div class="card destaque">
+            <h2>🏆 TOP 10 MAIORES HOLDERS $DGM</h2>
+            <table class="tabela-holders">
+                <thead>
+                    <tr><th class="posicao">#</th><th>Endereço</th><th class="qtd">Quantidade de Tokens</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td class="posicao">👑1</td><td>5roTERrB36...</td><td class="qtd">40.221.999.099</td></tr>
+                    <tr><td class="posicao">🥈2</td><td>Fbu14tFi5Y...</td><td class="qtd">36.000.000.000</td></tr>
+                    <tr><td class="posicao">🥉3</td><td>6xdk2P5ZT4...</td><td class="qtd">27.500.000.000</td></tr>
+                    <tr><td class="posicao">4</td><td>EEiBaa4yUt...</td><td class="qtd">25.005.000.000</td></tr>
+                    <tr><td class="posicao">5</td><td>AhfgWeTFHF...</td><td class="qtd">25.000.000.000</td></tr>
+                    <tr><td class="posicao">6</td><td>HBxnWfKZLk...</td><td class="qtd">23.000.000.000</td></tr>
+                    <tr><td class="posicao">7</td><td>AR6ZsJgv7w...</td><td class="qtd">21.170.000.200</td></tr>
+                    <tr><td class="posicao">8</td><td>HffRmFaNBp...</td><td class="qtd">18.518.000.000</td></tr>
+                    <tr><td class="posicao">9</td><td>FKPF5bvJio...</td><td class="qtd">18.419.300.176</td></tr>
+                    <tr><td class="posicao">10</td><td>cmF5QseFJ...</td><td class="qtd">18.000.000.000</td></tr>
+                </tbody>
+            </table>
+            <div style="margin-top:15px; text-align:center;">
+                <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana&tab=holders" target="_blank" class="btn btn-secundario btn-pequeno">🔗 Ver Lista Completa</a>
+            </div>
+        </div>
     </div>
-</div></div></section>
+</section>
 
 <section id="comprar" class="secao"><div class="container"><div class="card destaque">
     <h2>🚀 Como Comprar $DGM</h2>
-    <p>1. Tenha SOL na carteira • 2. Troque nas plataformas oficiais abaixo</p>
-    <div class="botoes-acao" style="justify-content:flex-start;">
-        <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-primario">🔄 Comprar na Jupiter</a>
-        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-secundario">🔁 Comprar na Raydium</a>
+    <p>Contrato oficial: <code style="color:var(--primaria);">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code></p>
+    <div class="botoes-acao" style="justify-content:flex-start; margin-top:15px;">
+        <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">🔄 Comprar na Jupiter</a>
+        <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-secundario">🔁 Raydium</a>
     </div>
-    <div style="margin-top:15px; padding:12px; background:rgba(2,6,23,0.8); border-radius:8px;">
-        <p style="font-weight:600; color:var(--primaria);">Contrato Oficial Verificado:</p>
-        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-            <code style="font-size:12px; color:#d1d5db; word-break:break-all;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code>
-            <button class="btn-copiar" onclick="navigator.clipboard.writeText('E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE'); document.getElementById('avisoCopiado').style.display='block'; setTimeout(()=>document.getElementById('avisoCopiado').style.display='none',2500);">📋 Copiar</button>
-        </div>
-    </div>
-    <div class="aviso-risco">⚠️ Criptomoedas envolvem riscos. Confira sempre o contrato oficial antes de qualquer transação.</div>
+    <div class="aviso-risco">⚠️ Sempre confira o contrato antes de transacionar. Nenhum outro endereço é o oficial.</div>
 </div></div></section>
-
-<section id="tokenomics" class="secao"><div class="container"><div class="card"><h2>📊 Tokenomics</h2><p>Em breve com distribuição completa e detalhada.</p></div></div></section>
 
 <section id="nft" class="secao"><div class="container"><div class="card destaque">
-    <a href="#" class="btn btn-secundario btn-pequeno" data-secao="inicio" style="margin-bottom:18px; display:inline-flex; align-items:center; gap:8px;">↩️ Voltar ao Portal</a>
-    <h2>🎨 DOGE MANGA ORIGINS — COLEÇÃO NFT</h2>
-    <p style="color:var(--sucesso); font-weight:700; margin-bottom:15px;">✅ VERIFICADA PELA METAPLEX • 1.000 PEÇAS ÚNICAS</p>
-    <p>Arte exclusiva • Rede Solana • Padrão Oficial Metaplex</p>
+    <a href="#" class="btn btn-secundario btn-pequeno" data-secao="inicio" style="margin-bottom:15px;">↩️ Voltar</a>
+    <h2>🎨 DOGE MANGA ORIGINS — NFT</h2>
+    <p>✅ 1.000 peças únicas • Rede Solana • Verificado Metaplex</p>
     <div class="botoes-acao" style="justify-content:flex-start;">
-        <a href="https://magiceden.io/marketplace/doge_manga_origins" target="_blank" rel="noopener noreferrer" class="btn btn-primario btn-pequeno">🛒 Magic Eden</a>
-        <a href="https://www.tensor.trade/collections/doge_manga_origins" target="_blank" rel="noopener noreferrer" class="btn btn-secundario btn-pequeno">📊 Tensor</a>
+        <a href="https://magiceden.io/marketplace/doge_manga_origins" target="_blank" class="btn btn-primario btn-pequeno">🛒 Magic Eden</a>
+        <a href="https://www.tensor.trade/collections/doge_manga_origins" target="_blank" class="btn btn-secundario btn-pequeno">📊 Tensor</a>
     </div>
 </div></div></section>
 
-<section id="listados" class="secao">
-    <div class="container">
-        <div class="card destaque">
-            <a href="#" class="btn btn-secundario btn-pequeno" data-secao="inicio" style="margin-bottom:18px; display:inline-flex; align-items:center; gap:8px;">↩️ Voltar ao Portal</a>
-            <h2>📋 PROJETOS LISTADOS & VERIFICADOS</h2>
-            <div style="background:rgba(2,6,23,0.85); padding:20px; border-radius:12px; border:1px solid rgba(250,204,21,0.3); margin-top:15px;">
-                <div style="display:flex; align-items:center; gap:15px; flex-wrap:wrap;">
-                    <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga" style="width:60px; height:60px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover; animation:brilhoLogo 2s infinite alternate;">
-                    <div>
-                        <h3 style="color:var(--primaria); font-size:18px; margin-bottom:4px;">DOGE MANGA EVOLUTION</h3>
-                        <p style="color:var(--sucesso); font-weight:700; font-size:14px;">✅ PROJETO LISTADO E VERIFICADO — PROJETO PRINCIPAL</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section id="listados" class="secao"><div class="container"><div class="card destaque">
+    <a href="#" class="btn btn-secundario btn-pequeno" data-secao="inicio" style="margin-bottom:15px;">↩️ Voltar</a>
+    <h2>📋 PROJETOS LISTADOS</h2>
+    <div style="display:flex; align-items:center; gap:15px; padding:15px; background:rgba(2,6,23,0.8); border-radius:10px;">
+        <img src="IMG-20260727-WA0036(7).jpg" style="width:55px; height:55px; border-radius:50%; border:2px solid var(--primaria);">
+        <div><h3 style="color:var(--primaria);">DOGE MANGA EVOLUTION</h3><p style="color:var(--sucesso);">✅ VERIFICADO • PROJETO PRINCIPAL</p></div>
     </div>
-</section>
+</div></div></section>
 
-<section id="seguranca" class="secao">
-    <div class="container">
-        <div class="card destaque">
-            <a href="#" class="btn btn-secundario btn-pequeno" data-secao="inicio" style="margin-bottom:18px; display:inline-flex; align-items:center; gap:8px;">↩️ Voltar ao Portal</a>
-            <h2>🛡️ SEGURANÇA & ANTI-GOLPE</h2>
-            <div class="aviso-risco" style="background:rgba(250,204,21,0.08); border-color:rgba(250,204,21,0.4); color:#fde047;">
-                ⚠️ **ALERTA OFICIAL:** Acesse apenas: <strong>https://dogemangaofficial.xyz</strong> — nenhum outro endereço é verdadeiro.
-            </div>
-            <div style="margin-top:20px;">
-                <h3 style="color:var(--primaria); font-size:16px; margin-bottom:10px;">🔐 CONTRATO OFICIAL</h3>
-                <code style="font-size:12px; color:#d1d5db; word-break:break-all; display:block; padding:10px; background:rgba(0,0,0,0.3); border-radius:6px;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 DOGE MANGA EVOLUTION | Portal Oficial Profissional • Todos os direitos reservados</p>
-</footer>
+<footer>© 2026 Doge Manga Evolution | Portal Oficial — Todos os direitos reservados</footer>
 
 <script>
-const CONTRATO_DGM = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
-const CHAVE_BIRDEYE = ""; // Coloque sua chave se possuir
+const CONTRATO = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
+const CHAVE_BIRDEYE = "";
 const PADRAO = "Aguardando...";
 let temaEscuro = true;
 
-function formatarValor(valor){
-    if(!valor || isNaN(valor) || parseFloat(valor) <= 0) return null;
-    const n = parseFloat(valor);
-    if(n >= 1e9) return `$ ${(n/1e9).toFixed(2)}B`;
-    if(n >= 1e6) return `$ ${(n/1e6).toFixed(2)}M`;
-    if(n >= 1e3) return `$ ${(n/1e3).toFixed(2)}K`;
-    return `$ ${n.toFixed(8)}`;
-}
+function formatarValor(v){if(!v || isNaN(v)||v<=0)return null; const n=parseFloat(v); return n>=1e9?`$ ${(n/1e9).toFixed(2)}B`:n>=1e6?`$ ${(n/1e6).toFixed(2)}M`:n>=1e3?`$ ${(n/1e3).toFixed(2)}K`:`$ ${n.toFixed(8)}`;}
+function formatarNum(v){return !v||isNaN(v)?PADRAO:parseInt(v).toLocaleString('pt-BR');}
 
-function formatarNumero(valor){
-    if(!valor || isNaN(valor)) return PADRAO;
-    return parseInt(valor).toLocaleString('pt-BR');
-}
-
-async function atualizarPortal(){
-    let preco = null, marketcap = null, liquidez = null, volume = null, holders = null;
-
-    // 1️⃣ BIRDEYE — Prioridade para dados principais
+async function atualizarDados(){
+    let preco=null, mc=null, liq=null, vol=null, holders=null;
     if(CHAVE_BIRDEYE){
-        try{
-            const res = await fetch(`https://public-api.birdeye.so/defi/token_overview?address=${CONTRATO_DGM}`,{
-                headers:{"x-api-key": CHAVE_BIRDEYE, "X-Chain":"solana"}
-            });
-            const d = await res.json();
-            if(d?.data){
-                preco = formatarValor(d.data.price);
-                marketcap = formatarValor(d.data.mc);
-                liquidez = formatarValor(d.data.liquidity);
-                volume = formatarValor(d.data.v24hUSD);
-            }
-        }catch(e){console.log("Birdeye: usando DexScreener...");}
+        try{const r=await fetch(`https://public-api.birdeye.so/defi/token_overview?address=${CONTRATO}`,{headers:{"x-api-key":CHAVE_BIRDEYE,"X-Chain":"solana"}}); const d=await r.json(); if(d?.data){preco=formatarValor(d.data.price);mc=formatarValor(d.data.mc);liq=formatarValor(d.data.liquidity);vol=formatarValor(d.data.v24hUSD);}}catch(e){}
     }
-
-    // 2️⃣ DEXSCREENER — Fallback rápido e sem chave
     if(!preco){
-        try{
-            const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO_DGM}`);
-            const d = await res.json();
-            if(d?.pairs?.[0]){
-                const p = d.pairs[0];
-                preco = formatarValor(p.priceUsd);
-                liquidez = formatarValor(p.liquidity?.usd);
-                volume = formatarValor(p.volume?.h24);
-                marketcap = formatarValor(p.fdv);
-            }
-        }catch(e){console.log("DexScreener indisponível");}
+        try{const r=await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO}`); const d=await r.json(); if(d?.pairs?.[0]){const p=d.pairs[0]; preco=formatarValor(p.priceUsd);liq=formatarValor(p.liquidity?.usd);vol=formatarValor(p.volume?.h24);mc=formatarValor(p.fdv);}}catch(e){}
     }
+    try{const r=await fetch(`https://api.solscan.io/token/holders?token=${CONTRATO}&limit=1`); const d=await r.json(); holders=d?.total?formatarNum(d.total):null;}catch(e){try{const r2=await fetch(`https://api.solana.fm/v1/tokens/${CONTRATO}/holders`); const d2=await r2.json(); holders=d2?.total?formatarNum(d2.total):null;}catch(e2){}}
 
-    // 3️⃣ SOLSCAN — Total de Holders
-    try{
-        const res = await fetch(`https://api.solscan.io/token/holders?token=${CONTRATO_DGM}&limit=1`);
-        const d = await res.json();
-        holders = d?.total ? formatarNumero(d.total) : null;
-    }catch(e){
-        try{
-            const res2 = await fetch(`https://api.solana.fm/v1/tokens/${CONTRATO_DGM}/holders`);
-            const d2 = await res2.json();
-            holders = d2?.total ? formatarNumero(d2.total) : null;
-        }catch(e2){console.log("Solscan: aguardando dados");}
-    }
-
-    // Atualiza TODOS os campos — sem inventar valores
-    document.getElementById("dgm-preco").textContent = preco || PADRAO;
-    document.getElementById("dgm-preco-barra").textContent = preco || PADRAO;
-    document.getElementById("dgm-preco-barra2").textContent = preco || PADRAO;
-    document.getElementById("dgm-marketcap").textContent = marketcap || PADRAO;
-    document.getElementById("dgm-liquidez").textContent = liquidez || PADRAO;
-    document.getElementById("dgm-volume").textContent = volume || PADRAO;
-    document.getElementById("dgm-holders").textContent = holders || PADRAO;
+    document.getElementById("dgm-preco").textContent=preco||PADRAO;
+    document.getElementById("dgm-preco-barra").textContent=preco||PADRAO;
+    document.getElementById("dgm-preco-barra2").textContent=preco||PADRAO;
+    document.getElementById("dgm-marketcap").textContent=mc||PADRAO;
+    document.getElementById("dgm-liquidez").textContent=liq||PADRAO;
+    document.getElementById("dgm-volume").textContent=vol||PADRAO;
+    document.getElementById("dgm-holders").textContent=holders||PADRAO;
 }
 
-// Conexão Phantom Wallet Profissional
-document.getElementById('btnConectarCarteira').onclick = async () => {
-    try {
-        if (window.solana && window.solana.isPhantom) {
-            const resp = await window.solana.connect({onlyIfTrusted:false});
-            const endereco = resp.publicKey.toString();
-            alert(`✅ CONECTADO!\nCarteira: ${endereco.slice(0,8)}...${endereco.slice(-4)}`);
-            document.getElementById('btnConectarCarteira').innerHTML = `✅ ${endereco.slice(0,4)}...`;
-        } else {
-            alert('⚠️ Instale a Phantom Wallet primeiro!');
-            window.open('https://phantom.app/', '_blank', 'noopener,noreferrer');
-        }
-    } catch (erro) {
-        alert(erro.message.includes('rejected') ? '❌ Conexão cancelada.' : '❌ Erro ao conectar.');
-    }
-};
-
-// Navegação e inicialização
-document.addEventListener('DOMContentLoaded', function(){
-    setTimeout(()=>document.getElementById('splash').classList.add('oculto'), 1500);
-
-    document.getElementById('btnCopiarContrato').onclick = () => {
-        navigator.clipboard.writeText(CONTRATO_DGM).then(()=>{
-            const aviso = document.getElementById('avisoCopiado');
-            aviso.style.display='block';
-            setTimeout(()=>aviso.style.display='none',2500);
-        });
-    };
-
-    document.getElementById('btnMenu').onclick = e => {e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto');};
-    document.addEventListener('click', e => {if(!document.getElementById('menuNavegacao').contains(e.target) && e.target!==document.getElementById('btnMenu')) document.getElementById('menuNavegacao').classList.remove('aberto');});
-
-    document.getElementById('btnTema').onclick = ()=>{
-        temaEscuro = !temaEscuro;
-        document.body.classList.toggle('tema-claro');
-        document.getElementById('btnTema').innerText = temaEscuro ? '💡 Iluminação: Modo Escuro' : '💡 Iluminação: Modo Claro';
-    };
-
-    document.getElementById('btnParceiros').onclick = () => {
-        const lista = document.getElementById('listaParceiros');
-        lista.style.display = lista.style.display === 'none' ? 'block' : 'none';
-    };
-
-    document.querySelectorAll('.menu-item[data-secao], .aba').forEach(b=>{
-        b.addEventListener('click', e=>{
-            e.preventDefault();
-            document.querySelectorAll('.menu-item, .aba').forEach(x=>x.classList.remove('ativo'));
-            document.querySelectorAll('.secao').forEach(x=>x.classList.remove('ativa'));
-            const id = b.dataset.secao || 'inicio';
-            document.querySelectorAll(`[data-secao="${id}"]`).forEach(x=>x.classList.add('ativo'));
-            document.getElementById(id).classList.add('ativa');
-            document.getElementById('menuNavegacao').classList.remove('aberto');
-            window.scrollTo(0,0);
-        });
-    });
-
-    // Inicia tudo e atualiza a cada 30 segundos
-    atualizarPortal();
-    setInterval(atualizarPortal, 30000);
+document.addEventListener('DOMContentLoaded',()=>{
+    setTimeout(()=>document.getElementById('splash').classList.add('oculto'),1500);
+    document.getElementById('btnMenu').onclick=e=>{e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto');};
+    document.addEventListener('click',e=>{if(!document.getElementById('menuNavegacao').contains(e.target)&&e.target!==document.getElementById('btnMenu'))document.getElementById('menuNavegacao').classList.remove('aberto');});
+    document.getElementById('btnTema').onclick=()=>{temaEscuro=!temaEscuro; document.body.classList.toggle('tema-claro'); document.getElementById('btnTema').innerText=temaEscuro?'💡 Modo Escuro':'☀️ Modo Claro';};
+    document.getElementById('btnCopiarContrato').onclick=()=>{navigator.clipboard.writeText(CONTRATO).then(()=>{const a=document.getElementById('avisoCopiado'); a.style.display='block'; setTimeout(()=>a.style.display='none',2500);});};
+    document.getElementById('btnConectarCarteira').onclick=async()=>{try{if(window.solana&&window.solana.isPhantom){const r=await window.solana.connect({onlyIfTrusted:false}); alert(`✅ Conectado!\nCarteira: ${r.publicKey.toString().slice(0,8)}...`); document.getElementById('btnConectarCarteira').innerHTML=`✅ ${r.publicKey.toString().slice(0,4)}...`;}else{alert('Instale a Phantom primeiro!'); window.open('https://phantom.app','_blank');}}catch(e){alert(e.message.includes('rejected')?'❌ Cancelado':'❌ Erro ao conectar');}};
+    document.querySelectorAll('.menu-item[data-secao], .aba, .btn[data-secao]').forEach(b=>{b.onclick=e=>{e.preventDefault(); document.querySelectorAll('.menu-item,.aba').forEach(x=>x.classList.remove('ativo')); document.querySelectorAll('.secao').forEach(x=>x.classList.remove('ativa')); const id=b.dataset.secao; document.querySelectorAll(`[data-secao="${id}"]`).forEach(x=>x.classList.add('ativo')); document.getElementById(id).classList.add('ativa'); document.getElementById('menuNavegacao').classList.remove('aberto'); window.scrollTo(0,0);};});
+    atualizarDados(); setInterval(atualizarDados,30000);
 });
 </script>
 </body>
