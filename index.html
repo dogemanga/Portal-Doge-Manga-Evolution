@@ -152,11 +152,16 @@ footer a:hover{text-decoration:underline;}
             <div class="menu-divisao"></div>
 
             <div class="titulo-menu">🔗 PLATAFORMAS OFICIAIS</div>
+            <a href="https://www.binance.com/pt-BR" target="_blank" rel="noopener noreferrer" class="menu-item">💱 Binance</a>
             <a href="https://coinmarketcap.com/currencies/doge-manga/" target="_blank" rel="noopener noreferrer" class="menu-item">📊 CoinMarketCap</a>
             <a href="https://www.coingecko.com/pt-br/moedas/doge-manga" target="_blank" rel="noopener noreferrer" class="menu-item">📈 CoinGecko</a>
             <a href="https://phantom.com/tokens/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="menu-item">👻 Phantom</a>
             <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="menu-item">🔍 DexScreener</a>
             <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener noreferrer" class="menu-item">🔎 Birdeye</a>
+            <div class="menu-divisao"></div>
+
+            <div class="titulo-menu">🎮 DIVERSÃO</div>
+            <a href="#jogos" class="menu-item" data-secao="jogos">🎮 Jogos Doge Manga</a>
             <div class="menu-divisao"></div>
 
             <div class="titulo-menu">🎬 CONTEÚDO & ARQUIVOS</div>
@@ -250,6 +255,14 @@ footer a:hover{text-decoration:underline;}
 <section id="nft" class="secao"><div class="container"><div class="card destaque">
     <h2>🎨 NFT Origins Doge Manga</h2>
     <p>Coleção exclusiva, benefícios para holders e lançamento em breve.</p>
+</div></div></section>
+
+<section id="jogos" class="secao"><div class="container"><div class="card">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px;">
+        <h2>🎮 Jogos Doge Manga</h2>
+        <button class="btn btn-secundario" data-voltar>↩️ Voltar</button>
+    </div>
+    <p>Em breve: jogos exclusivos do universo Doge Manga! Fique ligado nas novidades.</p>
 </div></div></section>
 
 <section id="launchpad" class="secao"><div class="container"><div class="card">
@@ -426,7 +439,7 @@ async function atualizarPrecos(){
         
         if(dados['doge-manga']){
             document.getElementById('precoDGM').innerText = `$${dados['doge-manga'].usd.toFixed(6)}`;
-            document.getElementById('barraPrecos').innerHTML = document.getElementById('barraPrecos').innerHTML.replace('Carregando...', `$${dados['doge-manga'].usd.toFixed(6)}`);
+            document.getElementById('barraPrecos').innerHTML = document.getElementById('barraPrecos').innerHTML.replaceAll('Carregando...', `$${dados['doge-manga'].usd.toFixed(6)}`);
         }
     }catch(erro){
         console.log('Aguardando listagem na CoinGecko');
