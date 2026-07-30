@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
-<meta name="description" content="Portal oficial do ecossistema Doge Manga na Rede Solana — Dados em tempo real, Gráficos, Holders, NFT e Parceiros.">
+<meta name="description" content="Portal oficial do ecossistema Doge Manga na Rede Solana — Dados em tempo real, Gráficos, Holders, Notícias e NFT.">
 <link rel="icon" href="IMG-20260727-WA0036(7).jpg">
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif; scroll-behavior:smooth;}
@@ -24,6 +24,8 @@ body{
 @keyframes brilhoLogo{0%{box-shadow:0 0 15px rgba(250,204,21,0.4); transform:scale(1);}100%{box-shadow:0 0 35px rgba(250,204,21,0.8); transform:scale(1.05);}}
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes entrar{from{opacity:0; transform:translateY(25px);}to{opacity:1; transform:translateY(0);}}
+@keyframes alertaSininho{0%,100%{transform:rotate(0deg);}20%{transform:rotate(-15deg);}40%{transform:rotate(15deg);}60%{transform:rotate(-10deg);}80%{transform:rotate(10deg);}}
+@keyframes novoItem{0%{background:rgba(250,204,21,0.2);}100%{background:transparent;}}
 
 #splash{position:fixed; inset:0; background:var(--fundo); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; transition:opacity 0.6s ease;}
 #splash.oculto{opacity:0; visibility:hidden;}
@@ -33,13 +35,15 @@ body{
 .barra-conteudo-geral{display:flex; gap:40px; animation:rolar 50s linear infinite; width:max-content; font-size:13px;}
 .item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap;}
 .item-moeda.destaque{font-weight:700; color:var(--primaria);}
-.item-moeda a{color:inherit; text-decoration:none;}
 
 .barra-dm{background:rgba(250,204,21,0.08); border-bottom:1px solid rgba(250,204,21,0.2); padding:10px 15px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px; margin-top:40px;}
 .dm-info{display:flex; align-items:center; gap:10px;}
-.dm-info img{width:24px; height:24px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover; animation:brilhoLogo 2s infinite alternate;}
+.dm-info img{width:24px; height:24px; border-radius:50%; border:2px solid var(--primaria); animation:brilhoLogo 2s infinite alternate;}
 .dm-nome{color:var(--primaria); font-weight:700; font-size:15px;}
 .selo-verificado{color:var(--sucesso); font-weight:800;}
+.sininho-notif{position:relative; font-size:18px; cursor:pointer; margin-left:10px;}
+.sininho-notif.tem-notif{animation:alertaSininho 1s infinite; color:var(--primaria);}
+.bolinha-notif{position:absolute; top:-5px; right:-5px; background:var(--queda); color:white; font-size:10px; font-weight:bold; padding:1px 5px; border-radius:50%;}
 .btn-copiar{background:var(--primaria); color:var(--fundo); border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; transition:0.3s;}
 .btn-conectar{background:linear-gradient(135deg,#9945FF,#00D4AA); color:white; border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; transition:0.3s;}
 
@@ -56,7 +60,6 @@ body{
 .menu-item:hover{background:rgba(250,204,21,0.05); color:var(--primaria);}
 .menu-item.ativo{background:rgba(250,204,21,0.1); color:var(--primaria);}
 .menu-divisao{height:1px; background:rgba(250,204,21,0.2); margin:8px 0;}
-#listaParceiros{display:block;}
 
 .abas{display:flex; gap:12px; padding:12px 20px; overflow-x:auto; position:sticky; top:160px; background:var(--fundo); z-index:996; border-bottom:1px solid rgba(250,204,21,0.1);}
 .aba{font-size:14px; font-weight:600; color:var(--claro); cursor:pointer; white-space:nowrap; padding-bottom:5px; transition:0.2s;}
@@ -80,6 +83,13 @@ h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,2
 .dado strong{display:block; color:var(--primaria); font-size:22px; margin-bottom:8px;}
 .dado span{color:var(--claro); font-size:13px;}
 
+.noticia-item{padding:15px; border-bottom:1px solid rgba(250,204,21,0.1); transition:0.2s;}
+.noticia-item.nova{animation:novoItem 2s ease-out; background:rgba(250,204,21,0.08);}
+.noticia-item:hover{background:rgba(250,204,21,0.05);}
+.noticia-data{font-size:12px; color:var(--claro); margin-bottom:5px;}
+.noticia-titulo{font-weight:700; color:var(--primaria); margin-bottom:5px;}
+.noticia-texto{font-size:14px; color:var(--texto);}
+
 header{text-align:center; padding:50px 20px;}
 .logo-principal{width:230px; height:230px; border-radius:50%; border:4px solid var(--primaria); margin-bottom:20px; object-fit:cover; animation:brilhoLogo 2s infinite alternate;}
 header h1{font-size:44px; color:var(--primaria); margin-bottom:15px;}
@@ -96,6 +106,7 @@ header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px
 .tabela-holders .qtd{text-align:right; font-family:monospace;}
 
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
+.aviso-noticia{position:fixed; top:20px; right:20px; background:rgba(250,204,21,0.95); color:var(--fundo); padding:12px 18px; border-radius:10px; font-weight:700; z-index:99998; display:none; max-width:320px; box-shadow:0 0 20px rgba(250,204,21,0.3);}
 .aviso-risco{background:rgba(239,68,68,0.1); border:1px solid var(--queda); padding:15px; border-radius:10px; margin:20px 0; color:#fca5a5;}
 
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
@@ -106,6 +117,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div id="splash"><img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga Evolution"><h2>Carregando Portal Oficial...</h2></div>
 <div class="aviso-copiado" id="avisoCopiado">✅ CÓPIA REALIZADA!</div>
+<div class="aviso-noticia" id="avisoNotif">🔔 CONFIRMADO: CONTRATO VERIFICADO NA SOLANA!</div>
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral">
@@ -116,7 +128,11 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 </div>
 
 <div class="barra-dm">
-    <div class="dm-info"><img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga"><span class="dm-nome">DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO</span> | REDE SOLANA</span></div>
+    <div class="dm-info">
+        <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga">
+        <span class="dm-nome">DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO</span> | REDE SOLANA</span>
+        <div class="sininho-notif tem-notif" id="sininhoNotif">🔔<div class="bolinha-notif">1</div></div>
+    </div>
     <div style="display:flex; gap:8px;">
         <button class="btn-copiar" id="btnCopiarContrato">📋 CONTRATO</button>
         <button class="btn-conectar" id="btnConectarCarteira">👻 Conectar</button>
@@ -142,6 +158,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔗 Solscan</a>
             <div class="menu-divisao"></div>
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
+            <a href="#noticias" class="menu-item" data-secao="noticias">📰 Notícias</a>
             <a href="#mercado" class="menu-item" data-secao="mercado">📈 Mercado & Holders</a>
             <a href="#comprar" class="menu-item" data-secao="comprar">🚀 Comprar</a>
             <a href="#nft" class="menu-item" data-secao="nft">🎨 NFT</a>
@@ -152,6 +169,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="abas">
     <div class="aba" data-secao="inicio">🏠 Início</div>
+    <div class="aba" data-secao="noticias">📰 Notícias</div>
     <div class="aba" data-secao="mercado">📈 Mercado & Holders</div>
     <div class="aba" data-secao="comprar">🚀 Comprar</div>
     <div class="aba" data-secao="nft">🎨 NFT</div>
@@ -177,6 +195,32 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <a href="https://raydium.io/swap/?inputMint=sol&outputMint=E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-secundario">🔁 Raydium</a>
             </div>
         </header>
+    </div>
+</section>
+
+<section id="noticias" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <h2>📰 NOVIDADES E OFICIALIDADES DO $DGM</h2>
+
+            <div class="noticia-item nova">
+                <div class="noticia-data">28/07/2026 • ✅ CONFIRMADO</div>
+                <div class="noticia-titulo">🔒 Contrato Oficial Verificado na Rede Solana!</div>
+                <div class="noticia-texto">Endereço único e verdadeiro: <code style="color:var(--primaria); font-weight:bold;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code> — registrado, ativo e 100% seguro. Nunca aceite outro endereço.</div>
+            </div>
+
+            <div class="noticia-item">
+                <div class="noticia-data">28/07/2026 • Oficial</div>
+                <div class="noticia-titulo">✅ Contrato Publicado no Portal Oficial</div>
+                <div class="noticia-texto">Todos os dados e endereços verdadeiros estão disponíveis aqui primeiro, para total segurança da comunidade.</div>
+            </div>
+
+            <div class="noticia-item">
+                <div class="noticia-data">30/07/2026 • Atualização</div>
+                <div class="noticia-titulo">🚀 Portal Atualizado com Ranking de Holders</div>
+                <div class="noticia-texto">Adicionamos a lista dos maiores investidores, sistema de notificações e todos os dados em tempo real.</div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -252,6 +296,18 @@ const CHAVE_BIRDEYE = "";
 const PADRAO = "Aguardando...";
 let temaEscuro = true;
 
+function tocarSininho(){
+    try{
+        const som = new AudioContext();
+        const nota = som.createOscillator();
+        const vol = som.createGain();
+        nota.connect(vol); vol.connect(som.destination);
+        nota.type = 'sine'; nota.frequency.setValueAtTime(880, som.currentTime);
+        vol.gain.setValueAtTime(0.25, som.currentTime);
+        nota.start(); nota.stop(som.currentTime + 0.3);
+    }catch(e){}
+}
+
 function formatarValor(v){if(!v || isNaN(v)||v<=0)return null; const n=parseFloat(v); return n>=1e9?`$ ${(n/1e9).toFixed(2)}B`:n>=1e6?`$ ${(n/1e6).toFixed(2)}M`:n>=1e3?`$ ${(n/1e3).toFixed(2)}K`:`$ ${n.toFixed(8)}`;}
 function formatarNum(v){return !v||isNaN(v)?PADRAO:parseInt(v).toLocaleString('pt-BR');}
 
@@ -276,6 +332,20 @@ async function atualizarDados(){
 
 document.addEventListener('DOMContentLoaded',()=>{
     setTimeout(()=>document.getElementById('splash').classList.add('oculto'),1500);
+    
+    setTimeout(()=>{
+        tocarSininho();
+        document.getElementById('avisoNotif').style.display='block';
+        setTimeout(()=>document.getElementById('avisoNotif').style.display='none',4000);
+    },2000);
+
+    document.getElementById('sininhoNotif').onclick=()=>{
+        tocarSininho();
+        document.getElementById('sininhoNotif').classList.remove('tem-notif');
+        document.querySelector('.bolinha-notif').style.display='none';
+        document.querySelector('[data-secao="noticias"]').click();
+    };
+
     document.getElementById('btnMenu').onclick=e=>{e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto');};
     document.addEventListener('click',e=>{if(!document.getElementById('menuNavegacao').contains(e.target)&&e.target!==document.getElementById('btnMenu'))document.getElementById('menuNavegacao').classList.remove('aberto');});
     document.getElementById('btnTema').onclick=()=>{temaEscuro=!temaEscuro; document.body.classList.toggle('tema-claro'); document.getElementById('btnTema').innerText=temaEscuro?'💡 Modo Escuro':'☀️ Modo Claro';};
