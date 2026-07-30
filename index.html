@@ -159,6 +159,13 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="https://www.binance.com/pt-BR" target="_blank" rel="noopener noreferrer" class="menu-item">💱 Binance</a>
             <div class="menu-divisao"></div>
 
+            <!-- ==== NOVO: SÓ ADICIONEI ISSO AQUI ==== -->
+            <div class="titulo-menu">🎬 CONTEÚDO & ARQUIVOS</div>
+            <a href="#videos" class="menu-item" data-secao="videos">🎬 Vídeos Oficiais</a>
+            <a href="#enviar-imagens" class="menu-item" data-secao="enviar-imagens">🖼️ Enviar Imagens</a>
+            <div class="menu-divisao"></div>
+            <!-- ====================================== -->
+
             <div class="titulo-menu">🏠 PRINCIPAL</div>
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Página Inicial</a>
             <a href="#mercado" class="menu-item" data-secao="mercado">📈 Mercado & Gráfico</a>
@@ -167,7 +174,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="#nft" class="menu-item" data-secao="nft">🎨 NFT Origins</a>
             <div class="menu-divisao"></div>
             <div class="titulo-menu">🚀 LANÇAMENTOS</div>
-            <a href="#launchpad" class="menu-item" data-secao="launchpad">🚀 Launchpad</a>
+            <a href="#launchpad" class="menu-item" data-secao="launchpad">🚀 Solicitar Listagem</a>
             <a href="#listados" class="menu-item" data-secao="listados">📋 Projetos Listados</a>
             <div class="menu-divisao"></div>
             <div class="titulo-menu">📋 INFORMAÇÕES</div>
@@ -178,7 +185,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="#suporte" class="menu-item" data-secao="suporte">📞 Suporte</a>
             <div class="menu-divisao"></div>
             <div class="titulo-menu">🔐 ÁREA RESTRITA</div>
-            <a href="#admin" class="menu-item" data-secao="admin">🔐 Painel Administrador</a>
+            <a href="#admin" class="menu-item" data-secao="admin">🔐 Administrador</a>
             <a href="#seguranca" class="menu-item" data-secao="seguranca">🛡️ Segurança</a>
         </nav>
     </div>
@@ -303,6 +310,24 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </div></section>
 
+<!-- ==== NOVAS PÁGINAS ADICIONADAS ==== -->
+<section id="videos" class="secao"><div class="container"><div class="card">
+    <h2>🎬 Galeria de Vídeos & Memes</h2>
+    <p>Espaço exclusivo para todos os vídeos do Doge Manga, animações, brincadeiras e os melhores memes do universo das memecoins!</p>
+</div></div></section>
+
+<section id="enviar-imagens" class="secao"><div class="container"><div class="card">
+    <h2>🖼️ Enviar Imagens & Artes</h2>
+    <p>Área para enviar logos oficiais, artes, imagens e materiais para o portal Doge Manga.</p>
+    <div class="form-grid">
+        <div class="grupo-form"><label>Selecione o arquivo *</label><input type="file" accept="image/png, image/jpeg, image/webp" required></div>
+        <div class="grupo-form"><label>Título</label><input type="text" placeholder="Ex: Logo Oficial Doge Manga"></div>
+        <div class="grupo-form" style="grid-column: 1 / -1;"><label>Observação</label><textarea rows="2" placeholder="Descreva a imagem..."></textarea></div>
+    </div>
+    <button class="btn btn-primario" style="margin-top:10px;">📤 Enviar Arquivo</button>
+</div></div></section>
+<!-- ===================================== -->
+
 <section id="roadmap" class="secao"><div class="container"><div class="card"><h2>🗺️ Roadmap Completo</h2><p>Fase 1 • Fase 2 • Fase 3 • Fase 4 — atualizado constantemente.</p></div></div></section>
 <section id="whitepaper" class="secao"><div class="container"><div class="card"><h2>📄 Whitepaper Oficial</h2><p>Documento completo com objetivos, segurança, economia e regras do ecossistema.</p></div></div></section>
 <section id="comunidade" class="secao"><div class="container"><div class="card"><h2>👥 Nossa Comunidade</h2><p><a href="https://t.me/+fRrBfGscm9Y3OWEx" target="_blank" rel="noopener noreferrer" style="color:var(--primaria);">Telegram</a> • <a href="https://x.com/dogemanga96508" target="_blank" rel="noopener noreferrer" style="color:var(--primaria);">X</a> • <a href="https://tiktok.com/@dogemangaofficial" target="_blank" rel="noopener noreferrer" style="color:var(--primaria);">TikTok</a> • Discord • YouTube.</p></div></div></section>
@@ -342,17 +367,6 @@ document.addEventListener('click', (e)=>{
     const botao = document.getElementById('btnMenu');
     if(!menu.contains(e.target) && e.target !== botao) menu.classList.remove('mostrar');
 });
-
-document.getElementById('btnTema').onclick = ()=>{
-    temaEscuro = !temaEscuro;
-    document.body.classList.toggle('tema-claro');
-    document.getElementById('btnTema').innerText = temaEscuro ? '💡 Iluminação: Modo Escuro' : '💡 Iluminação: Modo Claro';
-};
-
-document.getElementById('btnIdioma').onclick = ()=>{
-    idiomaAtual = idiomaAtual === 'pt' ? 'en' : idiomaAtual === 'en' ? 'es' : 'pt';
-    document.getElementById('btnIdioma').innerText = `🌐 Idioma: ${idiomaAtual === 'pt' ? 'Português' : idiomaAtual === 'en' ? 'English' : 'Español'}`;
-};
 
 document.querySelectorAll('.aba, .menu-item, #btnVoltarMenu, #btnVoltarProjetos').forEach(item=>{
     if(item.id === 'btnTema' || item.id === 'btnIdioma') return;
@@ -407,7 +421,7 @@ async function atualizarDados(){
             <div class="item-moeda"><a href="https://www.coingecko.com/pt-br/moedas/solana" target="_blank" rel="noopener noreferrer">SOL: $${parseFloat(dadosCG.market_data.current_price.sol || 0).toLocaleString('pt-BR')}</a></div>
         `;
     }catch(e){
-        console.log('Aguardando listagem oficial do token nas plataformas...');
+        console.log('Aguardando listagem oficial do token...');
     }
 }
 atualizarDados();
