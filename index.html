@@ -4,23 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
-<meta name="description" content="Mercado cripto em tempo real, dados do $DGM, gráficos, busca completa e ecossistema Solana.">
-<meta name="keywords" content="Doge Manga, $DGM, Criptomoedas, Mercado, Preços em BRL, Solana, DexScreener">
+<meta name="description" content="Mercado cripto em tempo real, dados do $DGM, gráficos, IA, busca completa e ecossistema Solana.">
+<meta name="keywords" content="Doge Manga, $DGM, Criptomoedas, Mercado, Preços em BRL, Solana, DexScreener, Inteligência Artificial">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Doge Manga Evolution">
 <meta property="og:title" content="🐕 Doge Manga Evolution">
-<meta property="og:description" content="Acompanhe todo o mercado e o token $DGM em tempo real.">
+<meta property="og:description" content="Acompanhe todo o mercado e o token $DGM em tempo real — com Assistente IA.">
 <meta property="og:image" content="IMG-20260727-WA0036(7).jpg">
 <meta property="og:url" content="https://dogemangaofficial.xyz">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="IMG-20260727-WA0036(7).jpg">
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif; scroll-behavior:smooth;}
-:root{--primaria:#facc15; --fundo:#050816; --secundaria:#111827; --sucesso:#22c55e; --queda:#ef4444; --texto:#e2e8f0; --claro:#94a3b8;}
+:root{--primaria:#facc15; --fundo:#050816; --secundaria:#111827; --sucesso:#22c55e; --queda:#ef4444; --texto:#e2e8f0; --claro:#94a3b8; --ia-cor:#8b5cf6;}
 body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22,0.65), rgba(2,6,23,0.7)), url("IMG-20260727-WA0036(7).jpg"); background-size:cover; background-position:center top; background-attachment:fixed; min-height:100vh; padding-bottom:80px;}
 @keyframes brilhoLogo{0%{box-shadow:0 0 15px rgba(250,204,21,0.4); transform:scale(1);}100%{box-shadow:0 0 35px rgba(250,204,21,0.8); transform:scale(1.05);}}
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes entrar{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
+@keyframes brilhoIA{0%{box-shadow:0 4px 20px rgba(139,92,246,0.4);}100%{box-shadow:0 6px 25px rgba(139,92,246,0.6);}}
 #splash{position:fixed; inset:0; background:var(--fundo); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; transition:opacity 0.6s ease;}
 #splash.oculto{opacity:0; visibility:hidden;}
 #splash img{width:180px; height:180px; border-radius:50%; border:4px solid var(--primaria); margin-bottom:20px; animation:brilhoLogo 2s infinite alternate;}
@@ -99,7 +100,34 @@ header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
-@media(max-width:768px){header h1{font-size:32px;} .tabela-mercado{font-size:11px;} .grafico-container{height:400px;} .grid-dados{grid-template-columns:repeat(2,1fr);}}
+
+/* 🤖 BOTÃO DA IA */
+#dogemanga-ai{position:fixed; bottom:25px; right:25px; z-index:99999;}
+#btnIA{
+  background:linear-gradient(135deg,#8b5cf6,#6366f1);
+  color:white;
+  border:none;
+  padding:14px 20px;
+  border-radius:50px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(139,92,246,0.4);
+  transition:all 0.3s ease;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  animation:brilhoIA 2s infinite alternate;
+}
+#btnIA:hover{transform:scale(1.05); box-shadow:0 6px 25px rgba(139,92,246,0.55);}
+
+@media(max-width:768px){
+  header h1{font-size:32px;}
+  .tabela-mercado{font-size:11px;}
+  .grafico-container{height:400px;}
+  .grid-dados{grid-template-columns:repeat(2,1fr);}
+  #btnIA{padding:12px 16px; font-size:14px;}
+}
 </style>
 </head>
 <body>
@@ -261,6 +289,11 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <footer>© 2026 🐕 Doge Manga Evolution | Portal Oficial — Dados em tempo real</footer>
 
+<!-- 🤖 BOTÃO DA IA DOGE MANGA -->
+<div id="dogemanga-ai">
+  <button id="btnIA" onclick="abrirIA()">🤖 Assistente Doge Manga</button>
+</div>
+
 <script>
 const CONTRATO = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
 const CONFIG = {
@@ -271,9 +304,8 @@ const CONFIG = {
 };
 let pagina = 1;
 let cacheMercado = { dados: [], ultimaAtualizacao: 0 };
-let cotacaoUSD_BRL = 5.70; // Atualizado automaticamente pela API
+let cotacaoUSD_BRL = 5.70;
 
-// 📐 FORMATAÇÃO PADRÃO BRASILEIRO
 function formatarBRL(valor){
     if(!valor || isNaN(valor) || valor === 0) return "---";
     const num = parseFloat(valor);
@@ -288,7 +320,6 @@ function formatarVariacao(valor){
     return `<span class="${num >= 0 ? 'var-positiva' : 'var-negativa'}">${num >= 0 ? '+' : ''}${num.toFixed(2)}%</span>`;
 }
 
-// 🧭 NAVEGAÇÃO COMPLETA
 function navegarSecao(id){
     document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
     document.querySelectorAll('.aba, .menu-item').forEach(b => b.classList.remove('ativo'));
@@ -299,7 +330,6 @@ function navegarSecao(id){
     window.scrollTo(0,0);
 }
 
-// 📋 COPIAR CONTRATO
 function copiarTexto(texto){
     navigator.clipboard.writeText(texto).then(() => {
         const aviso = document.getElementById('avisoCopiado');
@@ -309,7 +339,6 @@ function copiarTexto(texto){
     }).catch(() => alert("Copie manualmente o contrato"));
 }
 
-// 💱 BUSCA COTAÇÃO USD→BRL REAL (SEM VALOR FIXO!)
 async function atualizarCotacao(){
     try{
         const res = await fetch(`${CONFIG.coinGecko}/simple/price?ids=usd&vs_currencies=brl`);
@@ -320,7 +349,6 @@ async function atualizarCotacao(){
     }catch{ cotacaoUSD_BRL = 5.70; }
 }
 
-// 🐕 DADOS EXCLUSIVOS $DGM DIRETO DA DEXSCREENER
 async function atualizarDGM(){
     try{
         const res = await fetch(`${CONFIG.dexScreener}/${CONTRATO}`, { cache: 'no-store' });
@@ -335,11 +363,9 @@ async function atualizarDGM(){
         const volumeUSD = parseFloat(par.volume?.h24 || 0);
         const marketCapUSD = parseFloat(par.fdv || 0);
 
-        // Atualiza barra rolante
         document.getElementById('dgm-preco-barra').innerText = formatarBRL(precoUSD);
         document.getElementById('var-dgm').innerHTML = formatarVariacao(var24h);
 
-        // Atualiza cards da página inicial
         document.getElementById('precoAtual').innerText = formatarBRL(precoUSD);
         document.getElementById('var24h').innerHTML = formatarVariacao(var24h);
         document.getElementById('liquidez').innerText = formatarBRL(liquidezUSD * cotacaoUSD_BRL);
@@ -347,7 +373,6 @@ async function atualizarDGM(){
         document.getElementById('marketcap').innerText = formatarBRL(marketCapUSD * cotacaoUSD_BRL);
         document.getElementById('ultimaDGM').innerText = new Date().toLocaleTimeString('pt-BR');
 
-        // Gráfico exclusivo do $DGM — TÍTULO CORRIGIDO!
         document.getElementById('tituloGrafico').innerText = "📈 GRÁFICO — Doge Manga Evolution ($DGM)";
         document.getElementById('graficoUniversal').innerHTML = `
         <iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" 
@@ -360,7 +385,6 @@ async function atualizarDGM(){
     }
 }
 
-// 📊 MERCADO GERAL — TODAS AS MOEDAS COM DADOS REAIS
 async function carregarMercado(pag=1, limpar=false){
     try{
         const agora = Date.now();
@@ -369,7 +393,7 @@ async function carregarMercado(pag=1, limpar=false){
         }
 
         const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=${CONFIG.limitePagina}&page=${pag}&sparkline=false&price_change_percentage=24h`);
-        if(!res.ok) throw new Error("Falha na API — tentando novamente");
+        if(!res.ok) throw new Error("Falha na API");
         const dados = await res.json();
 
         if(limpar) cacheMercado.dados = [];
@@ -379,7 +403,6 @@ async function carregarMercado(pag=1, limpar=false){
         renderizarTabela();
         document.getElementById('ultimaMercado').innerText = new Date().toLocaleTimeString('pt-BR');
 
-        // Atualiza BTC/ETH/SOL na barra superior
         const btc = dados.find(m => m.symbol === 'btc');
         const eth = dados.find(m => m.symbol === 'eth');
         const sol = dados.find(m => m.symbol === 'sol');
@@ -405,14 +428,12 @@ function renderizarTabela(){
     `).join('');
 }
 
-// 📊 GRÁFICO DE OUTRAS MOEDAS
 function abrirGraficoMoeda(id, nome){
     document.getElementById('tituloGrafico').innerText = `📈 GRÁFICO — ${nome}`;
     document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://www.coingecko.com/pt-BR/coins/${id}/embed-chart?theme=dark" width="100%" height="100%" frameborder="0"></iframe>`;
     navegarSecao('graficoMoeda');
 }
 
-// 🔍 PESQUISA COMPLETA — NOME / SÍMBOLO / CONTRATO
 let timerPesquisa;
 document.getElementById('campoBusca').addEventListener('input', e => {
     clearTimeout(timerPesquisa);
@@ -435,7 +456,6 @@ document.getElementById('campoBusca').addEventListener('input', e => {
     }, 350);
 });
 
-// 👻 CONEXÃO PHANTOM — SEGURA E OFICIAL
 document.getElementById('btnConectarCarteira').addEventListener('click', async () => {
     if(window.solana?.isPhantom){
         try{
@@ -448,22 +468,35 @@ document.getElementById('btnConectarCarteira').addEventListener('click', async (
     }
 });
 
-// 🚀 INICIALIZAÇÃO GERAL E ATUALIZAÇÃO AUTOMÁTICA
+// 🤖 ASSISTENTE IA DOGE MANGA
+function abrirIA(){
+  const mensagem = `🐕 Olá! Sou a IA do Doge Manga Evolution! 🤖
+
+Posso ajudar você com:
+• 📈 Dados do token $DGM
+• 💱 Como comprar $DGM
+• 📊 Mercado e gráficos
+• 🔗 Informações do contrato
+• 🦊 Usar carteira Phantom
+• ❓ Dúvidas sobre o projeto
+
+Em breve: respostas inteligentes em tempo real!`;
+
+  alert(mensagem);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => document.getElementById('splash').classList.add('oculto'), 1500);
 
-    // Menu e navegação
     document.getElementById('btnMenu').addEventListener('click', e => { e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto'); });
     document.addEventListener('click', () => { document.getElementById('menuNavegacao').classList.remove('aberto'); document.getElementById('resultadoBusca').classList.remove('visivel'); });
     document.querySelectorAll('[data-secao]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); navegarSecao(el.dataset.secao); }));
 
-    // Botões
     document.getElementById('btnCopiarContrato').addEventListener('click', () => copiarTexto(CONTRATO));
     document.getElementById('btnMais').addEventListener('click', () => carregarMercado(pagina + 1));
     document.getElementById('btnAbrirForm').addEventListener('click', () => document.getElementById('formProj').style.display = 'block');
     document.getElementById('btnEnviar').addEventListener('click', () => { alert('✅ Projeto enviado com sucesso!'); document.getElementById('formProj').style.display = 'none'; });
 
-    // Inicia tudo e mantém atualizando
     atualizarCotacao().then(() => {
         atualizarDGM();
         carregarMercado(1, true);
