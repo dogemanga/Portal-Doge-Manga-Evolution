@@ -514,7 +514,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-<div class="barra-top-gainers">
+</body>
+</html><div class="barra-top-gainers">
     <div class="top-gainers-conteudo" id="barraTopGainers">
 
         <div class="moeda-alta">
@@ -523,46 +524,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     </div>
 </div>
-</body>
-</html>
-async function carregarTopGainers(){
-
-    try{
-
-        const res = await fetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=24h");
-
-        const moedas = await res.json();
-
-        moedas.sort((a,b)=>
-        b.price_change_percentage_24h-a.price_change_percentage_24h);
-
-        const top = moedas.slice(0,15);
-
-        document.getElementById("barraTopGainers").innerHTML = top.map(m=>`
-
-        <div class="moeda-alta"
-        onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">
-
-            <img src="${m.image}">
-            <strong>${m.symbol.toUpperCase()}</strong>
-
-            <span style="color:#22c55e;">
-            +${m.price_change_percentage_24h.toFixed(2)}%
-            </span>
-
-        </div>
-
-        `).join("");
-
-    }catch(e){
-
-        console.log(e);
-
-    }
-
-}
-
-carregarTopGainers();
-
-setInterval(carregarTopGainers,60000);
