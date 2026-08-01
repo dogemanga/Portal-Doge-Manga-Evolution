@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="Doge Manga Evolution">
 <meta property="og:title" content="🐕 Doge Manga Evolution">
-<meta property="og:description" content="Portal completo com dados de mercado, IA e ecossistema de memecoins.">
+<meta property="og:description" content="Portal completo com dados de mercado, gráficos e ecossistema de memecoins.">
 <meta property="og:image" content="IMG-20260727-WA0036(7).jpg">
 <meta property="og:url" content="https://dogemangaofficial.xyz">
 <meta name="twitter:card" content="summary_large_image">
@@ -93,7 +93,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 .grid-dados{grid-template-columns:repeat(2,1fr);}
 .menu-navegacao{width:calc(100% - 30px); right:15px;}
 }
-/* ESTILOS EXCLUSIVOS DO MÓDULO AI HUB — NÃO ALTERAM O RESTO */
 .chat-ia{background:rgba(2,6,23,0.9); border-radius:8px; border:1px solid rgba(139,92,246,0.3); margin-top:15px; overflow:hidden;}
 .chat-mensagens{padding:15px; max-height:300px; overflow-y:auto;}
 .msg-ia{background:rgba(139,92,246,0.1); padding:10px; border-radius:6px; margin-bottom:8px; border-left:3px solid var(--ia-cor);}
@@ -104,14 +103,12 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </head>
 <body>
 
-<!-- SPLASH INICIAL ORIGINAL -->
 <div id="splash">
 <img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga Evolution">
 <h2 style="color:var(--primaria);">DOGE MANGA EVOLUTION</h2>
 <p>Carregando ecossistema...</p>
 </div>
 
-<!-- BARRA DE PREÇOS ROLANTE -->
 <div class="barra-geral">
 <div class="barra-conteudo-geral" id="barraPrecos">
 <div class="item-moeda destaque"><strong>$DGM</strong> Carregando...</div>
@@ -121,7 +118,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </div>
 </div>
 
-<!-- BARRA DE BUSCA -->
 <div class="barra-busca">
 <div class="campo-busca">
 <input type="text" id="campoBusca" placeholder="🔍 Pesquise por nome, símbolo ou contrato..." autocomplete="off">
@@ -129,7 +125,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 <div class="resultado-busca" id="resultadoBusca"></div>
 </div>
 
-<!-- DADOS DO $DGM -->
 <div class="barra-dm">
 <div class="dm-info">
 <img src="IMG-20260727-WA0036(7).jpg" alt="$DGM">
@@ -143,7 +138,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </div>
 </div>
 
-<!-- BARRA TOPO E MENU -->
 <div class="barra-topo">
 <div class="perfil">
 <img src="IMG-20260727-WA0036(7).jpg" alt="Perfil">
@@ -164,7 +158,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </nav>
 </div>
 
-<!-- ABAS -->
 <div class="abas">
 <div class="aba ativa" data-secao="inicio">🏠 Início</div>
 <div class="aba" data-secao="mercado">📊 Mercado</div>
@@ -173,10 +166,8 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 <div class="aba" data-secao="aiHub">🤖 AI HUB</div>
 </div>
 
-<!-- ÁREA DAS SEÇÕES -->
 <main class="container">
 
-<!-- SEÇÃO INÍCIO -->
 <section class="secao ativa" id="inicio">
 <div class="card destaque">
 <h2>🐕 DOGE MANGA EVOLUTION</h2>
@@ -190,7 +181,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </div>
 </section>
 
-<!-- SEÇÃO MERCADO -->
 <section class="secao" id="mercado">
 <div class="card destaque">
 <h2>📊 MERCADO GLOBAL</h2>
@@ -200,17 +190,15 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </div>
 </section>
 
-<!-- SEÇÃO GRÁFICOS -->
 <section class="secao" id="graficos">
 <div class="card destaque">
-<h2>📈 GRÁFICOS EM TEMPO REAL</h2>
+<h2 id="tituloGrafico">📈 GRÁFICOS EM TEMPO REAL</h2>
 <div class="area-grafico">
-<iframe id="iframeGrafico" src="https://dexscreener.com/solana/EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v?embed=1&theme=dark"></iframe>
+<iframe id="iframeGrafico" src="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?embed=1&theme=dark"></iframe>
 </div>
 </div>
 </section>
 
-<!-- SEÇÃO LAUNCHPAD -->
 <section class="secao" id="launchpad">
 <div class="card destaque">
 <h2>🚀 LAUNCHPAD</h2>
@@ -224,7 +212,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </div>
 </section>
 
-<!-- SEÇÃO EQUIPE -->
 <section class="secao" id="equipe">
 <div class="card destaque">
 <h2>👥 EQUIPE DOGE MANGA</h2>
@@ -232,7 +219,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </div>
 </section>
 
-<!-- SEÇÃO SEGURANÇA -->
 <section class="secao" id="seguranca">
 <div class="card destaque">
 <h2>🛡️ SEGURANÇA</h2>
@@ -241,13 +227,11 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 </div>
 </section>
 
-<!-- SEÇÃO AI HUB + MEMECOIN HUB (MÓDULO INDEPENDENTE) -->
 <section class="secao" id="aiHub">
 <div class="card destaque">
 <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar ao Início</a>
 <h2>🤖 DOGE MANGA EVOLUTION — AI HUB</h2>
 <p>Módulo independente: assistente inteligente e ecossistema de memecoins.</p>
-
 <h3 style="color:var(--ia-cor); margin:25px 0 15px;">🧠 ASSISTENTE INTELIGENTE</h3>
 <div class="chat-ia">
 <div class="chat-mensagens" id="chatMensagens">
@@ -258,7 +242,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 <button class="btn btn-primario btn-pequeno" id="btnEnviar">Enviar</button>
 </div>
 </div>
-
 <h3 style="color:var(--primaria); margin:25px 0 15px;">🔥 MEMECOIN HUB</h3>
 <div class="grid-dados">
 <div class="dado" onclick="alert('Em desenvolvimento: Projetos em Destaque')" style="cursor:pointer;"><strong>🚀</strong><span>Projetos em Destaque</span></div>
@@ -266,7 +249,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 <div class="dado" onclick="alert('Em desenvolvimento: Novos Projetos')" style="cursor:pointer;"><strong>✨</strong><span>Novos Projetos</span></div>
 <div class="dado" onclick="alert('Em desenvolvimento: Verificar Projeto')" style="cursor:pointer;"><strong>🛡️</strong><span>Verificar Projeto</span></div>
 </div>
-
 <p style="margin-top:20px; font-size:13px; color:var(--claro);">✅ Módulo independente — não altera o funcionamento do portal oficial.</p>
 </div>
 </section>
@@ -275,110 +257,134 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 
 <script>
 // ==================================================
-// SISTEMA ORIGINAL DO PORTAL — 100% PRESERVADO
+// 🔒 CONTRATO OFICIAL JÁ CONFIGURADO
 // ==================================================
-const CONTRATO_DGM = "AquiColoqueSeuContrato"; // ALTERE PARA O CONTRATO REAL
-const moedasBase = [
-{simbolo:"DGM", nome:"Doge Manga Evolution", img:"IMG-20260727-WA0036(7).jpg", endereco:CONTRATO_DGM},
-{simbolo:"SOL", nome:"Solana", img:"https://assets.coingecko.com/coins/images/4128/small/solana.png"},
-{simbolo:"BTC", nome:"Bitcoin", img:"https://assets.coingecko.com/coins/images/1/small/bitcoin.png"},
-{simbolo:"ETH", nome:"Ethereum", img:"https://assets.coingecko.com/coins/images/279/small/ethereum.png"}
-];
+const CONTRATO_DGM = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
+let moedasBase = [];
+const COTACAO_USD_BRL = 5.50;
 
-// SPLASH
 setTimeout(()=>{document.getElementById('splash').classList.add('oculto');}, 2500);
 
-// MENU
 const btnMenu = document.getElementById('btnMenu');
 const menuNavegacao = document.getElementById('menuNavegacao');
-btnMenu.addEventListener('click', ()=>{menuNavegacao.classList.toggle('aberto');});
-document.addEventListener('click', (e)=>{if(!menuNavegacao.contains(e.target) && e.target!==btnMenu) menuNavegacao.classList.remove('aberto');});
+btnMenu.addEventListener('click', ()=>menuNavegacao.classList.toggle('aberto'));
+document.addEventListener('click', e=>{if(!menuNavegacao.contains(e.target) && e.target!==btnMenu) menuNavegacao.classList.remove('aberto');});
 
-// NAVEGAÇÃO ENTRE SEÇÕES
 document.querySelectorAll('.item-menu, .aba, .btn-voltar').forEach(el=>{
-el.addEventListener('click', (e)=>{
+el.addEventListener('click', e=>{
 e.preventDefault();
 const secao = el.dataset.secao;
 if(!secao) return;
-document.querySelectorAll('.secao').forEach(s=>s.classList.remove('ativa'));
-document.querySelectorAll('.aba').forEach(a=>a.classList.remove('ativa'));
-document.querySelectorAll('.item-menu').forEach(m=>m.classList.remove('ativo'));
+document.querySelectorAll('.secao, .aba, .item-menu').forEach(x=>x.classList.remove('ativa','ativo'));
 document.getElementById(secao).classList.add('ativa');
 document.querySelector(`[data-secao="${secao}"].aba`)?.classList.add('ativa');
 document.querySelector(`[data-secao="${secao}"].item-menu`)?.classList.add('ativo');
 menuNavegacao.classList.remove('aberto');
-window.scrollTo({top:0, behavior:'smooth'});
+window.scrollTo({top:0});
 });
 });
 
-// COPIAR CONTRATO
 document.getElementById('btnContrato').addEventListener('click', ()=>{
 navigator.clipboard.writeText(CONTRATO_DGM);
-alert('Contrato copiado!');
+alert('✅ Contrato copiado com sucesso!');
 });
 
-// BUSCA
-document.getElementById('campoBusca').addEventListener('input', (e)=>{
+document.getElementById('campoBusca').addEventListener('input', e=>{
 const val = e.target.value.toLowerCase().trim();
 const res = document.getElementById('resultadoBusca');
 if(val.length<2){res.classList.remove('visivel'); return;}
-const filtro = moedasBase.filter(m=> m.nome.toLowerCase().includes(val) || m.simbolo.toLowerCase().includes(val) || (m.endereco && m.endereco.toLowerCase().includes(val)));
-if(filtro.length===0){res.innerHTML = `<p style="padding:10px;">Nenhum resultado encontrado.</p>`;}
-else{res.innerHTML = filtro.map(m=>`<div class="item-resultado" onclick="abrirToken('${m.simbolo}')"><img src="${m.img}" alt="${m.nome}"><div><strong>${m.simbolo}</strong> <span>${m.nome}</span></div></div>`).join('');}
+const filtro = moedasBase.filter(m=> 
+  m.nome.toLowerCase().includes(val) || 
+  m.simbolo.toLowerCase().includes(val) || 
+  (m.endereco||'').toLowerCase().includes(val)
+);
+res.innerHTML = filtro.length ? filtro.map(m=>`
+<div class="item-resultado" onclick="abrirGrafico('${m.simbolo}','${m.endereco||''}')">
+<img src="${m.img}" alt="${m.nome}">
+<div><strong>${m.simbolo}</strong> · ${m.nome}</div>
+</div>`).join('') : `<p style="padding:10px;">Nenhum resultado encontrado.</p>`;
 res.classList.add('visivel');
 });
-function abrirToken(simbolo){
-document.getElementById('campoBusca').value = '';
-document.getElementById('resultadoBusca').classList.remove('visivel');
-navegarSecao('graficos');
-}
-function navegarSecao(id){
-document.querySelectorAll('.secao').forEach(s=>s.classList.remove('ativa'));
-document.getElementById(id).classList.add('ativa');
-document.querySelector(`[data-secao="${id}"].aba`)?.classList.add('ativa');
-}
 
-// DADOS DE MERCADO (SIMULAÇÃO E ESTRUTURA PRONTA PARA API REAL)
-function carregarDados(){
-document.getElementById('precoDgm').innerText = "R$ 0,00";
-document.getElementById('valorDgm').innerText = "0,00";
-document.getElementById('varDgm').innerText = "0,00%";
-document.getElementById('volDgm').innerText = "0";
-document.getElementById('listaMoedas').innerHTML = moedasBase.map(m=>`
+async function carregarDados(){
+try{
+const res = await fetch('https://api.coinlore.net/api/tickers/?start=0&limit=2500');
+const lista = (await res.json()).data || [];
+
+const dgm = lista.find(m=>m.symbol.toUpperCase()==='DGM') || {};
+document.getElementById('precoDgm').innerText = `R$ ${(parseFloat(dgm.price_usd||0)*COTACAO_USD_BRL).toFixed(2)}`;
+document.getElementById('valorDgm').innerText = (parseFloat(dgm.price_usd||0)*COTACAO_USD_BRL).toFixed(2);
+document.getElementById('varDgm').innerText = `${parseFloat(dgm.percent_change_24h||0).toFixed(2)}%`;
+document.getElementById('varDgm').className = parseFloat(dgm.percent_change_24h||0)>=0 ? 'var-positiva' : 'var-negativa';
+document.getElementById('volDgm').innerText = `R$ ${(parseFloat(dgm.volume24||0)*COTACAO_USD_BRL).toLocaleString('pt-BR')}`;
+
+document.getElementById('listaMoedas').innerHTML = lista.map(m=>`
 <div class="item-lista">
-<div class="esquerda-lista"><img src="${m.img}"><span>${m.simbolo}</span></div>
-<span>R$ 0,00</span>
-<span class="var-positiva">0,00%</span>
-<button class="btn btn-pequeno btn-primario" onclick="navegarSecao('graficos')">Gráfico</button>
+<div class="esquerda-lista">
+<img src="https://assets.coingecko.com/coins/images/${m.id||1}/small/${m.name.toLowerCase().replace(/ /g,'-')}.png" alt="${m.symbol}" onerror="this.src='IMG-20260727-WA0036(7).jpg'">
+<span><strong>${m.symbol}</strong> · ${m.name}</span>
+</div>
+<span>R$ ${(parseFloat(m.price_usd||0)*COTACAO_USD_BRL).toFixed(2)}</span>
+<span class="${parseFloat(m.percent_change_24h||0)>=0?'var-positiva':'var-negativa'}">${parseFloat(m.percent_change_24h||0).toFixed(2)}%</span>
+<span>Cap: $ ${(parseFloat(m.market_cap_usd||0)/1e6).toFixed(1)}M</span>
+<span>Vol: $ ${(parseFloat(m.volume24||0)/1e6).toFixed(1)}M</span>
+<button class="btn btn-pequeno btn-primario" onclick="abrirGrafico('${m.symbol}','${m.address||''}')">📈 Gráfico</button>
 </div>`).join('');
+
+document.getElementById('barraPrecos').innerHTML = lista.slice(0,8).map(m=>`
+<div class="item-moeda ${m.symbol.toUpperCase()==='DGM'?'destaque':''}">
+<strong>${m.symbol}</strong> R$ ${(parseFloat(m.price_usd||0)*COTACAO_USD_BRL).toFixed(2)}
+<span class="${parseFloat(m.percent_change_24h||0)>=0?'var-positiva':'var-negativa'}">${parseFloat(m.percent_change_24h||0).toFixed(2)}%</span>
+</div>`).join('');
+
+moedasBase = lista.map(m=>({
+simbolo: m.symbol, nome: m.name, endereco: m.address||'',
+img: `https://assets.coingecko.com/coins/images/${m.id||1}/small/${m.name.toLowerCase().replace(/ /g,'-')}.png`
+}));
+
+console.log(`✅ Mercado carregado: ${lista.length} moedas`);
+}catch(e){
+document.getElementById('listaMoedas').innerHTML = `<p>Erro ao carregar dados — tente novamente.</p>`;
+console.error(e);
+}
 }
 
-// ==================================================
-// MÓDULO AI HUB — 100% INDEPENDENTE
-// ==================================================
+function abrirGrafico(simbolo, endereco){
+document.getElementById('campoBusca').value='';
+document.getElementById('resultadoBusca').classList.remove('visivel');
+document.querySelectorAll('.secao, .aba').forEach(x=>x.classList.remove('ativa'));
+document.getElementById('graficos').classList.add('ativa');
+document.querySelector('[data-secao="graficos"].aba')?.classList.add('ativa');
+
+const tit = document.getElementById('tituloGrafico');
+const iframe = document.getElementById('iframeGrafico');
+
+if(simbolo.toUpperCase()==='DGM'){
+tit.innerText = "Doge Manga Evolution ($DGM)";
+iframe.src = `https://dexscreener.com/solana/${CONTRATO_DGM}?embed=1&theme=dark`;
+}else{
+tit.innerText = "Doge Manga Evolution — Gráfico de Mercado";
+iframe.src = endereco ? `https://dexscreener.com/solana/${endereco}?embed=1&theme=dark` : `https://dexscreener.com/search?q=${simbolo}&embed=1&theme=dark`;
+}
+}
+
 document.getElementById('btnEnviar').addEventListener('click', enviarPergunta);
-document.getElementById('entradaChat').addEventListener('keydown', (e)=>{if(e.key==='Enter') enviarPergunta();});
+document.getElementById('entradaChat').addEventListener('keydown', e=>{if(e.key==='Enter') enviarPergunta();});
 function enviarPergunta(){
 const inp = document.getElementById('entradaChat');
 const msg = inp.value.trim();
 if(!msg) return;
-const caixa = document.getElementById('chatMensagens');
-caixa.innerHTML += `<div class="msg-usuario">${msg}</div>`;
-inp.value = '';
+const cx = document.getElementById('chatMensagens');
+cx.innerHTML += `<div class="msg-usuario">${msg}</div>`;
+inp.value='';
 setTimeout(()=>{
-caixa.innerHTML += `<div class="msg-ia">Recebi sua pergunta: <strong>${msg}</strong>. No momento estou em fase de treinamento, mas em breve responderei com dados completos sobre o projeto, mercado e muito mais!</div>`;
-caixa.scrollTop = caixa.scrollHeight;
+cx.innerHTML += `<div class="msg-ia">Recebi: <strong>${msg}</strong>. Em breve respostas completas sobre o projeto e mercado!</div>`;
+cx.scrollTop = cx.scrollHeight;
 }, 800);
-caixa.scrollTop = caixa.scrollHeight;
+cx.scrollTop = cx.scrollHeight;
 }
 
-// INICIALIZAÇÃO GERAL
-document.addEventListener('DOMContentLoaded', ()=>{
-carregarDados();
-console.log('✅ DOGE MANGA EVOLUTION — VERSÃO OFICIAL ONLINE CARREGADA');
-console.log('✅ Módulos: IA Hub + Memecoin Hub integrados');
-console.log('✅ Nenhuma estrutura original alterada');
-});
+document.addEventListener('DOMContentLoaded', carregarDados);
 </script>
 
 </body>
