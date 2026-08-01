@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
-<meta name="description" content="Mercado cripto, $DGM, Assistente IA e Ecossistema Memecoin.">
-<meta name="keywords" content="Doge Manga, $DGM, Memecoins, Solana, Inteligência Artificial">
+<meta name="description" content="Mercado cripto em tempo real, dados do $DGM, gráficos, IA, busca completa e ecossistema Solana.">
+<meta name="keywords" content="Doge Manga, $DGM, Criptomoedas, Mercado, Preços em BRL, Solana, DexScreener, Inteligência Artificial">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Doge Manga Evolution">
 <meta property="og:title" content="🐕 Doge Manga Evolution">
-<meta property="og:description" content="Portal completo com dados de mercado, gráficos e ecossistema de memecoins.">
+<meta property="og:description" content="Acompanhe todo o mercado e o token $DGM em tempo real — com Assistente IA.">
 <meta property="og:image" content="IMG-20260727-WA0036(7).jpg">
 <meta property="og:url" content="https://dogemangaofficial.xyz">
 <meta name="twitter:card" content="summary_large_image">
@@ -21,407 +21,455 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 @keyframes brilhoLogo{0%{box-shadow:0 0 15px rgba(250,204,21,0.4); transform:scale(1);}100%{box-shadow:0 0 35px rgba(250,204,21,0.8); transform:scale(1.05);}}
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes entrar{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
+@keyframes brilhoIA{0%{box-shadow:0 4px 20px rgba(139,92,246,0.4);}100%{box-shadow:0 6px 25px rgba(139,92,246,0.6);}}
+@keyframes notificacaoPulsar{0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
 #splash{position:fixed; inset:0; background:var(--fundo); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; transition:opacity 0.6s ease;}
 #splash.oculto{opacity:0; visibility:hidden;}
 #splash img{width:180px; height:180px; border-radius:50%; border:4px solid var(--primaria); margin-bottom:20px; animation:brilhoLogo 2s infinite alternate;}
-.barra-geral{background:rgba(2,6,23,0.96); padding:9px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:997;}
-.barra-conteudo-geral{display:flex; gap:50px; animation:rolar 45s linear infinite; width:max-content; font-size:13px; font-weight:500;}
-.item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap;}
-.item-moeda.destaque{font-weight:700; color:var(--primaria);}
 .var-positiva{color:var(--sucesso); font-weight:600;}
 .var-negativa{color:var(--queda); font-weight:600;}
+.aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
+
+/* BARRA DE PREÇOS ROLANDO */
+.barra-geral{background:rgba(2,6,23,0.96); padding:9px 0; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:997;}
+.barra-conteudo-geral{display:flex; gap:60px; animation:rolar 45s linear infinite; width:max-content; font-size:13px; font-weight:500; padding:0 20px;}
+.barra-conteudo-geral:hover{animation-play-state:paused;}
+.item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap;}
+.item-moeda.destaque{font-weight:700; color:var(--primaria);}
+.item-moeda img{width:18px; height:18px; border-radius:50%; border:1px solid var(--primaria); object-fit:cover; background:#000;}
+
+/* BARRA DE BUSCA */
 .barra-busca{background:rgba(2,6,23,0.98); padding:12px 20px; border-bottom:1px solid rgba(250,204,21,0.15); position:sticky; top:42px; z-index:997;}
-.campo-busca{width:100%; max-width:800px; margin:0 auto; display:flex; gap:8px; flex-wrap:wrap;}
-.campo-busca input{flex:1; min-width:260px; padding:11px 15px; border-radius:8px; border:1px solid rgba(250,204,21,0.3); background:rgba(17,24,39,0.9); color:var(--texto); font-size:14px; outline:none; transition:0.2s;}
+.campo-busca{width:100%; max-width:800px; margin:0 auto; position:relative;}
+.campo-busca input{width:100%; padding:11px 15px; border-radius:8px; border:1px solid rgba(250,204,21,0.3); background:rgba(17,24,39,0.9); color:var(--texto); font-size:14px; outline:none; transition:0.2s;}
 .campo-busca input:focus{border-color:var(--primaria); box-shadow:0 0 10px rgba(250,204,21,0.15);}
-.resultado-busca{width:100%; margin-top:10px; background:rgba(17,24,39,0.96); border-radius:8px; padding:15px; display:none; border:1px solid rgba(250,204,21,0.2); max-height:450px; overflow-y:auto;}
+.resultado-busca{position:absolute; top:100%; left:0; right:0; margin-top:8px; background:rgba(17,24,39,0.98); border-radius:8px; padding:10px; display:none; border:1px solid rgba(250,204,21,0.2); max-height:450px; overflow-y:auto; z-index:999;}
 .resultado-busca.visivel{display:block; animation:entrar 0.25s ease;}
-.item-resultado{display:flex; align-items:center; gap:12px; padding:10px; border-bottom:1px solid rgba(250,204,21,0.08); cursor:pointer; transition:0.2s;}
+.item-resultado{display:flex; align-items:center; gap:12px; padding:10px; border-bottom:1px solid rgba(250,204,21,0.08); cursor:pointer; transition:0.2s; border-radius:6px;}
 .item-resultado:hover{background:rgba(250,204,21,0.05);}
-.item-resultado img{width:32px; height:32px; border-radius:50%; object-fit:cover; border:1px solid var(--primaria);}
-.barra-dm{background:rgba(250,204,21,0.08); border-bottom:1px solid rgba(250,204,21,0.2); padding:10px 15px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px;}
-.dm-info{display:flex; align-items:center; gap:10px;}
-.dm-info img{width:24px; height:24px; border-radius:50%; border:2px solid var(--primaria); animation:brilhoLogo 2s infinite alternate;}
+.item-resultado img{width:32px; height:32px; border-radius:50%; object-fit:cover; border:1px solid var(--primaria); background:#000;}
+.item-resultado div:last-child{margin-left:auto;}
+
+/* BARRA DO DGM + CONTRATO + BOTÕES */
+.barra-dm{background:rgba(250,204,21,0.08); border-bottom:1px solid rgba(250,204,21,0.2); padding:10px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:13px;}
+.dm-info{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+.dm-info img{width:26px; height:26px; border-radius:50%; border:2px solid var(--primaria); animation:brilhoLogo 2s infinite alternate;}
 .dm-nome{color:var(--primaria); font-weight:700; font-size:15px;}
-.selo-verificado{color:var(--sucesso); font-weight:800;}
+.selo-verificado{color:var(--sucesso); font-weight:800; margin-left:4px;}
+.contrato-dgm{background:rgba(0,0,0,0.3); padding:4px 10px; border-radius:4px; font-family:monospace; font-size:12px; border:1px solid rgba(250,204,21,0.3);}
 .btn-copiar{background:var(--primaria); color:var(--fundo); border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; transition:0.3s;}
 .btn-copiar:hover{filter:brightness(1.1);}
 .btn-conectar{background:linear-gradient(135deg,#9945FF,#00D4AA); color:white; border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; transition:0.3s;}
 .btn-conectar:hover{filter:brightness(1.15);}
+.btn-conectar.conectado{background:var(--sucesso);}
+.grupo-botoes{display:flex; gap:8px; flex-wrap:wrap;}
+.btn-parceiro{background:rgba(17,24,39,0.9); color:var(--texto); border:1px solid rgba(250,204,21,0.3); padding:6px 12px; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; transition:0.2s; text-decoration:none; display:inline-flex; align-items:center; gap:5px;}
+.btn-parceiro:hover{border-color:var(--primaria); color:var(--primaria);}
+
+/* BARRA SUPERIOR: PERFIL + SININHO + MENU */
 .barra-topo{background:rgba(2,6,23,0.98); padding:15px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:108px; z-index:998;}
+.esquerda-topo{display:flex; align-items:center; gap:15px;}
 .perfil{display:flex; gap:10px; align-items:center;}
 .perfil img{width:42px; height:42px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover; animation:brilhoLogo 2s infinite alternate;}
 .perfil span{font-weight:700; color:var(--primaria); font-size:16px;}
+.direita-topo{display:flex; align-items:center; gap:12px;}
+.sininho{position:relative; background:transparent; border:none; color:var(--primaria); font-size:22px; cursor:pointer; padding:5px; transition:0.2s;}
+.sininho:hover{transform:scale(1.1);}
+.sininho .badge{position:absolute; top:-2px; right:-2px; background:var(--queda); color:white; font-size:10px; width:16px; height:16px; border-radius:50%; display:flex; align-items:center; justify-content:center; animation:notificacaoPulsar 2s infinite;}
+.lista-notificacoes{display:none; position:absolute; top:100%; right:0; width:320px; background:rgba(5,8,22,0.98); border:1px solid rgba(250,204,21,0.25); border-radius:8px; margin-top:5px; z-index:99999; max-height:400px; overflow-y:auto;}
+.lista-notificacoes.visivel{display:block; animation:entrar 0.2s ease;}
+.lista-notificacoes h4{padding:10px 15px; border-bottom:1px solid rgba(250,204,21,0.15); color:var(--primaria);}
+.item-notificacao{padding:12px 15px; border-bottom:1px solid rgba(250,204,21,0.08); cursor:pointer; transition:0.2s;}
+.item-notificacao:hover{background:rgba(250,204,21,0.05);}
+.item-notificacao small{color:var(--claro); display:block; margin-top:3px;}
 .menu-botao{background:rgba(250,204,21,0.1); border:1px solid rgba(250,204,21,0.3); border-radius:8px; padding:8px 18px; color:var(--primaria); cursor:pointer; font-size:26px; transition:0.3s;}
 .menu-botao:hover{background:rgba(250,204,21,0.15);}
-.menu-navegacao{display:none; position:absolute; top:100%; right:15px; width:340px; max-height:85vh; overflow-y:auto; background:rgba(5,8,22,0.98); border-radius:12px; border:1px solid rgba(250,204,21,0.25); margin-top:5px; z-index:99999 !important; padding:8px 0;}
-.menu-navegacao.aberto{display:block !important;}
+.menu-navegacao{display:none; position:absolute; top:100%; right:15px; width:340px; max-height:85vh; overflow-y:auto; background:rgba(5,8,22,0.98); border-radius:12px; border:1px solid rgba(250,204,21,0.25); margin-top:5px; z-index:99999; padding:8px 0;}
+.menu-navegacao.aberto{display:block !important; animation:entrar 0.25s ease;}
 .titulo-menu{padding:10px 20px; color:var(--primaria); font-weight:700; font-size:14px; border-bottom:1px solid rgba(250,204,21,0.15); margin-bottom:5px;}
-.item-menu{display:block; width:calc(100% - 40px); margin:0 20px; padding:8px 12px; color:var(--texto); background:transparent; border:none; text-align:left; text-decoration:none; font-size:14px; font-weight:500; border-radius:6px; transition:0.2s; cursor:pointer;}
-.item-menu:hover{background:rgba(250,204,21,0.05); color:var(--primaria);}
-.item-menu.ativo{background:rgba(250,204,21,0.1); color:var(--primaria);}
-.divisao-menu{height:1px; background:rgba(250,204,21,0.2); margin:8px 0;}
-.abas{display:flex; gap:12px; padding:12px 20px; overflow-x:auto; position:sticky; top:170px; background:var(--fundo); z-index:996; border-bottom:1px solid rgba(250,204,21,0.15);}
-.aba{padding:8px 16px; border-radius:6px; font-size:14px; font-weight:500; cursor:pointer; transition:0.2s; white-space:nowrap; border:1px solid transparent;}
-.aba.ativa{background:rgba(250,204,21,0.1); color:var(--primaria); border-color:rgba(250,204,21,0.3);}
-.aba:hover{background:rgba(250,204,21,0.05);}
-.secao{display:none; padding:20px; animation:entrar 0.3s ease;}
+.menu-item{display:block; width:calc(100% - 40px); margin:0 20px; padding:8px 12px; color:var(--texto); background:transparent; border:none; text-align:left; text-decoration:none; font-size:14px; font-weight:500; border-radius:6px; transition:0.2s; cursor:pointer;}
+.menu-item:hover{background:rgba(250,204,21,0.05); color:var(--primaria);}
+.menu-item.ativo{background:rgba(250,204,21,0.1); color:var(--primaria);}
+.menu-divisao{height:1px; background:rgba(250,204,21,0.2); margin:8px 0;}
+
+/* ABAS */
+.abas{display:flex; gap:18px; padding:12px 20px; overflow-x:auto; position:sticky; top:170px; background:rgba(5,8,22,0.98); z-index:996; border-bottom:1px solid rgba(250,204,21,0.15);}
+.aba{font-size:14px; font-weight:600; color:var(--claro); cursor:pointer; white-space:nowrap; padding-bottom:5px; transition:0.2s; border-bottom:2px solid transparent;}
+.aba.ativo{color:var(--primaria); border-bottom:2px solid var(--primaria);}
+
+/* ESTRUTURA */
+.container{max-width:1400px; margin:0 auto; padding:20px;}
+.secao{display:none; animation:entrar 0.6s ease-out;}
 .secao.ativa{display:block;}
-.container{max-width:1200px; margin:0 auto;}
-.card{background:rgba(17,24,39,0.92); border-radius:12px; padding:20px; border:1px solid rgba(250,204,21,0.15); margin-bottom:15px;}
-.card.destaque{border-color:rgba(250,204,21,0.3);}
-.card h2{color:var(--primaria); margin-bottom:15px; font-size:20px;}
-.card h3{color:var(--primaria); margin-bottom:10px; font-size:16px;}
-.grid-dados{display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin-top:15px;}
-.dado{background:rgba(2,6,23,0.8); padding:15px; border-radius:8px; border:1px solid rgba(250,204,21,0.2); text-align:center; transition:0.2s;}
-.dado:hover{border-color:var(--primaria); transform:translateY(-2px);}
-.dado strong{display:block; font-size:22px; margin-bottom:5px; color:var(--primaria);}
-.btn{display:inline-block; padding:8px 16px; border-radius:6px; text-decoration:none; font-weight:600; cursor:pointer; border:none; transition:0.2s;}
+.card{background:rgba(17,24,39,0.95); padding:25px; margin:25px 0; border-radius:16px; border:1px solid rgba(250,204,21,0.2); transition:0.3s;}
+.card:hover{border-color:rgba(250,204,21,0.5); box-shadow:0 0 25px rgba(250,204,21,0.15);}
+.card.destaque{border-color:var(--primaria); box-shadow:0 0 30px rgba(250,204,21,0.2);}
+h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:12px; font-size:24px;}
+h3{color:var(--primaria); margin:15px 0 10px; font-size:18px;}
+.btn{display:inline-block; padding:10px 20px; border-radius:8px; font-weight:700; text-decoration:none; transition:0.3s; border:none; cursor:pointer; font-size:14px;}
 .btn-primario{background:var(--primaria); color:var(--fundo);}
-.btn-primario:hover{filter:brightness(1.1);}
-.btn-pequeno{padding:5px 12px; font-size:13px;}
-.btn-voltar{color:var(--primaria); text-decoration:none; font-size:13px; display:inline-block; margin-bottom:10px;}
-.area-grafico{width:100%; min-height:400px; border-radius:8px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin-top:15px;}
-.area-grafico iframe{width:100%; height:100%; border:none;}
-.lista-moedas{margin-top:15px;}
-.item-lista{display:flex; align-items:center; justify-content:space-between; padding:10px; border-bottom:1px solid rgba(250,204,21,0.08); flex-wrap:wrap; gap:8px;}
-.item-lista:hover{background:rgba(250,204,21,0.03);}
-.esquerda-lista{display:flex; align-items:center; gap:10px;}
-.esquerda-lista img{width:28px; height:28px; border-radius:50%; object-fit:cover; border:1px solid var(--primaria); background:#000;}
-@media(max-width:768px){
-.barra-topo, .barra-busca, .abas, .secao{padding:12px 15px;}
-.grid-dados{grid-template-columns:repeat(2,1fr);}
-.menu-navegacao{width:calc(100% - 30px); right:15px;}
+.btn-secundario{background:var(--secundaria); color:var(--texto); border:1px solid var(--primaria);}
+.btn-pequeno{padding:6px 12px; font-size:12px;}
+.btn-voltar{display:inline-block; margin-bottom:15px; padding:6px 12px; background:rgba(250,204,21,0.1); color:var(--primaria); border-radius:6px; text-decoration:none; font-size:13px; font-weight:600; transition:0.2s;}
+.btn-voltar:hover{background:rgba(250,204,21,0.2);}
+.ultima-atualizacao{text-align:right; font-size:12px; color:var(--claro); margin-bottom:10px;}
+
+/* TABELA MERCADO */
+.tabela-mercado{width:100%; border-collapse:collapse; margin-top:15px; font-size:13px;}
+.tabela-mercado th, .tabela-mercado td{padding:12px 8px; text-align:right; border-bottom:1px solid rgba(250,204,21,0.1);}
+.tabela-mercado th{color:var(--primaria); font-weight:700; background:rgba(2,6,23,0.5); position:sticky; top:0;}
+.tabela-mercado td:first-child, .tabela-mercado th:first-child{text-align:left;}
+.tabela-mercado tr:hover{background:rgba(250,204,21,0.03);}
+.moeda-linha{display:flex; align-items:center; gap:10px; text-align:left;}
+.moeda-linha img{width:28px; height:28px; border-radius:50%; object-fit:cover; border:1px solid var(--primaria); background:#000;}
+.moeda-linha small{color:var(--claro); font-size:11px;}
+.btn-carregar-mais{width:100%; margin-top:20px; padding:12px; font-size:14px;}
+
+/* DADOS / INICIO */
+.grid-dados{display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:15px; margin:25px 0;}
+.dado{background:rgba(2,6,23,0.8); padding:18px; border-radius:10px; border:1px solid rgba(250,204,21,0.15); text-align:center; transition:0.2s;}
+.dado:hover{border-color:var(--primaria); transform:translateY(-2px);}
+.dado strong{display:block; color:var(--primaria); font-size:22px; margin-bottom:6px;}
+.dado span{color:var(--claro); font-size:13px;}
+header{text-align:center; padding:40px 20px 20px;}
+.logo-principal{width:210px; height:210px; border-radius:50%; border:4px solid var(--primaria); margin-bottom:20px; object-fit:cover; animation:brilhoLogo 2s infinite alternate;}
+header h1{font-size:40px; color:var(--primaria); margin-bottom:15px;}
+header p{font-size:17px; color:var(--claro); max-width:800px; margin:0 auto 25px;}
+.botoes-acao{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
+
+/* GRAFICO */
+.grafico-container{width:100%; height:520px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816;}
+
+/* LAUNCHPAD */
+#formProj{display:none; margin-top:20px; background:rgba(2,6,23,0.9); padding:20px; border-radius:10px;}
+#formProj input, #formProj select{width:100%; padding:10px; margin-bottom:10px; border-radius:6px; border:1px solid var(--primaria); background:rgba(17,24,39,0.9); color:white; font-size:14px; outline:none;}
+
+/* NOTICIAS */
+.grid-noticias{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:15px; margin-top:15px;}
+.card-noticia{background:rgba(2,6,23,0.8); border-radius:10px; overflow:hidden; border:1px solid rgba(250,204,21,0.15); transition:0.2s; cursor:pointer;}
+.card-noticia:hover{border-color:var(--primaria); transform:translateY(-3px);}
+.card-noticia .img-noticia{height:160px; background:linear-gradient(135deg, var(--primaria), #f97316); display:flex; align-items:center; justify-content:center; font-size:50px;}
+.card-noticia .conteudo-noticia{padding:15px;}
+.card-noticia h4{color:var(--primaria); margin-bottom:8px;}
+.card-noticia p{font-size:13px; color:var(--claro); margin-bottom:10px;}
+.card-noticia small{color:var(--sucesso);}
+
+/* RODAPE */
+footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
+footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
+
+/* BOTAO IA */
+#dogemanga-ai{position:fixed; bottom:25px; right:25px; z-index:99999;}
+#btnIA{
+    background:linear-gradient(135deg,#8b5cf6,#6366f1); color:white; border:none;
+    padding:14px 20px; border-radius:50px; font-size:15px; font-weight:700; cursor:pointer;
+    box-shadow:0 4px 20px rgba(139,92,246,0.4); transition:all 0.3s ease;
+    display:flex; align-items:center; gap:8px; animation:brilhoIA 2s infinite alternate;
 }
-.chat-ia{background:rgba(2,6,23,0.9); border-radius:8px; border:1px solid rgba(139,92,246,0.3); margin-top:15px; overflow:hidden;}
-.chat-mensagens{padding:15px; max-height:300px; overflow-y:auto;}
-.msg-ia{background:rgba(139,92,246,0.1); padding:10px; border-radius:6px; margin-bottom:8px; border-left:3px solid var(--ia-cor);}
-.msg-usuario{background:rgba(250,204,21,0.05); padding:10px; border-radius:6px; margin-bottom:8px; border-left:3px solid var(--primaria); text-align:right;}
-.chat-entrada{display:flex; gap:8px; padding:10px; border-top:1px solid rgba(139,92,246,0.2);}
-.chat-entrada input{flex:1; padding:8px; border-radius:6px; border:1px solid rgba(139,92,246,0.3); background:rgba(17,24,39,0.9); color:var(--texto); outline:none;}
+#btnIA:hover{transform:scale(1.05); box-shadow:0 6px 25px rgba(139,92,246,0.55);}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+    header h1{font-size:30px;}
+    .logo-principal{width:170px; height:170px;}
+    .tabela-mercado{font-size:11px;}
+    .tabela-mercado th, .tabela-mercado td{padding:8px 4px;}
+    .grafico-container{height:400px;}
+    .grid-dados{grid-template-columns:repeat(2,1fr);}
+    .menu-navegacao{width:calc(100% - 30px); right:10px;}
+    #btnIA{padding:12px 16px; font-size:14px; bottom:15px; right:15px;}
+    .contrato-dgm{max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+    .lista-notificacoes{width:calc(100vw - 40px); right:-10px;}
+}
 </style>
 </head>
 <body>
 
+<!-- TELA DE CARREGAMENTO -->
 <div id="splash">
-<img src="IMG-20260727-WA0036(7).jpg" alt="Doge Manga Evolution">
-<h2 style="color:var(--primaria);">DOGE MANGA EVOLUTION</h2>
-<p>Carregando ecossistema...</p>
+    <img src="IMG-20260727-WA0036(7).jpg" alt="🐕 Doge Manga Evolution">
+    <h2 style="color:var(--primaria);">Carregando Portal...</h2>
 </div>
+<div class="aviso-copiado" id="avisoCopiado"></div>
 
+<!-- BARRA DE PREÇOS ROLANDO -->
 <div class="barra-geral">
-<div class="barra-conteudo-geral" id="barraPrecos">
-<div class="item-moeda destaque"><strong>$DGM</strong> Carregando...</div>
-<div class="item-moeda">BTC <span>Carregando...</span></div>
-<div class="item-moeda">ETH <span>Carregando...</span></div>
-<div class="item-moeda">SOL <span>Carregando...</span></div>
-</div>
+    <div class="barra-conteudo-geral" id="barraPrecos">
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg"><strong>$DGM</strong> <span id="dgm-preco-barra">---</span> <span id="var-dgm"></span></div>
+        <div class="item-moeda">BTC: <span id="preco-btc">---</span> <span id="var-btc"></span></div>
+        <div class="item-moeda">ETH: <span id="preco-eth">---</span> <span id="var-eth"></span></div>
+        <div class="item-moeda">SOL: <span id="preco-sol">---</span> <span id="var-sol"></span></div>
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg"><strong>$DGM</strong> <span id="dgm-preco-barra-2">---</span> <span id="var-dgm-2"></span></div>
+        <div class="item-moeda">BTC: <span id="preco-btc-2">---</span> <span id="var-btc-2"></span></div>
+        <div class="item-moeda">ETH: <span id="preco-eth-2">---</span> <span id="var-eth-2"></span></div>
+        <div class="item-moeda">SOL: <span id="preco-sol-2">---</span> <span id="var-sol-2"></span></div>
+    </div>
 </div>
 
+<!-- BARRA DE BUSCA -->
 <div class="barra-busca">
-<div class="campo-busca">
-<input type="text" id="campoBusca" placeholder="🔍 Pesquise por nome, símbolo ou contrato..." autocomplete="off">
-</div>
-<div class="resultado-busca" id="resultadoBusca"></div>
+    <div class="campo-busca">
+        <input type="text" id="campoBusca" placeholder="🔍 Buscar: nome, símbolo ou contrato..." autocomplete="off">
+        <div class="resultado-busca" id="resultadoBusca"></div>
+    </div>
 </div>
 
+<!-- BARRA DO DGM: CONTRATO + BOTÕES + PARCEIROS -->
 <div class="barra-dm">
-<div class="dm-info">
-<img src="IMG-20260727-WA0036(7).jpg" alt="$DGM">
-<span class="dm-nome">$DGM</span>
-<span class="selo-verificado">✓ VERIFICADO</span>
-<span id="precoDgm">R$ 0,00</span>
-</div>
-<div style="display:flex; gap:8px; flex-wrap:wrap;">
-<button class="btn-copiar" id="btnContrato">Copiar Contrato</button>
-<button class="btn-conectar">Conectar Carteira</button>
-</div>
+    <div class="dm-info">
+        <img src="IMG-20260727-WA0036(7).jpg" alt="🐕 Doge Manga">
+        <span class="dm-nome">🐕 DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO</span> | REDE SOLANA</span>
+        <span class="contrato-dgm" title="Contrato Oficial">E9qg...UmqE</span>
+        <button class="btn-copiar" id="btnCopiarContrato">📋 COPIAR CONTRATO</button>
+    </div>
+    <div class="grupo-botoes">
+        <a href="https://www.binance.com" target="_blank" class="btn-parceiro">🟡 BINANCE</a>
+        <a href="https://coinmarketcap.com" target="_blank" class="btn-parceiro">🟢 COINMARKETCAP</a>
+        <a href="#parceiros" class="btn-parceiro">🤝 PARCEIROS</a>
+        <a href="https://linktr.ee/dogemanga" target="_blank" class="btn-parceiro">🔗 CONJUNTO</a>
+        <button class="btn-conectar" id="btnConectarCarteira">👻 CONECTAR PHANTOM</button>
+    </div>
 </div>
 
+<!-- BARRA SUPERIOR: PERFIL + SININHO + MENU -->
 <div class="barra-topo">
-<div class="perfil">
-<img src="IMG-20260727-WA0036(7).jpg" alt="Perfil">
-<span>DOGE MANGA EVOLUTION</span>
-</div>
-<button class="menu-botao" id="btnMenu">☰</button>
-<nav class="menu-navegacao" id="menuNavegacao">
-<div class="titulo-menu">MENU PRINCIPAL</div>
-<button class="item-menu ativo" data-secao="inicio">🏠 Início</button>
-<button class="item-menu" data-secao="mercado">📊 Mercado Global</button>
-<button class="item-menu" data-secao="graficos">📈 Gráficos</button>
-<button class="item-menu" data-secao="launchpad">🚀 Launchpad</button>
-<button class="item-menu" data-secao="equipe">👥 Equipe</button>
-<button class="item-menu" data-secao="seguranca">🛡️ Segurança</button>
-<div class="divisao-menu"></div>
-<div class="titulo-menu">MÓDULOS EXTRAS</div>
-<button class="item-menu" data-secao="aiHub">🤖 AI HUB + MEMECOINS</button>
-</nav>
+    <div class="esquerda-topo">
+        <div class="perfil">
+            <img src="IMG-20260727-WA0036(7).jpg" alt="Portal">
+            <span>🐕 DOGE MANGA EVOLUTION</span>
+        </div>
+    </div>
+    <div class="direita-topo">
+        <div style="position:relative;">
+            <button class="sininho" id="btnSininho">🔔<span class="badge">3</span></button>
+            <div class="lista-notificacoes" id="listaNotificacoes">
+                <h4>🔔 NOTIFICAÇÕES</h4>
+                <div class="item-notificacao">
+                    <strong>🚀 Novo lançamento!</strong>
+                    <p>Confira os novos projetos do Launchpad</p>
+                    <small>Há 5 minutos</small>
+                </div>
+                <div class="item-notificacao">
+                    <strong>📈 $DGM subiu!</strong>
+                    <p>Variação positiva de +5.2% nas últimas 24h</p>
+                    <small>Há 1 hora</small>
+                </div>
+                <div class="item-notificacao">
+                    <strong>🛡️ Atualização de segurança</strong>
+                    <p>Portal atualizado com novas proteções</p>
+                    <small>Há 1 dia</small>
+                </div>
+            </div>
+        </div>
+        <div style="position:relative;">
+            <button class="menu-botao" id="btnMenu">☰</button>
+            <nav class="menu-navegacao" id="menuNavegacao">
+                <div class="titulo-menu">🔗 PLATAFORMAS OFICIAIS</div>
+                <a href="https://dogemangaofficial.xyz" target="_blank" class="menu-item">🌐 Site Oficial</a>
+                <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="menu-item">👁️ Birdeye</a>
+                <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 DexScreener</a>
+                <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔗 Solscan</a>
+                <a href="https://www.binance.com" target="_blank" class="menu-item">🟡 Binance</a>
+                <a href="https://coinmarketcap.com" target="_blank" class="menu-item">🟢 CoinMarketCap</a>
+                <div class="menu-divisao"></div>
+                <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
+                <a href="#mercado" class="menu-item" data-secao="mercado">📊 Mercado</a>
+                <a href="#noticias" class="menu-item" data-secao="noticias">📰 Notícias</a>
+                <a href="#graficoMoeda" class="menu-item" data-secao="graficoMoeda">📈 Gráfico</a>
+                <a href="#launchpad" class="menu-item" data-secao="launchpad">🚀 Launchpad</a>
+                <a href="#parceiros" class="menu-item" data-secao="parceiros">🤝 Parceiros</a>
+                <a href="#equipe" class="menu-item" data-secao="equipe">👥 Equipe</a>
+                <a href="#seguranca" class="menu-item" data-secao="seguranca">🛡️ Segurança</a>
+            </nav>
+        </div>
+    </div>
 </div>
 
+<!-- ABAS -->
 <div class="abas">
-<div class="aba ativa" data-secao="inicio">🏠 Início</div>
-<div class="aba" data-secao="mercado">📊 Mercado</div>
-<div class="aba" data-secao="graficos">📈 Gráficos</div>
-<div class="aba" data-secao="launchpad">🚀 Launchpad</div>
-<div class="aba" data-secao="aiHub">🤖 AI HUB</div>
+    <div class="aba ativo" data-secao="inicio">🏠 Início</div>
+    <div class="aba" data-secao="mercado">📊 Mercado</div>
+    <div class="aba" data-secao="noticias">📰 Notícias</div>
+    <div class="aba" data-secao="graficoMoeda">📈 Gráfico</div>
+    <div class="aba" data-secao="launchpad">🚀 Launchpad</div>
+    <div class="aba" data-secao="parceiros">🤝 Parceiros</div>
+    <div class="aba" data-secao="equipe">👥 Equipe</div>
+    <div class="aba" data-secao="seguranca">🛡️ Segurança</div>
 </div>
 
-<main class="container">
-
-<section class="secao ativa" id="inicio">
-<div class="card destaque">
-<h2>🐕 DOGE MANGA EVOLUTION</h2>
-<p>Bem-vindo ao portal oficial do ecossistema $DGM na rede Solana. Acompanhe dados em tempo real, gráficos, lançamentos e tudo sobre o mundo das criptomoedas e memecoins.</p>
-<div class="grid-dados" style="margin-top:20px;">
-<div class="dado"><strong>R$ <span id="valorDgm">0,00</span></strong><span>Preço $DGM</span></div>
-<div class="dado"><strong id="varDgm">0,00%</strong><span>Variação 24h</span></div>
-<div class="dado"><strong>R$ <span id="volDgm">0</span></strong><span>Volume 24h</span></div>
-<div class="dado"><strong>SOLANA</strong><span>Rede Oficial</span></div>
-</div>
-</div>
+<!-- SEÇÃO: INÍCIO -->
+<section id="inicio" class="secao ativa">
+    <div class="container">
+        <header>
+            <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="🐕 Doge Manga Evolution">
+            <h1>🐕 DOGE MANGA EVOLUTION</h1>
+            <p>Ecossistema Web3 completo e mercado cripto em tempo real na Rede Solana.</p>
+        </header>
+        <div class="card destaque">
+            <h2 style="text-align:center; font-size:20px;">📈 DADOS DOGE MANGA $DGM</h2>
+            <div class="ultima-atualizacao">⏰ Atualizado: <span id="ultimaDGM">---</span></div>
+            <div class="grid-dados">
+                <div class="dado"><strong id="precoAtual">---</strong><span>Preço R$</span></div>
+                <div class="dado"><strong id="var24h">---</strong><span>Variação 24h</span></div>
+                <div class="dado"><strong id="liquidez">---</strong><span>Liquidez</span></div>
+                <div class="dado"><strong id="volume24h">---</strong><span>Volume 24h</span></div>
+                <div class="dado"><strong id="marketcap">---</strong><span>Market Cap</span></div>
+            </div>
+            <div class="botoes-acao">
+                <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">🔄 Comprar $DGM</a>
+                <a href="#graficoMoeda" class="btn btn-secundario" data-secao="graficoMoeda">📊 Gráfico Completo</a>
+                <a href="#noticias" class="btn btn-secundario" data-secao="noticias">📰 Últimas Notícias</a>
+            </div>
+        </div>
+    </div>
 </section>
 
-<section class="secao" id="mercado">
-<div class="card destaque">
-<h2>📊 MERCADO GLOBAL</h2>
-<div class="lista-moedas" id="listaMoedas">
-<p>Carregando dados do mercado...</p>
-</div>
-</div>
+<!-- SEÇÃO: MERCADO -->
+<section id="mercado" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
+            <h2>📊 MERCADO GLOBAL — VALORES EM R$</h2>
+            <div class="ultima-atualizacao">⏱️ Atualizado: <span id="ultimaMercado">---</span></div>
+            <div style="overflow-x:auto;">
+                <table class="tabela-mercado">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Moeda</th>
+                            <th>Preço R$</th>
+                            <th>24h %</th>
+                            <th>Market Cap</th>
+                            <th>Volume</th>
+                            <th>Gráfico</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabela">
+                        <tr><td colspan="7" style="text-align:center;padding:30px;">Carregando dados do mercado...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <button id="btnMais" class="btn btn-secundario btn-carregar-mais">📥 Carregar Mais Moedas</button>
+        </div>
+    </div>
 </section>
 
-<section class="secao" id="graficos">
-<div class="card destaque">
-<h2 id="tituloGrafico">📈 GRÁFICOS EM TEMPO REAL</h2>
-<div class="area-grafico">
-<iframe id="iframeGrafico" src="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?embed=1&theme=dark"></iframe>
-</div>
-</div>
+<!-- SEÇÃO: NOTÍCIAS -->
+<section id="noticias" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
+            <h2>📰 ÚLTIMAS NOTÍCIAS DO MERCADO</h2>
+            <div class="grid-noticias">
+                <div class="card-noticia">
+                    <div class="img-noticia">🚀</div>
+                    <div class="conteudo-noticia">
+                        <h4>$DGM: Novos marcos alcançados</h4>
+                        <p>Token Doge Manga Evolution atinge novos recordes de holders na rede Solana.</p>
+                        <small>Há 2 horas · Cripto</small>
+                    </div>
+                </div>
+                <div class="card-noticia">
+                    <div class="img-noticia" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);">📊</div>
+                    <div class="conteudo-noticia">
+                        <h4>Solana: Taxas em queda</h4>
+                        <p>Rede Solana registra menor custo médio de transação dos últimos 3 meses.</p>
+                        <small>Há 5 horas · Tecnologia</small>
+                    </div>
+                </div>
+                <div class="card-noticia">
+                    <div class="img-noticia" style="background:linear-gradient(135deg,#ef4444,#f97316);">🔥</div>
+                    <div class="conteudo-noticia">
+                        <h4>Memecoins em alta</h4>
+                        <p>Projetos de comunidade lideram os volumes de negociação nesta semana.</p>
+                        <small>Há 1 dia · Mercado</small>
+                    </div>
+                </div>
+                <div class="card-noticia">
+                    <div class="img-noticia" style="background:linear-gradient(135deg,#22c55e,#14b8a6);">🤖</div>
+                    <div class="conteudo-noticia">
+                        <h4>AI HUB: Nova atualização</h4>
+                        <p>Assistente inteligente do portal ganha novas funcionalidades de análise.</p>
+                        <small>Há 2 dias · Inovação</small>
+                    </div>
+                </div>
+                <div class="card-noticia">
+                    <div class="img-noticia" style="background:linear-gradient(135deg,#facc15,#eab308);">🛡️</div>
+                    <div class="conteudo-noticia">
+                        <h4>Segurança reforçada</h4>
+                        <p>Portal implementa novas camadas de proteção para usuários.</p>
+                        <small>Há 3 dias · Segurança</small>
+                    </div>
+                </div>
+                <div class="card-noticia">
+                    <div class="img-noticia" style="background:linear-gradient(135deg,#ec4899,#8b5cf6);">🎮</div>
+                    <div class="conteudo-noticia">
+                        <h4>Launchpad: Novos projetos</h4>
+                        <p>Confira os próximos lançamentos verificados do ecossistema Doge Manga.</p>
+                        <small>Há 4 dias · Launchpad</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<section class="secao" id="launchpad">
-<div class="card destaque">
-<h2>🚀 LAUNCHPAD</h2>
-<p>Área exclusiva para lançamentos de projetos verificados do ecossistema Doge Manga Evolution.</p>
-<div class="grid-dados" style="margin-top:20px;">
-<div class="dado"><strong>🔜</strong><span>Em breve</span></div>
-<div class="dado"><strong>📋</strong><span>Cadastro</span></div>
-<div class="dado"><strong>🛡️</strong><span>Verificação</span></div>
-<div class="dado"><strong>🚀</strong><span>Lançamento</span></div>
-</div>
-</div>
+<!-- SEÇÃO: GRÁFICO -->
+<section id="graficoMoeda" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="mercado">↩️ Voltar</a>
+            <h2 id="tituloGrafico">📈 GRÁFICO — Doge Manga Evolution ($DGM)</h2>
+            <div id="graficoUniversal" class="grafico-container">
+                <p style="text-align:center; padding-top:40px; color:var(--claro);">Carregando gráfico...</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<section class="secao" id="equipe">
-<div class="card destaque">
-<h2>👥 EQUIPE DOGE MANGA</h2>
-<p>Projeto desenvolvido por comunidade apaixonada por tecnologia e inovação na rede Solana.</p>
-</div>
+<!-- SEÇÃO: LAUNCHPAD -->
+<section id="launchpad" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
+            <h2>🚀 LAUNCHPAD — CADASTRE SEU PROJETO</h2>
+            <button class="btn btn-primario" id="btnAbrirForm">📩 Enviar Projeto para Análise</button>
+            <div id="formProj">
+                <h3>📋 DADOS DO PROJETO</h3>
+                <input type="text" placeholder="Nome do Projeto *" required>
+                <input type="text" placeholder="Símbolo (ex: DGM) *" required>
+                <select required>
+                    <option value="">Selecione a Rede *</option>
+                    <option>Solana</option>
+                    <option>Ethereum</option>
+                    <option>BNB Chain</option>
+                    <option>Base</option>
+                </select>
+                <input type="text" placeholder="Contrato Oficial *" required>
+                <input type="url" placeholder="Site Oficial">
+                <input type="url" placeholder="Twitter / X">
+                <input type="url" placeholder="Telegram">
+                <button class="btn btn-primario" id="btnEnviar">✅ Enviar para Análise</button>
+            </div>
+        </div>
+    </div>
 </section>
 
-<section class="secao" id="seguranca">
-<div class="card destaque">
-<h2>🛡️ SEGURANÇA</h2>
-<p>Contrato verificado, código auditado e desenvolvimento transparente.</p>
-<p style="margin-top:10px;">Nunca compartilhe suas chaves privadas ou frase secreta.</p>
-</div>
-</section>
-
-<section class="secao" id="aiHub">
-<div class="card destaque">
-<a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar ao Início</a>
-<h2>🤖 DOGE MANGA EVOLUTION — AI HUB</h2>
-<p>Módulo independente: assistente inteligente e ecossistema de memecoins.</p>
-<h3 style="color:var(--ia-cor); margin:25px 0 15px;">🧠 ASSISTENTE INTELIGENTE</h3>
-<div class="chat-ia">
-<div class="chat-mensagens" id="chatMensagens">
-<div class="msg-ia">Olá! Sou o assistente do Doge Manga Evolution. Posso tirar dúvidas sobre o projeto, dados de mercado, tokens e muito mais. Como posso ajudar?</div>
-</div>
-<div class="chat-entrada">
-<input type="text" id="entradaChat" placeholder="Digite sua pergunta..." autocomplete="off">
-<button class="btn btn-primario btn-pequeno" id="btnEnviar">Enviar</button>
-</div>
-</div>
-<h3 style="color:var(--primaria); margin:25px 0 15px;">🔥 MEMECOIN HUB</h3>
-<div class="grid-dados">
-<div class="dado" onclick="alert('Em desenvolvimento: Projetos em Destaque')" style="cursor:pointer;"><strong>🚀</strong><span>Projetos em Destaque</span></div>
-<div class="dado" onclick="alert('Em desenvolvimento: Ranking')" style="cursor:pointer;"><strong>📊</strong><span>Ranking</span></div>
-<div class="dado" onclick="alert('Em desenvolvimento: Novos Projetos')" style="cursor:pointer;"><strong>✨</strong><span>Novos Projetos</span></div>
-<div class="dado" onclick="alert('Em desenvolvimento: Verificar Projeto')" style="cursor:pointer;"><strong>🛡️</strong><span>Verificar Projeto</span></div>
-</div>
-<p style="margin-top:20px; font-size:13px; color:var(--claro);">✅ Módulo independente — não altera o funcionamento do portal oficial.</p>
-</div>
-</section>
-
-</main>
-
-<script>
-// ==================================================
-// 🔒 CONTRATO OFICIAL JÁ CONFIGURADO
-// ==================================================
-const CONTRATO_DGM = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
-let moedasBase = [];
-let COTACAO_USD_BRL = 5.50;
-const IMG_PADRAO_DGM = "IMG-20260727-WA0036(7).jpg";
-
-setTimeout(()=>{document.getElementById('splash').classList.add('oculto');}, 2500);
-
-const btnMenu = document.getElementById('btnMenu');
-const menuNavegacao = document.getElementById('menuNavegacao');
-btnMenu.addEventListener('click', ()=>menuNavegacao.classList.toggle('aberto'));
-document.addEventListener('click', e=>{if(!menuNavegacao.contains(e.target) && e.target!==btnMenu) menuNavegacao.classList.remove('aberto');});
-
-document.querySelectorAll('.item-menu, .aba, .btn-voltar').forEach(el=>{
-el.addEventListener('click', e=>{
-e.preventDefault();
-const secao = el.dataset.secao;
-if(!secao) return;
-document.querySelectorAll('.secao, .aba, .item-menu').forEach(x=>x.classList.remove('ativa','ativo'));
-document.getElementById(secao).classList.add('ativa');
-document.querySelector(`[data-secao="${secao}"].aba`)?.classList.add('ativa');
-document.querySelector(`[data-secao="${secao}"].item-menu`)?.classList.add('ativo');
-menuNavegacao.classList.remove('aberto');
-window.scrollTo({top:0});
-});
-});
-
-document.getElementById('btnContrato').addEventListener('click', ()=>{
-navigator.clipboard.writeText(CONTRATO_DGM);
-alert('✅ Contrato copiado com sucesso!');
-});
-
-document.getElementById('campoBusca').addEventListener('input', e=>{
-const val = e.target.value.toLowerCase().trim();
-const res = document.getElementById('resultadoBusca');
-if(val.length<2){res.classList.remove('visivel'); return;}
-const filtro = moedasBase.filter(m=> 
-  m.nome.toLowerCase().includes(val) || 
-  m.simbolo.toLowerCase().includes(val) || 
-  (m.endereco||'').toLowerCase().includes(val)
-);
-res.innerHTML = filtro.length ? filtro.map(m=>`
-<div class="item-resultado" onclick="abrirGrafico('${m.simbolo}','${m.endereco||''}', '${m.nome}')">
-<img src="${m.img}" alt="${m.nome}" onerror="this.src='${IMG_PADRAO_DGM}'">
-<div><strong>${m.simbolo}</strong> · ${m.nome}</div>
-</div>`).join('') : `<p style="padding:10px;">Nenhum resultado encontrado.</p>`;
-res.classList.add('visivel');
-});
-
-// ==================================================
-// ✅ CORREÇÃO PRINCIPAL: ÍCONES CORRETOS DE CADA MOEDA
-//    Agora usa a CoinCap (URLs 100% previsíveis por símbolo)
-// ==================================================
-function gerarIcone(moeda){
-  // ✅ URL QUE FUNCIONA PARA 99% DAS MOEDAS (FRAX, CRV, TRUMP, GNO, LUNC, etc.)
-  return `https://assets.coincap.io/assets/icons/${moeda.symbol.toLowerCase()}@2x.png`;
-}
-
-// 📊 MERCADO COM ÍCONES CORRETOS E BUSCA GLOBAL
-async function carregarDados(){
-try{
-// ✅ Busca cotação REAL do Dólar em Tempo Real
-try{
-  const resCot = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=usd&vs_currencies=brl');
-  const dadosCot = await resCot.json();
-  if(dadosCot?.usd?.brl) COTACAO_USD_BRL = dadosCot.usd.brl;
-}catch(e){ console.log("Usando cotação padrão"); }
-
-const res = await fetch('https://api.coinlore.net/api/tickers/?start=0&limit=2500');
-const lista = (await res.json()).data || [];
-
-// ✅ Tenta buscar dados do $DGM na Birdeye (mais preciso para Solana)
-let dgmDados = {};
-try{
-  const resDgm = await fetch(`https://api.birdeye.so/public/price?address=${CONTRATO_DGM}`);
-  const dadosDgm = await resDgm.json();
-  if(dadosDgm?.data?.value){
-    dgmDados = {
-      price_usd: dadosDgm.data.value,
-      percent_change_24h: (dadosDgm.data.change24hPercent || 0),
-      volume24: 0
-    };
-  }
-}catch(e){
-  // Fallback: busca na própria lista da Coinlore
-  dgmDados = lista.find(m=>m.symbol.toUpperCase()==='DGM') || {};
-}
-
-document.getElementById('precoDgm').innerText = `R$ ${(parseFloat(dgmDados.price_usd||0)*COTACAO_USD_BRL).toFixed(6)}`;
-document.getElementById('valorDgm').innerText = (parseFloat(dgmDados.price_usd||0)*COTACAO_USD_BRL).toFixed(6);
-const varDgm = parseFloat(dgmDados.percent_change_24h||0);
-document.getElementById('varDgm').innerText = `${varDgm.toFixed(2)}%`;
-document.getElementById('varDgm').className = varDgm>=0 ? 'var-positiva' : 'var-negativa';
-document.getElementById('volDgm').innerText = `R$ ${(parseFloat(dgmDados.volume24||0)*COTACAO_USD_BRL).toLocaleString('pt-BR')}`;
-
-document.getElementById('listaMoedas').innerHTML = lista.map(m=>`
-<div class="item-lista">
-<div class="esquerda-lista">
-<img src="${gerarIcone(m)}" alt="${m.symbol}" onerror="this.src='${IMG_PADRAO_DGM}'">
-<span><strong>${m.symbol}</strong> · ${m.name}</span>
-</div>
-<span>R$ ${(parseFloat(m.price_usd||0)*COTACAO_USD_BRL).toFixed(2)}</span>
-<span class="${parseFloat(m.percent_change_24h||0)>=0?'var-positiva':'var-negativa'}">${parseFloat(m.percent_change_24h||0).toFixed(2)}%</span>
-<span>Cap: $ ${(parseFloat(m.market_cap_usd||0)/1e6).toFixed(1)}M</span>
-<span>Vol: $ ${(parseFloat(m.volume24||0)/1e6).toFixed(1)}M</span>
-<button class="btn btn-pequeno btn-primario" onclick="abrirGrafico('${m.symbol}','${m.address||''}', '${m.name}')">📈 Gráfico</button>
-</div>`).join('');
-
-document.getElementById('barraPrecos').innerHTML = lista.slice(0,8).map(m=>`
-<div class="item-moeda ${m.symbol.toUpperCase()==='DGM'?'destaque':''}">
-<img src="${gerarIcone(m)}" alt="${m.symbol}" onerror="this.src='${IMG_PADRAO_DGM}'" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);">
-<strong>${m.symbol}</strong> R$ ${(parseFloat(m.price_usd||0)*COTACAO_USD_BRL).toFixed(2)}
-<span class="${parseFloat(m.percent_change_24h||0)>=0?'var-positiva':'var-negativa'}">${parseFloat(m.percent_change_24h||0).toFixed(2)}%</span>
-</div>`).join('');
-
-moedasBase = lista.map(m=>({
-simbolo: m.symbol, nome: m.name, endereco: m.address||'',
-img: gerarIcone(m)
-}));
-
-console.log(`✅ Mercado carregado: ${lista.length} moedas — ÍCONES CORRETOS ✅`);
-}catch(e){
-document.getElementById('listaMoedas').innerHTML = `<p>Erro ao carregar dados — tente novamente.</p>`;
-console.error(e);
-}
-}
-
-function abrirGrafico(simbolo, endereco, nomeMoeda){
-document.getElementById('campoBusca').value='';
-document.getElementById('resultadoBusca').classList.remove('visivel');
-document.querySelectorAll('.secao, .aba').forEach(x=>x.classList.remove('ativa'));
-document.getElementById('graficos').classList.add('ativa');
-document.querySelector('[data-secao="graficos"].aba')?.classList.add('ativa');
-
-const tit = document.getElementById('tituloGrafico');
-const iframe = document.getElementById('iframeGrafico');
-
-if(simbolo.toUpperCase()==='DGM'){
-tit.innerText = "DOGE MANGA EVOLUTION ($DGM)";
-iframe.src = `https://dexscreener.com/solana/${CONTRATO_DGM}?embed=1&theme=dark`;
-}else{
-tit.innerText = `DOGE MANGA EVOLUTION — ${nomeMoeda || simbolo}`;
-iframe.src = endereco ? `https://dexscreener.com/solana/${endereco}?embed=1&theme=dark` : `https://dexscreener.com/search?q=${simbolo}&embed=1&theme=dark`;
-}
-}
-
-document.getElementById('btnEnviar').addEventListener('click', enviarPergunta);
-document.getElementById('entradaChat').addEventListener('keydown', e=>{if(e.key==='Enter') enviarPergunta();});
-function enviarPergunta(){
-const inp = document.getElementById('entradaChat');
-const msg = inp.value.trim();
-if(!msg) return;
-const cx = document.getElementById('chatMensagens');
-cx.innerHTML += `<div class="msg-usuario">${msg}</div>`;
-inp.value='';
-setTimeout(()=>{
-cx.innerHTML += `<div class="msg-ia">Recebi: <strong>${msg}</strong>. Em breve respostas completas sobre o projeto e mercado!</div>`;
-cx.scrollTop = cx.scrollHeight;
-}, 800);
-cx.scrollTop = cx.scrollHeight;
-}
-
-document.addEventListener('DOMContentLoaded', carregarDados);
-</script>
-
-</body>
-</html>
+<!-- SEÇÃO: PARCEIROS -->
+<section id="parceiros" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
+            <h2>🤝 NOSSOS PARCEIROS</h2>
+            <div class="grid-dados">
+                <a href="https://www.binance.com" target="_blank" class="dado" style="text-decoration:none; color:inherit; cursor:pointer;">
+                    <strong style="font-size:18px;">🟡 BINANCE</strong>
+                    <span>Maior exchange do mundo</span>
+                </a>
+                <a href="https://coinmarketcap.com" target="_blank" class="dado" style="text-decoration:none; color:inherit; cursor:pointer;">
+                    <strong style="font-size:18px;">🟢 COINMARKETCAP</strong>
+                    <span>Dados de mercado em tempo real</span>
+                </a>
+                <a href="https://phantom.app" target="_blank" class="dado" style="text-decoration:none; color:inherit; cursor:pointer;">
+                    <strong style="font-size:18px;">👻 PHANTOM</strong>
+                    <span>Carteira oficial da
