@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
-<meta name="description" content="Mercado cripto em tempo real, dados do $DGM, gráficos, IA, busca completa e ecossistema Solana.">
+<meta name="description" content="Mercado cripto em tempo real, dados do $DGM, gráficos, busca completa e ecossistema Solana.">
 <meta name="keywords" content="Doge Manga, $DGM, Criptomoedas, Mercado, Preços em BRL, Solana, DexScreener, Inteligência Artificial">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Doge Manga Evolution">
@@ -101,15 +101,13 @@ header{text-align:center; padding:50px 20px;}
 header h1{font-size:44px; color:var(--primaria); margin-bottom:15px;}
 header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px;}
 .botoes-acao{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
-.grafico-container{width:100%; height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816;}
+.grafico-container{width:100%; height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816; position:relative;}
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
-
 #dogemanga-ai{position:fixed; bottom:25px; right:25px; z-index:99999;}
 #btnIA{background:linear-gradient(135deg,#8b5cf6,#6366f1); color:white; border:none; padding:14px 20px; border-radius:50px; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 20px rgba(139,92,246,0.4); transition:all 0.3s ease; display:flex; align-items:center; gap:8px; animation:brilhoIA 2s infinite alternate;}
 #btnIA:hover{transform:scale(1.05); box-shadow:0 6px 25px rgba(139,92,246,0.55);}
-
 @media(max-width:768px){
   header h1{font-size:32px;}
   .tabela-mercado{font-size:11px;}
@@ -170,6 +168,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
             <a href="#mercado" class="menu-item" data-secao="mercado">📊 Mercado</a>
             <a href="#graficoMoeda" class="menu-item" data-secao="graficoMoeda">📈 Gráfico</a>
+            <a href="#comprarCripto" class="menu-item" data-secao="comprarCripto">💰 Comprar Cripto</a>
             <a href="#launchpad" class="menu-item" data-secao="launchpad">🚀 Launchpad</a>
             <a href="#equipe" class="menu-item" data-secao="equipe">👥 Equipe</a>
             <a href="#seguranca" class="menu-item" data-secao="seguranca">🛡️ Segurança</a>
@@ -181,6 +180,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div class="aba" data-secao="inicio">🏠 Início</div>
     <div class="aba" data-secao="mercado">📊 Mercado</div>
     <div class="aba" data-secao="graficoMoeda">📈 Gráfico</div>
+    <div class="aba" data-secao="comprarCripto">💰 Comprar</div>
     <div class="aba" data-secao="launchpad">🚀 Launchpad</div>
     <div class="aba" data-secao="equipe">👥 Equipe</div>
     <div class="aba" data-secao="seguranca">🛡️ Segurança</div>
@@ -215,13 +215,13 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div class="container">
         <div class="card destaque">
             <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
-            <h2>📊 MERCADO GLOBAL — VALORES REAIS EM R$</h2>
-            <div class="ultima-atualizacao">⏱️ Atualizado: <span id="ultimaMercado">---</span></div>
+            <h2>📊 MERCADO GLOBAL — ATÉ 2.500 MOEDAS EM R$</h2>
+            <div class="ultima-atualizacao">⏱️ Status: <span id="ultimaMercado">Carregando...</span></div>
             <table class="tabela-mercado">
                 <thead><tr><th>#</th><th>Moeda</th><th>Preço R$</th><th>24h %</th><th>Market Cap</th><th>Volume</th><th>Gráfico</th></tr></thead>
-                <tbody id="corpoTabela"><tr><td colspan="7" style="text-align:center;padding:30px;">Carregando dados...</td></tr>
+                <tbody id="corpoTabela"><tr><td colspan="7" style="text-align:center;padding:30px;">🔄 Preparando mercado...</td></tr>
             </table>
-            <button id="btnMais" class="btn btn-secundario btn-carregar-mais">📥 Carregar Mais</button>
+            <button id="btnMais" class="btn btn-secundario btn-carregar-mais">📥 Carregar Todas as 2.500 Moedas</button>
         </div>
     </div>
 </section>
@@ -231,7 +231,63 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <div class="card destaque">
             <a href="#" class="btn-voltar" data-secao="mercado">↩️ Voltar</a>
             <h2 id="tituloGrafico">📈 GRÁFICO — Doge Manga Evolution ($DGM)</h2>
-            <div id="graficoUniversal" class="grafico-container"></div>
+            <div id="graficoUniversal" class="grafico-container">
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--claro);">🔄 Carregando gráfico...</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="comprarCripto" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
+            <h2>💰 COMPRAR CRIPTOMOEDAS</h2>
+            <p style="margin-bottom:20px;color:var(--claro);">Compre com segurança, diretamente pela Rede Solana ou parceiros oficiais.</p>
+            
+            <div class="grid-dados">
+                <div class="dado">
+                    <strong>🔄 SWAP RÁPIDO</strong>
+                    <span>Direto na Rede Solana</span>
+                    <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario btn-pequeno" style="margin-top:10px;">Comprar $DGM</a>
+                </div>
+                <div class="dado">
+                    <strong>💱 PLATAFORMAS</strong>
+                    <span>Comprar com BRL</span>
+                    <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;">
+                        <a href="https://foxbit.com.br" target="_blank" class="btn btn-secundario btn-pequeno">Foxbit</a>
+                        <a href="https://mercadobitcoin.com.br" target="_blank" class="btn btn-secundario btn-pequeno">Mercado Bitcoin</a>
+                    </div>
+                </div>
+                <div class="dado">
+                    <strong>👻 CARTEIRA</strong>
+                    <span>Segurança total</span>
+                    <a href="https://phantom.app/pt-BR/download" target="_blank" class="btn btn-secundario btn-pequeno" style="margin-top:10px;">Baixar Phantom</a>
+                </div>
+                <div class="dado">
+                    <strong>📖 PASSO A PASSO</strong>
+                    <span>Como comprar</span>
+                    <button onclick="mostrarPasso()" class="btn btn-secundario btn-pequeno" style="margin-top:10px;">Ver Guia</button>
+                </div>
+            </div>
+
+            <div id="guiaPasso" style="display:none; margin-top:25px; background:rgba(2,6,23,0.9); padding:20px; border-radius:10px;">
+                <h3 style="color:var(--primaria);margin-bottom:15px;">📝 Como comprar $DGM e outras moedas Solana:</h3>
+                <ol style="padding-left:20px; font-size:14px; line-height:1.9;">
+                    <li>Baixe e instale a carteira <strong>Phantom</strong> no celular ou computador</li>
+                    <li>Crie sua carteira e <strong>guarde a frase de recuperação</strong> em local seguro</li>
+                    <li>Compre <strong>SOL</strong> em uma corretora confiável (Foxbit, Mercado Bitcoin)</li>
+                    <li>Envie o SOL para o endereço da sua carteira Phantom</li>
+                    <li>Acesse o <strong>Jupiter Swap</strong> ou clique em "Comprar $DGM" acima</li>
+                    <li>Conecte sua carteira e troque SOL por $DGM instantaneamente</li>
+                </ol>
+                <p style="margin-top:15px; color:var(--sucesso); font-weight:600;">✅ Sem burocracia — transações diretas na blockchain Solana!</p>
+            </div>
+
+            <div style="margin-top:25px; background:rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.2); border-radius:8px; padding:15px;">
+                <h4 style="color:var(--primaria); margin-bottom:8px;">⚠️ AVISO IMPORTANTE</h4>
+                <p style="font-size:13px; color:var(--claro);">A Doge Manga Evolution apenas indica parceiros confiáveis. Sempre verifique o endereço do contrato oficial antes de comprar: <code style="color:var(--primaria);">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code>. Nunca envie fundos para endereços desconhecidos.</p>
+            </div>
         </div>
     </div>
 </section>
@@ -293,10 +349,14 @@ const CONTRATO = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
 const CONFIG = {
     coinGecko: "https://api.coingecko.com/api/v3",
     dexScreener: "https://api.dexscreener.com/latest/dex/tokens",
-    intervalo: 45000,
-    limitePagina: 50
+    intervalo: 60000,
+    limitePagina: 250,
+    totalPaginas: 10,
+    tempoTimeout: 12000
 };
+
 let pagina = 1;
+let carregandoTodas = false;
 let cacheMercado = { dados: [], ultimaAtualizacao: 0 };
 let cotacaoUSD_BRL = 5.70;
 
@@ -329,15 +389,16 @@ function abrirGraficoMoeda(id, nome, simbolo = ""){
     document.getElementById('tituloGrafico').innerHTML =
     `📈 GRÁFICO — ${nome} ${simbolo ? `(${simbolo.toUpperCase()})` : ''} | Doge Manga Evolution`;
     
-    let conteudoGrafico = "";
+    const container = document.getElementById('graficoUniversal');
+    container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--claro);">🔄 Carregando gráfico...</div>`;
+    
     if(id === "doge-manga-evolution" || id === CONTRATO){
-        conteudoGrafico = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        container.innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
     } else {
         const simboloUpper = (simbolo || id).toUpperCase();
-        conteudoGrafico = `<iframe src="https://www.tradingview.com/widgetembed/?symbol=BINANCE:${simboloUpper}USDT&interval=60&theme=dark&locale=br&style=1&timezone=America/Sao_Paulo" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        container.innerHTML = `<iframe src="https://www.tradingview.com/widgetembed/?symbol=BINANCE:${simboloUpper}USDT&interval=60&theme=dark&locale=br&style=1&timezone=America/Sao_Paulo" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy" onerror="this.parentElement.innerHTML='<div style=\"padding:20px;text-align:center;color:var(--claro);\">📊 Gráfico indisponível — <a href=\"https://dexscreener.com/search?q=${simboloUpper}\" target=\"_blank\" style=\"color:var(--primaria);\">Ver no DexScreener</a></div>'"></iframe>`;
     }
     
-    document.getElementById('graficoUniversal').innerHTML = conteudoGrafico;
     navegarSecao('graficoMoeda');
 }
 
@@ -350,9 +411,14 @@ function copiarTexto(texto){
     }).catch(() => alert("Copie manualmente o contrato"));
 }
 
+function mostrarPasso(){
+    const guia = document.getElementById('guiaPasso');
+    if(guia) guia.style.display = guia.style.display === 'none' ? 'block' : 'none';
+}
+
 async function atualizarCotacao(){
     try{
-        const res = await fetch(`${CONFIG.coinGecko}/simple/price?ids=usd&vs_currencies=brl`);
+        const res = await fetch(`${CONFIG.coinGecko}/simple/price?ids=usd&vs_currencies=brl`, { signal: AbortSignal.timeout(CONFIG.tempoTimeout) });
         if(res.ok){
             const dados = await res.json();
             cotacaoUSD_BRL = dados.usd.brl || 5.70;
@@ -362,7 +428,7 @@ async function atualizarCotacao(){
 
 async function atualizarDGM(){
     try{
-        const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO}`, { cache: 'no-store' });
+        const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO}`, { cache: 'no-store', signal: AbortSignal.timeout(CONFIG.tempoTimeout) });
         if(!res.ok) throw new Error("API temporariamente instável");
         const dados = await res.json();
         const par = dados?.pairs?.find(p => p.chainId === "solana") || dados?.pairs?.[0];
@@ -383,7 +449,9 @@ async function atualizarDGM(){
         document.getElementById('marketcap').innerText = formatarBRL(marketCapUSD * cotacaoUSD_BRL);
         document.getElementById('ultimaDGM').innerText = new Date().toLocaleTimeString('pt-BR');
 
-        document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        if(document.getElementById('graficoUniversal').innerHTML.includes('Carregando gráfico')){
+            document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        }
 
     }catch(e){
         console.warn("⚠️ DGM:", e.message);
@@ -397,7 +465,7 @@ async function carregarTopGainers(){
     if(!container) return;
     
     try{
-        const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=price_change_percentage_24h_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h`);
+        const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=price_change_percentage_24h_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h`, { signal: AbortSignal.timeout(CONFIG.tempoTimeout) });
         if(!res.ok) throw new Error("Erro na API");
         const dados = await res.json();
         
@@ -426,144 +494,31 @@ async function carregarTopGainers(){
     }
 }
 
-async function carregarMercado(pag=1, limpar=false){
-    try{
-        const agora = Date.now();
-        if(!limpar && cacheMercado.dados.length && (agora - cacheMercado.ultimaAtualizacao) < 35000){
-            renderizarTabela(); return;
+async function carregarMercadoCompleto() {
+    if (carregandoTodas) return;
+    carregandoTodas = true;
+    cacheMercado.dados = [];
+    const status = document.getElementById('ultimaMercado');
+    const tabela = document.getElementById('corpoTabela');
+
+    try {
+        for (let pag = 1; pag <= CONFIG.totalPaginas; pag++) {
+            if(status) status.innerText = `Carregando página ${pag}/${CONFIG.totalPaginas} — ${cacheMercado.dados.length} moedas`;
+            
+            const res = await fetch(
+                `${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=${CONFIG.limitePagina}&page=${pag}&sparkline=false&price_change_percentage=24h`,
+                { signal: AbortSignal.timeout(CONFIG.tempoTimeout + 5000) }
+            );
+
+            if (!res.ok) continue;
+            const dados = await res.json();
+            if (Array.isArray(dados)) cacheMercado.dados.push(...dados);
+            
+            await new Promise(res => setTimeout(res, 500));
         }
 
-        const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=${CONFIG.limitePagina}&page=${pag}&sparkline=false&price_change_percentage=24h`);
-        if(!res.ok) throw new Error("Falha na API");
-        const dados = await res.json();
-
-        if(limpar) cacheMercado.dados = [];
-        cacheMercado.dados.push(...dados);
-        cacheMercado.ultimaAtualizacao = agora;
-        pagina = pag;
+        cacheMercado.ultimaAtualizacao = Date.now();
+        pagina = CONFIG.totalPaginas;
         renderizarTabela();
-        document.getElementById('ultimaMercado').innerText = new Date().toLocaleTimeString('pt-BR');
-
-        const btc = dados.find(m => m.symbol === 'btc');
-        const eth = dados.find(m => m.symbol === 'eth');
-        const sol = dados.find(m => m.symbol === 'sol');
-        if(btc){ document.getElementById('preco-btc').innerText = formatarBRL(btc.current_price); document.getElementById('var-btc').innerHTML = formatarVariacao(btc.price_change_percentage_24h); }
-        if(eth){ document.getElementById('preco-eth').innerText = formatarBRL(eth.current_price); document.getElementById('var-eth').innerHTML = formatarVariacao(eth.price_change_percentage_24h); }
-        if(sol){ document.getElementById('preco-sol').innerText = formatarBRL(sol.current_price); document.getElementById('var-sol').innerHTML = formatarVariacao(sol.price_change_percentage_24h); }
-
-    }catch(e){
-        const tabela = document.getElementById('corpoTabela');
-        if(tabela) tabela.innerHTML = `<tr><td colspan="7" style="color:var(--claro);text-align:center;">Tentando reconectar...</td></tr>`;
-    }
-}
-
-function renderizarTabela(){
-    const tabela = document.getElementById('corpoTabela');
-    if(!tabela) return;
-    tabela.innerHTML = cacheMercado.dados.map(m => `
-        <tr>
-            <td>${m.market_cap_rank || '-'}</td>
-            <td><div class="moeda-linha"><img src="${m.image}" loading="lazy"><div><strong>${m.name}</strong><br><small>${m.symbol.toUpperCase()}</small></div></div></td>
-            <td><strong>${formatarBRL(m.current_price)}</strong></td>
-            <td>${formatarVariacao(m.price_change_percentage_24h)}</td>
-            <td>${formatarBRL(m.market_cap)}</td>
-            <td>${formatarBRL(m.total_volume)}</td>
-            <td><button class="btn btn-pequeno btn-primario" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">📊</button></td>
-        </tr>
-    `).join('');
-}
-
-let timerPesquisa;
-const campoBusca = document.getElementById('campoBusca');
-const resultadoBusca = document.getElementById('resultadoBusca');
-if(campoBusca && resultadoBusca){
-campoBusca.addEventListener('input', e => {
-    clearTimeout(timerPesquisa);
-    timerPesquisa = setTimeout(async () => {
-        const termo = e.target.value.trim();
-        if(!termo){ resultadoBusca.classList.remove('visivel'); return; }
-        try{
-            const res = await fetch(`${CONFIG.coinGecko}/search?query=${encodeURIComponent(termo)}`);
-            const dados = await res.json();
-            resultadoBusca.innerHTML = dados.coins?.slice(0,8).map(m => `
-                <div class="item-resultado" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">
-                    <img src="${m.large}" loading="lazy">
-                    <div><strong>${m.name}</strong><br><small>${m.symbol.toUpperCase()}</small></div>
-                    <button class="btn btn-pequeno">📊</button>
-                </div>
-            `).join('') || `<p style="padding:15px;">Nenhum resultado encontrado</p>`;
-            resultadoBusca.classList.add('visivel');
-        }catch{}
-    }, 350);
-});
-}
-
-document.getElementById('btnConectarCarteira')?.addEventListener('click', async () => {
-    if(window.solana?.isPhantom){
-        try{
-            const resp = await window.solana.connect();
-            alert(`✅ CARTEIRA CONECTADA!\nEndereço: ${resp.publicKey.toString().slice(0,10)}...`);
-        }catch{ alert('❌ Conexão cancelada.'); }
-    }else{
-        alert('⚠️ Instale a carteira Phantom em phantom.app');
-        window.open('https://phantom.app', '_blank');
-    }
-});
-
-function abrirIA(){
-  const mensagem = `🐕 Olá! Sou a IA do Doge Manga Evolution! 🤖
-
-Posso ajudar você com:
-• 📈 Dados do token $DGM
-• 💱 Como comprar $DGM
-• 📊 Mercado e gráficos
-• 🔗 Informações do contrato
-• 🦊 Usar carteira Phantom
-• ❓ Dúvidas sobre o projeto
-
-Em breve: respostas inteligentes em tempo real!`;
-  alert(mensagem);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        const splash = document.getElementById('splash');
-        if(splash) splash.classList.add('oculto');
-    }, 1500);
-
-    document.getElementById('btnMenu')?.addEventListener('click', e => { e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto'); });
-    document.addEventListener('click', () => { 
-        document.getElementById('menuNavegacao')?.classList.remove('aberto'); 
-        document.getElementById('resultadoBusca')?.classList.remove('visivel'); 
-    });
-    document.querySelectorAll('[data-secao]').forEach(el => {
-        el.addEventListener('click', e => { e.preventDefault(); navegarSecao(el.dataset.secao); });
-    });
-
-    document.getElementById('btnCopiarContrato')?.addEventListener('click', () => copiarTexto(CONTRATO));
-    document.getElementById('btnMais')?.addEventListener('click', () => carregarMercado(pagina + 1));
-    document.getElementById('btnAbrirForm')?.addEventListener('click', () => {
-        const form = document.getElementById('formProj');
-        if(form) form.style.display = 'block';
-    });
-    document.getElementById('btnEnviar')?.addEventListener('click', () => { 
-        alert('✅ Projeto enviado com sucesso!'); 
-        const form = document.getElementById('formProj');
-        if(form) form.style.display = 'none'; 
-    });
-
-    atualizarCotacao().then(() => {
-        atualizarDGM();
-        carregarMercado(1, true);
-        carregarTopGainers();
-        setInterval(() => { 
-            atualizarCotacao(); 
-            atualizarDGM(); 
-            carregarMercado(pagina, false); 
-            carregarTopGainers();
-        }, CONFIG.intervalo);
-    });
-});
-</script>
-</body>
-</html>
+        
+        if(status) status.innerText = `✅ ${cacheMercado.dados.length} moedas carregadas —
