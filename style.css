@@ -910,4 +910,42 @@ footer{
     color: var(--claro);
     border-top: 1px solid rgba(250,204,21,0.25);
     font-size: 13px;
+}/* ===== BARRA INFERIOR - MOEDAS EM ALTA ===== */
+
+.barra-top-gainers{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(2,6,23,.98);
+    border-top:1px solid rgba(250,204,21,.25);
+    overflow:hidden;
+    z-index:9998;
+    height:42px;
+    display:flex;
+    align-items:center;
+}
+
+.top-gainers-conteudo{
+    display:flex;
+    gap:40px;
+    width:max-content;
+    animation:rolar 45s linear infinite;
+    padding-left:20px;
+}
+
+.moeda-alta{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+}
+
+.moeda-alta img{
+    width:22px;
+    height:22px;
+    border-radius:50%;
 }
