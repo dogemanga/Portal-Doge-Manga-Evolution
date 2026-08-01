@@ -404,7 +404,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             
             <div class="cabecalho-mercado">
                 <p style="color:var(--claro); font-size:13px;">Acompanhe as 2.500 principais criptomoedas em tempo real</p>
-                <button class="btn-atualizar" id="btnAtualizarMercado" onclick="carregarListaMoedas()">🔄 Atualizar Mercado</button>
+                <button class="btn-atualizar" id="btnAtualizarMercado">🔄 Atualizar Mercado</button>
             </div>
 
             <div id="areaTabelaMercado">
@@ -461,33 +461,28 @@ function formatarVariacao(v){
 async function atualizarDadosMercado(){
     try{
         const resGeral=await fetch(API_GERAL);
-        const dGeral=await resGeral.json();
-        if(dGeral.bitcoin){
-            document.getElementById("preco-btc").innerText=`$${dGeral.bitcoin.usd.toFixed(2)}`;
-            document.getElementById("var-btc").innerHTML=formatarVariacao(dGeral.bitcoin.usd_24h_change);
-        }
-        if(dGeral.ethereum){
-            document.getElementById("preco-eth").innerText=`$${dGeral.ethereum.usd.toFixed(2)}`;
-            document.getElementById("var-eth").innerHTML=formatarVariacao(dGeral.ethereum.usd_24h_change);
-        }
-        if(dGeral.solana){
-            document.getElementById("preco-sol").innerText=`$${dGeral.solana.usd.toFixed(2)}`;
-            document.getElementById("var-sol").innerHTML=formatarVariacao(dGeral.solana.usd_24h_change);
-        }
-        if(dGeral.ripple){
-            document.getElementById("preco-xrp").innerText=`$${dGeral.ripple.usd.toFixed(4)}`;
-            document.getElementById("var-xrp").innerHTML=formatarVariacao(dGeral.ripple.usd_24h_change);
+        if(resGeral.ok){
+            const dGeral=await resGeral.json();
+            if(dGeral.bitcoin){
+                document.getElementById("preco-btc").innerText=`$${dGeral.bitcoin.usd.toFixed(2)}`;
+                document.getElementById("var-btc").innerHTML=formatarVariacao(dGeral.bitcoin.usd_24h_change);
+            }
+            if(dGeral.ethereum){
+                document.getElementById("preco-eth").innerText=`$${dGeral.ethereum.usd.toFixed(2)}`;
+                document.getElementById("var-eth").innerHTML=formatarVariacao(dGeral.ethereum.usd_24h_change);
+            }
+            if(dGeral.solana){
+                document.getElementById("preco-sol").innerText=`$${dGeral.solana.usd.toFixed(2)}`;
+                document.getElementById("var-sol").innerHTML=formatarVariacao(dGeral.solana.usd_24h_change);
+            }
+            if(dGeral.ripple){
+                document.getElementById("preco-xrp").innerText=`$${dGeral.ripple.usd.toFixed(4)}`;
+                document.getElementById("var-xrp").innerHTML=formatarVariacao(dGeral.ripple.usd_24h_change);
+            }
         }
 
         const resDmg=await fetch(API_DMG);
-        const dDmg=await resDmg.json();
-        if(dDmg?.pairs?.[0]){
-            const p=dDmg.pairs[0];
-            document.getElementById("dgm-preco-barra").innerText=formatarValor(p.priceUsd);
-            document.getElementById("dgm-preco-barra2").innerText=formatarValor(p.priceUsd);
-            document.getElementById("precoAtual").innerText=formatarValor(p.priceUsd);
-            document.getElementById("precoBrlDgm").innerText=formatarBrl(p.priceUsd);
-
-            const var24=parseFloat(p.priceChange?.h24||0);
-            document.getElementById("var24h").innerText=`${var24>=0?'+':''}${var24.toFixed(2)} %`;
-            document.getElementById("var24h").style.color=
+        if(resDmg.ok){
+            const dDmg=await resDmg.json();
+            if(dDmg?.pairs?.[0]){
+                const p
