@@ -550,4 +550,219 @@ mostrarMoedasGlobais(resultado);
 });
 
 
-carregarMercadoGlobal();
+carregarMercadoGlobal();function abrirGraficoGlobal(id){
+
+const mercado = document.getElementById("mercado-global");
+
+mercado.innerHTML += `
+
+<div class="card destaque" id="graficoMoedaGlobal">
+
+<h2>📈 Gráfico da Moeda</h2>
+
+<iframe
+
+src="https://www.coingecko.com/en/coins/${id}"
+
+width="100%"
+
+height="600"
+
+style="border:none;border-radius:12px;">
+
+</iframe>
+
+</div>function abrirGraficoGlobal(id){
+
+const mercado = document.getElementById("mercado-global");
+
+mercado.innerHTML += `
+
+<div class="card destaque" id="graficoMoedaGlobal">
+
+<h2>📈 Gráfico da Moeda</h2>
+
+<iframe
+
+src="https://www.coingecko.com/en/coins/${id}"
+
+width="100%"
+
+height="600"
+
+style="border:none;border-radius:12px;">
+
+</iframe>
+
+</div>
+
+`;
+
+}
+
+`;
+
+}<div id="detalhesMoedaGlobal"></div>async function abrirDetalhesMoeda(id){
+
+const area = document.getElementById("detalhesMoedaGlobal");
+
+area.innerHTML = `
+<div class="card destaque">
+<h2>📊 Carregando dados da moeda...</h2>
+</div>
+`;
+
+try{
+
+const resposta = await fetch(
+`https://api.coingecko.com/api/v3/coins/${id}?localization=false&sparkline=true`
+);
+
+const moeda = await resposta.json();
+
+
+area.innerHTML = `
+
+<div class="card destaque">
+
+<h2>
+${moeda.name} (${moeda.symbol.toUpperCase()})
+</h2>
+
+
+<div class="grid-dados">
+
+<div class="dado">
+<strong>Preço</strong>
+<span>
+$${moeda.market_data.current_price.usd}
+</span>
+</div>
+
+
+<div class="dado">
+<strong>Market Cap</strong>
+<span>
+$${moeda.market_data.market_cap.usd.toLocaleString()}
+</span>
+</div>
+
+
+<div class="dado">
+<strong>Volume 24h</strong>
+<span>
+$${moeda.market_data.total_volume.usd.toLocaleString()}
+</span>
+</div>
+
+
+<div class="dado">
+<strong>Variação 24h</strong>
+<span>
+${moeda.market_data.price_change_percentage_24h.toFixed(2)}%
+</span>
+</div>
+
+</div>
+
+
+<div class="grafico-container">
+
+<canvas id="graficoCrypto"></canvas>
+
+</div>
+
+
+<button class="btn btn-primario" onclick="voltarParaResultados()">
+↩️ Voltar para Mercado Global
+</button>
+
+
+</div>
+
+`;
+
+
+criarGraficoCrypto(
+moeda.market_data.sparkline_7d.price
+);
+
+
+}catch(e){
+
+area.innerHTML="Erro ao carregar dados.";
+
+}
+
+}
+
+
+
+function voltarParaResultados(){
+
+document.getElementById("detalhesMoedaGlobal").innerHTML="";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+} gu<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+let graficoAtual = null;
+
+function criarGraficoCrypto(precos){
+
+const canvas = document.getElementById("graficoCrypto");
+
+if(!canvas) return;
+
+
+if(graficoAtual){
+    graficoAtual.destroy();
+}
+
+
+graficoAtual = new Chart(canvas, {
+
+type:"line",
+
+data:{
+
+labels:precos.map((_,i)=>`Dia ${i+1}`),
+
+datasets:[{
+
+label:"Preço USD",
+
+data:precos,
+
+fill:true,
+
+tension:0.3
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+plugins:{
+
+legend:{
+
+display:trueonclick="abrirGraficoGlobal('${moeda.id}')"onclick="abrirDetalhesMoeda('${moeda.id}')"
+
+}
+
+}
+
+}
+
+});
+
+
+}onclick="abrirDetalhesMoeda('${moeda.id}')"
