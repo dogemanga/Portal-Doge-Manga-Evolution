@@ -199,7 +199,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 </div>
 
 <div class="abas">
-    <div class="aba ativo" data-secao="inicio">🏠 Início</div>
+    <div class="aba ativa" data-secao="inicio">🏠 Início</div>
     <div class="aba" data-secao="mercado">📈 $DGM</div>
     <div class="aba" data-secao="global">🌍 Global</div>
     <div class="aba" data-secao="comprar">🛒 Comprar</div>
@@ -419,7 +419,7 @@ function inicializarEventos(){
     document.getElementById('btnCopiarContrato')?.addEventListener('click', () => {
         navigator.clipboard.writeText(CONTRATO);
         const aviso = document.getElementById('avisoCopiado');
-        if(aviso){ aviso.style.display = 'block; setTimeout(()=>aviso.style.display='none',2500); }
+        if(aviso){ aviso.style.display = 'block'; setTimeout(()=>aviso.style.display='none',2500); }
     });
 
     document.getElementById('btnMenu')?.addEventListener('click', (e) => {
@@ -435,10 +435,10 @@ function inicializarEventos(){
         item.addEventListener('click', (e) => {
             e.preventDefault();
             document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
-            document.querySelectorAll('.aba, .item-menu').forEach(a => a.classList.remove('ativo'));
+            document.querySelectorAll('.aba, .item-menu').forEach(a => a.classList.remove('ativa'));
             const id = item.dataset.secao;
             document.getElementById(id)?.classList.add('ativa');
-            document.querySelectorAll(`[data-secao="${id}"]`).forEach(el => el.classList.add('ativo'));
+            document.querySelectorAll(`[data-secao="${id}"]`).forEach(el => el.classList.add('ativa'));
             document.getElementById('menuNavegacao').classList.remove('mostrar');
             
             if(id === 'global') setTimeout(carregarRankingGlobal, 300);
@@ -564,4 +564,4 @@ async function abrirDetalheMoeda(id){
 }
 
 function voltarParaResultados(){
-    document.getElementById('detal
+    document.getElementById('detalhesMoedaGlobal').classList.remove
