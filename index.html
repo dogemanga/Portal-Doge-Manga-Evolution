@@ -427,3 +427,127 @@ document.getElementById('btnConectarCarteira').onclick = async ()=>{
 </script>
 </body>
 </html>
+<section id="mercado-global" class="secao">
+<div class="container">
+<div class="card destaque">
+
+<h2>🌎 Mercado Global Doge Manga</h2>
+
+<input 
+id="pesquisaMoedaGlobal" 
+placeholder="🔍 Pesquisar moeda..."
+style="width:100%;padding:15px;border-radius:10px;"
+>
+
+<div id="listaMercadoGlobal">
+Carregando mercado global...
+</div>
+
+</div>
+</div>
+</section><a href="#mercado-global" 
+class="menu-item" 
+data-secao="mercado-global">
+🌎 Mercado Global
+</a><a href="#mercado-global" 
+class="menu-item" 
+data-secao="mercado-global">
+🌎 Mercado Global
+</a></script>let moedasGlobais = [];
+
+async function carregarMercadoGlobal(){
+
+const area = document.getElementById("listaMercadoGlobal");
+
+area.innerHTML="📊 Carregando 2500 moedas...";
+
+try{
+
+const resposta = await fetch(
+"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=1&sparkline=false"
+);
+
+const dados = await resposta.json();
+
+moedasGlobais = dados;
+
+
+mostrarMoedasGlobais(dados);
+
+
+}catch(e){
+
+area.innerHTML="Erro ao carregar mercado.";
+
+}
+
+}
+
+
+function mostrarMoedasGlobais(lista){
+
+const area=document.getElementById("listaMercadoGlobal");
+
+area.innerHTML="";
+
+
+lista.forEach((moeda,index)=>{
+
+area.innerHTML += `
+
+<div class="dado">
+
+<strong>
+${index+1} ${moeda.name}
+</strong>
+
+<span>
+${moeda.symbol.toUpperCase()}
+<br>
+
+Preço:
+$${moeda.current_price}
+
+<br>
+
+24h:
+${moeda.price_change_percentage_24h?.toFixed(2) || 0}%
+
+<br>
+
+Market Cap:
+$${moeda.market_cap.toLocaleString()}
+
+</span>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+document.getElementById("pesquisaMoedaGlobal")
+.addEventListener("input",function(){
+
+let busca=this.value.toLowerCase();
+
+
+let resultado=moedasGlobais.filter(m=>
+
+m.name.toLowerCase().includes(busca)
+||
+m.symbol.toLowerCase().includes(busca)
+
+);
+
+
+mostrarMoedasGlobais(resultado);
+
+
+});
+
+
+carregarMercadoGlobal();
