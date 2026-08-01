@@ -233,7 +233,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <div class="dado"><strong>FDV</strong><span id="fdv">Aguardando listagem...</span></div>
                 <div class="dado"><strong>Holders</strong><span id="holders">Aguardando atualização...</span></div>
                 <div class="dado"><strong>Volume 24h</strong><span id="volume24">Aguardando listagem...</span></div>
-                <div class="dado"><strong>Supply Total</strong><span>1.000.000.000</span></div>
+                <div class="dado"><strong>Supply Total</strong><span>420.000.000.000</span></div>
                 <div class="dado"><strong>Circulante</strong><span id="circulante">Aguardando listagem...</span></div>
                 <div class="dado"><strong>Queimados</strong><span id="queimados">Aguardando listagem...</span></div>
             </div>
@@ -344,50 +344,57 @@ let termoPesquisaGlobal = '';
 let cacheDados = {};
 let taxaBRL = 5.40;
 
-window.onload = ()=>setTimeout(()=>document.getElementById('splash').classList.add('oculto'),1800);
-
-document.getElementById('btnCopiarContrato').onclick = ()=>{
-    navigator.clipboard.writeText(CONTRATO);
-    document.getElementById('avisoCopiado').style.display='block';
-    setTimeout(()=>document.getElementById('avisoCopiado').style.display='none',2500);
-};
-
-document.getElementById('btnMenu').onclick = (e)=>{e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('mostrar');};
-document.addEventListener('click', (e)=>{
-    const menu = document.getElementById('menuNavegacao');
-    const botao = document.getElementById('btnMenu');
-    if(!menu.contains(e.target) && e.target !== botao) menu.classList.remove('mostrar');
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => document.getElementById('splash').classList.add('oculto'), 1800);
+    inicializarEventos();
+    atualizarDados();
+    setInterval(atualizarDados, 180000);
 });
 
-document.getElementById('btnTema').onclick = ()=>{
-    temaEscuro = !temaEscuro;
-    document.body.classList.toggle('tema-claro');
-    document.getElementById('btnTema').innerText = temaEscuro ? '💡 Iluminação: Modo Escuro' : '💡 Iluminação: Modo Claro';
-};
+function inicializarEventos(){
+    document.getElementById('btnCopiarContrato').onclick = ()=>{
+        navigator.clipboard.writeText(CONTRATO);
+        document.getElementById('avisoCopiado').style.display='block';
+        setTimeout(()=>document.getElementById('avisoCopiado').style.display='none',2500);
+    };
 
-document.getElementById('btnIdioma').onclick = ()=>{
-    const idiomas = ['🌐 Idioma: Português', '🌐 Idioma: English', '🌐 Idioma: Español'];
-    const atual = idiomas.indexOf(document.getElementById('btnIdioma').innerText);
-    document.getElementById('btnIdioma').innerText = idiomas[(atual+1)%3];
-};
-
-document.querySelectorAll('.aba, .menu-item, #btnVoltarMenu').forEach(item=>{
-    if(item.id === 'btnTema' || item.id === 'btnIdioma') return;
-    item.addEventListener('click', (e)=>{
-        e.preventDefault();
-        document.querySelectorAll('.aba, .menu-item').forEach(i=>i.classList.remove('ativo'));
-        document.querySelectorAll('.secao').forEach(s=>s.classList.remove('ativa'));
-        if(item.dataset.secao){
-            document.querySelector(`[data-secao="${item.dataset.secao}"]`).classList.add('ativo');
-            document.getElementById(item.dataset.secao).classList.add('ativa');
-            if(item.dataset.secao !== 'global') voltarParaResultados();
-        }else{
-            document.querySelector('[data-secao="inicio"]').classList.add('ativo');
-            document.getElementById('inicio').classList.add('ativa');
-        }
-        document.getElementById('menuNavegacao').classList.remove('mostrar');
+    document.getElementById('btnMenu').onclick = (e)=>{e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('mostrar');};
+    document.addEventListener('click', (e)=>{
+        const menu = document.getElementById('menuNavegacao');
+        const botao = document.getElementById('btnMenu');
+        if(!menu.contains(e.target) && e.target !== botao) menu.classList.remove('mostrar');
     });
-});
+
+    document.getElementById('btnTema').onclick = ()=>{
+        temaEscuro = !temaEscuro;
+        document.body.classList.toggle('tema-claro');
+        document.getElementById('btnTema').innerText = temaEscuro ? '💡 Iluminação: Modo Escuro' : '💡 Iluminação: Modo Claro';
+    };
+
+    document.getElementById('btnIdioma').onclick = ()=>{
+        const idiomas = ['🌐 Idioma: Português', '🌐 Idioma: English', '🌐 Idioma: Español'];
+        const atual = idiomas.indexOf(document.getElementById('btnIdioma').innerText);
+        document.getElementById('btnIdioma').innerText = idiomas[(atual+1)%3];
+    };
+
+    document.querySelectorAll('.aba, .menu-item, #btnVoltarMenu, #btnVoltar').forEach(item=>{
+        if(item.id === 'btnTema' || item.id === 'btnIdioma') return;
+        item.addEventListener('click', (e)=>{
+            e.preventDefault();
+            document.querySelectorAll('.aba, .menu-item').forEach(i=>i.classList.remove('ativo'));
+            document.querySelectorAll('.secao').forEach(s=>s.classList.remove('ativa'));
+            if(item.dataset.secao){
+                document.querySelector(`[data-secao="${item.dataset.secao}"]`).classList.add('ativo');
+                document.getElementById(item.dataset.secao).classList.add('ativa');
+                if(item.dataset.secao !== 'global') voltarParaResultados();
+            }else{
+                document.querySelector('[data-secao="inicio"]').classList.add('ativo');
+                document.getElementById('inicio').classList.add('ativa');
+            }
+            document.getElementById('menuNavegacao').classList.remove('mostrar');
+        });
+    });
+}
 
 async function buscarTaxaBRL(){
     try{
@@ -403,13 +410,13 @@ async function atualizarDados(){
         const cacheKey = 'dados-gerais';
         if(cacheDados[cacheKey] && Date.now() - cacheDados[cacheKey].tempo < 120000){
             processarDadosGerais(cacheDados[cacheKey].dados);
-            return;
+        } else {
+            const resCG = await fetch(`${API_CG}/simple/price?ids=doge-manga,bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true`, {cache:'no-store'});
+            if(!resCG.ok) throw new Error('API indisponível');
+            const dadosCG = await resCG.json();
+            cacheDados[cacheKey] = {dados:dadosCG, tempo:Date.now()};
+            processarDadosGerais(dadosCG);
         }
-        const resCG = await fetch(`${API_CG}/simple/price?ids=doge-manga,bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true`, {cache:'no-store'});
-        if(!resCG.ok) throw new Error('API indisponível');
-        const dadosCG = await resCG.json();
-        cacheDados[cacheKey] = {dados:dadosCG, tempo:Date.now()};
-        processarDadosGerais(dadosCG);
     }catch(e){
         console.warn('Erro dados gerais:', e);
         document.getElementById('barraPrecos').innerHTML = `<div class="item-moeda destaque"><span>Dados temporariamente indisponíveis</span></div>`;
@@ -443,8 +450,8 @@ async function buscarMoedasGlobal(){
     try{
         const res = await fetch(`${API_CG}/search?query=${encodeURIComponent(termoPesquisaGlobal)}`, {cache:'no-store'});
         if(res.status===429){
-            document.getElementById('areaResultadosGlobal').innerHTML = `<div class="aviso-api">⏳ Muitas requisições — aguarde 1 minuto e tente novamente</div>`;
-            setTimeout(buscarMoedasGlobal, 65000);
+            document.getElementById('areaResultadosGlobal').innerHTML = `<div class="aviso-api">⏳ Muitas requisições — aguarde 6,5 segundos</div>`;
+            setTimeout(buscarMoedasGlobal, 6500);
             return;
         }
         const dados = await res.json();
@@ -463,5 +470,4 @@ async function carregarRankingGlobal(){
     try{
         const res = await fetch(`${API_CG}/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${paginaGlobal}&sparkline=false`, {cache:'no-store'});
         if(res.status===429){
-            document.getElementById('areaResultadosGlobal').innerHTML = `<div class="aviso-api">⏳ Limite de requisições — aguarde 1 minuto</div>`;
-            setTimeout(carregarRankingGlobal, 6500
+            document.getElementById('areaResultadosGlobal').
