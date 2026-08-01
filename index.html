@@ -87,7 +87,7 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 .item-lista{display:flex; align-items:center; justify-content:space-between; padding:10px; border-bottom:1px solid rgba(250,204,21,0.08); flex-wrap:wrap; gap:8px;}
 .item-lista:hover{background:rgba(250,204,21,0.03);}
 .esquerda-lista{display:flex; align-items:center; gap:10px;}
-.esquerda-lista img{width:28px; height:28px; border-radius:50%; border:1px solid var(--primaria);}
+.esquerda-lista img{width:28px; height:28px; border-radius:50%; object-fit:cover; border:1px solid var(--primaria); background:#000;}
 @media(max-width:768px){
 .barra-topo, .barra-busca, .abas, .secao{padding:12px 15px;}
 .grid-dados{grid-template-columns:repeat(2,1fr);}
@@ -262,6 +262,7 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 const CONTRATO_DGM = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
 let moedasBase = [];
 const COTACAO_USD_BRL = 5.50;
+const IMG_PADRAO_DGM = "IMG-20260727-WA0036(7).jpg";
 
 setTimeout(()=>{document.getElementById('splash').classList.add('oculto');}, 2500);
 
@@ -299,13 +300,14 @@ const filtro = moedasBase.filter(m=>
   (m.endereco||'').toLowerCase().includes(val)
 );
 res.innerHTML = filtro.length ? filtro.map(m=>`
-<div class="item-resultado" onclick="abrirGrafico('${m.simbolo}','${m.endereco||''}')">
-<img src="${m.img}" alt="${m.nome}">
+<div class="item-resultado" onclick="abrirGrafico('${m.simbolo}','${m.endereco||''}', '${m.nome}')">
+<img src="${m.img}" alt="${m.nome}" onerror="this.src='${IMG_PADRAO_DGM}'">
 <div><strong>${m.simbolo}</strong> · ${m.nome}</div>
 </div>`).join('') : `<p style="padding:10px;">Nenhum resultado encontrado.</p>`;
 res.classList.add('visivel');
 });
 
+// 📊 MERCADO COM ÍCONES CORRETOS E BUSCA GLOBAL
 async function carregarDados(){
 try{
 const res = await fetch('https://api.coinlore.net/api/tickers/?start=0&limit=2500');
@@ -318,38 +320,45 @@ document.getElementById('varDgm').innerText = `${parseFloat(dgm.percent_change_2
 document.getElementById('varDgm').className = parseFloat(dgm.percent_change_24h||0)>=0 ? 'var-positiva' : 'var-negativa';
 document.getElementById('volDgm').innerText = `R$ ${(parseFloat(dgm.volume24||0)*COTACAO_USD_BRL).toLocaleString('pt-BR')}`;
 
+function gerarIcone(moeda){
+  const id = moeda.id || '';
+  const nomeAjustado = moeda.name.toLowerCase().replace(/[^a-z0-9]/g,'-').replace(/-+/g,'-').replace(/^-|-$/g,'');
+  return `https://assets.coingecko.com/coins/images/${id}/small/${nomeAjustado}.png`;
+}
+
 document.getElementById('listaMoedas').innerHTML = lista.map(m=>`
 <div class="item-lista">
 <div class="esquerda-lista">
-<img src="https://assets.coingecko.com/coins/images/${m.id||1}/small/${m.name.toLowerCase().replace(/ /g,'-')}.png" alt="${m.symbol}" onerror="this.src='IMG-20260727-WA0036(7).jpg'">
+<img src="${gerarIcone(m)}" alt="${m.symbol}" onerror="this.src='${IMG_PADRAO_DGM}'">
 <span><strong>${m.symbol}</strong> · ${m.name}</span>
 </div>
 <span>R$ ${(parseFloat(m.price_usd||0)*COTACAO_USD_BRL).toFixed(2)}</span>
 <span class="${parseFloat(m.percent_change_24h||0)>=0?'var-positiva':'var-negativa'}">${parseFloat(m.percent_change_24h||0).toFixed(2)}%</span>
 <span>Cap: $ ${(parseFloat(m.market_cap_usd||0)/1e6).toFixed(1)}M</span>
 <span>Vol: $ ${(parseFloat(m.volume24||0)/1e6).toFixed(1)}M</span>
-<button class="btn btn-pequeno btn-primario" onclick="abrirGrafico('${m.symbol}','${m.address||''}')">📈 Gráfico</button>
+<button class="btn btn-pequeno btn-primario" onclick="abrirGrafico('${m.symbol}','${m.address||''}', '${m.name}')">📈 Gráfico</button>
 </div>`).join('');
 
 document.getElementById('barraPrecos').innerHTML = lista.slice(0,8).map(m=>`
 <div class="item-moeda ${m.symbol.toUpperCase()==='DGM'?'destaque':''}">
+<img src="${gerarIcone(m)}" alt="${m.symbol}" onerror="this.src='${IMG_PADRAO_DGM}'" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);">
 <strong>${m.symbol}</strong> R$ ${(parseFloat(m.price_usd||0)*COTACAO_USD_BRL).toFixed(2)}
 <span class="${parseFloat(m.percent_change_24h||0)>=0?'var-positiva':'var-negativa'}">${parseFloat(m.percent_change_24h||0).toFixed(2)}%</span>
 </div>`).join('');
 
 moedasBase = lista.map(m=>({
 simbolo: m.symbol, nome: m.name, endereco: m.address||'',
-img: `https://assets.coingecko.com/coins/images/${m.id||1}/small/${m.name.toLowerCase().replace(/ /g,'-')}.png`
+img: gerarIcone(m)
 }));
 
-console.log(`✅ Mercado carregado: ${lista.length} moedas`);
+console.log(`✅ Mercado carregado: ${lista.length} moedas — busca e ícones prontos`);
 }catch(e){
 document.getElementById('listaMoedas').innerHTML = `<p>Erro ao carregar dados — tente novamente.</p>`;
 console.error(e);
 }
 }
 
-function abrirGrafico(simbolo, endereco){
+function abrirGrafico(simbolo, endereco, nomeMoeda){
 document.getElementById('campoBusca').value='';
 document.getElementById('resultadoBusca').classList.remove('visivel');
 document.querySelectorAll('.secao, .aba').forEach(x=>x.classList.remove('ativa'));
@@ -360,10 +369,10 @@ const tit = document.getElementById('tituloGrafico');
 const iframe = document.getElementById('iframeGrafico');
 
 if(simbolo.toUpperCase()==='DGM'){
-tit.innerText = "Doge Manga Evolution ($DGM)";
+tit.innerText = "DOGE MANGA EVOLUTION ($DGM)";
 iframe.src = `https://dexscreener.com/solana/${CONTRATO_DGM}?embed=1&theme=dark`;
 }else{
-tit.innerText = "Doge Manga Evolution — Gráfico de Mercado";
+tit.innerText = `DOGE MANGA EVOLUTION — ${nomeMoeda || simbolo}`;
 iframe.src = endereco ? `https://dexscreener.com/solana/${endereco}?embed=1&theme=dark` : `https://dexscreener.com/search?q=${simbolo}&embed=1&theme=dark`;
 }
 }
