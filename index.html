@@ -100,6 +100,7 @@ header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
+.top-gainers-conteudo{padding:8px 15px; color:var(--claro); font-size:12px;}
 
 /* 🤖 BOTÃO DA IA */
 #dogemanga-ai{position:fixed; bottom:25px; right:25px; z-index:99999;}
@@ -287,6 +288,12 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
+<div class="top-gainers-conteudo" id="barraTopGainers">
+    <div class="moeda-alta">
+        🔥 Carregando moedas em alta...
+    </div>
+</div>
+
 <footer>© 2026 🐕 Doge Manga Evolution | Portal Oficial — Dados em tempo real</footer>
 
 <!-- 🤖 BOTÃO DA IA DOGE MANGA -->
@@ -312,7 +319,7 @@ function formatarBRL(valor){
     return new Intl.NumberFormat('pt-BR', {
         style: 'currency', currency: 'BRL',
         maximumFractionDigits: num < 0.01 ? 8 : 2
-    }).format(num * cotacaoUSD_BRL);
+    }).format(num);
 }
 function formatarVariacao(valor){
     if(!valor && valor !== 0) return "<span>--</span>";
@@ -323,11 +330,26 @@ function formatarVariacao(valor){
 function navegarSecao(id){
     document.querySelectorAll('.secao').forEach(s => s.classList.remove('ativa'));
     document.querySelectorAll('.aba, .menu-item').forEach(b => b.classList.remove('ativo'));
-    document.getElementById(id).classList.add('ativa');
+    const secao = document.getElementById(id);
+    if(secao) secao.classList.add('ativa');
     document.querySelectorAll(`[data-secao="${id}"]`).forEach(b => b.classList.add('ativo'));
     document.getElementById('menuNavegacao').classList.remove('aberto');
     document.getElementById('resultadoBusca').classList.remove('visivel');
     window.scrollTo(0,0);
+}
+
+function abrirGraficoMoeda(id, nome, simbolo = ""){
+    document.getElementById('tituloGrafico').innerHTML =
+    `📈 GRÁFICO — ${nome} ${simbolo ? `(${simbolo.toUpperCase()})` : ''} | Doge Manga Evolution`;
+    document.getElementById('graficoUniversal').innerHTML = `
+    <iframe
+    src="https://www.tradingview.com/widgetembed/?symbol=${simbolo || id}USD&theme=dark&locale=br"
+    width="100%"
+    height="100%"
+    frameborder="0"
+    allowfullscreen>
+    </iframe>`;
+    navegarSecao('graficoMoeda');
 }
 
 function copiarTexto(texto){
@@ -363,10 +385,10 @@ async function atualizarDGM(){
         const volumeUSD = parseFloat(par.volume?.h24 || 0);
         const marketCapUSD = parseFloat(par.fdv || 0);
 
-        document.getElementById('dgm-preco-barra').innerText = formatarBRL(precoUSD);
+        document.getElementById('dgm-preco-barra').innerText = formatarBRL(precoUSD * cotacaoUSD_BRL);
         document.getElementById('var-dgm').innerHTML = formatarVariacao(var24h);
 
-        document.getElementById('precoAtual').innerText = formatarBRL(precoUSD);
+        document.getElementById('precoAtual').innerText = formatarBRL(precoUSD * cotacaoUSD_BRL);
         document.getElementById('var24h').innerHTML = formatarVariacao(var24h);
         document.getElementById('liquidez').innerText = formatarBRL(liquidezUSD * cotacaoUSD_BRL);
         document.getElementById('volume24h').innerText = formatarBRL(volumeUSD * cotacaoUSD_BRL);
@@ -406,67 +428,59 @@ async function carregarMercado(pag=1, limpar=false){
         const btc = dados.find(m => m.symbol === 'btc');
         const eth = dados.find(m => m.symbol === 'eth');
         const sol = dados.find(m => m.symbol === 'sol');
-        if(btc){ document.getElementById('preco-btc').innerText = formatarBRL(btc.current_price / cotacaoUSD_BRL); document.getElementById('var-btc').innerHTML = formatarVariacao(btc.price_change_percentage_24h); }
-        if(eth){ document.getElementById('preco-eth').innerText = formatarBRL(eth.current_price / cotacaoUSD_BRL); document.getElementById('var-eth').innerHTML = formatarVariacao(eth.price_change_percentage_24h); }
-        if(sol){ document.getElementById('preco-sol').innerText = formatarBRL(sol.current_price / cotacaoUSD_BRL); document.getElementById('var-sol').innerHTML = formatarVariacao(sol.price_change_percentage_24h); }
+        if(btc){ document.getElementById('preco-btc').innerText = formatarBRL(btc.current_price); document.getElementById('var-btc').innerHTML = formatarVariacao(btc.price_change_percentage_24h); }
+        if(eth){ document.getElementById('preco-eth').innerText = formatarBRL(eth.current_price); document.getElementById('var-eth').innerHTML = formatarVariacao(eth.price_change_percentage_24h); }
+        if(sol){ document.getElementById('preco-sol').innerText = formatarBRL(sol.current_price); document.getElementById('var-sol').innerHTML = formatarVariacao(sol.price_change_percentage_24h); }
 
     }catch(e){
-        document.getElementById('corpoTabela').innerHTML = `<tr><td colspan="7" style="color:var(--claro);text-align:center;">Tentando reconectar...</td></tr>`;
+        const tabela = document.getElementById('corpoTabela');
+        if(tabela) tabela.innerHTML = `<tr><td colspan="7" style="color:var(--claro);text-align:center;">Tentando reconectar...</td></tr>`;
     }
 }
+
 function renderizarTabela(){
-    document.getElementById('corpoTabela').innerHTML = cacheMercado.dados.map(m => `
+    const tabela = document.getElementById('corpoTabela');
+    if(!tabela) return;
+    tabela.innerHTML = cacheMercado.dados.map(m => `
         <tr>
             <td>${m.market_cap_rank || '-'}</td>
             <td><div class="moeda-linha"><img src="${m.image}" loading="lazy"><div><strong>${m.name}</strong><br><small>${m.symbol.toUpperCase()}</small></div></div></td>
-            <td><strong>${formatarBRL(m.current_price / cotacaoUSD_BRL)}</strong></td>
+            <td><strong>${formatarBRL(m.current_price)}</strong></td>
             <td>${formatarVariacao(m.price_change_percentage_24h)}</td>
-            <td>${formatarBRL(m.market_cap / cotacaoUSD_BRL)}</td>
-            <td>${formatarBRL(m.total_volume / cotacaoUSD_BRL)}</td>
-            <td><button class="btn btn-pequeno btn-primario" onclick="abrirGraficoMoeda('${m.id}','${m.name}')">📊</button></td>
+            <td>${formatarBRL(m.market_cap)}</td>
+            <td>${formatarBRL(m.total_volume)}</td>
+            <td><button class="btn btn-pequeno btn-primario" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">📊</button></td>
         </tr>
-    `).join('');function abrirGraficoMoeda(id, nome, simbolo){
-
-    document.getElementById('tituloGrafico').innerHTML =
-    `📈 GRÁFICO — ${nome} (${simbolo.toUpperCase()}) | Doge Manga Evolution`;
-
-    document.getElementById('graficoUniversal').innerHTML = `
-    <iframe
-    src="https://www.tradingview.com/widgetembed/?symbol=${simbolo.toUpperCase()}USD&theme=dark"
-    width="100%"
-    height="100%"
-    frameborder="0"
-    allowfullscreen>
-    </iframe>`;
-
-    navegarSecao('graficoMoeda');
-}
+    `).join('');
 }
 
 
 let timerPesquisa;
-document.getElementById('campoBusca').addEventListener('input', e => {
+const campoBusca = document.getElementById('campoBusca');
+const resultadoBusca = document.getElementById('resultadoBusca');
+if(campoBusca && resultadoBusca){
+campoBusca.addEventListener('input', e => {
     clearTimeout(timerPesquisa);
     timerPesquisa = setTimeout(async () => {
         const termo = e.target.value.trim();
-        if(!termo){ document.getElementById('resultadoBusca').classList.remove('visivel'); return; }
+        if(!termo){ resultadoBusca.classList.remove('visivel'); return; }
         try{
             const res = await fetch(`${CONFIG.coinGecko}/search?query=${encodeURIComponent(termo)}`);
             const dados = await res.json();
-            const lista = document.getElementById('resultadoBusca');
-            lista.innerHTML = dados.coins?.slice(0,8).map(m => `
-                <div class="item-resultado" onclick="abrirGraficoMoeda('${m.id}','${m.name}')">
+            resultadoBusca.innerHTML = dados.coins?.slice(0,8).map(m => `
+                <div class="item-resultado" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">
                     <img src="${m.large}" loading="lazy">
                     <div><strong>${m.name}</strong><br><small>${m.symbol.toUpperCase()}</small></div>
                     <button class="btn btn-pequeno">📊</button>
                 </div>
             `).join('') || `<p style="padding:15px;">Nenhum resultado encontrado</p>`;
-            lista.classList.add('visivel');
+            resultadoBusca.classList.add('visivel');
         }catch{}
     }, 350);
 });
+}
 
-document.getElementById('btnConectarCarteira').addEventListener('click', async () => {
+document.getElementById('btnConectarCarteira')?.addEventListener('click', async () => {
     if(window.solana?.isPhantom){
         try{
             const resp = await window.solana.connect();
@@ -491,21 +505,35 @@ Posso ajudar você com:
 • ❓ Dúvidas sobre o projeto
 
 Em breve: respostas inteligentes em tempo real!`;
-
   alert(mensagem);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => document.getElementById('splash').classList.add('oculto'), 1500);
+    setTimeout(() => {
+        const splash = document.getElementById('splash');
+        if(splash) splash.classList.add('oculto');
+    }, 1500);
 
-    document.getElementById('btnMenu').addEventListener('click', e => { e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto'); });
-    document.addEventListener('click', () => { document.getElementById('menuNavegacao').classList.remove('aberto'); document.getElementById('resultadoBusca').classList.remove('visivel'); });
-    document.querySelectorAll('[data-secao]').forEach(el => el.addEventListener('click', e => { e.preventDefault(); navegarSecao(el.dataset.secao); }));
+    document.getElementById('btnMenu')?.addEventListener('click', e => { e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto'); });
+    document.addEventListener('click', () => { 
+        document.getElementById('menuNavegacao')?.classList.remove('aberto'); 
+        document.getElementById('resultadoBusca')?.classList.remove('visivel'); 
+    });
+    document.querySelectorAll('[data-secao]').forEach(el => {
+        el.addEventListener('click', e => { e.preventDefault(); navegarSecao(el.dataset.secao); });
+    });
 
-    document.getElementById('btnCopiarContrato').addEventListener('click', () => copiarTexto(CONTRATO));
-    document.getElementById('btnMais').addEventListener('click', () => carregarMercado(pagina + 1));
-    document.getElementById('btnAbrirForm').addEventListener('click', () => document.getElementById('formProj').style.display = 'block');
-    document.getElementById('btnEnviar').addEventListener('click', () => { alert('✅ Projeto enviado com sucesso!'); document.getElementById('formProj').style.display = 'none'; });
+    document.getElementById('btnCopiarContrato')?.addEventListener('click', () => copiarTexto(CONTRATO));
+    document.getElementById('btnMais')?.addEventListener('click', () => carregarMercado(pagina + 1));
+    document.getElementById('btnAbrirForm')?.addEventListener('click', () => {
+        const form = document.getElementById('formProj');
+        if(form) form.style.display = 'block';
+    });
+    document.getElementById('btnEnviar')?.addEventListener('click', () => { 
+        alert('✅ Projeto enviado com sucesso!'); 
+        const form = document.getElementById('formProj');
+        if(form) form.style.display = 'none'; 
+    });
 
     atualizarCotacao().then(() => {
         atualizarDGM();
@@ -515,16 +543,4 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 </body>
-
-    <div class="top-gainers-conteudo" id="barraTopGainers">
-        <div class="moeda-alta">
-            🔥 Carregando moedas em alta...
-        </div>
-    </div>
-</div>
-
-<script>
-    ...
-
-
-
+</html>
