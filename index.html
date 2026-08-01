@@ -49,14 +49,11 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 .btn-copiar:hover{filter:brightness(1.1);}
 .btn-conectar{background:linear-gradient(135deg,#9945FF,#00D4AA); color:white; border:none; padding:6px 14px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; transition:0.3s;}
 .btn-conectar:hover{filter:brightness(1.15);}
-/* 🚀 BARRA TOP GAINERS — ADICIONADA SEM ALTERAR NADA */
 #barraTopGainers{background:rgba(34,197,94,0.08); border-bottom:1px solid rgba(34,197,94,0.2); padding:8px 15px; overflow:hidden; position:sticky; top:108px; z-index:997;}
 .barra-top-conteudo{display:flex; gap:40px; animation:rolar 35s linear infinite; width:max-content; font-size:13px; font-weight:500;}
 #barraTopGainers:hover .barra-top-conteudo{animation-play-state:paused;}
-.item-alta{display:flex; align-items:center; gap:6px; white-space:nowrap; cursor:pointer; transition:0.2s; padding:4px 8px; border-radius:6px;}
+.item-alta{display:flex; align-items:center; gap:8px; white-space:nowrap; cursor:pointer; transition:0.2s; padding:4px 8px; border-radius:6px;}
 .item-alta:hover{background:rgba(34,197,94,0.1);}
-.item-alta strong{color:var(--primaria);}
-.item-alta span{color:var(--sucesso); font-weight:600;}
 .barra-topo{background:rgba(2,6,23,0.98); padding:15px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:140px; z-index:998;}
 .perfil{display:flex; gap:10px; align-items:center;}
 .perfil img{width:42px; height:42px; border-radius:50%; border:2px solid var(--primaria); object-fit:cover; animation:brilhoLogo 2s infinite alternate;}
@@ -108,26 +105,9 @@ header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
-.top-gainers-conteudo{padding:8px 15px; color:var(--claro); font-size:12px;}
 
-/* 🤖 BOTÃO DA IA */
 #dogemanga-ai{position:fixed; bottom:25px; right:25px; z-index:99999;}
-#btnIA{
-  background:linear-gradient(135deg,#8b5cf6,#6366f1);
-  color:white;
-  border:none;
-  padding:14px 20px;
-  border-radius:50px;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  box-shadow:0 4px 20px rgba(139,92,246,0.4);
-  transition:all 0.3s ease;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  animation:brilhoIA 2s infinite alternate;
-}
+#btnIA{background:linear-gradient(135deg,#8b5cf6,#6366f1); color:white; border:none; padding:14px 20px; border-radius:50px; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 20px rgba(139,92,246,0.4); transition:all 0.3s ease; display:flex; align-items:center; gap:8px; animation:brilhoIA 2s infinite alternate;}
 #btnIA:hover{transform:scale(1.05); box-shadow:0 6px 25px rgba(139,92,246,0.55);}
 
 @media(max-width:768px){
@@ -172,11 +152,8 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </div>
 
-<!-- 🚀 BARRA MOEDAS EM ALTA — ADICIONADA -->
 <div id="barraTopGainers">
-    <div class="barra-top-conteudo" id="conteudoTopGainers">
-        🔥 Carregando moedas em alta...
-    </div>
+    <div class="barra-top-conteudo" id="conteudoTopGainers">🔥 Carregando moedas em alta...</div>
 </div>
 
 <div class="barra-topo">
@@ -305,11 +282,8 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
-<div class="top-gainers-conteudo" id="barraTopGainersOld"></div>
-
 <footer>© 2026 🐕 Doge Manga Evolution | Portal Oficial — Dados em tempo real</footer>
 
-<!-- 🤖 BOTÃO DA IA DOGE MANGA -->
 <div id="dogemanga-ai">
   <button id="btnIA" onclick="abrirIA()">🤖 Assistente Doge Manga</button>
 </div>
@@ -351,21 +325,16 @@ function navegarSecao(id){
     window.scrollTo(0,0);
 }
 
-// 🚀 GRÁFICO CORRIGIDO — ABRE DENTRO DO PORTAL COM FALLBACKS
 function abrirGraficoMoeda(id, nome, simbolo = ""){
     document.getElementById('tituloGrafico').innerHTML =
     `📈 GRÁFICO — ${nome} ${simbolo ? `(${simbolo.toUpperCase()})` : ''} | Doge Manga Evolution`;
     
-    // Lógica inteligente para gráfico correto
     let conteudoGrafico = "";
     if(id === "doge-manga-evolution" || id === CONTRATO){
-        // Gráfico oficial do $DGM via DexScreener
         conteudoGrafico = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
     } else {
-        // Para outras moedas: primeiro tenta DexScreener, depois TradingView
         const simboloUpper = (simbolo || id).toUpperCase();
-        conteudoGrafico = `
-        <iframe src="https://www.tradingview.com/widgetembed/?symbol=BINANCE:${simboloUpper}USDT&interval=60&theme=dark&locale=br&style=1&timezone=America/Sao_Paulo" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        conteudoGrafico = `<iframe src="https://www.tradingview.com/widgetembed/?symbol=BINANCE:${simboloUpper}USDT&interval=60&theme=dark&locale=br&style=1&timezone=America/Sao_Paulo" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
     }
     
     document.getElementById('graficoUniversal').innerHTML = conteudoGrafico;
@@ -407,7 +376,6 @@ async function atualizarDGM(){
 
         document.getElementById('dgm-preco-barra').innerText = formatarBRL(precoUSD * cotacaoUSD_BRL);
         document.getElementById('var-dgm').innerHTML = formatarVariacao(var24h);
-
         document.getElementById('precoAtual').innerText = formatarBRL(precoUSD * cotacaoUSD_BRL);
         document.getElementById('var24h').innerHTML = formatarVariacao(var24h);
         document.getElementById('liquidez').innerText = formatarBRL(liquidezUSD * cotacaoUSD_BRL);
@@ -415,9 +383,7 @@ async function atualizarDGM(){
         document.getElementById('marketcap').innerText = formatarBRL(marketCapUSD * cotacaoUSD_BRL);
         document.getElementById('ultimaDGM').innerText = new Date().toLocaleTimeString('pt-BR');
 
-        // Gráfico padrão do DGM
-        document.getElementById('graficoUniversal').innerHTML = `
-        <iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
 
     }catch(e){
         console.warn("⚠️ DGM:", e.message);
@@ -426,7 +392,6 @@ async function atualizarDGM(){
     }
 }
 
-// 🚀 FUNÇÃO DA BARRA MOEDAS EM ALTA
 async function carregarTopGainers(){
     const container = document.getElementById('conteudoTopGainers');
     if(!container) return;
@@ -444,13 +409,15 @@ async function carregarTopGainers(){
         }
         
         let html = altas.map(m => `
-            <div class="item-alta" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">
-                🚀 <strong>${m.symbol.toUpperCase()}</strong>
-                <span>+${m.price_change_percentage_24h.toFixed(2)}%</span>
-            </div>
+        <div class="item-alta" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">
+            <img src="${m.image}" style="width:22px;height:22px;border-radius:50%;border:1px solid var(--primaria);object-fit:cover;">
+            <strong>${m.symbol.toUpperCase()}</strong>
+            <span>${formatarBRL(m.current_price)}</span>
+            <span style="color:var(--sucesso);font-weight:600;">+${m.price_change_percentage_24h.toFixed(2)}%</span>
+        </div>
         `).join("");
-        html += html; // Duplica para rolagem perfeita
         
+        html += html;
         container.innerHTML = html;
         
     }catch(e){
@@ -506,7 +473,6 @@ function renderizarTabela(){
     `).join('');
 }
 
-
 let timerPesquisa;
 const campoBusca = document.getElementById('campoBusca');
 const resultadoBusca = document.getElementById('resultadoBusca');
@@ -544,7 +510,6 @@ document.getElementById('btnConectarCarteira')?.addEventListener('click', async 
     }
 });
 
-// 🤖 ASSISTENTE IA DOGE MANGA
 function abrirIA(){
   const mensagem = `🐕 Olá! Sou a IA do Doge Manga Evolution! 🤖
 
@@ -572,4 +537,33 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('resultadoBusca')?.classList.remove('visivel'); 
     });
     document.querySelectorAll('[data-secao]').forEach(el => {
-        el.addEventListener('
+        el.addEventListener('click', e => { e.preventDefault(); navegarSecao(el.dataset.secao); });
+    });
+
+    document.getElementById('btnCopiarContrato')?.addEventListener('click', () => copiarTexto(CONTRATO));
+    document.getElementById('btnMais')?.addEventListener('click', () => carregarMercado(pagina + 1));
+    document.getElementById('btnAbrirForm')?.addEventListener('click', () => {
+        const form = document.getElementById('formProj');
+        if(form) form.style.display = 'block';
+    });
+    document.getElementById('btnEnviar')?.addEventListener('click', () => { 
+        alert('✅ Projeto enviado com sucesso!'); 
+        const form = document.getElementById('formProj');
+        if(form) form.style.display = 'none'; 
+    });
+
+    atualizarCotacao().then(() => {
+        atualizarDGM();
+        carregarMercado(1, true);
+        carregarTopGainers();
+        setInterval(() => { 
+            atualizarCotacao(); 
+            atualizarDGM(); 
+            carregarMercado(pagina, false); 
+            carregarTopGainers();
+        }, CONFIG.intervalo);
+    });
+});
+</script>
+</body>
+</html>
