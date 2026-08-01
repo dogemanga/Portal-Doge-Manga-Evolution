@@ -41,7 +41,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 .item-resultado:hover{background:rgba(250,204,21,0.05);}
 .item-resultado img{width:32px; height:32px; border-radius:50%; object-fit:cover; border:1px solid var(--primaria);}
 
-/* 🚀 BARRA MAIORES ALTAS */
 .barra-altas{background:rgba(34,197,94,0.08); padding:10px 20px; border-bottom:1px solid rgba(34,197,94,0.2); position:sticky; top:100px; z-index:996; overflow:hidden;}
 .barra-altas-titulo{color:var(--sucesso); font-weight:700; font-size:13px; margin-bottom:8px; display:flex; align-items:center; gap:6px;}
 .barra-altas-conteudo{display:flex; gap:25px; animation:rolar 35s linear infinite; width:max-content;}
@@ -115,7 +114,6 @@ header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
-/* 🤖 BOTÃO DA IA */
 #dogemanga-ai{position:fixed; bottom:25px; right:25px; z-index:99999;}
 #btnIA{
   background:linear-gradient(135deg,#8b5cf6,#6366f1);
@@ -166,7 +164,6 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </div>
 
-<!-- 🚀 BARRA DE MAIORES ALTAS -->
 <div class="barra-altas">
     <div class="barra-altas-titulo">🔥 MAIORES ALTAS 24H</div>
     <div class="barra-altas-conteudo" id="listaMaioresAltas">
@@ -317,7 +314,6 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <footer>© 2026 🐕 Doge Manga Evolution | Portal Oficial — Dados em tempo real</footer>
 
-<!-- 🤖 BOTÃO DA IA DOGE MANGA -->
 <div id="dogemanga-ai">
   <button id="btnIA" onclick="abrirIA()">🤖 Assistente Doge Manga</button>
 </div>
@@ -409,7 +405,6 @@ async function atualizarDGM(){
 
         document.getElementById('dgm-preco-barra').innerText = formatarBRL(precoUSD * cotacaoUSD_BRL);
         document.getElementById('var-dgm').innerHTML = formatarVariacao(var24h);
-
         document.getElementById('precoAtual').innerText = formatarBRL(precoUSD * cotacaoUSD_BRL);
         document.getElementById('var24h').innerHTML = formatarVariacao(var24h);
         document.getElementById('liquidez').innerText = formatarBRL(liquidezUSD * cotacaoUSD_BRL);
@@ -429,7 +424,6 @@ async function atualizarDGM(){
     }
 }
 
-// 🚀 FUNÇÃO MAIORES ALTAS
 async function carregarMaioresAltas(){
     try{
         const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=price_change_percentage_24h_desc&per_page=${CONFIG.qtdMaioresAltas}&page=1&sparkline=false&price_change_percentage=24h`);
@@ -501,7 +495,6 @@ function renderizarTabela(){
     `).join('');
 }
 
-
 let timerPesquisa;
 const campoBusca = document.getElementById('campoBusca');
 const resultadoBusca = document.getElementById('resultadoBusca');
@@ -539,7 +532,6 @@ document.getElementById('btnConectarCarteira')?.addEventListener('click', async 
     }
 });
 
-// 🤖 ASSISTENTE IA DOGE MANGA
 function abrirIA(){
   const mensagem = `🐕 Olá! Sou a IA do Doge Manga Evolution! 🤖
 
@@ -571,4 +563,14 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('click', e => { e.preventDefault(); navegarSecao(el.dataset.secao); });
     });
 
-    document.getElementById('
+    document.getElementById('btnCopiarContrato')?.addEventListener('click', () => copiarTexto(CONTRATO));
+    document.getElementById('btnAbrirForm')?.addEventListener('click', () => {
+        const form = document.getElementById('formProj');
+        if(form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    });
+    document.getElementById('btnMais')?.addEventListener('click', () => carregarMercado(pagina + 1));
+    document.getElementById('btnEnviar')?.addEventListener('click', () => { 
+        alert('✅ Projeto enviado com sucesso!'); 
+        const form = document.getElementById('formProj');
+        if(form) form.style.display = 'none'; 
+    });
