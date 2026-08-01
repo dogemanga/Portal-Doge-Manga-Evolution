@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Doge Manga Evolution | Portal Oficial Solana</title>
-<meta name="description" content="Mercado cripto em tempo real, dados do $DGM, gráficos, busca completa e ecossistema Solana.">
+<meta name="description" content="Mercado cripto em tempo real, dados do $DGM, gráficos profissionais, busca completa e ecossistema Solana.">
 <meta name="keywords" content="Doge Manga, $DGM, Criptomoedas, Mercado, Preços em BRL, Solana, DexScreener, Afiliados">
 <meta name="robots" content="index, follow">
 <meta name="author" content="Doge Manga Evolution">
@@ -216,7 +216,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <div class="card destaque">
             <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
             <h2>📊 MERCADO GLOBAL — ATÉ 2.500 MOEDAS EM R$</h2>
-            <div class="ultima-atualizacao">⏱️ Status: <span id="ultimaMercado">Carregando...</span></div>
+            <div class="ultima-atualizacao">⏱️ Status: <span id="ultimaMercado">Aguardando carregamento...</span></div>
             <table class="tabela-mercado">
                 <thead><tr><th>#</th><th>Moeda</th><th>Preço R$</th><th>24h %</th><th>Market Cap</th><th>Volume</th><th>Gráfico</th></tr></thead>
                 <tbody id="corpoTabela"><tr><td colspan="7" style="text-align:center;padding:30px;">🔄 Preparando mercado...</td></tr>
@@ -288,10 +288,10 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <h3 style="color:var(--sucesso); margin-bottom:12px; font-size:17px;">💡 COMO O PORTAL DOGE MANGA CRESCERÁ</h3>
                 <p style="font-size:13px; color:var(--claro); margin-bottom:10px;">O ecossistema se sustenta de forma transparente, sem custos extras para você:</p>
                 <ul style="padding-left:20px; font-size:13px; line-height:1.8; color:var(--texto);">
-                    <li>✅ <strong>Comissões de afiliados</strong> — quando você usa os links oficiais das corretoras, a plataforma paga uma pequena taxa ao portal, sem alterar o valor da sua compra</li>
-                    <li>✅ <strong>Anúncios e parcerias</strong> — apenas projetos e serviços verificados e alinhados aos valores do Doge Manga</li>
-                    <li>✅ <strong>Destaque no Launchpad</strong> — taxas de análise e listagem para projetos que querem aparecer em destaque</li>
-                    <li>✅ <strong>Serviços futuros</strong> — ferramentas avançadas, análises exclusivas e funcionalidades premium do ecossistema</li>
+                    <li>✅ <strong>Comissões de afiliados</strong> — quando você usa os links das corretoras, a plataforma paga taxa ao portal, sem alterar o valor da compra</li>
+                    <li>✅ <strong>Anúncios e parcerias</strong> — apenas projetos verificados e alinhados aos valores do Doge Manga</li>
+                    <li>✅ <strong>Destaque no Launchpad</strong> — taxas de análise e listagem para projetos em destaque</li>
+                    <li>✅ <strong>Serviços futuros</strong> — ferramentas avançadas, análises exclusivas e funcionalidades premium</li>
                 </ul>
             </div>
 
@@ -402,17 +402,29 @@ function navegarSecao(id){
 }
 
 function abrirGraficoMoeda(id, nome, simbolo = ""){
-    document.getElementById('tituloGrafico').innerHTML =
-    `📈 GRÁFICO — ${nome} ${simbolo ? `(${simbolo.toUpperCase()})` : ''} | Doge Manga Evolution`;
+    if(id === "doge-manga-evolution" || id === CONTRATO){
+        document.getElementById('tituloGrafico').innerHTML =
+        `📈 GRÁFICO — Doge Manga Evolution ($DGM) | Doge Manga Evolution`;
+    } else {
+        document.getElementById('tituloGrafico').innerHTML =
+        `📈 GRÁFICO — ${nome} ${simbolo ? `(${simbolo.toUpperCase()})` : ''}`;
+    }
     
     const container = document.getElementById('graficoUniversal');
-    container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--claro);">🔄 Carregando gráfico...</div>`;
+    const simboloUpper = (simbolo || id).toUpperCase();
     
+    container.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--claro);">🔄 Carregando gráfico profissional...</div>`;
+
     if(id === "doge-manga-evolution" || id === CONTRATO){
         container.innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
     } else {
-        const simboloUpper = (simbolo || id).toUpperCase();
-        container.innerHTML = `<iframe src="https://www.tradingview.com/widgetembed/?symbol=BINANCE:${simboloUpper}USDT&interval=60&theme=dark&locale=br&style=1&timezone=America/Sao_Paulo" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy" onerror="this.parentElement.innerHTML='<div style=\"padding:20px;text-align:center;color:var(--claro);\">📊 Gráfico indisponível — <a href=\"https://dexscreener.com/search?q=${simboloUpper}\" target=\"_blank\" style=\"color:var(--primaria);\">Ver no DexScreener</a></div>'"></iframe>`;
+        container.innerHTML = `<iframe 
+            src="https://dexscreener.com/search?q=${encodeURIComponent(simboloUpper)}&embed=1&theme=dark&chart=1"
+            width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"
+            onerror="
+                this.parentElement.innerHTML = '<iframe src=\"https://www.tradingview.com/widgetembed/?symbol=BINANCE:' + encodeURIComponent(simboloUpper) + 'USDT&interval=60&theme=dark&locale=br&style=1&timezone=America/Sao_Paulo\" width=\"100%\" height=\"100%\" frameborder=\"0\" allowfullscreen loading=\"lazy\" onerror=\"this.parentElement.innerHTML=\\'<div style=\\\\\"padding:30px;text-align:center;color:var(--claro);\\\\\">📊 Nenhum gráfico encontrado<br><a href=\\\\\"https://dexscreener.com/search?q=' + encodeURIComponent(simboloUpper) + '\\\\\" target=\\\\\"_blank\\\\\" style=\\\\\"color:var(--primaria);font-weight:600;text-decoration:underline;\\\\\">Ver no DexScreener</a></div>\\'\"></iframe>';
+            "
+        ></iframe>`;
     }
     
     navegarSecao('graficoMoeda');
@@ -460,10 +472,6 @@ async function atualizarDGM(){
         document.getElementById('marketcap').innerText = formatarBRL(marketCapUSD * cotacaoUSD_BRL);
         document.getElementById('ultimaDGM').innerText = new Date().toLocaleTimeString('pt-BR');
 
-        if(document.getElementById('graficoUniversal').innerHTML.includes('Carregando gráfico')){
-            document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
-        }
-
     }catch(e){
         console.warn("⚠️ DGM:", e.message);
         document.getElementById('dgm-preco-barra').innerText = "---";
@@ -474,18 +482,8 @@ async function atualizarDGM(){
 async function carregarTopGainers(){
     const container = document.getElementById('conteudoTopGainers');
     if(!container) return;
-    
     try{
         const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=price_change_percentage_24h_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h`, { signal: AbortSignal.timeout(CONFIG.tempoTimeout) });
         if(!res.ok) throw new Error("Erro na API");
         const dados = await res.json();
-        
         const altas = dados.filter(m => m.price_change_percentage_24h > 0 && m.price_change_percentage_24h != null).slice(0,12);
-        
-        if(altas.length === 0){
-            container.innerHTML = `<span style="color:var(--claro);">Nenhuma alta no momento</span>`;
-            return;
-        }
-        
-        let html = altas.map(m => `
-        <div class="item-alta" onclick="abrir
