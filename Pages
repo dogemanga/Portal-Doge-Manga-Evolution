@@ -564,4 +564,4 @@ async function abrirDetalheMoeda(id){
 }
 
 function voltarParaResultados(){
-    document.getElementById('detalhesMoedaGlobal').classList.remove('vis
+    const detalhes = document.getElementById('detalhesMoeda
