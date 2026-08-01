@@ -766,3 +766,100 @@ display:trueonclick="abrirGraficoGlobal('${moeda.id}')"onclick="abrirDetalhesMoe
 
 
 }onclick="abrirDetalhesMoeda('${moeda.id}')"
+<button class="btn btn-primario" onclick="mostrarFavoritos()">
+⭐ Minhas Moedas Favoritas
+</button>
+
+<div id="listaFavoritos"></div>let favoritos = JSON.parse(localStorage.getItem("favoritosDGM")) || [];
+
+
+function adicionarFavorito(id,nome){
+
+if(!favoritos.includes(id)){
+
+favoritos.push(id);
+
+localStorage.setItem(
+"favoritosDGM",
+JSON.stringify(favoritos)
+);
+
+alert("⭐ Moeda adicionada aos favoritos!");
+
+}
+
+}
+
+
+
+async function mostrarFavoritos(){
+
+const area=document.getElementById("listaFavoritos");
+
+area.innerHTML="📊 Carregando favoritos...";
+
+
+if(favoritos.length===0){
+
+area.innerHTML="Nenhuma moeda favorita salva.";
+
+return;
+
+}
+
+
+area.innerHTML="";
+
+
+for(const id of favoritos){
+
+
+const resposta=await fetch(
+`https://api.coingecko.com/api/v3/coins/${id}`
+);
+
+
+const moeda=await resposta.json();
+
+
+area.innerHTML+=`
+
+<div class="dado">
+
+<strong>
+⭐ ${moeda.name}
+</strong>
+
+<span>
+
+Preço:
+$${moeda.market_data.current_price.usd}
+
+<br>
+
+Market Cap:
+$${moeda.market_data.market_cap.usd.toLocaleString()}
+
+</span>
+
+</div><strong>
+#${index+1} ${moeda.name}
+</strong><strong>
+#${index+1} ${moeda.name}
+</strong>
+
+<br>
+
+<button 
+class="btn btn-secundario"
+onclick="event.stopPropagation(); adicionarFavorito('${moeda.id}','${moeda.name}')">
+
+⭐ Favoritar
+
+</button>
+
+`;
+
+}
+
+}
