@@ -512,3 +512,32 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 </body>
 </html>
+<a href="https://dexscreener.com/search?q=${m.symbol}">
+📊 Gráfico
+</a>abrirDetalhesMoeda('${m.id}') <section id="detalhesMoeda" class="secao">
+<div class="container">
+
+<div class="card destaque">
+
+<a class="btn-voltar" onclick="voltarPesquisa()">
+↩️ Voltar
+</a>
+
+<h2 id="nomeMoedaDetalhe">
+📊 Mercado
+</h2>
+
+<div id="dadosMoedaDetalhe"></div>
+
+<div class="grafico-container">
+<iframe id="graficoMoeda"
+width="100%"
+height="100%"
+frameborder="0">
+</iframe>
+</div>
+
+</div>
+
+</div>
+</section>
