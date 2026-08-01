@@ -425,14 +425,24 @@ function renderizarTabela(){
             <td>${formatarBRL(m.total_volume / cotacaoUSD_BRL)}</td>
             <td><button class="btn btn-pequeno btn-primario" onclick="abrirGraficoMoeda('${m.id}','${m.name}')">📊</button></td>
         </tr>
-    `).join('');
-}
+    `).join('');function abrirGraficoMoeda(id, nome, simbolo){
 
-function abrirGraficoMoeda(id, nome){
-    document.getElementById('tituloGrafico').innerText = `📈 GRÁFICO — ${nome}`;
-    document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://www.coingecko.com/pt-BR/coins/${id}/embed-chart?theme=dark" width="100%" height="100%" frameborder="0"></iframe>`;
+    document.getElementById('tituloGrafico').innerHTML =
+    `📈 GRÁFICO — ${nome} (${simbolo.toUpperCase()}) | Doge Manga Evolution`;
+
+    document.getElementById('graficoUniversal').innerHTML = `
+    <iframe
+    src="https://www.tradingview.com/widgetembed/?symbol=${simbolo.toUpperCase()}USD&theme=dark"
+    width="100%"
+    height="100%"
+    frameborder="0"
+    allowfullscreen>
+    </iframe>`;
+
     navegarSecao('graficoMoeda');
 }
+}
+
 
 let timerPesquisa;
 document.getElementById('campoBusca').addEventListener('input', e => {
