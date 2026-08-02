@@ -16,7 +16,7 @@
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif; scroll-behavior:smooth;}
 :root{--primaria:#facc15; --fundo:#050816; --secundaria:#111827; --sucesso:#22c55e; --queda:#ef4444; --texto:#e2e8f0; --claro:#94a3b8; --ia-cor:#8b5cf6; --noticias-cor:#3b82f6; --ranking-cor:#ec4899; --alerta-cor:#f97316;}
-body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22,0.65), rgba(2,6,23,0.7)), url("IMG-20260727-WA0036(7).jpg"); background-size:cover; background-position:center top; background-attachment:fixed; min-height:100vh; padding-bottom:100px;}
+body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22,0.65), rgba(2,6,23,0.7)), url("IMG-20260727-WA0036(7).jpg"); background-size:cover; background-position:center top; background-attachment:fixed; min-height:100vh; padding-bottom:100px; overflow-x:hidden;}
 @keyframes brilhoLogo{0%{box-shadow:0 0 15px rgba(250,204,21,0.4); transform:scale(1);}100%{box-shadow:0 0 35px rgba(250,204,21,0.8); transform:scale(1.05);}}
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes entrar{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
@@ -129,43 +129,45 @@ header{text-align:center; padding:50px 20px;}
 header h1{font-size:44px; color:var(--primaria); margin-bottom:15px;}
 header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px;}
 .botoes-acao{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
-.grafico-container{width:100%; height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816;}
+.grafico-container{width:100%; min-height:450px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816; position:relative;}
+.grafico-container iframe{width:100%; height:100%; border:none;}
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
 .notificacao-alerta{position:fixed; top:20px; right:20px; background:rgba(249,115,22,0.95); color:white; padding:15px 20px; border-radius:10px; border:1px solid var(--alerta-cor); box-shadow:0 4px 20px rgba(249,115,22,0.3); z-index:99999; display:none; max-width:90%; animation:entrar 0.3s ease;}
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
-/* ESTILOS DO ASSISTENTE IA */
+/* ASSISTENTE IA */
 #dogemanga-ai{position:fixed; bottom:25px; right:25px; z-index:99999;}
 #btnIA{background:linear-gradient(135deg,#8b5cf6,#6366f1); color:white; border:none; padding:14px 20px; border-radius:50px; font-size:15px; font-weight:700; cursor:pointer; box-shadow:0 4px 20px rgba(139,92,246,0.4); transition:all 0.3s ease; display:flex; align-items:center; gap:8px; animation:brilhoIA 2s infinite alternate;}
 #btnIA:hover{transform:scale(1.05); box-shadow:0 6px 25px rgba(139,92,246,0.55);}
 .janela-chat{position:absolute; bottom:70px; right:0; width:360px; max-width:95vw; height:480px; max-height:80vh; background:rgba(17,24,39,0.98); border-radius:16px; border:1px solid var(--ia-cor); box-shadow:0 8px 32px rgba(139,92,246,0.2); display:none; flex-direction:column; overflow:hidden; animation:entrar 0.25s ease;}
 .janela-chat.aberta{display:flex;}
-.cabecalho-chat{background:linear-gradient(135deg,#8b5cf6,#6366f1); padding:12px 15px; display:flex; align-items:center; justify-content:space-between;}
+.cabecalho-chat{background:linear-gradient(135deg,#8b5cf6,#6366f1); padding:12px 15px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;}
 .cabecalho-chat h4{color:white; font-size:15px; font-weight:700;}
 .fechar-chat{background:none; border:none; color:white; font-size:20px; cursor:pointer; padding:0 5px;}
 .mensagens-chat{flex:1; padding:15px; overflow-y:auto; display:flex; flex-direction:column; gap:12px;}
-.mensagem{max-width:85%; padding:10px 14px; border-radius:12px; font-size:13px; line-height:1.5;}
+.mensagem{max-width:85%; padding:10px 14px; border-radius:12px; font-size:13px; line-height:1.5; word-wrap:break-word;}
 .mensagem.usuario{background:rgba(139,92,246,0.2); align-self:flex-end; border-bottom-right-radius:4px;}
 .mensagem.assistente{background:rgba(255,255,255,0.08); align-self:flex-start; border-bottom-left-radius:4px; border-left:3px solid var(--ia-cor);}
-.entrada-chat{display:flex; gap:8px; padding:12px; border-top:1px solid rgba(139,92,246,0.2);}
+.entrada-chat{display:flex; gap:8px; padding:12px; border-top:1px solid rgba(139,92,246,0.2); flex-shrink:0;}
 .entrada-chat input{flex:1; padding:10px 12px; border-radius:8px; border:1px solid rgba(139,92,246,0.3); background:rgba(5,8,22,0.9); color:var(--texto); font-size:13px; outline:none;}
 .entrada-chat input:focus{border-color:var(--ia-cor);}
 .entrada-chat button{background:var(--ia-cor); color:white; border:none; padding:10px 16px; border-radius:8px; font-weight:600; cursor:pointer; transition:0.2s;}
 .entrada-chat button:hover{filter:brightness(1.1);}
-.perguntas-rapidas{display:flex; flex-wrap:wrap; gap:6px; padding:0 12px 10px;}
+.perguntas-rapidas{display:flex; flex-wrap:wrap; gap:6px; padding:0 12px 10px; flex-shrink:0;}
 .pergunta-rapida{background:rgba(139,92,246,0.1); color:var(--ia-cor); border:1px solid rgba(139,92,246,0.2); border-radius:12px; padding:4px 8px; font-size:11px; cursor:pointer; transition:0.2s;}
 .pergunta-rapida:hover{background:rgba(139,92,246,0.2);}
 
 @media(max-width:768px){
   header h1{font-size:32px;}
   .tabela-mercado{font-size:11px;}
-  .grafico-container{height:400px;}
+  .grafico-container{min-height:380px; height:auto;}
   .grid-dados{grid-template-columns:repeat(2,1fr);}
   #btnIA{padding:12px 16px; font-size:14px;}
   .janela-chat{width:92vw; right:4px; bottom:65px; height:80vh;}
   .barra-topo{top:140px;}
   .abas{top:192px;}
+  .menu-navegacao{width:calc(100vw - 30px); right:15px;}
 }
 </style>
 </head>
@@ -176,7 +178,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral">
-        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra">---</span> <span id="var-dgm"></span></div>
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" loading="lazy" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra">---</span> <span id="var-dgm"></span></div>
         <div class="item-moeda">BTC: <span id="preco-btc">---</span> <span id="var-btc"></span></div>
         <div class="item-moeda">ETH: <span id="preco-eth">---</span> <span id="var-eth"></span></div>
         <div class="item-moeda">SOL: <span id="preco-sol">---</span> <span id="var-sol"></span></div>
@@ -192,7 +194,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="barra-dm">
     <div class="dm-info">
-        <img src="IMG-20260727-WA0036(7).jpg" alt="🐕 Doge Manga">
+        <img src="IMG-20260727-WA0036(7).jpg" loading="lazy" alt="🐕 Doge Manga">
         <span class="dm-nome">🐕 DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO</span> | REDE SOLANA</span>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -207,15 +209,15 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 </div>
 
 <div class="barra-topo">
-    <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg" alt="Portal"><span>🐕 DOGE MANGA EVOLUTION</span></div>
+    <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg" loading="lazy" alt="Portal"><span>🐕 DOGE MANGA EVOLUTION</span></div>
     <div style="position:relative;">
         <button class="menu-botao" id="btnMenu">☰</button>
         <nav class="menu-navegacao" id="menuNavegacao">
             <div class="titulo-menu">🔗 PLATAFORMAS OFICIAIS</div>
-            <a href="https://dogemangaofficial.xyz" target="_blank" class="menu-item">🌐 Site Oficial</a>
-            <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" class="menu-item">👁️ Birdeye</a>
-            <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔍 DexScreener</a>
-            <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="menu-item">🔗 Solscan</a>
+            <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener" class="menu-item">🌐 Site Oficial</a>
+            <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener" class="menu-item">👁️ Birdeye</a>
+            <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="menu-item">🔍 DexScreener</a>
+            <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="menu-item">🔗 Solscan</a>
             <div class="menu-divisao"></div>
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
             <a href="#mercado" class="menu-item" data-secao="mercado">📊 Mercado</a>
@@ -243,7 +245,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 <section id="inicio" class="secao ativa">
     <div class="container">
         <header>
-            <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" alt="🐕 Doge Manga Evolution">
+            <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" loading="lazy" alt="🐕 Doge Manga Evolution">
             <h1>🐕 DOGE MANGA EVOLUTION</h1>
             <p>Ecossistema Web3 completo, notícias, alertas e mercado cripto em tempo real na Rede Solana.</p>
             <div class="card destaque">
@@ -258,9 +260,9 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                     <div class="dado"><strong>420.000.000.000</strong><span>Supply Total</span></div>
                 </div>
                 <div class="botoes-acao">
-                    <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">🔄 Comprar $DGM</a>
-                    <a href="#graficoMoeda" class="btn btn-secundario" onclick="navegarSecao('graficoMoeda')">📊 Gráfico Completo</a>
-                    <a href="#alertas" class="btn btn-alerta-form" onclick="navegarSecao('alertas')">🔔 Criar Alerta</a>
+                    <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-primario">🔄 Comprar $DGM</a>
+                    <a href="#graficoMoeda" class="btn btn-secundario" onclick="navegarSecao('graficoMoeda'); return false;">📊 Gráfico Completo</a>
+                    <a href="#alertas" class="btn btn-alerta-form" onclick="navegarSecao('alertas'); return false;">🔔 Criar Alerta</a>
                 </div>
             </div>
         </header>
@@ -340,11 +342,13 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <div class="card destaque">
             <a href="#" class="btn-voltar" onclick="navegarSecao('mercado'); return false;">↩️ Voltar</a>
             <h2 id="tituloGrafico">📈 GRÁFICO — Doge Manga Evolution ($DGM)</h2>
-            <div id="graficoUniversal" class="grafico-container"></div>
+            <div id="graficoUniversal" class="grafico-container">
+                <iframe id="iframeGrafico" src="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?embed=1&theme=dark" allowfullscreen loading="lazy"></iframe>
+            </div>
             <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
-                <a href="https://www.binance.com/pt-BR" target="_blank" class="btn btn-pequeno btn-secundario">💱 Binance</a>
-                <a href="https://www.coingecko.com/pt-br" target="_blank" class="btn btn-pequeno btn-secundario">📊 CoinGecko</a>
-                <a href="https://coinmarketcap.com/pt-br/" target="_blank" class="btn btn-pequeno btn-secundario">📈 CoinMarketCap</a>
+                <a href="https://www.binance.com/pt-BR" target="_blank" rel="noopener" class="btn btn-pequeno btn-secundario">💱 Binance</a>
+                <a href="https://www.coingecko.com/pt-br" target="_blank" rel="noopener" class="btn btn-pequeno btn-secundario">📊 CoinGecko</a>
+                <a href="https://coinmarketcap.com/pt-br/" target="_blank" rel="noopener" class="btn btn-pequeno btn-secundario">📈 CoinMarketCap</a>
             </div>
         </div>
     </div>
@@ -360,55 +364,4 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <h3 style="color:var(--primaria); margin-bottom:15px;">CADASTRAR PROJETO</h3>
                 <div style="display:grid; gap:10px;">
                     <input type="text" placeholder="Nome do Projeto" style="padding:8px; border-radius:6px; border:1px solid var(--primaria); background:rgba(17,24,39,0.9); color:white;">
-                    <input type="text" placeholder="Símbolo" style="padding:8px; border-radius:6px; border:1px solid var(--primaria); background:rgba(17,24,39,0.9); color:white;">
-                    <select style="padding:8px; border-radius:6px; border:1px solid var(--primaria); background:rgba(17,24,39,0.9); color:white;">
-                        <option>Rede</option><option>Solana</option><option>Ethereum</option>
-                    </select>
-                    <input type="text" placeholder="Contrato Oficial" style="padding:8px; border-radius:6px; border:1px solid var(--primaria); background:rgba(17,24,39,0.9); color:white;">
-                    <button class="btn btn-primario" id="btnEnviar">✅ Enviar para Análise</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="equipe" class="secao">
-    <div class="container">
-        <div class="card destaque">
-            <a href="#" class="btn-voltar" onclick="navegarSecao('inicio'); return false;">↩️ Voltar</a>
-            <h2>👥 EQUIPE</h2>
-            <p>Desenvolvendo um ecossistema seguro e inovador na Rede Solana.</p>
-        </div>
-    </div>
-</section>
-
-<section id="seguranca" class="secao">
-    <div class="container">
-        <div class="card destaque">
-            <a href="#" class="btn-voltar" onclick="navegarSecao('inicio'); return false;">↩️ Voltar</a>
-            <h2>🛡️ SEGURANÇA E AVISOS</h2>
-            <div style="background:rgba(239,68,68,0.1); border:1px solid var(--queda); border-radius:8px; padding:15px; margin-bottom:20px;">
-                <h4 style="color:var(--queda);">⚠️ NUNCA COMPARTILHE FRASE OU CHAVE PRIVADA!</h4>
-                <p style="margin-top:8px; font-size:13px;">A equipe Doge Manga nunca pede dados pessoais ou acesso à carteira.</p>
-            </div>
-            <p><strong>Contrato Oficial $DGM:</strong><br><code style="color:var(--primaria); font-size:14px; word-break:break-all;">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code></p>
-        </div>
-    </div>
-</section>
-
-<footer>© 2026 🐕 Doge Manga Evolution | Portal Oficial — Dados, notícias e alertas em tempo real</footer>
-
-<div id="dogemanga-ai">
-  <button id="btnIA" onclick="alternarChat()">🤖 Assistente</button>
-  <div class="janela-chat" id="janelaChat">
-    <div class="cabecalho-chat">
-      <h4>🤖 Assistente Doge Manga</h4>
-      <button class="fechar-chat" onclick="alternarChat()">×</button>
-    </div>
-    <div class="perguntas-rapidas">
-      <div class="pergunta-rapida" onclick="enviarPergunta('O que é o $DGM?')">Sobre o $DGM</div>
-      <div class="pergunta-rapida" onclick="enviarPergunta('Como comprar o $DGM?')">Como comprar</div>
-      <div class="pergunta-rapida" onclick="enviarPergunta('Qual o contrato oficial?')">Contrato</div>
-      <div class="pergunta-rapida" onclick="enviarPergunta('Como usar a Phantom?')">Carteira Phantom</div>
-    </div>
-    <div
+                    <input type="text" placeholder="Símbolo" style="padding:
