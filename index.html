@@ -235,7 +235,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <thead><tr><th>#</th><th>Moeda</th><th>Preço R$</th><th>24h %</th><th>Market Cap</th><th>Volume</th><th>Gráfico</th></tr></thead>
                 <tbody id="corpoTabela"><tr><td colspan="7" style="text-align:center;padding:30px;">Carregando dados...</td></tr>
             </table>
-            <button id="btnMais" class="btn btn-secundario btn-carregar-mais">📥 Carregar Mais</button>
+            <button id="btnMais" class="btn btn-secundario btn-carregar-mais" style="display:none;">📥 Carregar Mais</button>
         </div>
     </div>
 </section>
@@ -444,7 +444,9 @@ async function atualizarDGM(){
         document.getElementById('marketcap').innerText = formatarBRL(marketCapUSD * cotacaoUSD_BRL);
         document.getElementById('ultimaDGM').innerText = new Date().toLocaleTimeString('pt-BR');
 
-        document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        if(document.getElementById('graficoUniversal').innerHTML.trim() === ""){
+            document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
+        }
 
     }catch(e){
         console.warn("⚠️ DGM:", e.message);
@@ -454,4 +456,63 @@ async function atualizarDGM(){
 }
 
 async function carregarTopGainers(){
-    const container =
+    const container = document.getElementById("conteudoTopGainers");
+    if(!container) return;
+
+    try {
+        const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
+        if(!res.ok) throw new Error("Erro API");
+        const dados = await res.json();
+
+        const altas = dados
+            .filter(m => m.price_change_percentage_24h > 0)
+            .sort((a,b) => b.price_change_percentage_24h - a.price_change_percentage_24h)
+            .slice(0, 15);
+
+        let html = altas.map(m => `
+            <div class="item-alta" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">
+                ${imgHtml(m)}
+                <strong>${m.symbol.toUpperCase()}</strong>
+                <span>${formatarBRL(m.current_price)}</span>
+                ${formatarVariacao(m.price_change_percentage_24h)}
+            </div>
+        `).join("");
+
+        container.innerHTML = `${html}${html}`;
+
+    } catch(e) {
+        container.innerHTML = `<span style="color:var(--ruim)">⚠️ Não foi possível carregar altas</span>`;
+        console.error("Erro Top Gainers:", e);
+    }
+}
+
+async function carregarMercadoCompleto(){
+    if(cacheMercado.dados.length > 0 && Date.now() - cacheMercado.ultimaAtualizacao < 60000) {
+        renderizarTabelaMercado();
+        return;
+    }
+
+    try {
+        let todasMoedas = [];
+        for(let p = 1; p <= CONFIG.maxPaginas; p++){
+            const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=${CONFIG.limitePagina}&page=${p}&sparkline=false`);
+            if(!res.ok) continue;
+            const dados = await res.json();
+            if(Array.isArray(dados)) todasMoedas.push(...dados);
+        }
+
+        cacheMercado.dados = todasMoedas.filter((m,i,a) => a.findIndex(x=>x.id===m.id)===i);
+        cacheMercado.ultimaAtualizacao = Date.now();
+        pagina = 1;
+        renderizarTabelaMercado();
+        document.getElementById("ultimaMercado").innerText = new Date().toLocaleTimeString('pt-BR');
+
+    } catch(e) {
+        console.error("Erro Mercado:", e);
+        document.getElementById("corpoTabela").innerHTML = `<tr><td colspan="7" style="color:var(--ruim)">⚠️ Erro ao carregar mercado</td></tr>`;
+    }
+}
+
+function renderizarTabelaMercado(){
+    const corpo = document.getElementById("corpoTabela");
+    if(!corpo || cacheMercado.dados.length === 0) return;
