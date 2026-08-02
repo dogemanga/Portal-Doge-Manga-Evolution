@@ -28,7 +28,7 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 .barra-geral{background:rgba(2,6,23,0.96); padding:9px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:997;}
 .barra-conteudo-geral{display:flex; gap:50px; animation:rolar 45s linear infinite; width:max-content; font-size:13px; font-weight:500;}
 .item-moeda{display:flex; align-items:center; gap:6px; white-space:nowrap;}
-.item-moeda.destaque{font-weight:700; color:var(--primaria);}
+.item-moeda destaque{font-weight:700; color:var(--primaria);}
 .var-positiva{color:var(--sucesso); font-weight:600;}
 .var-negativa{color:var(--queda); font-weight:600;}
 .barra-busca{background:rgba(2,6,23,0.98); padding:12px 20px; border-bottom:1px solid rgba(250,204,21,0.15); position:sticky; top:42px; z-index:997;}
@@ -149,6 +149,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div style="display:flex; gap:8px;">
         <button class="btn-copiar" id="btnCopiarContrato">📋 CONTRATO</button>
         <button class="btn-conectar" id="btnConectarCarteira">👻 Conectar Phantom</button>
+        <button class="btn btn-primario btn-pequeno" onclick="navegarSecao('comprarCripto')">💰 COMPRAR CRIPTO</button>
     </div>
 </div>
 
@@ -170,6 +171,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
             <a href="#mercado" class="menu-item" data-secao="mercado">📊 Mercado</a>
             <a href="#graficoMoeda" class="menu-item" data-secao="graficoMoeda">📈 Gráfico</a>
+            <a href="#comprarCripto" class="menu-item" data-secao="comprarCripto">💰 Comprar Cripto</a>
             <a href="#launchpad" class="menu-item" data-secao="launchpad">🚀 Launchpad</a>
             <a href="#equipe" class="menu-item" data-secao="equipe">👥 Equipe</a>
             <a href="#seguranca" class="menu-item" data-secao="seguranca">🛡️ Segurança</a>
@@ -181,6 +183,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     <div class="aba" data-secao="inicio">🏠 Início</div>
     <div class="aba" data-secao="mercado">📊 Mercado</div>
     <div class="aba" data-secao="graficoMoeda">📈 Gráfico</div>
+    <div class="aba" data-secao="comprarCripto">💰 Comprar</div>
     <div class="aba" data-secao="launchpad">🚀 Launchpad</div>
     <div class="aba" data-secao="equipe">👥 Equipe</div>
     <div class="aba" data-secao="seguranca">🛡️ Segurança</div>
@@ -232,6 +235,46 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
             <a href="#" class="btn-voltar" data-secao="mercado">↩️ Voltar</a>
             <h2 id="tituloGrafico">📈 GRÁFICO — Doge Manga Evolution ($DGM)</h2>
             <div id="graficoUniversal" class="grafico-container"></div>
+        </div>
+    </div>
+</section>
+
+<section id="comprarCripto" class="secao">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" data-secao="inicio">↩️ Voltar</a>
+            <h2>💰 COMPRE QUALQUER CRIPTOMOEDA AQUI</h2>
+            <p style="margin-bottom:20px;color:var(--claro); font-size:15px;">
+                Compre Bitcoin, $DGM e milhares de criptos com Pix, TED ou cartão. <strong>Você ajuda o projeto e eu ganho uma pequena comissão — sem custo extra para você!</strong>
+            </p>
+            <div class="grid-dados">
+                <div class="dado">
+                    <strong>🇧🇷 MERCADO BITCOIN</strong>
+                    <span>Líder nacional — Pix rápido e seguro</span>
+                    <a href="https://www.mercadobitcoin.com.br/?affiliate=SEU_CODIGO_AQUI" target="_blank" class="btn btn-primario btn-pequeno" style="margin-top:10px;">COMPRAR AQUI</a>
+                </div>
+                <div class="dado">
+                    <strong>🔶 BINANCE</strong>
+                    <span>Maior do mundo — +350 moedas</span>
+                    <a href="https://www.binance.com/pt-BR/register?ref=SEU_CODIGO_AQUI" target="_blank" class="btn btn-primario btn-pequeno" style="margin-top:10px;">CRIAR CONTA & COMPRAR</a>
+                </div>
+                <div class="dado">
+                    <strong>🟢 KUCOIN</strong>
+                    <span>Taxas baixas — muitas memecoins</span>
+                    <a href="https://www.kucoin.com/ucenter/signup?rcode=SEU_CODIGO_AQUI" target="_blank" class="btn btn-primario btn-pequeno" style="margin-top:10px;">COMPRAR AQUI</a>
+                </div>
+                <div class="dado">
+                    <strong>🔄 COMPRAR $DGM DIRETO</strong>
+                    <span>Troque SOL por $DGM instantaneamente</span>
+                    <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario btn-pequeno" style="margin-top:10px;">COMPRAR $DGM</a>
+                </div>
+            </div>
+            <div style="background:rgba(250,204,21,0.08); border:1px solid rgba(250,204,21,0.2); border-radius:8px; padding:15px; margin-top:20px;">
+                <h4 style="color:var(--primaria); margin-bottom:8px;">ℹ️ COMO FUNCIONA:</h4>
+                <p style="font-size:13px; color:var(--claro);">
+                    Ao clicar nos botões acima, você acessa a corretora através do nosso link exclusivo. Quando o usuário comprar ou negociar, a corretora paga uma comissão ao Doge Manga Evolution — <strong>o comprador não paga nada a mais por isso!</strong>
+                </p>
+            </div>
         </div>
     </div>
 </section>
@@ -469,101 +512,4 @@ function renderizarTabela(){
             <td>${formatarBRL(m.market_cap)}</td>
             <td>${formatarBRL(m.total_volume)}</td>
             <td><button class="btn btn-pequeno btn-primario" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">📊</button></td>
-        </tr>
-    `).join('');
-}
-
-let timerPesquisa;
-const campoBusca = document.getElementById('campoBusca');
-const resultadoBusca = document.getElementById('resultadoBusca');
-if(campoBusca && resultadoBusca){
-campoBusca.addEventListener('input', e => {
-    clearTimeout(timerPesquisa);
-    timerPesquisa = setTimeout(async () => {
-        const termo = e.target.value.trim();
-        if(!termo){ resultadoBusca.classList.remove('visivel'); return; }
-        try{
-            const res = await fetch(`${CONFIG.coinGecko}/search?query=${encodeURIComponent(termo)}`);
-            const dados = await res.json();
-            resultadoBusca.innerHTML = dados.coins?.slice(0,8).map(m => `
-                <div class="item-resultado" onclick="abrirGraficoMoeda('${m.id}','${m.name}','${m.symbol}')">
-                    <img src="${m.large}" loading="lazy">
-                    <div><strong>${m.name}</strong><br><small>${m.symbol.toUpperCase()}</small></div>
-                    <button class="btn btn-pequeno">📊</button>
-                </div>
-            `).join('') || `<p style="padding:15px;">Nenhum resultado encontrado</p>`;
-            resultadoBusca.classList.add('visivel');
-        }catch{}
-    }, 350);
-});
-}
-
-document.getElementById('btnConectarCarteira')?.addEventListener('click', async () => {
-    if(window.solana?.isPhantom){
-        try{
-            const resp = await window.solana.connect();
-            alert(`✅ CARTEIRA CONECTADA!\nEndereço: ${resp.publicKey.toString().slice(0,10)}...`);
-        }catch{ alert('❌ Conexão cancelada.'); }
-    }else{
-        alert('⚠️ Instale a carteira Phantom em phantom.app');
-        window.open('https://phantom.app', '_blank');
-    }
-});
-
-function abrirIA(){
-  const mensagem = `🐕 Olá! Sou a IA do Doge Manga Evolution! 🤖
-
-Posso ajudar você com:
-• 📈 Dados do token $DGM
-• 💱 Como comprar $DGM
-• 📊 Mercado e gráficos
-• 🔗 Informações do contrato
-• 🦊 Usar carteira Phantom
-• ❓ Dúvidas sobre o projeto
-
-Em breve: respostas inteligentes em tempo real!`;
-  alert(mensagem);
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        const splash = document.getElementById('splash');
-        if(splash) splash.classList.add('oculto');
-    }, 1500);
-
-    document.getElementById('btnMenu')?.addEventListener('click', e => { e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto'); });
-    document.addEventListener('click', () => { 
-        document.getElementById('menuNavegacao')?.classList.remove('aberto'); 
-        document.getElementById('resultadoBusca')?.classList.remove('visivel'); 
-    });
-    document.querySelectorAll('[data-secao]').forEach(el => {
-        el.addEventListener('click', e => { e.preventDefault(); navegarSecao(el.dataset.secao); });
-    });
-
-    document.getElementById('btnCopiarContrato')?.addEventListener('click', () => copiarTexto(CONTRATO));
-    document.getElementById('btnMais')?.addEventListener('click', () => carregarMercado(pagina + 1));
-    document.getElementById('btnAbrirForm')?.addEventListener('click', () => {
-        const form = document.getElementById('formProj');
-        if(form) form.style.display = 'block';
-    });
-    document.getElementById('btnEnviar')?.addEventListener('click', () => { 
-        alert('✅ Projeto enviado com sucesso!'); 
-        const form = document.getElementById('formProj');
-        if(form) form.style.display = 'none'; 
-    });
-
-    atualizarCotacao().then(() => {
-        atualizarDGM();
-        carregarMercado(1, true);
-        carregarTopGainers();
-        setInterval(() => { 
-            atualizarCotacao(); 
-            atualizarDGM(); 
-            carregarMercado(pagina, false); 
-            carregarTopGainers();
-        }, CONFIG.intervalo);
-    });
-});
-</script>
-</body>
-</html>
+        </tr
