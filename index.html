@@ -2078,4 +2078,330 @@ atualizarContadorDGM,
 
 
 
+</script><!-- ===================================== -->
+<!-- DOGE MANGA INTELLIGENCE CENTER -->
+<!-- ===================================== -->
+
+<style>
+
+.intel-container{
+max-width:1400px;
+margin:30px auto;
+padding:20px;
+}
+
+.intel-card{
+background:rgba(17,24,39,.96);
+border:1px solid rgba(250,204,21,.25);
+border-radius:18px;
+padding:25px;
+margin-bottom:25px;
+}
+
+.intel-title{
+color:#facc15;
+font-size:24px;
+margin-bottom:15px;
+border-bottom:1px solid rgba(250,204,21,.25);
+padding-bottom:10px;
+}
+
+.alert-box{
+background:rgba(139,92,246,.12);
+border-left:4px solid #8b5cf6;
+padding:15px;
+border-radius:10px;
+margin:10px 0;
+}
+
+.status-online{
+color:#22c55e;
+font-weight:bold;
+}
+
+.rank-box{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.rank-item{
+background:#050816;
+padding:18px;
+border-radius:12px;
+border:1px solid rgba(250,204,21,.15);
+}
+
+.rank-item strong{
+display:block;
+font-size:22px;
+color:#facc15;
+}
+
+.fake-news{
+padding:12px;
+background:rgba(34,197,94,.08);
+border-radius:8px;
+margin:8px 0;
+}
+
+.dm-ai-box{
+background:#050816;
+border-radius:15px;
+padding:20px;
+border:1px solid rgba(139,92,246,.4);
+}
+
+.dm-ai-input{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:#111827;
+border:1px solid #8b5cf6;
+color:white;
+border-radius:8px;
+}
+
+.dm-ai-btn{
+margin-top:10px;
+padding:10px 20px;
+background:#8b5cf6;
+color:white;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+}
+
+#respostaIA{
+margin-top:15px;
+padding:15px;
+background:#111827;
+border-radius:10px;
+display:none;
+}
+
+</style>
+
+
+
+<div class="intel-container">
+
+
+<div class="intel-card">
+
+<div class="intel-title">
+🤖 DOGE MANGA INTELLIGENCE CENTER
+</div>
+
+
+<div class="alert-box">
+
+<span class="status-online">
+● SISTEMA ONLINE
+</span>
+
+<br>
+
+Monitoramento do ecossistema Doge Manga ativo.
+
+</div>
+
+
+<div class="rank-box">
+
+
+<div class="rank-item">
+<strong>🔥</strong>
+Mercado em análise
+</div>
+
+
+<div class="rank-item">
+<strong>🐋</strong>
+Baleias monitoradas
+</div>
+
+
+<div class="rank-item">
+<strong>⚡</strong>
+Solana conectada
+</div>
+
+
+<div class="rank-item">
+<strong>🌎</strong>
+Comunidade global
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="intel-card">
+
+<div class="intel-title">
+📢 CENTRAL DE ANÚNCIOS
+</div>
+
+
+<div class="fake-news">
+🚀 Portal Doge Manga Evolution atualizado.
+</div>
+
+
+<div class="fake-news">
+🐕 Ecossistema $DGM preparado para novas integrações.
+</div>
+
+
+<div class="fake-news">
+🌐 Novas ferramentas Web3 em desenvolvimento.
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="intel-card">
+
+<div class="intel-title">
+🏆 RANKING DO MERCADO
+</div>
+
+
+<div class="rank-box">
+
+
+<div class="rank-item">
+<strong>BTC</strong>
+Maior capitalização
+</div>
+
+
+<div class="rank-item">
+<strong>SOL</strong>
+Rede principal
+</div>
+
+
+<div class="rank-item">
+<strong>$DGM</strong>
+Ecossistema Doge Manga
+</div>
+
+
+<div class="rank-item">
+<strong>WEB3</strong>
+Nova geração
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="intel-card">
+
+<div class="intel-title">
+🤖 IA DOGE MANGA ASSISTENTE
+</div>
+
+
+<div class="dm-ai-box">
+
+<p>
+Digite uma pergunta sobre o ecossistema:
+</p>
+
+
+<input 
+class="dm-ai-input"
+id="perguntaDGM"
+placeholder="Ex: Como comprar $DGM?">
+
+
+<button class="dm-ai-btn" onclick="consultarDGMIA()">
+Perguntar IA
+</button>
+
+
+<div id="respostaIA"></div>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+function consultarDGMIA(){
+
+let pergunta =
+document.getElementById("perguntaDGM").value.toLowerCase();
+
+
+let resposta="";
+
+
+if(pergunta.includes("comprar")){
+
+resposta="🔄 Você pode comprar $DGM usando carteira Phantom e plataformas compatíveis com Solana.";
+
+}
+
+else if(pergunta.includes("contrato")){
+
+resposta="🔗 O contrato oficial $DGM está disponível na área de segurança do portal.";
+
+}
+
+else if(pergunta.includes("solana")){
+
+resposta="⚡ Doge Manga utiliza o ecossistema rápido e eficiente da rede Solana.";
+
+}
+
+else{
+
+resposta="🐕 A IA Doge Manga está analisando sua pergunta. Novas funções inteligentes serão adicionadas.";
+
+}
+
+
+let box=document.getElementById("respostaIA");
+
+box.innerHTML=resposta;
+
+box.style.display="block";
+
+
+}
+
+
 </script>
