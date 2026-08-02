@@ -22,7 +22,6 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 @keyframes entrar{from{opacity:0; transform:translateY(20px);}to{opacity:1; transform:translateY(0);}}
 @keyframes brilhoIA{0%{box-shadow:0 4px 20px rgba(139,92,246,0.4);}100%{box-shadow:0 6px 25px rgba(139,92,246,0.6);}}
-@keyframes giro{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 #splash{position:fixed; inset:0; background:var(--fundo); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; transition:opacity 0.6s ease;}
 #splash.oculto{opacity:0; visibility:hidden;}
 #splash img{width:180px; height:180px; border-radius:50%; border:4px solid var(--primaria); margin-bottom:20px; animation:brilhoLogo 2s infinite alternate;}
@@ -107,7 +106,6 @@ header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
-/* ESTILOS NOVOS: ÍNDICES E DADOS DE MERCADO */
 .indices-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:18px; margin:25px 0;}
 .indice-card{background:rgba(2,6,23,0.85); padding:20px; border-radius:12px; border:1px solid rgba(250,204,21,0.15); transition:0.3s;}
 .indice-card:hover{border-color:rgba(250,204,21,0.4); transform:translateY(-3px);}
@@ -116,10 +114,12 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 .indice-valor.medo{color:var(--medo);}
 .indice-valor.neutro{color:var(--neutro);}
 .indice-valor.ganancia{color:var(--ganancia);}
-.indice-status{font-size:13px; font-weight:600; padding:4px 10px; border-radius:12px; display:inline-block;}
+.indice-status{font-size:13px; font-weight:600; padding:4px 10px; border-radius:12px; display:inline-block; margin-top:5px;}
 .status-medo{background:rgba(239,68,68,0.1); color:var(--medo); border:1px solid rgba(239,68,68,0.3);}
 .status-neutro{background:rgba(245,158,11,0.1); color:var(--neutro); border:1px solid rgba(245,158,11,0.3);}
 .status-ganancia{background:rgba(34,197,94,0.1); color:var(--ganancia); border:1px solid rgba(34,197,94,0.3);}
+.status-negativo{background:rgba(239,68,68,0.1); color:var(--medo); border:1px solid rgba(239,68,68,0.3);}
+.status-positivo{background:rgba(34,197,94,0.1); color:var(--ganancia); border:1px solid rgba(34,197,94,0.3);}
 .medo-ganancia-container{display:flex; flex-direction:column; align-items:center; padding:15px 0;}
 .medo-ganancia-circulo{width:140px; height:140px; position:relative; margin-bottom:10px;}
 .circulo-fundo{width:100%; height:100%; border-radius:50%; background:conic-gradient(var(--medo) 0deg 108deg, var(--neutro) 108deg 180deg, var(--ganancia) 180deg 360deg); display:flex; align-items:center; justify-content:center; position:relative;}
@@ -128,7 +128,6 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 .ponto-indicador::after{content:''; position:absolute; top:-5px; left:-5px; width:22px; height:22px; border:2px solid var(--primaria); border-radius:50%; animation:brilhoLogo 2s infinite alternate;}
 .total-mercado{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:15px; padding:15px; background:rgba(2,6,23,0.7); border-radius:10px; margin-bottom:20px;}
 .total-mercado-valor{font-size:24px; font-weight:700; color:var(--primaria);}
-.total-mercado-variacao{font-size:14px; font-weight:600;}
 .etf-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-top:15px;}
 .etf-item{background:rgba(2,6,23,0.8); padding:12px; border-radius:8px; border-left:4px solid var(--claro);}
 .etf-item.btc{border-left-color:var(--medo);}
@@ -283,7 +282,6 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
-<!-- SEÇÃO NOV: ÍNDICES PROFISSIONAIS -->
 <section id="indices" class="secao">
     <div class="container">
         <div class="card destaque">
@@ -307,7 +305,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                             <div class="circulo-fundo">
                                 <div class="circulo-interno">
                                     <div class="indice-valor" id="valorMedoGanancia">---</div>
-                                    <div class="indice-status status-medo" id="statusMedoGanancia">Carregando</div>
+                                    <div class="indice-status status-neutro" id="statusMedoGanancia">Carregando</div>
                                 </div>
                                 <div class="ponto-indicador" id="pontoMedoGanancia"></div>
                             </div>
@@ -330,7 +328,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <div class="indice-card">
                     <div class="indice-titulo">MACD</div>
                     <div class="indice-valor" id="valorMacd">---</div>
-                    <div class="indice-status" id="statusMacd">---</div>
+                    <div class="indice-status status-negativo" id="statusMacd">---</div>
                 </div>
             </div>
 
@@ -434,10 +432,16 @@ function formatarVariacao(valor){
     const num = parseFloat(valor);
     return `<span class="${num >= 0 ? 'var-positiva' : 'var-negativa'}">${num >= 0 ? '+' : ''}${num.toFixed(2)}%</span>`;
 }
-function formatarMilhoes(valor){
+function formatarNumero(valor){
     if(!valor || isNaN(valor)) return "---";
     const num = parseFloat(valor);
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(num) + "M";
+    return new Intl.NumberFormat('pt-BR').format(num);
+}
+function formatarMilhoesUSD(valor){
+    if(!valor || isNaN(valor)) return "---";
+    const num = parseFloat(valor);
+    const sinal = num < 0 ? "-" : "+";
+    return `${sinal} $${new Intl.NumberFormat('pt-BR', {maximumFractionDigits:0}).format(Math.abs(num))}M`;
 }
 
 function navegarSecao(id){
@@ -506,10 +510,4 @@ async function atualizarDGM(){
         document.getElementById('var-dgm').innerHTML = formatarVariacao(var24h);
         document.getElementById('precoAtual').innerText = formatarBRL(precoUSD * cotacaoUSD_BRL);
         document.getElementById('var24h').innerHTML = formatarVariacao(var24h);
-        document.getElementById('liquidez').innerText = formatarBRL(liquidezUSD * cotacaoUSD_BRL);
-        document.getElementById('volume24h').innerText = formatarBRL(volumeUSD * cotacaoUSD_BRL);
-        document.getElementById('marketcap').innerText = formatarBRL(marketCapUSD * cotacaoUSD_BRL);
-        document.getElementById('ultimaDGM').innerText = new Date().toLocaleTimeString('pt-BR');
-
-        if(document.getElementById('graficoUniversal').innerHTML.trim() === ""){
-            document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CON
+        document.getElementById('liquidez').innerText = formatarBRL(liquidezUSD * cot
