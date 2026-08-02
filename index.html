@@ -359,7 +359,7 @@ function abrirGraficoMoeda(id, nome, simbolo = ""){
     } else {
         titulo.innerHTML = `📈 GRÁFICO — ${nome} (${simbolo.toUpperCase()}) | Doge Manga Evolution`;
         const simboloUpper = simbolo.toUpperCase();
-        container.innerHTML = `<iframe src="https://dexscreener.com/search?q=${encodeURIComponent(simboloUpper)}&embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy" onerror="this.parentElement.innerHTML='<iframe src=\"https://www.tradingview.com/widgetembed/?symbol=BINANCE:${encodeURIComponent(simboloUpper)}USDT&interval=60&theme=dark&locale=br&style=1&timezone=America/Sao_Paulo\" width=\"100%\" height=\"100%\" frameborder=\"0\" allowfullscreen loading=\"lazy\" onerror=\"this.parentElement.innerHTML=\\'<div style=\\\\\"padding:30px;text-align:center;color:var(--claro);\\\\\">📊 Gráfico indisponível — <a href=\\\\\"https://dexscreener.com/search?q=${encodeURIComponent(simboloUpper)}\\\\\" target=\\\\\"_blank\\\\\" style=\\\\\"color:var(--primaria);font-weight:600;text-decoration:underline;\\\\\">Ver no DexScreener</a></div>\\'\"></iframe>'"></iframe>`;
+        container.innerHTML = `<iframe src="https://dexscreener.com/search?q=${encodeURIComponent(simboloUpper)}&embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
     }
     navegarSecao('graficoMoeda');
 }
@@ -439,11 +439,9 @@ async function carregarMercadoCompleto(){
     if(carregandoTodas) return;
     carregandoTodas = true;
     const status = document.getElementById('ultimaMercado');
-    if(cacheMercado.dados.length > 0){
+    try{
         cacheMercado.dados = [];
         document.getElementById('corpoTabela').innerHTML = `<tr><td colspan="7" style="text-align:center;padding:30px;">🔄 Atualizando mercado...</td></tr>`;
-    }
-    try{
         for(let pagina = 1; pagina <= CONFIG.totalPaginas; pagina++){
             if(status) status.innerText = `🔄 Carregando página ${pagina} de ${CONFIG.totalPaginas}...`;
             const res = await fetch(`${CONFIG.coinGecko}/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=${CONFIG.limitePagina}&page=${pagina}&sparkline=false&price_change_percentage=24h`, { signal: AbortSignal.timeout(CONFIG.tempoTimeout) });
@@ -525,4 +523,26 @@ campoBusca.addEventListener('input', () => {
 }
 
 document.getElementById('btnCopiarContrato').addEventListener('click', () => copiarTexto(CONTRATO));
-document.getElementById('btnMenu').addEventListener('click', (
+document.getElementById('btnMenu').addEventListener('click', (e)=>{
+    e.stopPropagation();
+    document.getElementById('menuNavegacao').classList.toggle('aberto');
+});
+document.addEventListener('click', (e) => {
+    const menu = document.getElementById('menuNavegacao');
+    if(menu && !e.target.closest('#btnMenu') && !e.target.closest('#menuNavegacao')){
+        menu.classList.remove('aberto');
+    }
+});
+document.getElementById('btnMais').addEventListener('click', carregarMercadoCompleto);
+document.getElementById('btnAbrirForm').addEventListener('click', ()=>{
+    const form = document.getElementById('formProj');
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+});
+document.querySelectorAll('[data-secao]').forEach(el => {
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        navegarSecao(el.dataset.secao);
+    });
+});
+
+window.addEventListener("load", async () =>
