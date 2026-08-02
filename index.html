@@ -2404,4 +2404,860 @@ box.style.display="block";
 }
 
 
+</script><!-- ================================= -->
+<!-- DOGE MANGA NOTIFICATION CENTER -->
+<!-- ================================= -->
+
+<style>
+
+#dm-notificacao{
+position:fixed;
+right:25px;
+bottom:100px;
+z-index:99999;
+}
+
+#dm-sino{
+width:60px;
+height:60px;
+border-radius:50%;
+border:none;
+background:linear-gradient(135deg,#facc15,#f59e0b);
+font-size:28px;
+cursor:pointer;
+box-shadow:0 0 25px rgba(250,204,21,.5);
+animation:pulsarSino 2s infinite;
+}
+
+@keyframes pulsarSino{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.12);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+
+#dm-contador{
+position:absolute;
+top:-5px;
+right:-5px;
+background:#ef4444;
+color:white;
+font-size:12px;
+font-weight:bold;
+width:22px;
+height:22px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+
+#dm-painel-notificacao{
+
+display:none;
+position:absolute;
+right:0;
+bottom:75px;
+width:330px;
+background:#050816;
+border:1px solid rgba(250,204,21,.3);
+border-radius:15px;
+padding:20px;
+box-shadow:0 0 30px rgba(0,0,0,.5);
+
+}
+
+
+#dm-painel-notificacao h3{
+
+color:#facc15;
+margin-bottom:15px;
+
+}
+
+
+.dm-noticia{
+
+background:#111827;
+padding:12px;
+border-radius:10px;
+margin-bottom:10px;
+border-left:3px solid #22c55e;
+font-size:14px;
+
+}
+
+
+.dm-nova{
+
+color:#22c55e;
+font-weight:bold;
+
+}
+
+
+</style>
+
+
+
+
+<div id="dm-notificacao">
+
+
+<button id="dm-sino" onclick="abrirNotificacoes()">
+
+🔔
+
+<span id="dm-contador">
+3
+</span>
+
+</button>
+
+
+
+<div id="dm-painel-notificacao">
+
+
+<h3>
+🔔 Novidades Doge Manga
+</h3>
+
+
+<div class="dm-noticia">
+
+<span class="dm-nova">
+NOVO
+</span>
+
+<br>
+
+🚀 Portal Evolution atualizado.
+
+</div>
+
+
+
+<div class="dm-noticia">
+
+<span class="dm-nova">
+ATUALIZAÇÃO
+</span>
+
+<br>
+
+🐕 Novas ferramentas Web3 chegando.
+
+</div>
+
+
+
+<div class="dm-noticia">
+
+<span class="dm-nova">
+AVISO
+</span>
+
+<br>
+
+🌐 Comunidade Doge Manga em expansão.
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+function abrirNotificacoes(){
+
+let painel =
+document.getElementById("dm-painel-notificacao");
+
+
+if(painel.style.display==="block"){
+
+painel.style.display="none";
+
+}else{
+
+painel.style.display="block";
+
+document.getElementById("dm-contador").style.display="none";
+
+}
+
+}
+
+
+
+
+// Simulação de nova notificação
+
+setTimeout(()=>{
+
+
+let contador =
+document.getElementById("dm-contador");
+
+
+contador.style.display="flex";
+
+contador.innerHTML="1";
+
+
+},15000);
+
+
+
+</script><!-- ===================================== -->
+<!-- DOGE MANGA NEWS LIVE CENTER -->
+<!-- ===================================== -->
+
+<style>
+
+.news-live-container{
+max-width:1400px;
+margin:30px auto;
+padding:20px;
+}
+
+.news-live-card{
+background:rgba(17,24,39,.96);
+border:1px solid rgba(250,204,21,.25);
+border-radius:18px;
+padding:25px;
+margin-bottom:25px;
+}
+
+.news-live-title{
+color:#facc15;
+font-size:25px;
+border-bottom:1px solid rgba(250,204,21,.25);
+padding-bottom:12px;
+margin-bottom:20px;
+}
+
+.news-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:18px;
+}
+
+
+.news-box{
+
+background:#050816;
+border-radius:14px;
+padding:18px;
+border:1px solid rgba(250,204,21,.15);
+transition:.3s;
+animation:entrarNews .5s ease;
+
+}
+
+
+.news-box:hover{
+
+transform:translateY(-6px);
+border-color:#facc15;
+box-shadow:0 0 20px rgba(250,204,21,.15);
+
+}
+
+
+.news-tag{
+
+display:inline-block;
+background:#facc15;
+color:#050816;
+font-size:12px;
+font-weight:bold;
+padding:5px 10px;
+border-radius:20px;
+margin-bottom:10px;
+
+}
+
+
+.news-time{
+
+color:#94a3b8;
+font-size:12px;
+margin-top:10px;
+
+}
+
+
+.news-btn{
+
+margin-top:15px;
+background:#111827;
+color:#facc15;
+border:1px solid #facc15;
+padding:8px 15px;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+
+}
+
+
+@keyframes entrarNews{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+
+</style>
+
+
+
+<div class="news-live-container">
+
+
+<div class="news-live-card">
+
+
+<div class="news-live-title">
+📰 DOGE MANGA NEWS LIVE
+</div>
+
+
+
+<div class="news-grid">
+
+
+
+<div class="news-box">
+
+<div class="news-tag">
+🐕 DGM
+</div>
+
+<h3>
+Doge Manga Evolution atualizado
+</h3>
+
+<p>
+Novas ferramentas do ecossistema Web3 estão sendo adicionadas ao portal.
+</p>
+
+<div class="news-time">
+🕒 Agora
+</div>
+
+<button class="news-btn">
+Ler notícia
+</button>
+
+</div>
+
+
+
+
+
+<div class="news-box">
+
+<div class="news-tag">
+⚡ SOLANA
+</div>
+
+<h3>
+Rede Solana em expansão
+</h3>
+
+<p>
+Acompanhe novidades, projetos e tendências do ecossistema Solana.
+</p>
+
+<div class="news-time">
+🕒 Hoje
+</div>
+
+<button class="news-btn">
+Ler notícia
+</button>
+
+</div>
+
+
+
+
+
+
+<div class="news-box">
+
+<div class="news-tag">
+📈 MERCADO
+</div>
+
+<h3>
+Mercado cripto em observação
+</h3>
+
+<p>
+Dados de preços, volume e movimentações importantes.
+</p>
+
+<div class="news-time">
+🕒 Atualizado
+</div>
+
+<button class="news-btn">
+Ler notícia
+</button>
+
+</div>
+
+
+
+
+
+
+
+<div class="news-box">
+
+<div class="news-tag">
+🎨 NFT
+</div>
+
+<h3>
+Doge Manga NFT
+</h3>
+
+<p>
+Novidades sobre coleções digitais e futuros lançamentos.
+</p>
+
+<div class="news-time">
+🕒 Em breve
+</div>
+
+<button class="news-btn">
+Ler notícia
+</button>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+// Sistema preparado para notícias dinâmicas
+
+const noticiasDGM = [
+
+"🚀 Nova atualização do Portal Doge Manga",
+
+"🐋 Grande movimentação detectada na rede",
+
+"⚡ Solana recebendo novos projetos",
+
+"🎨 Novidades NFT chegando"
+
+];
+
+
+function novaNoticiaDGM(){
+
+let noticia =
+noticiasDGM[
+Math.floor(Math.random()*noticiasDGM.length)
+];
+
+
+console.log(
+"🔔 Nova notícia:",
+noticia
+);
+
+}
+
+
+// Verifica a cada 1 minuto
+
+setInterval(
+novaNoticiaDGM,
+60000
+);
+
+
+</script><!-- ======================================= -->
+<!-- DOGE MANGA WHALE TRACKER + MARKET PRO -->
+<!-- ======================================= -->
+
+<style>
+
+.dm-market-container{
+max-width:1400px;
+margin:30px auto;
+padding:20px;
+}
+
+.dm-market-card{
+background:rgba(17,24,39,.96);
+border:1px solid rgba(250,204,21,.25);
+border-radius:18px;
+padding:25px;
+margin-bottom:25px;
+}
+
+.dm-market-title{
+color:#facc15;
+font-size:24px;
+border-bottom:1px solid rgba(250,204,21,.25);
+padding-bottom:12px;
+margin-bottom:20px;
+}
+
+.dm-market-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.dm-market-item{
+background:#050816;
+padding:20px;
+border-radius:12px;
+text-align:center;
+border:1px solid rgba(250,204,21,.15);
+}
+
+.dm-market-item strong{
+display:block;
+font-size:26px;
+color:#facc15;
+}
+
+.dm-whale-box{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:#050816;
+padding:15px;
+border-radius:12px;
+margin:10px 0;
+border-left:4px solid #22c55e;
+}
+
+.dm-buy{
+color:#22c55e;
+font-weight:bold;
+}
+
+.dm-sell{
+color:#ef4444;
+font-weight:bold;
+}
+
+.dm-gauge{
+height:25px;
+background:#111827;
+border-radius:20px;
+overflow:hidden;
+margin-top:15px;
+}
+
+.dm-gauge-fill{
+height:100%;
+width:72%;
+background:#22c55e;
+border-radius:20px;
+text-align:center;
+color:white;
+font-size:13px;
+font-weight:bold;
+}
+
+</style>
+
+
+
+<div class="dm-market-container">
+
+
+
+<div class="dm-market-card">
+
+
+<div class="dm-market-title">
+🐋 DOGE MANGA WHALE TRACKER
+</div>
+
+
+
+<div class="dm-whale-box">
+
+<span>
+🐋 Carteira Grande #01
+</span>
+
+<span class="dm-buy">
+COMPRA +250K $DGM
+</span>
+
+</div>
+
+
+
+<div class="dm-whale-box">
+
+<span>
+🐋 Investidor Solana
+</span>
+
+<span class="dm-buy">
+ACUMULAÇÃO
+</span>
+
+</div>
+
+
+
+<div class="dm-whale-box">
+
+<span>
+🐋 Movimento Mercado
+</span>
+
+<span class="dm-sell">
+VENDA MONITORADA
+</span>
+
+</div>
+
+
+<p style="color:#94a3b8;font-size:13px;margin-top:15px;">
+Painel preparado para integração com dados reais da blockchain Solana.
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="dm-market-card">
+
+
+<div class="dm-market-title">
+📊 DOGE MANGA MARKET PRO
+</div>
+
+
+
+<div class="dm-market-grid">
+
+
+<div class="dm-market-item">
+
+<strong id="sentimentoMercado">
+72%
+</strong>
+
+Sentimento Mercado
+
+</div>
+
+
+
+<div class="dm-market-item">
+
+<strong>
+🔥 ALTA
+</strong>
+
+Tendência
+
+</div>
+
+
+
+<div class="dm-market-item">
+
+<strong>
+🌐 GLOBAL
+</strong>
+
+Mercado
+
+</div>
+
+
+
+<div class="dm-market-item">
+
+<strong>
+⚡ SOL
+</strong>
+
+Rede
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="dm-market-card">
+
+
+<div class="dm-market-title">
+😨 ÍNDICE DE MEDO E GANÂNCIA
+</div>
+
+
+<p>
+Análise geral do mercado cripto:
+</p>
+
+
+<div class="dm-gauge">
+
+<div class="dm-gauge-fill">
+72% GANÂNCIA
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="dm-market-card">
+
+
+<div class="dm-market-title">
+🔥 MOEDAS EM DESTAQUE
+</div>
+
+
+<div class="dm-market-grid">
+
+
+<div class="dm-market-item">
+<strong>BTC</strong>
+Bitcoin
+</div>
+
+
+<div class="dm-market-item">
+<strong>SOL</strong>
+Solana
+</div>
+
+
+<div class="dm-market-item">
+<strong>$DGM</strong>
+Doge Manga
+</div>
+
+
+<div class="dm-market-item">
+<strong>NFT</strong>
+Web3
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+// Simulação de atualização do sentimento
+
+setInterval(()=>{
+
+
+let valor =
+Math.floor(Math.random()*20)+70;
+
+
+let elemento =
+document.getElementById(
+"sentimentoMercado"
+);
+
+
+if(elemento){
+
+elemento.innerHTML =
+valor+"%";
+
+}
+
+
+},30000);
+
+
+
 </script>
