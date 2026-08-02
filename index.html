@@ -148,8 +148,8 @@ header{text-align:center; padding:50px 20px;}
 header h1{font-size:44px; color:var(--primaria); margin-bottom:15px;}
 header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px;}
 .botoes-acao{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
-.grafico-container{width:100%; min-height:450px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816; position:relative;}
-.grafico-container iframe{width:100%; height:100%; border:none; allowfullscreen loading="lazy"; referrerpolicy="no-referrer-when-downgrade";}
+.grafico-container{width:100%; min-height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816; position:relative;}
+.grafico-container iframe{width:100%; height:100%; border:none; display:block;}
 .aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px; box-shadow:0 4px 12px rgba(0,0,0,0.3);}
 .notificacao-alerta{position:fixed; top:20px; right:20px; background:rgba(249,115,22,0.95); color:white; padding:15px 20px; border-radius:10px; border:1px solid var(--alerta-cor); box-shadow:0 4px 20px rgba(249,115,22,0.3); z-index:99999; display:none; max-width:90%; animation:entrar 0.3s ease;}
 .erro-api{color:var(--erro); padding:15px; text-align:center; background:rgba(248,113,113,0.1); border-radius:8px; border:1px solid var(--erro); margin:10px 0;}
@@ -183,7 +183,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
   html{font-size:15px;}
   header h1{font-size:32px;}
   .tabela-mercado{font-size:11px;}
-  .grafico-container{min-height:380px; height:auto;}
+  .grafico-container{min-height:400px;}
   .grid-dados{grid-template-columns:repeat(2,1fr);}
   #btnIA{padding:12px 16px; font-size:14px;}
   .janela-chat{width:92vw; right:4px; bottom:65px; height:80vh;}
@@ -365,5 +365,33 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <div class="card destaque">
             <a href="#" class="btn-voltar" onclick="navegarSecao('mercado'); return false;">↩️ Voltar</a>
             <h2 id="tituloGrafico">📈 GRÁFICO — Doge Manga Evolution ($DGM)</h2>
-            <div id="graficoUniversal" class="grafico-container">
-                <iframe id="iframeGrafico" src="https://dexscreener
+            <div class="grafico-container">
+                <iframe 
+                id="iframeGrafico"
+                src="https://embed.birdeye.so/tv-widget/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana&theme=dark"
+                width="100%"
+                height="100%"
+                frameborder="0"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Gráfico $DGM - Doge Manga Evolution">
+                </iframe>
+            </div>
+            <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="https://www.binance.com/pt-BR" target="_blank" rel="noopener noreferrer" class="btn btn-pequeno btn-secundario">💱 Binance</a>
+                <a href="https://www.coingecko.com/pt-br" target="_blank" rel="noopener noreferrer" class="btn btn-pequeno btn-secundario">📊 CoinGecko</a>
+                <a href="https://coinmarketcap.com/pt-br/" target="_blank" rel="noopener noreferrer" class="btn btn-pequeno btn-secundario">📈 CoinMarketCap</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="launchpad" class="secao" role="tabpanel">
+    <div class="container">
+        <div class="card destaque">
+            <a href="#" class="btn-voltar" onclick="navegarSecao('inicio'); return false;">↩️ Voltar</a>
+            <h2>🚀 LAUNCHPAD</h2>
+            <p style="margin-bottom:15px; color:var(--claro);">Envie seu projeto para análise e destaque no ecossistema Doge Manga Evolution.</p>
+            <button class="btn btn-primario" id="btnAbrirForm">📩 Enviar Projeto</button>
+            <div id="formProj" style="display:none; margin-top:20px; background:rgba(2,6
