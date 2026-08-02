@@ -536,14 +536,4 @@ document.addEventListener('click', (e) => {
 document.getElementById('btnMais').addEventListener('click', carregarMercadoCompleto);
 document.getElementById('btnAbrirForm').addEventListener('click', ()=>{
     const form = document.getElementById('formProj');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
-});
-document.querySelectorAll('[data-secao]').forEach(el => {
-    el.addEventListener('click', (e) => {
-        e.preventDefault();
-        navegarSecao(el.dataset.secao);
-    });
-});
-
-window.addEventListener("load", async () => {
-    setTimeout(() =>
+    form.style.display = form.style.display === 'none' ?
