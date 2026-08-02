@@ -3,19 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Doge Manga Evolution | Portal Oficial Solana</title>
-<meta name="description" content="Mercado cripto, notícias, alertas de preço, assistente IA e dados do $DGM em tempo real.">
-<meta name="keywords" content="Doge Manga, $DGM, Criptomoedas, Notícias, Alertas, Mercado, Solana">
-<meta name="robots" content="index, follow">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="🐕 Doge Manga Evolution — Portal oficial Solana: mercado cripto em tempo real, gráficos, notícias, alertas, assistente IA e integração Phantom.">
+<meta name="keywords" content="Doge Manga, $DGM, Solana, memecoin, criptomoedas, mercado, preços, gráficos, notícias, alertas, Phantom">
 <meta name="author" content="Doge Manga Evolution">
-<meta property="og:title" content="🐕 Doge Manga Evolution">
-<meta property="og:description" content="Ecossistema completo na Rede Solana.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#facc15">
+<meta property="og:type" content="website">
+<meta property="og:title" content="🐕 Doge Manga Evolution | Portal Oficial Solana">
+<meta property="og:description" content="Ecossistema Web3 completo: dados do $DGM, mercado global, gráficos, notícias, alertas e assistente inteligente.">
 <meta property="og:image" content="IMG-20260727-WA0036(7).jpg">
 <meta property="og:url" content="https://dogemangaofficial.xyz">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="🐕 Doge Manga Evolution | Portal Oficial Solana">
+<meta name="twitter:description" content="Mercado cripto em tempo real, gráficos, notícias e integração Solana.">
+<meta name="twitter:image" content="IMG-20260727-WA0036(7).jpg">
 <link rel="icon" href="IMG-20260727-WA0036(7).jpg">
+<link rel="canonical" href="https://dogemangaofficial.xyz">
+<title>Doge Manga Evolution | Portal Oficial Solana</title>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Doge Manga Evolution",
+  "url":"https://dogemangaofficial.xyz",
+  "author":{"@type":"Organization","name":"Doge Manga Evolution"},
+  "description":"Ecossistema Web3 completo na Rede Solana",
+  "potentialAction":{"@type":"SearchAction","target":"https://dogemangaofficial.xyz/?q={search_term_string}","query-input":"required name=search_term_string"}
+}
+</script>
 <style>
 *{margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Roboto, Arial, sans-serif; scroll-behavior:smooth;}
-:root{--primaria:#facc15; --fundo:#050816; --secundaria:#111827; --sucesso:#22c55e; --queda:#ef4444; --texto:#e2e8f0; --claro:#94a3b8; --ia-cor:#8b5cf6; --noticias-cor:#3b82f6; --ranking-cor:#ec4899; --alerta-cor:#f97316;}
+:root{--primaria:#facc15; --fundo:#050816; --secundaria:#111827; --sucesso:#22c55e; --queda:#ef4444; --texto:#e2e8f0; --claro:#94a3b8; --ia-cor:#8b5cf6; --noticias-cor:#3b82f6; --ranking-cor:#ec4899; --alerta-cor:#f97316; --erro:#f87171; --aviso:#fbbf24;}
 body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22,0.65), rgba(2,6,23,0.7)), url("IMG-20260727-WA0036(7).jpg"); background-size:cover; background-position:center top; background-attachment:fixed; min-height:100vh; padding-bottom:100px; overflow-x:hidden;}
 @keyframes brilhoLogo{0%{box-shadow:0 0 15px rgba(250,204,21,0.4); transform:scale(1);}100%{box-shadow:0 0 35px rgba(250,204,21,0.8); transform:scale(1.05);}}
 @keyframes rolar{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
@@ -23,7 +42,7 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 @keyframes brilhoIA{0%{box-shadow:0 4px 20px rgba(139,92,246,0.4);}100%{box-shadow:0 6px 25px rgba(139,92,246,0.6);}}
 @keyframes brilhoRanking{0%{box-shadow:0 4px 15px rgba(236,72,153,0.3);}100%{box-shadow:0 6px 20px rgba(236,72,153,0.5);}}
 @keyframes brilhoAlerta{0%{box-shadow:0 4px 15px rgba(249,115,22,0.3);}100%{box-shadow:0 6px 20px rgba(249,115,22,0.5);}}
-#splash{position:fixed; inset:0; background:var(--fundo); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; transition:opacity 0.6s ease;}
+#splash{position:fixed; inset:0; background:var(--fundo); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; transition:opacity 0.6s ease, visibility 0.6s ease;}
 #splash.oculto{opacity:0; visibility:hidden;}
 #splash img{width:180px; height:180px; border-radius:50%; border:4px solid var(--primaria); margin-bottom:20px; animation:brilhoLogo 2s infinite alternate;}
 .barra-geral{background:rgba(2,6,23,0.96); padding:9px; overflow:hidden; border-bottom:1px solid rgba(250,204,21,0.2); position:sticky; top:0; z-index:997;}
@@ -83,7 +102,7 @@ body{color:var(--texto); line-height:1.7; background:linear-gradient(rgba(5,8,22
 .card.ranking{border-color:var(--ranking-cor); box-shadow:0 0 25px rgba(236,72,153,0.15); animation:brilhoRanking 2.5s infinite alternate;}
 .card.alertas{border-color:var(--alerta-cor); box-shadow:0 0 25px rgba(249,115,22,0.15); animation:brilhoAlerta 2.5s infinite alternate;}
 h2{color:var(--primaria); margin-bottom:20px; border-bottom:1px solid rgba(250,204,21,0.25); padding-bottom:12px; font-size:24px;}
-.btn{display:inline-block; padding:10px 20px; border-radius:8px; font-weight:700; text-decoration:none; transition:0.3s; border:none; cursor:pointer; font-size:14px;}
+.btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 20px; border-radius:8px; font-weight:700; text-decoration:none; transition:0.3s; border:none; cursor:pointer; font-size:14px; text-align:center;}
 .btn-primario{background:var(--primaria); color:var(--fundo);}
 .btn-secundario{background:var(--secundaria); color:var(--texto); border:1px solid var(--primaria);}
 .btn-alerta-form{background:var(--alerta-cor); color:white; border:none; padding:8px 16px; border-radius:6px; font-weight:600; cursor:pointer; transition:0.2s;}
@@ -130,9 +149,11 @@ header h1{font-size:44px; color:var(--primaria); margin-bottom:15px;}
 header p{font-size:18px; color:var(--claro); max-width:850px; margin:0 auto 25px;}
 .botoes-acao{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px;}
 .grafico-container{width:100%; min-height:450px; border-radius:12px; overflow:hidden; border:1px solid rgba(250,204,21,0.2); margin:20px 0; background:#050816; position:relative;}
-.grafico-container iframe{width:100%; height:100%; border:none;}
-.aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px;}
+.grafico-container iframe{width:100%; height:100%; border:none; allowfullscreen loading="lazy"; referrerpolicy="no-referrer-when-downgrade";}
+.aviso-copiado{position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--sucesso); color:white; padding:10px 20px; border-radius:8px; font-weight:600; z-index:99999; display:none; font-size:14px; box-shadow:0 4px 12px rgba(0,0,0,0.3);}
 .notificacao-alerta{position:fixed; top:20px; right:20px; background:rgba(249,115,22,0.95); color:white; padding:15px 20px; border-radius:10px; border:1px solid var(--alerta-cor); box-shadow:0 4px 20px rgba(249,115,22,0.3); z-index:99999; display:none; max-width:90%; animation:entrar 0.3s ease;}
+.erro-api{color:var(--erro); padding:15px; text-align:center; background:rgba(248,113,113,0.1); border-radius:8px; border:1px solid var(--erro); margin:10px 0;}
+.aviso-api{color:var(--aviso); padding:15px; text-align:center; background:rgba(251,191,36,0.1); border-radius:8px; border:1px solid var(--aviso); margin:10px 0;}
 footer{text-align:center; padding:30px 20px; background:rgba(2,6,23,0.96); margin-top:40px; color:var(--claro); border-top:1px solid rgba(250,204,21,0.25); font-size:13px;}
 footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
@@ -159,6 +180,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 .pergunta-rapida:hover{background:rgba(139,92,246,0.2);}
 
 @media(max-width:768px){
+  html{font-size:15px;}
   header h1{font-size:32px;}
   .tabela-mercado{font-size:11px;}
   .grafico-container{min-height:380px; height:auto;}
@@ -168,6 +190,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
   .barra-topo{top:140px;}
   .abas{top:192px;}
   .menu-navegacao{width:calc(100vw - 30px); right:15px;}
+  .btn{width:100%; justify-content:center;}
 }
 </style>
 </head>
@@ -178,7 +201,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="barra-geral">
     <div class="barra-conteudo-geral">
-        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" loading="lazy" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);"><strong>$DGM</strong> <span id="dgm-preco-barra">---</span> <span id="var-dgm"></span></div>
+        <div class="item-moeda destaque"><img src="IMG-20260727-WA0036(7).jpg" loading="lazy" style="width:18px;height:18px;border-radius:50%;border:1px solid var(--primaria);" alt="$DGM"><strong>$DGM</strong> <span id="dgm-preco-barra">---</span> <span id="var-dgm"></span></div>
         <div class="item-moeda">BTC: <span id="preco-btc">---</span> <span id="var-btc"></span></div>
         <div class="item-moeda">ETH: <span id="preco-eth">---</span> <span id="var-eth"></span></div>
         <div class="item-moeda">SOL: <span id="preco-sol">---</span> <span id="var-sol"></span></div>
@@ -187,7 +210,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 
 <div class="barra-busca">
     <div class="campo-busca">
-        <input type="text" id="campoBusca" placeholder="🔍 Buscar: nome, símbolo ou contrato..." autocomplete="off">
+        <input type="text" id="campoBusca" placeholder="🔍 Buscar: nome, símbolo ou contrato..." autocomplete="off" maxlength="100">
         <div class="resultado-busca" id="resultadoBusca"></div>
     </div>
 </div>
@@ -198,9 +221,9 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
         <span class="dm-nome">🐕 DOGE MANGA $DGM <span class="selo-verificado">✅ VERIFICADO</span> | REDE SOLANA</span>
     </div>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn-copiar" id="btnCopiarContrato">📋 CONTRATO</button>
-        <button class="btn-conectar" id="btnConectarCarteira">👻 Conectar Phantom</button>
-        <button class="btn-alerta" onclick="navegarSecao('alertas')">🔔 Meus Alertas</button>
+        <button class="btn-copiar" id="btnCopiarContrato" aria-label="Copiar contrato">📋 CONTRATO</button>
+        <button class="btn-conectar" id="btnConectarCarteira" aria-label="Conectar Phantom">👻 Conectar Phantom</button>
+        <button class="btn-alerta" onclick="navegarSecao('alertas')" aria-label="Meus alertas">🔔 Meus Alertas</button>
     </div>
 </div>
 
@@ -211,13 +234,13 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
 <div class="barra-topo">
     <div class="perfil"><img src="IMG-20260727-WA0036(7).jpg" loading="lazy" alt="Portal"><span>🐕 DOGE MANGA EVOLUTION</span></div>
     <div style="position:relative;">
-        <button class="menu-botao" id="btnMenu">☰</button>
-        <nav class="menu-navegacao" id="menuNavegacao">
+        <button class="menu-botao" id="btnMenu" aria-label="Abrir menu">☰</button>
+        <nav class="menu-navegacao" id="menuNavegacao" aria-hidden="true">
             <div class="titulo-menu">🔗 PLATAFORMAS OFICIAIS</div>
-            <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener" class="menu-item">🌐 Site Oficial</a>
-            <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener" class="menu-item">👁️ Birdeye</a>
-            <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="menu-item">🔍 DexScreener</a>
-            <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="menu-item">🔗 Solscan</a>
+            <a href="https://dogemangaofficial.xyz" target="_blank" rel="noopener noreferrer" class="menu-item">🌐 Site Oficial</a>
+            <a href="https://birdeye.so/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?chain=solana" target="_blank" rel="noopener noreferrer" class="menu-item">👁️ Birdeye</a>
+            <a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="menu-item">🔍 DexScreener</a>
+            <a href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="menu-item">🔗 Solscan</a>
             <div class="menu-divisao"></div>
             <a href="#inicio" class="menu-item ativo" data-secao="inicio">🏠 Início</a>
             <a href="#mercado" class="menu-item" data-secao="mercado">📊 Mercado</a>
@@ -231,21 +254,21 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </div>
 
-<div class="abas">
-    <div class="aba" data-secao="inicio">🏠 Início</div>
-    <div class="aba" data-secao="mercado">📊 Mercado</div>
-    <div class="aba" data-secao="noticias">📰 Notícias</div>
-    <div class="aba" data-secao="alertas">🔔 Alertas</div>
-    <div class="aba" data-secao="graficoMoeda">📈 Gráfico</div>
-    <div class="aba" data-secao="launchpad">🚀 Launchpad</div>
-    <div class="aba" data-secao="equipe">👥 Equipe</div>
-    <div class="aba" data-secao="seguranca">🛡️ Segurança</div>
+<div class="abas" role="tablist">
+    <div class="aba" data-secao="inicio" role="tab" aria-selected="true">🏠 Início</div>
+    <div class="aba" data-secao="mercado" role="tab" aria-selected="false">📊 Mercado</div>
+    <div class="aba" data-secao="noticias" role="tab" aria-selected="false">📰 Notícias</div>
+    <div class="aba" data-secao="alertas" role="tab" aria-selected="false">🔔 Alertas</div>
+    <div class="aba" data-secao="graficoMoeda" role="tab" aria-selected="false">📈 Gráfico</div>
+    <div class="aba" data-secao="launchpad" role="tab" aria-selected="false">🚀 Launchpad</div>
+    <div class="aba" data-secao="equipe" role="tab" aria-selected="false">👥 Equipe</div>
+    <div class="aba" data-secao="seguranca" role="tab" aria-selected="false">🛡️ Segurança</div>
 </div>
 
-<section id="inicio" class="secao ativa">
+<section id="inicio" class="secao ativa" role="tabpanel">
     <div class="container">
         <header>
-            <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" loading="lazy" alt="🐕 Doge Manga Evolution">
+            <img src="IMG-20260727-WA0036(7).jpg" class="logo-principal" loading="eager" alt="🐕 Doge Manga Evolution">
             <h1>🐕 DOGE MANGA EVOLUTION</h1>
             <p>Ecossistema Web3 completo, notícias, alertas e mercado cripto em tempo real na Rede Solana.</p>
             <div class="card destaque">
@@ -260,7 +283,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                     <div class="dado"><strong>420.000.000.000</strong><span>Supply Total</span></div>
                 </div>
                 <div class="botoes-acao">
-                    <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener" class="btn btn-primario">🔄 Comprar $DGM</a>
+                    <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" rel="noopener noreferrer" class="btn btn-primario">🔄 Comprar $DGM</a>
                     <a href="#graficoMoeda" class="btn btn-secundario" onclick="navegarSecao('graficoMoeda'); return false;">📊 Gráfico Completo</a>
                     <a href="#alertas" class="btn btn-alerta-form" onclick="navegarSecao('alertas'); return false;">🔔 Criar Alerta</a>
                 </div>
@@ -269,7 +292,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
-<section id="mercado" class="secao">
+<section id="mercado" class="secao" role="tabpanel">
     <div class="container">
         <div class="card destaque">
             <a href="#" class="btn-voltar" onclick="navegarSecao('inicio'); return false;">↩️ Voltar</a>
@@ -279,25 +302,25 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 <thead><tr><th>#</th><th>Moeda</th><th>Preço R$</th><th>24h %</th><th>Market Cap</th><th>Volume</th><th>Ações</th></tr></thead>
                 <tbody id="corpoTabela"><tr><td colspan="7" style="text-align:center;padding:30px;">Carregando dados...</td></tr>
             </table>
-            <button id="btnMais" class="btn btn-secundario btn-carregar-mais">📥 Carregar Mais</button>
+            <button id="btnMais" class="btn btn-secundario btn-carregar-mais" disabled>📥 Carregar Mais</button>
         </div>
 
         <div class="card ranking">
             <h2>🏆 RANKING DE MOEDAS EM TEMPO REAL</h2>
-            <div class="abas-ranking">
-                <div class="aba-ranking ativo" data-ranking="altas">🚀 Maiores Altas 24h</div>
-                <div class="aba-ranking" data-ranking="trending">🔥 Mais Negociadas</div>
-                <div class="aba-ranking" data-ranking="volume">🐋 Maior Volume</div>
-                <div class="aba-ranking" data-ranking="novos">💎 Novos Tokens</div>
+            <div class="abas-ranking" role="tablist">
+                <div class="aba-ranking ativo" data-ranking="altas" role="tab" aria-selected="true">🚀 Maiores Altas 24h</div>
+                <div class="aba-ranking" data-ranking="trending" role="tab" aria-selected="false">🔥 Mais Negociadas</div>
+                <div class="aba-ranking" data-ranking="volume" role="tab" aria-selected="false">🐋 Maior Volume</div>
+                <div class="aba-ranking" data-ranking="novos" role="tab" aria-selected="false">💎 Novos Tokens</div>
             </div>
-            <div id="listaRanking" style="margin-top:15px;">
+            <div id="listaRanking" style="margin-top:15px;" role="tabpanel">
                 <div style="text-align:center;padding:20px;color:var(--claro);">Carregando ranking...</div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="noticias" class="secao">
+<section id="noticias" class="secao" role="tabpanel">
     <div class="container">
         <div class="card noticias">
             <a href="#" class="btn-voltar" onclick="navegarSecao('inicio'); return false;">↩️ Voltar</a>
@@ -310,14 +333,14 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
-<section id="alertas" class="secao">
+<section id="alertas" class="secao" role="tabpanel">
     <div class="container">
         <div class="card alertas">
             <a href="#" class="btn-voltar" onclick="navegarSecao('inicio'); return false;">↩️ Voltar</a>
             <h2>🔔 ALERTAS DE PREÇO</h2>
             <div class="form-alerta">
                 <h4 style="color:var(--alerta-cor); margin-bottom:5px;">Criar novo alerta:</h4>
-                <input type="text" id="alertaMoeda" placeholder="Nome ou símbolo (ex: BTC, $DGM)" required>
+                <input type="text" id="alertaMoeda" placeholder="Nome ou símbolo (ex: BTC, $DGM)" required maxlength="50">
                 <select id="alertaTipo">
                     <option value="preco">Quando chegar ao valor (R$)</option>
                     <option value="percentual">Quando variar (%)</option>
@@ -326,7 +349,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                     <option value="acima">Acima do valor</option>
                     <option value="abaixo">Abaixo do valor</option>
                 </select>
-                <input type="number" id="alertaValor" placeholder="Valor (ex: 700000 ou 20)" step="any" required>
+                <input type="number" id="alertaValor" placeholder="Valor (ex: 700000 ou 20)" step="any" required min="0.00000001">
                 <button class="btn-alerta-form" onclick="adicionarAlerta()">✅ Criar Alerta</button>
             </div>
             <h4 style="color:var(--texto); margin:20px 0 10px;">Seus alertas ativos:</h4>
@@ -337,31 +360,10 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
     </div>
 </section>
 
-<section id="graficoMoeda" class="secao">
+<section id="graficoMoeda" class="secao" role="tabpanel">
     <div class="container">
         <div class="card destaque">
             <a href="#" class="btn-voltar" onclick="navegarSecao('mercado'); return false;">↩️ Voltar</a>
             <h2 id="tituloGrafico">📈 GRÁFICO — Doge Manga Evolution ($DGM)</h2>
             <div id="graficoUniversal" class="grafico-container">
-                <iframe id="iframeGrafico" src="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE?embed=1&theme=dark" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
-                <a href="https://www.binance.com/pt-BR" target="_blank" rel="noopener" class="btn btn-pequeno btn-secundario">💱 Binance</a>
-                <a href="https://www.coingecko.com/pt-br" target="_blank" rel="noopener" class="btn btn-pequeno btn-secundario">📊 CoinGecko</a>
-                <a href="https://coinmarketcap.com/pt-br/" target="_blank" rel="noopener" class="btn btn-pequeno btn-secundario">📈 CoinMarketCap</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="launchpad" class="secao">
-    <div class="container">
-        <div class="card destaque">
-            <a href="#" class="btn-voltar" onclick="navegarSecao('inicio'); return false;">↩️ Voltar</a>
-            <h2>🚀 LAUNCHPAD</h2>
-            <button class="btn btn-primario" id="btnAbrirForm">📩 Enviar Projeto</button>
-            <div id="formProj" style="display:none; margin-top:20px; background:rgba(2,6,23,0.9); padding:20px; border-radius:10px;">
-                <h3 style="color:var(--primaria); margin-bottom:15px;">CADASTRAR PROJETO</h3>
-                <div style="display:grid; gap:10px;">
-                    <input type="text" placeholder="Nome do Projeto" style="padding:8px; border-radius:6px; border:1px solid var(--primaria); background:rgba(17,24,39,0.9); color:white;">
-                    <input type="text" placeholder="Símbolo" style="padding:
+                <iframe id="iframeGrafico" src="https://dexscreener
