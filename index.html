@@ -4236,5 +4236,97 @@ class="btn-binance">
 
 
 
+</div><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Doge Manga Market</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+
+<header>
+
+<h1>🟡 Doge Manga Market</h1>
+
+<p>Mini CoinMarketCap do Ecossistema Solana</p>
+
+</header>
+
+
+<div class="menu">
+
+<button onclick="mostrarCadastro()">
+Cadastrar Criptomoeda
+</button>
+
+
+<button onclick="mostrarMoedas()">
+Ver Moedas Cadastradas
+</button>
+
+
 </div>
+
+
+
+<section id="cadastro" class="card">
+
+<h2>Cadastrar Token</h2>
+
+
+<input id="nome" placeholder="Nome do projeto">
+
+<input id="simbolo" placeholder="Símbolo">
+
+<input id="rede" placeholder="Blockchain">
+
+<input id="contrato" placeholder="Contrato Solana">
+
+<input id="logo" placeholder="Link da Logo">
+
+<input id="site" placeholder="Site oficial">
+
+<input id="twitter" placeholder="Twitter/X">
+
+<input id="telegram" placeholder="Telegram">
+
+
+<textarea id="descricao"
+placeholder="Descrição do projeto">
+</textarea>
+
+
+<button onclick="cadastrarToken()">
+Enviar Cadastro
+</button>
+
+
+</section>
+
+
+
+<section id="lista">
+
+
+<h2>Moedas Cadastradas</h2>
+
+<div id="moedas"></div>
+
+
+</section>
+
+
+<script src="app.js"></script>
+
+
+</body>
+</html>
 
