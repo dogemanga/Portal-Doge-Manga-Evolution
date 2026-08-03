@@ -3,6 +3,10 @@
 // swap.js
 // ==================================
 
+let ultimoSwap = null;
+
+
+// Executa ao clicar em Fazer Swap
 function fazerSwap(){
 
     const origem = document.getElementById("tokenFrom").value;
@@ -11,7 +15,7 @@ function fazerSwap(){
     const resultado = document.getElementById("resultado");
 
 
-    if(!quantidade || quantidade <= 0){
+    if(!quantidade || Number(quantidade) <= 0){
 
         alert("Digite uma quantidade válida.");
         return;
@@ -19,8 +23,16 @@ function fazerSwap(){
     }
 
 
+    ultimoSwap = {
+
+        tokenOrigem: origem,
+        tokenDestino: destino,
+        valor: quantidade
+
+    };
+
+
     resultado.innerHTML =
-    "Preparando troca: " +
     quantidade +
     " " +
     origem +
@@ -28,13 +40,29 @@ function fazerSwap(){
     destino;
 
 
-    console.log("Swap solicitado:", {
+    console.log("Swap preparado:", ultimoSwap);
 
-        origem: origem,
-        destino: destino,
-        quantidade: quantidade
 
-    });
+    alert(
+        "Swap preparado com sucesso!"
+    );
 
+}
+
+
+
+// Atualiza a estimativa na tela
+function atualizarEstimativa(){
+
+    const valor =
+    document.getElementById("amount").value;
+
+
+    if(valor){
+
+        document.getElementById("resultado").innerHTML =
+        valor;
+
+    }
 
 }
