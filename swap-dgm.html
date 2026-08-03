@@ -1,1 +1,169 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Swap Doge Manga Evolution</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#050816;
+    color:white;
+    text-align:center;
+}
+
+.container{
+    padding:40px;
+}
+
+h1{
+    color:#facc15;
+}
+
+.box{
+
+    background:#111827;
+    border:1px solid #facc15;
+    border-radius:20px;
+    padding:30px;
+    max-width:450px;
+    margin:auto;
+
+}
+
+button{
+
+    background:#facc15;
+    border:none;
+    padding:15px 25px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:10px;
+
+}
+
+select,input{
+
+    width:90%;
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+
+}
+
+.info{
+
+    margin-top:30px;
+    color:#38bdf8;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+
+<h1>🚀 Swap Doge Manga</h1>
+
+
+<div class="box">
+
+
+<p>
+Compre, venda e troque criptomoedas dentro do ecossistema Doge Manga.
+</p>
+
+
+<p>
+Troque SOL, USDC e DGM usando sua carteira Solana.
+</p>
+
+
+
+<button onclick="conectar()">
+🟣 Conectar Phantom
+</button>
+
+
+
+<h3>Escolha a troca</h3>
+
+
+<select>
+
+<option>SOL</option>
+<option>USDC</option>
+<option>DGM</option>
+
+</select>
+
+
+<input placeholder="Quantidade">
+
+
+
+<button>
+🔄 Fazer Swap
+</button>
+
+
+
+<div class="info">
+
+Taxa do ecossistema Doge Manga:
+0,5%
+
+<br><br>
+
+Carteira de taxas:
+
+2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+async function conectar(){
+
+if(window.solana){
+
+await window.solana.connect();
+
+alert("Phantom conectada!");
+
+}else{
+
+alert("Instale a Phantom Wallet");
+
+}
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
