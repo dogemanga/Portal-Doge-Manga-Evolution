@@ -207,7 +207,7 @@ footer a{color:var(--primaria); text-decoration:none; margin:0 8px;}
                 </div>
                 <div class="botoes-acao">
                     <a href="https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" class="btn btn-primario">🔄 Comprar $DGM</a>
-                    <a href="SEU_LINK_AFILIADO_BINANCE_AQUI" target="_blank" class="btn btn-compra">💰 Comprar Bitcoin</a>
+                    <a href="SEU_LINK_AFILIADO_BINANCE_AQUI" target="_blank" class="btn btn-compra">💰 Comprar na Binance</a>
                     <a href="#graficoMoeda" class="btn btn-secundario" data-secao="graficoMoeda">📊 Gráfico Completo</a>
                 </div>
             </div>
@@ -387,8 +387,6 @@ async function atualizarDGM(){
         document.getElementById('marketcap').innerText = formatarBRL(marketCapUSD * cotacaoUSD_BRL);
         document.getElementById('ultimaDGM').innerText = new Date().toLocaleTimeString('pt-BR');
 
-        document.getElementById('graficoUniversal').innerHTML = `<iframe src="https://dexscreener.com/solana/${CONTRATO}?embed=1&theme=dark&chart=1" width="100%" height="100%" frameborder="0" allowfullscreen loading="lazy"></iframe>`;
-
     }catch(e){
         console.warn("⚠️ DGM:", e.message);
         document.getElementById('dgm-preco-barra').innerText = "---";
@@ -534,4 +532,10 @@ Em breve: respostas inteligentes em tempo real!`;
 
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
-        const splash = document.getElementById('s
+        const splash = document.getElementById('splash');
+        if(splash) splash.classList.add('oculto');
+    }, 1500);
+
+    document.getElementById('btnMenu')?.addEventListener('click', e => { e.stopPropagation(); document.getElementById('menuNavegacao').classList.toggle('aberto'); });
+    document.addEventListener('click', e => { 
+        if(!e.target.
