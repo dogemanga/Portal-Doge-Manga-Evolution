@@ -1,1 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mercado Cripto | Doge Manga Evolution</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#050816;
+    color:white;
+}
+
+header{
+    text-align:center;
+    padding:30px;
+    background:#111827;
+}
+
+h1{
+    color:#facc15;
+}
+
+.container{
+    padding:30px;
+    text-align:center;
+}
+
+input{
+    width:90%;
+    max-width:500px;
+    padding:15px;
+    border-radius:10px;
+    border:none;
+    margin-bottom:20px;
+}
+
+.crypto-card{
+
+    display:inline-block;
+    width:230px;
+    margin:15px;
+    padding:20px;
+    background:#111827;
+    border:1px solid #facc15;
+    border-radius:15px;
+
+}
+
+.crypto-card img{
+
+    width:50px;
+
+}
+
+button{
+
+    background:#facc15;
+    color:#000;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+
+}
+
+button:hover{
+
+    transform:scale(1.05);
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🚀 Mercado Cripto Doge Manga</h1>
+
+<p>Compre e acompanhe criptomoedas em tempo real</p>
+
+</header>
+
+
+
+<div class="container">
+
+
+<input 
+id="busca"
+placeholder="Buscar moeda (bitcoin, ethereum, solana)"
+>
+
+
+<div id="lista"></div>
+
+
+<br>
+
+<button onclick="conectarCarteira()">
+🟣 Conectar Phantom
+</button>
+
+
+</div>
+
+
+
+<script>
+
+
+const carteiraTaxaDGM =
+"2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
+
+
+async function mercado(){
+
+
+let moedas =
+"bitcoin,ethereum,solana,dogecoin";
+
+
+let resposta =
+await fetch(
+`https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&ids=${moedas}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`
+);
+
+
+let dados =
+await resposta.json();
+
+
+let html="";
+
+
+dados.forEach(m=>{
+
+
+html += `
+
+<div class="crypto-card">
+
+<img src="${m.image}">
+
+<h3>${m.name}</h3>
+
+<h2>
+R$ ${m.current_price.toLocaleString("pt-BR")}
+</h2>
+
+<p>
+24h: ${m.price_change_percentage_24h.toFixed(2)}%
+</p>
+
+
+<button onclick="comprar('${m.name}')">
+Comprar
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("lista").innerHTML=html;
+
+
+}
+
+
+
+function comprar(nome){
+
+alert(
+"Compra de "+nome+
+" será conectada ao Swap Doge Manga."
+);
+
+}
+
+
+
+async function conectarCarteira(){
+
+
+if(window.solana){
+
+await window.solana.connect();
+
+alert("Phantom conectada!");
+
+}
+
+else{
+
+alert("Instale a Phantom Wallet");
+
+}
+
+
+}
+
+
+
+mercado();
+
+
+</script>
+
+
+</body>
+</html>
