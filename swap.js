@@ -29,4 +29,4 @@ function fazerSwap() {
         quantidade
     });
 
-}
+}alert("swap.js carregou!");
