@@ -4,25 +4,43 @@
 // ===============================
 
 let wallet = null;
+let enderecoCarteira = null;
+
+
+// CONECTAR PHANTOM
 
 async function conectarCarteira() {
 
     if (!window.solana || !window.solana.isPhantom) {
+
         alert("Phantom Wallet não encontrada. Instale a Phantom.");
+
         return;
+
     }
+
 
     try {
 
         const resposta = await window.solana.connect();
 
-        wallet = resposta.publicKey.toString();
 
-        console.log("Carteira:", wallet);
+        wallet = window.solana;
 
-        alert("Carteira conectada!\n\n" + wallet);
+        enderecoCarteira = resposta.publicKey.toString();
 
-        return wallet;
+
+        console.log("Carteira:", enderecoCarteira);
+
+
+        alert(
+            "Carteira conectada!\n\n" +
+            enderecoCarteira
+        );
+
+
+        return enderecoCarteira;
+
 
     } catch (erro) {
 
@@ -34,19 +52,34 @@ async function conectarCarteira() {
 
 }
 
+
+
+// DESCONECTAR PHANTOM
+
 async function desconectarCarteira() {
 
-    if (window.solana) {
 
-        await window.solana.disconnect();
+    if (wallet) {
+
+
+        await wallet.disconnect();
+
 
         wallet = null;
 
+        enderecoCarteira = null;
+
+
         alert("Carteira desconectada.");
+
 
     }
 
 }
+
+
+
+// VERIFICAR CONEXÃO
 
 function carteiraConectada() {
 
@@ -54,5 +87,15 @@ function carteiraConectada() {
 
 }
 
-alert("wallet.js carregou!");alert("wallet.js carregou!");
 
+
+// PEGAR ENDEREÇO
+
+function pegarEnderecoCarteira(){
+
+    return enderecoCarteira;
+
+}
+
+
+console.log("wallet.js carregado!");
