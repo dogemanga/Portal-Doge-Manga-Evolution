@@ -53,3 +53,6 @@ function carteiraConectada() {
     return wallet !== null;
 
 }
+
+alert("wallet.js carregou!");
+
