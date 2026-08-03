@@ -1,95 +1,90 @@
 // ===============================
-// DOGE MANGA EVOLUTION
-// swap.js
+// DOGE MANGA SWAP - BOTÕES CORRIGIDOS
 // ===============================
-
-// Contratos oficiais Solana
 const CONTRATO_DGM = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
-const CONTRATO_USDC = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v";
-let precoDGM = 0;
-let precoSOL = 0;
+let precoDGM = 0, precoSOL = 0;
 
-// Busca preços em tempo real
-async function atualizarPrecosSwap() {
+// Verifica se a Phantom foi detectada
+function temPhantom() {
+    return typeof window.solana !== "undefined" && window.solana.isPhantom === true;
+}
+
+// 🟢 FUNÇÃO DO BOTÃO "Conectar Phantom"
+async function acaoConectar() {
+    if (!temPhantom()) {
+        alert(`❌ Navegador errado!\n\nAbra o site DENTRO do app Phantom → ícone Navegador 🧭`);
+        return;
+    }
     try {
-        const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO_DGM}`);
-        const dados = await res.json();
-        precoDGM = dados.pairs?.[0]?.price?.usd || 0;
-        
-        const resSol = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-        const dadosSol = await resSol.json();
-        precoSOL = dadosSol.solana.usd || 0;
-    } catch (e) {
-        console.log("Erro ao buscar preços:", e);
+        const resp = await window.solana.connect();
+        const endereco = resp.publicKey.toString();
+        alert(`✅ Carteira conectada!\n${endereco.slice(0,10)}...`);
+        // Muda o texto do botão depois de conectar
+        const btn = Array.from(document.querySelectorAll("button")).find(b => b.textContent.includes("Conectar Phantom"));
+        if (btn) btn.textContent = `✅ ${endereco.slice(0,6)}...`;
+    } catch (erro) {
+        alert(`⚠️ Erro: ${erro.message || "Conexão cancelada"}`);
     }
 }
 
-// Cálculo automático do valor estimado
-function calcularValorEstimado() {
-    const tokenOrigem = document.getElementById("tokenFrom")?.value || document.getElementById("moedaEnvia")?.value;
-    const tokenDestino = document.getElementById("tokenTo")?.value || document.getElementById("moedaRecebe")?.value;
-    const quantidade = parseFloat(document.getElementById("amount")?.value || document.getElementById("quantidadeEnvia")?.value) || 0;
-    let valorRecebido = 0;
-
-    if (!quantidade || !precoDGM || !precoSOL) {
-        document.getElementById("resultado").innerHTML = "Estimativa: 0.00";
-        return;
-    }
-
-    // Regras de conversão
-    if (tokenOrigem === "SOL" && tokenDestino === "DGM") valorRecebido = (quantidade * precoSOL) / precoDGM;
-    if (tokenOrigem === "DGM" && tokenDestino === "SOL") valorRecebido = (quantidade * precoDGM) / precoSOL;
-    if (tokenOrigem === "USDC" && tokenDestino === "DGM") valorRecebido = quantidade / precoDGM;
-    if (tokenOrigem === "DGM" && tokenDestino === "USDC") valorRecebido = quantidade * precoDGM;
-    if (tokenOrigem === "SOL" && tokenDestino === "USDC") valorRecebido = quantidade * precoSOL;
-    if (tokenOrigem === "USDC" && tokenDestino === "SOL") valorRecebido = quantidade / precoSOL;
-
-    document.getElementById("resultado").innerHTML = `Estimativa: ${valorRecebido.toFixed(6)} ${tokenDestino}`;
+// 🔄 FUNÇÃO DO BOTÃO "Fazer Swap"
+function acaoFazerSwap() {
+    if (!temPhantom()) return alert("🔗 Conecte a carteira primeiro!");
+    alert("🚀 Swap pronto! Em breve você vai poder trocar diretamente aqui.");
 }
 
-function fazerSwap() {
-    // Verifica se carteira está conectada
-    if (!carteiraConectadaStatus()) {
-        alert("🔗 Conecte sua Phantom Wallet primeiro!");
-        conectarCarteira();
-        return;
-    }
-
-    const tokenOrigem = document.getElementById("tokenFrom")?.value || document.getElementById("moedaEnvia")?.value;
-    const tokenDestino = document.getElementById("tokenTo")?.value || document.getElementById("moedaRecebe")?.value;
-    const quantidade = document.getElementById("amount")?.value || document.getElementById("quantidadeEnvia")?.value;
-
-    if (!quantidade || Number(quantidade) <= 0) {
-        alert("❌ Digite uma quantidade válida.");
-        return;
-    }
-
-    document.getElementById("resultado").innerHTML =
-        "🔄 Preparando swap de " + quantidade + " " + tokenOrigem + " para " + tokenDestino + "...";
-
-    console.log({
-        tokenOrigem,
-        tokenDestino,
-        quantidade,
-        carteira: enderecoCarteira
-    });
-
-    // Aviso de funcionalidade
-    setTimeout(() => {
-        alert("🚀 Swap integrado com Jupiter Aggregator! Em breve liberação completa para negociação direta na rede Solana.");
-        adicionarNotificacao(`🔄 Solicitação de swap: ${quantidade} ${tokenOrigem} → ${tokenDestino}`);
-    }, 1000);
+// 📊 Busca preços e cálculo automático
+async function atualizarPrecos() {
+    try {
+        const rDGM = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO_DGM}`);
+        precoDGM = (await rDGM.json())?.pairs?.[0]?.price?.usd || 0;
+        const rSOL = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+        precoSOL = (await rSOL.json())?.solana?.usd || 0;
+    } catch {}
+}
+function calcularEstimativa() {
+    const q = parseFloat(document.querySelector("input[placeholder='0.00']")?.value) || 0;
+    const sel = document.querySelectorAll("select");
+    const de = sel[0]?.value, para = sel[1]?.value;
+    let res = 0;
+    if (!q || !precoDGM || !precoSOL) return mostrarEstimativa("0.00");
+    if (de==="SOL"&&para==="DGM") res=(q*precoSOL)/precoDGM;
+    if (de==="DGM"&&para==="SOL") res=(q*precoDGM)/precoSOL;
+    if (de==="USDC"&&para==="DGM") res=q/precoDGM;
+    if (de==="DGM"&&para==="USDC") res=q*precoDGM;
+    mostrarEstimativa(res.toFixed(6));
+}
+function mostrarEstimativa(texto) {
+    const el = Array.from(document.querySelectorAll("*")).find(e => e.textContent.includes("Estimativa"));
+    if (el) el.innerHTML = `Estimativa: <strong>${texto}</strong>`;
 }
 
-// Atualiza valores automaticamente
-document.getElementById("amount")?.addEventListener("input", calcularValorEstimado);
-document.getElementById("quantidadeEnvia")?.addEventListener("input", calcularValorEstimado);
-document.getElementById("tokenFrom")?.addEventListener("change", calcularValorEstimado);
-document.getElementById("moedaEnvia")?.addEventListener("change", calcularValorEstimado);
-document.getElementById("tokenTo")?.addEventListener("change", calcularValorEstimado);
-document.getElementById("moedaRecebe")?.addEventListener("change", calcularValorEstimado);
+// 🔗 LIGA OS BOTÕES ASSIM QUE A PÁGINA CARREGA
+window.addEventListener("load", () => {
+    // Botão Conectar Phantom
+    const btnConectar = Array.from(document.querySelectorAll("button")).find(b => b.textContent.includes("Conectar Phantom"));
+    if (btnConectar) {
+        btnConectar.addEventListener("click", acaoConectar);
+        console.log("✅ Botão Conectar ligado!");
+    } else {
+        console.log("⚠️ Botão Conectar não encontrado");
+    }
 
-// Inicializa
-atualizarPrecosSwap();
-setInterval(atualizarPrecosSwap, 120000);
-alert("✅ swap.js carregou com sucesso!");
+    // Botão Fazer Swap
+    const btnSwap = Array.from(document.querySelectorAll("button")).find(b => b.textContent.includes("Fazer Swap"));
+    if (btnSwap) {
+        btnSwap.addEventListener("click", acaoFazerSwap);
+        console.log("✅ Botão Fazer Swap ligado!");
+    } else {
+        console.log("⚠️ Botão Fazer Swap não encontrado");
+    }
+
+    // Atualiza cálculo quando mudar valores
+    document.querySelector("input[placeholder='0.00']")?.addEventListener("input", calcularEstimativa);
+    document.querySelectorAll("select").forEach(s => s.addEventListener("change", calcularEstimativa));
+
+    atualizarPrecos();
+    setInterval(atualizarPrecos, 180000);
+});
+
+alert("✅ swap.js carregou!");
