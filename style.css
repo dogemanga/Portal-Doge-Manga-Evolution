@@ -960,4 +960,29 @@ footer{
 .menu-mercado:hover {
     color:#fff !important;
     transform:translateX(5px);
+}.menu-binance-box {
+    background:#050816;
+    border:1px solid #facc15;
+    border-radius:15px;
+    padding:15px;
+    margin:15px 0;
+}
+
+.menu-binance-box h3 {
+    color:#facc15;
+}
+
+.menu-binance-box p {
+    color:#ffffff;
+    font-size:14px;
+}
+
+.btn-binance {
+    display:inline-block;
+    background:#facc15;
+    color:#000 !important;
+    font-weight:800;
+    padding:12px 20px;
+    border-radius:10px;
+    text-decoration:none;
 }
