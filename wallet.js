@@ -1,26 +1,22 @@
-// ===============================
-// DOGE MANGA EVOLUTION
-// wallet.js
-// ===============================
-
 let wallet = null;
 let enderecoCarteira = null;
 
 
-// CONECTAR PHANTOM
+async function conectarCarteira(){
 
-async function conectarCarteira() {
+    alert("Entrou na função conectarCarteira");
 
-    if (!window.solana || !window.solana.isPhantom) {
 
-        alert("Phantom Wallet não encontrada. Instale a Phantom.");
+    if(!window.solana || !window.solana.isPhantom){
+
+        alert("Phantom Wallet não encontrada.");
 
         return;
 
     }
 
 
-    try {
+    try{
 
         const resposta = await window.solana.connect();
 
@@ -33,67 +29,40 @@ async function conectarCarteira() {
         console.log("Carteira:", enderecoCarteira);
 
 
-        alert(
-            "Carteira conectada!\n\n" +
-            enderecoCarteira
-        );
+        alert("Carteira conectada!\n\n" + enderecoCarteira);
 
 
-        return enderecoCarteira;
-
-
-    } catch (erro) {
+    }catch(erro){
 
         console.error(erro);
 
-        alert("Conexão cancelada.");
+        alert("Erro ao conectar.");
 
     }
 
 }
 
 
+async function desconectarCarteira(){
 
-// DESCONECTAR PHANTOM
-
-async function desconectarCarteira() {
-
-
-    if (wallet) {
-
+    if(wallet){
 
         await wallet.disconnect();
-
 
         wallet = null;
 
         enderecoCarteira = null;
 
-
         alert("Carteira desconectada.");
-
 
     }
 
 }
 
 
-
-// VERIFICAR CONEXÃO
-
-function carteiraConectada() {
+function carteiraConectada(){
 
     return wallet !== null;
-
-}
-
-
-
-// PEGAR ENDEREÇO
-
-function pegarEnderecoCarteira(){
-
-    return enderecoCarteira;
 
 }
 
