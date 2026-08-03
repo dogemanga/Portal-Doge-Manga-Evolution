@@ -948,4 +948,16 @@ footer{
     width:22px;
     height:22px;
     border-radius:50%;
+}.menu-mercado {
+    color:#facc15 !important;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:0.3s;
+}
+
+.menu-mercado:hover {
+    color:#fff !important;
+    transform:translateX(5px);
 }
