@@ -54,5 +54,5 @@ function carteiraConectada() {
 
 }
 
-alert("wallet.js carregou!");
+alert("wallet.js carregou!");alert("wallet.js carregou!");
 
