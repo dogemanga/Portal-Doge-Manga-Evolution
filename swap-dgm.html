@@ -8,55 +8,62 @@
 
 <title>Swap Doge Manga Evolution</title>
 
-<link rel="stylesheet" href="style.css">
-
 <style>
 
 body{
-    background:#050816;
-    color:white;
-    font-family:Arial,sans-serif;
+
+background:#050816;
+color:white;
+font-family:Arial;
+text-align:center;
+
 }
+
 
 .container{
-    max-width:500px;
-    margin:40px auto;
-    background:#111827;
-    padding:25px;
-    border-radius:20px;
-    border:1px solid #facc15;
+
+max-width:450px;
+margin:50px auto;
+background:#111827;
+padding:25px;
+border-radius:20px;
+
 }
+
 
 h1{
-    text-align:center;
-    color:#facc15;
+
+color:#facc15;
+
 }
+
 
 button{
-    width:100%;
-    padding:15px;
-    margin-top:15px;
-    border:none;
-    border-radius:10px;
-    background:#facc15;
-    color:#000;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
+
+background:#facc15;
+border:0;
+padding:15px 25px;
+border-radius:15px;
+font-size:18px;
+cursor:pointer;
+
 }
 
-select,input{
 
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-    border-radius:10px;
+input,select{
+
+width:90%;
+padding:12px;
+margin:10px;
+border-radius:10px;
+
 }
 
-.info{
 
-    text-align:center;
-    margin-top:20px;
+#wallet{
+
+color:#38bdf8;
+margin:20px;
 
 }
 
@@ -71,23 +78,28 @@ select,input{
 <div class="container">
 
 
-<h1>🚀 Doge Manga Swap</h1>
+<h1>
+🔄 Swap Doge Manga
+</h1>
 
 
-<p style="text-align:center;">
-Troque SOL, USDC e DGM.
+<p>
+Solana Ecosystem
 </p>
 
 
-<button onclick="conectarCarteira()">
-🟣 Conectar Phantom
+<button onclick="connectWallet()">
+Conectar Phantom
 </button>
 
 
+<div id="wallet">
+Carteira desconectada
+</div>
 
-<label>Você envia:</label>
 
-<select id="tokenFrom">
+
+<select id="from">
 
 <option>SOL</option>
 <option>USDC</option>
@@ -96,19 +108,16 @@ Troque SOL, USDC e DGM.
 </select>
 
 
-
-<label>Quantidade:</label>
 
 <input 
 id="amount"
+placeholder="Quantidade"
 type="number"
-placeholder="0.00">
+>
 
 
 
-<label>Você recebe:</label>
-
-<select id="tokenTo">
+<select id="to">
 
 <option>DGM</option>
 <option>SOL</option>
@@ -117,32 +126,139 @@ placeholder="0.00">
 </select>
 
 
-
-<div class="info">
-
-Estimativa:
-
-<h2 id="resultado">
-0.00
-</h2>
-
-</div>
+<br>
 
 
-
-<button onclick="fazerSwap()">
-🔄 Fazer Swap
+<button onclick="startSwap()">
+🚀 Trocar Agora
 </button>
 
 
+<p id="result"></p>
+
+
 
 </div>
 
 
 
-<script src="js/config.js"></script>
-<script src="js/wallet.js"></script>
-<script src="js/swap.js"></script>
+<script>
+
+
+// =================================
+// CARTEIRA DO ECOSSISTEMA
+// =================================
+
+const TAX_WALLET =
+"2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
+
+
+// TAXA 1%
+
+const ECOSYSTEM_FEE = 0.01;
+
+
+
+let userWallet = null;
+
+
+
+
+// CONECTAR PHANTOM
+
+async function connectWallet(){
+
+
+if(window.solana){
+
+
+const response =
+await window.solana.connect();
+
+
+userWallet =
+response.publicKey.toString();
+
+
+document.getElementById("wallet").innerHTML =
+
+"Carteira: <br>"+userWallet;
+
+
+}
+
+else{
+
+
+alert(
+"Instale a Phantom Wallet"
+);
+
+
+}
+
+
+}
+
+
+
+
+// INICIAR SWAP
+
+function startSwap(){
+
+
+
+if(!userWallet){
+
+alert(
+"Conecte sua carteira primeiro"
+);
+
+return;
+
+}
+
+
+
+let amount =
+Number(
+document.getElementById("amount").value
+);
+
+
+
+let fee =
+amount * ECOSYSTEM_FEE;
+
+
+
+document.getElementById("result").innerHTML =
+
+
+`
+Swap preparado ✅
+
+<br><br>
+
+Taxa do ecossistema:
+${fee}
+
+<br><br>
+
+Destino da taxa:
+
+${TAX_WALLET}
+
+`;
+
+
+
+}
+
+
+
+</script>
 
 
 </body>
