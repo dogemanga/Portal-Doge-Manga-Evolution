@@ -27,6 +27,8 @@ function fazerSwap() {
         tokenOrigem,
         tokenDestino,
         quantidade
-    });
+    }
 
-}alert("swap.js carregou!");
+alert("swap.js carregou!");
+
+
