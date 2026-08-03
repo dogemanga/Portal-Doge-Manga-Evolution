@@ -1,68 +1,65 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Swap Doge Manga Evolution</title>
+
+<link rel="stylesheet" href="style.css">
 
 <style>
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
     background:#050816;
     color:white;
-    text-align:center;
+    font-family:Arial,sans-serif;
+    margin:0;
 }
 
 .container{
-    padding:40px;
+    max-width:500px;
+    margin:40px auto;
+    background:#111827;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid #facc15;
 }
 
 h1{
     color:#facc15;
+    text-align:center;
 }
 
-.box{
-
-    background:#111827;
-    border:1px solid #facc15;
-    border-radius:20px;
-    padding:30px;
-    max-width:450px;
-    margin:auto;
-
-}
-
-button{
-
-    background:#facc15;
-    border:none;
-    padding:15px 25px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-    margin:10px;
-
+label{
+    display:block;
+    margin-top:15px;
 }
 
 select,input{
-
-    width:90%;
+    width:100%;
     padding:12px;
-    margin:10px;
     border-radius:10px;
+    margin-top:5px;
+    border:none;
+}
 
+button{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    cursor:pointer;
+    background:#facc15;
+    color:#000;
+    font-weight:bold;
 }
 
 .info{
-
-    margin-top:30px;
-    color:#38bdf8;
-
+    margin-top:20px;
+    text-align:center;
+    color:#9ca3af;
 }
 
 </style>
@@ -71,99 +68,53 @@ select,input{
 
 <body>
 
-
 <div class="container">
 
+<h1>🚀 Doge Manga Swap</h1>
 
-<h1>🚀 Swap Doge Manga</h1>
-
-
-<div class="box">
-
-
-<p>
-Compre, venda e troque criptomoedas dentro do ecossistema Doge Manga.
+<p style="text-align:center;">
+Troque SOL, USDC e DGM de forma rápida e segura.
 </p>
 
-
-<p>
-Troque SOL, USDC e DGM usando sua carteira Solana.
-</p>
-
-
-
-<button onclick="conectar()">
+<button onclick="conectarCarteira()">
 🟣 Conectar Phantom
 </button>
 
+<label>Você envia</label>
 
-
-<h3>Escolha a troca</h3>
-
-
-<select>
-
+<select id="tokenFrom">
 <option>SOL</option>
 <option>USDC</option>
 <option>DGM</option>
-
 </select>
 
+<label>Quantidade</label>
 
-<input placeholder="Quantidade">
+<input
+type="number"
+id="amount"
+placeholder="0.00">
 
+<label>Você recebe</label>
 
-
-<button>
-🔄 Fazer Swap
-</button>
-
-
+<select id="tokenTo">
+<option>DGM</option>
+<option>SOL</option>
+<option>USDC</option>
+</select>
 
 <div class="info">
 
-Taxa do ecossistema Doge Manga:
-0,5%
+Estimativa:<br>
 
-<br><br>
-
-Carteira de taxas:
-
-2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f
+<strong id="resultado">
+0.00
+</strong>
 
 </div>
 
+<button id="swapButton">
+🔄 Fazer Swap
+</button>
 
 </div>
-
-
-</div>
-
-
-
-<script>
-
-
-async function conectar(){
-
-if(window.solana){
-
-await window.solana.connect();
-
-alert("Phantom conectada!");
-
-}else{
-
-alert("Instale a Phantom Wallet");
-
-}
-
-}
-
-
-</script>
-
-
-</body>
-
-</html><script src="js/wallet.js"></script>
