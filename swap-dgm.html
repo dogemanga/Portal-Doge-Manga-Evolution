@@ -1,80 +1,167 @@
-// ===============================
-// DOGE MANGA EVOLUTION - swap.js
-// ===============================
-const CONTRATO_DGM = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
-let precoDGM = 0;
-let precoSOL = 0;
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-// Busca preços reais
-async function atualizarPrecos() {
-    try {
-        const resDGM = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${CONTRATO_DGM}`);
-        const dadosDGM = await resDGM.json();
-        precoDGM = dadosDGM?.pairs?.[0]?.price?.usd || 0;
+<head>
 
-        const resSOL = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-        const dadosSOL = await resSOL.json();
-        precoSOL = dadosSOL?.solana?.usd || 0;
-    } catch (e) {
-        console.log("Erro ao buscar preços:", e);
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Swap Doge Manga Evolution</title>
+
+<style>
+
+body{
+
+    margin:0;
+    background:#050816;
+    color:white;
+    font-family:Arial,sans-serif;
+
 }
 
-// Cálculo automático da estimativa
-function calcularEstimativa() {
-    const tokenOrigem = document.getElementById("tokenFrom").value;
-    const tokenDestino = document.getElementById("tokenTo").value;
-    const quantidade = parseFloat(document.getElementById("amount").value) || 0;
-    let valorRecebido = 0;
 
-    if (!quantidade || !precoDGM || !precoSOL) {
-        document.getElementById("resultado").textContent = "0.00";
-        document.getElementById("swapButton").disabled = true;
-        return;
-    }
+.container{
 
-    // Regras de conversão
-    if (tokenOrigem === "SOL" && tokenDestino === "DGM") valorRecebido = (quantidade * precoSOL) / precoDGM;
-    if (tokenOrigem === "DGM" && tokenDestino === "SOL") valorRecebido = (quantidade * precoDGM) / precoSOL;
-    if (tokenOrigem === "USDC" && tokenDestino === "DGM") valorRecebido = quantidade / precoDGM;
-    if (tokenOrigem === "DGM" && tokenDestino === "USDC") valorRecebido = quantidade * precoDGM;
-    if (tokenOrigem === "SOL" && tokenDestino === "USDC") valorRecebido = quantidade * precoSOL;
-    if (tokenOrigem === "USDC" && tokenDestino === "SOL") valorRecebido = quantidade / precoSOL;
+    max-width:500px;
+    margin:40px auto;
+    background:#111827;
+    padding:30px;
+    border-radius:20px;
+    border:1px solid #facc15;
 
-    document.getElementById("resultado").textContent = valorRecebido.toFixed(6);
-    document.getElementById("swapButton").disabled = !carteiraConectadaStatus() || valorRecebido <= 0;
 }
 
-// Conectar carteira já atualiza o botão
-async function conectarCarteira() {
-    if (!window.solana || !window.solana.isPhantom) {
-        alert(`❌ Phantom NÃO ENCONTRADA!\n\n📱 ABRA ESTA PÁGINA DENTRO DO NAVEGADOR DO APP PHANTOM!`);
-        window.open("https://phantom.app/download", "_blank");
-        return;
-    }
-    try {
-        await window.solana.connect();
-        const end = window.solana.publicKey.toString();
-        document.getElementById("btnConectar").textContent = `✅ ${end.slice(0,6)}...`;
-        document.getElementById("btnConectar").disabled = true;
-        alert("✅ Carteira conectada!");
-        calcularEstimativa();
-    } catch (e) {
-        alert(`⚠️ Erro: ${e.message || "Conexão cancelada"}`);
-    }
+
+h1{
+
+    text-align:center;
+    color:#facc15;
+
 }
 
-function fazerSwap() {
-    if (!carteiraConectadaStatus()) return alert("🔗 Conecte a carteira primeiro!");
-    alert("🚀 Swap pronto! Em breve execução direta na rede Solana.");
+
+button{
+
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border:none;
+    border-radius:10px;
+    background:#facc15;
+    color:#000;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
+
 }
 
-// Eventos de alteração
-document.getElementById("amount").addEventListener("input", calcularEstimativa);
-document.getElementById("tokenFrom").addEventListener("change", calcularEstimativa);
-document.getElementById("tokenTo").addEventListener("change", calcularEstimativa);
 
-// Inicializa
-atualizarPrecos();
-setInterval(atualizarPrecos, 120000);
-alert("✅ swap.js carregou!");
+select,
+input{
+
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:10px;
+
+}
+
+
+.resultado{
+
+    margin-top:20px;
+    text-align:center;
+    color:#38bdf8;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>🚀 Swap Doge Manga</h1>
+
+
+<p align="center">
+Troque SOL, USDC e DGM pelo ecossistema Doge Manga.
+</p>
+
+
+
+<button onclick="conectarCarteira()">
+
+🟣 Conectar Phantom
+
+</button>
+
+
+
+<h3>Você envia:</h3>
+
+
+<select id="tokenFrom">
+
+<option>SOL</option>
+<option>USDC</option>
+<option>DGM</option>
+
+</select>
+
+
+
+<input 
+id="amount"
+type="number"
+placeholder="Quantidade">
+
+
+
+<h3>Você recebe:</h3>
+
+
+<select id="tokenTo">
+
+<option>DGM</option>
+<option>SOL</option>
+<option>USDC</option>
+
+</select>
+
+
+
+<div class="resultado" id="resultado">
+
+0.00
+
+</div>
+
+
+
+<button onclick="fazerSwap()">
+
+🔄 Fazer Swap
+
+</button>
+
+
+
+</div>
+
+
+
+<script src="js/wallet.js"></script>
+
+<script src="js/swap.js"></script>
+
+
+</body>
+
+</html>
