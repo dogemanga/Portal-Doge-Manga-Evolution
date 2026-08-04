@@ -1,5 +1,5 @@
 // ===============================
-// DOGE MANGA - TESTE SEM TAXA
+// DOGE MANGA - TESTE SEM TAXA + API ATUALIZADA
 // ===============================
 
 const ATIVAR_TAXA = false; // ❌ Taxa desligada para testes
@@ -35,7 +35,7 @@ let wallet = null;
 let ultimaRota = null;
 let processando = false;
 
-console.log("🐕 Modo de teste: SEM TAXA");
+console.log("🐕 Modo de teste: SEM TAXA | API Jupiter atualizada");
 
 // ===============================
 // CONEXÃO PHANTOM
@@ -81,10 +81,10 @@ Saldo DGM: ${dgm.value.uiAmount.toLocaleString("pt-BR")}
 }
 
 // ===============================
-// MOTOR JUPITER
+// MOTOR JUPITER (ATUALIZADO!)
 // ===============================
-const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
-const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
+const JUPITER_QUOTE = "https://lite-api.jup.ag/swap/v1/quote";
+const JUPITER_SWAP = "https://lite-api.jup.ag/swap/v1/swap";
 
 async function buscarCotacao(inputMint, outputMint, amount){
     try{
@@ -111,6 +111,7 @@ function mensagemErro(erro){
     if(txt.includes("rejected") || txt.includes("cancelada")) return "❌ Você cancelou a transação";
     if(txt.includes("insufficient")) return "❌ Saldo insuficiente";
     if(txt.includes("blockhash") || txt.includes("expired")) return "❌ Tempo esgotado, tente novamente";
+    if(txt.includes("fetch")) return "❌ Sem conexão com a API, verifique a internet";
     return `❌ Erro: ${erro.message || "Falha desconhecida"}`;
 }
 
