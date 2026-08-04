@@ -1,51 +1,117 @@
 // ===============================
-// DOGE MANGA EVOLUTION
-// JUPITER QUOTE ENGINE
+// DOGE MANGA EVOLUTION - CONFIGS
+// ===============================
+
+const ATIVAR_TAXA = true;
+const CARTEIRA_TAXA = "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
+const TAX_WALLET = new solanaWeb3.PublicKey(CARTEIRA_TAXA);
+const TAXA_SWAP = 0.005;
+const TAXA_EM_BPS = Math.round(TAXA_SWAP * 100 * 100);
+
+const DGM_MINT = new solanaWeb3.PublicKey("E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE");
+const USDC_MINT = new solanaWeb3.PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+const SPL_TOKEN_PROGRAM = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
+
+const MINT_ADDRESSES = {
+    SOL: "So11111111111111111111111111111111111111112",
+    USDC: USDC_MINT.toString(),
+    DGM: DGM_MINT.toString()
+};
+
+let wallet = null;
+let ultimaRota = null;
+
+console.log("🐕 Configurações carregadas");
+// ===============================
+// CONEXÃO PHANTOM
+// ===============================
+
+async function connectWallet(){
+    if(!window.solana || !window.solana.isPhantom){
+        alert("❌ Abra pelo navegador dentro do app Phantom!");
+        return;
+    }
+    try{
+        const resp = await window.solana.connect();
+        wallet = resp.publicKey.toString();
+        document.getElementById("wallet").textContent = "Conectada: " + wallet.slice(0,8) + "...";
+        document.getElementById("swapBtn").disabled = true;
+    }catch(e){
+        alert("Erro: " + e.message);
+    }
+}
+
+console.log("🐕 Módulo Phantom carregado");
+// ===============================
+// MOTOR JUPITER
 // ===============================
 
 const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
 const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
 
-
 async function buscarCotacao(inputMint, outputMint, amount){
     try{
-        let url = `${JUPITER_QUOTE}?inputMint=${inputMint}`+
-                  `&outputMint=${outputMint}`+
-                  `&amount=${amount}`+
-                  `&slippageBps=50`;
+        let url = `${JUPITER_QUOTE}?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=50`;
+        if(ATIVAR_TAXA) url += `&platformFeeBps=${TAXA_EM_BPS}`;
 
-        // Adiciona taxa na cotação se estiver ativada
-        if(ATIVAR_TAXA){
-            url += `&platformFeeBps=${TAXA_EM_BPS}`;
-        }
-
-        const resposta = await fetch(url);
-        const dados = await resposta.json();
-
-        if(!dados.routePlan){
-            throw new Error(dados.error || "Nenhuma rota encontrada");
-        }
-
+        const res = await fetch(url);
+        const dados = await res.json();
+        if(!dados.routePlan) throw new Error(dados.error || "Nenhuma rota encontrada");
+        
         ultimaRota = dados;
-        console.log("🚀 Cotação Jupiter:", dados);
         return dados;
-
-    }catch(error){
-        console.error("Erro cotação:", error);
-        alert("Não foi possível buscar cotação: " + error.message);
+    }catch(e){
+        console.error("Erro cotação:", e);
+        alert("Não foi possível buscar cotação: " + e.message);
     }
 }
 
-
-// Converter valor recebido para formato brasileiro
 function formatarValor(valor){
-    return Number(valor).toLocaleString("pt-BR", {
-        maximumFractionDigits: 6
-    });
+    return Number(valor).toLocaleString("pt-BR", { maximumFractionDigits: 6 });
 }
 
+console.log("🐕 Motor Jupiter carregado");
+// ===============================
+// EXECUÇÃO DO SWAP
+// ===============================
 
-// Função principal de swap
+async function getQuote(){
+    const de = document.getElementById("tokenFrom").value;
+    const para = document.getElementById("tokenTo").value;
+    const quant = Number(document.getElementById("amount").value);
+
+    if(!quant || quant <= 0) return alert("Digite um valor válido!");
+    if(de === para) return alert("Escolha moedas diferentes!");
+
+    document.getElementById("status").textContent = "🔍 Buscando cotação...";
+    document.getElementById("swapBtn").disabled = true;
+    ultimaRota = null;
+
+    try{
+        const decimaisEntrada = de === "SOL" ? 1e9 : 1e6;
+        const bruto = Math.floor(quant * decimaisEntrada);
+        const dados = await buscarCotacao(MINT_ADDRESSES[de], MINT_ADDRESSES[para], bruto);
+        if(!dados) return;
+
+        const decimaisSaida = para === "SOL" ? 1e9 : 1e6;
+        const receber = dados.outAmount / decimaisSaida;
+        const taxa = ATIVAR_TAXA ? receber * TAXA_SWAP : 0;
+        const final = receber - taxa;
+
+        document.getElementById("quote").innerHTML = `
+Você envia: <strong>${quant.toFixed(6)} ${de}</strong><br>
+Recebe aproximadamente:<br>
+<strong>${final.toFixed(6)} ${para}</strong>
+${ATIVAR_TAXA ? `<br><br>Taxa Doge Manga: ${taxa.toFixed(6)} ${para}` : ""}
+        `.trim();
+
+        document.getElementById("status").textContent = "✅ Cotação pronta";
+        document.getElementById("swapBtn").disabled = false;
+    }catch(e){
+        document.getElementById("status").textContent = "❌ " + e.message;
+    }
+}
+
 async function executarSwap(){
     if(!wallet) return alert("🔗 Conecte a Phantom primeiro!");
     if(!ultimaRota) return alert("💹 Busque a cotação primeiro!");
@@ -61,11 +127,9 @@ async function executarSwap(){
             asLegacyTransaction: false
         };
 
-        // Adiciona a conta de taxa se ativada
         if(ATIVAR_TAXA){
             const moedaSaida = document.getElementById("tokenTo").value;
             let contaTaxa;
-
             if(moedaSaida === "SOL"){
                 contaTaxa = CARTEIRA_TAXA;
             }else{
@@ -113,46 +177,5 @@ async function executarSwap(){
     }
 }
 
+console.log("🐕 Lógica do Swap carregada");
 
-console.log("🐕 Jupiter Engine carregado");const JUPITER_QUOTE_API = "https://quote-api.jup.ag/v6/quote";
-
-
-async function buscarCotacao(
-    inputMint,
-    outputMint,
-    amount
-){
-
-    try{
-
-        const url =
-        `${JUPITER_QUOTE_API}?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=50`;
-
-
-        const resposta = await fetch(url);
-
-
-        if(!resposta.ok){
-            throw new Error("Erro Jupiter API");
-        }
-
-
-        const dados = await resposta.json();
-
-
-        if(!dados.routePlan || dados.routePlan.length === 0){
-            return null;
-        }
-
-
-        return dados;
-
-
-    }catch(e){
-
-        console.error("Jupiter:",e);
-
-        return null;
-    }
-
-}
