@@ -1,32 +1,58 @@
-let wallet = null;
-let enderecoCarteira = null;
+// ===============================
+// DOGE MANGA SWAP - SOLANA
+// ===============================
 
-async function conectarCarteira(){
-    if(!window.solana || !window.solana.isPhantom){
-        alert("❌ Phantom Wallet não encontrada. Instale em https://phantom.app/");
-        return;
+let carteiraUsuario = null;
+
+async function conectarPhantom(){
+
+    if(window.solana && window.solana.isPhantom){
+
+        try {
+
+            const resposta = await window.solana.connect();
+
+            carteiraUsuario = resposta.publicKey.toString();
+
+            document.getElementById("wallet").innerHTML =
+            "Conectado: " + carteiraUsuario;
+
+            console.log("Carteira:", carteiraUsuario);
+
+        } catch(error){
+
+            console.log(error);
+            alert("Erro ao conectar carteira");
+
+        }
+
+    } else {
+
+        alert("Instale a Phantom Wallet");
+
     }
-    try{
-        const resposta = await window.solana.connect();
-        wallet = window.solana;
-        enderecoCarteira = resposta.publicKey.toString();
-        alert("✅ Carteira conectada!\n\n" + enderecoCarteira);
-    }catch(erro){
-        alert("❌ Erro ao conectar: " + erro.message);
-    }
+
 }
 
-async function desconectarCarteira(){
-    if(wallet){
-        await wallet.disconnect();
-        wallet = null;
-        enderecoCarteira = null;
-        alert("✅ Carteira desconectada.");
-    }
+
+// Verifica configuração
+
+function verificarConfig(){
+
+    console.log("Token Doge Manga:",
+    CONFIG.DOGEMANGA_TOKEN);
+
+    console.log("Recebimento:",
+    CONFIG.CARTEIRA_RECEBIMENTO);
+
+    console.log("Taxa:",
+    CONFIG.TAXA_SWAP);
+
 }
 
-function carteiraConectadaStatus(){
-    return wallet !== null;
-}
 
-console.log("✅ wallet.js carregado!");
+window.onload = () => {
+
+    verificarConfig();
+
+};
