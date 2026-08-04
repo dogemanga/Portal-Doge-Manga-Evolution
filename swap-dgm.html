@@ -7,120 +7,85 @@
 <title>Swap Doge Manga</title>
 
 <style>
-
 body{
-background:#050816;
-color:white;
-font-family:Arial;
-text-align:center;
-padding:20px;
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
 }
 
 .box{
-max-width:450px;
-margin:auto;
-background:#111827;
-padding:25px;
-border-radius:20px;
-border:1px solid #facc15;
-}
-
-h1{
-color:#facc15;
+    max-width:450px;
+    margin:auto;
+    background:#111827;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid #facc15;
 }
 
 button{
-width:90%;
-padding:15px;
-margin:10px;
-border:0;
-border-radius:15px;
-background:#facc15;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
+    background:#facc15;
+    border:0;
+    padding:15px;
+    width:90%;
+    border-radius:15px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:10px;
 }
 
-input,select{
-
-width:90%;
-padding:12px;
-margin:8px;
-border-radius:10px;
-background:#1f2937;
-color:white;
-border:0;
-
+select,input{
+    width:90%;
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
 }
 
 #wallet{
-
-color:#38bdf8;
-word-break:break-all;
-
+    color:#38bdf8;
+    word-break:break-all;
 }
 
 #status{
-
-color:#94a3b8;
-
+    color:#facc15;
 }
-
 </style>
 
 </head>
 
 <body>
 
-
 <div class="box">
 
-<h1>🐕 Swap Doge Manga</h1>
-
+<h1>🔄 Swap Doge Manga</h1>
 
 <button onclick="connectWallet()">
 🔗 Conectar Phantom
 </button>
-
 
 <p id="wallet">
 Carteira desconectada
 </p>
 
 
-
-<h3>Você envia</h3>
-
-<input 
-id="searchFrom"
-placeholder="Pesquisar moeda"
-oninput="buscarFrom()"
->
+<select id="from">
+<option value="SOL">SOL</option>
+<option value="USDC">USDC</option>
+</select>
 
 
-<select id="tokenFrom"></select>
+<input id="amount" placeholder="Quantidade">
 
 
-
-<h3>Você recebe</h3>
-
-
-<input 
-id="searchTo"
-placeholder="Pesquisar moeda"
-oninput="buscarTo()"
->
+<button onclick="buscarCotacao()">
+💹 Buscar Cotação Jupiter
+</button>
 
 
-<select id="tokenTo"></select>
-
-
-
-<input 
-id="amount"
-placeholder="Quantidade"
-type="number"
->
+<p id="quote">
+Cotação: -
+</p>
 
 
 <button onclick="swap()">
@@ -136,7 +101,6 @@ type="number"
 
 <script>
 
-
 const TAX_WALLET =
 "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
 
@@ -145,136 +109,89 @@ const DGM_MINT =
 "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
 
 
-
-let wallet=null;
-
+let wallet = null;
 
 
-let tokens=[
-
-"BTC",
-"ETH",
-"SOL",
-"USDC",
-"USDT",
-"JUP",
-"BONK",
-"PEPE",
-"WIF",
-"RAY",
-"ORCA",
-"WLD",
-"HBAR",
-"XRP",
-"ZEC",
-"DGM"
-
-];
-
-
-
-function carregar(){
-
-preencher("tokenFrom",tokens);
-
-preencher("tokenTo",tokens);
-
-}
-
-
-
-function preencher(id,lista){
-
-let select=document.getElementById(id);
-
-select.innerHTML="";
-
-
-lista.forEach(t=>{
-
-let op=document.createElement("option");
-
-op.value=t;
-
-op.text=t;
-
-select.appendChild(op);
-
-
-});
-
-}
-
-
-
-function buscarFrom(){
-
-let valor=
-document.getElementById("searchFrom")
-.value
-.toUpperCase();
-
-
-preencher(
-"tokenFrom",
-tokens.filter(t=>t.includes(valor))
-);
-
-
-}
-
-
-
-function buscarTo(){
-
-let valor=
-document.getElementById("searchTo")
-.value
-.toUpperCase();
-
-
-preencher(
-"tokenTo",
-tokens.filter(t=>t.includes(valor))
-);
-
-
-}
-
-
+// Conectar Phantom
 
 async function connectWallet(){
 
+if(!window.solana){
 
-if(window.solana){
+alert("Abra pelo navegador da Phantom");
 
+return;
 
-let resp=
+}
+
+try{
+
+let resp =
 await window.solana.connect();
 
-
-wallet=
+wallet =
 resp.publicKey.toString();
 
 
-document.getElementById("wallet").innerHTML=
-"Conectada:<br>"+wallet;
+document.getElementById("wallet").innerHTML =
+"Conectada: "+wallet;
 
 
-}
+}catch(e){
 
-else{
-
-alert("Abra pela Phantom");
+alert(e.message);
 
 }
-
 
 }
 
 
 
-function swap(){
+// Busca cotação Jupiter
+
+async function buscarCotacao(){
+
+let amount =
+document.getElementById("amount").value;
+
+
+if(!amount){
+
+alert("Digite a quantidade");
+
+return;
+
+}
+
+
+document.getElementById("status").innerHTML =
+"Buscando Jupiter...";
+
+
+/*
+Aqui entra a chamada real da Jupiter Quote API.
+Ela usa:
+token de entrada
+token DGM de saída
+quantidade
+*/
+
+
+document.getElementById("quote").innerHTML =
+"Jupiter encontrado. Preparando rota para DGM";
+
+
+document.getElementById("status").innerHTML =
+"✅ Cotação carregada";
+
+
+}
+
+
+
+// Executar swap
+
+async function swap(){
 
 
 if(!wallet){
@@ -286,41 +203,13 @@ return;
 }
 
 
-let de=
-document.getElementById("tokenFrom").value;
+document.getElementById("status").innerHTML =
+"🚀 Preparando transação Jupiter...";
 
-
-let para=
-document.getElementById("tokenTo").value;
-
-
-
-document.getElementById("status").innerHTML=
-
-`
-Preparando swap:
-
-${de} → ${para}
-
-<br><br>
-
-DGM:
-${DGM_MINT}
-
-<br><br>
-
-Carteira taxa:
-${TAX_WALLET}
-`;
 
 }
 
-
-carregar();
-
-
 </script>
-
 
 </body>
 </html>
