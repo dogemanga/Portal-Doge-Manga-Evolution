@@ -114,4 +114,45 @@ async function executarSwap(){
 }
 
 
-console.log("🐕 Jupiter Engine carregado");
+console.log("🐕 Jupiter Engine carregado");const JUPITER_QUOTE_API = "https://quote-api.jup.ag/v6/quote";
+
+
+async function buscarCotacao(
+    inputMint,
+    outputMint,
+    amount
+){
+
+    try{
+
+        const url =
+        `${JUPITER_QUOTE_API}?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=50`;
+
+
+        const resposta = await fetch(url);
+
+
+        if(!resposta.ok){
+            throw new Error("Erro Jupiter API");
+        }
+
+
+        const dados = await resposta.json();
+
+
+        if(!dados.routePlan || dados.routePlan.length === 0){
+            return null;
+        }
+
+
+        return dados;
+
+
+    }catch(e){
+
+        console.error("Jupiter:",e);
+
+        return null;
+    }
+
+}
