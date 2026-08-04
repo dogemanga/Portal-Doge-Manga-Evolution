@@ -1,70 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Swap Doge Manga Evolution</title>
+<title>Swap Doge Manga</title>
 
 <style>
 
 body{
-    background:#050816;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    margin:0;
-    padding:20px;
+background:#050816;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:20px;
 }
 
 .box{
-    max-width:450px;
-    margin:40px auto;
-    background:#111827;
-    padding:25px;
-    border-radius:20px;
-    border:1px solid #facc15;
+max-width:450px;
+margin:auto;
+background:#111827;
+padding:25px;
+border-radius:20px;
+border:1px solid #facc15;
 }
 
 h1{
-    color:#facc15;
+color:#facc15;
 }
 
 button{
-    width:90%;
-    background:#facc15;
-    border:0;
-    padding:15px;
-    border-radius:15px;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
+width:90%;
+padding:15px;
+margin:10px;
+border:0;
+border-radius:15px;
+background:#facc15;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
 }
 
-select,input{
+input,select{
 
-    width:90%;
-    padding:12px;
-    margin:10px;
-    border-radius:10px;
-    background:#1f2937;
-    color:white;
-    border:0;
+width:90%;
+padding:12px;
+margin:8px;
+border-radius:10px;
+background:#1f2937;
+color:white;
+border:0;
 
 }
 
 #wallet{
 
-    color:#38bdf8;
-    word-break:break-all;
+color:#38bdf8;
+word-break:break-all;
 
 }
 
 #status{
 
-    color:#9ca3af;
+color:#94a3b8;
 
 }
 
@@ -72,16 +70,12 @@ select,input{
 
 </head>
 
-
 <body>
 
 
 <div class="box">
 
-
-<h1>
-🐕 Swap Doge Manga
-</h1>
+<h1>🐕 Swap Doge Manga</h1>
 
 
 <button onclick="connectWallet()">
@@ -95,37 +89,30 @@ Carteira desconectada
 
 
 
-<h3>
-🔎 Buscar moeda
-</h3>
-
+<h3>Você envia</h3>
 
 <input 
-id="search"
-placeholder="BTC, ETH, SOL, PEPE..."
-oninput="filterTokens()"
+id="searchFrom"
+placeholder="Pesquisar moeda"
+oninput="buscarFrom()"
 >
 
 
-
-<select id="tokenFrom">
-
-</select>
+<select id="tokenFrom"></select>
 
 
 
-<h3>
-Receber
-</h3>
+<h3>Você recebe</h3>
 
 
-<select id="tokenTo">
+<input 
+id="searchTo"
+placeholder="Pesquisar moeda"
+oninput="buscarTo()"
+>
 
-<option value="DGM">
-🐕 Doge Manga (DGM)
-</option>
 
-</select>
+<select id="tokenTo"></select>
 
 
 
@@ -136,19 +123,15 @@ type="number"
 >
 
 
-
 <button onclick="swap()">
 🚀 Trocar Agora
 </button>
-
 
 
 <p id="status"></p>
 
 
 </div>
-
-
 
 
 <script>
@@ -167,7 +150,7 @@ let wallet=null;
 
 
 
-const tokens=[
+let tokens=[
 
 "BTC",
 "ETH",
@@ -177,6 +160,9 @@ const tokens=[
 "JUP",
 "BONK",
 "PEPE",
+"WIF",
+"RAY",
+"ORCA",
 "WLD",
 "HBAR",
 "XRP",
@@ -187,70 +173,70 @@ const tokens=[
 
 
 
-function loadTokens(){
+function carregar(){
 
-let select=
-document.getElementById("tokenFrom");
+preencher("tokenFrom",tokens);
 
+preencher("tokenTo",tokens);
+
+}
+
+
+
+function preencher(id,lista){
+
+let select=document.getElementById(id);
 
 select.innerHTML="";
 
 
-tokens.forEach(token=>{
+lista.forEach(t=>{
 
+let op=document.createElement("option");
 
-let option=
-document.createElement("option");
+op.value=t;
 
+op.text=t;
 
-option.value=token;
-
-option.text=
-token;
-
-
-select.appendChild(option);
+select.appendChild(op);
 
 
 });
+
+}
+
+
+
+function buscarFrom(){
+
+let valor=
+document.getElementById("searchFrom")
+.value
+.toUpperCase();
+
+
+preencher(
+"tokenFrom",
+tokens.filter(t=>t.includes(valor))
+);
 
 
 }
 
 
 
-function filterTokens(){
+function buscarTo(){
+
+let valor=
+document.getElementById("searchTo")
+.value
+.toUpperCase();
 
 
-let busca=
-document.getElementById("search").value.toUpperCase();
-
-
-let select=
-document.getElementById("tokenFrom");
-
-
-select.innerHTML="";
-
-
-tokens
-.filter(t=>t.includes(busca))
-.forEach(token=>{
-
-
-let option=
-document.createElement("option");
-
-
-option.value=token;
-
-option.text=token;
-
-
-select.appendChild(option);
-
-
-});
+preencher(
+"tokenTo",
+tokens.filter(t=>t.includes(valor))
+);
 
 
 }
@@ -279,9 +265,7 @@ document.getElementById("wallet").innerHTML=
 
 else{
 
-
 alert("Abra pela Phantom");
-
 
 }
 
@@ -295,43 +279,48 @@ function swap(){
 
 if(!wallet){
 
-alert("Conecte a carteira");
+alert("Conecte a Phantom primeiro");
 
 return;
 
 }
 
 
+let de=
+document.getElementById("tokenFrom").value;
+
+
+let para=
+document.getElementById("tokenTo").value;
+
+
 
 document.getElementById("status").innerHTML=
 
 `
-Preparando Jupiter Swap...
+Preparando swap:
+
+${de} → ${para}
 
 <br><br>
 
-Taxa ecossistema:
-
-${TAX_WALLET}
-
-<br><br>
-
-Token DGM:
-
+DGM:
 ${DGM_MINT}
 
+<br><br>
+
+Carteira taxa:
+${TAX_WALLET}
 `;
 
 }
 
 
-
-loadTokens();
+carregar();
 
 
 </script>
 
 
 </body>
-
 </html>
