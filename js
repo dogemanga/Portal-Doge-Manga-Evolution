@@ -1,5 +1,5 @@
 // ===============================
-// DOGE MANGA EVOLUTION - FASE 1
+// DOGE MANGA EVOLUTION - SEGURO
 // ===============================
 
 const ATIVAR_TAXA = true;
@@ -11,6 +11,7 @@ const TAXA_EM_BPS = Math.round(TAXA_SWAP * 100 * 100);
 const DGM_MINT = new solanaWeb3.PublicKey("E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE");
 const USDC_MINT = new solanaWeb3.PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
 const SPL_TOKEN_PROGRAM = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
+const ASSOCIATED_TOKEN_PROGRAM = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
 const MINT_ADDRESSES = {
     SOL: "So11111111111111111111111111111111111111112",
@@ -18,13 +19,26 @@ const MINT_ADDRESSES = {
     DGM: DGM_MINT.toString()
 };
 
+const TOKEN_DECIMALS = {
+    SOL: 9,
+    USDC: 6,
+    DGM: 6
+};
+
+const VALOR_MINIMO = {
+    SOL: 0.01,
+    USDC: 1,
+    DGM: 1000
+};
+
 let wallet = null;
 let ultimaRota = null;
+let processando = false;
 
-console.log("🐕 Fase 1: Configurações carregadas");
+console.log("🐕 Sistema carregado com proteções");
 
 // ===============================
-// CONEXÃO PHANTOM MELHORADA
+// CONEXÃO PHANTOM
 // ===============================
 async function connectWallet(){
     if(!window.solana || !window.solana.isPhantom){
@@ -66,10 +80,8 @@ Saldo DGM: ${dgm.value.uiAmount.toLocaleString("pt-BR")}
     `.trim();
 }
 
-console.log("🐕 Módulo Phantom carregado");
-
 // ===============================
-// MOTOR JUPITER 100%
+// MOTOR JUPITER
 // ===============================
 const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
 const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
@@ -91,30 +103,85 @@ async function buscarCotacao(inputMint, outputMint, amount){
     }
 }
 
-console.log("🐕 Motor Jupiter carregado");
+// ===============================
+// FUNÇÃO DE ERROS AMIGÁVEIS
+// ===============================
+function mensagemErro(erro){
+    const txt = erro.message.toLowerCase();
+    if(txt.includes("user rejected") || txt.includes("cancelada")) return "❌ Você cancelou a transação";
+    if(txt.includes("insufficient") || txt.includes("saldo")) return "❌ Saldo insuficiente para essa troca";
+    if(txt.includes("blockhash") || txt.includes("expired")) return "❌ Tempo esgotado, tente novamente";
+    if(txt.includes("slippage")) return "❌ Variação de preço muito alta, aumente o slippage ou tente novamente";
+    if(txt.includes("fetch")) return "❌ Sem conexão com a rede, verifique sua internet";
+    return `❌ Erro: ${erro.message || "Falha desconhecida"}`;
+}
 
 // ===============================
-// EXECUÇÃO DO SWAP
+// BUSCAR COTAÇÃO
 // ===============================
 async function getQuote(){
+    if(processando) return;
+    processando = true;
+
     const de = document.getElementById("tokenFrom").value;
     const para = document.getElementById("tokenTo").value;
     const quant = Number(document.getElementById("amount").value);
 
-    if(!quant || quant <= 0) return alert("Digite um valor válido!");
-    if(de === para) return alert("Escolha moedas diferentes!");
+    // Validações
+    if(!quant || quant <= 0) {
+        alert("Digite um valor válido!");
+        processando = false;
+        return;
+    }
+    if(de === para) {
+        alert("Escolha moedas diferentes!");
+        processando = false;
+        return;
+    }
+    if(quant < VALOR_MINIMO[de]) {
+        alert(`Valor mínimo para ${de}: ${VALOR_MINIMO[de]} ${de}`);
+        processando = false;
+        return;
+    }
+
+    // Verificar saldo antes
+    if(wallet){
+        const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
+        const endereco = new solanaWeb3.PublicKey(wallet);
+        let saldoUsuario = 0;
+
+        if(de === "SOL"){
+            const saldo = await conexao.getBalance(endereco);
+            saldoUsuario = saldo / 1e9;
+        }else{
+            const mint = de === "DGM" ? DGM_MINT : USDC_MINT;
+            const conta = await conexao.getTokenAccountsByOwner(endereco, {mint});
+            if(conta.value[0]){
+                const balanco = await conexao.getTokenAccountBalance(conta.value[0].pubkey);
+                saldoUsuario = balanco.value.uiAmount;
+            }
+        }
+
+        if(quant > saldoUsuario){
+            alert(`Saldo insuficiente! Você tem ${saldoUsuario.toFixed(4)} ${de}`);
+            processando = false;
+            return;
+        }
+    }
 
     document.getElementById("status").textContent = "🔍 Buscando cotação...";
     document.getElementById("swapBtn").disabled = true;
     ultimaRota = null;
 
     try{
-        const decimaisEntrada = de === "SOL" ? 1e9 : 1e6;
-        const bruto = Math.floor(quant * decimaisEntrada);
+        const bruto = Math.floor(quant * (10 ** TOKEN_DECIMALS[de]));
         const dados = await buscarCotacao(MINT_ADDRESSES[de], MINT_ADDRESSES[para], bruto);
-        if(!dados) return;
+        if(!dados) {
+            processando = false;
+            return;
+        }
 
-        const decimaisSaida = para === "SOL" ? 1e9 : 1e6;
+        const decimaisSaida = 10 ** TOKEN_DECIMALS[para];
         const receber = dados.outAmount / decimaisSaida;
         const taxa = ATIVAR_TAXA ? receber * TAXA_SWAP : 0;
         const final = receber - taxa;
@@ -129,13 +196,29 @@ ${ATIVAR_TAXA ? `<br><br>Taxa Doge Manga: ${taxa.toFixed(6)} ${para}` : ""}
         document.getElementById("status").textContent = "✅ Cotação pronta";
         document.getElementById("swapBtn").disabled = false;
     }catch(e){
-        document.getElementById("status").textContent = "❌ " + e.message;
+        document.getElementById("status").textContent = mensagemErro(e);
+    }finally{
+        processando = false;
     }
 }
 
+// ===============================
+// EXECUTAR SWAP
+// ===============================
 async function executarSwap(){
-    if(!wallet) return alert("🔗 Conecte a Phantom primeiro!");
-    if(!ultimaRota) return alert("💹 Busque a cotação primeiro!");
+    if(processando) return;
+    processando = true;
+
+    if(!wallet) {
+        alert("🔗 Conecte a Phantom primeiro!");
+        processando = false;
+        return;
+    }
+    if(!ultimaRota) {
+        alert("💹 Busque a cotação primeiro!");
+        processando = false;
+        return;
+    }
 
     document.getElementById("status").textContent = "🚀 Preparando transação...";
     document.getElementById("swapBtn").disabled = true;
@@ -157,7 +240,7 @@ async function executarSwap(){
                 const mint = moedaSaida === "DGM" ? DGM_MINT : USDC_MINT;
                 const [ata] = await solanaWeb3.PublicKey.findProgramAddress(
                     [TAX_WALLET.toBuffer(), SPL_TOKEN_PROGRAM.toBuffer(), mint.toBuffer()],
-                    new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL")
+                    ASSOCIATED_TOKEN_PROGRAM
                 );
                 contaTaxa = ata.toString();
             }
@@ -197,12 +280,15 @@ async function executarSwap(){
         `.trim();
 
         await carregarSaldos();
+        ultimaRota = null;
+        document.getElementById("swapBtn").disabled = true;
 
     }catch(e){
-        document.getElementById("status").textContent = "❌ Erro: " + (e.message || "Transação cancelada");
+        document.getElementById("status").textContent = mensagemErro(e);
     }finally{
+        processando = false;
         document.getElementById("swapBtn").disabled = false;
     }
 }
 
-console.log("🐕 Fase 1 concluída com sucesso!");
+console.log("🐕 Todas as proteções ativadas!");
