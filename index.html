@@ -4232,7 +4232,37 @@ class="btn-binance">
 
 
 </div>
+<script>
 
+async function connectPhantom(){
+
+    const provider = window.phantom?.solana || window.solana;
+
+    if(provider){
+
+        try{
+
+            const response = await provider.connect();
+
+            document.getElementById("walletStatus").innerHTML =
+            "Carteira conectada:<br>" +
+            response.publicKey.toString();
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+    }else{
+
+        alert("Phantom não encontrada neste navegador");
+
+    }
+
+}
+
+</script>
 <a href="swap-dgm.html">
 🔄 Swap Doge Manga
 </a>
