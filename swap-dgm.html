@@ -11,48 +11,51 @@
 <style>
 
 body{
-background:#050816;
-color:white;
-font-family:Arial;
-text-align:center;
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    text-align:center;
 }
 
 .box{
-max-width:450px;
-margin:40px auto;
-background:#111827;
-padding:25px;
-border-radius:20px;
+    max-width:450px;
+    margin:40px auto;
+    background:#111827;
+    padding:25px;
+    border-radius:20px;
 }
 
 h1{
-color:#facc15;
-}
-
-select,input{
-
-width:90%;
-padding:15px;
-margin:10px;
-border-radius:10px;
-
+    color:#facc15;
 }
 
 button{
 
-background:#facc15;
-border:none;
-padding:15px 30px;
-border-radius:15px;
-font-size:18px;
-cursor:pointer;
+    background:#facc15;
+    color:#000;
+    border:0;
+    padding:15px 25px;
+    border-radius:15px;
+    cursor:pointer;
+    font-size:18px;
 
 }
 
+
+select,input{
+
+    width:90%;
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+
+}
+
+
 #wallet{
 
-color:#38bdf8;
-margin:20px;
+    color:#38bdf8;
+    margin:20px;
 
 }
 
@@ -68,16 +71,17 @@ margin:20px;
 
 
 <h1>
-🐉 Swap Doge Manga
+🔄 Swap Doge Manga
 </h1>
 
 
 <p>
-Solana Swap powered by Jupiter
+Solana Jupiter Swap
 </p>
 
 
-<button onclick="connectPhantom()">
+
+<button onclick="connectWallet()">
 🔗 Conectar Phantom
 </button>
 
@@ -88,42 +92,52 @@ Carteira desconectada
 
 
 
-<h3>Você envia</h3>
-
 <select id="fromToken">
 
-<option>SOL</option>
-<option>USDC</option>
-<option>DGM</option>
-<option>wBTC</option>
-<option>wETH</option>
+<option value="SOL">
+SOL
+</option>
+
+<option value="USDC">
+USDC
+</option>
+
+<option value="DGM">
+Doge Manga
+</option>
 
 </select>
+
 
 
 <input 
 id="amount"
 type="number"
 placeholder="Quantidade"
->
+/>
 
-
-
-<h3>Você recebe</h3>
 
 
 <select id="toToken">
 
-<option>DGM</option>
-<option>SOL</option>
-<option>USDC</option>
-<option>wBTC</option>
-<option>wETH</option>
+<option value="DGM">
+Doge Manga
+</option>
+
+<option value="SOL">
+SOL
+</option>
+
+<option value="USDC">
+USDC
+</option>
 
 </select>
 
 
-<br>
+
+<br><br>
+
 
 
 <button onclick="swap()">
@@ -131,94 +145,77 @@ placeholder="Quantidade"
 </button>
 
 
+
 <p id="status"></p>
+
 
 
 </div>
 
 
 
-
 <script>
+
+
+// ==============================
+// CARTEIRA DA TAXA ECOSSISTEMA
+// ==============================
 
 
 const TAX_WALLET =
 "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
 
 
+// 1%
+
 const ECOSYSTEM_FEE = 0.01;
 
 
-let wallet = null;
+
+// MINT DO DGM
+// colocar depois o endereço correto
+
+const DGM_MINT =
+"COLOCAR_MINT_DGM";
 
 
 
-async function connectPhantom(){
-
-
-try{
-
-
-let provider = null;
-
-
-// Phantom Android / Browser
-
-if(window.phantom && window.phantom.solana){
-
-provider = window.phantom.solana;
-
-}
-
-
-// Phantom extensão
-
-else if(window.solana){
-
-provider = window.solana;
-
-}
+let walletAddress = null;
 
 
 
-if(!provider){
+// ==============================
+// CONECTAR PHANTOM
+// ==============================
 
-alert(
-"Abra o site pelo navegador da Phantom Wallet"
-);
 
-return;
+async function connectWallet(){
 
-}
 
+if(window.solana){
 
 
 const response =
-await provider.connect();
+await window.solana.connect();
 
 
-
-wallet =
+walletAddress =
 response.publicKey.toString();
-
 
 
 document.getElementById("wallet").innerHTML =
 
-"Carteira conectada:<br>"+wallet;
-
+"Carteira conectada:<br>" +
+walletAddress;
 
 
 }
 
-catch(error){
-
-
-console.log(error);
+else{
 
 
 alert(
-"Erro ao conectar Phantom"
+"Abra usando uma carteira Solana"
 );
 
 
@@ -230,20 +227,29 @@ alert(
 
 
 
+// ==============================
+// BOTÃO SWAP
+// ==============================
 
-async function swap(){
+
+function swap(){
 
 
-if(!wallet){
+
+if(!walletAddress){
 
 alert(
-"Conecte a Phantom primeiro"
+"Conecte sua carteira primeiro"
 );
 
 return;
 
 }
 
+
+
+let amount =
+document.getElementById("amount").value;
 
 
 let from =
@@ -254,15 +260,17 @@ let to =
 document.getElementById("toToken").value;
 
 
-let amount =
-document.getElementById("amount").value;
+
+let fee =
+amount * ECOSYSTEM_FEE;
 
 
 
 document.getElementById("status").innerHTML =
 
 `
-Swap preparado 🚀
+Swap preparado ✅
+
 <br><br>
 
 ${amount} ${from}
@@ -271,12 +279,8 @@ ${to}
 
 <br><br>
 
-Jupiter será conectado na próxima etapa.
-
-<br><br>
-
 Taxa ecossistema:
-${ECOSYSTEM_FEE*100}%
+${fee}
 
 <br><br>
 
@@ -284,6 +288,8 @@ Carteira:
 ${TAX_WALLET}
 
 `;
+
+
 
 }
 
