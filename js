@@ -188,3 +188,5 @@ async function executarSwap(){
 }
 
 console.log("🐕 Lógica do Swap carregada");
+const resultado = await window.solana.signAndSendTransaction(transacao);
+const assinatura = resultado.signature || resultado;
