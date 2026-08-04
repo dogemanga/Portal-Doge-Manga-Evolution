@@ -1,1 +1,10 @@
 
+.imagem-principal {
+    width: 100%;
+    max-width: 480px;  /* Tamanho ideal para celular e desktop */
+    height: auto;      /* NÃO ALTERA! Mantém a proporção sem deformar */
+    border-radius: 12px; /* Cantos arredondados como você tinha */
+    display: block;
+    margin: 0 auto 20px auto; /* Centraliza e dá espaço abaixo */
+    object-fit: contain; /* Não corta nada da imagem */
+}
