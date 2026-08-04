@@ -7,81 +7,75 @@
 
 <title>Swap Doge Manga</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
+
 <style>
 
 body{
-    background:#050816;
-    color:white;
-    font-family:Arial;
-    text-align:center;
-    padding:20px;
+background:#050816;
+color:white;
+font-family:Arial;
+text-align:center;
+padding:20px;
 }
 
 .box{
-    max-width:450px;
-    margin:auto;
-    background:#111827;
-    padding:25px;
-    border-radius:20px;
-    border:1px solid #facc15;
+max-width:450px;
+margin:auto;
+background:#111827;
+padding:25px;
+border-radius:20px;
+border:1px solid #facc15;
 }
 
 h1{
-    color:#facc15;
+color:#facc15;
 }
 
 button{
-    width:90%;
-    padding:15px;
-    margin:10px;
-    border-radius:15px;
-    border:0;
-    background:#facc15;
-    font-weight:bold;
-    cursor:pointer;
+width:90%;
+padding:15px;
+margin:10px;
+border:0;
+border-radius:15px;
+background:#facc15;
+font-weight:bold;
+cursor:pointer;
 }
 
 input,select{
-
-    width:90%;
-    padding:12px;
-    margin:10px;
-    border-radius:10px;
-
+width:90%;
+padding:12px;
+margin:8px;
+border-radius:10px;
+background:#1f2937;
+color:white;
+border:0;
 }
 
 #wallet{
-
-    color:#38bdf8;
-    word-break:break-all;
-
+color:#38bdf8;
+word-break:break-all;
 }
 
-#status{
-
-    color:#facc15;
-
+#status,#quote{
+color:#facc15;
 }
 
 </style>
 
 </head>
 
-<body>
 
+<body>
 
 <div class="box">
 
-
-<h1>
-🐕 Swap Doge Manga
-</h1>
-
+<h1>🐕 Swap Doge Manga</h1>
 
 <button onclick="connectWallet()">
 🔗 Conectar Phantom
 </button>
-
 
 <p id="wallet">
 Carteira desconectada
@@ -90,57 +84,41 @@ Carteira desconectada
 
 <h3>Enviar</h3>
 
-<input id="searchToken"
-placeholder="Buscar token SOL, USDC, JUP...">
+<select id="tokenFrom">
 
-
-<select id="tokenList">
-
-<option>
-SOL
-</option>
+<option value="SOL">SOL</option>
+<option value="USDC">USDC</option>
+<option value="DGM">DGM</option>
 
 </select>
 
 
-
-<input 
-id="amount"
-placeholder="Quantidade"
-type="number">
+<input id="amount" type="number" placeholder="Quantidade">
 
 
 <h3>Receber</h3>
 
-<select>
+<select id="tokenTo">
 
-<option>
-DGM
-</option>
+<option value="DGM">DGM</option>
+<option value="SOL">SOL</option>
+<option value="USDC">USDC</option>
 
 </select>
 
 
 <p id="quote">
-
 Cotação: -
-
 </p>
 
 
-
 <button onclick="getQuote()">
-
 💹 Buscar Cotação Jupiter
-
 </button>
 
 
-
-<button onclick="swap()">
-
+<button id="swapBtn" onclick="swap()" disabled>
 🚀 Trocar Agora
-
 </button>
 
 
@@ -148,120 +126,3 @@ Cotação: -
 
 
 </div>
-
-
-
-<script>
-
-
-const TAX_WALLET =
-"2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
-
-
-const DGM_MINT =
-"E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
-
-
-let wallet = null;
-
-
-
-async function connectWallet(){
-
-if(!window.solana){
-
-alert("Abra pelo navegador da Phantom");
-
-return;
-
-}
-
-
-try{
-
-let resp =
-await window.solana.connect();
-
-
-wallet =
-resp.publicKey.toString();
-
-
-document.getElementById("wallet").innerHTML =
-"Conectada: "+wallet;
-
-
-}catch(e){
-
-alert(e.message);
-
-}
-
-
-}
-
-
-
-
-async function getQuote(){
-
-
-let amount =
-document.getElementById("amount").value;
-
-
-if(!amount){
-
-alert("Digite a quantidade");
-
-return;
-
-}
-
-
-document.getElementById("status").innerHTML =
-"Buscando Jupiter...";
-
-
-// Aqui entra a cotação Jupiter
-
-
-document.getElementById("quote").innerHTML =
-"Rota encontrada para DGM";
-
-
-document.getElementById("status").innerHTML =
-"✅ Cotação pronta";
-
-
-}
-
-
-
-
-async function swap(){
-
-
-if(!wallet){
-
-alert("Conecte a Phantom");
-
-return;
-
-}
-
-
-document.getElementById("status").innerHTML =
-"🚀 Preparando Swap Jupiter...";
-
-
-}
-
-
-
-</script>
-
-
-</body>
-
-</html>
