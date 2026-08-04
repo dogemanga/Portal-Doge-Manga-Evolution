@@ -1,128 +1,190 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Swap Doge Manga</title>
-
 <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
-
 <style>
-
 body{
-background:#050816;
-color:white;
-font-family:Arial;
-text-align:center;
-padding:20px;
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    padding:20px;
 }
-
 .box{
-max-width:450px;
-margin:auto;
-background:#111827;
-padding:25px;
-border-radius:20px;
-border:1px solid #facc15;
+    max-width:450px;
+    margin:auto;
+    background:#111827;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid #facc15;
 }
-
 h1{
-color:#facc15;
+    color:#facc15;
+    margin-top:0;
 }
-
+h3{
+    text-align:left;
+    width:90%;
+    margin:20px auto 5px;
+    color:#94a3b8;
+}
 button{
-width:90%;
-padding:15px;
-margin:10px;
-border:0;
-border-radius:15px;
-background:#facc15;
-font-weight:bold;
-cursor:pointer;
+    width:90%;
+    padding:15px;
+    margin:10px;
+    border:0;
+    border-radius:15px;
+    background:#facc15;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
 }
-
+button:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+}
 input,select{
-width:90%;
-padding:12px;
-margin:8px;
-border-radius:10px;
-background:#1f2937;
-color:white;
-border:0;
+    width:90%;
+    padding:12px;
+    margin:8px;
+    border-radius:10px;
+    background:#1f2937;
+    color:white;
+    border:0;
+    font-size:16px;
 }
-
 #wallet{
-color:#38bdf8;
-word-break:break-all;
+    color:#38bdf8;
+    word-break:break-all;
+    font-size:14px;
+    margin:5px 0 15px;
 }
-
 #status,#quote{
-color:#facc15;
+    color:#facc15;
+    margin:10px 0;
+}
+</style>
+</head>
+<body>
+<div class="box">
+    <h1>🐕 Swap Doge Manga</h1>
+    <button onclick="connectWallet()">🔗 Conectar Phantom</button>
+    <p id="wallet">Carteira desconectada</p>
+
+    <h3>Enviar</h3>
+    <select id="tokenFrom">
+        <option value="SOL">SOL</option>
+        <option value="USDC">USDC</option>
+        <option value="DGM">DGM</option>
+    </select>
+
+    <input id="amount" type="number" placeholder="Quantidade" step="0.00000001" min="0">
+
+    <h3>Receber</h3>
+    <select id="tokenTo">
+        <option value="DGM">DGM</option>
+        <option value="SOL">SOL</option>
+        <option value="USDC">USDC</option>
+    </select>
+
+    <p id="quote">Cotação: -</p>
+    <button onclick="getQuote()">💹 Buscar Cotação Jupiter</button>
+    <button id="swapBtn" onclick="swap()" disabled>🚀 Trocar Agora</button>
+    <p id="status"></p>
+</div>
+
+<script>
+const DGM_MINT = new solanaWeb3.PublicKey("E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE");
+const USDC_MINT = new solanaWeb3.PublicKey("EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v");
+const MINT_ADDRESSES = {
+    SOL: "So11111111111111111111111111111111111111112",
+    USDC: USDC_MINT.toString(),
+    DGM: DGM_MINT.toString()
+};
+
+let wallet = null;
+let ultimaRota = null;
+
+async function connectWallet(){
+    if(!window.solana || !window.solana.isPhantom){
+        alert("❌ Abra pelo navegador da Phantom!");
+        return;
+    }
+    try{
+        const resp = await window.solana.connect();
+        wallet = resp.publicKey.toString();
+        document.getElementById("wallet").textContent = "Conectada: " + wallet.slice(0,8) + "...";
+        document.getElementById("swapBtn").disabled = true;
+    }catch(e){
+        alert("Erro: " + e.message);
+    }
 }
 
-</style>
+async function getQuote(){
+    const de = document.getElementById("tokenFrom").value;
+    const para = document.getElementById("tokenTo").value;
+    const quant = parseFloat(document.getElementById("amount").value);
+    if(!quant || quant <= 0) return alert("Digite um valor válido!");
+    if(de === para) return alert("Escolha moedas diferentes!");
 
-</head>
+    document.getElementById("status").textContent = "🔍 Buscando cotação...";
+    document.getElementById("swapBtn").disabled = true;
+    ultimaRota = null;
 
+    try{
+        const decimais = de === "SOL" ? 1e9 : 1e6;
+        const quantBruto = Math.round(quant * decimais);
+        const res = await fetch(`https://quote-api.jup.ag/v6/quote?inputMint=${MINT_ADDRESSES[de]}&outputMint=${MINT_ADDRESSES[para]}&amount=${quantBruto}&slippageBps=50`);
+        const dados = await res.json();
+        if(!dados.routePlan) throw new Error(dados.error || "Nenhuma rota encontrada");
 
-<body>
+        const decimaisSaida = para === "SOL" ? 1e9 : 1e6;
+        const valorReceber = (dados.outAmount / decimaisSaida).toFixed(6);
+        document.getElementById("quote").textContent = `Cotação: ${valorReceber} ${para}`;
+        document.getElementById("status").textContent = "✅ Pronto para trocar!";
+        ultimaRota = dados;
+        document.getElementById("swapBtn").disabled = false;
+    }catch(e){
+        document.getElementById("status").textContent = "❌ Erro: " + e.message;
+    }
+}
 
-<div class="box">
+async function swap(){
+    if(!wallet) return alert("Conecte a carteira!");
+    if(!ultimaRota) return alert("Busque a cotação primeiro!");
+    document.getElementById("status").textContent = "🚀 Enviando transação...";
 
-<h1>🐕 Swap Doge Manga</h1>
+    try{
+        const resSwap = await fetch("https://quote-api.jup.ag/v6/swap", {
+            method:"POST",
+            headers:{ "Content-Type":"application/json" },
+            body:JSON.stringify({
+                quoteResponse: ultimaRota,
+                userPublicKey: wallet,
+                wrapAndUnwrapSol: true
+            })
+        });
 
-<button onclick="connectWallet()">
-🔗 Conectar Phantom
-</button>
+        const dados = await resSwap.json();
+        if(!dados.swapTransaction) throw new Error(dados.error || "Falha ao gerar transação");
 
-<p id="wallet">
-Carteira desconectada
-</p>
+        const transactionBuf = Uint8Array.from(atob(dados.swapTransaction), c=>c.charCodeAt(0));
+        const transaction = solanaWeb3.VersionedTransaction.deserialize(transactionBuf);
+        const resultado = await window.solana.signAndSendTransaction(transaction);
+        const assinatura = resultado.signature || resultado;
 
+        document.getElementById("status").innerHTML =
+        `✅ Concluído!<br>
+        <a target="_blank" style="color:#facc15" href="https://solscan.io/tx/${assinatura}">Ver transação</a>`;
 
-<h3>Enviar</h3>
-
-<select id="tokenFrom">
-
-<option value="SOL">SOL</option>
-<option value="USDC">USDC</option>
-<option value="DGM">DGM</option>
-
-</select>
-
-
-<input id="amount" type="number" placeholder="Quantidade">
-
-
-<h3>Receber</h3>
-
-<select id="tokenTo">
-
-<option value="DGM">DGM</option>
-<option value="SOL">SOL</option>
-<option value="USDC">USDC</option>
-
-</select>
-
-
-<p id="quote">
-Cotação: -
-</p>
-
-
-<button onclick="getQuote()">
-💹 Buscar Cotação Jupiter
-</button>
-
-
-<button id="swapBtn" onclick="swap()" disabled>
-🚀 Trocar Agora
-</button>
-
-
-<p id="status"></p>
-
-
-</div>
+    }catch(e){
+        document.getElementById("status").textContent = "❌ Erro: "+(e.message || "Cancelado");
+    }
+}
+</script>
+</body>
+</html>
