@@ -156,4 +156,40 @@ Doge Manga Crypto Hub
 
 </body>
 
-</html></body>
+</html></body><script>
+
+const token = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
+
+async function carregarDados(){
+
+try{
+
+const resposta = await fetch(
+`https://api.geckoterminal.com/api/v2/networks/solana/tokens/${token}`
+);
+
+const dados = await resposta.json();
+
+const moeda = dados.data.attributes;
+
+document.getElementById("preco").innerHTML =
+"💰 Preço: $" + moeda.price_usd;
+
+document.getElementById("volume").innerHTML =
+"📊 Volume 24h: $" + moeda.volume_usd.h24;
+
+document.getElementById("marketcap").innerHTML =
+"📈 Market Cap: " + (moeda.market_cap_usd || "Calculando");
+
+
+}catch(error){
+
+console.log("Erro ao carregar dados", error);
+
+}
+
+}
+
+carregarDados();
+
+</script>
