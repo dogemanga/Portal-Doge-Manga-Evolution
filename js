@@ -22,6 +22,7 @@ let wallet = null;
 let ultimaRota = null;
 
 console.log("🐕 Configurações carregadas");
+
 // ===============================
 // CONEXÃO PHANTOM
 // ===============================
@@ -42,6 +43,7 @@ async function connectWallet(){
 }
 
 console.log("🐕 Módulo Phantom carregado");
+
 // ===============================
 // MOTOR JUPITER
 // ===============================
@@ -71,6 +73,7 @@ function formatarValor(valor){
 }
 
 console.log("🐕 Motor Jupiter carregado");
+
 // ===============================
 // EXECUÇÃO DO SWAP
 // ===============================
@@ -163,7 +166,14 @@ async function executarSwap(){
 
         document.getElementById("status").textContent = "⏳ Confirmando na Solana...";
         const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
-        await conexao.confirmTransaction(assinatura, "confirmed");
+
+        // Verificação inteligente de confirmação
+        const status = await conexao.getSignatureStatuses([assinatura]);
+        const info = status.value[0];
+        if(!info || (info.confirmationStatus !== "confirmed" && info.confirmationStatus !== "finalized")){
+            await conexao.confirmTransaction(assinatura, "confirmed");
+        }
+        console.log("✅ Transação confirmada na rede");
 
         document.getElementById("status").innerHTML = `
 ✅ Swap concluído!${ATIVAR_TAXA ? "<br>💸 Taxa de 0,5% enviada" : ""}<br>
@@ -178,8 +188,3 @@ async function executarSwap(){
 }
 
 console.log("🐕 Lógica do Swap carregada");
-
-// Jeito correto
-const status = await conexao.getSignatureStatus(assinatura);
-console.log(status.value.confirmationStatus);
-await conexao.confirmTransaction(assinatura, "confirmed");
