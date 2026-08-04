@@ -1,184 +1,337 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swap Doge Manga</title>
-    <style>
-        body{
-            background:#050816;
-            color:white;
-            font-family:Arial;
-            text-align:center;
-            margin:0;
-            padding:20px;
-        }
 
-        .box{
-            max-width:450px;
-            margin:40px auto;
-            background:#111827;
-            padding:25px;
-            border-radius:20px;
-            border:1px solid #facc15;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        h1{
-            color:#facc15;
-            margin-bottom:15px;
-        }
+<title>Swap Doge Manga Evolution</title>
 
-        button{
-            background:#facc15;
-            border:0;
-            padding:15px 25px;
-            border-radius:15px;
-            font-size:18px;
-            font-weight:bold;
-            color:#000;
-            cursor:pointer;
-            width:90%;
-            margin:8px 0;
-        }
+<style>
 
-        button:disabled{
-            opacity:0.5;
-            cursor:not-allowed;
-        }
+body{
+    background:#050816;
+    color:white;
+    font-family:Arial;
+    text-align:center;
+    margin:0;
+    padding:20px;
+}
 
-        select,input{
-            width:90%;
-            padding:12px;
-            margin:10px 0;
-            border-radius:10px;
-            border:none;
-            background:#1f2937;
-            color:white;
-            font-size:16px;
-        }
+.box{
+    max-width:450px;
+    margin:40px auto;
+    background:#111827;
+    padding:25px;
+    border-radius:20px;
+    border:1px solid #facc15;
+}
 
-        #wallet{
-            color:#38bdf8;
-            word-break:break-all;
-            font-size:14px;
-            margin:10px 0 20px;
-        }
+h1{
+    color:#facc15;
+}
 
-        #status{
-            margin-top:15px;
-            color:#9ca3af;
-            font-size:15px;
-        }
-    </style>
+button{
+    width:90%;
+    background:#facc15;
+    border:0;
+    padding:15px;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+select,input{
+
+    width:90%;
+    padding:12px;
+    margin:10px;
+    border-radius:10px;
+    background:#1f2937;
+    color:white;
+    border:0;
+
+}
+
+#wallet{
+
+    color:#38bdf8;
+    word-break:break-all;
+
+}
+
+#status{
+
+    color:#9ca3af;
+
+}
+
+</style>
+
 </head>
+
+
 <body>
-    <div class="box">
-        <h1>🔄 Swap Doge Manga</h1>
 
-        <button onclick="connectWallet()">🔗 Conectar Phantom</button>
-        <p id="wallet">Carteira desconectada</p>
 
-        <label style="display:block;text-align:left;width:90%;margin:0 auto;color:#94a3b8">Você envia</label>
-        <select id="tokenFrom">
-            <option value="SOL">SOL</option>
-            <option value="USDC">USDC</option>
-            <option value="DGM">DGM</option>
-        </select>
+<div class="box">
 
-        <input type="number" id="amount" placeholder="Quantidade" step="0.00000001" min="0">
 
-        <label style="display:block;text-align:left;width:90%;margin:15px auto 0;color:#94a3b8">Você recebe</label>
-        <select id="tokenTo">
-            <option value="DGM">DGM</option>
-            <option value="SOL">SOL</option>
-            <option value="USDC">USDC</option>
-        </select>
+<h1>
+🐕 Swap Doge Manga
+</h1>
 
-        <p style="color:#facc15;font-size:18px;margin:15px 0">Estimativa: <span id="estimativa">0.00</span></p>
 
-        <button id="btnSwap" onclick="swap()" disabled>🚀 Trocar Agora</button>
-        <p id="status"></p>
-    </div>
+<button onclick="connectWallet()">
+🔗 Conectar Phantom
+</button>
+
+
+<p id="wallet">
+Carteira desconectada
+</p>
+
+
+
+<h3>
+🔎 Buscar moeda
+</h3>
+
+
+<input 
+id="search"
+placeholder="BTC, ETH, SOL, PEPE..."
+oninput="filterTokens()"
+>
+
+
+
+<select id="tokenFrom">
+
+</select>
+
+
+
+<h3>
+Receber
+</h3>
+
+
+<select id="tokenTo">
+
+<option value="DGM">
+🐕 Doge Manga (DGM)
+</option>
+
+</select>
+
+
+
+<input 
+id="amount"
+placeholder="Quantidade"
+type="number"
+>
+
+
+
+<button onclick="swap()">
+🚀 Trocar Agora
+</button>
+
+
+
+<p id="status"></p>
+
+
+</div>
+
+
+
 
 <script>
-const TAX_WALLET = "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
-const DGM_MINT = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
 
-let wallet = null;
-let precoDGM = 0;
-let precoSOL = 0;
 
-// Verifica e conecta a Phantom corretamente
+const TAX_WALLET =
+"2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
+
+
+const DGM_MINT =
+"E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
+
+
+
+let wallet=null;
+
+
+
+const tokens=[
+
+"BTC",
+"ETH",
+"SOL",
+"USDC",
+"USDT",
+"JUP",
+"BONK",
+"PEPE",
+"WLD",
+"HBAR",
+"XRP",
+"ZEC",
+"DGM"
+
+];
+
+
+
+function loadTokens(){
+
+let select=
+document.getElementById("tokenFrom");
+
+
+select.innerHTML="";
+
+
+tokens.forEach(token=>{
+
+
+let option=
+document.createElement("option");
+
+
+option.value=token;
+
+option.text=
+token;
+
+
+select.appendChild(option);
+
+
+});
+
+
+}
+
+
+
+function filterTokens(){
+
+
+let busca=
+document.getElementById("search").value.toUpperCase();
+
+
+let select=
+document.getElementById("tokenFrom");
+
+
+select.innerHTML="";
+
+
+tokens
+.filter(t=>t.includes(busca))
+.forEach(token=>{
+
+
+let option=
+document.createElement("option");
+
+
+option.value=token;
+
+option.text=token;
+
+
+select.appendChild(option);
+
+
+});
+
+
+}
+
+
+
 async function connectWallet(){
-    if(!window.solana || !window.solana.isPhantom){
-        alert(`❌ Phantom não encontrada!\n\nInstale a extensão no computador ou abra dentro do navegador do app Phantom.`);
-        return;
-    }
-    try{
-        const resp = await window.solana.connect();
-        wallet = resp.publicKey.toString();
-        document.getElementById("wallet").innerHTML = `Conectada: ${wallet.slice(0,8)}...`;
-        document.getElementById("btnSwap").disabled = false;
-        alert("✅ Carteira conectada com sucesso!");
-        atualizarPrecos();
-    }catch(e){
-        alert("❌ Erro: " + (e.message || "Conexão cancelada"));
-    }
+
+
+if(window.solana){
+
+
+let resp=
+await window.solana.connect();
+
+
+wallet=
+resp.publicKey.toString();
+
+
+document.getElementById("wallet").innerHTML=
+"Conectada:<br>"+wallet;
+
+
 }
 
-// Busca preços reais
-async function atualizarPrecos(){
-    try{
-        const resDGM = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${DGM_MINT}`);
-        const dadosDGM = await resDGM.json();
-        precoDGM = dadosDGM?.pairs?.[0]?.price?.usd || 0;
+else{
 
-        const resSOL = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-        const dadosSOL = await resSOL.json();
-        precoSOL = dadosSOL?.solana?.usd || 0;
-    }catch(e){
-        console.log("Erro ao buscar preços:", e);
-    }
-    calcularEstimativa();
+
+alert("Abra pela Phantom");
+
+
 }
 
-// Cálculo automático
-function calcularEstimativa(){
-    const de = document.getElementById("tokenFrom").value;
-    const para = document.getElementById("tokenTo").value;
-    const quant = parseFloat(document.getElementById("amount").value) || 0;
-    let res = 0;
 
-    if(!quant || !precoDGM || !precoSOL){
-        document.getElementById("estimativa").textContent = "0.00";
-        document.getElementById("btnSwap").disabled = !wallet;
-        return;
-    }
-
-    if(de==="SOL"&&para==="DGM") res=(quant*precoSOL)/precoDGM;
-    if(de==="DGM"&&para==="SOL") res=(quant*precoDGM)/precoSOL;
-    if(de==="USDC"&&para==="DGM") res=quant/precoDGM;
-    if(de==="DGM"&&para==="USDC") res=quant*precoDGM;
-    if(de==="SOL"&&para==="USDC") res=quant*precoSOL;
-    if(de==="USDC"&&para==="SOL") res=quant/precoSOL;
-
-    document.getElementById("estimativa").textContent = res.toFixed(6);
-    document.getElementById("btnSwap").disabled = !wallet || res <= 0;
 }
+
+
 
 function swap(){
-    if(!wallet) return alert("🔗 Conecte a carteira primeiro!");
-    document.getElementById("status").innerHTML = "🔄 Preparando Jupiter Swap...";
-    setTimeout(() => {
-        alert("🚀 Em breve: execução direta pela rede Solana com a Jupiter!");
-        document.getElementById("status").innerHTML = "✅ Funcionalidade em desenvolvimento.";
-    }, 1000);
+
+
+if(!wallet){
+
+alert("Conecte a carteira");
+
+return;
+
 }
 
-// Atualiza cálculo quando alterar valores
-document.getElementById("amount")?.addEventListener("input", calcularEstimativa);
-document.getElementById("tokenFrom")?.addEventListener("change", calcularEstimativa);
-document.getElementById("tokenTo")?.addEventListener("change", calcularEstimativa);
+
+
+document.getElementById("status").innerHTML=
+
+`
+Preparando Jupiter Swap...
+
+<br><br>
+
+Taxa ecossistema:
+
+${TAX_WALLET}
+
+<br><br>
+
+Token DGM:
+
+${DGM_MINT}
+
+`;
+
+}
+
+
+
+loadTokens();
+
+
 </script>
+
+
 </body>
+
 </html>
