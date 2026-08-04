@@ -1,8 +1,8 @@
 // ===============================
-// DOGE MANGA EVOLUTION - SEGURO
+// DOGE MANGA - TESTE SEM TAXA
 // ===============================
 
-const ATIVAR_TAXA = true;
+const ATIVAR_TAXA = false; // ❌ Taxa desligada para testes
 const CARTEIRA_TAXA = "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
 const TAX_WALLET = new solanaWeb3.PublicKey(CARTEIRA_TAXA);
 const TAXA_SWAP = 0.005;
@@ -35,14 +35,14 @@ let wallet = null;
 let ultimaRota = null;
 let processando = false;
 
-console.log("🐕 Sistema carregado com proteções");
+console.log("🐕 Modo de teste: SEM TAXA");
 
 // ===============================
 // CONEXÃO PHANTOM
 // ===============================
 async function connectWallet(){
     if(!window.solana || !window.solana.isPhantom){
-        alert("❌ Abra o site pelo navegador DENTRO do aplicativo Phantom!");
+        alert("❌ Abra pelo navegador DENTRO do app Phantom!");
         return;
     }
     try{
@@ -52,7 +52,7 @@ async function connectWallet(){
         document.getElementById("swapBtn").disabled = true;
         await carregarSaldos();
     }catch(e){
-        alert("Erro na conexão: " + e.message);
+        alert("Erro: " + e.message);
     }
 }
 
@@ -104,15 +104,13 @@ async function buscarCotacao(inputMint, outputMint, amount){
 }
 
 // ===============================
-// FUNÇÃO DE ERROS AMIGÁVEIS
+// ERROS AMIGÁVEIS
 // ===============================
 function mensagemErro(erro){
     const txt = erro.message.toLowerCase();
-    if(txt.includes("user rejected") || txt.includes("cancelada")) return "❌ Você cancelou a transação";
-    if(txt.includes("insufficient") || txt.includes("saldo")) return "❌ Saldo insuficiente para essa troca";
+    if(txt.includes("rejected") || txt.includes("cancelada")) return "❌ Você cancelou a transação";
+    if(txt.includes("insufficient")) return "❌ Saldo insuficiente";
     if(txt.includes("blockhash") || txt.includes("expired")) return "❌ Tempo esgotado, tente novamente";
-    if(txt.includes("slippage")) return "❌ Variação de preço muito alta, aumente o slippage ou tente novamente";
-    if(txt.includes("fetch")) return "❌ Sem conexão com a rede, verifique sua internet";
     return `❌ Erro: ${erro.message || "Falha desconhecida"}`;
 }
 
@@ -127,41 +125,21 @@ async function getQuote(){
     const para = document.getElementById("tokenTo").value;
     const quant = Number(document.getElementById("amount").value);
 
-    // Validações
-    if(!quant || quant <= 0) {
-        alert("Digite um valor válido!");
-        processando = false;
-        return;
-    }
-    if(de === para) {
-        alert("Escolha moedas diferentes!");
-        processando = false;
-        return;
-    }
-    if(quant < VALOR_MINIMO[de]) {
-        alert(`Valor mínimo para ${de}: ${VALOR_MINIMO[de]} ${de}`);
-        processando = false;
-        return;
-    }
+    if(!quant || quant <= 0) { alert("Digite um valor válido!"); processando=false; return; }
+    if(de === para) { alert("Escolha moedas diferentes!"); processando=false; return; }
+    if(quant < VALOR_MINIMO[de]) { alert(`Mínimo: ${VALOR_MINIMO[de]} ${de}`); processando=false; return; }
 
-    // Verificar saldo antes
     if(wallet){
         const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
         const endereco = new solanaWeb3.PublicKey(wallet);
         let saldoUsuario = 0;
-
         if(de === "SOL"){
-            const saldo = await conexao.getBalance(endereco);
-            saldoUsuario = saldo / 1e9;
+            saldoUsuario = (await conexao.getBalance(endereco)) / 1e9;
         }else{
             const mint = de === "DGM" ? DGM_MINT : USDC_MINT;
             const conta = await conexao.getTokenAccountsByOwner(endereco, {mint});
-            if(conta.value[0]){
-                const balanco = await conexao.getTokenAccountBalance(conta.value[0].pubkey);
-                saldoUsuario = balanco.value.uiAmount;
-            }
+            if(conta.value[0]) saldoUsuario = (await conexao.getTokenAccountBalance(conta.value[0].pubkey)).value.uiAmount;
         }
-
         if(quant > saldoUsuario){
             alert(`Saldo insuficiente! Você tem ${saldoUsuario.toFixed(4)} ${de}`);
             processando = false;
@@ -176,10 +154,7 @@ async function getQuote(){
     try{
         const bruto = Math.floor(quant * (10 ** TOKEN_DECIMALS[de]));
         const dados = await buscarCotacao(MINT_ADDRESSES[de], MINT_ADDRESSES[para], bruto);
-        if(!dados) {
-            processando = false;
-            return;
-        }
+        if(!dados) { processando=false; return; }
 
         const decimaisSaida = 10 ** TOKEN_DECIMALS[para];
         const receber = dados.outAmount / decimaisSaida;
@@ -188,18 +163,15 @@ async function getQuote(){
 
         document.getElementById("quote").innerHTML = `
 Você envia: <strong>${quant.toFixed(6)} ${de}</strong><br>
-Recebe aproximadamente:<br>
-<strong>${final.toFixed(6)} ${para}</strong>
-${ATIVAR_TAXA ? `<br><br>Taxa Doge Manga: ${taxa.toFixed(6)} ${para}` : ""}
+Recebe: <strong>${final.toFixed(6)} ${para}</strong>
+${ATIVAR_TAXA ? `<br>Taxa: ${taxa.toFixed(6)} ${para}` : ""}
         `.trim();
 
         document.getElementById("status").textContent = "✅ Cotação pronta";
         document.getElementById("swapBtn").disabled = false;
     }catch(e){
         document.getElementById("status").textContent = mensagemErro(e);
-    }finally{
-        processando = false;
-    }
+    }finally{ processando = false; }
 }
 
 // ===============================
@@ -209,18 +181,10 @@ async function executarSwap(){
     if(processando) return;
     processando = true;
 
-    if(!wallet) {
-        alert("🔗 Conecte a Phantom primeiro!");
-        processando = false;
-        return;
-    }
-    if(!ultimaRota) {
-        alert("💹 Busque a cotação primeiro!");
-        processando = false;
-        return;
-    }
+    if(!wallet) { alert("Conecte a Phantom!"); processando=false; return; }
+    if(!ultimaRota) { alert("Busque a cotação primeiro!"); processando=false; return; }
 
-    document.getElementById("status").textContent = "🚀 Preparando transação...";
+    document.getElementById("status").textContent = "🚀 Preparando...";
     document.getElementById("swapBtn").disabled = true;
 
     try{
@@ -249,39 +213,24 @@ async function executarSwap(){
 
         document.getElementById("status").textContent = "🔐 Solicitando assinatura...";
         const resSwap = await fetch(JUPITER_SWAP, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+            method: "POST", headers: {"Content-Type":"application/json"},
             body: JSON.stringify(corpo)
         });
-
         const dadosSwap = await resSwap.json();
         if(!dadosSwap.swapTransaction) throw new Error(dadosSwap.error || "Falha ao gerar transação");
 
-        const transacao = solanaWeb3.VersionedTransaction.deserialize(
-            Uint8Array.from(atob(dadosSwap.swapTransaction), c => c.charCodeAt(0))
-        );
-
+        const transacao = solanaWeb3.VersionedTransaction.deserialize(Uint8Array.from(atob(dadosSwap.swapTransaction), c=>c.charCodeAt(0)));
         document.getElementById("status").textContent = "🔐 Assine na carteira...";
         const resultado = await window.solana.signAndSendTransaction(transacao);
         const assinatura = resultado.signature || resultado;
 
-        document.getElementById("status").textContent = "⏳ Confirmando na Solana...";
+        document.getElementById("status").textContent = "⏳ Confirmando...";
         const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
+        await conexao.confirmTransaction(assinatura, "confirmed");
 
-        const status = await conexao.getSignatureStatuses([assinatura]);
-        const info = status.value[0];
-        if(!info || (info.confirmationStatus !== "confirmed" && info.confirmationStatus !== "finalized")){
-            await conexao.confirmTransaction(assinatura, "confirmed");
-        }
-
-        document.getElementById("status").innerHTML = `
-✅ Swap concluído!${ATIVAR_TAXA ? "<br>💸 Taxa de 0,5% enviada" : ""}<br>
-<a target="_blank" style="color:#facc15" href="https://solscan.io/tx/${assinatura}">Ver transação</a>
-        `.trim();
-
+        document.getElementById("status").innerHTML = `✅ Concluído!<br><a style="color:#facc15" target="_blank" href="https://solscan.io/tx/${assinatura}">Ver transação</a>`;
         await carregarSaldos();
         ultimaRota = null;
-        document.getElementById("swapBtn").disabled = true;
 
     }catch(e){
         document.getElementById("status").textContent = mensagemErro(e);
@@ -291,4 +240,4 @@ async function executarSwap(){
     }
 }
 
-console.log("🐕 Todas as proteções ativadas!");
+console.log("🐕 Pronto para testes passo a passo!");
