@@ -211,5 +211,55 @@ frameborder="0">
 
 </div>💰 Preço: Em tempo real
 
-📊 Market Cap: Em tempo real
+📊 Market Cap: Em tempo real<script>
+
+const token = "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE";
+
+async function atualizarDados(){
+
+try {
+
+const resposta = await fetch(
+`https://api.dexscreener.com/latest/dex/tokens/${token}`
+);
+
+const dados = await resposta.json();
+
+const par = dados.pairs[0];
+
+
+document.getElementById("preco").innerHTML =
+"💰 Preço: $" + par.priceUsd;
+
+
+document.getElementById("volume").innerHTML =
+"📈 Volume 24h: $" + par.volume.h24;
+
+
+document.getElementById("marketcap").innerHTML =
+"📊 Market Cap: $" + par.marketCap;
+
+
+document.getElementById("liquidez").innerHTML =
+"💧 Liquidez: $" + par.liquidity.usd;
+
+
+} catch (erro) {
+
+console.log("Erro ao carregar dados:", erro);
+
+}
+
+}
+
+
+atualizarDados();
+
+
+// Atualiza a cada 30 segundos
+
+setInterval(atualizarDados, 30000);
+
+
+    </script>
 
