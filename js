@@ -1,5 +1,5 @@
 // ===============================
-// DOGE MANGA EVOLUTION - CONFIGS
+// DOGE MANGA EVOLUTION - FASE 1
 // ===============================
 
 const ATIVAR_TAXA = true;
@@ -21,15 +21,14 @@ const MINT_ADDRESSES = {
 let wallet = null;
 let ultimaRota = null;
 
-console.log("🐕 Configurações carregadas");
+console.log("🐕 Fase 1: Configurações carregadas");
 
 // ===============================
-// CONEXÃO PHANTOM
+// CONEXÃO PHANTOM MELHORADA
 // ===============================
-
 async function connectWallet(){
     if(!window.solana || !window.solana.isPhantom){
-        alert("❌ Abra pelo navegador dentro do app Phantom!");
+        alert("❌ Abra o site pelo navegador DENTRO do aplicativo Phantom!");
         return;
     }
     try{
@@ -37,17 +36,41 @@ async function connectWallet(){
         wallet = resp.publicKey.toString();
         document.getElementById("wallet").textContent = "Conectada: " + wallet.slice(0,8) + "...";
         document.getElementById("swapBtn").disabled = true;
+        await carregarSaldos();
     }catch(e){
-        alert("Erro: " + e.message);
+        alert("Erro na conexão: " + e.message);
     }
+}
+
+// ===============================
+// CARREGAR SALDOS
+// ===============================
+async function carregarSaldos(){
+    if(!wallet) return;
+    const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
+    const endereco = new solanaWeb3.PublicKey(wallet);
+
+    const saldoSol = await conexao.getBalance(endereco);
+    const sol = (saldoSol / 1e9).toFixed(4);
+
+    const contaUsdc = await conexao.getTokenAccountsByOwner(endereco, {mint: USDC_MINT});
+    const usdc = contaUsdc.value[0] ? await conexao.getTokenAccountBalance(contaUsdc.value[0].pubkey) : {value: {uiAmount: 0}};
+
+    const contaDgm = await conexao.getTokenAccountsByOwner(endereco, {mint: DGM_MINT});
+    const dgm = contaDgm.value[0] ? await conexao.getTokenAccountBalance(contaDgm.value[0].pubkey) : {value: {uiAmount: 0}};
+
+    document.getElementById("saldos").innerHTML = `
+Saldo SOL: ${sol}<br>
+Saldo USDC: ${usdc.value.uiAmount.toFixed(2)}<br>
+Saldo DGM: ${dgm.value.uiAmount.toLocaleString("pt-BR")}
+    `.trim();
 }
 
 console.log("🐕 Módulo Phantom carregado");
 
 // ===============================
-// MOTOR JUPITER
+// MOTOR JUPITER 100%
 // ===============================
-
 const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
 const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
 
@@ -68,16 +91,11 @@ async function buscarCotacao(inputMint, outputMint, amount){
     }
 }
 
-function formatarValor(valor){
-    return Number(valor).toLocaleString("pt-BR", { maximumFractionDigits: 6 });
-}
-
 console.log("🐕 Motor Jupiter carregado");
 
 // ===============================
 // EXECUÇÃO DO SWAP
 // ===============================
-
 async function getQuote(){
     const de = document.getElementById("tokenFrom").value;
     const para = document.getElementById("tokenTo").value;
@@ -167,18 +185,18 @@ async function executarSwap(){
         document.getElementById("status").textContent = "⏳ Confirmando na Solana...";
         const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
 
-        // Verificação inteligente de confirmação
         const status = await conexao.getSignatureStatuses([assinatura]);
         const info = status.value[0];
         if(!info || (info.confirmationStatus !== "confirmed" && info.confirmationStatus !== "finalized")){
             await conexao.confirmTransaction(assinatura, "confirmed");
         }
-        console.log("✅ Transação confirmada na rede");
 
         document.getElementById("status").innerHTML = `
 ✅ Swap concluído!${ATIVAR_TAXA ? "<br>💸 Taxa de 0,5% enviada" : ""}<br>
 <a target="_blank" style="color:#facc15" href="https://solscan.io/tx/${assinatura}">Ver transação</a>
         `.trim();
+
+        await carregarSaldos();
 
     }catch(e){
         document.getElementById("status").textContent = "❌ Erro: " + (e.message || "Transação cancelada");
@@ -187,6 +205,4 @@ async function executarSwap(){
     }
 }
 
-console.log("🐕 Lógica do Swap carregada");
-const resultado = await window.solana.signAndSendTransaction(transacao);
-const assinatura = resultado.signature || resultado;
+console.log("🐕 Fase 1 concluída com sucesso!");
