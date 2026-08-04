@@ -1,10 +1,1 @@
-.logo-art{
-    width: 100%;
-    max-width: 280px; /* Tamanho máximo perfeito para celular */
-    height: auto; /* Mantém a proporção original, não achata nem estica */
-    border-radius: 15px;
-    border: 2px solid #facc15;
-    margin-bottom: 10px;
-    object-fit: contain; /* Garante que a imagem não fique cortada */
-}
 
