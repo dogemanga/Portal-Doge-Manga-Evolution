@@ -1,65 +1,70 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Swap Doge Manga Evolution</title>
+<title>
+Swap Doge Manga
+</title>
+
 
 <style>
 
 body{
-    background:#050816;
-    color:white;
-    font-family:Arial;
-    text-align:center;
+
+background:#050816;
+color:white;
+font-family:Arial;
+text-align:center;
+
 }
+
 
 .box{
-    max-width:450px;
-    margin:40px auto;
-    background:#111827;
-    padding:25px;
-    border-radius:20px;
+
+max-width:450px;
+margin:40px auto;
+background:#111827;
+padding:25px;
+border-radius:20px;
+
 }
 
-h1{
-    color:#facc15;
-}
 
 button{
 
-    background:#facc15;
-    color:#000;
-    border:0;
-    padding:15px 25px;
-    border-radius:15px;
-    cursor:pointer;
-    font-size:18px;
+background:#facc15;
+border:0;
+padding:15px 25px;
+border-radius:15px;
+font-size:18px;
 
 }
 
 
 select,input{
 
-    width:90%;
-    padding:12px;
-    margin:10px;
-    border-radius:10px;
+width:90%;
+padding:12px;
+margin:10px;
+border-radius:10px;
 
 }
 
 
 #wallet{
 
-    color:#38bdf8;
-    margin:20px;
+color:#38bdf8;
 
 }
 
 </style>
+
 
 </head>
 
@@ -75,79 +80,49 @@ select,input{
 </h1>
 
 
-<p>
-Solana Jupiter Swap
+<button onclick="connectWallet()">
+
+🔗 Conectar Phantom
+
+</button>
+
+
+<p id="wallet">
+Carteira desconectada
 </p>
 
 
 
-<button onclick="connectWallet()">
-🔗 Conectar Phantom
-</button>
+<select>
 
-
-<div id="wallet">
-Carteira desconectada
-</div>
-
-
-
-<select id="fromToken">
-
-<option value="SOL">
+<option>
 SOL
 </option>
 
-<option value="USDC">
+<option>
 USDC
 </option>
 
-<option value="DGM">
-Doge Manga
+<option>
+DGM
 </option>
 
 </select>
 
 
 
-<input 
-id="amount"
-type="number"
-placeholder="Quantidade"
-/>
-
-
-
-<select id="toToken">
-
-<option value="DGM">
-Doge Manga
-</option>
-
-<option value="SOL">
-SOL
-</option>
-
-<option value="USDC">
-USDC
-</option>
-
-</select>
-
-
-
-<br><br>
+<input placeholder="Quantidade">
 
 
 
 <button onclick="swap()">
+
 🚀 Trocar Agora
+
 </button>
 
 
-
 <p id="status"></p>
-
 
 
 </div>
@@ -157,36 +132,12 @@ USDC
 <script>
 
 
-// ==============================
-// CARTEIRA DA TAXA ECOSSISTEMA
-// ==============================
-
-
 const TAX_WALLET =
 "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
 
 
-// 1%
+let wallet = null;
 
-const ECOSYSTEM_FEE = 0.01;
-
-
-
-// MINT DO DGM
-// colocar depois o endereço correto
-
-const DGM_MINT =
-"COLOCAR_MINT_DGM";
-
-
-
-let walletAddress = null;
-
-
-
-// ==============================
-// CONECTAR PHANTOM
-// ==============================
 
 
 async function connectWallet(){
@@ -195,28 +146,22 @@ async function connectWallet(){
 if(window.solana){
 
 
-const response =
+let resp =
 await window.solana.connect();
 
 
-walletAddress =
-response.publicKey.toString();
+wallet =
+resp.publicKey.toString();
 
 
 document.getElementById("wallet").innerHTML =
-
-"Carteira conectada:<br>" +
-walletAddress;
+wallet;
 
 
-}
-
-else{
+}else{
 
 
-alert(
-"Abra usando uma carteira Solana"
-);
+alert("Abra usando uma carteira Solana");
 
 
 }
@@ -224,71 +169,14 @@ alert(
 
 }
 
-
-
-
-// ==============================
-// BOTÃO SWAP
-// ==============================
 
 
 function swap(){
 
 
-
-if(!walletAddress){
-
-alert(
-"Conecte sua carteira primeiro"
-);
-
-return;
-
-}
-
-
-
-let amount =
-document.getElementById("amount").value;
-
-
-let from =
-document.getElementById("fromToken").value;
-
-
-let to =
-document.getElementById("toToken").value;
-
-
-
-let fee =
-amount * ECOSYSTEM_FEE;
-
-
-
 document.getElementById("status").innerHTML =
 
-`
-Swap preparado ✅
-
-<br><br>
-
-${amount} ${from}
-→
-${to}
-
-<br><br>
-
-Taxa ecossistema:
-${fee}
-
-<br><br>
-
-Carteira:
-${TAX_WALLET}
-
-`;
-
+"Preparando Jupiter Swap...";
 
 
 }
