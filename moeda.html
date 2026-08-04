@@ -165,31 +165,36 @@ async function carregarDados(){
 try{
 
 const resposta = await fetch(
-`https://api.geckoterminal.com/api/v2/networks/solana/tokens/${token}`
+`https://api.dexscreener.com/latest/dex/tokens/${token}`
 );
 
 const dados = await resposta.json();
 
-const moeda = dados.data.attributes;
+const par = dados.pairs[0];
+
 
 document.getElementById("preco").innerHTML =
-"💰 Preço: $" + moeda.price_usd;
+"💰 Preço: $" + par.priceUsd;
+
 
 document.getElementById("volume").innerHTML =
-"📊 Volume 24h: $" + moeda.volume_usd.h24;
+"📊 Volume 24h: $" + par.volume.h24;
+
 
 document.getElementById("marketcap").innerHTML =
-"📈 Market Cap: " + (moeda.market_cap_usd || "Calculando");
+"📈 Market Cap: $" + par.marketCap;
 
 
-}catch(error){
+}catch(erro){
 
-console.log("Erro ao carregar dados", error);
+console.log("Erro:", erro);
+
+}
 
 }
 
-}
 
 carregarDados();
 
-</script></body>
+</script>
+
