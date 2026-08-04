@@ -179,3 +179,7 @@ async function executarSwap(){
 
 console.log("🐕 Lógica do Swap carregada");
 
+// Jeito correto
+const status = await conexao.getSignatureStatus(assinatura);
+console.log(status.value.confirmationStatus);
+await conexao.confirmTransaction(assinatura, "confirmed");
