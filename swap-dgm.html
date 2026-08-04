@@ -188,3 +188,65 @@ async function swap(){
 </script>
 </body>
 </html>
+async function getQuote(){
+    const de = document.getElementById("tokenFrom").value;
+    const para = document.getElementById("tokenTo").value;
+    const quant = Number(document.getElementById("amount").value);
+
+    if(!quant || quant <= 0){
+        alert("Digite um valor válido!");
+        return;
+    }
+
+    if(de === para){
+        alert("Escolha moedas diferentes!");
+        return;
+    }
+
+    document.getElementById("status").textContent = "🔍 Buscando cotação Jupiter...";
+    document.getElementById("swapBtn").disabled = true;
+    ultimaRota = null;
+
+    try{
+        // Conversão correta para a moeda que está sendo enviada
+        const decimaisEntrada = de === "SOL" ? 1e9 : 1e6;
+        const bruto = Math.floor(quant * decimaisEntrada);
+
+        const dados = await buscarCotacao(
+            MINT_ADDRESSES[de],
+            MINT_ADDRESSES[para],
+            bruto
+        );
+
+        if(!dados){
+            throw new Error("Cotação não encontrada");
+        }
+
+        ultimaRota = dados;
+
+        // Conversão correta para a moeda que vai receber
+        const decimaisSaida = para === "SOL" ? 1e9 : 1e6;
+        const receber = dados.outAmount / decimaisSaida;
+
+        let taxa = 0;
+        if(ATIVAR_TAXA){
+            taxa = receber * TAXA_SWAP;
+        }
+        const final = receber - taxa;
+
+        document.getElementById("quote").innerHTML = `
+Você envia: <strong>${quant.toFixed(6)} ${de}</strong><br>
+Recebe aproximadamente:<br>
+<strong>${final.toFixed(6)} ${para}</strong>
+<br><br>
+Taxa Doge Manga: ${taxa.toFixed(6)} ${para}
+        `.trim();
+
+        document.getElementById("status").textContent = "✅ Cotação pronta";
+        document.getElementById("swapBtn").disabled = false;
+
+    }catch(e){
+        document.getElementById("status").textContent = "❌ " + e.message;
+    }
+}
+        
