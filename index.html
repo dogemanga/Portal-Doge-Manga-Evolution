@@ -4232,36 +4232,370 @@ class="btn-binance">
 
 
 </div>
-<script>
 
-async function connectPhantom(){
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-    const provider = window.phantom?.solana || window.solana;
+<head>
 
-    if(provider){
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        try{
+<title>Portal Doge Manga Evolution</title>
 
-            const response = await provider.connect();
+<style>
 
-            document.getElementById("walletStatus").innerHTML =
-            "Carteira conectada:<br>" +
-            response.publicKey.toString();
+body{
+    margin:0;
+    background:#050816;
+    color:white;
+    font-family:Arial, sans-serif;
+}
 
-        }catch(error){
 
-            console.log(error);
+header{
 
-        }
-
-    }else{
-
-        alert("Phantom não encontrada neste navegador");
-
-    }
+    padding:25px;
+    text-align:center;
+    background:#111827;
 
 }
 
-<a href="swap-dgm.html">
-🔄 Swap Doge Manga
+
+.logo{
+
+    font-size:32px;
+    font-weight:bold;
+    color:#facc15;
+
+}
+
+
+nav{
+
+    margin-top:20px;
+
+}
+
+
+nav a{
+
+    color:white;
+    text-decoration:none;
+    margin:8px;
+    padding:12px 18px;
+    background:#2563eb;
+    border-radius:12px;
+    display:inline-block;
+
+}
+
+
+
+.container{
+
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+
+}
+
+
+
+.card{
+
+    background:#111827;
+    padding:25px;
+    margin:20px 0;
+    border-radius:20px;
+
+}
+
+
+
+h2{
+
+color:#facc15;
+
+}
+
+
+
+.coin{
+
+background:#050816;
+padding:15px;
+border-radius:12px;
+margin:10px;
+
+}
+
+
+
+button{
+
+background:#facc15;
+border:0;
+padding:15px 25px;
+border-radius:15px;
+font-size:16px;
+cursor:pointer;
+
+}
+
+
+
+footer{
+
+text-align:center;
+padding:30px;
+color:#94a3b8;
+
+}
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+
+<header>
+
+
+<div class="logo">
+
+🐕 Doge Manga Evolution
+
+</div>
+
+
+<p>
+Portal Cripto do Ecossistema Doge Manga
+</p>
+
+
+
+<nav>
+
+
+<a href="index.html">
+🏠 Início
 </a>
+
+
+<a href="mercado.html">
+📈 Mercado
+</a>
+
+
+<a href="swap-dgm.html">
+🔄 Swap
+</a>
+
+
+<a href="comprar-dgm.html">
+🪙 Comprar DGM
+</a>
+
+
+</nav>
+
+
+</header>
+
+
+
+
+<div class="container">
+
+
+
+<div class="card">
+
+
+<h2>
+📈 Mercado Cripto
+</h2>
+
+
+<p>
+Acompanhe Bitcoin, Ethereum, Solana e milhares de criptomoedas em tempo real.
+</p>
+
+
+<a href="mercado.html">
+
+<button>
+Ver Mercado
+</button>
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+🔄 Swap Doge Manga
+</h2>
+
+
+<p>
+Troque tokens da rede Solana através do nosso portal.
+</p>
+
+
+<a href="swap-dgm.html">
+
+<button>
+Abrir Swap
+</button>
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+🐕 Doge Manga Evolution
+</h2>
+
+
+<p>
+
+Token oficial do ecossistema.
+
+</p>
+
+
+<p>
+
+Rede: Solana
+
+</p>
+
+
+<p>
+
+Oferta Total:
+420 bilhões DGM
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+💰 Ecossistema
+
+</h2>
+
+
+<p>
+
+Carteira de receitas do projeto:
+
+</p>
+
+
+<p>
+
+2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+🚀 Futuro do Portal
+
+</h2>
+
+
+<ul>
+
+<li>Mercado cripto completo</li>
+
+<li>Swap Solana</li>
+
+<li>Parcerias e afiliados</li>
+
+<li>Área de projetos em destaque</li>
+
+</ul>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+<footer>
+
+Doge Manga Evolution © 2026
+
+</footer>
+
+
+
+
+
+<script>
+
+
+// Carteira do Ecossistema
+
+const ECOSYSTEM_WALLET =
+"2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
+
+
+console.log(
+"Carteira Ecossistema:",
+ECOSYSTEM_WALLET
+);
+
+
+</script>
+
+
+
+</body>
+
+</html>
