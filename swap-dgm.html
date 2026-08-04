@@ -267,3 +267,32 @@ ${TAX_WALLET}
 </body>
 
 </html>
+async function connectPhantom(){
+
+if(window.solana){
+
+
+const response =
+await window.solana.connect();
+
+
+wallet =
+response.publicKey.toString();
+
+
+document.getElementById("wallet").innerHTML =
+
+"Carteira:<br>"+wallet;
+
+
+}
+
+else{
+
+alert(
+"Instale a Phantom Wallet"
+);
+
+}
+
+}
