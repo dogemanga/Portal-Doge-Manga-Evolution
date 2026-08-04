@@ -1,1 +1,36 @@
 
+/* DOGE MANGA EVOLUTION - STYLE CSS */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#050816;
+    color:white;
+}
+
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:50px 20px;
+    background:linear-gradient(135deg,#111827,#050816);
+}
+
+header h1{
+    font-size:42px;
+    color:#facc15;
+}
+
+header p{
+    margin-top:15px;
+    font-size:18px;
+}
+
+
+/* BOTÕES */
