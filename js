@@ -4,11 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🐕 Doge Manga Swap</title>
-    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: #050816; font-family: Arial, sans-serif; padding: 20px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
         .container { max-width: 500px; width: 100%; background: #111827; padding: 25px; border-radius: 16px; border: 2px solid #facc15; color: white; }
+        
+        /* 🐕 Estilo da imagem */
+        .logo-art {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 15px;
+            border: 2px solid #facc15;
+            margin: 0 auto 15px auto;
+            display: block;
+            object-fit: contain;
+        }
+
         h2 { color: #facc15; text-align: center; margin-bottom: 20px; }
         button { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: opacity 0.2s; margin: 5px 0; }
         button:hover { opacity: 0.9; }
@@ -24,6 +37,9 @@
 </head>
 <body>
 <div class="container">
+    <!-- 🐕 IMAGEM JÁ COLOCADA NO LUGAR CERTO -->
+    <img src="imagens/1785844400390.png" alt="Doge Manga Oficial" class="logo-art">
+    
     <h2>🐕 Doge Manga Swap</h2>
 
     <button class="btn-conectar" onclick="connectWallet()">Conectar Phantom</button>
@@ -106,8 +122,6 @@ async function verificarCarteira(){
 }
 window.onload = verificarCarteira;
 
-console.log("🐕 Sistema carregado");
-
 // ===============================
 // CONEXÃO PHANTOM
 // ===============================
@@ -152,31 +166,6 @@ Saldo DGM: ${dgm.value.uiAmount.toLocaleString("pt-BR")}
 }
 
 // ===============================
-// MOTOR JUPITER
-// ===============================
-const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
-const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
-
-async function buscarCotacao(inputMint, outputMint, amount){
-    try{
-        let url = `${JUPITER_QUOTE}?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=50`;
-        if(ATIVAR_TAXA) url += `&platformFeeBps=${TAXA_EM_BPS}`;
-
-        const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
-        if(!res.ok) throw new Error(`Erro na rede: ${res.status}`);
-        const dados = await res.json();
-        
-        if(!dados.routePlan || !dados.outAmount) throw new Error(dados.errorDescription || dados.error || "Nenhuma rota válida encontrada");
-        
-        ultimaRota = dados;
-        return dados;
-    }catch(e){
-        console.error("Erro cotação:", e);
-        alert("Não foi possível buscar cotação: " + e.message);
-    }
-}
-
-// ===============================
 // TRATAMENTO DE ERROS
 // ===============================
 function mensagemErro(erro){
@@ -184,12 +173,12 @@ function mensagemErro(erro){
     if(txt.includes("rejected") || txt.includes("cancelada")) return "❌ Você cancelou a transação";
     if(txt.includes("insufficient")) return "❌ Saldo insuficiente";
     if(txt.includes("blockhash") || txt.includes("expired")) return "❌ Tempo esgotado, tente novamente";
-    if(txt.includes("fetch") || txt.includes("network error") || txt.includes("timeout")) return "❌ Sem conexão, verifique a internet ou tente novamente";
+    if(txt.includes("fetch") || txt.includes("network error") || txt.includes("timeout")) return "❌ Sem conexão ou API ocupada, tente novamente em instantes";
     return `❌ Erro: ${erro.message || "Falha desconhecida"}`;
 }
 
 // ===============================
-// BUSCAR COTAÇÃO
+// BUSCAR COTAÇÃO CORRIGIDA
 // ===============================
 async function getQuote(){
     if(processando) return;
@@ -227,9 +216,16 @@ async function getQuote(){
 
     try{
         const bruto = Math.floor(quant * (10 ** TOKEN_DECIMALS[de]));
-        const dados = await buscarCotacao(MINT_ADDRESSES[de], MINT_ADDRESSES[para], bruto);
-        if(!dados) { processando=false; return; }
+        let url = `https://quote-api.jup.ag/v6/quote?inputMint=${MINT_ADDRESSES[de]}&outputMint=${MINT_ADDRESSES[para]}&amount=${bruto}&slippageBps=50`;
+        if(ATIVAR_TAXA) url += `&platformFeeBps=${TAXA_EM_BPS}`;
 
+        const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
+        if(!res.ok) throw new Error(`Erro na rede: ${res.status}`);
+        const dados = await res.json();
+        
+        if(!dados.routePlan || !dados.outAmount) throw new Error(dados.errorDescription || dados.error || "Nenhuma rota válida encontrada");
+        
+        ultimaRota = dados;
         const decimaisSaida = 10 ** TOKEN_DECIMALS[para];
         const receber = dados.outAmount / decimaisSaida;
         const taxa = ATIVAR_TAXA ? receber * TAXA_SWAP : 0;
@@ -238,7 +234,7 @@ async function getQuote(){
         document.getElementById("quote").innerHTML = `
 Você envia: <strong>${quant.toFixed(6)} ${de}</strong><br>
 Recebe: <strong>${final.toFixed(6)} ${para}</strong>
-${ATIVAR_TAXA ? `<br>Taxa: ${taxa.toFixed(6)} ${para}` : ""}
+${ATIVAR_TAXA ? `<br>Taxa Doge Manga: ${taxa.toFixed(6)} ${para}` : ""}
         `.trim();
 
         document.getElementById("status").textContent = "✅ Cotação pronta";
@@ -286,11 +282,11 @@ async function executarSwap(){
         }
 
         document.getElementById("status").textContent = "🔐 Solicitando assinatura...";
-        const resSwap = await fetch(JUPITER_SWAP, {
+        const resSwap = await fetch("https://quote-api.jup.ag/v6/swap", {
             method: "POST",
             headers: {"Content-Type":"application/json"},
             body: JSON.stringify(corpo),
-            signal: AbortSignal.timeout(15000)
+            signal: AbortSignal.timeout(20000)
         });
         if(!resSwap.ok) throw new Error(`Erro na rede: ${resSwap.status}`);
         const dadosSwap = await resSwap.json();
@@ -300,10 +296,6 @@ async function executarSwap(){
         document.getElementById("status").textContent = "🔐 Assine na carteira...";
         const resultado = await window.solana.signAndSendTransaction(transacao);
         const assinatura = resultado.signature || resultado;
-
-        document.getElementById("status").textContent = "⏳ Confirmando...";
-        const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
-        await conexao.confirmTransaction(assinatura, "confirmed");
 
         document.getElementById("status").innerHTML = `✅ Concluído!<br><a target="_blank" href="https://solscan.io/tx/${assinatura}">Ver transação</a>`;
         await carregarSaldos();
