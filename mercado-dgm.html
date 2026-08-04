@@ -1,226 +1,201 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Mercado Cripto | Doge Manga Evolution</title>
-
-<style>
-
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#050816;
-    color:white;
-}
-
-header{
-    text-align:center;
-    padding:30px;
-    background:#111827;
-}
-
-h1{
-    color:#facc15;
-}
-
-.container{
-    padding:30px;
-    text-align:center;
-}
-
-input{
-    width:90%;
-    max-width:500px;
-    padding:15px;
-    border-radius:10px;
-    border:none;
-    margin-bottom:20px;
-}
-
-.crypto-card{
-
-    display:inline-block;
-    width:230px;
-    margin:15px;
-    padding:20px;
-    background:#111827;
-    border:1px solid #facc15;
-    border-radius:15px;
-
-}
-
-.crypto-card img{
-
-    width:50px;
-
-}
-
-button{
-
-    background:#facc15;
-    color:#000;
-    border:none;
-    padding:12px 20px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
-
-}
-
-button:hover{
-
-    transform:scale(1.05);
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Cripto | Doge Manga Evolution</title>
+    <style>
+        body{
+            margin:0;
+            font-family:Arial,sans-serif;
+            background:#050816;
+            color:white;
+        }
+        header{
+            text-align:center;
+            padding:30px 15px;
+            background:#111827;
+            border-bottom:1px solid rgba(250,204,21,0.2);
+        }
+        h1{
+            color:#facc15;
+            margin:0 0 10px;
+        }
+        header p{
+            color:#94a3b8;
+            margin:0;
+        }
+        .container{
+            padding:20px;
+            text-align:center;
+            max-width:1200px;
+            margin:0 auto;
+        }
+        input{
+            width:90%;
+            max-width:500px;
+            padding:15px;
+            border-radius:10px;
+            border:1px solid #1e293b;
+            background:#1f2937;
+            color:white;
+            margin-bottom:20px;
+            font-size:16px;
+        }
+        input:focus{
+            outline:none;
+            border-color:#facc15;
+        }
+        .crypto-card{
+            display:inline-block;
+            width:230px;
+            margin:10px;
+            padding:20px;
+            background:#111827;
+            border:1px solid #facc15;
+            border-radius:15px;
+            vertical-align:top;
+            transition:0.2s;
+        }
+        .crypto-card:hover{
+            transform:translateY(-3px);
+            box-shadow:0 5px 15px rgba(250,204,21,0.15);
+        }
+        .crypto-card img{
+            width:50px;
+            height:50px;
+            border-radius:50%;
+            margin-bottom:10px;
+            object-fit:cover;
+        }
+        .crypto-card h3{
+            margin:8px 0;
+            font-size:18px;
+        }
+        .crypto-card h2{
+            color:#facc15;
+            margin:10px 0;
+            font-size:22px;
+        }
+        .crypto-card p{
+            margin:5px 0 15px;
+            color:#94a3b8;
+        }
+        .var-positiva{color:#22c55e;}
+        .var-negativa{color:#ef4444;}
+        button{
+            background:#facc15;
+            color:#000;
+            border:none;
+            padding:12px 20px;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:bold;
+            font-size:15px;
+            transition:0.2s;
+        }
+        button:hover{
+            transform:scale(1.05);
+            background:#eab308;
+        }
+        #statusCarteira{
+            margin:10px 0 20px;
+            color:#38bdf8;
+            font-size:14px;
+            word-break:break-all;
+        }
+    </style>
 </head>
-
-
 <body>
+    <header>
+        <h1>🚀 Mercado Cripto Doge Manga</h1>
+        <p>Compre e acompanhe criptomoedas em tempo real</p>
+    </header>
 
-
-<header>
-
-<h1>🚀 Mercado Cripto Doge Manga</h1>
-
-<p>Compre e acompanhe criptomoedas em tempo real</p>
-
-</header>
-
-
-
-<div class="container">
-
-
-<input 
-id="busca"
-placeholder="Buscar moeda (bitcoin, ethereum, solana)"
->
-
-
-<div id="lista"></div>
-
-
-<br>
-
-<button onclick="conectarCarteira()">
-🟣 Conectar Phantom
-</button>
-
-
-</div>
-
-
+    <div class="container">
+        <input id="busca" placeholder="Buscar moeda (bitcoin, ethereum, solana)">
+        <div id="lista"></div>
+        <br>
+        <button onclick="conectarCarteira()">🟣 Conectar Phantom</button>
+        <p id="statusCarteira">Carteira desconectada</p>
+    </div>
 
 <script>
-
-
-const carteiraTaxaDGM =
-"2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
-
+const carteiraTaxaDGM = "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
+let todasMoedas = [];
 
 async function mercado(){
+    try{
+        const moedas = "bitcoin,ethereum,solana,dogecoin";
+        const resposta = await fetch(
+            `https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&ids=${moedas}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`
+        );
+        todasMoedas = await resposta.json();
+        renderizarLista(todasMoedas);
+    }catch(e){
+        document.getElementById("lista").innerHTML = `<p style="color:#ef4444">Erro ao carregar mercado. Tente novamente.</p>`;
+    }
+}
 
+function renderizarLista(lista, filtro=""){
+    const filtrada = filtro 
+        ? lista.filter(m=>m.name.toLowerCase().includes(filtro) || m.symbol.toLowerCase().includes(filtro)) 
+        : lista;
+    
+    let html = "";
+    if(filtrada.length === 0){
+        html = `<p style="color:#94a3b8">Nenhuma moeda encontrada.</p>`;
+    }else{
+        filtrada.forEach(m=>{
+            const classeVar = m.price_change_percentage_24h >= 0 ? "var-positiva" : "var-negativa";
+            html += `
+                <div class="crypto-card">
+                    <img src="${m.image}" alt="${m.name}">
+                    <h3>${m.name}</h3>
+                    <h2>R$ ${m.current_price.toLocaleString("pt-BR")}</h2>
+                    <p class="${classeVar}">24h: ${m.price_change_percentage_24h.toFixed(2)}%</p>
+                    <button onclick="comprar('${m.id}','${m.name}')">Comprar</button>
+                </div>
+            `;
+        });
+    }
+    document.getElementById("lista").innerHTML = html;
+}
 
-let moedas =
-"bitcoin,ethereum,solana,dogecoin";
-
-
-let resposta =
-await fetch(
-`https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&ids=${moedas}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`
-);
-
-
-let dados =
-await resposta.json();
-
-
-let html="";
-
-
-dados.forEach(m=>{
-
-
-html += `
-
-<div class="crypto-card">
-
-<img src="${m.image}">
-
-<h3>${m.name}</h3>
-
-<h2>
-R$ ${m.current_price.toLocaleString("pt-BR")}
-</h2>
-
-<p>
-24h: ${m.price_change_percentage_24h.toFixed(2)}%
-</p>
-
-
-<button onclick="comprar('${m.name}')">
-Comprar
-</button>
-
-
-</div>
-
-`;
-
+// Busca em tempo real
+document.getElementById("busca").addEventListener("input", (e)=>{
+    const filtro = e.target.value.toLowerCase().trim();
+    renderizarLista(todasMoedas, filtro);
 });
 
-
-document.getElementById("lista").innerHTML=html;
-
-
+function comprar(id, nome){
+    if(!window.solana || !window.solana.isPhantom){
+        alert("🔗 Conecte sua Phantom Wallet primeiro!");
+        conectarCarteira();
+        return;
+    }
+    alert(`🛒 Compra de ${nome} será redirecionada para o Swap Doge Manga.`);
+    // Aqui você pode adicionar o link direto para o swap ou integração real
 }
-
-
-
-function comprar(nome){
-
-alert(
-"Compra de "+nome+
-" será conectada ao Swap Doge Manga."
-);
-
-}
-
-
 
 async function conectarCarteira(){
-
-
-if(window.solana){
-
-await window.solana.connect();
-
-alert("Phantom conectada!");
-
+    if(!window.solana || !window.solana.isPhantom){
+        alert(`❌ Phantom não encontrada!\n\n📱 Abra este site dentro do navegador do app Phantom\n💻 Instale a extensão no Chrome.`);
+        return;
+    }
+    try{
+        const resp = await window.solana.connect();
+        const endereco = resp.publicKey.toString();
+        document.getElementById("statusCarteira").textContent = `Conectada: ${endereco.slice(0,8)}...`;
+        alert("✅ Phantom conectada com sucesso!");
+    }catch(e){
+        alert("⚠️ Erro: " + (e.message || "Conexão cancelada"));
+    }
 }
 
-else{
-
-alert("Instale a Phantom Wallet");
-
-}
-
-
-}
-
-
-
+// Atualiza os preços a cada 3 minutos
 mercado();
-
-
+setInterval(mercado, 180000);
 </script>
-
-
 </body>
 </html>
