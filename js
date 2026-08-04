@@ -1,17 +1,36 @@
-const TOKENS = {
-    SOL:{
-        mint:"So11111111111111111111111111111111111111112",
-        decimals:9
-    },
+// ===============================
+// DOGE MANGA EVOLUTION
+// JUPITER QUOTE ENGINE
+// ===============================
 
-    USDC:{
-        mint:"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-        decimals:6
-    },
+const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
+const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
 
-    DGM:{
-        mint:"SEU_MINT_DGM_AQUI",
-        decimals:6
+
+async function buscarCotacao(inputMint, outputMint, amount){
+    try{
+        let url = `${JUPITER_QUOTE}?inputMint=${inputMint}`+
+                  `&outputMint=${outputMint}`+
+                  `&amount=${amount}`+
+                  `&slippageBps=50`;
+
+        // Adiciona taxa na cotação se estiver ativada
+        if(ATIVAR_TAXA){
+            url += `&platformFeeBps=${TAXA_EM_BPS}`;
+        }
+
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        if(!dados.routePlan){
+            throw new Error(dados.error || "Nenhuma rota encontrada");
+        }
+
+        ultimaRota = dados;
+        console.log("🚀 Cotação Jupiter:", dados);
+        return dados;
+
+    }catch(error){
+        console.error("Erro cotação:", error);
+        alert("Não foi possível buscar cotação: " + error.message);
     }
-
-};
