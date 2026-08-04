@@ -1,11 +1,66 @@
-// ===============================
-// DOGE MANGA - TESTE SEM TAXA | 100% FUNCIONAL
-// ===============================
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐕 Doge Manga Swap</title>
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: #050816; font-family: Arial, sans-serif; padding: 20px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .container { max-width: 500px; width: 100%; background: #111827; padding: 25px; border-radius: 16px; border: 2px solid #facc15; color: white; }
+        h2 { color: #facc15; text-align: center; margin-bottom: 20px; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; transition: opacity 0.2s; margin: 5px 0; }
+        button:hover { opacity: 0.9; }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-conectar { background: #facc15; color: #050816; }
+        .btn-cotacao { background: #2563eb; color: white; }
+        .btn-swap { background: #16a34a; color: white; }
+        .info { margin: 15px 0; padding: 12px; background: #050816; border-radius: 8px; font-size: 14px; line-height: 1.6; }
+        label { display: block; margin: 12px 0 5px; font-size: 14px; color: #d1d5db; }
+        select, input { width: 100%; padding: 10px; border-radius: 6px; background: #1f2937; color: white; border: 1px solid #374151; font-size: 15px; }
+        a { color: #facc15; text-decoration: none; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>🐕 Doge Manga Swap</h2>
 
-const ATIVAR_TAXA = false; // ❌ Taxa desligada para testes
+    <button class="btn-conectar" onclick="connectWallet()">Conectar Phantom</button>
+    <div id="wallet" class="info"></div>
+    <div id="saldos" class="info"></div>
+
+    <label>De:</label>
+    <select id="tokenFrom">
+        <option value="SOL">SOL</option>
+        <option value="USDC">USDC</option>
+        <option value="DGM">DGM</option>
+    </select>
+
+    <label>Para:</label>
+    <select id="tokenTo">
+        <option value="USDC">USDC</option>
+        <option value="SOL">SOL</option>
+        <option value="DGM">DGM</option>
+    </select>
+
+    <label>Quantidade:</label>
+    <input type="number" step="0.0001" id="amount" placeholder="Ex: 0.1">
+
+    <button class="btn-cotacao" onclick="getQuote()" id="quoteBtn">Buscar Cotação</button>
+    <div id="quote" class="info"></div>
+    <button class="btn-swap" onclick="executarSwap()" id="swapBtn" disabled>Trocar Agora</button>
+    <div id="status" class="info"></div>
+</div>
+
+<script>
+// ===============================
+// CONFIGURAÇÕES
+// ===============================
+const ATIVAR_TAXA = false; // ❌ Mude para true quando terminar os testes
 const CARTEIRA_TAXA = "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
 const TAX_WALLET = new solanaWeb3.PublicKey(CARTEIRA_TAXA);
-const TAXA_SWAP = 0.005;
+const TAXA_SWAP = 0.005; // 0,5%
 const TAXA_EM_BPS = Math.round(TAXA_SWAP * 100 * 100);
 
 const DGM_MINT = new solanaWeb3.PublicKey("E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE");
@@ -35,7 +90,9 @@ let wallet = null;
 let ultimaRota = null;
 let processando = false;
 
-// Auto-conexão se já for confiável
+// ===============================
+// AUTO-CONEXÃO
+// ===============================
 async function verificarCarteira(){
     if(window.solana?.isPhantom){
         try{
@@ -95,7 +152,7 @@ Saldo DGM: ${dgm.value.uiAmount.toLocaleString("pt-BR")}
 }
 
 // ===============================
-// MOTOR JUPITER OFICIAL
+// MOTOR JUPITER
 // ===============================
 const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
 const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
@@ -120,14 +177,14 @@ async function buscarCotacao(inputMint, outputMint, amount){
 }
 
 // ===============================
-// ERROS AMIGÁVEIS
+// TRATAMENTO DE ERROS
 // ===============================
 function mensagemErro(erro){
     const txt = (erro.message || "").toLowerCase();
     if(txt.includes("rejected") || txt.includes("cancelada")) return "❌ Você cancelou a transação";
     if(txt.includes("insufficient")) return "❌ Saldo insuficiente";
     if(txt.includes("blockhash") || txt.includes("expired")) return "❌ Tempo esgotado, tente novamente";
-    if(txt.includes("fetch") || txt.includes("network error") || txt.includes("timeout")) return "❌ Sem conexão com a rede, verifique a internet ou tente novamente";
+    if(txt.includes("fetch") || txt.includes("network error") || txt.includes("timeout")) return "❌ Sem conexão, verifique a internet ou tente novamente";
     return `❌ Erro: ${erro.message || "Falha desconhecida"}`;
 }
 
@@ -192,7 +249,7 @@ ${ATIVAR_TAXA ? `<br>Taxa: ${taxa.toFixed(6)} ${para}` : ""}
 }
 
 // ===============================
-// EXECUTAR SWAP
+// EXECUTAR TROCA
 // ===============================
 async function executarSwap(){
     if(processando) return;
@@ -248,7 +305,7 @@ async function executarSwap(){
         const conexao = new solanaWeb3.Connection("https://api.mainnet-beta.solana.com");
         await conexao.confirmTransaction(assinatura, "confirmed");
 
-        document.getElementById("status").innerHTML = `✅ Concluído!<br><a style="color:#facc15" target="_blank" href="https://solscan.io/tx/${assinatura}">Ver transação</a>`;
+        document.getElementById("status").innerHTML = `✅ Concluído!<br><a target="_blank" href="https://solscan.io/tx/${assinatura}">Ver transação</a>`;
         await carregarSaldos();
         ultimaRota = null;
 
@@ -259,5 +316,6 @@ async function executarSwap(){
         document.getElementById("swapBtn").disabled = false;
     }
 }
-
-console.log("🐕 Pronto para testes passo a passo!");
+</script>
+</body>
+</html>
