@@ -11,55 +11,48 @@
 <style>
 
 body{
-    background:#050816;
-    color:white;
-    font-family:Arial;
-    text-align:center;
+background:#050816;
+color:white;
+font-family:Arial;
+text-align:center;
 }
-
 
 .box{
-
-    max-width:450px;
-    margin:40px auto;
-    background:#111827;
-    padding:25px;
-    border-radius:20px;
-
+max-width:450px;
+margin:40px auto;
+background:#111827;
+padding:25px;
+border-radius:20px;
 }
-
 
 h1{
-    color:#facc15;
+color:#facc15;
 }
-
 
 select,input{
 
-    width:90%;
-    padding:15px;
-    margin:10px;
-    border-radius:10px;
+width:90%;
+padding:15px;
+margin:10px;
+border-radius:10px;
 
 }
-
 
 button{
 
-    background:#facc15;
-    border:none;
-    padding:15px 30px;
-    border-radius:15px;
-    font-size:18px;
-    cursor:pointer;
+background:#facc15;
+border:none;
+padding:15px 30px;
+border-radius:15px;
+font-size:18px;
+cursor:pointer;
 
 }
 
-
 #wallet{
 
-    color:#38bdf8;
-    margin:20px;
+color:#38bdf8;
+margin:20px;
 
 }
 
@@ -97,7 +90,6 @@ Carteira desconectada
 
 <h3>Você envia</h3>
 
-
 <select id="fromToken">
 
 <option>SOL</option>
@@ -131,6 +123,8 @@ placeholder="Quantidade"
 </select>
 
 
+<br>
+
 
 <button onclick="swap()">
 🚀 Trocar Agora
@@ -148,16 +142,11 @@ placeholder="Quantidade"
 <script>
 
 
-// Carteira do ecossistema Doge Manga
-
 const TAX_WALLET =
 "2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f";
 
 
-// taxa futura do portal
-
 const ECOSYSTEM_FEE = 0.01;
-
 
 
 let wallet = null;
@@ -167,11 +156,46 @@ let wallet = null;
 async function connectPhantom(){
 
 
-if(window.solana){
+try{
+
+
+let provider = null;
+
+
+// Phantom Android / Browser
+
+if(window.phantom && window.phantom.solana){
+
+provider = window.phantom.solana;
+
+}
+
+
+// Phantom extensão
+
+else if(window.solana){
+
+provider = window.solana;
+
+}
+
+
+
+if(!provider){
+
+alert(
+"Abra o site pelo navegador da Phantom Wallet"
+);
+
+return;
+
+}
+
 
 
 const response =
-await window.solana.connect();
+await provider.connect();
+
 
 
 wallet =
@@ -181,22 +205,28 @@ response.publicKey.toString();
 
 document.getElementById("wallet").innerHTML =
 
-"Carteira:<br>"+wallet;
+"Carteira conectada:<br>"+wallet;
 
 
 
 }
 
-else{
+catch(error){
+
+
+console.log(error);
+
 
 alert(
-"Instale a Phantom Wallet"
+"Erro ao conectar Phantom"
 );
 
+
 }
 
 
 }
+
 
 
 
@@ -232,7 +262,7 @@ document.getElementById("amount").value;
 document.getElementById("status").innerHTML =
 
 `
-Preparando swap 🚀
+Swap preparado 🚀
 <br><br>
 
 ${amount} ${from}
@@ -241,24 +271,21 @@ ${to}
 
 <br><br>
 
-Jupiter será conectado nesta etapa.
+Jupiter será conectado na próxima etapa.
 
 <br><br>
 
 Taxa ecossistema:
 ${ECOSYSTEM_FEE*100}%
 
-<br>
+<br><br>
 
 Carteira:
 ${TAX_WALLET}
 
 `;
 
-
-
 }
-
 
 
 </script>
@@ -267,32 +294,3 @@ ${TAX_WALLET}
 </body>
 
 </html>
-async function connectPhantom(){
-
-if(window.solana){
-
-
-const response =
-await window.solana.connect();
-
-
-wallet =
-response.publicKey.toString();
-
-
-document.getElementById("wallet").innerHTML =
-
-"Carteira:<br>"+wallet;
-
-
-}
-
-else{
-
-alert(
-"Instale a Phantom Wallet"
-);
-
-}
-
-}
