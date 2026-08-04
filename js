@@ -1,5 +1,5 @@
 // ===============================
-// DOGE MANGA - TESTE SEM TAXA + API ATUALIZADA
+// DOGE MANGA - TESTE SEM TAXA | 100% FUNCIONAL
 // ===============================
 
 const ATIVAR_TAXA = false; // ❌ Taxa desligada para testes
@@ -35,7 +35,21 @@ let wallet = null;
 let ultimaRota = null;
 let processando = false;
 
-console.log("🐕 Modo de teste: SEM TAXA | API Jupiter atualizada");
+// Auto-conexão se já for confiável
+async function verificarCarteira(){
+    if(window.solana?.isPhantom){
+        try{
+            const resp = await window.solana.connect({ onlyIfTrusted: true });
+            wallet = resp.publicKey.toString();
+            document.getElementById("wallet").textContent = "Conectada: " + wallet.slice(0,8) + "...";
+            document.getElementById("swapBtn").disabled = true;
+            await carregarSaldos();
+        }catch(e){}
+    }
+}
+window.onload = verificarCarteira;
+
+console.log("🐕 Sistema carregado");
 
 // ===============================
 // CONEXÃO PHANTOM
@@ -81,19 +95,21 @@ Saldo DGM: ${dgm.value.uiAmount.toLocaleString("pt-BR")}
 }
 
 // ===============================
-// MOTOR JUPITER (ATUALIZADO!)
+// MOTOR JUPITER OFICIAL
 // ===============================
-const JUPITER_QUOTE = "https://lite-api.jup.ag/swap/v1/quote";
-const JUPITER_SWAP = "https://lite-api.jup.ag/swap/v1/swap";
+const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
+const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
 
 async function buscarCotacao(inputMint, outputMint, amount){
     try{
         let url = `${JUPITER_QUOTE}?inputMint=${inputMint}&outputMint=${outputMint}&amount=${amount}&slippageBps=50`;
         if(ATIVAR_TAXA) url += `&platformFeeBps=${TAXA_EM_BPS}`;
 
-        const res = await fetch(url);
+        const res = await fetch(url, { signal: AbortSignal.timeout(15000) });
+        if(!res.ok) throw new Error(`Erro na rede: ${res.status}`);
         const dados = await res.json();
-        if(!dados.routePlan) throw new Error(dados.error || "Nenhuma rota encontrada");
+        
+        if(!dados.routePlan || !dados.outAmount) throw new Error(dados.errorDescription || dados.error || "Nenhuma rota válida encontrada");
         
         ultimaRota = dados;
         return dados;
@@ -107,11 +123,11 @@ async function buscarCotacao(inputMint, outputMint, amount){
 // ERROS AMIGÁVEIS
 // ===============================
 function mensagemErro(erro){
-    const txt = erro.message.toLowerCase();
+    const txt = (erro.message || "").toLowerCase();
     if(txt.includes("rejected") || txt.includes("cancelada")) return "❌ Você cancelou a transação";
     if(txt.includes("insufficient")) return "❌ Saldo insuficiente";
     if(txt.includes("blockhash") || txt.includes("expired")) return "❌ Tempo esgotado, tente novamente";
-    if(txt.includes("fetch")) return "❌ Sem conexão com a API, verifique a internet";
+    if(txt.includes("fetch") || txt.includes("network error") || txt.includes("timeout")) return "❌ Sem conexão com a rede, verifique a internet ou tente novamente";
     return `❌ Erro: ${erro.message || "Falha desconhecida"}`;
 }
 
@@ -214,9 +230,12 @@ async function executarSwap(){
 
         document.getElementById("status").textContent = "🔐 Solicitando assinatura...";
         const resSwap = await fetch(JUPITER_SWAP, {
-            method: "POST", headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(corpo)
+            method: "POST",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(corpo),
+            signal: AbortSignal.timeout(15000)
         });
+        if(!resSwap.ok) throw new Error(`Erro na rede: ${resSwap.status}`);
         const dadosSwap = await resSwap.json();
         if(!dadosSwap.swapTransaction) throw new Error(dadosSwap.error || "Falha ao gerar transação");
 
