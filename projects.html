@@ -1,373 +1,236 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Projetos em Destaque | Doge Manga</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-
-body{
-background:#050816;
-color:white;
-font-family:Arial,sans-serif;
-padding:20px;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-}
-
-h1,h2{
-color:#facc15;
-text-align:center;
-}
-
-#lista{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-
-}
-
-.card-projeto{
-
-background:#111827;
-border:1px solid #2563eb;
-border-radius:20px;
-padding:20px;
-text-align:center;
-
-}
-
-.card-projeto img{
-
-width:100px;
-height:100px;
-border-radius:50%;
-object-fit:cover;
-
-}
-
-.btn{
-
-display:inline-block;
-margin-top:15px;
-padding:12px 20px;
-background:#facc15;
-color:#050816;
-border-radius:20px;
-text-decoration:none;
-font-weight:bold;
-
-}
-
-
-.chat{
-
-margin-top:40px;
-background:#111827;
-border:1px solid #38bdf8;
-border-radius:20px;
-padding:20px;
-
-}
-
-
-#mensagens{
-
-height:250px;
-overflow:auto;
-background:#050816;
-padding:10px;
-border-radius:10px;
-
-}
-
-
-input,textarea{
-
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:10px;
-
-}
-
-
-button{
-
-margin-top:10px;
-padding:12px 20px;
-border-radius:20px;
-background:#facc15;
-cursor:pointer;
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos em Destaque | Doge Manga</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body{
+            background:#050816;
+            color:white;
+            font-family:Arial,sans-serif;
+            padding:20px;
+        }
+        .container{
+            max-width:1200px;
+            margin:auto;
+        }
+        h1{
+            text-align:center;
+            color:#facc15;
+            margin-bottom: 30px;
+        }
+        h2{
+            color:#38bdf8;
+            margin-bottom: 15px;
+        }
+        #lista{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:20px;
+            margin-bottom: 40px;
+        }
+        .card-projeto{
+            background:#111827;
+            border:1px solid #2563eb;
+            border-radius:20px;
+            padding:20px;
+            text-align:center;
+            transition: 0.3s;
+        }
+        .card-projeto:hover{
+            border-color: #facc15;
+            transform: translateY(-5px);
+        }
+        .card-projeto img{
+            width:100px;
+            height:100px;
+            border-radius:50%;
+            object-fit:cover;
+            margin-bottom: 10px;
+        }
+        .btn{
+            display:inline-block;
+            padding:12px 20px;
+            background:#facc15;
+            color:#050816;
+            border-radius:20px;
+            text-decoration:none;
+            font-weight:bold;
+            margin-top:10px;
+            transition: 0.2s;
+        }
+        .btn:hover{
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        .chat{
+            background:#111827;
+            padding:20px;
+            border-radius:20px;
+            border:1px solid #38bdf8;
+        }
+        #mensagens{
+            height:300px;
+            overflow:auto;
+            margin-bottom: 15px;
+            display:flex;
+            flex-direction:column;
+            gap:10px;
+        }
+        .mensagem-item{
+            background:#1e293b;
+            padding:10px;
+            border-radius:8px;
+        }
+        .mensagem-item b{
+            color:#facc15;
+        }
+        input, textarea{
+            width:100%;
+            padding:12px;
+            margin-top:10px;
+            border-radius:10px;
+            border: 1px solid #2563eb;
+            background:#0f172a;
+            color:white;
+            box-sizing: border-box;
+        }
+        button{
+            margin-top:10px;
+            padding:12px 20px;
+            border-radius:20px;
+            cursor:pointer;
+            background:#22c55e;
+            color:white;
+            border:none;
+            font-weight:bold;
+            transition: 0.2s;
+        }
+        button:hover{
+            opacity: 0.9;
+        }
+    </style>
 </head>
-
 <body>
-
-<div class="container">
-
-<h1>🔥 Projetos em Destaque</h1>
-
-<div id="lista">
-Carregando projetos...
-</div><div class="chat">
-
-<h2>💬 Chat da Comunidade</h2>
-
-
-<div id="mensagens">
-Carregando mensagens...
-</div>
-
-
-<input id="nomeChat" placeholder="Seu nome">
-
-
-<textarea id="mensagemChat" placeholder="Digite sua mensagem"></textarea>
-
-
-<button onclick="enviarMensagem()">
-Enviar
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-<script>
-
-
-const SUPABASE_URL =
-"https://wudayugjctzhwnjdjsrx.supabase.co";
-
-
-const SUPABASE_KEY =
-"COLE_SUA_CHAVE_PUBLICA_AQUI";
-const SUPABASE_KEY =
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtzeG5ya3dlZnRzb3N5YXlsamRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NTQwMTcsImV4cCI6MjEwMTUzMDAxN30.KerSU-JtQdBgCcaLpvO7AlHZai0kaiYumHOrwlgSrXE";
-
-
-const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-
-
-async function carregarProjetos(){
-
-
-const {data,error}=await supabaseClient
-
-.from("projetos")
-
-.select("*")
-
-.eq("status","Aprovado");
-
-
-
-if(error){
-
-console.log("ERRO PROJETOS:",error);
-
-document.getElementById("lista").innerHTML =
-"Erro ao carregar projetos";
-
-return;
-
-}
-
-
-
-let html="";
-
-
-
-data.forEach(p=>{
-
-
-html += `
-
-<div class="card-projeto">
-
-
-<img src="${p.logo || 'logo.png'}">
-
-
-<h2>${p.nome}</h2>
-
-
-<p>
-🟢 Rede: ${p.rede || ""}
-</p>
-
-
-<p>
-${p.descricao || ""}
-</p>
-
-
-<a class="btn" href="projeto.html?id=${p.id}">
-📈 Ver Projeto
-</a>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-document.getElementById("lista").innerHTML = html;
-
-
-}
-
-
-
-async function carregarChat(){
-
-
-const {data,error}=await supabaseClient
-
-.from("chat_publico")
-
-.select("*")
-
-.order("id",{ascending:true});
-
-
-
-if(error){
-
-console.log("ERRO CHAT:",error);
-
-document.getElementById("mensagens").innerHTML =
-"Erro ao carregar chat";
-
-return;
-
-}
-
-
-
-let html="";
-
-
-data.forEach(msg=>{
-
-
-html += `
-
-let html="";
-
-
-data.forEach(msg=>{
-
-
-html += `
-
-<p>
-<b>${msg.nome}</b>: ${msg.mensagem}
-</p>
-
-`;
-
-});
-
-
-document.getElementById("mensagens").innerHTML = html;
-
-
-}
-
-const nome =
-document.getElementById("nomeChat").value;
-
-
-const mensagem =
-document.getElementById("mensagemChat").value;
-
-
-
-if(!nome || !mensagem){
-
-alert("Preencha nome e mensagem");
-
-return;
-
-}
-
-
-
-const {error}=await supabaseClient
-
-.from("chat_publico")
-
-.insert([{
-
-nome:nome,
-
-mensagem:mensagem,
-
-data:new Date()
-
-}]);
-
-
-
-if(error){
-
-console.log("ERRO ENVIO:",error);
-
-alert("Erro ao enviar mensagem");
-
-return;
-
-}
-
-
-
-document.getElementById("mensagemChat").value="";
-
-
-carregarChat();
-
-
-}
-
-
-
-carregarProjetos();
-
-carregarChat();
-
-</script>
-
+    <div class="container">
+        <h1>🔥 Projetos em Destaque</h1>
+        <div id="lista">Carregando projetos...</div>
+
+        <div class="chat">
+            <h2>💬 Chat da Comunidade</h2>
+            <div id="mensagens">Carregando mensagens...</div>
+            <input id="nomeChat" placeholder="Seu nome" maxlength="30">
+            <textarea id="mensagemChat" placeholder="Digite sua mensagem" maxlength="500"></textarea>
+            <button onclick="enviarMensagem()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Dados corretos do seu Supabase
+        const SUPABASE_URL = "https://wudayugjctzhwnjdjsrx.supabase.co";
+        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1ZGF5dWdqY3R6aHduamRqc3J4Iiwicm9sZSI6ImFjY2VzcyIsInBhdGggc2NvcGUiOiJwdWJsaWMifQ.S6WRuQAyCXFx5Mpzs4Duiv3gIwCPXQ2oInzc8uFKxiM";
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Carregar só projetos APROVADOS
+        async function carregarProjetos(){
+            const {data,error}=await supabaseClient
+                .from("projetos")
+                .select("*")
+                .eq("status","Aprovado");
+
+            if(error){
+                console.log(error);
+                document.getElementById("lista").innerHTML = "<p style='text-align:center;color:#ef4444;'>Erro ao carregar projetos</p>";
+                return;
+            }
+
+            if(data.length === 0){
+                document.getElementById("lista").innerHTML = "<p style='text-align:center;color:#94a3b8;'>Nenhum projeto aprovado ainda.</p>";
+                return;
+            }
+
+            let html="";
+            data.forEach(p=>{
+                html += `
+                <div class="card-projeto">
+                    <img src="${p.logo || 'logo.png'}" alt="${p.nome}">
+                    <h3>${p.nome}</h3>
+                    <p>🟢 Rede: ${p.rede || "Não informada"}</p>
+                    <p>${p.descricao || "Sem descrição"}</p>
+                    <a class="btn" href="projeto.html?id=${p.id}">📈 Ver Projeto</a>
+                </div>
+                `;
+            });
+            document.getElementById("lista").innerHTML = html;
+        }
+
+        // Carregar mensagens do chat
+        async function carregarChat(){
+            const {data,error}=await supabaseClient
+                .from("chat_publico")
+                .select("*")
+                .order("data",{ascending:true});
+
+            if(error){
+                console.log(error);
+                return;
+            }
+
+            let html="";
+            data.forEach(msg=>{
+                const dataFormatada = new Date(msg.data).toLocaleString('pt-BR');
+                html += `
+                <div class="mensagem-item">
+                    <b>${msg.nome}</b> <small style="color:#94a3b8;">(${dataFormatada})</small><br>
+                    ${msg.mensagem}
+                </div>
+                `;
+            });
+            document.getElementById("mensagens").innerHTML = html;
+            document.getElementById("mensagens").scrollTop = document.getElementById("mensagens").scrollHeight;
+        }
+
+        // Enviar mensagem
+        async function enviarMensagem(){
+            const nome = document.getElementById("nomeChat").value.trim();
+            const mensagem = document.getElementById("mensagemChat").value.trim();
+
+            if(!nome || !mensagem){
+                alert("Preencha seu nome e a mensagem!");
+                return;
+            }
+
+            const {error}=await supabaseClient
+                .from("chat_publico")
+                .insert([{
+                    nome:nome,
+                    mensagem:mensagem,
+                    data:new Date()
+                }]);
+
+            if(error){
+                console.log(error);
+                alert("Erro ao enviar: " + error.message);
+                return;
+            }
+
+            document.getElementById("mensagemChat").value="";
+            carregarChat();
+        }
+
+        // Atualizar chat em tempo real
+        supabaseClient.channel('novo-mensagem')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_publico' }, () => {
+                carregarChat();
+            })
+            .subscribe();
+
+        // Iniciar tudo
+        carregarProjetos();
+        carregarChat();
+    </script>
 </body>
-
 </html>
