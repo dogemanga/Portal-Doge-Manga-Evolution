@@ -209,3 +209,68 @@ carregarProjeto();
 </body>
 
 </html>
+<style>
+
+.card-projeto{
+
+background:#111827;
+border:1px solid #2563eb;
+border-radius:20px;
+padding:20px;
+margin:20px;
+text-align:center;
+
+}
+
+.card-projeto img{
+
+width:100px;
+height:100px;
+object-fit:cover;
+border-radius:50%;
+
+}
+
+.vip{
+
+border:2px solid #facc15;
+
+}
+
+.premium{
+
+border:2px solid #38bdf8;
+
+}
+
+.btn-projeto{
+
+display:inline-block;
+padding:12px 25px;
+background:#facc15;
+color:#050816;
+border-radius:20px;
+text-decoration:none;
+font-weight:bold;
+
+}
+
+</style><div class="card-projeto ${projeto.plano}">
+
+<img src="${projeto.logo}" alt="${projeto.nome}">
+
+<h2>${projeto.nome}</h2>
+
+<p>🟢 Rede: ${projeto.rede}</p>
+
+<p>⭐ Plano: ${projeto.plano}</p>
+
+<p>${projeto.descricao}</p>
+
+<a class="btn-projeto" href="projeto.html?id=${projeto.id}">
+📈 Ver Projeto
+</a>
+
+</div><style>
+...
+</style>
