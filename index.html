@@ -4575,4 +4575,63 @@ style="width:250px;border-radius:15px;"
 
 <p>
 Escaneie o QR Code com sua carteira Solana.
-</p>
+</p><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://wudayugjctzhwnjdjsrx.supabase.co";
+
+const SUPABASE_KEY = "COLE_AQUI_SUA_CHAVE_PUBLICA";
+
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+async function enviarProjeto(){
+
+const projeto = {
+
+nome: document.getElementById("nome").value,
+
+rede: document.getElementById("rede").value,
+
+contrato: document.getElementById("contrato").value,
+
+site: document.getElementById("site").value,
+
+twitter: document.getElementById("twitter").value,
+
+descricao: document.getElementById("descricao").value,
+
+plano: document.querySelector('input[name="plano"]:checked').value,
+
+status: "Pendente",
+
+data: new Date()
+
+};
+
+
+const { data, error } = await supabaseClient
+.from("projetos")
+.insert([projeto]);
+
+
+if(error){
+
+alert("Erro ao enviar projeto");
+
+console.log(error);
+
+}else{
+
+alert("Projeto enviado com sucesso!");
+
+}
+
+
+}
+
+  </script>
