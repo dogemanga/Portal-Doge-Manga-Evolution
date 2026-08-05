@@ -1,7 +1,3 @@
-const SUPABASE_KEY =
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1ZGF5dWdqY3R6aHduamRqc3J4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU4ODY0OTEsImV4cCI6MjEwMTQ2MjQ5MX0.S6WRuQAyCXFx5Mpzs4Duiv3gIwCPXQ2oInzc8uFKxiM";
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -23,18 +19,15 @@ font-family:Arial,sans-serif;
 padding:20px;
 }
 
-
-h1{
-text-align:center;
-color:#facc15;
-}
-
-
 .container{
 max-width:1200px;
 margin:auto;
 }
 
+h1{
+text-align:center;
+color:#facc15;
+}
 
 #lista{
 display:grid;
@@ -42,30 +35,22 @@ grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 }
 
-
 .card-projeto{
-
 background:#111827;
 border:1px solid #2563eb;
 border-radius:20px;
 padding:20px;
 text-align:center;
-
 }
 
-
 .card-projeto img{
-
 width:100px;
 height:100px;
 border-radius:50%;
 object-fit:cover;
-
 }
 
-
 .btn{
-
 display:inline-block;
 padding:12px 20px;
 background:#facc15;
@@ -73,62 +58,54 @@ color:#050816;
 border-radius:20px;
 text-decoration:none;
 font-weight:bold;
-
 }
 
-
 .chat{
-
 margin-top:40px;
 background:#111827;
 padding:20px;
 border-radius:20px;
 border:1px solid #38bdf8;
-
 }
-
 
 #mensagens{
-
 height:300px;
 overflow:auto;
-
 }
 
-
 input, textarea{
-
 width:100%;
 padding:12px;
 margin-top:10px;
 border-radius:10px;
-
 }
 
-
 button{
-
 margin-top:10px;
 padding:12px 20px;
 border-radius:20px;
 cursor:pointer;
-
 }
-
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
+
 <h1>🔥 Projetos em Destaque</h1>
+
 
 <div id="lista">
 Carregando projetos...
-</div><!-- CHAT DA COMUNIDADE -->
+</div>
+
+
 
 <div class="chat">
 
@@ -136,27 +113,18 @@ Carregando projetos...
 
 
 <div id="mensagens">
-
 Carregando mensagens...
-
 </div>
 
 
-<input 
-id="nomeChat"
-placeholder="Seu nome">
+<input id="nomeChat" placeholder="Seu nome">
 
 
-<textarea 
-id="mensagemChat"
-placeholder="Digite sua mensagem">
-</textarea>
+<textarea id="mensagemChat" placeholder="Digite sua mensagem"></textarea>
 
 
 <button onclick="enviarMensagem()">
-
 Enviar
-
 </button>
 
 
@@ -191,11 +159,8 @@ async function carregarProjetos(){
 
 
 const {data,error}=await supabaseClient
-
 .from("projetos")
-
 .select("*")
-
 .eq("status","Aprovado");
 
 
@@ -203,6 +168,8 @@ const {data,error}=await supabaseClient
 if(error){
 
 console.log(error);
+document.getElementById("lista").innerHTML =
+"Erro ao carregar projetos";
 
 return;
 
@@ -213,49 +180,32 @@ return;
 let html="";
 
 
-
 data.forEach(p=>{
 
 
 html += `
 
-
 <div class="card-projeto">
-
 
 <img src="${p.logo || 'logo.png'}">
 
-
 <h2>${p.nome}</h2>
 
+<p>🟢 Rede: ${p.rede || ""}</p>
 
-<p>
-🟢 Rede: ${p.rede || ""}
-</p>
-
-
-<p>
-${p.descricao || ""}
-</p>
-
+<p>${p.descricao || ""}</p>
 
 
 <a class="btn" href="projeto.html?id=${p.id}">
-
 📈 Ver Projeto
-
 </a>
 
 
 </div>
 
-
 `;
 
-
-
 });
-
 
 
 document.getElementById("lista").innerHTML = html;
@@ -270,11 +220,8 @@ async function carregarChat(){
 
 
 const {data,error}=await supabaseClient
-
 .from("chat_publico")
-
 .select("*")
-
 .order("id",{ascending:true});
 
 
@@ -282,7 +229,6 @@ const {data,error}=await supabaseClient
 if(error){
 
 console.log(error);
-
 return;
 
 }
@@ -292,28 +238,18 @@ return;
 let html="";
 
 
-
 data.forEach(msg=>{
 
 
 html += `
 
-
 <p>
-
-<b>${msg.nome}</b>:
-
-${msg.mensagem}
-
+<b>${msg.nome}</b>: ${msg.mensagem}
 </p>
-
 
 `;
 
-
-
 });
-
 
 
 document.getElementById("mensagens").innerHTML = html;
@@ -323,9 +259,8 @@ document.getElementById("mensagens").innerHTML = html;
 
 
 
-carregarProjetos();
 
-carregarChat();async function enviarMensagem(){
+async function enviarMensagem(){
 
 
 const nome =
@@ -340,7 +275,6 @@ document.getElementById("mensagemChat").value;
 if(!nome || !mensagem){
 
 alert("Preencha nome e mensagem");
-
 return;
 
 }
@@ -348,15 +282,11 @@ return;
 
 
 const {error}=await supabaseClient
-
 .from("chat_publico")
-
 .insert([{
 
 nome:nome,
-
 mensagem:mensagem,
-
 data:new Date()
 
 }]);
@@ -366,9 +296,7 @@ data:new Date()
 if(error){
 
 console.log(error);
-
 alert("Erro ao enviar mensagem");
-
 return;
 
 }
@@ -383,6 +311,11 @@ carregarChat();
 
 }
 
+
+
+carregarProjetos();
+
+carregarChat();
 
 
 </script>
