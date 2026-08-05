@@ -128,13 +128,14 @@
     </div>
 
     <script>
-        // Dados atualizados com a chave que você passou
-        const SUPABASE_URL = "https://wudayugjctzhwnjdjsrx.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_WHBdCSxfA3gq-CUhorz3yg_TI3Lt_Qw";
+        // Dados EXATOS que você forneceu
+        const SUPABASE_URL = "https://ksxnrkweftsosyayljdo.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_z19551yaBUdSlRG3uCcqlQ_OE8i3TM9";
         
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         console.log("✅ Supabase conectado com sucesso!");
 
+        // Carregar só projetos APROVADOS
         async function carregarProjetos(){
             const {data,error}=await supabaseClient
                 .from("projetos")
@@ -143,7 +144,7 @@
 
             if(error){
                 console.log("❌ Erro ao carregar projetos:", error);
-                document.getElementById("lista").innerHTML = "<p style='text-align:center;color:#ef4444;'>Erro ao carregar projetos</p>";
+                document.getElementById("lista").innerHTML = `<p style='text-align:center;color:#ef4444;'>Erro: ${error.message}</p>`;
                 return;
             }
 
@@ -167,6 +168,7 @@
             document.getElementById("lista").innerHTML = html;
         }
 
+        // Carregar mensagens do chat
         async function carregarChat(){
             const {data,error}=await supabaseClient
                 .from("chat_publico")
@@ -192,6 +194,7 @@
             document.getElementById("mensagens").scrollTop = document.getElementById("mensagens").scrollHeight;
         }
 
+        // Enviar mensagem
         async function enviarMensagem(){
             const nome = document.getElementById("nomeChat").value.trim();
             const mensagem = document.getElementById("mensagemChat").value.trim();
@@ -219,12 +222,14 @@
             carregarChat();
         }
 
+        // Atualizar chat em tempo real
         supabaseClient.channel('novo-mensagem')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_publico' }, () => {
                 carregarChat();
             })
             .subscribe();
 
+        // Iniciar tudo
         carregarProjetos();
         carregarChat();
     </script>
