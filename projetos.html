@@ -8,29 +8,26 @@
 
 <title>Projetos em Destaque | Doge Manga</title>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <style>
 
 body{
-
 background:#050816;
 color:white;
 font-family:Arial,sans-serif;
 padding:20px;
-
 }
 
+.container{
+max-width:1200px;
+margin:auto;
+}
 
-h1{
-
-text-align:center;
+h1,h2{
 color:#facc15;
-
+text-align:center;
 }
-
 
 #lista{
 
@@ -40,27 +37,15 @@ gap:20px;
 
 }
 
-
-
 .card-projeto{
 
 background:#111827;
 border:1px solid #2563eb;
 border-radius:20px;
-padding:25px;
+padding:20px;
 text-align:center;
-transition:0.3s;
 
 }
-
-
-.card-projeto:hover{
-
-transform:translateY(-5px);
-
-}
-
-
 
 .card-projeto img{
 
@@ -68,219 +53,75 @@ width:100px;
 height:100px;
 border-radius:50%;
 object-fit:cover;
-margin-bottom:15px;
 
 }
 
-
-
-.vip{
-
-border:2px solid #facc15;
-
-}
-
-
-.premium{
-
-border:2px solid #38bdf8;
-
-}
-
-
-
-.btn-projeto{
+.btn{
 
 display:inline-block;
 margin-top:15px;
-padding:12px 25px;
+padding:12px 20px;
 background:#facc15;
 color:#050816;
 border-radius:20px;
-font-weight:bold;
 text-decoration:none;
+font-weight:bold;
 
 }
 
 
+.chat{
 
-a{
-
-color:#38bdf8;
+margin-top:40px;
+background:#111827;
+border:1px solid #38bdf8;
+border-radius:20px;
+padding:20px;
 
 }
 
+
+#mensagens{
+
+height:250px;
+overflow:auto;
+background:#050816;
+padding:10px;
+border-radius:10px;
+
+}
+
+
+input,textarea{
+
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+
+}
+
+
+button{
+
+margin-top:10px;
+padding:12px 20px;
+border-radius:20px;
+background:#facc15;
+cursor:pointer;
+
+}
 
 </style>
 
-
 </head>
-
 
 <body>
 
+<div class="container">
 
 <h1>🔥 Projetos em Destaque</h1>
 
-
 <div id="lista">
-
 Carregando projetos...
-
 </div>
-
-
-
-<script>
-
-
-const SUPABASE_URL =
-"https://wudayugjctzhwnjdjsrx.supabase.co";
-
-
-const SUPABASE_KEY =
-"COLE_AQUI_SUA_CHAVE_PUBLICA";
-
-
-const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-
-
-async function carregarProjetos(){
-
-
-const {data,error}=await supabaseClient
-
-.from("projetos")
-
-.select("*")
-
-if(error){
-
-console.log("ERRO COMPLETO:", error);
-
-document.getElementById("lista").innerHTML =
-"Erro: " + error.message;
-
-return;
-
-}
-
-document.getElementById("lista").innerHTML =
-"Erro ao carregar projetos";
-
-return;
-
-}
-
-
-
-let html="";
-
-
-
-data.forEach(projeto=>{
-
-
-html += `
-
-
-<div class="card-projeto ${projeto.plano}">
-
-
-<img src="${projeto.logo || 'logo.png'}">
-
-
-<h2>
-${projeto.nome}
-</h2>
-
-
-<p>
-🟢 Rede: ${projeto.rede}
-</p>
-
-
-
-<p>
-⭐ Plano: ${projeto.plano || "Normal"}
-</p>
-
-
-
-<p>
-${projeto.descricao || ""}
-</p>
-
-
-
-<p>
-
-🌐
-
-<a href="${projeto.site}" target="_blank">
-
-Site Oficial
-
-</a>
-
-</p>
-
-
-
-<p>
-
-📢
-
-<a href="${projeto.telegram}" target="_blank">
-
-Telegram
-
-</a>
-
-</p>
-
-
-
-<a class="btn-projeto"
-href="projeto.html?id=${projeto.id}">
-
-📈 Ver Projeto
-
-</a>
-
-
-
-</div>
-
-
-`;
-
-
-
-});
-
-
-
-document.getElementById("lista").innerHTML = html;
-
-
-
-}
-
-
-
-carregarProjetos();
-
-
-
-</script>
-
-
-</body>
-
-</html>
