@@ -159,13 +159,16 @@ const {data,error}=await supabaseClient
 
 .select("*")
 
-.eq("status","Aprovado");
-
-
-
 if(error){
 
-console.log(error);
+console.log("ERRO COMPLETO:", error);
+
+document.getElementById("lista").innerHTML =
+"Erro: " + error.message;
+
+return;
+
+}
 
 document.getElementById("lista").innerHTML =
 "Erro ao carregar projetos";
