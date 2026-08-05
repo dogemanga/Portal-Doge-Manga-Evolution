@@ -88,4 +88,104 @@ background:#ef4444;
 
 </body>
 
-</html>
+</html></body><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://wudayugjctzhwnjdjsrx.supabase.co";
+
+const SUPABASE_KEY = "COLE_AQUI_SUA_CHAVE_PUBLICA";
+
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+async function carregarProjetos(){
+
+const { data, error } = await supabaseClient
+.from("projetos")
+.select("*")
+.order("id", { ascending: false });
+
+
+if(error){
+
+console.log(error);
+return;
+
+}
+
+
+const lista = document.getElementById("listaProjetos");
+
+lista.innerHTML = "";
+
+
+data.forEach(projeto => {
+
+
+lista.innerHTML += `
+
+<div class="card">
+
+<h2>${projeto.nome}</h2>
+
+<p>🌐 Rede: ${projeto.rede}</p>
+
+<p>💎 Plano: ${projeto.plano}</p>
+
+<p>📌 Status: ${projeto.status}</p>
+
+<button onclick="aprovar('${projeto.id}')">
+✅ Aprovar
+</button>
+
+
+<button onclick="rejeitar('${projeto.id}')">
+❌ Rejeitar
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+
+async function aprovar(id){
+
+await supabaseClient
+.from("projetos")
+.update({status:"Aprovado"})
+.eq("id",id);
+
+carregarProjetos();
+
+}
+
+
+
+async function rejeitar(id){
+
+await supabaseClient
+.from("projetos")
+.update({status:"Rejeitado"})
+.eq("id",id);
+
+carregarProjetos();
+
+}
+
+
+
+carregarProjetos();
+
+
+</script><div id="listaProjetos"></div>
