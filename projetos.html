@@ -282,9 +282,27 @@ data.forEach(msg=>{
 
 html += `
 
-<p>
-<b>${msg.nome}</b>: ${msg.mensagem}async function enviarMensagem(){
+let html="";
 
+
+data.forEach(msg=>{
+
+
+html += `
+
+<p>
+<b>${msg.nome}</b>: ${msg.mensagem}
+</p>
+
+`;
+
+});
+
+
+document.getElementById("mensagens").innerHTML = html;
+
+
+}
 
 const nome =
 document.getElementById("nomeChat").value;
