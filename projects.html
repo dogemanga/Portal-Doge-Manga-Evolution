@@ -24,90 +24,107 @@ max-width:1200px;
 margin:auto;
 }
 
-h1{
-text-align:center;
+h1,h2{
 color:#facc15;
+text-align:center;
 }
 
 #lista{
+
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
+
 }
 
 .card-projeto{
+
 background:#111827;
 border:1px solid #2563eb;
 border-radius:20px;
 padding:20px;
 text-align:center;
+
 }
 
 .card-projeto img{
+
 width:100px;
 height:100px;
 border-radius:50%;
 object-fit:cover;
+
 }
 
 .btn{
+
 display:inline-block;
+margin-top:15px;
 padding:12px 20px;
 background:#facc15;
 color:#050816;
 border-radius:20px;
 text-decoration:none;
 font-weight:bold;
+
 }
+
 
 .chat{
+
 margin-top:40px;
 background:#111827;
-padding:20px;
-border-radius:20px;
 border:1px solid #38bdf8;
+border-radius:20px;
+padding:20px;
+
 }
+
 
 #mensagens{
-height:300px;
+
+height:250px;
 overflow:auto;
+background:#050816;
+padding:10px;
+border-radius:10px;
+
 }
 
-input, textarea{
+
+input,textarea{
+
 width:100%;
 padding:12px;
 margin-top:10px;
 border-radius:10px;
+
 }
 
+
 button{
+
 margin-top:10px;
 padding:12px 20px;
 border-radius:20px;
+background:#facc15;
 cursor:pointer;
+
 }
 
 </style>
 
 </head>
 
-
 <body>
-
 
 <div class="container">
 
-
 <h1>🔥 Projetos em Destaque</h1>
-
 
 <div id="lista">
 Carregando projetos...
-</div>
-
-
-
-<div class="chat">
+</div><div class="chat">
 
 <h2>💬 Chat da Comunidade</h2>
 
@@ -144,7 +161,8 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
 "COLE_SUA_CHAVE_PUBLICA_AQUI";
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtzeG5ya3dlZnRzb3N5YXlsamRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NTQwMTcsImV4cCI6MjEwMTUzMDAxN30.KerSU-JtQdBgCcaLpvO7AlHZai0kaiYumHOrwlgSrXE
+const SUPABASE_KEY =
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtzeG5ya3dlZnRzb3N5YXlsamRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU5NTQwMTcsImV4cCI6MjEwMTUzMDAxN30.KerSU-JtQdBgCcaLpvO7AlHZai0kaiYumHOrwlgSrXE";
 
 
 const supabaseClient =
@@ -159,15 +177,19 @@ async function carregarProjetos(){
 
 
 const {data,error}=await supabaseClient
+
 .from("projetos")
+
 .select("*")
+
 .eq("status","Aprovado");
 
 
 
 if(error){
 
-console.log(error);
+console.log("ERRO PROJETOS:",error);
+
 document.getElementById("lista").innerHTML =
 "Erro ao carregar projetos";
 
@@ -180,6 +202,7 @@ return;
 let html="";
 
 
+
 data.forEach(p=>{
 
 
@@ -187,13 +210,21 @@ html += `
 
 <div class="card-projeto">
 
+
 <img src="${p.logo || 'logo.png'}">
+
 
 <h2>${p.nome}</h2>
 
-<p>🟢 Rede: ${p.rede || ""}</p>
 
-<p>${p.descricao || ""}</p>
+<p>
+🟢 Rede: ${p.rede || ""}
+</p>
+
+
+<p>
+${p.descricao || ""}
+</p>
 
 
 <a class="btn" href="projeto.html?id=${p.id}">
@@ -205,7 +236,10 @@ html += `
 
 `;
 
+
+
 });
+
 
 
 document.getElementById("lista").innerHTML = html;
@@ -215,25 +249,39 @@ document.getElementById("lista").innerHTML = html;
 
 
 
-
 async function carregarChat(){
 
 
 const {data,error}=await supabaseClient
+
 .from("chat_publico")
+
 .select("*")
+
 .order("id",{ascending:true});
 
 
 
 if(error){
 
-console.log(error);
+console.log("ERRO CHAT:",error);
+
+document.getElementById("mensagens").innerHTML =
+"Erro ao carregar chat";
+
 return;
 
 }
 
 
+
+let html="";
+
+
+data.forEach(msg=>{
+
+
+html += `
 
 let html="";
 
@@ -257,12 +305,6 @@ document.getElementById("mensagens").innerHTML = html;
 
 }
 
-
-
-
-async function enviarMensagem(){
-
-
 const nome =
 document.getElementById("nomeChat").value;
 
@@ -275,6 +317,7 @@ document.getElementById("mensagemChat").value;
 if(!nome || !mensagem){
 
 alert("Preencha nome e mensagem");
+
 return;
 
 }
@@ -282,11 +325,15 @@ return;
 
 
 const {error}=await supabaseClient
+
 .from("chat_publico")
+
 .insert([{
 
 nome:nome,
+
 mensagem:mensagem,
+
 data:new Date()
 
 }]);
@@ -295,8 +342,10 @@ data:new Date()
 
 if(error){
 
-console.log(error);
+console.log("ERRO ENVIO:",error);
+
 alert("Erro ao enviar mensagem");
+
 return;
 
 }
@@ -317,9 +366,7 @@ carregarProjetos();
 
 carregarChat();
 
-
 </script>
-
 
 </body>
 
