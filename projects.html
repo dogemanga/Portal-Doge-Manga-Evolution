@@ -304,7 +304,37 @@ A evolução das memecoins começa aqui 🚀
 
 <div id="grafico"></div><script>
 
-async function carregarMercado(contrato){
+async function carregarMercado(contrato){async function carregarProjetoMercado(){
+
+const params = new URLSearchParams(
+window.location.search
+);
+
+const id = params.get("id");
+
+
+const { data, error } = await supabaseClient
+.from("projetos")
+.select("*")
+.eq("id", id)
+.single();
+
+
+if(error){
+
+console.log(error);
+return;
+
+}
+
+
+carregarMercado(data.contrato);
+
+
+}
+
+
+carregarProjetoMercado();
 
 try{
 
