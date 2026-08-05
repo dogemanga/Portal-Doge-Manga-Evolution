@@ -6,102 +6,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Launchpad | Doge Manga Evolution</title>
+<title>Projeto | Doge Manga Evolution</title>
 
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
 
 body{
 background:#050816;
 color:white;
-}
-
-nav{
-background:#020617;
+font-family:Arial,sans-serif;
 padding:20px;
-text-align:center;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-margin:10px;
-font-weight:bold;
-}
-
-header{
-text-align:center;
-padding:60px 20px;
-background:linear-gradient(135deg,#111827,#2563eb);
-}
-
-.logo{
-width:180px;
-height:180px;
-border-radius:50%;
-object-fit:cover;
 }
 
 .container{
-max-width:1100px;
+max-width:900px;
 margin:auto;
-padding:20px;
 }
 
 .card{
 background:#111827;
-padding:30px;
-margin:25px 0;
+border:1px solid #2563eb;
 border-radius:20px;
-box-shadow:0 0 20px #000;
+padding:25px;
+margin-bottom:20px;
 }
 
 h1,h2{
+color:#facc15;
+}
+
+.logo{
+width:150px;
+height:150px;
+border-radius:20px;
+object-fit:cover;
+}
+
+a{
 color:#38bdf8;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-}
-
-.project{
+.info{
 background:#020617;
-padding:25px;
+padding:15px;
 border-radius:15px;
+margin-top:10px;
 }
 
-.tag{
-display:inline-block;
-background:#14f195;
-color:#000;
-padding:8px 15px;
-border-radius:20px;
-font-weight:bold;
-}
-
-button{
-background:#14f195;
-color:#000;
-border:none;
-padding:15px 30px;
-border-radius:30px;
-font-weight:bold;
-cursor:pointer;
-margin-top:15px;
-}
-
-footer{
-text-align:center;
-padding:30px;
-background:#020617;
+iframe{
+border-radius:15px;
 }
 
 </style>
@@ -112,220 +64,143 @@ background:#020617;
 <body>
 
 
-<nav>
-
-<a href="index.html">🏠 Home</a>
-
-<a href="projects.html">🚀 Launchpad</a>
-
-<a href="token.html">📊 Token</a>
-
-<a href="buy.html">💎 Comprar</a>
-
-<a href="doge-manga.html">🐕 Doge Manga</a>
-
-</nav>
-
-
-
-<header>
-
-<img src="file_00000000b510820ea690243d5980576c.png" class="logo">
-
-<h1>🚀 Launchpad Web3</h1>
-
-<p>
-Descubra novos projetos dentro do ecossistema Doge Manga Evolution
-</p>
-
-</header>
-
-
-
-
 <div class="container">
 
 
-<div class="card">
+<div class="card" id="dadosProjeto">
 
-<h2>🌎 Sobre o Launchpad</h2>
-
-<p>
-Uma plataforma criada para conectar projetos Web3, desenvolvedores, investidores e comunidades dentro do universo blockchain.
-</p>
+<h1>Carregando projeto...</h1>
 
 </div>
-
-
 
 
 <div class="card">
 
-<h2>🔥 Projetos em Destaque</h2>
+<h2>📊 Dados de Mercado</h2>
 
-
-<div class="grid">
-
-
-<div class="project">
-
-<span class="tag">
-Ativo
-</span>
-
-<br><br>
-
-<h3>🐕 Doge Manga Evolution</h3>
-
-<br>
-
-<p>
-<strong>Rede:</strong> Solana
-</p>
-
-<p>
-<strong>Categoria:</strong> MemeCoin / Web3
-</p>
-
-<p>
-<strong>Status:</strong> Desenvolvimento do ecossistema
-</p>
-
-
-<a href="doge-manga.html">
-
-<button>
-Ver Projeto
-</button>
-
-</a>
-
-
-</div>
-
-
-
-<div class="project">
-
-<span class="tag">
-Em breve
-</span>
-
-<br><br>
-
-<h3>🚀 Novo Projeto Web3</h3>
-
-<br>
-
-<p>
-<strong>Rede:</strong> A definir
-</p>
-
-<p>
-<strong>Status:</strong> Aguardando lançamento
-</p>
-
-
-<button>
-Em análise
-</button>
-
-
-</div>
-
-
-
-</div>
-
-</div>
-
-
-
-
-<div class="card">
-
-<h2>📈 Futuras Listagens</h2>
-
-<p>
-O Portal Doge Manga Evolution poderá apresentar novos projetos, tokens e comunidades do ecossistema Web3.
-</p>
-
-<br>
-
-<p>
-🔹 Projetos selecionados</p>
-<p>
-🔹 Informações de tokens</p>
-<p>
-🔹 Comunidades oficiais</p>
-<p>
-🔹 Links blockchain</p>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-<footer>
-
-🐕 Doge Manga Evolution
-
-<br><br>
-
-A evolução das memecoins começa aqui 🚀
-
-</footer>
-
-
-</body>
-
-</html><h2>📊 Dados de Mercado</h2>
-
-<p id="preco">
+<div class="info" id="preco">
 💰 Preço: Carregando...
-</p>
+</div>
 
-<p id="marketcap">
+<div class="info" id="marketcap">
 📊 Market Cap: Carregando...
-</p>
+</div>
 
-<p id="volume">
+<div class="info" id="volume">
 📈 Volume 24h: Carregando...
-</p>
+</div>
 
-<p id="liquidez">
+<div class="info" id="liquidez">
 💧 Liquidez: Carregando...
-</p>
+</div>
 
-<div id="grafico"></div><script>
+</div>
 
-async function carregarMercado(contrato){async function carregarProjetoMercado(){
 
-const params = new URLSearchParams(
+<div class="card">
+
+<h2>📈 Gráfico</h2>
+
+<div id="grafico">
+
+Carregando gráfico...
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+const SUPABASE_URL =
+"https://wudayugjctzhwnjdjsrx.supabase.co";
+
+
+const SUPABASE_KEY =
+"COLE_AQUI_SUA_CHAVE_PUBLICA";
+
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+
+async function carregarProjeto(){
+
+
+const params =
+new URLSearchParams(
 window.location.search
 );
 
-const id = params.get("id");
+
+const id =
+params.get("id");
 
 
-const { data, error } = await supabaseClient
+
+const {data,error} =
+await supabaseClient
 .from("projetos")
 .select("*")
-.eq("id", id)
+.eq("id",id)
 .single();
+
 
 
 if(error){
 
-console.log(error);
+document.getElementById("dadosProjeto").innerHTML =
+"Projeto não encontrado";
+
 return;
 
 }
+
+
+
+document.getElementById("dadosProjeto").innerHTML = `
+
+<h1>${data.nome}</h1>
+
+<p>🟢 Rede: ${data.rede}</p>
+
+<p>📄 Contrato:</p>
+
+<p>${data.contrato}</p>
+
+<p>🌐 Site:
+<a href="${data.site}" target="_blank">
+${data.site}
+</a>
+</p>
+
+<p>𝕏:
+<a href="${data.twitter}" target="_blank">
+${data.twitter}
+</a>
+</p>
+
+
+<h2>Descrição</h2>
+
+<p>
+${data.descricao}
+</p>
+
+`;
+
 
 
 carregarMercado(data.contrato);
@@ -334,17 +209,25 @@ carregarMercado(data.contrato);
 }
 
 
-carregarProjetoMercado();
+
+async function carregarMercado(contrato){
+
 
 try{
 
-const resposta = await fetch(
+
+const resposta =
+await fetch(
 `https://api.dexscreener.com/latest/dex/tokens/${contrato}`
 );
 
-const dados = await resposta.json();
 
-const par = dados.pairs[0];
+const dados =
+await resposta.json();
+
+
+const par =
+dados.pairs[0];
 
 
 document.getElementById("preco").innerHTML =
@@ -361,6 +244,7 @@ document.getElementById("volume").innerHTML =
 
 document.getElementById("liquidez").innerHTML =
 "💧 Liquidez: $" + par.liquidity.usd;
+
 
 
 document.getElementById("grafico").innerHTML = `
@@ -380,12 +264,24 @@ frameborder="0">
 `;
 
 
-}catch(e){
 
-console.log(e);
+}catch(erro){
+
+console.log(erro);
 
 }
 
+
 }
+
+
+
+carregarProjeto();
+
 
 </script>
+
+
+</body>
+
+</html>
