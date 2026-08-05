@@ -128,13 +128,13 @@
     </div>
 
     <script>
-        // Dados corretos do seu Supabase
+        // Dados atualizados com a chave que você passou
         const SUPABASE_URL = "https://wudayugjctzhwnjdjsrx.supabase.co";
-        const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind1ZGF5dWdqY3R6aHduamRqc3J4Iiwicm9sZSI6ImFjY2VzcyIsInBhdGggc2NvcGUiOiJwdWJsaWMifQ.S6WRuQAyCXFx5Mpzs4Duiv3gIwCPXQ2oInzc8uFKxiM";
+        const SUPABASE_KEY = "sb_publishable_WHBdCSxfA3gq-CUhorz3yg_TI3Lt_Qw";
         
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        console.log("✅ Supabase conectado com sucesso!");
 
-        // Carregar só projetos APROVADOS
         async function carregarProjetos(){
             const {data,error}=await supabaseClient
                 .from("projetos")
@@ -142,7 +142,7 @@
                 .eq("status","Aprovado");
 
             if(error){
-                console.log(error);
+                console.log("❌ Erro ao carregar projetos:", error);
                 document.getElementById("lista").innerHTML = "<p style='text-align:center;color:#ef4444;'>Erro ao carregar projetos</p>";
                 return;
             }
@@ -167,7 +167,6 @@
             document.getElementById("lista").innerHTML = html;
         }
 
-        // Carregar mensagens do chat
         async function carregarChat(){
             const {data,error}=await supabaseClient
                 .from("chat_publico")
@@ -175,7 +174,7 @@
                 .order("data",{ascending:true});
 
             if(error){
-                console.log(error);
+                console.log("❌ Erro ao carregar chat:", error);
                 return;
             }
 
@@ -193,7 +192,6 @@
             document.getElementById("mensagens").scrollTop = document.getElementById("mensagens").scrollHeight;
         }
 
-        // Enviar mensagem
         async function enviarMensagem(){
             const nome = document.getElementById("nomeChat").value.trim();
             const mensagem = document.getElementById("mensagemChat").value.trim();
@@ -212,7 +210,7 @@
                 }]);
 
             if(error){
-                console.log(error);
+                console.log("❌ Erro ao enviar mensagem:", error);
                 alert("Erro ao enviar: " + error.message);
                 return;
             }
@@ -221,14 +219,12 @@
             carregarChat();
         }
 
-        // Atualizar chat em tempo real
         supabaseClient.channel('novo-mensagem')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'chat_publico' }, () => {
                 carregarChat();
             })
             .subscribe();
 
-        // Iniciar tudo
         carregarProjetos();
         carregarChat();
     </script>
