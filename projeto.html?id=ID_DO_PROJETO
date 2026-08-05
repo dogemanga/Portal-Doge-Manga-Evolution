@@ -1,1 +1,5 @@
-
+<a href="moeda.html">
+📈 Ver Projeto
+</a><a href="projeto.html?id=${projeto.id}">
+📈 Ver Projeto
+</a>
