@@ -1,56 +1,4 @@
-🔥 Projetos em Destaque
-
-[ Logo ]
-Nome do Projeto
-Rede:
-Site:
-Telegram:
-Status: Patrocinado
-<script>
-const SUPABASE_URL = "SUA_URL";
-const SUPABASE_KEY = "SUA_CHAVE";
-
-const supabaseClient = supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-async function carregarProjetos(){
-
-const { data } = await supabaseClient
-.from("projetos")
-.select("*")
-.eq("status","Aprovado");
-
-document.getElementById("lista").innerHTML = "";
-
-data.forEach(p => {
-
-document.getElementById("lista").innerHTML += `
-
-<div class="card">
-
-<h2>${p.nome}</h2>
-
-<p>Rede: ${p.rede}</p>
-
-<p>${p.descricao}</p>
-
-<a href="${p.site}">
-Site Oficial
-</a>
-
-</div>
-
-`;
-
-});
-
-}
-
-carregarProjetos();
-
-</script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -58,40 +6,113 @@ carregarProjetos();
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Projeto | Doge Manga</title>
+<title>Projetos em Destaque | Doge Manga</title>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <style>
 
 body{
+
 background:#050816;
 color:white;
 font-family:Arial,sans-serif;
 padding:20px;
+
 }
 
-.card{
-max-width:800px;
-margin:auto;
+
+h1{
+
+text-align:center;
+color:#facc15;
+
+}
+
+
+#lista{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+
+}
+
+
+
+.card-projeto{
+
 background:#111827;
+border:1px solid #2563eb;
 border-radius:20px;
 padding:25px;
-border:1px solid #2563eb;
+text-align:center;
+transition:0.3s;
+
 }
 
-h1,h2{
-color:#facc15;
+
+.card-projeto:hover{
+
+transform:translateY(-5px);
+
 }
 
-img{
-max-width:150px;
+
+
+.card-projeto img{
+
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:15px;
+
+}
+
+
+
+.vip{
+
+border:2px solid #facc15;
+
+}
+
+
+.premium{
+
+border:2px solid #38bdf8;
+
+}
+
+
+
+.btn-projeto{
+
+display:inline-block;
+margin-top:15px;
+padding:12px 25px;
+background:#facc15;
+color:#050816;
 border-radius:20px;
+font-weight:bold;
+text-decoration:none;
+
 }
+
+
 
 a{
+
 color:#38bdf8;
+
 }
 
+
 </style>
+
 
 </head>
 
@@ -99,55 +120,55 @@ color:#38bdf8;
 <body>
 
 
-<div class="card" id="dadosProjeto">
+<h1>🔥 Projetos em Destaque</h1>
 
-<h1>Carregando projeto...</h1>
+
+<div id="lista">
+
+Carregando projetos...
 
 </div>
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 <script>
 
-const SUPABASE_URL = "https://wudayugjctzhwnjdjsrx.supabase.co";
 
-const SUPABASE_KEY = "COLE_AQUI_SUA_CHAVE_PUBLICA";
+const SUPABASE_URL =
+"https://wudayugjctzhwnjdjsrx.supabase.co";
 
 
-const supabaseClient = supabase.createClient(
+const SUPABASE_KEY =
+"COLE_AQUI_SUA_CHAVE_PUBLICA";
+
+
+const supabaseClient =
+supabase.createClient(
 SUPABASE_URL,
 SUPABASE_KEY
 );
 
 
 
-async function carregarProjeto(){
-
-
-const params = new URLSearchParams(
-window.location.search
-);
-
-
-const id = params.get("id");
-
+async function carregarProjetos(){
 
 
 const {data,error}=await supabaseClient
+
 .from("projetos")
+
 .select("*")
-.eq("id",id)
-.single();
+
+.eq("status","Aprovado");
 
 
 
 if(error){
 
-document.getElementById("dadosProjeto").innerHTML =
-"Projeto não encontrado";
+console.log(error);
+
+document.getElementById("lista").innerHTML =
+"Erro ao carregar projetos";
 
 return;
 
@@ -155,52 +176,103 @@ return;
 
 
 
-document.getElementById("dadosProjeto").innerHTML = `
+let html="";
 
 
-<h1>${data.nome}</h1>
+
+data.forEach(projeto=>{
+
+
+html += `
+
+
+<div class="card-projeto ${projeto.plano}">
+
+
+<img src="${projeto.logo || 'logo.png'}">
+
+
+<h2>
+${projeto.nome}
+</h2>
 
 
 <p>
-🟢 Rede: ${data.rede}
+🟢 Rede: ${projeto.rede}
 </p>
 
 
+
 <p>
-📄 Contrato:
-${data.contrato}
+⭐ Plano: ${projeto.plano || "Normal"}
 </p>
 
 
+
 <p>
-🌐 Site:
-<a href="${data.site}">
-${data.site}
+${projeto.descricao || ""}
+</p>
+
+
+
+<p>
+
+🌐
+
+<a href="${projeto.site}" target="_blank">
+
+Site Oficial
+
 </a>
+
 </p>
 
 
+
 <p>
-𝕏 Twitter:
-<a href="${data.twitter}">
-${data.twitter}
+
+📢
+
+<a href="${projeto.telegram}" target="_blank">
+
+Telegram
+
 </a>
+
 </p>
 
 
-<h2>Descrição</h2>
 
-<p>
-${data.descricao}
-</p>
+<a class="btn-projeto"
+href="projeto.html?id=${projeto.id}">
+
+📈 Ver Projeto
+
+</a>
+
+
+
+</div>
 
 
 `;
 
+
+
+});
+
+
+
+document.getElementById("lista").innerHTML = html;
+
+
+
 }
 
 
-carregarProjeto();
+
+carregarProjetos();
+
 
 
 </script>
@@ -209,68 +281,3 @@ carregarProjeto();
 </body>
 
 </html>
-<style>
-
-.card-projeto{
-
-background:#111827;
-border:1px solid #2563eb;
-border-radius:20px;
-padding:20px;
-margin:20px;
-text-align:center;
-
-}
-
-.card-projeto img{
-
-width:100px;
-height:100px;
-object-fit:cover;
-border-radius:50%;
-
-}
-
-.vip{
-
-border:2px solid #facc15;
-
-}
-
-.premium{
-
-border:2px solid #38bdf8;
-
-}
-
-.btn-projeto{
-
-display:inline-block;
-padding:12px 25px;
-background:#facc15;
-color:#050816;
-border-radius:20px;
-text-decoration:none;
-font-weight:bold;
-
-}
-
-</style><div class="card-projeto ${projeto.plano}">
-
-<img src="${projeto.logo}" alt="${projeto.nome}">
-
-<h2>${projeto.nome}</h2>
-
-<p>🟢 Rede: ${projeto.rede}</p>
-
-<p>⭐ Plano: ${projeto.plano}</p>
-
-<p>${projeto.descricao}</p>
-
-<a class="btn-projeto" href="projeto.html?id=${projeto.id}">
-📈 Ver Projeto
-</a>
-
-</div><style>
-...
-</style>
