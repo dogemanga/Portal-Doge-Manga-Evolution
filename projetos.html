@@ -6,3 +6,48 @@ Rede:
 Site:
 Telegram:
 Status: Patrocinado
+<script>
+const SUPABASE_URL = "SUA_URL";
+const SUPABASE_KEY = "SUA_CHAVE";
+
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+async function carregarProjetos(){
+
+const { data } = await supabaseClient
+.from("projetos")
+.select("*")
+.eq("status","Aprovado");
+
+document.getElementById("lista").innerHTML = "";
+
+data.forEach(p => {
+
+document.getElementById("lista").innerHTML += `
+
+<div class="card">
+
+<h2>${p.nome}</h2>
+
+<p>Rede: ${p.rede}</p>
+
+<p>${p.descricao}</p>
+
+<a href="${p.site}">
+Site Oficial
+</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+carregarProjetos();
+
+</script>
