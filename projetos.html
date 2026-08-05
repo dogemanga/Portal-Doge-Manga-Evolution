@@ -30,27 +30,34 @@ text-align:center;
 }
 
 #lista{
+
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
+
 }
 
 .card-projeto{
+
 background:#111827;
 border:1px solid #2563eb;
 border-radius:20px;
 padding:20px;
 text-align:center;
+
 }
 
 .card-projeto img{
+
 width:100px;
 height:100px;
 border-radius:50%;
 object-fit:cover;
+
 }
 
 .btn{
+
 display:inline-block;
 margin-top:15px;
 padding:12px 20px;
@@ -59,43 +66,55 @@ color:#050816;
 border-radius:20px;
 text-decoration:none;
 font-weight:bold;
+
 }
 
+
 .chat{
+
 margin-top:40px;
 background:#111827;
 border:1px solid #38bdf8;
 border-radius:20px;
 padding:20px;
+
 }
 
+
 #mensagens{
+
 height:250px;
 overflow:auto;
 background:#050816;
 padding:10px;
 border-radius:10px;
+
 }
 
+
 input,textarea{
+
 width:100%;
 padding:12px;
 margin-top:10px;
 border-radius:10px;
+
 }
 
+
 button{
+
 margin-top:10px;
 padding:12px 20px;
 border-radius:20px;
 background:#facc15;
 cursor:pointer;
+
 }
 
 </style>
 
 </head>
-
 
 <body>
 
@@ -105,27 +124,36 @@ cursor:pointer;
 
 <div id="lista">
 Carregando projetos...
-</div>
-
-
-<div class="chat">
+</div><div class="chat">
 
 <h2>💬 Chat da Comunidade</h2>
+
 
 <div id="mensagens">
 Carregando mensagens...
 </div>
 
+
 <input id="nomeChat" placeholder="Seu nome">
 
+
 <textarea id="mensagemChat" placeholder="Digite sua mensagem"></textarea>
+
 
 <button onclick="enviarMensagem()">
 Enviar
 </button>
 
+
 </div>
+
+
+</div>
+
+
+
 <script>
+
 
 const SUPABASE_URL =
 "https://wudayugjctzhwnjdjsrx.supabase.co";
@@ -133,6 +161,7 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
 "COLE_SUA_CHAVE_PUBLICA_AQUI";
+
 
 
 const supabaseClient =
@@ -147,8 +176,11 @@ async function carregarProjetos(){
 
 
 const {data,error}=await supabaseClient
+
 .from("projetos")
+
 .select("*")
+
 .eq("status","Aprovado");
 
 
@@ -159,17 +191,6 @@ console.log("ERRO PROJETOS:",error);
 
 document.getElementById("lista").innerHTML =
 "Erro ao carregar projetos";
-
-return;
-
-}
-
-
-
-if(!data || data.length === 0){
-
-document.getElementById("lista").innerHTML =
-"Nenhum projeto aprovado";
 
 return;
 
@@ -192,7 +213,7 @@ html += `
 <img src="${p.logo || 'logo.png'}">
 
 
-<h2>${p.nome || "Sem nome"}</h2>
+<h2>${p.nome}</h2>
 
 
 <p>
@@ -203,7 +224,6 @@ html += `
 <p>
 ${p.descricao || ""}
 </p>
-
 
 
 <a class="btn" href="projeto.html?id=${p.id}">
@@ -228,13 +248,15 @@ document.getElementById("lista").innerHTML = html;
 
 
 
-
 async function carregarChat(){
 
 
 const {data,error}=await supabaseClient
+
 .from("chat_publico")
+
 .select("*")
+
 .order("id",{ascending:true});
 
 
@@ -261,20 +283,7 @@ data.forEach(msg=>{
 html += `
 
 <p>
-<b>${msg.nome}</b>: ${msg.mensagem}
-</p>
-
-`;
-
-
-
-});
-
-
-document.getElementById("mensagens").innerHTML = html;
-
-
-}async function enviarMensagem(){
+<b>${msg.nome}</b>: ${msg.mensagem}async function enviarMensagem(){
 
 
 const nome =
@@ -324,7 +333,7 @@ return;
 
 
 
-document.getElementById("mensagemChat").value = "";
+document.getElementById("mensagemChat").value="";
 
 
 carregarChat();
@@ -338,10 +347,8 @@ carregarProjetos();
 
 carregarChat();
 
-
 </script>
 
 </body>
 
 </html>
-</div>
