@@ -124,4 +124,246 @@ cursor:pointer;
 
 <div id="lista">
 Carregando projetos...
+</div><div class="chat">
+
+<h2>💬 Chat da Comunidade</h2>
+
+
+<div id="mensagens">
+Carregando mensagens...
 </div>
+
+
+<input id="nomeChat" placeholder="Seu nome">
+
+
+<textarea id="mensagemChat" placeholder="Digite sua mensagem"></textarea>
+
+
+<button onclick="enviarMensagem()">
+Enviar
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+const SUPABASE_URL =
+"https://wudayugjctzhwnjdjsrx.supabase.co";
+
+
+const SUPABASE_KEY =
+"COLE_SUA_CHAVE_PUBLICA_AQUI";
+
+
+
+const supabaseClient =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+
+async function carregarProjetos(){
+
+
+const {data,error}=await supabaseClient
+
+.from("projetos")
+
+.select("*")
+
+.eq("status","Aprovado");
+
+
+
+if(error){
+
+console.log("ERRO PROJETOS:",error);
+
+document.getElementById("lista").innerHTML =
+"Erro ao carregar projetos";
+
+return;
+
+}
+
+
+
+let html="";
+
+
+
+data.forEach(p=>{
+
+
+html += `
+
+<div class="card-projeto">
+
+
+<img src="${p.logo || 'logo.png'}">
+
+
+<h2>${p.nome}</h2>
+
+
+<p>
+🟢 Rede: ${p.rede || ""}
+</p>
+
+
+<p>
+${p.descricao || ""}
+</p>
+
+
+<a class="btn" href="projeto.html?id=${p.id}">
+📈 Ver Projeto
+</a>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+document.getElementById("lista").innerHTML = html;
+
+
+}
+
+
+
+async function carregarChat(){
+
+
+const {data,error}=await supabaseClient
+
+.from("chat_publico")
+
+.select("*")
+
+.order("id",{ascending:true});
+
+
+
+if(error){
+
+console.log("ERRO CHAT:",error);
+
+document.getElementById("mensagens").innerHTML =
+"Erro ao carregar chat";
+
+return;
+
+}
+
+
+
+let html="";
+
+
+data.forEach(msg=>{
+
+
+html += `
+
+<p>
+<b>${msg.nome}</b>: ${msg.mensagem}async function enviarMensagem(){
+
+
+const nome =
+document.getElementById("nomeChat").value;
+
+
+const mensagem =
+document.getElementById("mensagemChat").value;
+
+
+
+if(!nome || !mensagem){
+
+alert("Preencha nome e mensagem");
+
+return;
+
+}
+
+
+
+const {error}=await supabaseClient
+
+.from("chat_publico")
+
+.insert([{
+
+nome:nome,
+
+mensagem:mensagem,
+
+data:new Date()
+
+}]);
+
+
+
+if(error){
+
+console.log("ERRO ENVIO:",error);
+
+alert("Erro ao enviar mensagem");
+
+return;
+
+}
+
+
+
+document.getElementById("mensagemChat").value="";
+
+
+carregarChat();
+
+
+}
+
+
+
+carregarProjetos();
+
+carregarChat();
+
+
+</script>
+
+
+</body>
+
+</html>
+</p>
+
+`;
+
+
+
+});
+
+
+document.getElementById("mensagens").innerHTML = html;
+
+
+}
