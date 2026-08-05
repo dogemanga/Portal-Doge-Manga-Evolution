@@ -4639,4 +4639,68 @@ id="rede"
 id="contrato"
 id="site"
 id="twitter"
-id="descricao"onclick="enviarProjeto()"
+id="descricao"onclick="enviarProjeto()"</body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const SUPABASE_URL = "https://wudayugjctzhwnjdjsrx.supabase.co";
+
+const SUPABASE_KEY = "COLE_AQUI_SUA_CHAVE_PUBLICA";
+
+const supabaseClient = supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+async function carregarProjetos(){
+
+const { data, error } = await supabaseClient
+.from("projetos")
+.select("*")
+.eq("status","Aprovado");
+
+
+if(error){
+
+console.log(error);
+return;
+
+}
+
+
+const lista = document.getElementById("projetosLista");
+
+lista.innerHTML = "";
+
+
+data.forEach(projeto => {
+
+lista.innerHTML += `
+
+<div class="card">
+
+<h2>${projeto.nome}</h2>
+
+<p>🟢 Rede: ${projeto.rede}</p>
+
+<p>${projeto.descricao}</p>
+
+<a href="moeda.html">
+📈 Ver Projeto
+</a>
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+carregarProjetos();
+
+</script><div id="projetosLista"></div>
