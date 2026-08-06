@@ -4750,4 +4750,118 @@ document.getElementById(nome)
 .style.display="block";
 
 }
-  
+
+  <nav class="menu-abas">
+
+<button onclick="abrirAba('inicio')">🏠 Início</button>
+<button onclick="abrirAba('projetos')">🔥 Projetos</button>
+<button onclick="abrirAba('chat')">💬 Chat</button>
+<button onclick="abrirAba('enviar')">🚀 Enviar Projeto</button>
+<button onclick="abrirAba('planos')">💎 Planos</button>
+<button onclick="abrirAba('nfts')">🖼️ NFTs</button>
+
+</nav>
+
+
+<section id="inicio" class="aba">
+<h2>🚀 Portal Doge Manga</h2>
+<p>Bem-vindo ao portal.</p>
+</section>
+
+
+<section id="projetos" class="aba">
+<h2>🔥 Projetos em Destaque</h2>
+<div id="lista"></div>
+</section>
+
+
+<section id="chat" class="aba">
+<h2>💬 Chat da Comunidade</h2>
+<div id="mensagens"></div>
+</section>
+
+
+<section id="enviar" class="aba">
+<h2>🚀 Enviar Projeto</h2>
+<p>Formulário será colocado aqui.</p>
+</section>
+
+
+<section id="planos" class="aba">
+<h2>💎 Planos de Divulgação</h2>
+<p>Área de monetização.</p>
+</section>
+
+
+<section id="nfts" class="aba">
+<h2>🖼️ NFT Marketplace</h2>
+<p>Área para coleções NFT.</p>
+</section>function abrirAba(nome){
+
+document.querySelectorAll(".aba")
+.forEach(function(item){
+
+item.style.display="none";
+
+});
+
+
+document.getElementById(nome)
+.style.display="block";
+
+}
+
+
+// abre a primeira aba
+abrirAba("inicio");
+
+  <nav class="menu-abas">
+
+<button onclick="abrirAba('inicio')">
+🏠 Início
+</button>
+
+<button onclick="abrirAba('projetos')">
+🔥 Projetos
+</button>
+
+<button onclick="abrirAba('chat')">
+💬 Chat
+</button>
+
+<button onclick="abrirAba('markchat')">
+🛒 MarkChat
+</button>
+
+<button onclick="abrirAba('marketnft')">
+🖼️ Markspace NFT
+</button>
+
+<button onclick="abrirAba('enviar')">
+🚀 Enviar Projeto
+</button>
+
+<button onclick="abrirAba('planos')">
+💎 Planos
+</button>
+
+  </nav><section id="markchat" class="aba">
+
+<h2>🛒 MarkChat</h2>
+
+<p>
+Área de comunidade, anúncios e negociações do Portal Doge Manga.
+</p>
+
+</section>
+
+
+<section id="marketnft" class="aba">
+
+<h2>🖼️ Markspace NFT</h2>
+
+<p>
+Mercado de coleções NFT e projetos parceiros.
+</p>
+
+</section>
