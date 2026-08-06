@@ -1,35 +1,37 @@
-<script>
+const SUPABASE_URL = "https://ksxnrkweftsosyayljdo.supabase.co";
+const SUPABASE_KEY = "sb_publishable_z19551yaBUdSlRG3uCcqlQ_OE8i3TM9";
 
-const SUPABASE_URL =
-"https://wudayugjctzhwnjdjsrx.supabase.co";
-
-const SUPABASE_KEY =
-"COLE_SUA_CHAVE_PUBLICA_AQUI";
-https://ksxnrkweftsosyayljdo.supabase.co
-
-const supabaseClient =
-supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
-);
-
-
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+console.log("✅ Conectado ao Supabase!");
 
 async function carregarProjetos(){
+    const {data,error}=await supabaseClient
+        .from("projetos")
+        .select("*")
+        .eq("status","Aprovado");
 
-const {data,error}=await supabaseClient
-.from("projetos")
-.select("*")
-.eq("status","Aprovado");
+    if(error){
+        console.log("ERRO PROJETOS:",error);
+        document.getElementById("lista").innerHTML = `<p style='color:#ef4444;text-align:center;'>Erro ao carregar projetos: ${error.message}</p>`;
+        return;
+    }
 
+    if(data.length === 0){
+        document.getElementById("lista").innerHTML = `<p style='color:#94a3b8;text-align:center;'>Nenhum projeto aprovado ainda.</p>`;
+        return;
+    }
 
-if(error){
-
-console.log("ERRO PROJETOS:",error);
-
-document.getElementById("lista").innerHTML =
-"Erro ao carregar projetos";
-
-return;
-
+    let html="";
+    data.forEach(p=>{
+        html += `
+        <div class="card-projeto">
+            <img src="${p.logo || 'logo.png'}" alt="${p.nome}">
+            <h3>${p.nome}</h3>
+            <p>🟢 Rede: ${p.rede || "Não informada"}</p>
+            <p>${p.descricao || "Sem descrição"}</p>
+            <a class="btn" href="projeto.html?id=${p.id}">📈 Ver Projeto</a>
+        </div>
+        `;
+    });
+    document.getElementById("lista").innerHTML = html;
 }
