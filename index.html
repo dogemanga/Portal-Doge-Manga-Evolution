@@ -4859,4 +4859,64 @@ abrirAba("inicio");
 Mercado de coleções NFT e projetos parceiros.
 </p>
 
-</section>
+</section>⋮ Menu
+
+🎨 Magic Eden
+📤 Compartilhar Portalmenu.style.displaymenu.style.display<div class="menu">
+
+<button onclick="abrirMenu()">
+⋮
+</button>
+
+<div id="opcoesMenu" style="display:none;">
+
+<a href="SEU_LINK_MAGIC_EDEN" target="_blank">
+🎨 Magic Eden
+</a>
+
+<button onclick="compartilharPortal()">
+📤 Compartilhar Portal
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+function abrirMenu(){
+
+let menu = document.getElementById("opcoesMenu");
+
+menu.style.display =
+menu.style.display === "none"
+? "block"
+: "none";
+
+}
+
+
+function compartilharPortal(){
+
+if(navigator.share){
+
+navigator.share({
+
+title:"Portal Doge Manga",
+
+text:"Conheça o Portal Doge Manga",
+
+url:window.location.href
+
+});
+
+}else{
+
+alert("Copie o link do portal para compartilhar!");
+
+}
+
+}
+
+</script>
