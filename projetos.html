@@ -1,18 +1,25 @@
+<!-- Primeiro carregue a biblioteca do Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+// Dados corretos
 const SUPABASE_URL = "https://ksxnrkweftsosyayljdo.supabase.co";
 const SUPABASE_KEY = "sb_publishable_z19551yaBUdSlRG3uCcqlQ_OE8i3TM9";
 
+// Conecta
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 console.log("✅ Conectado ao Supabase!");
 
+// Carrega projetos
 async function carregarProjetos(){
-    const {data,error}=await supabaseClient
+    const {data, error} = await supabaseClient
         .from("projetos")
         .select("*")
-        .eq("status","Aprovado");
+        .eq("status", "Aprovado");
 
     if(error){
-        console.log("ERRO PROJETOS:",error);
-        document.getElementById("lista").innerHTML = `<p style='color:#ef4444;text-align:center;'>Erro ao carregar projetos: ${error.message}</p>`;
+        console.log("❌ ERRO PROJETOS:", error);
+        document.getElementById("lista").innerHTML = `<p style='color:#ef4444;text-align:center;'>Erro ao carregar: ${error.message}</p>`;
         return;
     }
 
@@ -21,8 +28,8 @@ async function carregarProjetos(){
         return;
     }
 
-    let html="";
-    data.forEach(p=>{
+    let html = "";
+    data.forEach(p => {
         html += `
         <div class="card-projeto">
             <img src="${p.logo || 'logo.png'}" alt="${p.nome}">
@@ -35,3 +42,8 @@ async function carregarProjetos(){
     });
     document.getElementById("lista").innerHTML = html;
 }
+
+// Inicia
+carregarProjetos();
+</script>
+
