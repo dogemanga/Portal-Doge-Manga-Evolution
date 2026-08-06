@@ -4704,3 +4704,50 @@ lista.innerHTML += `
 carregarProjetos();
 
 </script><div id="projetosLista"></div>
+  
+<nav class="abas">
+<button onclick="abrirAba('inicio')">🏠 Início</button>
+<button onclick="abrirAba('projetos')">🔥 Projetos</button>
+<button onclick="abrirAba('chat')">💬 Chat</button>
+<button onclick="abrirAba('enviar')">🚀 Enviar Projeto</button>
+<button onclick="abrirAba('planos')">💎 Planos</button>
+</nav>
+
+
+<div id="inicio" class="aba">
+Conteúdo inicial do Portal Doge Manga
+</div>
+
+
+<div id="projetos" class="aba">
+Aqui entra os projetos em destaque
+</div>
+
+
+<div id="chat" class="aba">
+Aqui entra o chat público
+</div>
+
+
+<div id="enviar" class="aba">
+Aqui entra o formulário de envio de projetos
+</div>
+
+
+<div id="planos" class="aba">
+Aqui entram os planos de divulgação
+</div>function abrirAba(nome){
+
+document.querySelectorAll(".aba")
+.forEach(function(aba){
+
+aba.style.display="none";
+
+});
+
+
+document.getElementById(nome)
+.style.display="block";
+
+}
+  
