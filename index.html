@@ -2224,20 +2224,47 @@ display:none;
 
 <div class="intel-card">
 
-<div class="intel-title">
-🤖 DOGE MANGA INTELLIGENCE CENTER
-</div>
+<div  function abrirIA(){
+    // Pega o horário atual de São Paulo
+    const hora = new Date().getHours();
+    let saudacao = "Olá!";
+    if(hora >= 5 && hora < 12) saudacao = "🌞 Bom dia!";
+    else if(hora >= 12 && hora < 18) saudacao = "☀️ Boa tarde!";
+    else saudacao = "🌙 Boa noite!";
 
+    const mensagem = `${saudacao} Sou o Assistente Oficial do **Doge Manga Evolution** 🐕🤖
 
-<div class="alert-box">
+Posso ajudar você com:
 
-<span class="status-online">
-● SISTEMA ONLINE
-</span>
+🐕 **Sobre o Portal Doge Manga**
+• É o ecossistema completo na rede Solana
+• Acompanhe o token $DGM em tempo real
+• Veja projetos aprovados, notícias e novidades
+• Conecte sua carteira Phantom para usar todas as funções
+• Divulgue seu projeto no Launchpad oficial
 
-<br>
+📈 **Sobre o $DGM**
+• Token oficial do ecossistema Doge Manga
+• Contrato verificado: \`E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE\`
+• Compre pelo Jupiter: https://jup.ag/swap/SOL-E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE
+• Dados em tempo real no Birdeye e DexScreener
 
-Monitoramento do ecossistema Doge Manga ativo.
+🔗 **Links Oficiais**
+• Site: https://dogemangaofficial.xyz
+• X/Twitter: https://x.com/dogemanga96508
+• Telegram: https://t.me/+fRrBfGscm9Y3OWEx
+• Contato: dogemanga687@gmail.com
+
+🛡️ **Avisos Importantes**
+• Nossa carteira oficial: \`2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f\`
+• NUNCA compartilhe sua frase ou chave privada!
+• Projetos são analisados e aprovados em até 24h
+
+Pergunte qualquer coisa que eu ajudo! 🚀`;
+
+    alert(mensagem);
+}
+
 
 </div>
 
