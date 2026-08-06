@@ -1,167 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Projetos em Destaque | Doge Manga</title>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-
-body{
-background:#050816;
-color:white;
-font-family:Arial,sans-serif;
-padding:20px;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-}
-
-h1,h2{
-color:#facc15;
-text-align:center;
-}
-
-#lista{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-
-}
-
-.card-projeto{
-
-background:#111827;
-border:1px solid #2563eb;
-border-radius:20px;
-padding:20px;
-text-align:center;
-
-}
-
-.card-projeto img{
-
-width:100px;
-height:100px;
-border-radius:50%;
-object-fit:cover;
-
-}
-
-.btn{
-
-display:inline-block;
-margin-top:15px;
-padding:12px 20px;
-background:#facc15;
-color:#050816;
-border-radius:20px;
-text-decoration:none;
-font-weight:bold;
-
-}
-
-
-.chat{
-
-margin-top:40px;
-background:#111827;
-border:1px solid #38bdf8;
-border-radius:20px;
-padding:20px;
-
-}
-
-
-#mensagens{
-
-height:250px;
-overflow:auto;
-background:#050816;
-padding:10px;
-border-radius:10px;
-
-}
-
-
-input,textarea{
-
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:10px;
-
-}
-
-
-button{
-
-margin-top:10px;
-padding:12px 20px;
-border-radius:20px;
-background:#facc15;
-cursor:pointer;
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>🔥 Projetos em Destaque</h1>
-
-<div id="lista">
-Carregando projetos...
-</div><div class="chat">
-
-<h2>💬 Chat da Comunidade</h2>
-
-
-<div id="mensagens">
-Carregando mensagens...
-</div>
-
-
-<input id="nomeChat" placeholder="Seu nome">
-
-
-<textarea id="mensagemChat" placeholder="Digite sua mensagem"></textarea>
-
-
-<button onclick="enviarMensagem()">
-Enviar
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
 <script>
-
 
 const SUPABASE_URL =
 "https://wudayugjctzhwnjdjsrx.supabase.co";
 
-
 const SUPABASE_KEY =
 "COLE_SUA_CHAVE_PUBLICA_AQUI";
-
 
 
 const supabaseClient =
@@ -174,15 +17,10 @@ SUPABASE_KEY
 
 async function carregarProjetos(){
 
-
 const {data,error}=await supabaseClient
-
 .from("projetos")
-
 .select("*")
-
 .eq("status","Aprovado");
-
 
 
 if(error){
@@ -197,33 +35,22 @@ return;
 }
 
 
-
 let html="";
 
 
-
 data.forEach(p=>{
-
 
 html += `
 
 <div class="card-projeto">
 
-
 <img src="${p.logo || 'logo.png'}">
-
 
 <h2>${p.nome}</h2>
 
+<p>🟢 Rede: ${p.rede || ""}</p>
 
-<p>
-🟢 Rede: ${p.rede || ""}
-</p>
-
-
-<p>
-${p.descricao || ""}
-</p>
+<p>${p.descricao || ""}</p>
 
 
 <a class="btn" href="projeto.html?id=${p.id}">
@@ -235,10 +62,7 @@ ${p.descricao || ""}
 
 `;
 
-
-
 });
-
 
 
 document.getElementById("lista").innerHTML = html;
@@ -248,17 +72,14 @@ document.getElementById("lista").innerHTML = html;
 
 
 
+
+
 async function carregarChat(){
 
-
 const {data,error}=await supabaseClient
-
 .from("chat_publico")
-
 .select("*")
-
 .order("id",{ascending:true});
-
 
 
 if(error){
@@ -273,20 +94,10 @@ return;
 }
 
 
-
 let html="";
 
 
 data.forEach(msg=>{
-
-
-html += `
-
-let html="";
-
-
-data.forEach(msg=>{
-
 
 html += `
 
@@ -303,6 +114,12 @@ document.getElementById("mensagens").innerHTML = html;
 
 
 }
+
+
+
+
+async function enviarMensagem(){
+
 
 const nome =
 document.getElementById("nomeChat").value;
@@ -324,15 +141,11 @@ return;
 
 
 const {error}=await supabaseClient
-
 .from("chat_publico")
-
 .insert([{
 
 nome:nome,
-
 mensagem:mensagem,
-
 data:new Date()
 
 }]);
@@ -350,7 +163,6 @@ return;
 }
 
 
-
 document.getElementById("mensagemChat").value="";
 
 
@@ -361,12 +173,10 @@ carregarChat();
 
 
 
+
 carregarProjetos();
 
 carregarChat();
 
+
 </script>
-
-</body>
-
-</html>
