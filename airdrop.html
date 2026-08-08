@@ -147,13 +147,18 @@ font-weight:bold;
 cursor:pointer;
 }
 
+.btn:hover{
+transform:scale(1.02);
+}
+
 .status{
 margin-top:20px;
 padding:15px;
 border-radius:15px;
 background:#050816;
 border:1px solid #334155;
-color:#94a3b8;
+color:#cbd5e1;
+word-break:break-word;
 }
 
 .footer{
@@ -267,7 +272,6 @@ O primeiro Airdrop da comunidade Doge Manga terá
 
 </div>
 
-
 </div>
 
 
@@ -343,20 +347,17 @@ O primeiro Airdrop da comunidade Doge Manga terá
 
 </div>
 
-
 </div>
 
 
-<button class="btn" onclick="participar()">
-
-🎁 PARTICIPAR DO AIRDROP
-
+<button class="btn" onclick="conectarPhantom()">
+👻 CONECTAR PHANTOM
 </button>
 
 
 <div id="status" class="status">
 
-🔒 Participação em preparação. A conexão da carteira será ativada em breve.
+🔒 Nenhuma carteira conectada.
 
 </div>
 
@@ -382,10 +383,76 @@ Doge Manga Evolution • Airdrop Community
 
 <script>
 
-function participar(){
+let carteiraConectada = null;
+
+
+async function conectarPhantom(){
+
+const status =
+document.getElementById("status");
+
+
+if(!window.solana || !window.solana.isPhantom){
+
+status.innerHTML =
+"⚠️ Phantom não encontrada. Abra esta página pelo navegador da Phantom ou instale a carteira Phantom.";
+
+return;
+
+}
+
+
+try{
+
+const resposta =
+await window.solana.connect();
+
+carteiraConectada =
+resposta.publicKey.toString();
+
+
+const endereco =
+carteiraConectada;
+
+const curto =
+endereco.substring(0,6) +
+"..." +
+endereco.substring(endereco.length - 6);
+
+
+status.innerHTML =
+"✅ Carteira conectada!<br><br>" +
+"👻 " + curto;
+
+document.querySelector(".btn").innerText =
+"✅ PHANTOM CONECTADA";
+
+
+}catch(error){
+
+console.log("Erro Phantom:",error);
+
+status.innerHTML =
+"❌ Conexão cancelada ou não autorizada.";
+
+}
+
+}
+
+
+if(window.solana){
+
+window.solana.on("disconnect",function(){
+
+carteiraConectada = null;
 
 document.getElementById("status").innerHTML =
-"🚀 O sistema de participação será ativado na próxima etapa. Nenhum token é enviado nesta fase.";
+"🔒 Carteira desconectada.";
+
+document.querySelector(".btn").innerText =
+"👻 CONECTAR PHANTOM";
+
+});
 
 }
 
