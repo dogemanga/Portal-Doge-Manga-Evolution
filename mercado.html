@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Mercado | Doge Manga</title><style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+padding:20px;
+background:#050816;
+color:white;
+font-family:Arial,sans-serif;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+header{
+text-align:center;
+padding:25px 10px;
+}
+
+h1{
+color:#facc15;
+font-size:36px;
+margin:10px 0;
+}
+
+.subtitle{
+color:#cbd5e1;
+}
+
+.market-card{
+background:#111827;
+border:1px solid #2563eb;
+border-radius:22px;
+padding:25px;
+margin-top:20px;
+}
+
+h2{
+color:#38bdf8;
+text-align:center;
+}
+
+.search{
+display:flex;
+gap:10px;
+margin:25px 0;
+}
+
+.search input{
+flex:1;
+padding:14px;
+border-radius:12px;
+border:1px solid #334155;
+background:#050816;
+color:white;
+font-size:16px;
+}
+
+.search button{
+padding:14px 20px;
+border:0;
+border-radius:12px;
+background:#facc15;
+color:#050816;
+font-weight:bold;
+cursor:pointer;
+}
+
+.assets{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.asset{
+background:#050816;
+border:1px solid #334155;
+border-radius:18px;
+padding:20px;
+}
+
+.asset-name{
+font-size:20px;
+font-weight:bold;
+}
+
+.asset-type{
+font-size:13px;
+color:#94a3b8;
+margin-top:5px;
+}
+
+.asset-price{
+font-size:24px;
+font-weight:bold;
+margin-top:15px;
+color:#facc15;
+}
+
+.asset-info{
+margin-top:8px;
+color:#94a3b8;
+}
+
+.partner{
+margin-top:30px;
+background:#050816;
+border:2px solid #facc15;
+border-radius:20px;
+padding:25px;
+text-align:center;
+}
+
+.partner h2{
+color:#facc15;
+}
+
+.partner p{
+color:#cbd5e1;
+line-height:1.6;
+}
+
+.partner-btn{
+display:inline-block;
+margin-top:10px;
+padding:14px 28px;
+background:#facc15;
+color:#050816;
+border-radius:25px;
+text-decoration:none;
+font-weight:bold;
+}
+
+.notice{
+margin-top:20px;
+padding:15px;
+border-radius:12px;
+background:#111827;
+border:1px solid #334155;
+color:#94a3b8;
+font-size:14px;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:25px;
+color:#38bdf8;
+text-decoration:none;
+}
+
+</style></head><body><div class="container"><header><h1>📈 MERCADO DOGE MANGA</h1><p class="subtitle">
+Acompanhe ações, índices, moedas e criptomoedas.
+</p></header><section class="market-card"><h2>🔎 Pesquisar ativo</h2><div class="search"><input
+id="ticker"
+placeholder="Digite um ticker, ex: AAPL"
+
+«»
+
+<button onclick="pesquisar()">
+Buscar
+</button></div><div id="resultado"></div><h2>🔥 Ativos em destaque</h2><div class="assets"><div class="asset"><div class="asset-name">
+AAPL
+</div><div class="asset-type">
+Apple • Ações EUA
+</div><div class="asset-price">
+Consultar cotação
+</div><div class="asset-info">
+NASDAQ
+</div></div><div class="asset"><div class="asset-name">
+MSFT
+</div><div class="asset-type">
+Microsoft • Ações EUA
+</div><div class="asset-price">
+Consultar cotação
+</div><div class="asset-info">
+NASDAQ
+</div></div><div class="asset"><div class="asset-name">
+NVDA
+</div><div class="asset-type">
+NVIDIA • Ações EUA
+</div><div class="asset-price">
+Consultar cotação
+</div><div class="asset-info">
+NASDAQ
+</div></div><div class="asset"><div class="asset-name">
+SPY
+</div><div class="asset-type">
+ETF • S&P 500
+</div><div class="asset-price">
+Consultar cotação
+</div><div class="asset-info">
+NYSE Arca
+</div></div><div class="asset"><div class="asset-name">
+BTC
+</div><div class="asset-type">
+Bitcoin • Cripto
+</div><div class="asset-price">
+Consultar cotação
+</div><div class="asset-info">
+Crypto
+</div></div><div class="asset"><div class="asset-name">
+SOL
+</div><div class="asset-type">
+Solana • Cripto
+</div><div class="asset-price">
+Consultar cotação
+</div><div class="asset-info">
+Crypto
+</div></div></div><div class="partner"><h2>💼 Corretora Parceira</h2><p>Quer conhecer uma plataforma para investir
+em mercados globais?
+
+</p><a
+class="partner-btn"
+href="#"
+onclick="alert('O link oficial do parceiro será colocado aqui após a aprovação do programa de afiliados.'); return false;"
+
+«»
+
+Conheça a corretora
+</a>
+
+</div><div class="notice">⚠️ As informações desta página são apresentadas
+para fins informativos e não constituem recomendação
+de investimento.
+
+</div></section><a class="back" href="index.html">
+← Voltar para o Portal Doge Manga
+</a></div><script>
+
+function pesquisar(){
+
+const ticker =
+document.getElementById("ticker").value.trim().toUpperCase();
+
+const resultado =
+document.getElementById("resultado");
+
+
+if(!ticker){
+
+resultado.innerHTML =
+"<div class='notice'>Digite um ticker para pesquisar.</div>";
+
+return;
+
+}
+
+
+resultado.innerHTML = `
+
+<div class="asset">
+
+<div class="asset-name">
+${ticker}
+</div>
+
+<div class="asset-type">
+Ativo pesquisado
+</div>
+
+<div class="asset-price">
+Cotação será integrada
+</div>
+
+<div class="asset-info">
+O sistema de cotações será conectado na próxima etapa.
+</div>
+
+</div>
+
+`;
+
+}
+
+</script></body></html>
