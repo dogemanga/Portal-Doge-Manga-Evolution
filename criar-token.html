@@ -130,7 +130,8 @@ Valor fixo • Vai direto para a carteira oficial da Doge Manga
 </div>
 
 <script>
-const RPC = "https://api.mainnet-beta.solana.com";
+// ✅ RPC SEM BLOQUEIO PARA NAVEGADOR
+const RPC = "https://solana-api.projectserum.com";
 const conexao = new solanaWeb3.Connection(RPC, "confirmed");
 const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 const ASSOCIATED_TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
@@ -252,7 +253,7 @@ async function criarToken(){
 
         mostrarStatus("👻 Confirme na Phantom...", "aviso");
         const assinada = await window.solana.signTransaction(tx);
-        const sig = await conexao.sendRawTransaction(assinada.serialize(),{maxRetries:3});
+        const sig = await conexao.sendRawTransaction(assinada.serialize(),{maxRetries:5});
         await conexao.confirmTransaction({signature:sig,blockhash:bh.blockhash,lastValidBlockHeight:bh.lastValidBlockHeight},"confirmed");
 
         const endMint = mint.publicKey.toBase58();
@@ -261,8 +262,8 @@ async function criarToken(){
         document.getElementById("resultado").style.display = "block";
         mostrarStatus(`✅ Sucesso! Pagamento enviado e token criado 🎉`, "sucesso");
     }catch(e){
-        console.error(e);
-        mostrarStatus("❌ Falha: "+(e.message||"Erro"),"erro");
+        console.error("ERRO:", e);
+        mostrarStatus("❌ Falha: "+(e.message||"Erro desconhecido"),"erro");
     }finally{btn.disabled=false;}
 }
 
