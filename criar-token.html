@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Creator de Token | Doge Manga</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.4.8/lib/index.iife.min.js"></script>
+
+<style>
+:root{
+    --fundo:#050816;
+    --card:#111827;
+    --amarelo:#facc15;
+    --azul:#2563eb;
+    --azul-claro:#38bdf8;
+    --texto:#fff;
+    --cinza:#d1d5db;
+    --verde:#10b981;
+    --vermelho:#ef4444;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:var(--fundo);
+    color:var(--texto);
+    min-height:100vh;
+    padding:20px;
+}
+
+.container{
+    max-width:520px;
+    margin:30px auto;
+    background:var(--card);
+    border:1px solid var(--amarelo);
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 0 30px rgba(250,204,21,.10);
+}
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.header h1{
+    color:var(--amarelo);
+    margin-bottom:8px;
+}
+
+.header p{
+    color:var(--cinza);
+    font-size:14px;
+}
+
+.carteira{
+    background:#050816;
+    border:1px solid #374151;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+#enderecoCarteira{
+    display:block;
+    color:var(--cinza);
+    margin-bottom:10px;
+    font-size:14px;
+    word-break:break-all;
+}
+
+.grupo{
+    margin-bottom:17px;
+}
+
+label{
+    display:block;
+    color:var(--cinza);
+    margin-bottom:7px;
+    font-size:14px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:13px;
+    background:#050816;
+    color:white;
+    border:1px solid #374151;
+    border-radius:10px;
+    outline:none;
+}
+
+textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--azul-claro);
+}
+
+.logo-preview{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    object-fit:cover;
+    display:block;
+    margin:12px auto;
+    border:2px solid var(--amarelo);
+    background:#050816;
+}
+
+.btn{
+    width:100%;
+    border:0;
+    border-radius:12px;
+    padding:14px;
+    margin-top:8px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.btn-conectar{
+    background:var(--azul);
+    color:white;
+}
+
+.btn-criar{
+    background:var(--amarelo);
+    color:#050816;
+}
+
+.btn:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+.info{
+    background:rgba(37,99,235,.10);
+    border:1px solid #2563eb;
+    border-radius:12px;
+    padding:13px;
+    margin:18px 0;
+    font-size:13px;
+    line-height:1.6;
+    color:var(--cinza);
+}
+
+.status{
+    display:none;
+    padding:14px;
+    margin-top:18px;
+    border-radius:12px;
+    text-align:center;
+    line-height:1.5;
+    word-break:break-word;
+}
+
+.sucesso{
+    display:block;
+    background:rgba(16,185,129,.10);
+    border:1px solid var(--verde);
+    color:#6ee7b7;
+}
+
+.erro{
+    display:block;
+    background:rgba(239,68,68,.10);
+    border:1px solid var(--vermelho);
+    color:#fca5a5;
+}
+
+.aviso{
+    font-size:12px;
+    color:#9ca3af;
+    margin-top:6px;
+}
+
+.resultado{
+    display:none;
+    margin-top:20px;
+    background:#050816;
+    border:1px solid var(--verde);
+    border-radius:14px;
+    padding:16px;
+}
+
+.resultado h3{
+    color:var(--verde);
+    margin-bottom:10px;
+}
+
+.resultado a{
+    color:var(--amarelo);
+    word-break:break-all;
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:#6b7280;
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🚀 Creator de Token</h1>
+        <p>Crie seu token diretamente na blockchain Solana</p>
+    </div>
+
+    <div class="carteira">
+        <span id="enderecoCarteira">Carteira não conectada</span>
+
+        <button
+            class="btn btn-conectar"
+            id="btnCarteira"
+            onclick="conectarPhantom()">
+            👻 Conectar Phantom
+        </button>
+    </div>
+
+    <div class="grupo">
+        <label>Nome do Token</label>
+        <input
+            id="nomeToken"
+            type="text"
+            maxlength="50"
+            placeholder="Ex: Doge Coin">
+    </div>
+
+    <div class="grupo">
+        <label>Símbolo</label>
+        <input
+            id="simboloToken"
+            type="text"
+            maxlength="10"
+            placeholder="Ex: DOGE">
+    </div>
+
+    <div class="grupo">
+        <label>Oferta Total</label>
+        <input
+            id="ofertaToken"
+            type="number"
+            min="1"
+            step="any"
+            placeholder="Ex: 1000000000">
+        <div class="aviso">
+            Informe a quantidade total que será criada.
+        </div>
+    </div>
+
+    <div class="grupo">
+        <label>Casas Decimais</label>
+        <select id="decimaisToken">
+            <option value="0">0</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="6" selected>6</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+    </div>
+
+    <div class="grupo">
+        <label>Logo do Token</label>
+        <input
+            id="logoToken"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            onchange="mostrarLogo(event)">
+
+        <img
+            id="previewLogo"
+            class="logo-preview"
+            alt="Prévia da logo">
+    </div>
+
+    <div class="grupo">
+        <label>Descrição</label>
+        <textarea
+            id="descricaoToken"
+            maxlength="500"
+            placeholder="Descreva seu projeto..."></textarea>
+    </div>
+
+    <div class="info">
+        <strong>⚠️ Antes de criar</strong><br>
+        A criação acontece na blockchain Solana.
+        A Phantom solicitará sua assinatura.
+        O Doge Manga não recebe sua chave privada.
+        Você também precisa ter SOL suficiente para as taxas da rede.
+    </div>
+
+    <button
+        class="btn btn-criar"
+        id="btnCriar"
+        onclick="criarToken()"
+        disabled>
+        🚀 Criar Token na Solana
+    </button>
+
+    <div id="status" class="status"></div>
+
+    <div id="resultado" class="resultado">
+        <h3>✅ Token criado!</h3>
+
+        <p>
+            <strong>Mint do Token:</strong><br>
+            <span id="mintResultado"></span>
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Transação:</strong><br>
+            <a id="txResultado" href="#" target="_blank"></a>
+        </p>
+
+        <br>
+
+        <p>
+            <a id="explorerResultado" href="#" target="_blank">
+                🔎 Abrir Token no Solana Explorer
+            </a>
+        </p>
+    </div>
+
+    <div class="footer">
+        Doge Manga Evolution • Creator de Tokens
+    </div>
+
+</div>
+
+<script>
+
+const RPC_URL = "https://api.mainnet-beta.solana.com";
+
+const conexao = new solanaWeb3.Connection(
+    RPC_URL,
+    "confirmed"
+);
+
+let carteira = null;
+let logoSelecionada = null;
+
+function mostrarStatus(texto, tipo){
+
+    const status = document.getElementById("status");
+
+    status.className = "status " + tipo;
+
+    status.innerHTML = texto;
+
+}
+
+function esconderStatus(){
+
+    const status = document.getElementById("status");
+
+    status.className = "status";
+
+    status.innerHTML = "";
+
+}
+
+async function conectarPhantom(){
+
+    if(!window.solana || !window.solana.isPhantom){
+
+        mostrarStatus(
+            "❌ Phantom não encontrada. Abra o portal pelo navegador da Phantom ou instale a carteira.",
+            "erro"
+        );
+
+        return;
+    }
+
+    try{
+
+        const resposta = await window.solana.connect();
+
+        carteira = resposta.publicKey;
+
+        document.getElementById("enderecoCarteira").textContent =
+            "Conectado: " +
+            carteira.toBase58().slice(0,8) +
+            "..." +
+            carteira.toBase58().slice(-8);
+
+        document.getElementById("btnCarteira").textContent =
+            "✅ Phantom Conectada";
+
+        document.getElementById("btnCriar").disabled = false;
+
+        mostrarStatus(
+            "✅ Carteira conectada com sucesso.",
+            "sucesso"
+        );
+
+    }catch(erro){
+
+        mostrarStatus(
+            "❌ Não foi possível conectar: " +
+            erro.message,
+            "erro"
+        );
+
+    }
+
+}
+
+function mostrarLogo(event){
+
+    const arquivo = event.target.files[0];
+
+    if(!arquivo){
+        logoSelecionada = null;
+        return;
+    }
+
+    if(arquivo.size > 2 * 1024 * 1024){
+
+        mostrarStatus(
+            "❌ A logo deve ter no máximo 2 MB.",
+            "erro"
+        );
+
+        event.target.value = "";
+        logoSelecionada = null;
+
+        return;
+    }
+
+    logoSelecionada = arquivo;
+
+    const leitor = new FileReader();
+
+    leitor.onload = function(e){
+
+        document.getElementById("previewLogo").src =
+            e.target.result;
+
+    };
+
+    leitor.readAsDataURL(arquivo);
+
+}
+
+function validarDados(){
+
+    const nome =
+        document.getElementById("nomeToken").value.trim();
+
+    const simbolo =
+        document.getElementById("simboloToken").value.trim();
+
+    const oferta =
+        document.getElementById("ofertaToken").value;
+
+    const decimais =
+        Number(document.getElementById("decimaisToken").value);
+
+    if(!carteira){
+
+        throw new Error(
+            "Conecte a Phantom primeiro."
+        );
+
+    }
+
+    if(!nome){
+
+        throw new Error(
+            "Digite o nome do token."
+        );
+
+    }
+
+    if(!simbolo){
+
+        throw new Error(
+            "Digite o símbolo do token."
+        );
+
+    }
+
+    if(!/^[A-Za-z0-9]+$/.test(simbolo)){
+
+        throw new Error(
+            "O símbolo deve conter apenas letras e números."
+        );
+
+    }
+
+    if(!oferta || Number(oferta) <= 0){
+
+        throw new Error(
+            "Digite uma oferta total válida."
+        );
+
+    }
+
+    if(decimais < 0 || decimais > 9){
+
+        throw new Error(
+            "Escolha entre 0 e 9 casas decimais."
+        );
+
+    }
+
+    return {
+        nome,
+        simbolo: simbolo.toUpperCase(),
+        oferta: Number(oferta),
+        decimais
+    };
+
+}
+
+async function criarToken(){
+
+    const botao =
+        document.getElementById("btnCriar");
+
+    botao.disabled = true;
+
+    document.getElementById("resultado").style.display =
+        "none";
+
+    try{
+
+        esconderStatus();
+
+        const dados = validarDados();
+
+        mostrarStatus(
+            "⏳ Preparando a criação do token...",
+            "aviso"
+        );
+
+        /*
+         * Cria uma nova Mint Account.
+         *
+         * A Keypair do mint é criada SOMENTE no navegador.
+         * Ela não é enviada para nenhum servidor.
+         */
+
+        const mintKeypair =
+            solanaWeb3.Keypair.generate();
+
+        const mintPublicKey =
+            mintKeypair.publicKey;
+
+        const taxaRent =
+            await conexao.getMinimumBalanceForRentExemption(
+                solanaSplToken.MINT_SIZE
+            );
+
+        const instrucoes = [];
+
+        instrucoes.push(
+            solanaWeb3.SystemProgram.createAccount({
+
+                fromPubkey: carteira,
+
+                newAccountPubkey:
+                    mintPublicKey,
+
+                lamports:
+                    taxaRent,
+
+                space:
+                    solanaSplToken.MINT_SIZE,
+
+                programId:
+                    solanaSplToken.TOKEN_PROGRAM_ID
+
+            })
+        );
+
+        instrucoes.push(
+
+            solanaSplToken.createInitializeMintInstruction(
+
+                mintPublicKey,
+
+                dados.decimais,
+
+                carteira,
+
+                carteira,
+
+                solanaSplToken.TOKEN_PROGRAM_ID
+
+            )
+
+        );
+
+        const tokenAccount =
+            await solanaSplToken.getAssociatedTokenAddress(
+                mintPublicKey,
+                carteira,
+                false,
+                solanaSplToken.TOKEN_PROGRAM_ID,
+                solanaSplToken.ASSOCIATED_TOKEN_PROGRAM_ID
+            );
+
+        instrucoes.push(
+
+            solanaSplToken.createAssociatedTokenAccountInstruction(
+
+                carteira,
+
+                tokenAccount,
+
+                carteira,
+
+                mintPublicKey,
+
+                solanaSplToken.TOKEN_PROGRAM_ID,
+                solanaSplToken.ASSOCIATED_TOKEN_PROGRAM_ID
+
+            )
+
+        );
+
+        const quantidadeBase =
+            converterParaBase(
+                dados.oferta,
+                dados.decimais
+            );
+
+        instrucoes.push(
+
+            solanaSplToken.createMintToInstruction(
+
+                mintPublicKey,
+
+                tokenAccount,
+
+                carteira,
+
+                quantidadeBase,
+
+                [],
+                solanaSplToken.TOKEN_PROGRAM_ID
+
+            )
+
+        );
+
+        const blockhash =
+            await conexao.getLatestBlockhash(
+                "confirmed"
+            );
+
+        const transacao =
+            new solanaWeb3.Transaction();
+
+        transacao.recentBlockhash =
+            blockhash.blockhash;
+
+        transacao.feePayer =
+            carteira;
+
+        transacao.add(...instrucoes);
+
+        /*
+         * A transação é parcialmente assinada pelo mint.
+         * Depois a Phantom assina como dona da carteira.
+         */
+
+        transacao.partialSign(
+            mintKeypair
+        );
+
+        mostrarStatus(
+            "👻 Confirme a criação do token na Phantom...",
+            "aviso"
+        );
+
+        const assinada =
+            await window.solana.signTransaction(
+                transacao
+            );
+
+        const assinatura =
+            await conexao.sendRawTransaction(
+                assinada.serialize(),
+                {
+                    skipPreflight:false,
+                    maxRetries:3
+                }
+            );
+
+        mostrarStatus(
+            "⏳ Enviando e confirmando a transação na Solana...",
+            "aviso"
+        );
+
+        await conexao.confirmTransaction(
+            {
+                signature:assinatura,
+                blockhash:blockhash.blockhash,
+                lastValidBlockHeight:
+                    blockhash.lastValidBlockHeight
+            },
+            "confirmed"
+        );
+
+        document.getElementById("mintResultado").textContent =
+            mintPublicKey.toBase58();
+
+        const linkTx =
+            "https://solscan.io/tx/" +
+            assinatura;
+
+        const linkExplorer =
+            "https://explorer.solana.com/address/" +
+            mintPublicKey.toBase58();
+
+        const txElemento =
+            document.getElementById("txResultado");
+
+        txElemento.href =
+            linkTx;
+
+        txElemento.textContent =
+            assinatura;
+
+        document.getElementById(
+            "explorerResultado"
+        ).href =
+            linkExplorer;
+
+        document.getElementById(
+            "resultado"
+        ).style.display =
+            "block";
+
+        mostrarStatus(
+            "🎉 Token criado com sucesso na Solana!",
+            "sucesso"
+        );
+
+    }catch(erro){
+
+        console.error(erro);
+
+        mostrarStatus(
+            "❌ Erro: " +
+            (erro.message || "Não foi possível criar o token."),
+            "erro"
+        );
+
+    }finally{
+
+        botao.disabled = false;
+
+    }
+
+}
+
+function converterParaBase(valor, decimais){
+
+    const texto =
+        String(valor);
+
+    const partes =
+        texto.split(".");
+
+    const inteira =
+        partes[0] || "0";
+
+    let fracao =
+        partes[1] || "";
+
+    fracao =
+        fracao
+        .padEnd(decimais,"0")
+        .slice(0,decimais);
+
+    const numeroCompleto =
+        inteira + fracao;
+
+    const bigint =
+        BigInt(numeroCompleto || "0");
+
+    return bigint;
+
+}
+
+window.addEventListener(
+    "load",
+    async function(){
+
+        if(
+            window.solana &&
+            window.solana.isPhantom
+        ){
+
+            try{
+
+                const resposta =
+                    await window.solana.connect({
+                        onlyIfTrusted:true
+                    });
+
+                if(resposta.publicKey){
+
+                    carteira =
+                        resposta.publicKey;
+
+                    document.getElementById(
+                        "enderecoCarteira"
+                    ).textContent =
+                        "Conectado: " +
+                        carteira.toBase58().slice(0,8) +
+                        "..." +
+                        carteira.toBase58().slice(-8);
+
+                    document.getElementById(
+                        "btnCarteira"
+                    ).textContent =
+                        "✅ Phantom Conectada";
+
+                    document.getElementById(
+                        "btnCriar"
+                    ).disabled = false;
+
+                }
+
+            }catch(e){
+
+                console.log(
+                    "Conexão automática não realizada."
+                );
+
+            }
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
