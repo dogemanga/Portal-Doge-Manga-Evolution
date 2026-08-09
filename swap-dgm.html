@@ -4,230 +4,265 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🔄 Swap Oficial $DGM | Doge Manga Evolution</title>
-<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
+<!-- BIBLIOTECAS OFICIAIS E ESTÁVEIS -->
+<script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.98.0/lib/index.iife.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jup-ag/api@6.0.0/dist/index.global.js"></script>
 <style>
-:root{--fundo:#050816;--card:#111827;--amarelo:#facc15;--azul:#2563eb;--verde:#10b981;--vermelho:#ef4444;--texto:#ffffff;--cinza:#d1d5db;}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif;}
-body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;}
-.voltar{text-align:center;margin-bottom:15px;}
-.voltar a{color:var(--amarelo);text-decoration:none;font-weight:bold;}
-.voltar a:hover{text-decoration:underline;}
-.container{max-width:480px;margin:0 auto;background:var(--card);border:2px solid var(--amarelo);border-radius:24px;padding:28px;box-shadow:0 0 35px rgba(250,204,21,.15);}
-.header{text-align:center;margin-bottom:25px;}
-.header h1{color:var(--amarelo);margin-bottom:5px;font-size:28px;}
-.header p{color:var(--cinza);font-size:14px;}
-.carteira{background:#050816;border:1px solid #374151;border-radius:14px;padding:15px;margin-bottom:20px;text-align:center;}
-#endCarteira{display:block;color:var(--cinza);margin-bottom:10px;word-break:break-all;font-size:13px;}
-.btn-conectar{background:var(--azul);color:white;border:none;border-radius:12px;padding:12px 20px;font-weight:bold;cursor:pointer;transition:all .2s;}
+:root{
+    --fundo:#050816; --card:#111827; --borda:#1e293b;
+    --primaria:#facc15; --primaria-escura:#eab308;
+    --sucesso:#10b981; --erro:#ef4444; --aviso:#f59e0b;
+    --texto:#f9fafb; --texto-claro:#9ca3af;
+    --sombra:0 0 40px rgba(250,204,21,.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;display:flex;align-items:center;justify-content:center;}
+.voltar{position:fixed;top:15px;left:15px;z-index:99;}
+.voltar a{color:var(--primaria);text-decoration:none;font-weight:600;font-size:14px;display:flex;align-items:center;gap:5px;}
+.voltar a:hover{color:var(--primaria-escura);}
+.container{width:100%;max-width:480px;background:var(--card);border:2px solid var(--primaria);border-radius:24px;padding:32px;box-shadow:var(--sombra);}
+.cabecalho{text-align:center;margin-bottom:24px;}
+.cabecalho h1{color:var(--primaria);font-size:28px;margin-bottom:6px;}
+.cabecalho p{color:var(--texto-claro);font-size:14px;}
+.status-carteira{background:rgba(250,204,21,.05);border:1px solid var(--borda);border-radius:16px;padding:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.endereco-curto{color:var(--texto-claro);font-size:13px;word-break:break-all;flex:1 1 100%;}
+.btn-conectar{background:#2563eb;color:white;border:none;border-radius:12px;padding:10px 18px;font-weight:600;cursor:pointer;transition:.2s;}
 .btn-conectar:hover:not(:disabled){background:#1d4ed8;}
 .btn-conectar:disabled{opacity:.5;cursor:not-allowed;}
-.taxa-aviso{background:rgba(250,204,21,.08);border:1px solid var(--amarelo);border-radius:12px;padding:12px;margin-bottom:20px;font-size:14px;line-height:1.6;}
-.taxa-aviso strong{color:var(--amarelo);}
-.bloco-moeda{background:#050816;border:1px solid #374151;border-radius:16px;padding:18px;margin-bottom:15px;}
-.label-moeda{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.label-moeda span{color:var(--cinza);font-size:14px;}
-.valor-moeda{font-size:26px;font-weight:bold;color:white;width:100%;background:transparent;border:none;outline:none;}
-.seletor-moeda{background:transparent;color:var(--amarelo);border:none;font-weight:bold;font-size:16px;cursor:pointer;outline:none;}
-.seletor-moeda option{background:#111827;color:white;}
-.btn-inverter{display:block;margin:-12px auto 10px auto;background:var(--amarelo);color:#050816;border:none;border-radius:50%;width:40px;height:40px;font-size:20px;cursor:pointer;transition:transform .2s;z-index:2;position:relative;}
-.btn-inverter:hover{transform:rotate(180deg);}
-.info-cotacao{text-align:center;color:var(--cinza);font-size:13px;margin:10px 0;}
-.btn-cotar{width:100%;background:#374151;color:white;border:none;border-radius:12px;padding:13px;font-weight:bold;margin:8px 0;cursor:pointer;transition:all .2s;}
-.btn-cotar:hover:not(:disabled){background:#4b5563;}
-.btn-cotar:disabled{opacity:.5;cursor:not-allowed;}
-.btn-swap{width:100%;background:var(--amarelo);color:#050816;border:none;border-radius:12px;padding:15px;font-size:17px;font-weight:bold;margin-top:8px;cursor:pointer;transition:all .2s;}
-.btn-swap:hover:not(:disabled){background:#eab308;transform:translateY(-1px);}
+.aviso-taxa{background:rgba(250,204,21,.08);border:1px solid var(--primaria);border-radius:12px;padding:14px;margin-bottom:20px;font-size:14px;line-height:1.6;}
+.aviso-taxa strong{color:var(--primaria);}
+.aviso-taxa code{color:var(--primaria);font-size:11px;display:block;margin-top:4px;word-break:break-all;}
+.bloco-moeda{background:rgba(5,8,22,.8);border:1px solid var(--borda);border-radius:16px;padding:20px;margin-bottom:12px;}
+.titulo-bloco{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.titulo-bloco span{color:var(--texto-claro);font-size:14px;}
+.valor-input{width:100%;background:transparent;border:none;outline:none;color:white;font-size:30px;font-weight:700;}
+.seletor-moeda{background:transparent;color:var(--primaria);border:none;font-weight:600;font-size:16px;cursor:pointer;outline:none;}
+.seletor-moeda option{background:var(--card);color:white;}
+.btn-inverter{display:block;margin:-10px auto 8px auto;background:var(--primaria);color:var(--fundo);border:none;border-radius:50%;width:44px;height:44px;font-size:22px;cursor:pointer;transition:.2s;z-index:2;position:relative;}
+.btn-inverter:hover{transform:rotate(180deg);background:var(--primaria-escura);}
+.info-cotacao{text-align:center;color:var(--texto-claro);font-size:13px;margin:10px 0 16px;min-height:20px;}
+.btn-acao{width:100%;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:700;cursor:pointer;transition:.2s;margin-bottom:10px;}
+.btn-buscar{background:#374151;color:white;}
+.btn-buscar:hover:not(:disabled){background:#4b5563;}
+.btn-buscar:disabled{opacity:.5;cursor:not-allowed;}
+.btn-swap{background:var(--primaria);color:var(--fundo);font-size:17px;padding:16px;}
+.btn-swap:hover:not(:disabled){background:var(--primaria-escura);transform:translateY(-1px);}
 .btn-swap:disabled{opacity:.5;transform:none;}
-.status{margin-top:18px;padding:14px;border-radius:12px;text-align:center;line-height:1.5;word-break:break-word;font-size:14px;display:none;}
-.sucesso{display:block;background:rgba(16,185,129,.1);border:1px solid var(--verde);color:#6ee7b7;}
-.erro{display:block;background:rgba(239,68,68,.1);border:1px solid var(--vermelho);color:#fca5a5;}
-.aviso{display:block;background:rgba(250,204,21,.08);border:1px solid var(--amarelo);color:#fde68a;}
-.link-solscan{color:var(--amarelo);text-decoration:none;font-weight:bold;display:inline-block;margin-top:10px;}
+.area-status{margin-top:16px;padding:14px;border-radius:12px;text-align:center;line-height:1.5;font-size:14px;display:none;word-break:break-word;}
+.sucesso{display:block;background:rgba(16,185,129,.1);border:1px solid var(--sucesso);color:#6ee7b7;}
+.erro{display:block;background:rgba(239,68,68,.1);border:1px solid var(--erro);color:#fca5a5;}
+.aviso-msg{display:block;background:rgba(245,158,11,.1);border:1px solid var(--aviso);color:#fde68a;}
+.link-solscan{color:var(--primaria);text-decoration:none;font-weight:600;display:inline-block;margin-top:8px;}
 .link-solscan:hover{text-decoration:underline;}
-.footer{text-align:center;margin-top:25px;color:#6b7280;font-size:12px;}
+.rodape{text-align:center;margin-top:24px;color:#4b5563;font-size:12px;}
 </style>
 </head>
 <body>
 <div class="voltar">
-    <a href="https://dogemanga.github.io/Portal-Doge-Manga-Evolution/">← Voltar ao Portal Oficial</a>
+    <a href="https://dogemanga.github.io/Portal-Doge-Manga-Evolution/">← Voltar ao Portal</a>
 </div>
 <div class="container">
-<div class="header">
-<h1>🔄 Swap $DGM Oficial</h1>
-<p>Troque tokens na Solana com segurança</p>
+    <div class="cabecalho">
+        <h1>🔄 Swap Oficial $DGM</h1>
+        <p>Troca segura e rápida na rede Solana</p>
+    </div>
+
+    <div class="status-carteira">
+        <span class="endereco-curto" id="textoCarteira">Carteira não conectada</span>
+        <button class="btn-conectar" id="btnConectar" onclick="conectar()">👻 Conectar Phantom</button>
+    </div>
+
+    <div class="aviso-taxa">
+        💸 <strong>Comissão fixa: 0,5% por operação</strong><br>
+        Recebido por: <code>6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6</code>
+    </div>
+
+    <div class="bloco-moeda">
+        <div class="titulo-bloco">
+            <span>Você envia</span>
+            <select id="moedaDe" class="seletor-moeda" onchange="limparCotacao()">
+                <option value="So11111111111111111111111111111111111111112">SOL</option>
+                <option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+                <option value="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">$DGM</option>
+            </select>
+        </div>
+        <input type="number" id="valorDe" class="valor-input" placeholder="0.00" min="0.001" step="any" oninput="limparCotacao()">
+    </div>
+
+    <button class="btn-inverter" onclick="trocarMoedas()">⇅</button>
+
+    <div class="bloco-moeda">
+        <div class="titulo-bloco">
+            <span>Você recebe</span>
+            <select id="moedaPara" class="seletor-moeda" onchange="limparCotacao()">
+                <option value="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">$DGM</option>
+                <option value="So11111111111111111111111111111111111111112">SOL</option>
+                <option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
+            </select>
+        </div>
+        <div id="valorPara" class="valor-input">0.00</div>
+    </div>
+
+    <div class="info-cotacao" id="infoCotacao">Digite o valor e clique em buscar</div>
+
+    <button class="btn-acao btn-buscar" id="btnCotar" onclick="buscarMelhorRota()" disabled>🔍 Buscar Melhor Rota</button>
+    <button class="btn-acao btn-swap" id="btnSwap" onclick="realizarTroca()" disabled>🚀 Realizar Troca</button>
+
+    <div class="area-status" id="areaStatus"></div>
+
+    <div class="rodape">© 2026 Doge Manga Evolution • Sistema Profissional</div>
 </div>
-<div class="carteira">
-<span id="endCarteira">Carteira não conectada</span>
-<button class="btn-conectar" id="btnCarteira" onclick="conectarPhantom()">👻 Conectar Phantom</button>
-</div>
-<div class="taxa-aviso">
-💸 <strong>Comissão fixa: 0,5% por troca</strong><br>
-Recebido por: <code style="color:#facc15;font-size:11px;">6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6</code><br>
-Taxa da rede Solana inclusa
-</div>
-<div class="bloco-moeda">
-<div class="label-moeda">
-<span>Você envia</span>
-<select id="moedaDe" class="seletor-moeda" onchange="resetarCotacao()">
-<option value="So11111111111111111111111111111111111111112">SOL</option>
-<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
-<option value="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">$DGM</option>
-</select>
-</div>
-<input type="number" id="valorDe" class="valor-moeda" placeholder="0.00" step="any" min="0.001" oninput="resetarCotacao()">
-</div>
-<button class="btn-inverter" onclick="inverterMoedas()">⇅</button>
-<div class="bloco-moeda">
-<div class="label-moeda">
-<span>Você recebe</span>
-<select id="moedaPara" class="seletor-moeda" onchange="resetarCotacao()">
-<option value="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">$DGM</option>
-<option value="So11111111111111111111111111111111111111112">SOL</option>
-<option value="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</option>
-</select>
-</div>
-<div id="valorPara" class="valor-moeda">0.00</div>
-</div>
-<div class="info-cotacao" id="infoCotacao">Digite o valor e clique em buscar</div>
-<button class="btn-cotar" id="btnCotar" onclick="buscarCotacao()" disabled>🔍 Buscar Melhor Rota</button>
-<button class="btn-swap" id="btnSwap" onclick="executarSwap()" disabled>🚀 Realizar Troca</button>
-<div id="status" class="status"></div>
-<div class="footer">© 2026 Doge Manga Evolution • Comissão 0,5%</div>
-</div>
+
 <script>
-// ✅ SOLUÇÃO DEFINITIVA SEM PROBLEMAS DE CONEXÃO
+// ================= CONFIGURAÇÕES OFICIAIS E FIXAS =================
+const REDE = "mainnet-beta";
 const RPC = "https://api.mainnet-beta.solana.com";
-// Usamos proxy confiável e alternativo se o primeiro falhar
-const PROXIES = [
-    "https://api.allorigins.win/raw?url=",
-    "https://corsproxy.io/?",
-    "https://api.codetabs.com/v1/proxy?quest="
-];
-const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
-const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
 const conexao = new solanaWeb3.Connection(RPC, "confirmed");
 const CARTEIRA_COMISSAO = new solanaWeb3.PublicKey("6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6");
-const TAXA_COMISSAO_BPS = 50;
+const TAXA_BPS = 50; // 0,5%
+const DESLIZAMENTO_BPS = 50; // 0,5%
 const DECIMAIS = {
     "So11111111111111111111111111111111111111112": 9,
     "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": 6,
     "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE": 6
 };
-let carteiraUsuario = null;
+
+let carteira = null;
 let rotaValida = null;
 
-async function requisicaoComProxy(url, opcoes = {}){
-    for(const proxy of PROXIES){
-        try{
-            const res = await fetch(proxy + encodeURIComponent(url), opcoes);
-            if(res.ok) return await res.json();
-        }catch(e){ console.log("Proxy falhou, tentando próximo..."); }
-    }
-    throw new Error("Todos os serviços temporariamente indisponíveis, aguarde um pouco e tente novamente");
-}
-
+// ================= FUNÇÕES AUXILIARES =================
 function mostrarStatus(texto, tipo){
-    const el = document.getElementById("status");
-    el.className = "status " + tipo;
+    const el = document.getElementById("areaStatus");
+    el.className = `area-status ${tipo}`;
     el.innerHTML = texto;
 }
 
-async function conectarPhantom(){
-    if(!window.solana || !window.solana.isPhantom){
-        mostrarStatus("❌ Instale a carteira Phantom primeiro!", "erro");
-        return;
-    }
-    try{
-        const res = await window.solana.connect();
-        carteiraUsuario = res.publicKey;
-        const end = carteiraUsuario.toBase58();
-        document.getElementById("endCarteira").textContent = "✅ " + end.slice(0,8) + "..." + end.slice(-8);
-        document.getElementById("btnCarteira").textContent = "✅ Conectada";
-        document.getElementById("btnCotar").disabled = false;
-        mostrarStatus("✅ Conectado com sucesso!", "sucesso");
-    }catch(e){ mostrarStatus("❌ Erro: "+e.message,"erro"); }
-}
-
-function inverterMoedas(){
-    const de = document.getElementById("moedaDe");
-    const para = document.getElementById("moedaPara");
-    const temp = de.value; de.value = para.value; para.value = temp;
-    resetarCotacao();
-}
-
-function resetarCotacao(){
+function limparCotacao(){
     document.getElementById("valorPara").textContent = "0.00";
     document.getElementById("btnSwap").disabled = true;
     rotaValida = null;
     document.getElementById("infoCotacao").textContent = "Digite o valor e clique em buscar";
 }
 
-async function buscarCotacao(){
+function trocarMoedas(){
+    const de = document.getElementById("moedaDe");
+    const para = document.getElementById("moedaPara");
+    [de.value, para.value] = [para.value, de.value];
+    limparCotacao();
+}
+
+// ================= CONEXÃO PHANTOM =================
+async function conectar(){
+    if(!window.solana?.isPhantom){
+        mostrarStatus("❌ Instale a carteira Phantom primeiro!", "erro");
+        return;
+    }
+    try{
+        const res = await window.solana.connect();
+        carteira = res.publicKey;
+        const end = carteira.toBase58();
+        document.getElementById("textoCarteira").textContent = `✅ ${end.slice(0,8)}...${end.slice(-8)}`;
+        document.getElementById("btnConectar").textContent = "✅ Conectada";
+        document.getElementById("btnCotar").disabled = false;
+        mostrarStatus("✅ Conectado com sucesso!", "sucesso");
+    }catch(e){ mostrarStatus(`❌ Erro: ${e.message}`, "erro"); }
+}
+
+// ================= BUSCAR ROTA JUPITER =================
+async function buscarMelhorRota(){
     const valor = Number(document.getElementById("valorDe").value);
-    if(!valor || valor < 0.001){ mostrarStatus("❌ Valor mínimo: 0.001 SOL!", "erro"); return; }
     const de = document.getElementById("moedaDe").value;
     const para = document.getElementById("moedaPara").value;
-    if(de === para){ mostrarStatus("❌ Escolha moedas diferentes!", "erro"); return; }
-    mostrarStatus("🔍 Buscando rota na Jupiter...", "aviso");
+
+    if(!valor || valor < 0.001){
+        mostrarStatus("❌ Valor mínimo: 0.001 SOL!", "erro");
+        return;
+    }
+    if(de === para){
+        mostrarStatus("❌ Escolha moedas diferentes!", "erro");
+        return;
+    }
+
+    mostrarStatus("🔍 Buscando a melhor rota...", "aviso-msg");
     document.getElementById("btnCotar").disabled = true;
+
     try{
-        const quantBruta = Math.floor(valor * (10 ** DECIMAIS[de]));
-        const urlFinal = `${JUPITER_QUOTE}?inputMint=${de}&outputMint=${para}&amount=${quantBruta}&slippageBps=50&platformFeeBps=${TAXA_COMISSAO_BPS}&platformFeeAccount=${CARTEIRA_COMISSAO.toBase58()}`;
-        const dados = await requisicaoComProxy(urlFinal);
-        if(!dados.outAmount) throw new Error("Nenhuma rota encontrada para esse valor");
-        rotaValida = dados;
-        const valorRecebe = (Number(dados.outAmount) / (10 ** DECIMAIS[para])).toFixed(6);
+        const quantBruta = BigInt(Math.floor(valor * (10 ** DECIMAIS[de])));
+        const jupiter = await JupiterApi.JupiterApiClient.create();
+        
+        rotaValida = await jupiter.quoteGet({
+            inputMint: de,
+            outputMint: para,
+            amount: quantBruta.toString(),
+            slippageBps: DESLIZAMENTO_BPS,
+            platformFeeBps: TAXA_BPS,
+            platformFeeAccount: CARTEIRA_COMISSAO.toBase58()
+        });
+
+        if(!rotaValida.outAmount) throw new Error("Nenhuma rota disponível");
+        
+        const valorRecebe = (Number(rotaValida.outAmount) / (10 ** DECIMAIS[para])).toFixed(6);
         document.getElementById("valorPara").textContent = valorRecebe;
         document.getElementById("infoCotacao").textContent = `Rota pronta • Deslizamento 0,5% • Comissão 0,5%`;
         document.getElementById("btnSwap").disabled = false;
         mostrarStatus("✅ Rota encontrada!", "sucesso");
     }catch(e){
-        console.error("ERRO:", e);
-        mostrarStatus("❌ Falha: "+e.message,"erro");
-    }finally{ document.getElementById("btnCotar").disabled = false; }
+        console.error("ERRO COTAÇÃO:", e);
+        mostrarStatus(`❌ Falha: ${e.message || "Tente novamente em instantes"}`, "erro");
+    }finally{
+        document.getElementById("btnCotar").disabled = false;
+    }
 }
 
-async function executarSwap(){
-    if(!rotaValida || !carteiraUsuario) return;
+// ================= EXECUTAR TROCA =================
+async function realizarTroca(){
+    if(!rotaValida || !carteira) return;
     const btn = document.getElementById("btnSwap");
     btn.disabled = true;
-    mostrarStatus("⏳ Preparando transação...", "aviso");
+    mostrarStatus("⏳ Preparando transação...", "aviso-msg");
+
     try{
-        const corpo = JSON.stringify({
+        const jupiter = await JupiterApi.JupiterApiClient.create();
+        const transacaoDados = await jupiter.swapPost({
             quoteResponse: rotaValida,
-            userPublicKey: carteiraUsuario.toBase58(),
+            userPublicKey: carteira.toBase58(),
             wrapAndUnwrapSol: true,
             prioritizationFeeLamports: 200000
         });
-        const dadosSwap = await requisicaoComProxy(JUPITER_SWAP, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: corpo
-        });
-        if(!dadosSwap.swapTransaction) throw new Error("Não foi possível criar a transação");
-        const transacao = solanaWeb3.Transaction.from(Buffer.from(dadosSwap.swapTransaction, "base64"));
-        const {blockhash} = await conexao.getLatestBlockhash("confirmed");
+
+        const transacao = solanaWeb3.Transaction.from(Buffer.from(transacaoDados.swapTransaction, "base64"));
+        const { blockhash } = await conexao.getLatestBlockhash("confirmed");
         transacao.recentBlockhash = blockhash;
-        transacao.feePayer = carteiraUsuario;
-        mostrarStatus("👻 Confirme na Phantom...", "aviso");
-        const {signature} = await window.solana.signAndSendTransaction(transacao);
+        transacao.feePayer = carteira;
+
+        mostrarStatus("👻 Confirme na carteira Phantom...", "aviso-msg");
+        const { signature } = await window.solana.signAndSendTransaction(transacao);
         await conexao.confirmTransaction(signature, "confirmed");
-        mostrarStatus(`✅ TROCA CONCLUÍDA! Comissão enviada 🎉<br><a href="https://solscan.io/tx/${signature}" target="_blank" class="link-solscan">🔎 Ver transação</a>`, "sucesso");
+
+        mostrarStatus(`✅ TROCA CONCLUÍDA! Comissão enviada com sucesso 🎉<br>
+            <a href="https://solscan.io/tx/${signature}" target="_blank" class="link-solscan">🔎 Ver transação completa</a>`, "sucesso");
     }catch(e){
-        console.error("ERRO FINAL:", e);
-        const msg = e.message.includes("User rejected") ? "Transação cancelada na carteira" : (e.message || "Erro de rede, tente novamente");
-        mostrarStatus(`❌ Falha: ${msg}`,"erro");
-    }finally{ btn.disabled = false; rotaValida = null; resetarCotacao(); }
+        console.error("ERRO TROCA:", e);
+        let mensagem = e.message;
+        if(e.message.includes("rejected")) mensagem = "Transação cancelada na carteira";
+        else if(e.message.includes("insufficient")) mensagem = "Saldo insuficiente para a taxa";
+        mostrarStatus(`❌ Falha: ${mensagem}`, "erro");
+    }finally{
+        btn.disabled = false;
+        rotaValida = null;
+        limparCotacao();
+    }
 }
 
+// ================= CARREGAMENTO AUTOMÁTICO =================
 window.addEventListener("load", async () => {
     if(window.solana?.isPhantom){
         try{
-            const resp = await window.solana.connect({onlyIfTrusted:true});
-            carteiraUsuario = resp.publicKey;
-            const end = carteiraUsuario.toBase58();
-            document.getElementById("endCarteira").textContent = "✅ " + end.slice(0,8) + "..." + end.slice(-8);
-            document.getElementById("btnCarteira").textContent = "✅ Conectada";
+            const res = await window.solana.connect({ onlyIfTrusted: true });
+            carteira = res.publicKey;
+            const end = carteira.toBase58();
+            document.getElementById("textoCarteira").textContent = `✅ ${end.slice(0,8)}...${end.slice(-8)}`;
+            document.getElementById("btnConectar").textContent = "✅ Conectada";
             document.getElementById("btnCotar").disabled = false;
         }catch(e){}
     }
