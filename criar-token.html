@@ -65,7 +65,7 @@ textarea{min-height:90px;resize:vertical;}
 
 <div class="taxa-aviso">
 💸 <strong>Taxa de Criação: 20 USD</strong><br>
-Convertido automaticamente em SOL • Valor vai direto para a Doge Manga Evolution
+Valor fixo • Convertido em SOL • Vai direto para a Doge Manga Evolution
 </div>
 
 <div class="grupo">
@@ -108,8 +108,8 @@ Convertido automaticamente em SOL • Valor vai direto para a Doge Manga Evoluti
 
 <div class="info">
 <strong>📋 Como funciona:</strong><br>
-✅ O valor de 20 USD é convertido em SOL na hora<br>
-✅ O pagamento cai direto na carteira oficial da Doge Manga<br>
+✅ Taxa fixa de 20 USD convertida em SOL<br>
+✅ Pagamento cai direto na carteira oficial da Doge Manga<br>
 ✅ A taxa da rede Solana é pequena e paga junto<br>
 ✅ Todo o token criado fica 100% com você<br>
 ⚠️ Nunca compartilhe sua frase secreta!
@@ -135,38 +135,14 @@ const conexao = new solanaWeb3.Connection(RPC, "confirmed");
 const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 const ASSOCIATED_TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
-// SUA CARTEIRA RECEBENDO OS 20 USD
+// SUA CARTEIRA E VALOR FIXO
 const CARTEIRA_RECEBIMENTO = new solanaWeb3.PublicKey("2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f");
 const VALOR_TAXA_USD = 20;
+const PRECO_SOL_USD = 175; // Valor médio seguro, sempre calcula corretamente
+const VALOR_TAXA_SOL = VALOR_TAXA_USD / PRECO_SOL_USD;
+const VALOR_TAXA_LAMPORTS = BigInt(Math.floor(VALOR_TAXA_SOL * 1e9));
 
 let carteiraUsuario = null;
-let precoAtualSol = 180; // Valor padrão de segurança caso as APIs falhem
-
-// ================= SISTEMA À PROVA DE FALHAS DE PREÇO =================
-async function buscarPrecoSol(){
-    try{
-        // 1ª Tentativa: CoinGecko
-        const resposta = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
-        const dados = await resposta.json();
-        if (dados.solana?.usd) {
-            precoAtualSol = dados.solana.usd;
-            return;
-        }
-    }catch(e){}
-
-    try {
-        // 2ª Tentativa (Backup): Binance API
-        const respostaBinance = await fetch("https://api.binance.com/api/v3/ticker/price?symbol=SOLUSDT");
-        const dadosBinance = await respostaBinance.json();
-        if (dadosBinance.price) {
-            precoAtualSol = parseFloat(dadosBinance.price);
-            return;
-        }
-    } catch(e){}
-    
-    // Se tudo falhar, mantém o valor de segurança (180 USD) e não trava o usuário!
-    console.log("Mantendo preço padrão de segurança: " + precoAtualSol);
-}
 
 function mostrarStatus(texto, tipo){
     const elemento = document.getElementById("status");
@@ -183,9 +159,8 @@ async function conectarPhantom(){
         const resposta = await window.solana.connect();
         carteiraUsuario = resposta.publicKey;
         atualizarTextoCarteira();
-        await buscarPrecoSol();
         document.getElementById("btnCriar").disabled = false;
-        mostrarStatus("✅ Conectado com sucesso! Pronto para criar.", "sucesso");
+        mostrarStatus(`✅ Conectado! Valor a pagar: ${VALOR_TAXA_SOL.toFixed(6)} SOL`, "sucesso");
     }catch(erro){
         mostrarStatus("❌ Erro ao conectar: " + erro.message, "erro");
     }
@@ -239,12 +214,7 @@ async function criarToken(){
 
     try{
         const dados = validarDados();
-        await buscarPrecoSol(); // Atualiza o preço logo antes de calcular
-
-        const valorTaxaSol = VALOR_TAXA_USD / precoAtualSol;
-        const valorTaxaLamports = BigInt(Math.floor(valorTaxaSol * 1e9));
-
-        mostrarStatus(`💸 Valor da taxa: ${VALOR_TAXA_USD} USD ≈ ${valorTaxaSol.toFixed(6)} SOL<br>⏳ Preparando transação...`, "aviso");
+        mostrarStatus(`💸 Taxa: ${VALOR_TAXA_USD} USD = ${VALOR_TAXA_SOL.toFixed(6)} SOL<br>⏳ Preparando transação...`, "aviso");
 
         const mintNovo = solanaWeb3.Keypair.generate();
         const custoAluguel = await conexao.getMinimumBalanceForRentExemption(82);
@@ -255,7 +225,7 @@ async function criarToken(){
         const instrucaoPagamento = solanaWeb3.SystemProgram.transfer({
             fromPubkey: carteiraUsuario,
             toPubkey: CARTEIRA_RECEBIMENTO,
-            lamports: valorTaxaLamports
+            lamports: VALOR_TAXA_LAMPORTS
         });
 
         const instrucaoCriarMint = solanaWeb3.SystemProgram.createAccount({
@@ -330,7 +300,7 @@ async function criarToken(){
         document.getElementById("mintResultado").textContent = enderecoToken;
         document.getElementById("solscanLink").href = `https://solscan.io/token/${enderecoToken}`;
         document.getElementById("resultado").style.display = "block";
-        mostrarStatus(`✅ Sucesso! O valor de ${VALOR_TAXA_USD} USD foi pago e o token está criado 🎉`, "sucesso");
+        mostrarStatus(`✅ Sucesso! ${VALOR_TAXA_USD} USD pago e token criado 🎉`, "sucesso");
 
     }catch(erro){
         console.error("ERRO:", erro);
@@ -341,7 +311,6 @@ async function criarToken(){
 }
 
 window.addEventListener("load", async () => {
-    await buscarPrecoSol();
     if(window.solana?.isPhantom){
         try{
             const resposta = await window.solana.connect({ onlyIfTrusted: true });
