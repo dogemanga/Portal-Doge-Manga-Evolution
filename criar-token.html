@@ -16,244 +16,46 @@
     --verde:#10b981;
     --vermelho:#ef4444;
 }
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    background:var(--fundo);
-    color:var(--texto);
-    min-height:100vh;
-    padding:20px;
-}
-
-.container{
-    max-width:520px;
-    margin:20px auto;
-    background:var(--card);
-    border:1px solid var(--amarelo);
-    border-radius:22px;
-    padding:25px;
-    box-shadow:0 0 30px rgba(250,204,21,.12);
-}
-
-.header{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.header h1{
-    color:var(--amarelo);
-    margin-bottom:8px;
-    font-size:28px;
-}
-
-.header p{
-    color:var(--cinza);
-    font-size:15px;
-}
-
-.carteira{
-    background:#050816;
-    border:1px solid #374151;
-    border-radius:14px;
-    padding:15px;
-    margin-bottom:20px;
-    text-align:center;
-}
-
-#enderecoCarteira{
-    display:block;
-    color:var(--cinza);
-    margin-bottom:10px;
-    word-break:break-all;
-    font-size:14px;
-}
-
-.grupo{
-    margin-bottom:17px;
-}
-
-label{
-    display:block;
-    color:var(--cinza);
-    margin-bottom:7px;
-    font-size:15px;
-    font-weight:500;
-}
-
-input,
-textarea,
-select{
-    width:100%;
-    padding:13px;
-    background:#050816;
-    color:white;
-    border:1px solid #374151;
-    border-radius:10px;
-    outline:none;
-    font-size:15px;
-}
-
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:var(--amarelo);
-    box-shadow:0 0 0 2px rgba(250,204,21,.15);
-}
-
-textarea{
-    min-height:90px;
-    resize:vertical;
-}
-
-.logo-preview{
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    object-fit:cover;
-    display:block;
-    margin:12px auto;
-    border:2px solid var(--amarelo);
-    background:#050816;
-}
-
-.btn{
-    width:100%;
-    border:0;
-    border-radius:12px;
-    padding:14px;
-    margin-top:8px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:bold;
-    transition:all 0.2s ease;
-}
-
-.btn-conectar{
-    background:var(--azul);
-    color:white;
-}
-
-.btn-conectar:hover:not(:disabled){
-    background:#1d4ed8;
-}
-
-.btn-criar{
-    background:var(--amarelo);
-    color:#050816;
-}
-
-.btn-criar:hover:not(:disabled){
-    background:#eab308;
-}
-
-.btn:disabled{
-    opacity:.5;
-    cursor:not-allowed;
-    transform:none !important;
-}
-
-.info{
-    background:rgba(37,99,235,.10);
-    border:1px solid #2563eb;
-    border-radius:12px;
-    padding:13px;
-    margin:18px 0;
-    font-size:13px;
-    line-height:1.6;
-    color:var(--cinza);
-}
-
-.status{
-    display:none;
-    padding:14px;
-    margin-top:18px;
-    border-radius:12px;
-    text-align:center;
-    line-height:1.5;
-    word-break:break-word;
-    font-size:14px;
-}
-
-.sucesso{
-    display:block;
-    background:rgba(16,185,129,.10);
-    border:1px solid var(--verde);
-    color:#6ee7b7;
-}
-
-.erro{
-    display:block;
-    background:rgba(239,68,68,.10);
-    border:1px solid var(--vermelho);
-    color:#fca5a5;
-}
-
-.aviso{
-    display:block;
-    background:rgba(250,204,21,.08);
-    border:1px solid var(--amarelo);
-    color:#fde68a;
-}
-
-.resultado{
-    display:none;
-    margin-top:20px;
-    background:#050816;
-    border:1px solid var(--verde);
-    border-radius:14px;
-    padding:16px;
-}
-
-.resultado h3{
-    color:var(--verde);
-    margin-bottom:12px;
-    font-size:18px;
-}
-
-.mint{
-    word-break:break-all;
-    font-size:13px;
-    color:white;
-    padding:8px;
-    background:rgba(255,255,255,.05);
-    border-radius:8px;
-    margin:8px 0;
-}
-
-.link{
-    display:inline-block;
-    margin-top:12px;
-    color:var(--amarelo);
-    text-decoration:none;
-    font-weight:bold;
-    transition:color 0.2s;
-}
-
-.link:hover{
-    color:#fde68a;
-    text-decoration:underline;
-}
-
-.footer{
-    text-align:center;
-    margin-top:25px;
-    color:#6b7280;
-    font-size:12px;
-}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif;}
+body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;}
+.container{max-width:520px;margin:20px auto;background:var(--card);border:1px solid var(--amarelo);border-radius:22px;padding:25px;box-shadow:0 0 30px rgba(250,204,21,.12);}
+.header{text-align:center;margin-bottom:25px;}
+.header h1{color:var(--amarelo);margin-bottom:8px;font-size:28px;}
+.header p{color:var(--cinza);font-size:15px;}
+.carteira{background:#050816;border:1px solid #374151;border-radius:14px;padding:15px;margin-bottom:15px;text-align:center;}
+#enderecoCarteira{display:block;color:var(--cinza);margin-bottom:10px;word-break:break-all;font-size:14px;}
+.taxa-aviso{background:rgba(250,204,21,.08);border:1px solid var(--amarelo);border-radius:12px;padding:12px;margin-bottom:20px;font-size:14px;line-height:1.6;}
+.taxa-aviso strong{color:var(--amarelo);}
+.grupo{margin-bottom:17px;}
+label{display:block;color:var(--cinza);margin-bottom:7px;font-size:15px;font-weight:500;}
+input,textarea,select{width:100%;padding:13px;background:#050816;color:white;border:1px solid #374151;border-radius:10px;outline:none;font-size:15px;}
+input:focus,textarea:focus,select:focus{border-color:var(--amarelo);box-shadow:0 0 0 2px rgba(250,204,21,.15);}
+textarea{min-height:90px;resize:vertical;}
+.logo-preview{width:90px;height:90px;border-radius:50%;object-fit:cover;display:block;margin:12px auto;border:2px solid var(--amarelo);background:#050816;}
+.btn{width:100%;border:0;border-radius:12px;padding:14px;margin-top:8px;cursor:pointer;font-size:16px;font-weight:bold;transition:all 0.2s ease;}
+.btn-conectar{background:var(--azul);color:white;}
+.btn-conectar:hover:not(:disabled){background:#1d4ed8;}
+.btn-criar{background:var(--amarelo);color:#050816;}
+.btn-criar:hover:not(:disabled){background:#eab308;}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none !important;}
+.info{background:rgba(37,99,235,.10);border:1px solid #2563eb;border-radius:12px;padding:13px;margin:18px 0;font-size:13px;line-height:1.6;color:var(--cinza);}
+.status{display:none;padding:14px;margin-top:18px;border-radius:12px;text-align:center;line-height:1.5;word-break:break-word;font-size:14px;}
+.sucesso{display:block;background:rgba(16,185,129,.10);border:1px solid var(--verde);color:#6ee7b7;}
+.erro{display:block;background:rgba(239,68,68,.10);border:1px solid var(--vermelho);color:#fca5a5;}
+.aviso{display:block;background:rgba(250,204,21,.08);border:1px solid var(--amarelo);color:#fde68a;}
+.resultado{display:none;margin-top:20px;background:#050816;border:1px solid var(--verde);border-radius:14px;padding:16px;}
+.resultado h3{color:var(--verde);margin-bottom:12px;font-size:18px;}
+.mint{word-break:break-all;font-size:13px;color:white;padding:8px;background:rgba(255,255,255,.05);border-radius:8px;margin:8px 0;}
+.link{display:inline-block;margin-top:12px;color:var(--amarelo);text-decoration:none;font-weight:bold;transition:color 0.2s;}
+.link:hover{color:#fde68a;text-decoration:underline;}
+.footer{text-align:center;margin-top:25px;color:#6b7280;font-size:12px;}
 </style>
 </head>
-
 <body>
 <div class="container">
 <div class="header">
 <h1>🚀 Creator de Token</h1>
-<p>Crie seu token diretamente na blockchain Solana</p>
+<p>Crie seu token na Solana com segurança</p>
 </div>
 
 <div class="carteira">
@@ -261,14 +63,19 @@ textarea{
 <button class="btn btn-conectar" id="btnCarteira" onclick="conectarPhantom()">👻 Conectar Phantom</button>
 </div>
 
+<div class="taxa-aviso">
+💸 <strong>Taxa de Criação: 20 USD</strong><br>
+Convertido automaticamente em SOL • Valor vai direto para a Doge Manga Evolution
+</div>
+
 <div class="grupo">
 <label>Nome do Token</label>
-<input id="nomeToken" type="text" maxlength="50" placeholder="Ex: Doge Manga">
+<input id="nomeToken" type="text" maxlength="50" placeholder="Ex: Meu Projeto">
 </div>
 
 <div class="grupo">
 <label>Símbolo</label>
-<input id="simboloToken" type="text" maxlength="10" placeholder="Ex: DGM">
+<input id="simboloToken" type="text" maxlength="10" placeholder="Ex: MPRJ">
 </div>
 
 <div class="grupo">
@@ -295,84 +102,90 @@ textarea{
 </div>
 
 <div class="grupo">
-<label>Descrição</label>
-<textarea id="descricaoToken" maxlength="500" placeholder="Descreva seu projeto..."></textarea>
+<label>Descrição do Projeto</label>
+<textarea id="descricaoToken" maxlength="500" placeholder="Conte um pouco sobre seu token..."></textarea>
 </div>
 
 <div class="info">
-<strong>⚠️ Antes de criar</strong>
-<br><br>
-✅ O token será criado oficialmente na rede Solana Mainnet
-✅ A Phantom pedirá apenas assinatura da transação, nunca compartilhe sua frase secreta
-✅ Você precisa ter SOL na carteira para pagar as taxas de rede
-✅ A oferta total será enviada 100% para sua carteira
+<strong>📋 Como funciona:</strong><br>
+✅ O valor de 20 USD é convertido em SOL na hora<br>
+✅ O pagamento cai direto na carteira oficial da Doge Manga<br>
+✅ A taxa da rede Solana é pequena e paga junto<br>
+✅ Todo o token criado fica 100% com você<br>
+⚠️ Nunca compartilhe sua frase secreta!
 </div>
 
-<button class="btn btn-criar" id="btnCriar" onclick="criarToken()" disabled>🚀 Criar Token na Solana</button>
+<button class="btn btn-criar" id="btnCriar" onclick="criarToken()" disabled>🚀 Pagar e Criar Token</button>
 
 <div id="status" class="status"></div>
 
 <div id="resultado" class="resultado">
 <h3>🎉 Token criado com sucesso!</h3>
-<p><strong>Endereço do Token (Mint):</strong></p>
+<p><strong>Endereço do Token:</strong></p>
 <p id="mintResultado" class="mint"></p>
-<a id="solscanLink" class="link" target="_blank">🔎 Ver detalhes no Solscan</a>
+<a id="solscanLink" class="link" target="_blank">🔎 Ver transação no Solscan</a>
 </div>
 
-<div class="footer">
-© 2026 Doge Manga Evolution • Todos os direitos reservados
-</div>
+<div class="footer">© 2026 Doge Manga Evolution • Todos os direitos reservados</div>
 </div>
 
 <script>
-/* =====================================
-   CONFIGURAÇÕES SOLANA
-===================================== */
+// ================= CONFIGURAÇÕES EXATAS =================
 const RPC = "https://api.mainnet-beta.solana.com";
 const conexao = new solanaWeb3.Connection(RPC, "confirmed");
-
 const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 const ASSOCIATED_TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
-let carteira = null;
+// SUA CARTEIRA QUE RECEBE O VALOR
+const CARTEIRA_RECEBIMENTO = new solanaWeb3.PublicKey("2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f");
+const VALOR_TAXA_USD = 20; // 20 DÓLARES FIXO
 
-/* =====================================
-   FUNÇÕES DE STATUS
-===================================== */
+let carteiraUsuario = null;
+let precoAtualSol = 0;
+
+// ================= CARREGAR PREÇO DO SOL =================
+async function buscarPrecoSol(){
+    try{
+        const resposta = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd");
+        const dados = await resposta.json();
+        precoAtualSol = dados.solana.usd;
+    }catch(erro){
+        precoAtualSol = 0;
+    }
+}
+
+// ================= FUNÇÕES DE STATUS =================
 function mostrarStatus(texto, tipo){
     const elemento = document.getElementById("status");
     elemento.className = "status " + tipo;
     elemento.innerHTML = texto;
 }
 
-/* =====================================
-   CONEXÃO PHANTOM
-===================================== */
+// ================= CONEXÃO PHANTOM =================
 async function conectarPhantom(){
     if(!window.solana || !window.solana.isPhantom){
-        mostrarStatus("❌ Carteira Phantom não encontrada!<br>Instale a extensão ou use o navegador da Phantom.", "erro");
+        mostrarStatus("❌ Carteira Phantom não encontrada! Instale a extensão primeiro.", "erro");
         return;
     }
     try{
         const resposta = await window.solana.connect();
-        carteira = resposta.publicKey;
-        atualizarCarteira();
+        carteiraUsuario = resposta.publicKey;
+        atualizarTextoCarteira();
+        await buscarPrecoSol();
         document.getElementById("btnCriar").disabled = false;
-        mostrarStatus("✅ Phantom conectada com sucesso!", "sucesso");
+        mostrarStatus("✅ Conectado com sucesso! Pronto para criar.", "sucesso");
     }catch(erro){
         mostrarStatus("❌ Erro ao conectar: " + erro.message, "erro");
     }
 }
 
-function atualizarCarteira(){
-    const endereco = carteira.toBase58();
+function atualizarTextoCarteira(){
+    const endereco = carteiraUsuario.toBase58();
     document.getElementById("enderecoCarteira").textContent = "✅ " + endereco.substring(0,8) + "..." + endereco.slice(-8);
     document.getElementById("btnCarteira").textContent = "✅ Conectada";
 }
 
-/* =====================================
-   PRÉVIA DA LOGO
-===================================== */
+// ================= PRÉVIA DA LOGO =================
 function mostrarLogo(event){
     const arquivo = event.target.files[0];
     if(!arquivo) return;
@@ -382,39 +195,35 @@ function mostrarLogo(event){
         return;
     }
     const leitor = new FileReader();
-    leitor.onload = e => document.getElementById("previewLogo").src = e.target.result;
+    leitor.onload = evento => document.getElementById("previewLogo").src = evento.target.result;
     leitor.readAsDataURL(arquivo);
 }
 
-/* =====================================
-   VALIDAÇÃO DE DADOS
-===================================== */
+// ================= VALIDAÇÃO =================
 function validarDados(){
-    if(!carteira) throw new Error("Conecte sua carteira Phantom primeiro");
-
+    if(!carteiraUsuario) throw new Error("Conecte sua carteira primeiro");
+    if(precoAtualSol <= 0) throw new Error("Não foi possível carregar o preço do SOL, tente novamente em instantes");
+    
     const nome = document.getElementById("nomeToken").value.trim();
     const simbolo = document.getElementById("simboloToken").value.trim().toUpperCase();
     const oferta = document.getElementById("ofertaToken").value;
     const decimais = Number(document.getElementById("decimaisToken").value);
 
-    if(!nome) throw new Error("Digite o nome do token");
-    if(!simbolo) throw new Error("Digite o símbolo do token");
-    if(!/^[A-Z0-9]+$/.test(simbolo)) throw new Error("Símbolo só pode ter letras e números");
-    if(!oferta || Number(oferta) <= 0) throw new Error("Digite uma quantidade válida de oferta");
+    if(!nome) throw new Error("Digite o nome do seu token");
+    if(!simbolo || !/^[A-Z0-9]+$/.test(simbolo)) throw new Error("Símbolo só pode ter letras e números");
+    if(!oferta || Number(oferta) <= 0) throw new Error("Informe uma quantidade válida de oferta");
 
     return { nome, simbolo, oferta, decimais };
 }
 
-function converterQuantidade(valor, decimais){
+function converterQuantidade(valor, casas){
     const partes = String(valor).split(".");
     const inteira = partes[0] || "0";
-    const decimal = (partes[1] || "").padEnd(decimais, "0").slice(0, decimais);
+    const decimal = (partes[1] || "").padEnd(casas, "0").slice(0, casas);
     return BigInt(inteira + decimal);
 }
 
-/* =====================================
-   CRIAÇÃO DO TOKEN
-===================================== */
+// ================= CRIAÇÃO E PAGAMENTO =================
 async function criarToken(){
     const botao = document.getElementById("btnCriar");
     botao.disabled = true;
@@ -422,41 +231,55 @@ async function criarToken(){
 
     try{
         const dados = validarDados();
-        mostrarStatus("⏳ Preparando criação do token...", "aviso");
+        const valorTaxaSol = VALOR_TAXA_USD / precoAtualSol;
+        const valorTaxaLamports = BigInt(Math.floor(valorTaxaSol * 1e9));
 
-        const mint = solanaWeb3.Keypair.generate();
-        const mintPublicKey = mint.publicKey;
-        const rent = await conexao.getMinimumBalanceForRentExemption(82);
+        mostrarStatus(`💸 Valor da taxa: ${VALOR_TAXA_USD} USD ≈ ${valorTaxaSol.toFixed(6)} SOL<br>⏳ Preparando transação...`, "aviso");
 
-        const sementes = [carteira.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mintPublicKey.toBuffer()];
-        const [tokenAccount] = await solanaWeb3.PublicKey.findProgramAddress(sementes, ASSOCIATED_TOKEN_PROGRAM_ID);
+        // Gerar endereço do novo token
+        const mintNovo = solanaWeb3.Keypair.generate();
+        const custoAluguel = await conexao.getMinimumBalanceForRentExemption(82);
 
-        const criarMint = solanaWeb3.SystemProgram.createAccount({
-            fromPubkey: carteira,
-            newAccountPubkey: mintPublicKey,
-            lamports: rent,
+        // Criar conta associada para receber os tokens
+        const sementes = [carteiraUsuario.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mintNovo.publicKey.toBuffer()];
+        const [contaRecebimento] = await solanaWeb3.PublicKey.findProgramAddress(sementes, ASSOCIATED_TOKEN_PROGRAM_ID);
+
+        // Instrução: Pagar taxa para VOCÊ
+        const instrucaoPagamento = solanaWeb3.SystemProgram.transfer({
+            fromPubkey: carteiraUsuario,
+            toPubkey: CARTEIRA_RECEBIMENTO,
+            lamports: valorTaxaLamports
+        });
+
+        // Instrução: Criar conta do token
+        const instrucaoCriarMint = solanaWeb3.SystemProgram.createAccount({
+            fromPubkey: carteiraUsuario,
+            newAccountPubkey: mintNovo.publicKey,
+            lamports: custoAluguel,
             space: 82,
             programId: TOKEN_PROGRAM_ID
         });
 
-        const dadosInitialize = new Uint8Array(67);
-        dadosInitialize[0] = 0;
-        dadosInitialize[1] = dados.decimais;
-        dadosInitialize.set(carteira.toBytes(), 2);
-        dadosInitialize[34] = 1;
-        dadosInitialize.set(carteira.toBytes(), 35);
-        const initializeMint = new solanaWeb3.TransactionInstruction({
-            keys: [ { pubkey: mintPublicKey, isSigner: false, isWritable: true } ],
+        // Inicializar configurações do token
+        const dadosInicializacao = new Uint8Array(67);
+        dadosInicializacao[0] = 0;
+        dadosInicializacao[1] = dados.decimais;
+        dadosInicializacao.set(carteiraUsuario.toBytes(), 2);
+        dadosInicializacao[34] = 1;
+        dadosInicializacao.set(carteiraUsuario.toBytes(), 35);
+        const instrucaoInicializar = new solanaWeb3.TransactionInstruction({
+            keys: [ { pubkey: mintNovo.publicKey, isSigner: false, isWritable: true } ],
             programId: TOKEN_PROGRAM_ID,
-            data: dadosInitialize
+            data: dadosInicializacao
         });
 
-        const criarTokenAccount = new solanaWeb3.TransactionInstruction({
+        // Criar conta associada
+        const instrucaoCriarAta = new solanaWeb3.TransactionInstruction({
             keys: [
-                { pubkey: carteira, isSigner: true, isWritable: true },
-                { pubkey: tokenAccount, isSigner: false, isWritable: true },
-                { pubkey: carteira, isSigner: false, isWritable: false },
-                { pubkey: mintPublicKey, isSigner: false, isWritable: false },
+                { pubkey: carteiraUsuario, isSigner: true, isWritable: true },
+                { pubkey: contaRecebimento, isSigner: false, isWritable: true },
+                { pubkey: carteiraUsuario, isSigner: false, isWritable: false },
+                { pubkey: mintNovo.publicKey, isSigner: false, isWritable: false },
                 { pubkey: solanaWeb3.SystemProgram.programId, isSigner: false, isWritable: false },
                 { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false }
             ],
@@ -464,73 +287,70 @@ async function criarToken(){
             data: new Uint8Array([])
         });
 
-        const quantidade = converterQuantidade(dados.oferta, dados.decimais);
-        const dadosMintTo = new Uint8Array(9);
-        dadosMintTo[0] = 7;
-        let numero = quantidade;
+        // Enviar todo o suprimento para o usuário
+        const quantidadeTotal = converterQuantidade(dados.oferta, dados.decimais);
+        const dadosMintagem = new Uint8Array(9);
+        dadosMintagem[0] = 7;
+        let numero = quantidadeTotal;
         for(let i=0; i<8; i++){
-            dadosMintTo[1+i] = Number(numero & 255n);
+            dadosMintagem[1+i] = Number(numero & 255n);
             numero = numero >> 8n;
         }
-        const mintTo = new solanaWeb3.TransactionInstruction({
+        const instrucaoMintar = new solanaWeb3.TransactionInstruction({
             keys: [
-                { pubkey: mintPublicKey, isSigner: false, isWritable: true },
-                { pubkey: tokenAccount, isSigner: false, isWritable: true },
-                { pubkey: carteira, isSigner: true, isWritable: false }
+                { pubkey: mintNovo.publicKey, isSigner: false, isWritable: true },
+                { pubkey: contaRecebimento, isSigner: false, isWritable: true },
+                { pubkey: carteiraUsuario, isSigner: true, isWritable: false }
             ],
             programId: TOKEN_PROGRAM_ID,
-            data: dadosMintTo
+            data: dadosMintagem
         });
 
-        const blockhash = await conexao.getLatestBlockhash("confirmed");
+        // Montar e enviar transação
+        const bloco = await conexao.getLatestBlockhash("confirmed");
         const transacao = new solanaWeb3.Transaction();
-        transacao.feePayer = carteira;
-        transacao.recentBlockhash = blockhash.blockhash;
-        transacao.add(criarMint, initializeMint, criarTokenAccount, mintTo);
-        transacao.partialSign(mint);
+        transacao.feePayer = carteiraUsuario;
+        transacao.recentBlockhash = bloco.blockhash;
+        transacao.add(instrucaoPagamento, instrucaoCriarMint, instrucaoInicializar, instrucaoCriarAta, instrucaoMintar);
+        transacao.partialSign(mintNovo);
 
-        mostrarStatus("👻 Confirme a transação na sua Phantom...", "aviso");
-        const assinada = await window.solana.signTransaction(transacao);
-
-        mostrarStatus("⏳ Enviando para a rede Solana...", "aviso");
-        const assinatura = await conexao.sendRawTransaction(assinada.serialize(), {
-            skipPreflight: false,
-            maxRetries: 3
-        });
-
+        mostrarStatus("👻 Confirme o pagamento e criação na Phantom...", "aviso");
+        const transacaoAssinada = await window.solana.signTransaction(transacao);
+        const assinatura = await conexao.sendRawTransaction(transacaoAssinada.serialize(), { skipPreflight: false, maxRetries: 3 });
+        
         await conexao.confirmTransaction({
             signature: assinatura,
-            blockhash: blockhash.blockhash,
-            lastValidBlockHeight: blockhash.lastValidBlockHeight
+            blockhash: bloco.blockhash,
+            lastValidBlockHeight: bloco.lastValidBlockHeight
         }, "confirmed");
 
-        const enderecoMint = mintPublicKey.toBase58();
-        document.getElementById("mintResultado").textContent = enderecoMint;
-        document.getElementById("solscanLink").href = `https://solscan.io/token/${enderecoMint}`;
+        // Mostrar resultado
+        const enderecoToken = mintNovo.publicKey.toBase58();
+        document.getElementById("mintResultado").textContent = enderecoToken;
+        document.getElementById("solscanLink").href = `https://solscan.io/token/${enderecoToken}`;
         document.getElementById("resultado").style.display = "block";
-        mostrarStatus("🎉 Token criado com sucesso! Agora você pode listar e compartilhar seu projeto.", "sucesso");
+        mostrarStatus(`✅ Sucesso! O valor de ${VALOR_TAXA_USD} USD foi pago e o token está criado 🎉`, "sucesso");
 
     }catch(erro){
         console.error("ERRO:", erro);
-        mostrarStatus("❌ Falha: " + (erro.message || "Não foi possível criar o token"), "erro");
+        mostrarStatus("❌ Falha: " + (erro.message || "Não foi possível concluir"), "erro");
     }finally{
         botao.disabled = false;
     }
 }
 
-/* =====================================
-   CONEXÃO AUTOMÁTICA
-===================================== */
+// ================= CARREGAMENTO AUTOMÁTICO =================
 window.addEventListener("load", async () => {
+    await buscarPrecoSol();
     if(window.solana?.isPhantom){
         try{
             const resposta = await window.solana.connect({ onlyIfTrusted: true });
             if(resposta?.publicKey){
-                carteira = resposta.publicKey;
-                atualizarCarteira();
+                carteiraUsuario = resposta.publicKey;
+                atualizarTextoCarteira();
                 document.getElementById("btnCriar").disabled = false;
             }
-        }catch(e){}
+        }catch(erro){}
     }
 });
 </script>
