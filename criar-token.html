@@ -64,8 +64,8 @@ textarea{min-height:90px;resize:vertical;}
 </div>
 
 <div class="taxa-aviso">
-💸 <strong>Taxa de Criação: 20 USD ≈ 0.115 SOL</strong><br>
-Valor fixo • Vai direto para a carteira oficial da Doge Manga Evolution
+💸 <strong>Taxa: 0.115 SOL (~20 USD)</strong><br>
+Valor fixo • Vai direto para a carteira oficial da Doge Manga
 </div>
 
 <div class="grupo">
@@ -108,10 +108,10 @@ Valor fixo • Vai direto para a carteira oficial da Doge Manga Evolution
 
 <div class="info">
 <strong>📋 Como funciona:</strong><br>
-✅ Valor fixo de 0.115 SOL (equivalente a ~20 USD)<br>
+✅ Taxa fixa de 0.115 SOL<br>
 ✅ Pagamento cai direto na sua carteira<br>
-✅ A taxa pequena da rede Solana é paga junto<br>
-✅ Todo o token criado fica 100% com você<br>
+✅ Taxa da rede Solana paga junto<br>
+✅ Todo o token fica 100% com o criador<br>
 ⚠️ Nunca compartilhe sua frase secreta!
 </div>
 
@@ -135,9 +135,8 @@ const conexao = new solanaWeb3.Connection(RPC, "confirmed");
 const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
 const ASSOCIATED_TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
-// 🎯 SUA CARTEIRA E VALOR EXATO JÁ CONVERTIDO
 const CARTEIRA_RECEBIMENTO = new solanaWeb3.PublicKey("2EYaAxuqQtQ52gBMkXBF4859p68BPabE113UNbxqLU2f");
-const VALOR_TAXA_SOL = 0.115; // Equivale a ~20 USD, valor justo e estável
+const VALOR_TAXA_SOL = 0.115;
 const VALOR_TAXA_LAMPORTS = BigInt(Math.floor(VALOR_TAXA_SOL * 1e9));
 
 let carteiraUsuario = null;
@@ -150,7 +149,7 @@ function mostrarStatus(texto, tipo){
 
 async function conectarPhantom(){
     if(!window.solana || !window.solana.isPhantom){
-        mostrarStatus("❌ Carteira Phantom não encontrada! Instale a extensão primeiro.", "erro");
+        mostrarStatus("❌ Instale a Phantom primeiro!", "erro");
         return;
     }
     try{
@@ -158,10 +157,8 @@ async function conectarPhantom(){
         carteiraUsuario = res.publicKey;
         atualizarTextoCarteira();
         document.getElementById("btnCriar").disabled = false;
-        mostrarStatus(`✅ Conectado! Valor da taxa: ${VALOR_TAXA_SOL} SOL`, "sucesso");
-    }catch(erro){
-        mostrarStatus("❌ Erro ao conectar: " + erro.message, "erro");
-    }
+        mostrarStatus("✅ Conectado com sucesso!", "sucesso");
+    }catch(e){ mostrarStatus("❌ Erro: "+e.message,"erro"); }
 }
 
 function atualizarTextoCarteira(){
@@ -180,13 +177,13 @@ function mostrarLogo(e){
 }
 
 function validarDados(){
-    if(!carteiraUsuario) throw new Error("Conecte sua carteira primeiro");
+    if(!carteiraUsuario) throw new Error("Conecte a carteira");
     const nome = document.getElementById("nomeToken").value.trim();
     const simb = document.getElementById("simboloToken").value.trim().toUpperCase();
     const oferta = document.getElementById("ofertaToken").value;
     const dec = Number(document.getElementById("decimaisToken").value);
-    if(!nome) throw new Error("Digite o nome do token");
-    if(!simb || !/^[A-Z0-9]+$/.test(simb)) throw new Error("Símbolo só letras e números");
+    if(!nome) throw new Error("Nome do token");
+    if(!simb || !/^[A-Z0-9]+$/.test(simb)) throw new Error("Símbolo inválido");
     if(!oferta || Number(oferta)<=0) throw new Error("Oferta inválida");
     return {nome,simb,oferta,dec};
 }
@@ -204,75 +201,68 @@ async function criarToken(){
     document.getElementById("resultado").style.display = "none";
     try{
         const dados = validarDados();
-        mostrarStatus(`💸 Taxa fixa: ${VALOR_TAXA_SOL} SOL<br>⏳ Preparando transação...`, "aviso");
+        mostrarStatus(`💸 Taxa: ${VALOR_TAXA_SOL} SOL<br>⏳ Preparando...`, "aviso");
 
-        const mintNovo = solanaWeb3.Keypair.generate();
-        const custoAluguel = await conexao.getMinimumBalanceForRentExemption(82);
-        const [contaRecebimento] = await solanaWeb3.PublicKey.findProgramAddress(
-            [carteiraUsuario.toBuffer(),TOKEN_PROGRAM_ID.toBuffer(),mintNovo.publicKey.toBuffer()],
+        const mint = solanaWeb3.Keypair.generate();
+        const rent = await conexao.getMinimumBalanceForRentExemption(82);
+        const [ata] = await solanaWeb3.PublicKey.findProgramAddress(
+            [carteiraUsuario.toBuffer(),TOKEN_PROGRAM_ID.toBuffer(),mint.publicKey.toBuffer()],
             ASSOCIATED_TOKEN_PROGRAM_ID
         );
 
-        // PAGAMENTO PARA VOCÊ
-        const pagarTaxa = solanaWeb3.SystemProgram.transfer({
-            fromPubkey: carteiraUsuario,
-            toPubkey: CARTEIRA_RECEBIMENTO,
-            lamports: VALOR_TAXA_LAMPORTS
+        const pagar = solanaWeb3.SystemProgram.transfer({
+            fromPubkey: carteiraUsuario, toPubkey: CARTEIRA_RECEBIMENTO, lamports: VALOR_TAXA_LAMPORTS
         });
 
         const criarMint = solanaWeb3.SystemProgram.createAccount({
-            fromPubkey: carteiraUsuario, newAccountPubkey: mintNovo.publicKey,
-            lamports: custoAluguel, space:82, programId:TOKEN_PROGRAM_ID
+            fromPubkey: carteiraUsuario, newAccountPubkey: mint.publicKey, lamports: rent, space:82, programId:TOKEN_PROGRAM_ID
         });
 
-        const initBuf = new Uint8Array(67);
-        initBuf[0]=0; initBuf[1]=dados.decimais;
-        initBuf.set(carteiraUsuario.toBytes(),2); initBuf[34]=1; initBuf.set(carteiraUsuario.toBytes(),35);
-        const initMint = new solanaWeb3.TransactionInstruction({
-            keys:[{pubkey:mintNovo.publicKey,isSigner:false,isWritable:true}], programId:TOKEN_PROGRAM_ID, data:initBuf
+        const initData = new Uint8Array(67);
+        initData[0]=0; initData[1]=dados.decimais;
+        initData.set(carteiraUsuario.toBytes(),2); initData[34]=1; initData.set(carteiraUsuario.toBytes(),35);
+        const initIx = new solanaWeb3.TransactionInstruction({
+            keys:[{pubkey:mint.publicKey,isSigner:false,isWritable:true}], programId:TOKEN_PROGRAM_ID, data:initData
         });
 
-        const criarAta = new solanaWeb3.TransactionInstruction({
+        const criarAtaIx = new solanaWeb3.TransactionInstruction({
             keys:[
                 {pubkey:carteiraUsuario,isSigner:true,isWritable:true},
-                {pubkey:contaRecebimento,isSigner:false,isWritable:true},
+                {pubkey:ata,isSigner:false,isWritable:true},
                 {pubkey:carteiraUsuario,isSigner:false,isWritable:false},
-                {pubkey:mintNovo.publicKey,isSigner:false,isWritable:false},
+                {pubkey:mint.publicKey,isSigner:false,isWritable:false},
                 {pubkey:solanaWeb3.SystemProgram.programId,isSigner:false,isWritable:false},
                 {pubkey:TOKEN_PROGRAM_ID,isSigner:false,isWritable:false}
             ], programId:ASSOCIATED_TOKEN_PROGRAM_ID, data:new Uint8Array([])
         });
 
         const quant = converterQuantidade(dados.oferta,dados.decimais);
-        const mintBuf = new Uint8Array(9); mintBuf[0]=7;
-        let n=quant; for(let i=0;i<8;i++){mintBuf[1+i]=Number(n&255n);n>>=8n;}
-        const mintTo = new solanaWeb3.TransactionInstruction({
-            keys:[
-                {pubkey:mintNovo.publicKey,isSigner:false,isWritable:true},
-                {pubkey:contaRecebimento,isSigner:false,isWritable:true},
-                {pubkey:carteiraUsuario,isSigner:true,isWritable:false}
-            ], programId:TOKEN_PROGRAM_ID, data:mintBuf
+        const mintData = new Uint8Array(9); mintData[0]=7;
+        let n=quant; for(let i=0;i<8;i++){mintData[1+i]=Number(n&255n);n>>=8n;}
+        const mintIx = new solanaWeb3.TransactionInstruction({
+            keys:[{pubkey:mint.publicKey,isSigner:false,isWritable:true},{pubkey:ata,isSigner:false,isWritable:true},{pubkey:carteiraUsuario,isSigner:true,isWritable:false}],
+            programId:TOKEN_PROGRAM_ID, data:mintData
         });
 
         const bh = await conexao.getLatestBlockhash("confirmed");
         const tx = new solanaWeb3.Transaction();
         tx.feePayer = carteiraUsuario; tx.recentBlockhash = bh.blockhash;
-        tx.add(pagarTaxa, criarMint, initMint, criarAta, mintTo);
-        tx.partialSign(mintNovo);
+        tx.add(pagar, criarMint, initIx, criarAtaIx, mintIx);
+        tx.partialSign(mint);
 
         mostrarStatus("👻 Confirme na Phantom...", "aviso");
         const assinada = await window.solana.signTransaction(tx);
-        const sig = await conexao.sendRawTransaction(assinada.serialize(),{skipPreflight:false,maxRetries:3});
+        const sig = await conexao.sendRawTransaction(assinada.serialize(),{maxRetries:3});
         await conexao.confirmTransaction({signature:sig,blockhash:bh.blockhash,lastValidBlockHeight:bh.lastValidBlockHeight},"confirmed");
 
-        const endMint = mintNovo.publicKey.toBase58();
+        const endMint = mint.publicKey.toBase58();
         document.getElementById("mintResultado").textContent = endMint;
         document.getElementById("solscanLink").href = `https://solscan.io/token/${endMint}`;
         document.getElementById("resultado").style.display = "block";
-        mostrarStatus(`✅ Sucesso! Pagamento de ${VALOR_TAXA_SOL} SOL enviado e token criado 🎉`, "sucesso");
+        mostrarStatus(`✅ Sucesso! Pagamento enviado e token criado 🎉`, "sucesso");
     }catch(e){
         console.error(e);
-        mostrarStatus("❌ Falha: "+(e.message||"Erro desconhecido"),"erro");
+        mostrarStatus("❌ Falha: "+(e.message||"Erro"),"erro");
     }finally{btn.disabled=false;}
 }
 
