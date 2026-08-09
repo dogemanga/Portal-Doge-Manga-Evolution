@@ -37,7 +37,7 @@ body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;}
 .btn-cotar:disabled{opacity:.5;cursor:not-allowed;}
 .btn-swap{width:100%;background:var(--amarelo);color:#050816;border:none;border-radius:12px;padding:15px;font-size:17px;font-weight:bold;margin-top:8px;cursor:pointer;transition:all .2s;}
 .btn-swap:hover:not(:disabled){background:#eab308;transform:translateY(-1px);}
-.btn-swap:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+.btn-swap:disabled{opacity:.5;transform:none;}
 .status{margin-top:18px;padding:14px;border-radius:12px;text-align:center;line-height:1.5;word-break:break-word;font-size:14px;display:none;}
 .sucesso{display:block;background:rgba(16,185,129,.1);border:1px solid var(--verde);color:#6ee7b7;}
 .erro{display:block;background:rgba(239,68,68,.1);border:1px solid var(--vermelho);color:#fca5a5;}
@@ -95,7 +95,11 @@ Taxa da rede Solana inclusa
 <div class="footer">© 2026 Doge Manga Evolution • Comissão 0,5%</div>
 </div>
 <script>
+// 🚀 CORRIGIDO PARA FUNCIONAR NO GITHUB PAGES
 const RPC = "https://api.mainnet-beta.solana.com";
+const PROXY = "https://api.allorigins.win/raw?url=";
+const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
+const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
 const conexao = new solanaWeb3.Connection(RPC, "confirmed");
 const CARTEIRA_COMISSAO = new solanaWeb3.PublicKey("6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6");
 const TAXA_COMISSAO_BPS = 50;
@@ -106,11 +110,13 @@ const DECIMAIS = {
 };
 let carteiraUsuario = null;
 let rotaValida = null;
+
 function mostrarStatus(texto, tipo){
     const el = document.getElementById("status");
     el.className = "status " + tipo;
     el.innerHTML = texto;
 }
+
 async function conectarPhantom(){
     if(!window.solana || !window.solana.isPhantom){
         mostrarStatus("❌ Instale a carteira Phantom primeiro!", "erro");
@@ -126,18 +132,21 @@ async function conectarPhantom(){
         mostrarStatus("✅ Conectado com sucesso!", "sucesso");
     }catch(e){ mostrarStatus("❌ Erro: "+e.message,"erro"); }
 }
+
 function inverterMoedas(){
     const de = document.getElementById("moedaDe");
     const para = document.getElementById("moedaPara");
     const temp = de.value; de.value = para.value; para.value = temp;
     resetarCotacao();
 }
+
 function resetarCotacao(){
     document.getElementById("valorPara").textContent = "0.00";
     document.getElementById("btnSwap").disabled = true;
     rotaValida = null;
     document.getElementById("infoCotacao").textContent = "Digite o valor e clique em buscar";
 }
+
 async function buscarCotacao(){
     const valor = Number(document.getElementById("valorDe").value);
     if(!valor || valor <= 0){ mostrarStatus("❌ Digite um valor válido!", "erro"); return; }
@@ -148,11 +157,11 @@ async function buscarCotacao(){
     document.getElementById("btnCotar").disabled = true;
     try{
         const quantBruta = Math.floor(valor * (10 ** DECIMAIS[de]));
-        const url = `https://quote-api.jup.ag/v6/quote?inputMint=${de}&outputMint=${para}&amount=${quantBruta}&slippageBps=50&platformFeeBps=${TAXA_COMISSAO_BPS}&platformFeeAccount=${CARTEIRA_COMISSAO.toBase58()}`;
-        const res = await fetch(url);
-        if(!res.ok) throw new Error("Erro na resposta da Jupiter");
+        const urlFinal = `${JUPITER_QUOTE}?inputMint=${de}&outputMint=${para}&amount=${quantBruta}&slippageBps=50&platformFeeBps=${TAXA_COMISSAO_BPS}&platformFeeAccount=${CARTEIRA_COMISSAO.toBase58()}`;
+        const res = await fetch(PROXY + encodeURIComponent(urlFinal));
+        if(!res.ok) throw new Error("Serviço temporariamente indisponível");
         const dados = await res.json();
-        if(!dados.outAmount) throw new Error("Nenhuma rota encontrada");
+        if(!dados.outAmount) throw new Error("Nenhuma rota encontrada para esse valor");
         rotaValida = dados;
         const valorRecebe = (Number(dados.outAmount) / (10 ** DECIMAIS[para])).toFixed(6);
         document.getElementById("valorPara").textContent = valorRecebe;
@@ -164,15 +173,23 @@ async function buscarCotacao(){
         mostrarStatus("❌ Falha: "+e.message,"erro");
     }finally{ document.getElementById("btnCotar").disabled = false; }
 }
+
 async function executarSwap(){
     if(!rotaValida || !carteiraUsuario) return;
     const btn = document.getElementById("btnSwap");
     btn.disabled = true;
     mostrarStatus("⏳ Preparando transação...", "aviso");
     try{
-        const resSwap = await fetch("https://quote-api.jup.ag/v6/swap", {
-            method:"POST", headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({quoteResponse:rotaValida,userPublicKey:carteiraUsuario.toBase58(),wrapAndUnwrapSol:true,prioritizationFeeLamports:100000})
+        const corpo = JSON.stringify({
+            quoteResponse: rotaValida,
+            userPublicKey: carteiraUsuario.toBase58(),
+            wrapAndUnwrapSol: true,
+            prioritizationFeeLamports: 100000
+        });
+        const resSwap = await fetch(PROXY + encodeURIComponent(JUPITER_SWAP), {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: corpo
         });
         const dadosSwap = await resSwap.json();
         if(!dadosSwap.swapTransaction) throw new Error("Não foi possível criar a transação");
@@ -189,6 +206,7 @@ async function executarSwap(){
         mostrarStatus("❌ Falha: "+(e.message||"Transação cancelada ou erro de rede"),"erro");
     }finally{ btn.disabled = false; rotaValida = null; resetarCotacao(); }
 }
+
 window.addEventListener("load", async () => {
     if(window.solana?.isPhantom){
         try{
