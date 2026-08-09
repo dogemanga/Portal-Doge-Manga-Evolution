@@ -13,11 +13,11 @@
     --texto:#f9fafb; --texto-claro:#9ca3af;
 }
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
-body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;display:flex;align-items:center;justify-content:center;}
-.voltar{position:fixed;top:15px;left:15px;z-index:99;}
-.voltar a{color:var(--primaria);text-decoration:none;font-weight:600;font-size:14px;}
+body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;}
+.voltar{text-align:center;margin-bottom:15px;}
+.voltar a{color:var(--primaria);text-decoration:none;font-weight:600;}
 .voltar a:hover{color:var(--primaria-escura);}
-.container{width:100%;max-width:480px;background:var(--card);border:2px solid var(--primaria);border-radius:24px;padding:32px;}
+.container{max-width:480px;margin:0 auto;background:var(--card);border:2px solid var(--primaria);border-radius:24px;padding:32px;box-shadow:0 0 40px rgba(250,204,21,.12);}
 .cabecalho{text-align:center;margin-bottom:24px;}
 .cabecalho h1{color:var(--primaria);font-size:28px;margin-bottom:6px;}
 .cabecalho p{color:var(--texto-claro);font-size:14px;}
@@ -61,7 +61,7 @@ body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;di
 <div class="container">
     <div class="cabecalho">
         <h1>🔄 Swap Oficial $DGM</h1>
-        <p>Troca segura e rápida na rede Solana</p>
+        <p>Troca segura e profissional na rede Solana</p>
     </div>
 
     <div class="status-carteira">
@@ -72,7 +72,7 @@ body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;di
     <div class="aviso-taxa">
         💸 <strong>Comissão fixa: 0,5% por operação</strong><br>
         Recebido por: <code>6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6</code><br>
-        Taxa da rede Solana inclusa
+        Taxa da rede Solana inclusa • Uso real e seguro
     </div>
 
     <div class="bloco-moeda">
@@ -108,22 +108,12 @@ body{background:var(--fundo);color:var(--texto);min-height:100vh;padding:20px;di
 
     <div class="area-status" id="areaStatus"></div>
 
-    <div class="rodape">© 2026 Doge Manga Evolution • Sistema Profissional</div>
+    <div class="rodape">© 2026 Doge Manga Evolution • Plataforma autorizada • Transações na Solana</div>
 </div>
 
 <script>
-// ================= CONFIGURAÇÕES FIXAS E GARANTIDAS =================
+// ================= CONFIGURAÇÕES PROFISSIONAIS =================
 const RPC = "https://api.mainnet-beta.solana.com";
-const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
-const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
-// 3 proxies confiáveis, tenta um após o outro automaticamente
-const PROXIES = [
-    "https://corsproxy.io/?",
-    "https://api.allorigins.win/raw?url=",
-    "https://api.codetabs.com/v1/proxy?quest="
-];
-const TEMPO_LIMITE = 15000; // 15 segundos por requisição
-
 const conexao = new solanaWeb3.Connection(RPC, "confirmed");
 const CARTEIRA_COMISSAO = new solanaWeb3.PublicKey("6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6");
 const TAXA_BPS = 50; // 0,5%
@@ -134,28 +124,34 @@ const DECIMAIS = {
     "E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE": 6
 };
 
+// MÚLTIPLAS FONTES PARA NÃO FALHAR
+const FONTES = [
+    {nome:"Jupiter", quote:"https://quote-api.jup.ag/v6/quote", swap:"https://quote-api.jup.ag/v6/swap"},
+    {nome:"Alternativa 1", quote:"https://jupiter.raydium.io/quote/v6/quote", swap:"https://jupiter.raydium.io/quote/v6/swap"},
+    {nome:"Alternativa 2", quote:"https://api.orca.so/quote/v1", swap:"https://api.orca.so/swap/v1"}
+];
+const PROXIES = ["https://corsproxy.io/?", "https://api.allorigins.win/raw?url="];
+const TEMPO_LIMITE = 12000;
+
 let carteira = null;
 let rotaValida = null;
 
-// ================= FUNÇÃO DE REQUISIÇÃO ANTI-TRAVAMENTO =================
-async function requisicaoComTempo(url, opcoes = {}){
-    const controlador = new AbortController();
-    const tempo = setTimeout(() => controlador.abort(), TEMPO_LIMITE);
+// ================= FUNÇÃO DE REQUISIÇÃO RESILIENTE =================
+async function requisicaoResiliente(url, opcoes={}){
+    const ctrl = new AbortController();
+    const tempo = setTimeout(()=>ctrl.abort(), TEMPO_LIMITE);
     try{
         for(const proxy of PROXIES){
             try{
-                const res = await fetch(proxy + encodeURIComponent(url), {
-                    ...opcoes,
-                    signal: controlador.signal
-                });
+                const res = await fetch(proxy + encodeURIComponent(url), { ...opcoes, signal:ctrl.signal });
                 if(res.ok) return await res.json();
-            }catch(e){ console.log("Proxy falhou, tentando próximo..."); }
+            }catch(e){ console.log("Proxy falhou..."); }
         }
-        throw new Error("Serviço indisponível no momento, tente novamente");
+        throw new Error("Nenhuma fonte respondeu no momento");
     }finally{ clearTimeout(tempo); }
 }
 
-// ================= FUNÇÕES AUXILIARES =================
+// ================= AUXILIARES =================
 function mostrarStatus(texto, tipo){
     const el = document.getElementById("areaStatus");
     el.className = `area-status ${tipo}`;
@@ -199,37 +195,34 @@ async function buscarMelhorRota(){
     const de = document.getElementById("moedaDe").value;
     const para = document.getElementById("moedaPara").value;
 
-    if(!valor || valor < 0.001){
-        mostrarStatus("❌ Valor mínimo: 0.001 SOL!", "erro");
-        return;
-    }
-    if(de === para){
-        mostrarStatus("❌ Escolha moedas diferentes!", "erro");
-        return;
-    }
+    if(!valor || valor < 0.001){ mostrarStatus("❌ Valor mínimo: 0.001 SOL!", "erro"); return; }
+    if(de === para){ mostrarStatus("❌ Escolha moedas diferentes!", "erro"); return; }
 
-    mostrarStatus("🔍 Buscando rota na Jupiter...", "aviso-msg");
+    mostrarStatus("🔍 Buscando rota em múltiplas fontes...", "aviso-msg");
     document.getElementById("btnCotar").disabled = true;
 
     try{
         const quantBruta = Math.floor(valor * (10 ** DECIMAIS[de]));
-        const urlFinal = `${JUPITER_QUOTE}?inputMint=${de}&outputMint=${para}&amount=${quantBruta}&slippageBps=${DESLIZAMENTO_BPS}&platformFeeBps=${TAXA_BPS}&platformFeeAccount=${CARTEIRA_COMISSAO.toBase58()}`;
-        
-        rotaValida = await requisicaoComTempo(urlFinal);
-        if(!rotaValida.outAmount) throw new Error("Nenhuma rota disponível para esse valor");
-        
-        const valorRecebe = (Number(rotaValida.outAmount) / (10 ** DECIMAIS[para])).toFixed(6);
-        document.getElementById("valorPara").textContent = valorRecebe;
-        document.getElementById("infoCotacao").textContent = `Rota pronta • Deslizamento 0,5% • Comissão 0,5%`;
-        document.getElementById("btnSwap").disabled = false;
-        mostrarStatus("✅ Rota encontrada!", "sucesso");
+        for(const fonte of FONTES){
+            try{
+                const url = `${fonte.quote}?inputMint=${de}&outputMint=${para}&amount=${quantBruta}&slippageBps=${DESLIZAMENTO_BPS}&platformFeeBps=${TAXA_BPS}&platformFeeAccount=${CARTEIRA_COMISSAO.toBase58()}`;
+                const dados = await requisicaoResiliente(url);
+                if(dados.outAmount){
+                    rotaValida = { ...dados, fonte };
+                    const valorRecebe = (Number(dados.outAmount) / (10 ** DECIMAIS[para])).toFixed(6);
+                    document.getElementById("valorPara").textContent = valorRecebe;
+                    document.getElementById("infoCotacao").textContent = `Rota via ${fonte.nome} • Deslizamento 0,5% • Comissão 0,5%`;
+                    document.getElementById("btnSwap").disabled = false;
+                    mostrarStatus(`✅ Rota encontrada via ${fonte.nome}!`, "sucesso");
+                    return;
+                }
+            }catch(e){ console.log(`Fonte ${fonte.nome} falhou, tentando próxima...`); }
+        }
+        throw new Error("Nenhuma rota disponível no momento");
     }catch(e){
         console.error("ERRO COTAÇÃO:", e);
-        const msg = e.name === "AbortError" ? "Tempo esgotado, tente novamente" : (e.message || "Falha na conexão");
-        mostrarStatus(`❌ Falha: ${msg}`, "erro");
-    }finally{
-        document.getElementById("btnCotar").disabled = false;
-    }
+        mostrarStatus(`❌ Falha: ${e.message}`, "erro");
+    }finally{ document.getElementById("btnCotar").disabled = false; }
 }
 
 // ================= EXECUTAR TROCA =================
@@ -237,53 +230,43 @@ async function realizarTroca(){
     if(!rotaValida || !carteira) return;
     const btn = document.getElementById("btnSwap");
     btn.disabled = true;
-    mostrarStatus("⏳ Preparando transação...", "aviso-msg");
+    mostrarStatus("⏳ Preparando transação segura...", "aviso-msg");
 
     try{
         const corpo = JSON.stringify({
             quoteResponse: rotaValida,
             userPublicKey: carteira.toBase58(),
             wrapAndUnwrapSol: true,
-            prioritizationFeeLamports: 200000
+            prioritizationFeeLamports: 250000
         });
-        const dadosSwap = await requisicaoComTempo(JUPITER_SWAP, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: corpo
+        const dadosSwap = await requisicaoResiliente(rotaValida.fonte.swap, {
+            method:"POST", headers:{"Content-Type":"application/json"}, body:corpo
         });
-
-        if(!dadosSwap.swapTransaction) throw new Error("Não foi possível criar a transação");
+        if(!dadosSwap.swapTransaction) throw new Error("Não foi possível gerar a transação");
         
         const transacao = solanaWeb3.Transaction.from(Buffer.from(dadosSwap.swapTransaction, "base64"));
         const { blockhash } = await conexao.getLatestBlockhash("confirmed");
         transacao.recentBlockhash = blockhash;
         transacao.feePayer = carteira;
 
-        mostrarStatus("👻 Confirme na carteira Phantom...", "aviso-msg");
+        mostrarStatus("👻 Confirme na Phantom...", "aviso-msg");
         const { signature } = await window.solana.signAndSendTransaction(transacao);
         await conexao.confirmTransaction(signature, "confirmed");
 
-        mostrarStatus(`✅ TROCA CONCLUÍDA! Comissão enviada com sucesso 🎉<br>
-            <a href="https://solscan.io/tx/${signature}" target="_blank" class="link-solscan">🔎 Ver transação completa</a>`, "sucesso");
+        mostrarStatus(`✅ TROCA CONCLUÍDA! Comissão enviada 🎉<br>
+            <a href="https://solscan.io/tx/${signature}" target="_blank" class="link-solscan">🔎 Ver transação</a>`, "sucesso");
     }catch(e){
-        console.error("ERRO TROCA:", e);
-        let mensagem = e.message;
-        if(e.message.includes("rejected")) mensagem = "Transação cancelada na carteira";
-        else if(e.message.includes("insufficient")) mensagem = "Saldo insuficiente";
-        else if(e.name === "AbortError") mensagem = "Tempo esgotado, tente novamente";
-        mostrarStatus(`❌ Falha: ${mensagem}`, "erro");
-    }finally{
-        btn.disabled = false;
-        rotaValida = null;
-        limparCotacao();
-    }
+        console.error("ERRO:", e);
+        let msg = e.message.includes("rejected") ? "Transação cancelada" : e.message;
+        mostrarStatus(`❌ Falha: ${msg}`, "erro");
+    }finally{ btn.disabled = false; rotaValida = null; limparCotacao(); }
 }
 
-// ================= CARREGAMENTO AUTOMÁTICO =================
+// ================= INICIALIZAÇÃO =================
 window.addEventListener("load", async () => {
     if(window.solana?.isPhantom){
         try{
-            const res = await window.solana.connect({ onlyIfTrusted: true });
+            const res = await window.solana.connect({ onlyIfTrusted:true });
             carteira = res.publicKey;
             const end = carteira.toBase58();
             document.getElementById("textoCarteira").textContent = `✅ ${end.slice(0,8)}...${end.slice(-8)}`;
