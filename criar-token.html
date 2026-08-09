@@ -3,11 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Creator de Token | Doge Manga</title>
-
+<title>Creator de Token | Doge Manga Evolution</title>
 <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.95.3/lib/index.iife.min.js"></script>
-
 <style>
 :root{
     --fundo:#050816;
@@ -52,10 +49,12 @@ body{
 .header h1{
     color:var(--amarelo);
     margin-bottom:8px;
+    font-size:28px;
 }
 
 .header p{
     color:var(--cinza);
+    font-size:15px;
 }
 
 .carteira{
@@ -72,6 +71,7 @@ body{
     color:var(--cinza);
     margin-bottom:10px;
     word-break:break-all;
+    font-size:14px;
 }
 
 .grupo{
@@ -82,6 +82,8 @@ label{
     display:block;
     color:var(--cinza);
     margin-bottom:7px;
+    font-size:15px;
+    font-weight:500;
 }
 
 input,
@@ -94,6 +96,14 @@ select{
     border:1px solid #374151;
     border-radius:10px;
     outline:none;
+    font-size:15px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--amarelo);
+    box-shadow:0 0 0 2px rgba(250,204,21,.15);
 }
 
 textarea{
@@ -121,6 +131,7 @@ textarea{
     cursor:pointer;
     font-size:16px;
     font-weight:bold;
+    transition:all 0.2s ease;
 }
 
 .btn-conectar{
@@ -128,14 +139,23 @@ textarea{
     color:white;
 }
 
+.btn-conectar:hover:not(:disabled){
+    background:#1d4ed8;
+}
+
 .btn-criar{
     background:var(--amarelo);
     color:#050816;
 }
 
+.btn-criar:hover:not(:disabled){
+    background:#eab308;
+}
+
 .btn:disabled{
     opacity:.5;
     cursor:not-allowed;
+    transform:none !important;
 }
 
 .info{
@@ -157,6 +177,7 @@ textarea{
     text-align:center;
     line-height:1.5;
     word-break:break-word;
+    font-size:14px;
 }
 
 .sucesso{
@@ -192,12 +213,17 @@ textarea{
 .resultado h3{
     color:var(--verde);
     margin-bottom:12px;
+    font-size:18px;
 }
 
 .mint{
     word-break:break-all;
     font-size:13px;
     color:white;
+    padding:8px;
+    background:rgba(255,255,255,.05);
+    border-radius:8px;
+    margin:8px 0;
 }
 
 .link{
@@ -206,6 +232,12 @@ textarea{
     color:var(--amarelo);
     text-decoration:none;
     font-weight:bold;
+    transition:color 0.2s;
+}
+
+.link:hover{
+    color:#fde68a;
+    text-decoration:underline;
 }
 
 .footer{
@@ -218,964 +250,289 @@ textarea{
 </head>
 
 <body>
-
 <div class="container">
-
 <div class="header">
 <h1>🚀 Creator de Token</h1>
 <p>Crie seu token diretamente na blockchain Solana</p>
 </div>
 
 <div class="carteira">
-
-<span id="enderecoCarteira">
-Carteira não conectada
-</span>
-
-<button
-class="btn btn-conectar"
-id="btnCarteira"
-onclick="conectarPhantom()">
-
-👻 Conectar Phantom
-
-</button>
-
+<span id="enderecoCarteira">Carteira não conectada</span>
+<button class="btn btn-conectar" id="btnCarteira" onclick="conectarPhantom()">👻 Conectar Phantom</button>
 </div>
 
 <div class="grupo">
-
 <label>Nome do Token</label>
-
-<input
-id="nomeToken"
-type="text"
-maxlength="50"
-placeholder="Ex: Meu Token">
-
+<input id="nomeToken" type="text" maxlength="50" placeholder="Ex: Doge Manga">
 </div>
 
 <div class="grupo">
-
 <label>Símbolo</label>
-
-<input
-id="simboloToken"
-type="text"
-maxlength="10"
-placeholder="Ex: MTK">
-
+<input id="simboloToken" type="text" maxlength="10" placeholder="Ex: DGM">
 </div>
 
 <div class="grupo">
-
 <label>Oferta Total</label>
-
-<input
-id="ofertaToken"
-type="number"
-min="1"
-step="any"
-placeholder="Ex: 1000000000">
-
+<input id="ofertaToken" type="number" min="1" step="any" placeholder="Ex: 1000000000">
 </div>
 
 <div class="grupo">
-
 <label>Casas Decimais</label>
-
 <select id="decimaisToken">
-
 <option value="0">0</option>
 <option value="2">2</option>
 <option value="4">4</option>
 <option value="6" selected>6</option>
 <option value="8">8</option>
 <option value="9">9</option>
-
 </select>
-
 </div>
 
 <div class="grupo">
-
-<label>Logo do Token</label>
-
-<input
-id="logoToken"
-type="file"
-accept="image/png,image/jpeg,image/webp"
-onchange="mostrarLogo(event)">
-
-<img
-id="previewLogo"
-class="logo-preview"
-alt="Logo">
-
+<label>Logo do Token (máx 2MB)</label>
+<input id="logoToken" type="file" accept="image/png,image/jpeg,image/webp" onchange="mostrarLogo(event)">
+<img id="previewLogo" class="logo-preview" alt="Logo do Token">
 </div>
 
 <div class="grupo">
-
 <label>Descrição</label>
-
-<textarea
-id="descricaoToken"
-maxlength="500"
-placeholder="Descrição do projeto"></textarea>
-
+<textarea id="descricaoToken" maxlength="500" placeholder="Descreva seu projeto..."></textarea>
 </div>
 
 <div class="info">
-
 <strong>⚠️ Antes de criar</strong>
-
 <br><br>
-
-O token será criado na blockchain Solana.
-
-<br>
-
-A Phantom solicitará sua assinatura.
-
-<br>
-
-Nunca informe sua frase secreta ou chave privada.
-
-<br>
-
-Você precisa ter SOL para pagar as taxas da rede.
-
+✅ O token será criado oficialmente na rede Solana Mainnet
+✅ A Phantom pedirá apenas assinatura da transação, nunca compartilhe sua frase secreta
+✅ Você precisa ter SOL na carteira para pagar as taxas de rede
+✅ A oferta total será enviada 100% para sua carteira
 </div>
 
-<button
-class="btn btn-criar"
-id="btnCriar"
-onclick="criarToken()"
-disabled>
-
-🚀 Criar Token na Solana
-
-</button>
+<button class="btn btn-criar" id="btnCriar" onclick="criarToken()" disabled>🚀 Criar Token na Solana</button>
 
 <div id="status" class="status"></div>
 
 <div id="resultado" class="resultado">
-
-<h3>🎉 Token criado!</h3>
-
-<p><strong>Endereço Mint:</strong></p>
-
-<p
-id="mintResultado"
-class="mint">
-</p>
-
-<a
-id="solscanLink"
-class="link"
-target="_blank">
-
-🔎 Ver Token no Solscan
-
-</a>
-
+<h3>🎉 Token criado com sucesso!</h3>
+<p><strong>Endereço do Token (Mint):</strong></p>
+<p id="mintResultado" class="mint"></p>
+<a id="solscanLink" class="link" target="_blank">🔎 Ver detalhes no Solscan</a>
 </div>
 
 <div class="footer">
-Doge Manga Evolution • Creator de Tokens
+© 2026 Doge Manga Evolution • Todos os direitos reservados
 </div>
-
 </div>
 
 <script>
-
 /* =====================================
-   SOLANA
+   CONFIGURAÇÕES SOLANA
 ===================================== */
+const RPC = "https://api.mainnet-beta.solana.com";
+const conexao = new solanaWeb3.Connection(RPC, "confirmed");
 
-const RPC =
-"https://api.mainnet-beta.solana.com";
-
-const conexao =
-new solanaWeb3.Connection(
-    RPC,
-    "confirmed"
-);
-
-
-/* =====================================
-   PROGRAMAS OFICIAIS
-===================================== */
-
-const TOKEN_PROGRAM_ID =
-new solanaWeb3.PublicKey(
-    "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
-);
-
-const ASSOCIATED_TOKEN_PROGRAM_ID =
-new solanaWeb3.PublicKey(
-    "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
-);
-
-
-/* =====================================
-   VARIÁVEIS
-===================================== */
+const TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA");
+const ASSOCIATED_TOKEN_PROGRAM_ID = new solanaWeb3.PublicKey("ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL");
 
 let carteira = null;
 
-
 /* =====================================
-   STATUS
+   FUNÇÕES DE STATUS
 ===================================== */
-
-function mostrarStatus(texto,tipo){
-
-    const elemento =
-    document.getElementById("status");
-
-    elemento.className =
-    "status " + tipo;
-
-    elemento.innerHTML =
-    texto;
+function mostrarStatus(texto, tipo){
+    const elemento = document.getElementById("status");
+    elemento.className = "status " + tipo;
+    elemento.innerHTML = texto;
 }
 
-
 /* =====================================
-   PHANTOM
+   CONEXÃO PHANTOM
 ===================================== */
-
 async function conectarPhantom(){
-
-    if(
-        !window.solana ||
-        !window.solana.isPhantom
-    ){
-
-        mostrarStatus(
-            "❌ Phantom não encontrada.<br><br>" +
-            "Abra esta página pelo navegador da Phantom.",
-            "erro"
-        );
-
+    if(!window.solana || !window.solana.isPhantom){
+        mostrarStatus("❌ Carteira Phantom não encontrada!<br>Instale a extensão ou use o navegador da Phantom.", "erro");
         return;
     }
-
     try{
-
-        const resposta =
-        await window.solana.connect();
-
-        carteira =
-        resposta.publicKey;
-
+        const resposta = await window.solana.connect();
+        carteira = resposta.publicKey;
         atualizarCarteira();
-
-        document.getElementById(
-            "btnCriar"
-        ).disabled = false;
-
-        mostrarStatus(
-            "✅ Phantom conectada com sucesso!",
-            "sucesso"
-        );
-
+        document.getElementById("btnCriar").disabled = false;
+        mostrarStatus("✅ Phantom conectada com sucesso!", "sucesso");
     }catch(erro){
-
-        mostrarStatus(
-            "❌ Erro ao conectar: " +
-            erro.message,
-            "erro"
-        );
+        mostrarStatus("❌ Erro ao conectar: " + erro.message, "erro");
     }
 }
-
-
-/* =====================================
-   MOSTRAR CARTEIRA
-===================================== */
 
 function atualizarCarteira(){
-
-    const endereco =
-    carteira.toBase58();
-
-    document.getElementById(
-        "enderecoCarteira"
-    ).textContent =
-    "✅ " +
-    endereco.substring(0,8) +
-    "..." +
-    endereco.substring(
-        endereco.length - 8
-    );
-
-    document.getElementById(
-        "btnCarteira"
-    ).textContent =
-    "✅ Phantom Conectada";
+    const endereco = carteira.toBase58();
+    document.getElementById("enderecoCarteira").textContent = "✅ " + endereco.substring(0,8) + "..." + endereco.slice(-8);
+    document.getElementById("btnCarteira").textContent = "✅ Conectada";
 }
 
-
 /* =====================================
-   LOGO
+   PRÉVIA DA LOGO
 ===================================== */
-
 function mostrarLogo(event){
-
-    const arquivo =
-    event.target.files[0];
-
+    const arquivo = event.target.files[0];
     if(!arquivo) return;
-
-    if(
-        arquivo.size >
-        2 * 1024 * 1024
-    ){
-
-        mostrarStatus(
-            "❌ A logo deve ter no máximo 2 MB.",
-            "erro"
-        );
-
+    if(arquivo.size > 2 * 1024 * 1024){
+        mostrarStatus("❌ A imagem deve ter no máximo 2 MB!", "erro");
         event.target.value = "";
-
         return;
     }
-
-    const leitor =
-    new FileReader();
-
-    leitor.onload =
-    function(e){
-
-        document.getElementById(
-            "previewLogo"
-        ).src =
-        e.target.result;
-
-    };
-
+    const leitor = new FileReader();
+    leitor.onload = e => document.getElementById("previewLogo").src = e.target.result;
     leitor.readAsDataURL(arquivo);
 }
 
-
 /* =====================================
-   VALIDAÇÃO
+   VALIDAÇÃO DE DADOS
 ===================================== */
-
 function validarDados(){
+    if(!carteira) throw new Error("Conecte sua carteira Phantom primeiro");
 
-    if(!carteira){
+    const nome = document.getElementById("nomeToken").value.trim();
+    const simbolo = document.getElementById("simboloToken").value.trim().toUpperCase();
+    const oferta = document.getElementById("ofertaToken").value;
+    const decimais = Number(document.getElementById("decimaisToken").value);
 
-        throw new Error(
-            "Conecte a Phantom primeiro."
-        );
-    }
+    if(!nome) throw new Error("Digite o nome do token");
+    if(!simbolo) throw new Error("Digite o símbolo do token");
+    if(!/^[A-Z0-9]+$/.test(simbolo)) throw new Error("Símbolo só pode ter letras e números");
+    if(!oferta || Number(oferta) <= 0) throw new Error("Digite uma quantidade válida de oferta");
 
-    const nome =
-    document.getElementById(
-        "nomeToken"
-    ).value.trim();
-
-    const simbolo =
-    document.getElementById(
-        "simboloToken"
-    ).value.trim().toUpperCase();
-
-    const oferta =
-    document.getElementById(
-        "ofertaToken"
-    ).value;
-
-    const decimais =
-    Number(
-        document.getElementById(
-            "decimaisToken"
-        ).value
-    );
-
-    if(!nome){
-
-        throw new Error(
-            "Digite o nome do token."
-        );
-    }
-
-    if(!simbolo){
-
-        throw new Error(
-            "Digite o símbolo do token."
-        );
-    }
-
-    if(
-        !/^[A-Z0-9]+$/.test(simbolo)
-    ){
-
-        throw new Error(
-            "O símbolo deve conter apenas letras e números."
-        );
-    }
-
-    if(
-        !oferta ||
-        Number(oferta) <= 0
-    ){
-
-        throw new Error(
-            "Digite uma oferta válida."
-        );
-    }
-
-    return {
-        nome,
-        simbolo,
-        oferta,
-        decimais
-    };
+    return { nome, simbolo, oferta, decimais };
 }
 
-
-/* =====================================
-   CONVERTER OFERTA
-===================================== */
-
-function converterQuantidade(
-    valor,
-    decimais
-){
-
-    const partes =
-    String(valor).split(".");
-
-    const inteira =
-    partes[0] || "0";
-
-    let decimal =
-    partes[1] || "";
-
-    decimal =
-    decimal
-    .padEnd(decimais,"0")
-    .slice(0,decimais);
-
-    return BigInt(
-        inteira + decimal
-    );
+function converterQuantidade(valor, decimais){
+    const partes = String(valor).split(".");
+    const inteira = partes[0] || "0";
+    const decimal = (partes[1] || "").padEnd(decimais, "0").slice(0, decimais);
+    return BigInt(inteira + decimal);
 }
 
-
 /* =====================================
-   CRIAR TOKEN
+   CRIAÇÃO DO TOKEN
 ===================================== */
-
 async function criarToken(){
-
-    const botao =
-    document.getElementById(
-        "btnCriar"
-    );
-
+    const botao = document.getElementById("btnCriar");
     botao.disabled = true;
-
-    document.getElementById(
-        "resultado"
-    ).style.display = "none";
+    document.getElementById("resultado").style.display = "none";
 
     try{
+        const dados = validarDados();
+        mostrarStatus("⏳ Preparando criação do token...", "aviso");
 
-        const dados =
-        validarDados();
+        const mint = solanaWeb3.Keypair.generate();
+        const mintPublicKey = mint.publicKey;
+        const rent = await conexao.getMinimumBalanceForRentExemption(82);
 
-        mostrarStatus(
-            "⏳ Preparando o token...",
-            "aviso"
-        );
+        const sementes = [carteira.toBuffer(), TOKEN_PROGRAM_ID.toBuffer(), mintPublicKey.toBuffer()];
+        const [tokenAccount] = await solanaWeb3.PublicKey.findProgramAddress(sementes, ASSOCIATED_TOKEN_PROGRAM_ID);
 
-
-        /* ================================
-           NOVA MINT
-        ================================= */
-
-        const mint =
-        solanaWeb3.Keypair.generate();
-
-
-        const mintPublicKey =
-        mint.publicKey;
-
-
-        /* ================================
-           RENT
-        ================================= */
-
-        const rent =
-        await conexao
-        .getMinimumBalanceForRentExemption(
-            82
-        );
-
-
-        /* ================================
-           CONTA ASSOCIADA
-        ================================= */
-
-        const sementes = [
-
-            carteira.toBuffer(),
-
-            TOKEN_PROGRAM_ID.toBuffer(),
-
-            mintPublicKey.toBuffer()
-
-        ];
-
-
-        const [tokenAccount] =
-        await solanaWeb3.PublicKey
-        .findProgramAddress(
-            sementes,
-            ASSOCIATED_TOKEN_PROGRAM_ID
-        );
-
-
-        /* ================================
-           CRIAR MINT
-        ================================= */
-
-        const criarMint =
-        solanaWeb3.SystemProgram
-        .createAccount({
-
-            fromPubkey:
-            carteira,
-
-            newAccountPubkey:
-            mintPublicKey,
-
-            lamports:
-            rent,
-
-            space:
-            82,
-
-            programId:
-            TOKEN_PROGRAM_ID
-
+        const criarMint = solanaWeb3.SystemProgram.createAccount({
+            fromPubkey: carteira,
+            newAccountPubkey: mintPublicKey,
+            lamports: rent,
+            space: 82,
+            programId: TOKEN_PROGRAM_ID
         });
 
-
-        /* ================================
-           INITIALIZE MINT
-        ================================= */
-
-        const dadosInitialize =
-        new Uint8Array(67);
-
+        const dadosInitialize = new Uint8Array(67);
         dadosInitialize[0] = 0;
-
-        dadosInitialize[1] =
-        dados.decimais;
-
-        dadosInitialize.set(
-            carteira.toBytes(),
-            2
-        );
-
+        dadosInitialize[1] = dados.decimais;
+        dadosInitialize.set(carteira.toBytes(), 2);
         dadosInitialize[34] = 1;
-
-        dadosInitialize.set(
-            carteira.toBytes(),
-            35
-        );
-
-
-        const initializeMint =
-        new solanaWeb3.TransactionInstruction({
-
-            keys:[
-
-                {
-                    pubkey:
-                    mintPublicKey,
-
-                    isSigner:false,
-
-                    isWritable:true
-                }
-
-            ],
-
-            programId:
-            TOKEN_PROGRAM_ID,
-
-            data:
-            dadosInitialize
+        dadosInitialize.set(carteira.toBytes(), 35);
+        const initializeMint = new solanaWeb3.TransactionInstruction({
+            keys: [ { pubkey: mintPublicKey, isSigner: false, isWritable: true } ],
+            programId: TOKEN_PROGRAM_ID,
+            data: dadosInitialize
         });
 
-
-        /* ================================
-           CRIAR ASSOCIATED TOKEN ACCOUNT
-        ================================= */
-
-        const criarTokenAccount =
-        new solanaWeb3.TransactionInstruction({
-
-            keys:[
-
-                {
-                    pubkey:
-                    carteira,
-
-                    isSigner:true,
-
-                    isWritable:true
-                },
-
-                {
-                    pubkey:
-                    tokenAccount,
-
-                    isSigner:false,
-
-                    isWritable:true
-                },
-
-                {
-                    pubkey:
-                    carteira,
-
-                    isSigner:false,
-
-                    isWritable:false
-                },
-
-                {
-                    pubkey:
-                    mintPublicKey,
-
-                    isSigner:false,
-
-                    isWritable:false
-                },
-
-                {
-                    pubkey:
-                    solanaWeb3.SystemProgram.programId,
-
-                    isSigner:false,
-
-                    isWritable:false
-                },
-
-                {
-                    pubkey:
-                    TOKEN_PROGRAM_ID,
-
-                    isSigner:false,
-
-                    isWritable:false
-                }
-
+        const criarTokenAccount = new solanaWeb3.TransactionInstruction({
+            keys: [
+                { pubkey: carteira, isSigner: true, isWritable: true },
+                { pubkey: tokenAccount, isSigner: false, isWritable: true },
+                { pubkey: carteira, isSigner: false, isWritable: false },
+                { pubkey: mintPublicKey, isSigner: false, isWritable: false },
+                { pubkey: solanaWeb3.SystemProgram.programId, isSigner: false, isWritable: false },
+                { pubkey: TOKEN_PROGRAM_ID, isSigner: false, isWritable: false }
             ],
-
-            programId:
-            ASSOCIATED_TOKEN_PROGRAM_ID,
-
-            data:
-            new Uint8Array([])
+            programId: ASSOCIATED_TOKEN_PROGRAM_ID,
+            data: new Uint8Array([])
         });
 
-
-        /* ================================
-           MINT TO
-        ================================= */
-
-        const quantidade =
-        converterQuantidade(
-            dados.oferta,
-            dados.decimais
-        );
-
-
-        const dadosMintTo =
-        new Uint8Array(9);
-
+        const quantidade = converterQuantidade(dados.oferta, dados.decimais);
+        const dadosMintTo = new Uint8Array(9);
         dadosMintTo[0] = 7;
-
-
-        let numero =
-        quantidade;
-
-
-        for(
-            let i=0;
-            i<8;
-            i++
-        ){
-
-            dadosMintTo[1+i] =
-            Number(
-                numero & 255n
-            );
-
-            numero =
-            numero >> 8n;
+        let numero = quantidade;
+        for(let i=0; i<8; i++){
+            dadosMintTo[1+i] = Number(numero & 255n);
+            numero = numero >> 8n;
         }
-
-
-        const mintTo =
-        new solanaWeb3.TransactionInstruction({
-
-            keys:[
-
-                {
-                    pubkey:
-                    mintPublicKey,
-
-                    isSigner:false,
-
-                    isWritable:true
-                },
-
-                {
-                    pubkey:
-                    tokenAccount,
-
-                    isSigner:false,
-
-                    isWritable:true
-                },
-
-                {
-                    pubkey:
-                    carteira,
-
-                    isSigner:true,
-
-                    isWritable:false
-                }
-
+        const mintTo = new solanaWeb3.TransactionInstruction({
+            keys: [
+                { pubkey: mintPublicKey, isSigner: false, isWritable: true },
+                { pubkey: tokenAccount, isSigner: false, isWritable: true },
+                { pubkey: carteira, isSigner: true, isWritable: false }
             ],
-
-            programId:
-            TOKEN_PROGRAM_ID,
-
-            data:
-            dadosMintTo
+            programId: TOKEN_PROGRAM_ID,
+            data: dadosMintTo
         });
 
+        const blockhash = await conexao.getLatestBlockhash("confirmed");
+        const transacao = new solanaWeb3.Transaction();
+        transacao.feePayer = carteira;
+        transacao.recentBlockhash = blockhash.blockhash;
+        transacao.add(criarMint, initializeMint, criarTokenAccount, mintTo);
+        transacao.partialSign(mint);
 
-        /* ================================
-           TRANSAÇÃO
-        ================================= */
+        mostrarStatus("👻 Confirme a transação na sua Phantom...", "aviso");
+        const assinada = await window.solana.signTransaction(transacao);
 
-        const blockhash =
-        await conexao
-        .getLatestBlockhash(
-            "confirmed"
-        );
+        mostrarStatus("⏳ Enviando para a rede Solana...", "aviso");
+        const assinatura = await conexao.sendRawTransaction(assinada.serialize(), {
+            skipPreflight: false,
+            maxRetries: 3
+        });
 
+        await conexao.confirmTransaction({
+            signature: assinatura,
+            blockhash: blockhash.blockhash,
+            lastValidBlockHeight: blockhash.lastValidBlockHeight
+        }, "confirmed");
 
-        const transacao =
-        new solanaWeb3.Transaction();
-
-
-        transacao.feePayer =
-        carteira;
-
-        transacao.recentBlockhash =
-        blockhash.blockhash;
-
-
-        transacao.add(
-            criarMint
-        );
-
-        transacao.add(
-            initializeMint
-        );
-
-        transacao.add(
-            criarTokenAccount
-        );
-
-        transacao.add(
-            mintTo
-        );
-
-
-        /* ================================
-           ASSINATURA DO MINT
-        ================================= */
-
-        transacao.partialSign(
-            mint
-        );
-
-
-        mostrarStatus(
-            "👻 Confirme a transação na Phantom...",
-            "aviso"
-        );
-
-
-        /* ================================
-           PHANTOM ASSINA
-        ================================= */
-
-        const assinada =
-        await window.solana
-        .signTransaction(
-            transacao
-        );
-
-
-        /* ================================
-           ENVIO
-        ================================= */
-
-        mostrarStatus(
-            "⏳ Enviando para a Solana...",
-            "aviso"
-        );
-
-
-        const assinatura =
-        await conexao.sendRawTransaction(
-            assinada.serialize(),
-            {
-                skipPreflight:false,
-                maxRetries:3
-            }
-        );
-
-
-        /* ================================
-           CONFIRMAÇÃO
-        ================================= */
-
-        await conexao.confirmTransaction(
-            {
-                signature:
-                assinatura,
-
-                blockhash:
-                blockhash.blockhash,
-
-                lastValidBlockHeight:
-                blockhash.lastValidBlockHeight
-
-            },
-            "confirmed"
-        );
-
-
-        /* ================================
-           RESULTADO
-        ================================= */
-
-        const enderecoMint =
-        mintPublicKey.toBase58();
-
-
-        document.getElementById(
-            "mintResultado"
-        ).textContent =
-        enderecoMint;
-
-
-        document.getElementById(
-            "solscanLink"
-        ).href =
-        "https://solscan.io/token/" +
-        enderecoMint;
-
-
-        document.getElementById(
-            "resultado"
-        ).style.display =
-        "block";
-
-
-        mostrarStatus(
-            "🎉 Token criado com sucesso na Solana!",
-            "sucesso"
-        );
-
+        const enderecoMint = mintPublicKey.toBase58();
+        document.getElementById("mintResultado").textContent = enderecoMint;
+        document.getElementById("solscanLink").href = `https://solscan.io/token/${enderecoMint}`;
+        document.getElementById("resultado").style.display = "block";
+        mostrarStatus("🎉 Token criado com sucesso! Agora você pode listar e compartilhar seu projeto.", "sucesso");
 
     }catch(erro){
-
-        console.error(
-            "ERRO:",
-            erro
-        );
-
-        mostrarStatus(
-            "❌ Erro: " +
-            (
-                erro.message ||
-                "Falha ao criar token."
-            ),
-            "erro"
-        );
-
+        console.error("ERRO:", erro);
+        mostrarStatus("❌ Falha: " + (erro.message || "Não foi possível criar o token"), "erro");
     }finally{
-
         botao.disabled = false;
-
     }
 }
-
 
 /* =====================================
    CONEXÃO AUTOMÁTICA
 ===================================== */
-
-window.addEventListener(
-    "load",
-    async function(){
-
-        if(
-            window.solana &&
-            window.solana.isPhantom
-        ){
-
-            try{
-
-                const resposta =
-                await window.solana.connect({
-                    onlyIfTrusted:true
-                });
-
-                if(
-                    resposta &&
-                    resposta.publicKey
-                ){
-
-                    carteira =
-                    resposta.publicKey;
-
-                    atualizarCarteira();
-
-                    document.getElementById(
-                        "btnCriar"
-                    ).disabled = false;
-                }
-
-            }catch(e){
-
-                console.log(
-                    "Sem conexão automática."
-                );
+window.addEventListener("load", async () => {
+    if(window.solana?.isPhantom){
+        try{
+            const resposta = await window.solana.connect({ onlyIfTrusted: true });
+            if(resposta?.publicKey){
+                carteira = resposta.publicKey;
+                atualizarCarteira();
+                document.getElementById("btnCriar").disabled = false;
             }
-        }
+        }catch(e){}
     }
-);
-
+});
 </script>
-
 </body>
 </html>
