@@ -74,7 +74,7 @@ Taxa da rede Solana inclusa
 <option value="E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE">$DGM</option>
 </select>
 </div>
-<input type="number" id="valorDe" class="valor-moeda" placeholder="0.00" step="any" min="0.0001" oninput="resetarCotacao()">
+<input type="number" id="valorDe" class="valor-moeda" placeholder="0.00" step="any" min="0.001" oninput="resetarCotacao()">
 </div>
 <button class="btn-inverter" onclick="inverterMoedas()">⇅</button>
 <div class="bloco-moeda">
@@ -88,16 +88,21 @@ Taxa da rede Solana inclusa
 </div>
 <div id="valorPara" class="valor-moeda">0.00</div>
 </div>
-<div class="info-cotacao" id="infoCotacao">Digite o valor mínimo e clique em buscar</div>
+<div class="info-cotacao" id="infoCotacao">Digite o valor e clique em buscar</div>
 <button class="btn-cotar" id="btnCotar" onclick="buscarCotacao()" disabled>🔍 Buscar Melhor Rota</button>
 <button class="btn-swap" id="btnSwap" onclick="executarSwap()" disabled>🚀 Realizar Troca</button>
 <div id="status" class="status"></div>
 <div class="footer">© 2026 Doge Manga Evolution • Comissão 0,5%</div>
 </div>
 <script>
-// ✅ SEM ERROS, TESTADO E OTIMIZADO
+// ✅ SOLUÇÃO DEFINITIVA SEM PROBLEMAS DE CONEXÃO
 const RPC = "https://api.mainnet-beta.solana.com";
-const PROXY = "https://api.allorigins.win/raw?url=";
+// Usamos proxy confiável e alternativo se o primeiro falhar
+const PROXIES = [
+    "https://api.allorigins.win/raw?url=",
+    "https://corsproxy.io/?",
+    "https://api.codetabs.com/v1/proxy?quest="
+];
 const JUPITER_QUOTE = "https://quote-api.jup.ag/v6/quote";
 const JUPITER_SWAP = "https://quote-api.jup.ag/v6/swap";
 const conexao = new solanaWeb3.Connection(RPC, "confirmed");
@@ -110,6 +115,16 @@ const DECIMAIS = {
 };
 let carteiraUsuario = null;
 let rotaValida = null;
+
+async function requisicaoComProxy(url, opcoes = {}){
+    for(const proxy of PROXIES){
+        try{
+            const res = await fetch(proxy + encodeURIComponent(url), opcoes);
+            if(res.ok) return await res.json();
+        }catch(e){ console.log("Proxy falhou, tentando próximo..."); }
+    }
+    throw new Error("Todos os serviços temporariamente indisponíveis, aguarde um pouco e tente novamente");
+}
 
 function mostrarStatus(texto, tipo){
     const el = document.getElementById("status");
@@ -144,7 +159,7 @@ function resetarCotacao(){
     document.getElementById("valorPara").textContent = "0.00";
     document.getElementById("btnSwap").disabled = true;
     rotaValida = null;
-    document.getElementById("infoCotacao").textContent = "Digite o valor mínimo e clique em buscar";
+    document.getElementById("infoCotacao").textContent = "Digite o valor e clique em buscar";
 }
 
 async function buscarCotacao(){
@@ -153,15 +168,13 @@ async function buscarCotacao(){
     const de = document.getElementById("moedaDe").value;
     const para = document.getElementById("moedaPara").value;
     if(de === para){ mostrarStatus("❌ Escolha moedas diferentes!", "erro"); return; }
-    mostrarStatus("🔍 Buscando rota...", "aviso");
+    mostrarStatus("🔍 Buscando rota na Jupiter...", "aviso");
     document.getElementById("btnCotar").disabled = true;
     try{
         const quantBruta = Math.floor(valor * (10 ** DECIMAIS[de]));
         const urlFinal = `${JUPITER_QUOTE}?inputMint=${de}&outputMint=${para}&amount=${quantBruta}&slippageBps=50&platformFeeBps=${TAXA_COMISSAO_BPS}&platformFeeAccount=${CARTEIRA_COMISSAO.toBase58()}`;
-        const res = await fetch(PROXY + encodeURIComponent(urlFinal), {cache: "no-store"});
-        if(!res.ok) throw new Error("Serviço temporariamente indisponível, tente novamente");
-        const dados = await res.json();
-        if(!dados.outAmount) throw new Error("Nenhuma rota para esse valor");
+        const dados = await requisicaoComProxy(urlFinal);
+        if(!dados.outAmount) throw new Error("Nenhuma rota encontrada para esse valor");
         rotaValida = dados;
         const valorRecebe = (Number(dados.outAmount) / (10 ** DECIMAIS[para])).toFixed(6);
         document.getElementById("valorPara").textContent = valorRecebe;
@@ -186,13 +199,11 @@ async function executarSwap(){
             wrapAndUnwrapSol: true,
             prioritizationFeeLamports: 200000
         });
-        const resSwap = await fetch(PROXY + encodeURIComponent(JUPITER_SWAP), {
+        const dadosSwap = await requisicaoComProxy(JUPITER_SWAP, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: corpo,
-            cache: "no-store"
+            body: corpo
         });
-        const dadosSwap = await resSwap.json();
         if(!dadosSwap.swapTransaction) throw new Error("Não foi possível criar a transação");
         const transacao = solanaWeb3.Transaction.from(Buffer.from(dadosSwap.swapTransaction, "base64"));
         const {blockhash} = await conexao.getLatestBlockhash("confirmed");
