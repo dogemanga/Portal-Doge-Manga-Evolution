@@ -4886,3 +4886,136 @@ Dinheiro cai em USDT na sua conta MEXC automaticamente!
     ✅ Comissão direto na carteira do Doge Manga
   </p>
 </div>
+
+      <!-- =====================================================
+   🛩️ DOGE MANGA CRASH — JOGO DO AVIÃOZINHO
+   ===================================================== -->
+<div style="max-width:600px; margin:30px auto; background:#111827; border-radius:20px; border:2px solid #facc15; padding:25px; text-align:center;">
+  <h2 style="color:#facc15; margin:0 0 15px 0;">🛩️ DOGE MANGA CRASH</h2>
+  <p style="color:#d1d5db; font-size:14px; margin-bottom:20px;">Avião sobe, ganha mais! Pare antes que ele voe!</p>
+
+  <!-- Área do Jogo -->
+  <div id="areaJogo" style="background:#050816; border-radius:15px; padding:40px 20px; margin-bottom:20px; position:relative; overflow:hidden; height:200px;">
+    <div id="aviao" style="font-size:48px; position:absolute; bottom:10px; left:50%; transform:translateX(-50%); transition:all 0.1s linear;">✈️</div>
+    <div id="multiplicador" style="font-size:36px; font-weight:bold; color:#facc15; margin-top:60px;">1.00x</div>
+    <div id="statusJogo" style="color:#9ca3af; margin-top:10px;">Aguardando próxima rodada...</div>
+  </div>
+
+  <!-- Valor da Aposta -->
+  <div style="display:flex; gap:10px; justify-content:center; margin-bottom:15px; flex-wrap:wrap;">
+    <input type="number" id="valorAposta" placeholder="Valor em SOL" step="0.01" min="0.01" value="0.05" style="padding:12px; border-radius:10px; border:1px solid #facc15; background:#050816; color:white; width:150px; text-align:center; font-size:16px;">
+    <button id="btnApostar" style="padding:12px 24px; border-radius:10px; border:none; background:#facc15; color:#050816; font-weight:bold; font-size:16px; cursor:pointer;">🔔 APOSTAR</button>
+    <button id="btnParar" style="padding:12px 24px; border-radius:10px; border:none; background:#10b981; color:white; font-weight:bold; font-size:16px; cursor:pointer; display:none;">✅ PARAR & GANHAR</button>
+  </div>
+
+  <!-- Sua Carteira -->
+  <div style="background:#050816; padding:12px; border-radius:10px; font-size:11px; color:#9ca3af; word-break:break-all;">
+    💸 Todas as apostas vão para:<br>
+    <span style="color:#facc15;">6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6</span>
+  </div>
+
+  <p style="font-size:11px; color:#6b7280; margin-top:15px;">🔞 Apenas maiores de 18 anos • Jogue com responsabilidade</p>
+</div>
+
+<script>
+// ==============================
+// CONFIGURAÇÕES DO JOGO
+// ==============================
+const CARTEIRA_DONO = "6xdk2P5ZT4gR7HNvHibLvpGUSGo3YbddYRFyvQkLJRg6";
+let valorAposta = 0;
+let apostou = false;
+let rodadaAtiva = false;
+let multiplicador = 1.00;
+let velocidade = 0;
+let intervalo;
+
+const aviao = document.getElementById("aviao");
+const multiplicadorEl = document.getElementById("multiplicador");
+const statusEl = document.getElementById("statusJogo");
+const btnApostar = document.getElementById("btnApostar");
+const btnParar = document.getElementById("btnParar");
+const inputValor = document.getElementById("valorAposta");
+
+// ==============================
+// FUNÇÕES DO JOGO
+// ==============================
+function iniciarRodada(){
+  multiplicador = 1.00;
+  velocidade = 0.5 + Math.random() * 1.2;
+  apostou = false;
+  rodadaAtiva = true;
+  aviao.style.bottom = "10px";
+  multiplicadorEl.textContent = "1.00x";
+  multiplicadorEl.style.color = "#facc15";
+  statusEl.textContent = "Avião decolando...";
+  btnApostar.style.display = "none";
+  btnParar.style.display = "none";
+  
+  intervalo = setInterval(() => {
+    multiplicador += velocidade * 0.01;
+    multiplicador = Math.round(multiplicador * 100) / 100;
+    multiplicadorEl.textContent = multiplicador.toFixed(2) + "x";
+    
+    // Sobe o avião
+    let novaPosicao = parseFloat(aviao.style.bottom) + 0.3;
+    aviao.style.bottom = novaPosicao + "px";
+    
+    // Quanto mais alto, mais rápido pode voar fora
+    if(Math.random() < (0.003 + multiplicador * 0.0015)){
+      fimRodada(false);
+    }
+  }, 100);
+}
+
+function fimRodada(ganhou){
+  clearInterval(intervalo);
+  rodadaAtiva = false;
+  
+  if(ganhou){
+    multiplicadorEl.style.color = "#10b981";
+    statusEl.innerHTML = `✅ VOCÊ GANHOU! Recebe ${(valorAposta * multiplicador).toFixed(4)} SOL`;
+  } else {
+    aviao.style.display = "none";
+    setTimeout(() => aviao.style.display = "block", 500);
+    multiplicadorEl.style.color = "#ef4444";
+    statusEl.innerHTML = `💥 AVIÃO VOOU! Você perdeu ${valorAposta.toFixed(4)} SOL`;
+  }
+  
+  btnApostar.style.display = "block";
+  btnParar.style.display = "none";
+  valorAposta = 0;
+  
+  // Nova rodada em 5 segundos
+  setTimeout(iniciarRodada, 5000);
+}
+
+// ==============================
+// BOTÕES
+// ==============================
+btnApostar.addEventListener("click", () => {
+  valorAposta = parseFloat(inputValor.value);
+  if(!valorAposta || valorAposta < 0.01){
+    alert("Coloque um valor mínimo de 0.01 SOL!");
+    return;
+  }
+  if(!window.solana){
+    alert("Conecte sua carteira Phantom primeiro!");
+    return;
+  }
+  apostou = true;
+  statusEl.textContent = "Aposta feita! Aguardando decolagem...";
+  setTimeout(iniciarRodada, 2000);
+  btnApostar.style.display = "none";
+  btnParar.style.display = "block";
+});
+
+btnParar.addEventListener("click", () => {
+  if(!rodadaAtiva || !apostou) return;
+  fimRodada(true);
+});
+
+// Inicia primeira rodada
+window.onload = () => {
+  setTimeout(iniciarRodada, 2000);
+};
+</script>
