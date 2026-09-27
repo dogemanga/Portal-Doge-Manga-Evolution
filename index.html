@@ -4810,3 +4810,781 @@ target="_blank">
 <a href="criar-token.html" class="btn">
     🚀 Criar Minha Criptomoeda
 </a>
+
+ <!-- ==============================================
+   FUTUROS — DOGE MANGA | GRÁFICO DENTRO DO PORTAL
+   Preços em tempo real · Gráfico embutido · Negociação na Binance
+   ============================================== -->
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+
+.secao-futuros {
+    background: #0b0e14;
+    min-height: 100vh;
+    color: #eaecef;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+/* CABEÇALHO */
+.futuros-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.futuros-titulo h1 {
+    font-size: 1.5rem;
+    color: #f0b90b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.futuros-titulo p { color: #848e9c; font-size: 0.85rem; margin-top: 4px; }
+
+.status-conexao {
+    display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #848e9c;
+}
+.ponto-conectado {
+    width: 8px; height: 8px; background: #089981; border-radius: 50%;
+    animation: pulsar 2s infinite;
+}
+@keyframes pulsar {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.aviso-direcionamento {
+    background: rgba(240,185,11,0.1);
+    border: 1px solid #f0b90b44;
+    color: #f0b90b; padding: 12px 16px; border-radius: 8px;
+    font-size: 0.85rem; margin-bottom: 20px; text-align: center;
+}
+
+/* TABELA DE MERCADO */
+.tabela-cripto {
+    width: 100%; border-collapse: collapse; background: #1e2329;
+    border-radius: 12px; overflow: hidden; margin-bottom: 25px;
+}
+.tabela-cripto th {
+    background: #2b3139; padding: 14px 12px; text-align: right;
+    font-size: 0.85rem; color: #848e9c; font-weight: 500;
+    border-bottom: 1px solid #373c46;
+}
+.tabela-cripto th:first-child { text-align: left; width: 25%; }
+.tabela-cripto td {
+    padding: 16px 12px; border-bottom: 1px solid #2b3139; font-size: 0.95rem;
+}
+.tabela-cripto tr:hover { background: #2b313966; cursor: pointer; }
+.tabela-cripto tr:last-child td { border-bottom: none; }
+
+.col-moeda { display: flex; align-items: center; gap: 10px; }
+.icone-moeda { font-size: 1.4rem; }
+.nome-moeda { font-weight: 600; color: #fff; }
+.sigla-moeda { color: #848e9c; font-size: 0.8rem; margin-left: 6px; }
+
+.col-preco { font-family: 'Roboto Mono', monospace; font-weight: 500; }
+.preco-subindo { color: #089981; }
+.preco-descendo { color: #f23645; }
+
+.col-variacao { font-weight: 600; font-family: 'Roboto Mono', monospace; }
+.var-positiva { color: #089981; }
+.var-negativa { color: #f23645; }
+
+.col-acao { display: flex; gap: 8px; justify-content: flex-end; }
+
+.btn-grafico-dentro {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #1e88e5, #2196f3);
+    border: none; border-radius: 6px; color: #fff;
+    font-weight: 600; cursor: pointer; font-size: 0.85rem;
+    transition: transform 0.15s;
+}
+.btn-grafico-dentro:hover { transform: scale(1.05); }
+
+.btn-comprar-binance {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #089981, #0ec09f);
+    border: none; border-radius: 6px; color: #fff;
+    font-weight: 700; cursor: pointer; font-size: 0.85rem;
+    text-decoration: none; display: inline-block;
+    transition: transform 0.15s;
+}
+.btn-comprar-binance:hover { transform: scale(1.05); }
+
+.btn-vender-binance {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #d50000, #ff5252);
+    border: none; border-radius: 6px; color: #fff;
+    font-weight: 700; cursor: pointer; font-size: 0.85rem;
+    text-decoration: none; display: inline-block;
+    transition: transform 0.15s;
+}
+.btn-vender-binance:hover { transform: scale(1.05); }
+
+/* ÁREA DO GRÁFICO — DENTRO DO PORTAL */
+.secao-grafico {
+    background: #1e2329;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    display: none; /* Escondido até clicar */
+}
+
+.secao-grafico.visivel { display: block; animation: aparecer 0.3s ease; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.cabecalho-grafico {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.info-grafico h3 {
+    font-size: 1.2rem;
+    color: #f0b90b;
+}
+.info-grafico p {
+    color: #848e9c;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.fechar-grafico {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid #474d57;
+    border-radius: 6px;
+    color: #848e9c;
+    cursor: pointer;
+}
+.fechar-grafico:hover { border-color: #f23645; color: #f23645; }
+
+.iframe-grafico {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 8px;
+    background: #0b0e14;
+}
+
+.botoes-abaixo-grafico {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.link-externo {
+    color: #848e9c;
+    font-size: 0.8rem;
+    text-align: right;
+    margin-top: 10px;
+}
+.link-externo a { color: #f0b90b; text-decoration: none; }
+
+.atualizacao-rodape {
+    text-align: right;
+    margin-top: 15px;
+    font-size: 0.75rem;
+    color: #5e6673;
+}
+</style>
+
+<section class="secao-futuros" id="futuros">
+    <!-- CABEÇALHO -->
+    <div class="futuros-header">
+        <div class="futuros-titulo">
+            <h1>📈 FUTUROS — DOGE MANGA</h1>
+            <p>Mercado Perpétuo · Preços em Tempo Real</p>
+        </div>
+        <div class="status-conexao">
+            <span class="ponto-conectado"></span>
+            <span id="statusTexto">Dados atualizados</span>
+        </div>
+    </div>
+
+    <div class="aviso-direcionamento">
+        ⚠️ <strong>Veja o gráfico aqui → Negocie na Binance</strong> — Clique em "Ver Gráfico" para visualizar os dados dentro do portal
+    </div>
+
+    <!-- ÁREA DO GRÁFICO — APARECE QUANDO CLICA -->
+    <div class="secao-grafico" id="caixaGrafico">
+        <div class="cabecalho-grafico">
+            <div class="info-grafico">
+                <h3 id="tituloGrafico">Bitcoin (BTC/USDT)</h3>
+                <p id="subtituloGrafico">Gráfico de preços em tempo real</p>
+            </div>
+            <button class="fechar-grafico" onclick="fecharGrafico()">✕ Fechar</button>
+        </div>
+        
+        <iframe id="iframeGrafico" class="iframe-grafico" src="" title="Gráfico de Preços"></iframe>
+        
+        <div class="botoes-abaixo-grafico">
+            <a id="linkComprar" href="" target="_blank" class="btn-comprar-binance">💰 Comprar na Binance</a>
+            <a id="linkVender" href="" target="_blank" class="btn-vender-binance">💰 Vender na Binance</a>
+        </div>
+        
+        <p class="link-externo">
+            Fonte: CoinGecko · <a id="linkMaisDados" href="" target="_blank">Ver dados completos ↗</a>
+        </p>
+    </div>
+
+    <!-- TABELA DE MERCADO -->
+    <table class="tabela-cripto">
+        <thead>
+            <tr>
+                <th>Par de Futuros</th>
+                <th>Preço Atual</th>
+                <th>Variação 24h</th>
+                <th style="text-align:right;">Ações</th>
+            </tr>
+        </thead>
+        <tbody id="corpoTabela">
+            <tr>
+                <td colspan="4" style="text-align:center; padding:40px; color:#848e9c;">Carregando dados do mercado...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="atualizacao-rodape" id="ultimaAtualizacao">Última atualização: --</p>
+</section>
+
+<script>
+// ===== MOEDAS E LINKS =====
+const LISTA_MOEDAS = [
+    { 
+        id: 'bitcoin', nome: 'Bitcoin', sigla: 'BTC', icone: '₿',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/bitcoin',
+        linkIframe: 'https://www.coingecko.com/pt/coins/bitcoin/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/BTCUSDT'
+    },
+    { 
+        id: 'ethereum', nome: 'Ethereum', sigla: 'ETH', icone: 'Ξ',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/ethereum',
+        linkIframe: 'https://www.coingecko.com/pt/coins/ethereum/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/ETHUSDT'
+    },
+    { 
+        id: 'solana', nome: 'Solana', sigla: 'SOL', icone: '◎',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/solana',
+        linkIframe: 'https://www.coingecko.com/pt/coins/solana/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/SOLUSDT'
+    },
+    { 
+        id: 'cardano', nome: 'Cardano', sigla: 'ADA', icone: '₳',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/cardano',
+        linkIframe: 'https://www.coingecko.com/pt/coins/cardano/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/ADAUSDT'
+    },
+    { 
+        id: 'dogecoin', nome: 'Dogecoin', sigla: 'DOGE', icone: '🐕',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/dogecoin',
+        linkIframe: 'https://www.coingecko.com/pt/coins/dogecoin/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/DOGEUSDT'
+    },
+    { 
+        id: 'binancecoin', nome: 'BNB', sigla: 'BNB', icone: '◆',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/binancecoin',
+        linkIframe: 'https://www.coingecko.com/pt/coins/binancecoin/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/BNBUSDT'
+    }
+];
+
+let dadosMercado = {};
+
+function formatarPreco(valor) {
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency', currency: 'BRL', minimumFractionDigits: 2
+    }).format(valor);
+}
+
+async function carregarMercado() {
+    try {
+        const ids = LISTA_MOEDAS.map(m => m.id).join(',');
+        const res = await fetch(
+            `https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&ids=${ids}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`
+        );
+        const dados = await res.json();
+        
+        dados.forEach(item => {
+            dadosMercado[item.id] = {
+                preco: item.current_price,
+                variacao: item.price_change_percentage_24h || 0
+            };
+        });
+
+        renderizarTabela();
+        document.getElementById('ultimaAtualizacao').textContent =
+            'Última atualização: ' + new Date().toLocaleTimeString('pt-BR');
+    } catch (e) {
+        console.error('Erro:', e);
+    }
+}
+
+function renderizarTabela() {
+    const corpo = document.getElementById('corpoTabela');
+    corpo.innerHTML = '';
+
+    LISTA_MOEDAS.forEach(moeda => {
+        const d = dadosMercado[moeda.id];
+        if (!d) return;
+
+        const classePreco = d.variacao >= 0 ? 'preco-subindo' : 'preco-descendo';
+        const classeVar = d.variacao >= 0 ? 'var-positiva' : 'var-negativa';
+        const sinal = d.variacao >= 0 ? '+' : '';
+
+        corpo.innerHTML += `
+            <tr>
+                <td>
+                    <div class="col-moeda">
+                        <span class="icone-moeda">${moeda.icone}</span>
+                        <div>
+                            <div class="nome-moeda">${moeda.nome}</div>
+                            <span class="sigla-moeda">${moeda.sigla}/USDT</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-preco ${classePreco}">${formatarPreco(d.preco)}</td>
+                <td class="col-variacao ${classeVar}">${sinal}${d.variacao.toFixed(2)}%</td>
+                <td class="col-acao">
+                    <button class="btn-grafico-dentro" onclick="abrirGrafico('${moeda.id}')">📊 Ver Gráfico</button>
+                    <a href="${moeda.linkBinance}" target="_blank" class="btn-comprar-binance">Comprar</a>
+                    <a href="${moeda.linkBinance}" target="_blank" class="btn-vender-binance">Vender</a>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// ===== ABRIR GRÁFICO DENTRO DO PORTAL =====
+function abrirGrafico(moedaId) {
+    const moeda = LISTA_MOEDAS.find(m => m.id === moedaId);
+    if (!moeda) return;
+
+    // Atualizar informações
+    document.getElementById('tituloGrafico').textContent = `${moeda.icone} ${moeda.nome} (${moeda.sigla}/USDT)`;
+    document.getElementById('subtituloGrafico').textContent = 'Gráfico de preços em tempo real';
+    
+    // Carregar gráfico
+    document.getElementById('iframeGrafico').src = moeda.linkIframe;
+    
+    // Links de compra/venda
+    document.getElementById('linkComprar').href = moeda.linkBinance;
+    document.getElementById('linkVender').href = moeda.linkBinance;
+    document.getElementById('linkMaisDados').href = moeda.linkGrafico;
+    
+    // Mostrar caixa do gráfico
+    document.getElementById('caixaGrafico').classList.add('visivel');
+    
+    // Rolar até o gráfico
+    document.getElementById('caixaGrafico').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function fecharGrafico() {
+    document.getElementById('caixaGrafico').classList.remove('visivel');
+    document.getElementById('iframeGrafico').src = '';
+}
+
+// Iniciar
+document.addEventListener('DOMContentLoaded', carregarMercado);
+setInterval(carregarMercado, 60000);
+</script>
+</section>
+   <!-- ==============================================
+   FUTUROS — DOGE MANGA | GRÁFICO DENTRO DO PORTAL
+   Preços em tempo real · Gráfico embutido · Negociação na Binance
+   ============================================== -->
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+
+.secao-futuros {
+    background: #0b0e14;
+    min-height: 100vh;
+    color: #eaecef;
+    padding: 20px;
+    border-radius: 16px;
+}
+
+/* CABEÇALHO */
+.futuros-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.futuros-titulo h1 {
+    font-size: 1.5rem;
+    color: #f0b90b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.futuros-titulo p { color: #848e9c; font-size: 0.85rem; margin-top: 4px; }
+
+.status-conexao {
+    display: flex; align-items: center; gap: 6px; font-size: 0.8rem; color: #848e9c;
+}
+.ponto-conectado {
+    width: 8px; height: 8px; background: #089981; border-radius: 50%;
+    animation: pulsar 2s infinite;
+}
+@keyframes pulsar {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.aviso-direcionamento {
+    background: rgba(240,185,11,0.1);
+    border: 1px solid #f0b90b44;
+    color: #f0b90b; padding: 12px 16px; border-radius: 8px;
+    font-size: 0.85rem; margin-bottom: 20px; text-align: center;
+}
+
+/* TABELA DE MERCADO */
+.tabela-cripto {
+    width: 100%; border-collapse: collapse; background: #1e2329;
+    border-radius: 12px; overflow: hidden; margin-bottom: 25px;
+}
+.tabela-cripto th {
+    background: #2b3139; padding: 14px 12px; text-align: right;
+    font-size: 0.85rem; color: #848e9c; font-weight: 500;
+    border-bottom: 1px solid #373c46;
+}
+.tabela-cripto th:first-child { text-align: left; width: 25%; }
+.tabela-cripto td {
+    padding: 16px 12px; border-bottom: 1px solid #2b3139; font-size: 0.95rem;
+}
+.tabela-cripto tr:hover { background: #2b313966; cursor: pointer; }
+.tabela-cripto tr:last-child td { border-bottom: none; }
+
+.col-moeda { display: flex; align-items: center; gap: 10px; }
+.icone-moeda { font-size: 1.4rem; }
+.nome-moeda { font-weight: 600; color: #fff; }
+.sigla-moeda { color: #848e9c; font-size: 0.8rem; margin-left: 6px; }
+
+.col-preco { font-family: 'Roboto Mono', monospace; font-weight: 500; }
+.preco-subindo { color: #089981; }
+.preco-descendo { color: #f23645; }
+
+.col-variacao { font-weight: 600; font-family: 'Roboto Mono', monospace; }
+.var-positiva { color: #089981; }
+.var-negativa { color: #f23645; }
+
+.col-acao { display: flex; gap: 8px; justify-content: flex-end; }
+
+.btn-grafico-dentro {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #1e88e5, #2196f3);
+    border: none; border-radius: 6px; color: #fff;
+    font-weight: 600; cursor: pointer; font-size: 0.85rem;
+    transition: transform 0.15s;
+}
+.btn-grafico-dentro:hover { transform: scale(1.05); }
+
+.btn-comprar-binance {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #089981, #0ec09f);
+    border: none; border-radius: 6px; color: #fff;
+    font-weight: 700; cursor: pointer; font-size: 0.85rem;
+    text-decoration: none; display: inline-block;
+    transition: transform 0.15s;
+}
+.btn-comprar-binance:hover { transform: scale(1.05); }
+
+.btn-vender-binance {
+    padding: 10px 16px;
+    background: linear-gradient(90deg, #d50000, #ff5252);
+    border: none; border-radius: 6px; color: #fff;
+    font-weight: 700; cursor: pointer; font-size: 0.85rem;
+    text-decoration: none; display: inline-block;
+    transition: transform 0.15s;
+}
+.btn-vender-binance:hover { transform: scale(1.05); }
+
+/* ÁREA DO GRÁFICO — DENTRO DO PORTAL */
+.secao-grafico {
+    background: #1e2329;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    display: none; /* Escondido até clicar */
+}
+
+.secao-grafico.visivel { display: block; animation: aparecer 0.3s ease; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.cabecalho-grafico {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.info-grafico h3 {
+    font-size: 1.2rem;
+    color: #f0b90b;
+}
+.info-grafico p {
+    color: #848e9c;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+.fechar-grafico {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid #474d57;
+    border-radius: 6px;
+    color: #848e9c;
+    cursor: pointer;
+}
+.fechar-grafico:hover { border-color: #f23645; color: #f23645; }
+
+.iframe-grafico {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 8px;
+    background: #0b0e14;
+}
+
+.botoes-abaixo-grafico {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.link-externo {
+    color: #848e9c;
+    font-size: 0.8rem;
+    text-align: right;
+    margin-top: 10px;
+}
+.link-externo a { color: #f0b90b; text-decoration: none; }
+
+.atualizacao-rodape {
+    text-align: right;
+    margin-top: 15px;
+    font-size: 0.75rem;
+    color: #5e6673;
+}
+</style>
+
+<section class="secao-futuros" id="futuros">
+    <!-- CABEÇALHO -->
+    <div class="futuros-header">
+        <div class="futuros-titulo">
+            <h1>📈 FUTUROS — DOGE MANGA</h1>
+            <p>Mercado Perpétuo · Preços em Tempo Real</p>
+        </div>
+        <div class="status-conexao">
+            <span class="ponto-conectado"></span>
+            <span id="statusTexto">Dados atualizados</span>
+        </div>
+    </div>
+
+    <div class="aviso-direcionamento">
+        ⚠️ <strong>Veja o gráfico aqui → Negocie na Binance</strong> — Clique em "Ver Gráfico" para visualizar os dados dentro do portal
+    </div>
+
+    <!-- ÁREA DO GRÁFICO — APARECE QUANDO CLICA -->
+    <div class="secao-grafico" id="caixaGrafico">
+        <div class="cabecalho-grafico">
+            <div class="info-grafico">
+                <h3 id="tituloGrafico">Bitcoin (BTC/USDT)</h3>
+                <p id="subtituloGrafico">Gráfico de preços em tempo real</p>
+            </div>
+            <button class="fechar-grafico" onclick="fecharGrafico()">✕ Fechar</button>
+        </div>
+        
+        <iframe id="iframeGrafico" class="iframe-grafico" src="" title="Gráfico de Preços"></iframe>
+        
+        <div class="botoes-abaixo-grafico">
+            <a id="linkComprar" href="" target="_blank" class="btn-comprar-binance">💰 Comprar na Binance</a>
+            <a id="linkVender" href="" target="_blank" class="btn-vender-binance">💰 Vender na Binance</a>
+        </div>
+        
+        <p class="link-externo">
+            Fonte: CoinGecko · <a id="linkMaisDados" href="" target="_blank">Ver dados completos ↗</a>
+        </p>
+    </div>
+
+    <!-- TABELA DE MERCADO -->
+    <table class="tabela-cripto">
+        <thead>
+            <tr>
+                <th>Par de Futuros</th>
+                <th>Preço Atual</th>
+                <th>Variação 24h</th>
+                <th style="text-align:right;">Ações</th>
+            </tr>
+        </thead>
+        <tbody id="corpoTabela">
+            <tr>
+                <td colspan="4" style="text-align:center; padding:40px; color:#848e9c;">Carregando dados do mercado...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="atualizacao-rodape" id="ultimaAtualizacao">Última atualização: --</p>
+</section>
+
+<script>
+// ===== MOEDAS E LINKS =====
+const LISTA_MOEDAS = [
+    { 
+        id: 'bitcoin', nome: 'Bitcoin', sigla: 'BTC', icone: '₿',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/bitcoin',
+        linkIframe: 'https://www.coingecko.com/pt/coins/bitcoin/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/BTCUSDT'
+    },
+    { 
+        id: 'ethereum', nome: 'Ethereum', sigla: 'ETH', icone: 'Ξ',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/ethereum',
+        linkIframe: 'https://www.coingecko.com/pt/coins/ethereum/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/ETHUSDT'
+    },
+    { 
+        id: 'solana', nome: 'Solana', sigla: 'SOL', icone: '◎',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/solana',
+        linkIframe: 'https://www.coingecko.com/pt/coins/solana/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/SOLUSDT'
+    },
+    { 
+        id: 'cardano', nome: 'Cardano', sigla: 'ADA', icone: '₳',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/cardano',
+        linkIframe: 'https://www.coingecko.com/pt/coins/cardano/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/ADAUSDT'
+    },
+    { 
+        id: 'dogecoin', nome: 'Dogecoin', sigla: 'DOGE', icone: '🐕',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/dogecoin',
+        linkIframe: 'https://www.coingecko.com/pt/coins/dogecoin/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/DOGEUSDT'
+    },
+    { 
+        id: 'binancecoin', nome: 'BNB', sigla: 'BNB', icone: '◆',
+        linkGrafico: 'https://www.coingecko.com/pt/coins/binancecoin',
+        linkIframe: 'https://www.coingecko.com/pt/coins/binancecoin/embed?theme=dark',
+        linkBinance: 'https://www.binance.com/futures/BNBUSDT'
+    }
+];
+
+let dadosMercado = {};
+
+function formatarPreco(valor) {
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency', currency: 'BRL', minimumFractionDigits: 2
+    }).format(valor);
+}
+
+async function carregarMercado() {
+    try {
+        const ids = LISTA_MOEDAS.map(m => m.id).join(',');
+        const res = await fetch(
+            `https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&ids=${ids}&order=market_cap_desc&sparkline=false&price_change_percentage=24h`
+        );
+        const dados = await res.json();
+        
+        dados.forEach(item => {
+            dadosMercado[item.id] = {
+                preco: item.current_price,
+                variacao: item.price_change_percentage_24h || 0
+            };
+        });
+
+        renderizarTabela();
+        document.getElementById('ultimaAtualizacao').textContent =
+            'Última atualização: ' + new Date().toLocaleTimeString('pt-BR');
+    } catch (e) {
+        console.error('Erro:', e);
+    }
+}
+
+function renderizarTabela() {
+    const corpo = document.getElementById('corpoTabela');
+    corpo.innerHTML = '';
+
+    LISTA_MOEDAS.forEach(moeda => {
+        const d = dadosMercado[moeda.id];
+        if (!d) return;
+
+        const classePreco = d.variacao >= 0 ? 'preco-subindo' : 'preco-descendo';
+        const classeVar = d.variacao >= 0 ? 'var-positiva' : 'var-negativa';
+        const sinal = d.variacao >= 0 ? '+' : '';
+
+        corpo.innerHTML += `
+            <tr>
+                <td>
+                    <div class="col-moeda">
+                        <span class="icone-moeda">${moeda.icone}</span>
+                        <div>
+                            <div class="nome-moeda">${moeda.nome}</div>
+                            <span class="sigla-moeda">${moeda.sigla}/USDT</span>
+                        </div>
+                    </div>
+                </td>
+                <td class="col-preco ${classePreco}">${formatarPreco(d.preco)}</td>
+                <td class="col-variacao ${classeVar}">${sinal}${d.variacao.toFixed(2)}%</td>
+                <td class="col-acao">
+                    <button class="btn-grafico-dentro" onclick="abrirGrafico('${moeda.id}')">📊 Ver Gráfico</button>
+                    <a href="${moeda.linkBinance}" target="_blank" class="btn-comprar-binance">Comprar</a>
+                    <a href="${moeda.linkBinance}" target="_blank" class="btn-vender-binance">Vender</a>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// ===== ABRIR GRÁFICO DENTRO DO PORTAL =====
+function abrirGrafico(moedaId) {
+    const moeda = LISTA_MOEDAS.find(m => m.id === moedaId);
+    if (!moeda) return;
+
+    // Atualizar informações
+    document.getElementById('tituloGrafico').textContent = `${moeda.icone} ${moeda.nome} (${moeda.sigla}/USDT)`;
+    document.getElementById('subtituloGrafico').textContent = 'Gráfico de preços em tempo real';
+    
+    // Carregar gráfico
+    document.getElementById('iframeGrafico').src = moeda.linkIframe;
+    
+    // Links de compra/venda
+    document.getElementById('linkComprar').href = moeda.linkBinance;
+    document.getElementById('linkVender').href = moeda.linkBinance;
+    document.getElementById('linkMaisDados').href = moeda.linkGrafico;
+    
+    // Mostrar caixa do gráfico
+    document.getElementById('caixaGrafico').classList.add('visivel');
+    
+    // Rolar até o gráfico
+    document.getElementById('caixaGrafico').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function fecharGrafico() {
+    document.getElementById('caixaGrafico').classList.remove('visivel');
+    document.getElementById('iframeGrafico').src = '';
+}
+
+// Iniciar
+document.addEventListener('DOMContentLoaded', carregarMercado);
+setInterval(carregarMercado, 60000);
+</script>
+</section>
+  
