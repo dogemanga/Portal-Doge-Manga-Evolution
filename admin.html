@@ -4804,4 +4804,327 @@ target="_blank">
 🎁 Airdrop
 </a><a href="airdrop.html">🎁 Airdrop</a><a href="airdrop.html">🎁 Airdrop</a>
   
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOGE MANGA — Espaços</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+    :root {
+      --primaria: #f5a900;
+      --fundo: #000000;
+      --card: #16181c;
+      --borda: #2f3336;
+      --texto: #e7e9ea;
+      --texto-claro: #71767b;
+      --erro: #ef4444;
+    }
+    body { background: var(--fundo); color: var(--texto); min-height: 100vh; }
+    .container { max-width: 700px; margin: 0 auto; border-left: 1px solid var(--borda); border-right: 1px solid var(--borda); }
+    
+    /* CABEÇALHO */
+    .topo {
+      position: sticky; top: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+      padding: 12px 16px; border-bottom: 1px solid var(--borda); z-index: 100;
+    }
+    .topo h1 { font-size: 20px; display: flex; align-items: center; gap: 8px; }
+    .topo h1 span { color: var(--primaria); }
+    
+    /* ABAS */
+    .abas { display: flex; margin-top: 12px; }
+    .aba { flex: 1; text-align: center; padding: 12px; cursor: pointer; color: var(--texto-claro); border-bottom: 2px solid transparent; }
+    .aba.ativa { color: var(--texto); border-bottom-color: var(--primaria); font-weight: bold; }
+    .aba:hover { background: rgba(255,255,255,0.05); }
+    
+    /* CAIXA DE POSTAGEM */
+    .caixa-post {
+      display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid var(--borda);
+    }
+    .avatar {
+      width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #f5a900, #fb9000); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 20px; flex-shrink: 0;
+    }
+    .post-input { flex: 1; }
+    .post-input textarea {
+      width: 100%; background: transparent; border: none; color: var(--texto); font-size: 16px; resize: none; outline: none; min-height: 60px;
+    }
+    .preview-img {
+      max-width: 100%; border-radius: 12px; margin: 10px 0; display: none;
+      border: 1px solid var(--borda);
+    }
+    .aviso-proibido {
+      background: rgba(239, 68, 68, 0.15); border-left: 3px solid var(--erro);
+      padding: 10px 14px; margin: 10px 0; border-radius: 6px;
+      color: #fca5a5; font-size: 14px; display: none;
+    }
+    .post-botoes { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; border-top: 1px solid var(--borda); padding-top: 12px; }
+    .botoes-esq { display: flex; gap: 16px; color: var(--primaria); font-size: 20px; }
+    .icone-img { cursor: pointer; }
+    .btn-publicar {
+      background: var(--primaria); border: none; color: #000; font-weight: bold; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 14px; transition: filter 0.2s;
+    }
+    .btn-publicar:disabled { background: #4b5563; cursor: not-allowed; opacity: 0.6; }
+    .btn-publicar:hover:not(:disabled) { filter: brightness(0.9); }
+    
+    /* POSTAGENS */
+    .post {
+      display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid var(--borda); transition: background 0.2s;
+    }
+    .post:hover { background: rgba(255,255,255,0.02); }
+    .post-conteudo { flex: 1; }
+    .post-cabecalho { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+    .post-nome { font-weight: bold; }
+    .post-usuario { color: var(--texto-claro); }
+    .post-texto { line-height: 1.5; margin-bottom: 12px; white-space: pre-wrap; }
+    .post-texto a { color: var(--primaria); text-decoration: none; }
+    .post-imagem { max-width: 100%; border-radius: 12px; margin-bottom: 12px; }
+    .post-acoes { display: flex; justify-content: space-between; max-width: 380px; color: var(--texto-claro); font-size: 14px; }
+    .acao { display: flex; align-items: center; gap: 4px; cursor: pointer; transition: color 0.2s; }
+    .acao:hover { color: var(--primaria); }
+    
+    /* TENDÊNCIAS */
+    .tendencias { background: var(--card); border-radius: 16px; margin: 16px; padding: 16px; }
+    .tendencias h3 { margin-bottom: 16px; }
+    .tag { padding: 12px 0; border-bottom: 1px solid var(--borda); cursor: pointer; transition: padding 0.2s; }
+    .tag:hover { background: rgba(255,255,255,0.03); padding-left: 8px; }
+    .tag-nome { font-weight: bold; }
+    .tag-qtd { font-size: 13px; color: var(--texto-claro); }
+    
+    /* MENU INFERIOR */
+    .menu-inferior {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 700px; display: flex; justify-content: space-around;
+      padding: 12px 0; background: rgba(0,0,0,0.9); border-top: 1px solid var(--borda);
+    }
+    .menu-item { color: var(--texto); text-decoration: none; font-size: 24px; }
+    .menu-item.ativo { color: var(--primaria); }
+    
+    .escondido { display: none !important; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- CABEÇALHO -->
+  <div class="topo">
+    <h1><span>🐾</span> DOGE MANGA</h1>
+    <div class="abas">
+      <div class="aba ativa" onclick="mudarAba(this)">Para você</div>
+      <div class="aba" onclick="mudarAba(this)">Seguindo</div>
+      <div class="aba" onclick="mudarAba(this)">Espaços</div>
+    </div>
+  </div>
+
+  <!-- CAIXA DE POSTAR -->
+  <div class="caixa-post">
+    <div class="avatar">G</div>
+    <div class="post-input">
+      <textarea id="textoPost" placeholder="Fale sobre criptomoedas, projetos, análises... 🐾" oninput="verificarTexto()"></textarea>
+      
+      <div id="avisoProibido" class="aviso-proibido">
+        ⚠️ Este conteúdo não é permitido aqui. Respeite o DOGE MANGA e a comunidade.
+      </div>
+      
+      <img id="previewImagem" class="preview-img" alt="Pré-visualização">
+      <div class="post-botoes">
+        <div class="botoes-esq">
+          <label class="icone-img" title="Adicionar imagem">📷
+            <input type="file" id="entradaImagem" accept="image/*" class="escondido" onchange="carregarImagem(this)">
+          </label>
+          <span>📊</span>
+          <span>🔗</span>
+        </div>
+        <button id="btnPublicar" class="btn-publicar" onclick="publicar()">Publicar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TENDÊNCIAS -->
+  <div class="tendencias">
+    <h3>🔥 O que estão falando</h3>
+    <div class="tag">
+      <div class="tag-nome">#Bitcoin</div>
+      <div class="tag-qtd">12.5 mil postagens</div>
+    </div>
+    <div class="tag">
+      <div class="tag-nome">#Ethereum</div>
+      <div class="tag-qtd">8.2 mil postagens</div>
+    </div>
+    <div class="tag">
+      <div class="tag-nome">#Solana</div>
+      <div class="tag-qtd">5.7 mil postagens</div>
+    </div>
+    <div class="tag">
+      <div class="tag-nome">#DogeManga</div>
+      <div class="tag-qtd">4.8 mil postagens</div>
+    </div>
+    <div class="tag">
+      <div class="tag-nome">#Cardano</div>
+      <div class="tag-qtd">2.9 mil postagens</div>
+    </div>
+  </div>
+
+  <!-- ÁREA DE POSTAGENS -->
+  <div id="feed">
+    <div class="post">
+      <div class="avatar">G</div>
+      <div class="post-conteudo">
+        <div class="post-cabecalho">
+          <span class="post-nome">Gilson</span>
+          <span class="post-usuario">@Gilson_Doge · 2min</span>
+        </div>
+        <div class="post-texto">🚀 Bem-vindos ao DOGE MANGA! 🐾
+
+Aqui é espaço livre pra falar de TODAS as criptomoedas:
+✅ Bitcoin • Ethereum • Solana • Cardano • Doge • tudo!
+
+Compartilhem análises, gráficos, notícias e projetos! Vamos crescer juntos! 💎✨</div>
+        <div class="post-acoes">
+          <span class="acao">💬 24</span>
+          <span class="acao">🔁 12</span>
+          <span class="acao">❤️ 156</span>
+          <span class="acao">📊 3.2 mil</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 80px;"></div>
+</div>
+
+<!-- MENU INFERIOR -->
+<div class="menu-inferior">
+  <a href="#" class="menu-item ativa">🏠</a>
+  <a href="#" class="menu-item">🔍</a>
+  <a href="#" class="menu-item">💬</a>
+  <a href="#" class="menu-item">👤</a>
+</div>
+
+<script>
+let imagemBase64 = null;
+let temPalavraProibida = false;
+
+// 🛡️ LISTA DE PROTEÇÃO — PALAVRAS QUE NÃO PODEM
+const palavrasProibidas = [
+  'doge manga é fraude', 'dogemanga é fraude', 'fraude no doge manga',
+  'doge manga é golpe', 'dogemanga é golpe', 'golpe doge manga',
+  'doge manga não presta', 'dogemanga não presta',
+  'doge manga é lixo', 'dogemanga é lixo',
+  'doge manga é enganação', 'dogemanga é enganação',
+  'não invistam no doge manga', 'não comprem dogemanga',
+  'doge manga vai cair', 'dogemanga vai cair',
+  'abandonem o doge manga', 'saiam do dogemanga',
+  'doge manga é uma piada', 'dogemanga é uma piada',
+  'perder dinheiro doge manga', 'perdi tudo dogemanga',
+  'doge manga é mentira', 'dogemanga é mentira',
+  'projeto morto doge manga', 'dogemanga morreu',
+  'doge manga é uma farsa', 'dogemanga é uma farsa',
+  'cair de tudo doge manga', 'não vale nada dogemanga'
+];
+
+function mudarAba(elemento) {
+  document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
+  elemento.classList.add('ativa');
+}
+
+function normalizarTexto(texto) {
+  return texto.toLowerCase()
+    .replace(/[áàãâä]/g, 'a')
+    .replace(/[éèêë]/g, 'e')
+    .replace(/[íìîï]/g, 'i')
+    .replace(/[óòôöõ]/g, 'o')
+    .replace(/[úùûü]/g, 'u')
+    .replace(/[ç]/g, 'c')
+    .replace(/[^a-z0-9 ]/g, ' ');
+}
+
+function verificarTexto() {
+  const texto = document.getElementById('textoPost').value;
+  const textoLimpo = normalizarTexto(texto);
+  
+  temPalavraProibida = palavrasProibidas.some(proibida => {
+    return textoLimpo.includes(normalizarTexto(proibida));
+  });
+  
+  const aviso = document.getElementById('avisoProibido');
+  const botao = document.getElementById('btnPublicar');
+  
+  if (temPalavraProibida) {
+    aviso.style.display = 'block';
+    botao.disabled = true;
+  } else {
+    aviso.style.display = 'none';
+    botao.disabled = false;
+  }
+}
+
+function carregarImagem(input) {
+  if (input.files && input.files[0]) {
+    const leitor = new FileReader();
+    leitor.onload = function(e) {
+      imagemBase64 = e.target.result;
+      const preview = document.getElementById('previewImagem');
+      preview.src = imagemBase64;
+      preview.style.display = 'block';
+    };
+    leitor.readAsDataURL(input.files[0]);
+  }
+}
+
+function publicar() {
+  const texto = document.getElementById('textoPost').value.trim();
+  
+  if (temPalavraProibida) {
+    alert('🚫 Conteúdo bloqueado! Respeite as regras da comunidade DOGE MANGA.');
+    return;
+  }
+  
+  if (!texto && !imagemBase64) {
+    alert('Escreva algo ou adicione uma imagem! 🐾');
+    return;
+  }
+  
+  const feed = document.getElementById('feed');
+  
+  let htmlImagem = '';
+  if (imagemBase64) {
+    htmlImagem = `<img src="${imagemBase64}" class="post-imagem" alt="Imagem do post">`;
+  }
+  
+  const novoPost = document.createElement('div');
+  novoPost.className = 'post';
+  novoPost.innerHTML = `
+    <div class="avatar">G</div>
+    <div class="post-conteudo">
+      <div class="post-cabecalho">
+        <span class="post-nome">Gilson</span>
+        <span class="post-usuario">@Gilson_Doge · agora</span>
+      </div>
+      <div class="post-texto">${texto}</div>
+      ${htmlImagem}
+      <div class="post-acoes">
+        <span class="acao">💬 0</span>
+        <span class="acao">🔁 0</span>
+        <span class="acao">❤️ 0</span>
+        <span class="acao">📊 0</span>
+      </div>
+    </div>
+  `;
+  
+  feed.insertBefore(novoPost, feed.firstChild);
+  
+  // Limpar
+  document.getElementById('textoPost').value = '';
+  document.getElementById('previewImagem').style.display = 'none';
+  imagemBase64 = null;
+  temPalavraProibida = false;
+  
+  alert('✅ Publicado com sucesso! Bem-vindo ao DOGE MANGA! 🐾');
+}
+</script>
+
+</body>
+</html>
 
