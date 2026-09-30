@@ -2,7 +2,7 @@
 
 
 
-lo
+
 
 
 
@@ -5591,3 +5591,503 @@ atualizarDiamantes();
 
 </body>
 </html>
+
+  <!-- =========================================
+     CHAT DOGE MANGA + ACHADINHOS
+     Cole antes do </body>
+========================================= -->
+
+<style>
+
+#dogeChatButton{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    border:none;
+    background:linear-gradient(135deg,#8b5cf6,#6d28d9);
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+    z-index:9997;
+    box-shadow:0 0 20px rgba(139,92,246,.55);
+    animation:chatPulse 2s infinite;
+}
+
+@keyframes chatPulse{
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+}
+
+
+#dogeChat{
+
+    position:fixed;
+    right:18px;
+    bottom:88px;
+
+    width:310px;
+    max-width:calc(100vw - 36px);
+
+    background:#0b1020;
+
+    border:1px solid rgba(139,92,246,.55);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    z-index:9996;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.55),
+        0 0 25px rgba(139,92,246,.15);
+
+    display:none;
+
+}
+
+
+#dogeChat.active{
+    display:block;
+    animation:chatOpen .25s ease;
+}
+
+
+@keyframes chatOpen{
+
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
+}
+
+
+.dogeChatHeader{
+
+    display:flex;
+    align-items:center;
+
+    gap:10px;
+
+    padding:13px;
+
+    background:linear-gradient(
+        135deg,
+        #111827,
+        #17122c
+    );
+
+    border-bottom:1px solid #252b42;
+
+}
+
+
+.dogeAvatar{
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#151b31;
+
+    font-size:25px;
+
+    box-shadow:
+        0 0 12px rgba(250,204,21,.35);
+
+}
+
+
+.dogeChatTitle{
+    flex:1;
+}
+
+
+.dogeChatTitle strong{
+
+    display:block;
+
+    color:#fff;
+
+    font-size:15px;
+
+}
+
+
+.dogeOnline{
+
+    font-size:11px;
+
+    color:#86efac;
+
+}
+
+
+.dogeClose{
+
+    background:none;
+
+    border:none;
+
+    color:#8d96aa;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+}
+
+
+.dogeChatBody{
+
+    padding:15px;
+
+}
+
+
+.dogeMessage{
+
+    background:#151b2d;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    color:#dce2f0;
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    margin-bottom:10px;
+
+}
+
+
+.dogeMessage strong{
+
+    color:#facc15;
+
+}
+
+
+.dogeStore{
+
+    background:linear-gradient(
+        135deg,
+        rgba(250,204,21,.10),
+        rgba(139,92,246,.10)
+    );
+
+    border:1px solid rgba(250,204,21,.25);
+
+    border-radius:15px;
+
+    padding:13px;
+
+    margin-top:10px;
+
+}
+
+
+.dogeStoreTitle{
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    color:#fff;
+
+    margin-bottom:5px;
+
+}
+
+
+.dogeStoreText{
+
+    font-size:12px;
+
+    color:#aab2c5;
+
+    line-height:1.4;
+
+    margin-bottom:10px;
+
+}
+
+
+.dogeShopButton{
+
+    display:block;
+
+    width:100%;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    padding:11px;
+
+    border-radius:12px;
+
+    background:#facc15;
+
+    color:#111827;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    transition:.2s;
+
+}
+
+
+.dogeShopButton:hover{
+
+    transform:scale(1.02);
+
+}
+
+
+.dogeAffiliate{
+
+    margin-top:8px;
+
+    font-size:9px;
+
+    text-align:center;
+
+    color:#687187;
+
+}
+
+
+.dogeChatFooter{
+
+    padding:10px 15px;
+
+    text-align:center;
+
+    font-size:10px;
+
+    color:#596277;
+
+    border-top:1px solid #1c2439;
+
+}
+
+</style>
+
+
+<!-- BOTÃO FLUTUANTE -->
+
+<button
+    id="dogeChatButton"
+    onclick="abrirDogeChat()"
+    aria-label="Abrir chat Doge Manga">
+
+    🐕💬
+
+</button>
+
+
+<!-- CHAT -->
+
+<div id="dogeChat">
+
+
+    <div class="dogeChatHeader">
+
+        <div class="dogeAvatar">
+            🐕
+        </div>
+
+
+        <div class="dogeChatTitle">
+
+            <strong>
+                Doge Manga
+            </strong>
+
+            <span class="dogeOnline">
+                ● Online
+            </span>
+
+        </div>
+
+
+        <button
+            class="dogeClose"
+            onclick="fecharDogeChat()">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div class="dogeChatBody">
+
+
+        <div class="dogeMessage">
+
+            👋 Olá!
+
+            <br>
+
+            Sou o Doge Manga. 🐕
+
+            <br><br>
+
+            Quer dar uma olhada nos
+            <strong>achadinhos</strong>
+            antes de sair?
+
+        </div>
+
+
+        <div class="dogeStore">
+
+            <div class="dogeStoreTitle">
+
+                🛍️ Achadinhos do Gilson
+
+            </div>
+
+
+            <div class="dogeStoreText">
+
+                Confira produtos e ofertas
+                selecionados na Shopee.
+
+            </div>
+
+
+            <a
+                class="dogeShopButton"
+                href="https://collshp.com/gilson009760?share_channel_code=1&view=storefront"
+                target="_blank"
+                rel="noopener noreferrer"
+                onclick="registrarCliqueShopee()">
+
+                🛒 VER ACHADINHOS
+
+            </a>
+
+
+            <div class="dogeAffiliate">
+
+                Alguns links podem gerar comissão
+                sem custo adicional para você.
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="dogeChatFooter">
+
+        Doge Manga • Achadinhos do Gilson
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+function abrirDogeChat(){
+
+    document
+        .getElementById("dogeChat")
+        .classList.add("active");
+
+}
+
+
+function fecharDogeChat(){
+
+    document
+        .getElementById("dogeChat")
+        .classList.remove("active");
+
+}
+
+
+/* Pequeno registro local de cliques */
+
+function registrarCliqueShopee(){
+
+    let cliques =
+        parseInt(
+            localStorage.getItem(
+                "dogeMangaShopeeClicks"
+            )
+        ) || 0;
+
+
+    cliques++;
+
+
+    localStorage.setItem(
+        "dogeMangaShopeeClicks",
+        cliques
+    );
+
+}
+
+
+/*
+Abre o chat automaticamente somente uma vez
+por navegador, depois de alguns segundos.
+*/
+
+setTimeout(function(){
+
+    const visto =
+        localStorage.getItem(
+            "dogeMangaChatVisto"
+        );
+
+
+    if(!visto){
+
+        abrirDogeChat();
+
+        localStorage.setItem(
+            "dogeMangaChatVisto",
+            "1"
+        );
+
+    }
+
+},5000);
+
+</script>    
