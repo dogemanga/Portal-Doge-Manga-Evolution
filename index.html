@@ -2,7 +2,7 @@
 
 
 
-
+lo
 
 
 
@@ -4811,3 +4811,783 @@ target="_blank">
 <a href="criar-token.html" class="btn">
     🚀 Criar Minha Criptomoeda
 </a>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doge Manga Evolution</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#050816;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* HEADER */
+header{
+    text-align:center;
+    padding:35px 15px 20px;
+}
+
+.logo{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:10px;
+    filter:drop-shadow(0 0 15px #facc15);
+}
+
+h1{
+    color:#facc15;
+    font-size:28px;
+    margin-bottom:6px;
+}
+
+.subtitle{
+    color:#aab2c5;
+    font-size:14px;
+}
+
+/* PAINEL DE DIAMANTES */
+.diamond-panel{
+    width:calc(100% - 30px);
+    max-width:520px;
+    margin:15px auto;
+    padding:18px;
+    border:1px solid rgba(250,204,21,.35);
+    border-radius:18px;
+    background:linear-gradient(
+        145deg,
+        rgba(250,204,21,.12),
+        rgba(139,92,246,.10)
+    );
+    box-shadow:0 0 25px rgba(250,204,21,.08);
+}
+
+.diamond-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.diamond-score{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.diamond{
+    font-size:38px;
+    display:inline-block;
+    animation:diamondGlow 1.5s infinite alternate;
+}
+
+@keyframes diamondGlow{
+    from{
+        transform:scale(1);
+        filter:drop-shadow(0 0 4px #60a5fa);
+    }
+    to{
+        transform:scale(1.15) rotate(4deg);
+        filter:drop-shadow(0 0 18px #60a5fa);
+    }
+}
+
+.score-number{
+    font-size:25px;
+    font-weight:bold;
+    color:#fff;
+}
+
+.level{
+    color:#facc15;
+    font-size:13px;
+    font-weight:bold;
+}
+
+/* PROGRESSO */
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin:14px 0 7px;
+    font-size:12px;
+    color:#b9c1d3;
+}
+
+.progress{
+    width:100%;
+    height:10px;
+    background:#171d30;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    width:0%;
+    height:100%;
+    border-radius:20px;
+    background:linear-gradient(90deg,#60a5fa,#a78bfa,#facc15);
+    box-shadow:0 0 12px rgba(96,165,250,.7);
+    transition:width .5s ease;
+}
+
+/* BOTÕES */
+.actions{
+    width:calc(100% - 30px);
+    max-width:520px;
+    margin:15px auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.btn{
+    border:0;
+    border-radius:14px;
+    padding:14px 10px;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+    font-size:14px;
+    transition:.2s;
+}
+
+.btn:active{
+    transform:scale(.96);
+}
+
+.share{
+    background:linear-gradient(135deg,#8b5cf6,#6d28d9);
+    box-shadow:0 0 15px rgba(139,92,246,.25);
+}
+
+.bonus{
+    background:linear-gradient(135deg,#f59e0b,#d97706);
+    box-shadow:0 0 15px rgba(245,158,11,.2);
+}
+
+/* CARTÕES */
+.container{
+    width:calc(100% - 30px);
+    max-width:900px;
+    margin:20px auto;
+}
+
+.card{
+    background:#0b1020;
+    border:1px solid #1d263d;
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:15px;
+}
+
+.card h2{
+    color:#facc15;
+    font-size:19px;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#aab2c5;
+    line-height:1.5;
+    font-size:14px;
+}
+
+/* TICKER */
+.ticker{
+    display:flex;
+    gap:10px;
+    overflow:hidden;
+    margin:15px 0;
+}
+
+.coin{
+    flex:1;
+    min-width:100px;
+    background:#0b1020;
+    border:1px solid #1d263d;
+    border-radius:14px;
+    padding:12px;
+    text-align:center;
+}
+
+.coin strong{
+    display:block;
+    color:#fff;
+}
+
+.coin span{
+    color:#7dd3fc;
+    font-size:12px;
+}
+
+/* NOTIFICAÇÃO */
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translateX(-50%) translateY(100px);
+    background:#111827;
+    border:1px solid #facc15;
+    color:#fff;
+    padding:13px 18px;
+    border-radius:14px;
+    z-index:9999;
+    opacity:0;
+    transition:.35s;
+    box-shadow:0 0 25px rgba(0,0,0,.5);
+    font-size:14px;
+    text-align:center;
+}
+
+.toast.show{
+    transform:translateX(-50%) translateY(0);
+    opacity:1;
+}
+
+/* DIAMANTES FLUTUANDO */
+.floating-diamond{
+    position:fixed;
+    pointer-events:none;
+    font-size:22px;
+    animation:floatDiamond 1s ease-out forwards;
+    z-index:9998;
+}
+
+@keyframes floatDiamond{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-100px) scale(1.5);
+    }
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:30px 15px;
+    color:#626b80;
+    font-size:12px;
+}
+
+/* CELULAR */
+@media(max-width:500px){
+    h1{
+        font-size:24px;
+    }
+
+    .actions{
+        grid-template-columns:1fr;
+    }
+
+    .diamond-panel{
+        padding:16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <!--
+    Se sua imagem do logo tiver outro nome,
+    troque "images/logo.png" pelo nome correto.
+    -->
+
+    <img
+        src="images/logo.png"
+        class="logo"
+        alt="Doge Manga"
+        onerror="this.style.display='none'"
+    >
+
+    <h1>🐕 DOGE MANGA</h1>
+
+    <div class="subtitle">
+        Evolution Portal
+    </div>
+
+</header>
+
+
+<!-- DIAMANTES -->
+
+<section class="diamond-panel">
+
+    <div class="diamond-top">
+
+        <div class="diamond-score">
+
+            <div class="diamond">
+                💎
+            </div>
+
+            <div>
+                <div class="score-number">
+                    <span id="diamonds">0</span>
+                </div>
+
+                <div class="level" id="level">
+                    Nível Bronze
+                </div>
+            </div>
+
+        </div>
+
+        <div>
+            <span style="font-size:12px;color:#aab2c5;">
+                Pontuação
+            </span>
+        </div>
+
+    </div>
+
+
+    <div class="progress-info">
+
+        <span id="progressText">
+            0 / 100 💎
+        </span>
+
+        <span id="nextLevel">
+            Próximo nível
+        </span>
+
+    </div>
+
+    <div class="progress">
+
+        <div
+            class="progress-bar"
+            id="progressBar">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BOTÕES -->
+
+<section class="actions">
+
+    <button
+        class="btn share"
+        onclick="compartilharPortal()">
+
+        📤 Compartilhar Portal
+
+    </button>
+
+
+    <button
+        class="btn bonus"
+        onclick="ganharBonus()">
+
+        💎 Ganhar Diamantes
+
+    </button>
+
+</section>
+
+
+<!-- TICKER -->
+
+<div class="container">
+
+    <div class="ticker">
+
+        <div class="coin">
+            <strong>DGM</strong>
+            <span>Dogemanga</span>
+        </div>
+
+        <div class="coin">
+            <strong>BTC</strong>
+            <span>Bitcoin</span>
+        </div>
+
+        <div class="coin">
+            <strong>ETH</strong>
+            <span>Ethereum</span>
+        </div>
+
+        <div class="coin">
+            <strong>SOL</strong>
+            <span>Solana</span>
+        </div>
+
+        <div class="coin">
+            <strong>XRP</strong>
+            <span>XRP</span>
+        </div>
+
+    </div>
+
+
+    <!-- CARTÃO PRINCIPAL -->
+
+    <div class="card">
+
+        <h2>
+            🚀 Bem-vindo ao Portal Doge Manga
+        </h2>
+
+        <p>
+            Acompanhe criptomoedas, projetos, novidades
+            e participe da evolução do Doge Manga.
+        </p>
+
+    </div>
+
+
+    <!-- COMUNIDADE -->
+
+    <div class="card">
+
+        <h2>
+            💎 Como ganhar diamantes?
+        </h2>
+
+        <p>
+            Compartilhe o portal com seus amigos e
+            acumule pontos. Quanto mais você participa,
+            maior fica seu nível.
+        </p>
+
+    </div>
+
+
+    <!-- NÍVEIS -->
+
+    <div class="card">
+
+        <h2>
+            🏆 Níveis
+        </h2>
+
+        <p>
+            🥉 Bronze — 0 💎<br>
+            🥈 Prata — 100 💎<br>
+            🥇 Ouro — 500 💎<br>
+            💎 Diamante — 1.000 💎<br>
+            👑 Lendário — 5.000 💎
+        </p>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<footer>
+
+    Doge Manga Evolution © 2026
+
+</footer>
+
+
+<script>
+
+/* ==========================================
+   SISTEMA DE DIAMANTES
+========================================== */
+
+let diamonds =
+    parseInt(
+        localStorage.getItem("dogeMangaDiamonds")
+    ) || 0;
+
+
+/* Atualiza tela */
+
+function atualizarDiamantes(){
+
+    document.getElementById("diamonds")
+        .textContent = diamonds.toLocaleString("pt-BR");
+
+
+    let level = "Nível Bronze";
+    let current = diamonds;
+    let next = 100;
+
+
+    if(diamonds >= 5000){
+
+        level = "👑 Nível Lendário";
+        current = diamonds - 5000;
+        next = 5000;
+
+    }else if(diamonds >= 1000){
+
+        level = "💎 Nível Diamante";
+        current = diamonds - 1000;
+        next = 5000;
+
+    }else if(diamonds >= 500){
+
+        level = "🥇 Nível Ouro";
+        current = diamonds - 500;
+        next = 1000;
+
+    }else if(diamonds >= 100){
+
+        level = "🥈 Nível Prata";
+        current = diamonds - 100;
+        next = 500;
+
+    }
+
+
+    document.getElementById("level")
+        .textContent = level;
+
+
+    let percent =
+        Math.min(
+            (current / next) * 100,
+            100
+        );
+
+
+    document.getElementById("progressBar")
+        .style.width = percent + "%";
+
+
+    document.getElementById("progressText")
+        .textContent =
+        current.toLocaleString("pt-BR")
+        + " / "
+        + next.toLocaleString("pt-BR")
+        + " 💎";
+
+
+    localStorage.setItem(
+        "dogeMangaDiamonds",
+        diamonds
+    );
+
+}
+
+
+/* Adicionar diamantes */
+
+function adicionarDiamantes(valor){
+
+    diamonds += valor;
+
+    atualizarDiamantes();
+
+    mostrarToast(
+        "+" + valor + " 💎 Diamantes!"
+    );
+
+    criarDiamantesAnimados();
+
+}
+
+
+/* ==========================================
+   COMPARTILHAMENTO
+========================================== */
+
+async function compartilharPortal(){
+
+    const dados = {
+
+        title:"🐕 Doge Manga Evolution",
+
+        text:
+        "🚀 Conheça o Portal Doge Manga! " +
+        "Cripto, projetos e novidades. 💎",
+
+        url:window.location.href
+
+    };
+
+
+    try{
+
+        if(
+            navigator.share
+        ){
+
+            await navigator.share(dados);
+
+            /*
+            O usuário abriu o compartilhamento.
+            Não damos pontos antes da ação.
+            */
+
+            adicionarDiamantes(10);
+
+        }else{
+
+            await navigator.clipboard.writeText(
+                window.location.href
+            );
+
+            adicionarDiamantes(5);
+
+            mostrarToast(
+                "🔗 Link copiado! +5 💎"
+            );
+
+        }
+
+    }catch(error){
+
+        /*
+        Usuário cancelou o compartilhamento.
+        Não adiciona pontos.
+        */
+
+        console.log(
+            "Compartilhamento cancelado."
+        );
+
+    }
+
+}
+
+
+/* ==========================================
+   BOTÃO DE BÔNUS
+========================================== */
+
+function ganharBonus(){
+
+    /*
+    Evita que a pessoa fique apertando
+    infinitamente para ganhar pontos.
+    */
+
+    const hoje =
+        new Date().toLocaleDateString();
+
+    const ultimoBonus =
+        localStorage.getItem(
+            "dogeMangaBonus"
+        );
+
+
+    if(ultimoBonus === hoje){
+
+        mostrarToast(
+            "💎 Bônus diário já coletado!"
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "dogeMangaBonus",
+        hoje
+    );
+
+
+    adicionarDiamantes(20);
+
+}
+
+
+/* ==========================================
+   TOAST
+========================================== */
+
+let toastTimer;
+
+function mostrarToast(texto){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = texto;
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer =
+        setTimeout(function(){
+
+            toast.classList.remove("show");
+
+        },2500);
+
+}
+
+
+/* ==========================================
+   ANIMAÇÃO DOS DIAMANTES
+========================================== */
+
+function criarDiamantesAnimados(){
+
+    for(let i = 0; i < 4; i++){
+
+        const diamond =
+            document.createElement("div");
+
+        diamond.className =
+            "floating-diamond";
+
+        diamond.textContent = "💎";
+
+
+        diamond.style.left =
+            (45 + Math.random() * 20) + "%";
+
+        diamond.style.bottom =
+            "100px";
+
+
+        document.body.appendChild(
+            diamond
+        );
+
+
+        setTimeout(function(){
+
+            diamond.remove();
+
+        },1000);
+
+    }
+
+}
+
+
+/* INICIALIZA */
+
+atualizarDiamantes();
+
+</script>
+
+</body>
+</html>
