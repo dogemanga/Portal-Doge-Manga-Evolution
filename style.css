@@ -1092,3 +1092,89 @@ display:inline-block;
 transform:scale(1.05);
 
 }
+
+
+/* ===== UNIVERSO DOGE MANGA ===== */
+
+.universo-dgm {
+  width: calc(100% - 24px);
+  max-width: 1000px;
+  margin: 25px auto;
+}
+
+.universo-titulo {
+  color: #facc15;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  padding-left: 5px;
+}
+
+.universo-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  min-height: 260px;
+  background: #050816;
+  border: 1px solid rgba(250, 204, 21, 0.35);
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.10);
+}
+
+.universo-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.72;
+}
+
+.universo-info {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 25px 20px 20px;
+  background: linear-gradient(
+    transparent,
+    rgba(5, 8, 22, 0.96)
+  );
+}
+
+.universo-info h2 {
+  margin: 25px 0 5px;
+  color: #fff;
+  font-size: 23px;
+}
+
+.universo-info p {
+  margin: 0 0 14px;
+  color: #d1d5db;
+  font-size: 14px;
+}
+
+.universo-info button {
+  border: none;
+  border-radius: 12px;
+  padding: 11px 18px;
+  background: #facc15;
+  color: #050816;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+  .universo-card img {
+    height: 280px;
+  }
+
+  .universo-info h2 {
+    font-size: 19px;
+  }
+
+  .universo-info {
+    padding: 20px 15px 15px;
+  }
+}
