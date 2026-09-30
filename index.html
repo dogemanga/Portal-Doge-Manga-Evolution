@@ -4844,3 +4844,2234 @@ target="_blank">
   </div>
 
 </section>
+
+   <!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Doge Manga Evolution | Portal Web3</title>
+
+<meta name="description"
+content="Doge Manga Evolution - Portal Web3 da rede Solana">
+
+<link rel="icon"
+href="IMG-20260727-WA0036(7).jpg">
+
+<style>
+
+/* =====================================================
+   DOGE MANGA EVOLUTION
+   NOVO PORTAL
+   ===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --gold:#facc15;
+    --gold2:#fde047;
+
+    --bg:#030712;
+    --bg2:#050816;
+
+    --card:#0b1220;
+    --card2:#111827;
+
+    --green:#22c55e;
+    --red:#ef4444;
+
+    --text:#f1f5f9;
+    --muted:#94a3b8;
+
+    --purple:#8b5cf6;
+
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    background:
+
+    radial-gradient(
+        circle at 50% 0%,
+        rgba(250,204,21,.08),
+        transparent 35%
+    ),
+
+    var(--bg);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+    padding-bottom:75px;
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+::-webkit-scrollbar{
+    width:7px;
+}
+
+::-webkit-scrollbar-track{
+    background:#020617;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#facc15;
+    border-radius:20px;
+}
+
+
+/* =====================================================
+   TICKER
+   ===================================================== */
+
+.ticker{
+
+    width:100%;
+
+    overflow:hidden;
+
+    background:#020617;
+
+    border-bottom:
+    1px solid
+    rgba(250,204,21,.18);
+
+}
+
+.ticker-track{
+
+    display:flex;
+
+    width:max-content;
+
+    gap:45px;
+
+    padding:9px 0;
+
+    animation:
+    tickerMove
+    40s linear infinite;
+
+}
+
+.ticker:hover
+.ticker-track{
+
+    animation-play-state:paused;
+
+}
+
+@keyframes tickerMove{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
+
+}
+
+.ticker-item{
+
+    display:flex;
+
+    gap:7px;
+
+    align-items:center;
+
+    white-space:nowrap;
+
+    font-size:13px;
+
+}
+
+.up{
+    color:var(--green);
+    font-weight:700;
+}
+
+.down{
+    color:var(--red);
+    font-weight:700;
+}
+
+
+/* =====================================================
+   TOPO
+   ===================================================== */
+
+.topbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    background:
+    rgba(3,7,18,.94);
+
+    backdrop-filter:blur(15px);
+
+    border-bottom:
+    1px solid
+    rgba(250,204,21,.18);
+
+    padding:12px 18px;
+
+}
+
+.topbar-inner{
+
+    max-width:1250px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+}
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:var(--gold);
+
+    text-decoration:none;
+
+    font-weight:800;
+
+    font-size:16px;
+
+}
+
+.brand img{
+
+    width:43px;
+
+    height:43px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+    2px solid
+    var(--gold);
+
+    box-shadow:
+    0 0 18px
+    rgba(250,204,21,.35);
+
+}
+
+.menu-button{
+
+    border:
+    1px solid
+    rgba(250,204,21,.35);
+
+    background:
+    rgba(250,204,21,.08);
+
+    color:var(--gold);
+
+    font-size:27px;
+
+    border-radius:10px;
+
+    padding:4px 12px;
+
+    cursor:pointer;
+
+}
+
+.menu{
+
+    display:none;
+
+    position:absolute;
+
+    right:15px;
+
+    top:70px;
+
+    width:270px;
+
+    background:#050816;
+
+    border:
+    1px solid
+    rgba(250,204,21,.3);
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 15px 50px
+    rgba(0,0,0,.6);
+
+}
+
+.menu.open{
+    display:block;
+}
+
+.menu a{
+
+    display:block;
+
+    color:var(--text);
+
+    text-decoration:none;
+
+    padding:15px 18px;
+
+    border-bottom:
+    1px solid
+    rgba(255,255,255,.05);
+
+}
+
+.menu a:hover{
+
+    background:
+    rgba(250,204,21,.08);
+
+    color:var(--gold);
+
+}
+
+
+/* =====================================================
+   BUSCA
+   ===================================================== */
+
+.search-area{
+
+    max-width:1250px;
+
+    margin:18px auto;
+
+    padding:0 18px;
+
+}
+
+.search{
+
+    width:100%;
+
+    background:#0b1220;
+
+    border:
+    1px solid
+    rgba(250,204,21,.35);
+
+    border-radius:14px;
+
+    padding:15px 18px;
+
+    color:white;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.search:focus{
+
+    border-color:var(--gold);
+
+    box-shadow:
+    0 0 20px
+    rgba(250,204,21,.1);
+
+}
+
+
+/* =====================================================
+   HERO
+   ===================================================== */
+
+.hero{
+
+    max-width:1250px;
+
+    margin:20px auto;
+
+    padding:0 18px;
+
+}
+
+.hero-box{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:520px;
+
+    border-radius:28px;
+
+    border:
+    1px solid
+    rgba(250,204,21,.35);
+
+    background:#050816;
+
+    box-shadow:
+    0 0 45px
+    rgba(250,204,21,.08);
+
+}
+
+.hero-box img{
+
+    width:100%;
+
+    height:520px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    padding:35px;
+
+    background:
+
+    linear-gradient(
+        transparent 25%,
+        rgba(3,7,18,.95)
+    );
+
+}
+
+.hero-content{
+
+    max-width:650px;
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    background:
+    rgba(250,204,21,.12);
+
+    color:var(--gold);
+
+    border:
+    1px solid
+    rgba(250,204,21,.35);
+
+    border-radius:30px;
+
+    padding:7px 14px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+.hero h1{
+
+    font-size:48px;
+
+    color:var(--gold);
+
+    line-height:1.1;
+
+    margin-bottom:10px;
+
+    text-shadow:
+    0 0 25px
+    rgba(250,204,21,.3);
+
+}
+
+.hero p{
+
+    color:#e2e8f0;
+
+    font-size:17px;
+
+    margin-bottom:20px;
+
+}
+
+.buttons{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+}
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    padding:12px 19px;
+
+    border-radius:11px;
+
+    text-decoration:none;
+
+    font-weight:800;
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.btn:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.btn-gold{
+
+    background:var(--gold);
+
+    color:#030712;
+
+}
+
+.btn-purple{
+
+    background:var(--purple);
+
+    color:white;
+
+}
+
+.btn-dark{
+
+    background:#111827;
+
+    color:white;
+
+    border:
+    1px solid
+    rgba(255,255,255,.12);
+
+}
+
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.container{
+
+    width:100%;
+
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:0 18px;
+
+}
+
+.section{
+
+    margin-top:28px;
+
+}
+
+.section-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+.section-title h2{
+
+    color:var(--gold);
+
+    font-size:23px;
+
+}
+
+.section-title span{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   CARDS
+   ===================================================== */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(220px,1fr)
+    );
+
+    gap:15px;
+
+}
+
+.card{
+
+    background:
+    linear-gradient(
+        145deg,
+        #0b1220,
+        #080e1b
+    );
+
+    border:
+    1px solid
+    rgba(250,204,21,.15);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    transition:.25s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:
+    rgba(250,204,21,.4);
+
+    box-shadow:
+    0 12px 35px
+    rgba(0,0,0,.3);
+
+}
+
+
+/* =====================================================
+   DGM
+   ===================================================== */
+
+.dgm-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.dgm-logo{
+
+    width:75px;
+
+    height:75px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+    3px solid
+    var(--gold);
+
+    box-shadow:
+    0 0 20px
+    rgba(250,204,21,.3);
+
+}
+
+.dgm-info h3{
+
+    color:var(--gold);
+
+    font-size:20px;
+
+}
+
+.dgm-info p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+.status{
+
+    display:inline-block;
+
+    margin-top:8px;
+
+    color:#22c55e;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+/* =====================================================
+   MERCADO
+   ===================================================== */
+
+.market-card{
+
+    text-align:center;
+
+}
+
+.market-icon{
+
+    font-size:35px;
+
+    margin-bottom:8px;
+
+}
+
+.market-name{
+
+    color:var(--gold);
+
+    font-weight:800;
+
+}
+
+.market-price{
+
+    font-size:22px;
+
+    font-weight:800;
+
+    margin:6px 0;
+
+}
+
+
+/* =====================================================
+   DOGE + PEPE
+   ===================================================== */
+
+.universe{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    border:
+    1px solid
+    rgba(250,204,21,.3);
+
+    background:#050816;
+
+}
+
+.universe img{
+
+    width:100%;
+
+    height:400px;
+
+    object-fit:cover;
+
+    display:block;
+
+}
+
+.universe-info{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    right:0;
+
+    padding:70px 25px 25px;
+
+    background:
+    linear-gradient(
+        transparent,
+        rgba(3,7,18,.98)
+    );
+
+}
+
+.universe-info h2{
+
+    color:var(--gold);
+
+    font-size:30px;
+
+    margin-bottom:5px;
+
+}
+
+.universe-info p{
+
+    color:#cbd5e1;
+
+}
+
+
+/* =====================================================
+   AÇÕES
+   ===================================================== */
+
+.action-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(
+        auto-fit,
+        minmax(220px,1fr)
+    );
+
+    gap:15px;
+
+}
+
+.action{
+
+    text-decoration:none;
+
+    color:white;
+
+    background:#0b1220;
+
+    border:
+    1px solid
+    rgba(250,204,21,.18);
+
+    border-radius:17px;
+
+    padding:22px;
+
+    transition:.2s;
+
+}
+
+.action:hover{
+
+    border-color:var(--gold);
+
+    transform:translateY(-3px);
+
+}
+
+.action-icon{
+
+    font-size:30px;
+
+    margin-bottom:8px;
+
+}
+
+.action h3{
+
+    color:var(--gold);
+
+    margin-bottom:5px;
+
+}
+
+.action p{
+
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+
+/* =====================================================
+   SHOPEE
+   ===================================================== */
+
+.shop{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(250,204,21,.09),
+        rgba(139,92,246,.08)
+    );
+
+    border:
+    1px solid
+    rgba(250,204,21,.3);
+
+    border-radius:20px;
+
+    padding:25px;
+
+}
+
+.shop h2{
+
+    color:var(--gold);
+
+    margin-bottom:5px;
+
+}
+
+.shop p{
+
+    color:var(--muted);
+
+}
+
+
+/* =====================================================
+   LAUNCHPAD
+   ===================================================== */
+
+.launch{
+
+    text-align:center;
+
+    padding:28px;
+
+    background:#0b1220;
+
+    border-radius:20px;
+
+    border:
+    1px solid
+    rgba(250,204,21,.18);
+
+}
+
+.launch h2{
+
+    color:var(--gold);
+
+    margin-bottom:8px;
+
+}
+
+.launch p{
+
+    color:var(--muted);
+
+    margin-bottom:18px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer{
+
+    max-width:1250px;
+
+    margin:40px auto 0;
+
+    padding:30px 18px;
+
+    text-align:center;
+
+    border-top:
+    1px solid
+    rgba(250,204,21,.15);
+
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+footer strong{
+
+    color:var(--gold);
+
+}
+
+
+/* =====================================================
+   BOTÃO ASSISTENTE
+   ===================================================== */
+
+.assistente{
+
+    position:fixed;
+
+    right:18px;
+
+    bottom:70px;
+
+    z-index:2000;
+
+    background:
+    linear-gradient(
+        135deg,
+        #8b5cf6,
+        #6366f1
+    );
+
+    color:white;
+
+    padding:14px 20px;
+
+    border-radius:30px;
+
+    font-weight:800;
+
+    box-shadow:
+    0 0 30px
+    rgba(139,92,246,.45);
+
+    cursor:pointer;
+
+}
+
+.assistente:hover{
+
+    transform:scale(1.03);
+
+}
+
+
+/* =====================================================
+   NOTIFICAÇÃO
+   ===================================================== */
+
+.notificacao{
+
+    position:fixed;
+
+    right:18px;
+
+    bottom:130px;
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:var(--gold);
+
+    color:#030712;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    box-shadow:
+    0 0 25px
+    rgba(250,204,21,.4);
+
+    z-index:2000;
+
+}
+
+.notificacao span{
+
+    position:absolute;
+
+    right:-3px;
+
+    top:-5px;
+
+    background:#ef4444;
+
+    color:white;
+
+    width:21px;
+
+    height:21px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:11px;
+
+    font-weight:bold;
+
+}
+
+
+/* =====================================================
+   BARRA INFERIOR
+   ===================================================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    height:58px;
+
+    background:
+    rgba(2,6,23,.97);
+
+    border-top:
+    1px solid
+    rgba(250,204,21,.2);
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+    align-items:center;
+
+    z-index:1500;
+
+}
+
+.bottom-nav a{
+
+    color:var(--muted);
+
+    text-decoration:none;
+
+    font-size:12px;
+
+    text-align:center;
+
+}
+
+.bottom-nav a:first-child{
+
+    color:var(--gold);
+
+}
+
+.bottom-nav span{
+
+    display:block;
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media(max-width:700px){
+
+    .hero-box{
+
+        min-height:440px;
+
+    }
+
+    .hero-box img{
+
+        height:440px;
+
+    }
+
+    .hero-overlay{
+
+        padding:22px;
+
+    }
+
+    .hero h1{
+
+        font-size:34px;
+
+    }
+
+    .hero p{
+
+        font-size:14px;
+
+    }
+
+    .universe img{
+
+        height:310px;
+
+    }
+
+    .universe-info{
+
+        padding:65px 18px 18px;
+
+    }
+
+    .universe-info h2{
+
+        font-size:22px;
+
+    }
+
+    .dgm-card{
+
+        align-items:flex-start;
+
+    }
+
+    .assistente{
+
+        right:12px;
+
+        bottom:70px;
+
+        font-size:13px;
+
+        padding:12px 15px;
+
+    }
+
+    .bottom-nav{
+
+        gap:20px;
+
+    }
+
+    .bottom-nav a{
+
+        font-size:10px;
+
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR PEQUENO
+   ===================================================== */
+
+@media(max-width:420px){
+
+    .hero h1{
+
+        font-size:29px;
+
+    }
+
+    .hero-box img{
+
+        height:430px;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
+
+    .buttons{
+
+        width:100%;
+
+    }
+
+    .bottom-nav{
+
+        gap:10px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TICKER
+     ===================================================== -->
+
+<div class="ticker">
+
+<div class="ticker-track">
+
+<div class="ticker-item">
+₿ BTC
+<strong>R$ 434.177</strong>
+<span class="up">+0.05%</span>
+</div>
+
+<div class="ticker-item">
+♦ ETH
+<strong>R$ 13.899</strong>
+<span class="down">-0.16%</span>
+</div>
+
+<div class="ticker-item">
+◎ SOL
+<strong>Mercado Solana</strong>
+<span class="up">ATIVO</span>
+</div>
+
+<div class="ticker-item">
+🐕 DGM
+<strong>Doge Manga</strong>
+<span class="up">SOLANA</span>
+</div>
+
+<div class="ticker-item">
+🐸 PEPE
+<strong>PepeCoin</strong>
+<span class="up">MEME</span>
+</div>
+
+<div class="ticker-item">
+₿ BTC
+<strong>R$ 434.177</strong>
+<span class="up">+0.05%</span>
+</div>
+
+<div class="ticker-item">
+♦ ETH
+<strong>R$ 13.899</strong>
+<span class="down">-0.16%</span>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =====================================================
+     TOPO
+     ===================================================== -->
+
+<header class="topbar">
+
+<div class="topbar-inner">
+
+<a class="brand" href="#inicio">
+
+<img
+src="IMG-20260727-WA0036(7).jpg"
+alt="Doge Manga">
+
+<span>
+🐕 DOGE MANGA EVOLUTION
+</span>
+
+</a>
+
+
+<button
+class="menu-button"
+onclick="toggleMenu()">
+
+☰
+
+</button>
+
+
+<div
+class="menu"
+id="menu">
+
+<a href="#inicio">
+🏠 Início
+</a>
+
+<a href="#mercado">
+📊 Mercado
+</a>
+
+<a href="#universo">
+🌐 Universo
+</a>
+
+<a href="#projetos">
+🚀 Projetos
+</a>
+
+<a href="#shop">
+🛍️ Achadinhos
+</a>
+
+<a href="#sobre">
+ℹ️ Sobre
+</a>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- =====================================================
+     BUSCA
+     ===================================================== -->
+
+<div class="search-area">
+
+<input
+class="search"
+id="search"
+type="search"
+placeholder="🔎 Buscar: nome, símbolo ou contrato...">
+
+</div>
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section
+class="hero"
+id="inicio">
+
+<div class="hero-box">
+
+<!-- IMAGEM PRINCIPAL ANTIGA PRESERVADA -->
+
+<img
+src="IMG-20260727-WA0036(7).jpg"
+alt="Doge Manga Evolution">
+
+<div class="hero-overlay">
+
+<div class="hero-content">
+
+<span class="badge">
+✅ VERIFICADO • REDE SOLANA
+</span>
+
+<h1>
+🐕 DOGE MANGA
+</h1>
+
+<p>
+Uma experiência Web3 criada para reunir
+cripto, comunidade, projetos e o universo
+Doge Manga em um único portal.
+</p>
+
+<div class="buttons">
+
+<a
+class="btn btn-gold"
+href="https://phantom.app/"
+target="_blank">
+
+👻 Abrir Phantom
+
+</a>
+
+<a
+class="btn btn-purple"
+href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE"
+target="_blank">
+
+📊 Ver DGM
+
+</a>
+
+<a
+class="btn btn-dark"
+href="#universo">
+
+🌐 Explorar Portal
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     DGM
+     ===================================================== -->
+
+<main class="container">
+
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>🐕 Doge Manga $DGM</h2>
+
+<span>Solana</span>
+
+</div>
+
+
+<div class="card dgm-card">
+
+<img
+class="dgm-logo"
+src="IMG-20260727-WA0036(7).jpg"
+alt="Doge Manga">
+
+<div class="dgm-info">
+
+<h3>
+DOGE MANGA
+</h3>
+
+<p>
+Token da comunidade Doge Manga na rede Solana.
+</p>
+
+<span class="status">
+🟢 Portal ativo
+</span>
+
+<div class="buttons">
+
+<a
+class="btn btn-gold"
+href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE"
+target="_blank">
+
+📈 Gráfico DGM
+
+</a>
+
+<a
+class="btn btn-dark"
+href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE"
+target="_blank">
+
+🔎 Solscan
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     MERCADO
+     ===================================================== -->
+
+<section
+class="section"
+id="mercado">
+
+<div class="section-title">
+
+<h2>📊 Mercado Cripto</h2>
+
+<span>Indicadores</span>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card market-card">
+
+<div class="market-icon">₿</div>
+
+<div class="market-name">
+BITCOIN
+</div>
+
+<div class="market-price">
+R$ 434.177
+</div>
+
+<div class="up">
++0.05%
+</div>
+
+</div>
+
+
+<div class="card market-card">
+
+<div class="market-icon">♦</div>
+
+<div class="market-name">
+ETHEREUM
+</div>
+
+<div class="market-price">
+R$ 13.899
+</div>
+
+<div class="down">
+-0.16%
+</div>
+
+</div>
+
+
+<div class="card market-card">
+
+<div class="market-icon">◎</div>
+
+<div class="market-name">
+SOLANA
+</div>
+
+<div class="market-price">
+REDE SOLANA
+</div>
+
+<div class="up">
+ATIVA
+</div>
+
+</div>
+
+
+<div class="card market-card">
+
+<div class="market-icon">🐕</div>
+
+<div class="market-name">
+DOGE MANGA
+</div>
+
+<div class="market-price">
+$DGM
+</div>
+
+<div class="up">
+SOLANA
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     NOVA IMAGEM
+     ===================================================== -->
+
+<section
+class="section"
+id="universo">
+
+<div class="section-title">
+
+<h2>🌐 Universo Doge Manga</h2>
+
+<span>Nova experiência</span>
+
+</div>
+
+
+<div class="universe">
+
+<!--
+     NOVA IMAGEM
+
+     Coloque a imagem enviada
+     na mesma pasta deste arquivo
+     com o nome:
+
+     doge-pepe.jpg
+-->
+
+<img
+src="doge-pepe.jpg"
+alt="Doge Manga e PepeCoin">
+
+<div class="universe-info">
+
+<h2>
+🐕 Doge Manga × PepeCoin
+</h2>
+
+<p>
+Dois universos de memes encontrando
+a criatividade da comunidade Web3.
+</p>
+
+<a
+href="#projetos"
+class="btn btn-gold">
+
+🚀 Explorar
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     PROJETOS
+     ===================================================== -->
+
+<section
+class="section"
+id="projetos">
+
+<div class="section-title">
+
+<h2>🚀 Portal Web3</h2>
+
+<span>Explore</span>
+
+</div>
+
+
+<div class="action-grid">
+
+
+<a
+class="action"
+href="https://dogemanga.github.io/Portal-Doge-Manga-Evolution/"
+target="_blank">
+
+<div class="action-icon">
+🌐
+</div>
+
+<h3>
+Portal Doge Manga
+</h3>
+
+<p>
+Acesse a experiência completa.
+</p>
+
+</a>
+
+
+<a
+class="action"
+href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE"
+target="_blank">
+
+<div class="action-icon">
+📊
+</div>
+
+<h3>
+DGM Market
+</h3>
+
+<p>
+Acompanhe o mercado do token.
+</p>
+
+</a>
+
+
+<a
+class="action"
+href="https://solscan.io/token/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE"
+target="_blank">
+
+<div class="action-icon">
+🔎
+</div>
+
+<h3>
+Blockchain
+</h3>
+
+<p>
+Consulte informações na Solana.
+</p>
+
+</a>
+
+
+<a
+class="action"
+href="https://phantom.app/"
+target="_blank">
+
+<div class="action-icon">
+👻
+</div>
+
+<h3>
+Phantom
+</h3>
+
+<p>
+Carteira Web3 da rede Solana.
+</p>
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SHOPEE
+     ===================================================== -->
+
+<section
+class="section"
+id="shop">
+
+<div class="shop">
+
+<div>
+
+<h2>
+🛍️ Achadinhos do Gilson
+</h2>
+
+<p>
+Produtos e ofertas selecionadas.
+</p>
+
+</div>
+
+
+<a
+class="btn btn-gold"
+href="https://collshp.com/gilson009760?view=storefront"
+target="_blank">
+
+🛒 Abrir loja
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     LAUNCHPAD
+     ===================================================== -->
+
+<section
+class="section">
+
+<div class="launch">
+
+<h2>
+🚀 Launchpad Doge Manga
+</h2>
+
+<p>
+Espaço para descobrir novos projetos
+e novas ideias dentro do universo Web3.
+</p>
+
+<a
+class="btn btn-gold"
+href="#projetos">
+
+🚀 Explorar projetos
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     SOBRE
+     ===================================================== -->
+
+<section
+class="section"
+id="sobre">
+
+<div class="card">
+
+<div class="section-title">
+
+<h2>
+ℹ️ Sobre o Portal
+</h2>
+
+</div>
+
+<p style="color:#94a3b8">
+
+O Doge Manga Evolution é um portal
+independente voltado para a comunidade,
+criptomoedas, Web3, projetos e conteúdos
+do universo Doge Manga.
+
+</p>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     NOTIFICAÇÃO
+     ===================================================== -->
+
+<div
+class="notificacao"
+onclick="mostrarAviso()">
+
+🔔
+
+<span>
+1
+</span>
+
+</div>
+
+
+<!-- =====================================================
+     ASSISTENTE
+     ===================================================== -->
+
+<div
+class="assistente"
+onclick="assistente()">
+
+🤖 Assistente Doge Manga
+
+</div>
+
+
+<!-- =====================================================
+     MENU INFERIOR
+     ===================================================== -->
+
+<nav class="bottom-nav">
+
+<a href="#inicio">
+
+<span>🏠</span>
+Início
+
+</a>
+
+<a href="#mercado">
+
+<span>📊</span>
+Mercado
+
+</a>
+
+<a href="#universo">
+
+<span>🌐</span>
+Universo
+
+</a>
+
+<a href="#projetos">
+
+<span>🚀</span>
+Projetos
+
+</a>
+
+</nav>
+
+
+<!-- =====================================================
+     RODAPÉ
+     ===================================================== -->
+
+<footer>
+
+<p>
+
+🐕 <strong>DOGE MANGA EVOLUTION</strong>
+
+</p>
+
+<p>
+
+Portal Web3 • Solana • Comunidade
+
+</p>
+
+<p style="margin-top:8px">
+
+© 2026 Doge Manga
+
+</p>
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   MENU
+   ===================================================== */
+
+function toggleMenu(){
+
+    const menu =
+    document.getElementById("menu");
+
+    menu.classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   FECHAR MENU AO CLICAR
+   ===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const menu =
+        document.getElementById("menu");
+
+        const button =
+        document.querySelector(".menu-button");
+
+        if(
+            !menu.contains(event.target)
+            &&
+            !button.contains(event.target)
+        ){
+
+            menu.classList.remove("open");
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   NOTIFICAÇÃO
+   ===================================================== */
+
+function mostrarAviso(){
+
+    alert(
+        "🔔 Bem-vindo ao Portal Doge Manga!"
+    );
+
+}
+
+
+/* =====================================================
+   ASSISTENTE
+   ===================================================== */
+
+function assistente(){
+
+    alert(
+        "🤖 Olá! Eu sou o Assistente Doge Manga.\\n\\n" +
+        "🐕 DGM • Solana\\n" +
+        "📊 Mercado\\n" +
+        "🚀 Projetos\\n" +
+        "🌐 Universo Doge Manga"
+    );
+
+}
+
+
+/* =====================================================
+   BUSCA
+   ===================================================== */
+
+const search =
+document.getElementById("search");
+
+search.addEventListener(
+    "input",
+    function(){
+
+        const termo =
+        this.value.toLowerCase().trim();
+
+        const cards =
+        document.querySelectorAll(
+            ".card, .action"
+        );
+
+        cards.forEach(
+            function(card){
+
+                const texto =
+                card.innerText.toLowerCase();
+
+                if(
+                    termo === ""
+                    ||
+                    texto.includes(termo)
+                ){
+
+                    card.style.display="";
+
+                }else{
+
+                    card.style.display="none";
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   AVISO DE CARREGAMENTO
+   ===================================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        console.log(
+            "🐕 Doge Manga Evolution carregado."
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>   
