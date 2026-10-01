@@ -2,769 +2,769 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Doge Manga Exchange</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doge Manga Evolution | Exchange — USD</title>
+<meta name="description" content="Exchange completa — preços em DÓLAR, negociação, carteira, tudo funcionando">
+<meta name="keywords" content="Doge Manga, $DGM, Criptomoedas, Exchange, Solana, Preços em USD">
+<meta name="robots" content="index, follow">
+<meta name="author" content="Doge Manga Evolution">
 
 <style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+:root {
+  --primaria: #f5a623;
+  --fundo: #0f172a;
+  --fundo-claro: #1e293b;
+  --fundo-card: #334155;
+  --verde: #10b981;
+  --vermelho: #ef4444;
+  --texto: #f8fafc;
+  --texto-fraco: #94a3b8;
+  --borda: #475569;
+  --dolar: #85bb65;
 }
 
-body{
-    font-family:Arial,sans-serif;
-    background:#050816;
-    color:#fff;
-    min-height:100vh;
+body {
+  background: linear-gradient(135deg, var(--fundo) 0%, #1a2744 100%);
+  color: var(--texto);
+  min-height: 100vh;
 }
 
-/* HEADER */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:#080b1b;
-    border-bottom:1px solid #20243d;
-    padding:15px;
+nav {
+  background: rgba(15, 23, 42, 0.95);
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--borda);
 }
 
-.header-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.nav-conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--primaria);
 }
 
-.logo-icon{
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:#facc15;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:22px;
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
 }
 
-.logo strong{
-    font-size:18px;
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--texto-fraco);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
 }
 
-.logo small{
-    display:block;
-    color:#888;
-    margin-top:3px;
+.nav-btn.ativo, .nav-btn:hover {
+  background: var(--fundo-claro);
+  color: var(--primaria);
 }
 
-/* MENU */
-
-.menu{
-    display:flex;
-    gap:8px;
-    overflow-x:auto;
-    padding-top:15px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.menu button{
-    border:0;
-    padding:9px 15px;
-    border-radius:20px;
-    background:#15192c;
-    color:#aaa;
-    white-space:nowrap;
+.aviso-teste {
+  background: rgba(133, 187, 101, 0.1);
+  border: 1px solid var(--dolar);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-.menu button.active{
-    background:#facc15;
-    color:#000;
-    font-weight:bold;
+.atualizacao {
+  font-size: 0.8rem;
+  color: var(--texto-fraco);
+  text-align: right;
+  margin-bottom: 10px;
 }
 
-/* CONTAINER */
-
-.container{
-    width:100%;
-    max-width:900px;
-    margin:auto;
-    padding:18px;
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
-/* SALDO */
-
-.balance{
-    background:linear-gradient(135deg,#121733,#1b1740);
-    border:1px solid #282d50;
-    border-radius:20px;
-    padding:20px;
-    margin-bottom:18px;
+.card {
+  background: var(--fundo-claro);
+  border-radius: 12px;
+  padding: 18px;
+  border: 1px solid var(--borda);
+  transition: transform 0.2s;
 }
 
-.balance-title{
-    color:#999;
-    font-size:14px;
+.card:hover { transform: translateY(-2px); }
+
+.card h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: var(--primaria);
 }
 
-.balance-value{
-    font-size:32px;
-    font-weight:bold;
-    margin:8px 0 15px;
+.valor-grande {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
-.balance-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+.var-positiva { color: var(--verde); }
+.var-negativa { color: var(--vermelho); }
+
+.tabela-cripto {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
 }
 
-.balance-actions button{
-    padding:13px;
-    border:0;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
+.tabela-cripto th, .tabela-cripto td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid var(--borda);
+  font-size: 0.9rem;
 }
 
-.deposit{
-    background:#22c55e;
-    color:white;
+.tabela-cripto th {
+  color: var(--texto-fraco);
+  font-weight: 600;
 }
 
-.withdraw{
-    background:#ef4444;
-    color:white;
+.form-lado-a-lado {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
-/* MERCADO */
-
-.section-title{
-    font-size:20px;
-    margin:25px 0 12px;
+.grupo-input {
+  margin-bottom: 14px;
 }
 
-.market{
-    background:#0c1022;
-    border:1px solid #20243d;
-    border-radius:18px;
-    overflow:hidden;
+.grupo-input label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--texto-fraco);
+  font-size: 0.85rem;
 }
 
-.coin{
-    display:grid;
-    grid-template-columns:1fr 100px 90px;
-    align-items:center;
-    padding:15px;
-    border-bottom:1px solid #20243d;
+.grupo-input input, .grupo-input select {
+  width: 100%;
+  padding: 12px;
+  background: var(--fundo-card);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  color: var(--texto);
+  font-size: 1rem;
 }
 
-.coin:last-child{
-    border-bottom:0;
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
-.coin-name{
-    display:flex;
-    align-items:center;
-    gap:10px;
+.btn:hover { opacity: 0.9; }
+.btn-compra { background: var(--verde); color: white; }
+.btn-venda { background: var(--vermelho); color: white; }
+.btn-primario { background: var(--primaria); color: #000; }
+
+.linha-historico {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--borda);
+  font-size: 0.9rem;
 }
 
-.coin-icon{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    background:#24294b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:bold;
+.oculto { display: none !important; }
+.vazio { text-align: center; padding: 30px; color: var(--texto-fraco); }
+.simbolo-dolar { color: var(--dolar); font-weight: bold; }
+
+@media (max-width: 768px) {
+  .form-lado-a-lado { grid-template-columns: 1fr; }
+  .nav-conteudo { flex-direction: column; align-items: flex-start; }
 }
-
-.coin-name strong{
-    display:block;
-}
-
-.coin-name small{
-    color:#777;
-}
-
-.price{
-    text-align:right;
-}
-
-.change{
-    text-align:right;
-    font-weight:bold;
-}
-
-.up{
-    color:#22c55e;
-}
-
-.down{
-    color:#ef4444;
-}
-
-/* CARTEIRA */
-
-.wallet{
-    background:#0c1022;
-    border:1px solid #20243d;
-    border-radius:18px;
-    padding:5px;
-}
-
-.asset{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px;
-    border-bottom:1px solid #20243d;
-}
-
-.asset:last-child{
-    border-bottom:0;
-}
-
-.asset-left{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.asset-icon{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:#24294b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.asset-value{
-    text-align:right;
-}
-
-.asset-value small{
-    display:block;
-    color:#777;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    color:#666;
-    padding:30px 15px 90px;
-    font-size:12px;
-}
-
-/* MENU INFERIOR */
-
-.bottom{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:30;
-    background:#080b1b;
-    border-top:1px solid #20243d;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    padding:10px 5px;
-}
-
-.bottom button{
-    border:0;
-    background:none;
-    color:#888;
-    font-size:12px;
-}
-
-.bottom button span{
-    display:block;
-    font-size:21px;
-    margin-bottom:3px;
-}
-
-.bottom button.active{
-    color:#facc15;
-}
-
-/* MODAL */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.75);
-    z-index:100;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.modal-box{
-    width:100%;
-    max-width:420px;
-    background:#10142a;
-    border:1px solid #30365b;
-    border-radius:20px;
-    padding:22px;
-}
-
-.modal-box h2{
-    margin-bottom:15px;
-}
-
-.modal-box input,
-.modal-box select{
-    width:100%;
-    padding:14px;
-    margin:7px 0;
-    border-radius:10px;
-    border:1px solid #30365b;
-    background:#080b1b;
-    color:#fff;
-}
-
-.modal-box button{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:0;
-    border-radius:10px;
-    background:#facc15;
-    color:#000;
-    font-weight:bold;
-}
-
-.close{
-    background:#292d45!important;
-    color:#fff!important;
-}
-
-@media(max-width:600px){
-
-    .coin{
-        grid-template-columns:1fr 85px 75px;
-    }
-
-    .price{
-        font-size:14px;
-    }
-
-    .change{
-        font-size:14px;
-    }
-
-}
-
 </style>
 </head>
-
 <body>
 
-<header>
-
-    <div class="header-top">
-
-        <div class="logo">
-
-            <div class="logo-icon">🐕</div>
-
-            <div>
-                <strong>Doge Manga</strong>
-                <small>Exchange</small>
-            </div>
-
-        </div>
-
-        <div>🔔</div>
-
+<nav>
+  <div class="nav-conteudo">
+    <div class="logo">🐕 DOGE MANGA</div>
+    <div class="nav-links">
+      <button class="nav-btn ativo" data-pagina="inicio">🏠 Início</button>
+      <button class="nav-btn" data-pagina="mercado">📊 Mercado</button>
+      <button class="nav-btn" data-pagina="favoritos">⭐ Favoritos</button>
+      <button class="nav-btn" data-pagina="novas">🆕 Novas</button>
+      <button class="nav-btn" data-pagina="avista">📈 À Vista</button>
+      <button class="nav-btn" data-pagina="tokenstocks">🪙 TokenStocks</button>
+      <button class="nav-btn" data-pagina="carteira">👛 Carteira</button>
+      <button class="nav-btn" data-pagina="deposito">📥 Depósito</button>
+      <button class="nav-btn" data-pagina="saque">📤 Saque</button>
+      <button class="nav-btn" data-pagina="historico">📜 Histórico</button>
     </div>
-
-    <div class="menu">
-
-        <button class="active">Favoritos</button>
-        <button>À vista</button>
-        <button>Novas</button>
-        <button>TokenStocks</button>
-        <button>Mais</button>
-
-    </div>
-
-</header>
-
-
-<main class="container">
-
-
-    <!-- SALDO -->
-
-    <section class="balance">
-
-        <div class="balance-title">
-            Patrimônio estimado
-        </div>
-
-        <div class="balance-value">
-            R$ 0,00
-        </div>
-
-        <div class="balance-actions">
-
-            <button class="deposit"
-                    onclick="openModal('deposit')">
-                📥 Depositar
-            </button>
-
-            <button class="withdraw"
-                    onclick="openModal('withdraw')">
-                📤 Sacar
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- MERCADO -->
-
-    <h2 class="section-title">
-        Mercado
-    </h2>
-
-    <section class="market">
-
-
-        <div class="coin">
-
-            <div class="coin-name">
-
-                <div class="coin-icon">₿</div>
-
-                <div>
-                    <strong>BTC / USDT</strong>
-                    <small>Bitcoin</small>
-                </div>
-
-            </div>
-
-            <div class="price">
-                $67.420
-            </div>
-
-            <div class="change up">
-                +2.41%
-            </div>
-
-        </div>
-
-
-        <div class="coin">
-
-            <div class="coin-name">
-
-                <div class="coin-icon">◎</div>
-
-                <div>
-                    <strong>SOL / USDT</strong>
-                    <small>Solana</small>
-                </div>
-
-            </div>
-
-            <div class="price">
-                $145.20
-            </div>
-
-            <div class="change up">
-                +3.18%
-            </div>
-
-        </div>
-
-
-        <div class="coin">
-
-            <div class="coin-name">
-
-                <div class="coin-icon">Ξ</div>
-
-                <div>
-                    <strong>ETH / USDT</strong>
-                    <small>Ethereum</small>
-                </div>
-
-            </div>
-
-            <div class="price">
-                $3.820
-            </div>
-
-            <div class="change down">
-                -1.21%
-            </div>
-
-        </div>
-
-
-        <div class="coin">
-
-            <div class="coin-name">
-
-                <div class="coin-icon">D</div>
-
-                <div>
-                    <strong>DGM / USDT</strong>
-                    <small>Doge Manga</small>
-                </div>
-
-            </div>
-
-            <div class="price">
-                0.000001
-            </div>
-
-            <div class="change up">
-                +8.52%
-            </div>
-
-        </div>
-
-
-        <div class="coin">
-
-            <div class="coin-name">
-
-                <div class="coin-icon">₮</div>
-
-                <div>
-                    <strong>USDT</strong>
-                    <small>Tether</small>
-                </div>
-
-            </div>
-
-            <div class="price">
-                $1.00
-            </div>
-
-            <div class="change up">
-                +0.01%
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-    <!-- CARTEIRA -->
-
-    <h2 class="section-title">
-        Minha carteira
-    </h2>
-
-    <section class="wallet">
-
-
-        <div class="asset">
-
-            <div class="asset-left">
-
-                <div class="asset-icon">◎</div>
-
-                <div>
-                    <strong>SOL</strong>
-                    <small>Solana</small>
-                </div>
-
-            </div>
-
-            <div class="asset-value">
-                0 SOL
-                <small>R$ 0,00</small>
-            </div>
-
-        </div>
-
-
-        <div class="asset">
-
-            <div class="asset-left">
-
-                <div class="asset-icon">₮</div>
-
-                <div>
-                    <strong>USDT</strong>
-                    <small>Tether</small>
-                </div>
-
-            </div>
-
-            <div class="asset-value">
-                0 USDT
-                <small>R$ 0,00</small>
-            </div>
-
-        </div>
-
-
-        <div class="asset">
-
-            <div class="asset-left">
-
-                <div class="asset-icon">D</div>
-
-                <div>
-                    <strong>DGM</strong>
-                    <small>Doge Manga</small>
-                </div>
-
-            </div>
-
-            <div class="asset-value">
-                0 DGM
-                <small>R$ 0,00</small>
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-</main>
-
-
-<footer>
-
-    Doge Manga Exchange<br>
-    Plataforma em desenvolvimento
-
-</footer>
-
-
-<!-- MENU INFERIOR -->
-
-<nav class="bottom">
-
-    <button class="active">
-        <span>⌂</span>
-        Início
-    </button>
-
-    <button>
-        <span>📊</span>
-        Mercado
-    </button>
-
-    <button>
-        <span>⇄</span>
-        Negociar
-    </button>
-
-    <button>
-        <span>👛</span>
-        Ativos
-    </button>
-
+  </div>
 </nav>
 
+<div class="container">
+  <div class="aviso-teste">
+    💵 <strong>PREÇOS EM DÓLAR (USD)</strong> | Modo de Teste — valores simulados, sem dinheiro real
+  </div>
 
-<!-- MODAL -->
-
-<div class="modal" id="modal">
-
-    <div class="modal-box">
-
-        <h2 id="modalTitle">
-            Depositar
-        </h2>
-
-        <select>
-            <option>SOL — Solana</option>
-            <option>USDT — USDT</option>
-            <option>DGM — Doge Manga</option>
-            <option>BTC — Bitcoin</option>
-            <option>ETH — Ethereum</option>
-        </select>
-
-        <input
-            type="text"
-            placeholder="Endereço da carteira"
-        >
-
-        <input
-            type="number"
-            placeholder="Quantidade"
-        >
-
-        <button onclick="alert('Função disponível após integração blockchain.')">
-            Confirmar
-        </button>
-
-        <button class="close"
-                onclick="closeModal()">
-            Fechar
-        </button>
-
+  <!-- INÍCIO -->
+  <section id="pag-inicio">
+    <h1 style="font-size: 1.8rem; margin-bottom: 12px;">Bem-vindo à Exchange 🐕</h1>
+    <p style="color: var(--texto-fraco); margin-bottom: 16px;">Preços atualizados em DÓLAR diretamente do mercado mundial.</p>
+    <div class="atualizacao" id="ultima-atualizacao"></div>
+    
+    <h2 style="margin: 24px 0 16px;">🔥 Destaques do Mercado</h2>
+    <div class="grade" id="destaques-mercado">
+      <div class="card" style="text-align:center; padding:40px;">Carregando dados do mercado...</div>
     </div>
+  </section>
 
+  <!-- MERCADO -->
+  <section id="pag-mercado" class="oculto">
+    <h2 style="margin-bottom: 12px;">📊 Mercado em Tempo Real</h2>
+    <div class="atualizacao" id="atualizacao-mercado"></div>
+    <input type="text" id="busca-moeda" placeholder="🔎 Buscar moeda (ex: BTC, Bitcoin)...">
+    <table class="tabela-cripto">
+      <thead>
+        <tr>
+          <th>Moeda</th>
+          <th>Preço (USD $)</th>
+          <th>Variação 24h</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody id="lista-moedas"></tbody>
+    </table>
+  </section>
+
+  <!-- FAVORITOS -->
+  <section id="pag-favoritos" class="oculto">
+    <h2 style="margin-bottom: 16px;">⭐ Meus Favoritos</h2>
+    <p style="color: var(--texto-fraco); margin-bottom: 16px;">Clique na estrela na página Mercado para adicionar.</p>
+    <div id="lista-favoritos" class="vazio">Nenhum favorito salvo ainda.</div>
+  </section>
+
+  <!-- NOVAS -->
+  <section id="pag-novas" class="oculto">
+    <h2 style="margin-bottom: 16px;">🆕 Moedas Recém-Listadas</h2>
+    <table class="tabela-cripto">
+      <thead>
+        <tr>
+          <th>Moeda</th>
+          <th>Preço (USD $)</th>
+          <th>Variação 24h</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody id="lista-novas">
+        <tr><td colspan="4" class="vazio">Carregando...</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- À VISTA -->
+  <section id="pag-avista" class="oculto">
+    <h2 style="margin-bottom: 16px;">📈 Negociação à Vista — Modo Teste</h2>
+    <div class="form-lado-a-lado">
+      <div class="card">
+        <h3 style="color: var(--verde); margin-bottom: 16px;">✅ COMPRAR</h3>
+        <div class="grupo-input">
+          <label>Selecione a moeda</label>
+          <select id="sel-compra">
+            <option value="BTC">Bitcoin (BTC)</option>
+            <option value="ETH">Ethereum (ETH)</option>
+            <option value="SOL">Solana (SOL)</option>
+            <option value="ADA">Cardano (ADA)</option>
+            <option value="DOGE">Dogecoin (DOGE)</option>
+            <option value="BNB">BNB</option>
+            <option value="XRP">Ripple (XRP)</option>
+          </select>
+        </div>
+        <div class="grupo-input">
+          <label>Quantidade</label>
+          <input type="number" id="qtd-compra" placeholder="0.00" step="0.0001" oninput="atualizarCalcCompra()">
+        </div>
+        <div class="grupo-input">
+          <label>Valor Total Estimado (USD $)</label>
+          <input type="text" id="valor-compra" placeholder="$ 0.00" readonly style="background:#1f2937;">
+        </div>
+        <button class="btn btn-compra" onclick="registrarOperacao('compra')">COMPRAR AGORA</button>
+      </div>
+
+      <div class="card">
+        <h3 style="color: var(--vermelho); margin-bottom: 16px;">❌ VENDER</h3>
+        <div class="grupo-input">
+          <label>Selecione a moeda</label>
+          <select id="sel-venda">
+            <option value="BTC">Bitcoin (BTC)</option>
+            <option value="ETH">Ethereum (ETH)</option>
+            <option value="SOL">Solana (SOL)</option>
+            <option value="ADA">Cardano (ADA)</option>
+            <option value="DOGE">Dogecoin (DOGE)</option>
+            <option value="BNB">BNB</option>
+            <option value="XRP">Ripple (XRP)</option>
+          </select>
+        </div>
+        <div class="grupo-input">
+          <label>Quantidade</label>
+          <input type="number" id="qtd-venda" placeholder="0.00" step="0.0001" oninput="atualizarCalcVenda()">
+        </div>
+        <div class="grupo-input">
+          <label>Valor Total Estimado (USD $)</label>
+          <input type="text" id="valor-venda" placeholder="$ 0.00" readonly style="background:#1f2937;">
+        </div>
+        <button class="btn btn-venda" onclick="registrarOperacao('venda')">VENDER AGORA</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOKENSTOCKS -->
+  <section id="pag-tokenstocks" class="oculto">
+    <h2 style="margin-bottom: 16px;">🪙 TokenStocks — Ecossistema</h2>
+    <p style="color: var(--texto-fraco); margin-bottom: 16px;">Projetos do ecossistema Solana e parceiros.</p>
+    <div class="grade" id="lista-tokenstocks">
+      <div class="card" style="text-align:center; padding:40px;">Carregando...</div>
+    </div>
+  </section>
+
+  <!-- CARTEIRA -->
+  <section id="pag-carteira" class="oculto">
+    <h2 style="margin-bottom: 16px;">👛 Minha Carteira</h2>
+    <div class="card" style="margin-bottom: 20px;">
+      <h3>Saldo Disponível (Simulado)</h3>
+      <div class="valor-grande simbolo-dolar" id="saldo-total">$ 100,000.00</div>
+      <p style="color: var(--texto-fraco); font-size: 0.85rem;">Saldo inicial de teste — sem valor real</p>
+    </div>
+    <h3 style="margin-bottom: 12px;">Meus Ativos</h3>
+    <table class="tabela-cripto">
+      <thead>
+        <tr>
+          <th>Moeda</th>
+          <th>Quantidade</th>
+          <th>Preço Atual (USD $)</th>
+          <th>Valor Total (USD $)</th>
+        </tr>
+      </thead>
+      <tbody id="meus-ativos">
+        <tr><td colspan="4" class="vazio">Nenhum ativo ainda. Vá em "À Vista" e comece a negociar!</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- DEPÓSITO -->
+  <section id="pag-deposito" class="oculto">
+    <h2 style="margin-bottom: 16px;">📥 Depósito</h2>
+    <div class="card">
+      <p style="color: var(--texto-fraco); margin-bottom: 20px;">⚠️ <strong>Modo de Teste</strong> — depósito real será liberado oficialmente.</p>
+      <div class="grupo-input">
+        <label>Valor em Dólar (USD $)</label>
+        <input type="number" id="valor-deposito" placeholder="0.00" step="0.01">
+      </div>
+      <button class="btn btn-primario" onclick="simularDeposito()">Depositar (Teste)</button>
+      <p style="margin-top: 12px; font-size: 0.8rem; color: var(--texto-fraco);">Apenas demonstração — sem dinheiro real.</p>
+    </div>
+  </section>
+
+  <!-- SAQUE -->
+  <section id="pag-saque" class="oculto">
+    <h2 style="margin-bottom: 16px;">📤 Saque</h2>
+    <div class="card">
+      <p style="color: var(--texto-fraco); margin-bottom: 20px;">⚠️ <strong>Modo de Teste</strong> — saque real após liberação oficial.</p>
+      <div class="grupo-input">
+        <label>Valor em Dólar (USD $)</label>
+        <input type="number" id="valor-saque" placeholder="0.00" step="0.01">
+      </div>
+      <div class="grupo-input">
+        <label>Destino / Chave</label>
+        <input type="text" id="chave-saque" placeholder="Endereço ou Chave PIX">
+      </div>
+      <button class="btn btn-primario" onclick="simularSaque()">Solicitar Saque (Teste)</button>
+      <p style="margin-top: 12px; font-size: 0.8rem; color: var(--texto-fraco);">Apenas demonstração — sem dinheiro real.</p>
+    </div>
+  </section>
+
+  <!-- HISTÓRICO -->
+  <section id="pag-historico" class="oculto">
+    <h2 style="margin-bottom: 16px;">📜 Histórico de Operações</h2>
+    <div id="lista-historico" class="vazio">Nenhuma operação realizada ainda.</div>
+  </section>
 </div>
 
-
 <script>
+// Estado do sistema
+let dadosMoedas = [];
+let favoritos = JSON.parse(localStorage.getItem('dm_favoritos') || '[]');
+let saldo = parseFloat(localStorage.getItem('dm_saldo_usd') || 100000);
+let carteira = JSON.parse(localStorage.getItem('dm_carteira') || '{}');
+let historico = JSON.parse(localStorage.getItem('dm_historico') || '[]');
 
-function openModal(type){
-
-    const modal =
-        document.getElementById("modal");
-
-    const title =
-        document.getElementById("modalTitle");
-
-    if(type === "deposit"){
-        title.innerText = "📥 Depositar criptomoeda";
-    }
-
-    if(type === "withdraw"){
-        title.innerText = "📤 Sacar criptomoeda";
-    }
-
-    modal.style.display = "flex";
-}
-
-
-function closeModal(){
-
-    document.getElementById("modal")
-        .style.display = "none";
-
-}
-
-
-window.onclick = function(event){
-
-    const modal =
-        document.getElementById("modal");
-
-    if(event.target === modal){
-        closeModal();
-    }
-
+const mapaMoedas = {
+  bitcoin: { simbolo: 'BTC', nome: 'Bitcoin' },
+  ethereum: { simbolo: 'ETH', nome: 'Ethereum' },
+  solana: { simbolo: 'SOL', nome: 'Solana' },
+  cardano: { simbolo: 'ADA', nome: 'Cardano' },
+  dogecoin: { simbolo: 'DOGE', nome: 'Dogecoin' },
+  binancecoin: { simbolo: 'BNB', nome: 'BNB' },
+  ripple: { simbolo: 'XRP', nome: 'Ripple' },
+  polkadot: { simbolo: 'DOT', nome: 'Polkadot' }
 };
 
+// Formatar valor em dólar
+function formatarUSD(valor) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(valor);
+}
+
+// Buscar preços reais em USD
+async function buscarPrecos() {
+  try {
+    const ids = Object.keys(mapaMoedas).join(',');
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+    if (!res.ok) throw new Error('API falhou');
+    const dados = await res.json();
+    
+    dadosMoedas = Object.entries(dados).map(([id, info]) => ({
+      id,
+      simbolo: mapaMoedas[id].simbolo,
+      nome: mapaMoedas[id].nome,
+      preco: info.usd,
+      variacao: info.usd_24h_change
+    }));
+
+    const agora = new Date().toLocaleString('pt-BR');
+    document.getElementById('ultima-atualizacao').textContent = `✅ Atualizado: ${agora}`;
+    document.getElementById('atualizacao-mercado').textContent = `✅ Atualizado: ${agora}`;
+
+    renderizarTudo();
+  } catch (erro) {
+    console.log('Usando dados de backup:', erro);
+    usarDadosBackup();
+  }
+}
+
+function usarDadosBackup() {
+  dadosMoedas = [
+    { id: 'bitcoin', simbolo: 'BTC', nome: 'Bitcoin', preco: 63500.00, variacao: 2.41 },
+    { id: 'ethereum', simbolo: 'ETH', nome: 'Ethereum', preco: 3180.50, variacao: -0.78 },
+    { id: 'solana', simbolo: 'SOL', nome: 'Solana', preco: 85.65, variacao: 1.23 },
+    { id: 'cardano', simbolo: 'ADA', nome: 'Cardano', preco: 0.42, variacao: 3.52 },
+    { id: 'dogecoin', simbolo: 'DOGE', nome: 'Dogecoin', preco: 0.095, variacao: -1.47 },
+    { id: 'binancecoin', simbolo: 'BNB', nome: 'BNB', preco: 421.50, variacao: 0.89 },
+    { id: 'ripple', simbolo: 'XRP', nome: 'Ripple', preco: 0.64, variacao: -0.31 },
+    { id: 'polkadot', simbolo: 'DOT', nome: 'Polkadot', preco: 6.85, variacao: 1.84 }
+  ];
+  renderizarTudo();
+}
+
+function renderizarTudo() {
+  renderizarInicio();
+  renderizarMercado();
+  renderizarNovas();
+  renderizarTokenStocks();
+  carregarFavoritos();
+  atualizarCarteira();
+  atualizarHistorico();
+  atualizarCalculos();
+}
+
+function renderizarInicio() {
+  const container = document.getElementById('destaques-mercado');
+  container.innerHTML = '';
+  dadosMoedas.slice(0, 4).forEach(m => {
+    container.innerHTML += `
+      <div class="card">
+        <h3>${m.simbolo}</h3>
+        <p style="color:var(--texto-fraco); font-size:0.85rem;">${m.nome}</p>
+        <div class="valor-grande simbolo-dolar">${formatarUSD(m.preco)}</div>
+        <span class="${m.variacao >= 0 ? 'var-positiva' : 'var-negativa'}">
+          ${m.variacao >= 0 ? '+' : ''}${m.variacao.toFixed(2)}%
+        </span>
+      </div>
+    `;
+  });
+}
+
+function renderizarMercado(filtro = '') {
+  const lista = document.getElementById('lista-moedas');
+  lista.innerHTML = '';
+  const filtradas = dadosMoedas.filter(m => 
+    m.simbolo.toLowerCase().includes(filtro.toLowerCase()) ||
+    m.nome.toLowerCase().includes(filtro.toLowerCase())
+  );
+  
+  filtradas.forEach(m => {
+    const ehFav = favoritos.includes(m.simbolo);
+    lista.innerHTML += `
+      <tr>
+        <td><strong>${m.simbolo}</strong><br><small style="color:var(--texto-fraco)">${m.nome}</small></td>
+        <td class="simbolo-dolar">${formatarUSD(m.preco)}</td>
+        <td class="${m.variacao >= 0 ? 'var-positiva' : 'var-negativa'}">
+          ${m.variacao >= 0 ? '+' : ''}${m.variacao.toFixed(2)}%
+        </td>
+        <td style="display:flex; gap:8px; align-items:center;">
+          <button onclick="alternarFav('${m.simbolo}')" style="background:transparent; border:none; cursor:pointer; font-size:1.1rem;">${ehFav ? '⭐' : '☆'}</button>
+          <button class="btn-compra" style="padding:6px 12px; border-radius:6px; border:none; cursor:pointer; font-size:0.85rem; width:auto;" onclick="irParaNegociar('${m.simbolo}')">Negociar</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function renderizarNovas() {
+  const lista = document.getElementById('lista-novas');
+  lista.innerHTML = '';
+  dadosMoedas.slice(-5).forEach(m => {
+    lista.innerHTML += `
+      <tr>
+        <td><strong>${m.simbolo}</strong><br><small style="color:var(--texto-fraco)">${m.nome}</small></td>
+        <td class="simbolo-dolar">${formatarUSD(m.preco)}</td>
+        <td class="${m.variacao >= 0 ? 'var-positiva' : 'var-negativa'}">
+          ${m.variacao >= 0 ? '+' : ''}${m.variacao.toFixed(2)}%
+        </td>
+        <td><button class="btn-compra" style="padding:6px 12px; border-radius:6px; border:none; cursor:pointer; font-size:0.85rem;" onclick="irParaNegociar('${m.simbolo}')">Negociar</button></td>
+      </tr>
+    `;
+  });
+}
+
+function renderizarTokenStocks() {
+  const lista = document.getElementById('lista-tokenstocks');
+  lista.innerHTML = '';
+  dadosMoedas.filter(m => ['SOL', 'DOGE', 'DOT', 'ADA'].includes(m.simbolo)).forEach(m => {
+    lista.innerHTML += `
+      <div class="card">
+        <h3>${m.simbolo}</h3>
+        <p style="color:var(--texto-fraco); font-size:0.85rem;">${m.nome}</p>
+        <div class="valor-grande simbolo-dolar">${formatarUSD(m.preco)}</div>
+        <span class="${m.variacao >= 0 ? 'var-positiva' : 'var-negativa'}">${m.variacao >= 0 ? '+' : ''}${m.variacao.toFixed(2)}%</span>
+      </div>
+    `;
+  });
+}
+
+function alternarFav(simbolo) {
+  const idx = favoritos.indexOf(simbolo);
+  if (idx === -1) favoritos.push(simbolo);
+  else favoritos.splice(idx, 1);
+  localStorage.setItem('dm_favoritos', JSON.stringify(favoritos));
+  renderizarMercado(document.getElementById('busca-moeda').value);
+  carregarFavoritos();
+}
+
+function carregarFavoritos() {
+  const lista = document.getElementById('lista-favoritos');
+  if (favoritos.length === 0) {
+    lista.innerHTML = '<p class="vazio">Nenhum favorito ainda. Clique na estrela ★ na página Mercado.</p>';
+    return;
+  }
+  lista.innerHTML = '';
+  favoritos.forEach(sim => {
+    const m = dadosMoedas.find(x => x.simbolo === sim);
+    if (!m) return;
+    lista.innerHTML += `
+      <div class="card" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div>
+          <h3>${m.simbolo}</h3>
+          <p style="color:var(--texto-fraco); font-size:0.85rem;">${m.nome}</p>
+          <div style="font-size:1.2rem; font-weight:bold; margin-top:4px;" class="simbolo-dolar">${formatarUSD(m.preco)}</div>
+        </div>
+        <div style="text-align:right;">
+          <span class="${m.variacao >= 0 ? 'var-positiva' : 'var-negativa'}" style="font-size:1rem;">
+            ${m.variacao >= 0 ? '+' : ''}${m.variacao.toFixed(2)}%
+          </span><br>
+          <button onclick="alternarFav('${m.simbolo}')" style="margin-top:8px; background:transparent; border:none; font-size:1.2rem; cursor:pointer;">⭐</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function irParaNegociar(simbolo) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('ativo'));
+  document.querySelector('[data-pagina="avista"]').classList.add('ativo');
+  document.querySelectorAll('section').forEach(s => s.classList.add('oculto'));
+  document.getElementById('pag-avista').classList.remove('oculto');
+  document.getElementById('sel-compra').value = simbolo;
+  document.getElementById('sel-venda').value = simbolo;
+  atualizarCalculos();
+}
+
+function pegarPreco(simbolo) {
+  const m = dadosMoedas.find(x => x.simbolo === simbolo);
+  return m ? m.preco : 0;
+}
+
+function atualizarCalcCompra() {
+  const simbolo = document.getElementById('sel-compra').value;
+  const qtd = parseFloat(document.getElementById('qtd-compra').value) || 0;
+  const preco = pegarPreco(simbolo);
+  document.getElementById('valor-compra').value = formatarUSD(qtd * preco);
+}
+
+function atualizarCalcVenda() {
+  const simbolo = document.getElementById('sel-venda').value;
+  const qtd = parseFloat(document.getElementById('qtd-venda').value) || 0;
+  const preco = pegarPreco(simbolo);
+  document.getElementById('valor-venda').value = formatarUSD(qtd * preco);
+}
+
+function atualizarCalculos() {
+  atualizarCalcCompra();
+  atualizarCalcVenda();
+}
+
+function registrarOperacao(tipo) {
+  const sel = document.getElementById(`sel-${tipo}`);
+  const qtdInput = document.getElementById(`qtd-${tipo}`);
+  const qtd = parseFloat(qtdInput.value) || 0;
+  const simbolo = sel.value;
+  const preco = pegarPreco(simbolo);
+  const valor = qtd * preco;
+
+  if (qtd <= 0) { alert('Informe uma quantidade válida!'); return; }
+
+  if (tipo === 'compra') {
+    if (valor > saldo) { alert(`Saldo insuficiente! Você tem ${formatarUSD(saldo)}`); return; }
+    saldo -= valor;
+    carteira[simbolo] = (carteira[simbolo] || 0) + qtd;
+  } else {
+    if (!carteira[simbolo] || carteira[simbolo] < qtd) { alert(`Você não tem ${simbolo} suficiente!`); return; }
+    saldo += valor;
+    carteira[simbolo] -= qtd;
+    if (carteira[simbolo] <= 0) delete carteira[simbolo];
+  }
+
+  historico.unshift({
+    tipo, simbolo, quantidade: qtd, preco, valor,
+    data: new Date().toLocaleString('pt-BR')
+  });
+
+  localStorage.setItem('dm_saldo_usd', saldo);
+  localStorage.setItem('dm_carteira', JSON.stringify(carteira));
+  localStorage.setItem('dm_historico', JSON.stringify(historico));
+
+  qtdInput.value = '';
+  atualizarCalculos();
+  atualizarCarteira();
+  atualizarHistorico();
+  alert(`✅ ${tipo === 'compra' ? 'COMPRA' : 'VENDA'} REALIZADA!\n${qtd} ${simbolo} = ${formatarUSD(valor)}`);
+}
+
+function atualizarCarteira() {
+  document.getElementById('saldo-total').textContent = formatarUSD(saldo);
+  const corpo = document.getElementById('meus-ativos');
+  if (Object.keys(carteira).length === 0) {
+    corpo.innerHTML = '<tr><td colspan="4" class="vazio">Nenhum ativo ainda. Vá em "À Vista" e comece a negociar!</td></tr>';
+    return;
+  }
+  corpo.innerHTML = '';
+  for (const [sim, qtd] of Object.entries(carteira)) {
+    const preco = pegarPreco(sim);
+    corpo.innerHTML += `
+      <tr>
+        <td><strong>${sim}</strong></td>
+        <td>${qtd}</td>
+        <td class="simbolo-dolar">${formatarUSD(preco)}</td>
+        <td class="simbolo-dolar"><strong>${formatarUSD(qtd * preco)}</strong></td>
+      </tr>
+    `;
+  }
+}
+
+function atualizarHistorico() {
+  const lista = document.getElementById('lista-historico');
+  if (historico.length === 0) {
+    lista.innerHTML = '<p class="vazio">Nenhuma operação realizada ainda.</p>';
+    return;
+  }
+  lista.innerHTML = '';
+  historico.forEach(op => {
+    lista.innerHTML += `
+      <div class="linha-historico">
+        <div>
+          <strong style="color:${op.tipo === 'compra' ? 'var(--verde)' : 'var(--vermelho)'}">${op.tipo === 'compra' ? '✅ COMPRA' : '❌ VENDA'}</strong><br>
+          ${op.simbolo} · ${op.quantidade} unidades
+        </div>
+        <div style="text-align:right;">
+          <strong class="simbolo-dolar">${formatarUSD(op.valor)}</strong><br>
+          <small style="color:var(--texto-fraco)">${op.data}</small>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function simularDeposito() {
+  const valor = parseFloat(document.getElementById('valor-deposito').value) || 0;
+  if (valor <= 0) { alert('Informe um valor válido!'); return; }
+  saldo += valor;
+  localStorage.setItem('dm_saldo_usd', saldo);
+  document.getElementById('valor-deposito').value = '';
+  atualizarCarteira();
+  alert(`✅ Depósito de ${formatarUSD(valor)} realizado! Saldo: ${formatarUSD(saldo)}`);
+}
+
+function simularSaque() {
+  const valor = parseFloat(document.getElementById('valor-saque').value) || 0;
+  if (valor <= 0) { alert('Informe um valor válido!'); return; }
+  if (valor > saldo) { alert(`Saldo insuficiente! Você tem ${formatarUSD(saldo)}`); return; }
+  saldo -= valor;
+  localStorage.setItem('dm_saldo_usd', saldo);
+  document.getElementById('valor-saque').value = '';
+  atualizarCarteira();
+  alert(`✅ Saque de ${formatarUSD(valor)} solicitado! Saldo: ${formatarUSD(saldo)}`);
+}
+
+// Navegação
+document.querySelectorAll('.nav-btn').forEach(botao => {
+  botao.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('ativo'));
+    botao.classList.add('ativo');
+    const paginaAlvo = botao.getAttribute('data-pagina');
+    document.querySelectorAll('section').forEach(sec => sec.classList.add('oculto'));
+    document.getElementById(`pag-${paginaAlvo}`).classList.remove('oculto');
+  });
+});
+
+// Busca e cálculos
+document.getElementById('busca-moeda').addEventListener('input', (e) => renderizarMercado(e.target.value));
+document.getElementById('sel-compra').addEventListener('change', atualizarCalcCompra);
+document.getElementById('sel-venda').addEventListener('change', atualizarCalcVenda);
+
+// Iniciar
+buscarPrecos();
+setInterval(buscarPrecos, 30000); // Atualiza a cada 30 segundos
 </script>
 
 </body>
 </html>
+
