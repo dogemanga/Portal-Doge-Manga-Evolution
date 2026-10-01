@@ -7645,6 +7645,626 @@ setInterval(buscarPrecos, 30000);
 
       
 
+
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doge Manga Evolution | Índice de Mercado</title>
+<meta name="description" content="Capitalização total, preços, índice de Medo e Ganância, CMC20 — tudo em tempo real no Portal Doge Manga.">
+<meta name="keywords" content="Doge Manga, $DGM, Índice de Mercado, Bitcoin, Ethereum, Solana, Medo e Ganância">
+<meta name="robots" content="index, follow">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+
+:root {
+  --dgm: #f9d423;
+  --dgm-escuro: #e5b800;
+  --binance: #f3ba2f;
+  --verde: #10b981;
+  --vermelho: #ef4444;
+  --fundo: #0f172a;
+  --fundo-claro: #1e293b;
+  --fundo-card: #334155;
+  --texto: #f8fafc;
+  --texto-fraco: #94a3b8;
+  --borda: #475569;
+  --medo: #ef4444;
+  --neutro: #f59e0b;
+  --ganancia: #10b981;
+}
+
+body {
+  background: linear-gradient(135deg, var(--fundo) 0%, #1a2744 100%);
+  color: var(--texto);
+  min-height: 100vh;
+}
+
+nav {
+  background: rgba(15, 23, 42, 0.95);
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--borda);
+}
+
+.nav-conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--dgm);
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--texto-fraco);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.nav-btn.ativo, .nav-btn:hover {
+  background: var(--fundo-claro);
+  color: var(--dgm);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.topo-indice {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card-topo {
+  background: var(--fundo-claro);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--borda);
+}
+
+.card-topo label {
+  font-size: 0.75rem;
+  color: var(--texto-fraco);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.valor-principal {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.variacao-positiva { color: var(--verde); font-size: 0.85rem; }
+.variacao-negativa { color: var(--vermelho); font-size: 0.85rem; }
+
+.aviso-alerta {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.abas {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.aba {
+  padding: 10px 4px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: var(--texto-fraco);
+  transition: all 0.2s;
+}
+
+.aba.ativa {
+  border-bottom: 2px solid var(--dgm);
+  color: var(--dgm);
+  font-weight: bold;
+}
+
+.grafico-grande {
+  background: var(--fundo-claro);
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid var(--borda);
+  margin-bottom: 24px;
+}
+
+.cabecalho-grafico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.titulo-grafico {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.valor-grafico {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.area-grafico {
+  height: 260px;
+  position: relative;
+  margin: 16px 0;
+}
+
+.eixo-tempo {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--texto-fraco);
+  margin-top: 8px;
+}
+
+.grupo-blocos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.bloco {
+  background: var(--fundo-claro);
+  border-radius: 14px;
+  padding: 22px;
+  border: 1px solid var(--borda);
+}
+
+.bloco-titulo {
+  font-size: 0.9rem;
+  color: var(--texto-fraco);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bloco-valor {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 16px 0;
+}
+
+.legenda-indice {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.barra-indice {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(to right, var(--medo) 0%, var(--neutro) 50%, var(--ganancia) 100%);
+  position: relative;
+  margin: 20px 0;
+}
+
+.ponto-indice {
+  position: absolute;
+  top: -6px;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 3px solid var(--ganancia);
+}
+
+.escala-indice {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--texto-fraco);
+  margin-top: 8px;
+}
+
+.lista-moedas {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-moeda {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--borda);
+}
+
+.esq-moeda {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icone-moeda {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.btc { background: #f7931a; color: #000; }
+.eth { background: #627eea; color: #fff; }
+.sol { background: #00ffa3; color: #000; }
+.usdt { background: #26a17b; color: #fff; }
+.bnb { background: #f3ba2f; color: #000; }
+
+.atualizacao {
+  font-size: 0.75rem;
+  color: var(--texto-fraco);
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.oculto { display: none !important; }
+
+@media (max-width: 768px) {
+  .nav-conteudo { flex-direction: column; align-items: flex-start; }
+  .valor-grafico { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-conteudo">
+    <div class="logo">🐕 DOGE MANGA — ÍNDICE DE MERCADO</div>
+    <div class="nav-links">
+      <button class="nav-btn ativo" data-pagina="geral">📊 Visão Geral</button>
+      <button class="nav-btn" data-pagina="moedas">🪙 Top Moedas</button>
+      <button class="nav-btn" data-pagina="ganancia">📈 Medo e Ganância</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="atualizacao" id="ultima-atualizacao">✅ Atualizando...</div>
+
+  <!-- 📊 VISÃO GERAL -->
+  <section id="pag-geral">
+    <div class="topo-indice">
+      <div class="card-topo">
+        <label>Capitalização Total</label>
+        <div class="valor-principal" id="cap-total">$2.88T</div>
+        <div class="variacao-positiva" id="cap-variacao">+0.60%</div>
+      </div>
+      <div class="card-topo">
+        <label>DGM20 (Top 20)</label>
+        <div class="valor-principal" id="dgm20-valor">$177.07</div>
+        <div class="variacao-positiva" id="dgm20-variacao">+0.98%</div>
+      </div>
+      <div class="card-topo">
+        <label>Sentimento</label>
+        <div class="valor-principal" id="sentimento-valor">68</div>
+        <div class="variacao-positiva">Ganância</div>
+      </div>
+      <div class="card-topo">
+        <label>Medo e Ganância</label>
+        <div class="valor-principal" style="font-size:1.2rem;">68/100</div>
+        <div class="variacao-positiva">Ganância</div>
+      </div>
+    </div>
+
+    <div class="aviso-alerta">
+      🔥 Traders e Wall St observando $82K no Bitcoin
+    </div>
+
+    <div class="abas">
+      <div class="aba ativa" data-conteudo="visao">Visão Geral</div>
+      <div class="aba" data-conteudo="mercado">Mercado</div>
+      <div class="aba" data-conteudo="volume">Volume</div>
+    </div>
+
+    <div class="grafico-grande">
+      <div class="cabecalho-grafico">
+        <div>
+          <div class="titulo-grafico">Capitalização de Mercado Global</div>
+          <div class="valor-grafico" id="grafico-valor">$2.88T</div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button style="background:var(--dgm); border:none; padding:4px 10px; border-radius:4px; font-size:0.75rem; color:#000;">MCAP Total</button>
+          <button style="background:transparent; border:none; padding:4px 10px; border-radius:4px; font-size:0.75rem; color:var(--texto-fraco);">Detalhamento</button>
+          <button style="background:transparent; border:none; padding:4px 10px; border-radius:4px; font-size:0.75rem; color:var(--texto-fraco);">Volume</button>
+        </div>
+      </div>
+      
+      <div class="area-grafico" id="area-grafico">
+        <svg width="100%" height="100%" viewBox="0 0 800 260" preserveAspectRatio="none" id="svg-grafico">
+          <!-- Gráfico gerado automaticamente -->
+        </svg>
+      </div>
+      
+      <div class="eixo-tempo">
+        <span>18:00</span>
+        <span>22:20</span>
+        <span>02:40</span>
+        <span>06:55</span>
+        <span>11:15</span>
+        <span>15:35</span>
+      </div>
+    </div>
+
+    <div class="grupo-blocos">
+      <div class="bloco">
+        <div class="bloco-titulo">Índice de Medo e Ganância</div>
+        <div class="bloco-valor" id="indice-valor">68</div>
+        <div class="legenda-indice" id="indice-texto">Ganância</div>
+        <div class="barra-indice">
+          <div class="ponto-indice" id="ponto-indice" style="left: 68%;"></div>
+        </div>
+        <div class="escala-indice">
+          <span>0<br>Medo Extremo</span>
+          <span>25<br>Medo</span>
+          <span>50<br>Neutro</span>
+          <span>75<br>Ganância</span>
+          <span>100<br>Extrema</span>
+        </div>
+      </div>
+
+      <div class="bloco">
+        <div class="bloco-titulo">DGM20 — Top 20 Moedas</div>
+        <div class="bloco-valor" id="dgm20-grande">$177.07</div>
+        <div class="variacao-positiva" style="text-align:center; font-size:1rem;" id="dgm20-grande-var">+0.98%</div>
+        <div style="margin-top:20px;">
+          <div class="item-moeda">
+            <div class="esq-moeda"><div class="icone-moeda btc">₿</div><div><strong>BTC</strong><br><span style="font-size:0.75rem; color:var(--texto-fraco);">Bitcoin</span></div></div>
+            <div style="text-align:right;"><strong id="btc-preco">$84.557,19</strong><br><span class="variacao-positiva" id="btc-var">+1.23%</span></div>
+          </div>
+          <div class="item-moeda">
+            <div class="esq-moeda"><div class="icone-moeda eth">Ξ</div><div><strong>ETH</strong><br><span style="font-size:0.75rem; color:var(--texto-fraco);">Ethereum</span></div></div>
+            <div style="text-align:right;"><strong id="eth-preco">$2.695,92</strong><br><span class="variacao-negativa" id="eth-var">-0.45%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🪙 TOP MOEDAS -->
+  <section id="pag-moedas" class="oculto">
+    <h2 style="margin-bottom: 20px;">🪙 Top Moedas do Mercado</h2>
+    <div class="bloco" style="background:transparent; border:none; padding:0;">
+      <div class="lista-moedas" id="lista-top-moedas">
+        <!-- Carregando... -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 📈 MEDO E GANÂNCIA -->
+  <section id="pag-ganancia" class="oculto">
+    <h2 style="margin-bottom: 20px;">📈 Índice de Medo e Ganância</h2>
+    <div class="grupo-blocos">
+      <div class="bloco" style="max-width: 400px; margin: 0 auto;">
+        <div style="text-align:center; padding:20px 0;">
+          <div style="font-size:4rem; font-weight:bold; color:var(--ganancia);" id="pag-indice-valor">68</div>
+          <div style="font-size:1.2rem; margin:10px 0; color:var(--ganancia);" id="pag-indice-texto">GANÂNCIA</div>
+        </div>
+        <div class="barra-indice" style="height:16px;">
+          <div class="ponto-indice" style="width:32px; height:32px; left:68%; border-width:4px;"></div>
+        </div>
+        <div class="escala-indice" style="margin-top:16px;">
+          <span>0-24<br>Medo Extremo</span>
+          <span>25-44<br>Medo</span>
+          <span>45-55<br>Neutro</span>
+          <span>56-75<br>Ganância</span>
+          <span>76-100<br>Extrema</span>
+        </div>
+        <div style="margin-top:30px; padding:16px; background:rgba(249,212,35,0.05); border-radius:10px;">
+          <p style="font-size:0.85rem; line-height:1.6; color:var(--texto-fraco);">
+            <strong>O que significa?</strong><br>
+            O índice mede o sentimento do mercado cripto de 0 a 100. Valores acima de 50 indicam que os investidores estão otimistas e comprando. Abaixo de 30 sinalizam medo e vendas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ==========================================
+// 📊 DADOS DO MERCADO — EM TEMPO REAL
+// ==========================================
+const moedasTop = [
+  { id: 'bitcoin', simbolo: 'BTC', nome: 'Bitcoin', classe: 'btc' },
+  { id: 'ethereum', simbolo: 'ETH', nome: 'Ethereum', classe: 'eth' },
+  { id: 'tether', simbolo: 'USDT', nome: 'Tether', classe: 'usdt' },
+  { id: 'binancecoin', simbolo: 'BNB', nome: 'BNB', classe: 'bnb' },
+  { id: 'solana', simbolo: 'SOL', nome: 'Solana', classe: 'sol' }
+];
+
+let dadosMercado = {
+  capTotal: 2.88, // Trilhões
+  capVariacao: 0.60,
+  dgm20: 177.07,
+  dgm20Variacao: 0.98,
+  indiceGanancia: 68,
+  historico: [2.85, 2.84, 2.86, 2.855, 2.87, 2.865, 2.88]
+};
+
+function formatarMoeda(valor, simbolo = '$') {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(valor).replace('$', simbolo);
+}
+
+function formatarPreco(valor) {
+  if (valor >= 1000) return '$' + valor.toLocaleString('en-US', { maximumFractionDigits: 2 });
+  if (valor >= 1) return '$' + valor.toFixed(2);
+  return '$' + valor.toFixed(4);
+}
+
+function atualizarHora() {
+  document.getElementById('ultima-atualizacao').textContent = '✅ Atualizado: ' + new Date().toLocaleString('pt-BR');
+}
+
+function gerarGrafico() {
+  const pontos = dadosMercado.historico;
+  const min = Math.min(...pontos) - 0.01;
+  const max = Math.max(...pontos) + 0.01;
+  const altura = 220;
+  const largura = 800;
+  
+  let caminho = '';
+  pontos.forEach((p, i) => {
+    const x = (i / (pontos.length - 1)) * largura;
+    const y = altura - ((p - min) / (max - min)) * altura;
+    caminho += (i === 0 ? 'M' : 'L') + `${x},${y} `;
+  });
+  
+  const caminhoPreenchido = caminho + ` L ${largura},${altura} L 0,${altura} Z`;
+  
+  document.getElementById('svg-grafico').innerHTML = `
+    <defs>
+      <linearGradient id="grad-grafico" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#10b981" stop-opacity="0.3" />
+        <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <path d="${caminhoPreenchido}" fill="url(#grad-grafico)" />
+    <path d="${caminho}" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" />
+  `;
+}
+
+async function buscarDadosReais() {
+  try {
+    const ids = moedasTop.map(m => m.id).join(',');
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
+    
+    if (!res.ok) throw new Error('Falha');
+    const dados = await res.json();
+    
+    // Atualizar preços das moedas
+    const lista = document.getElementById('lista-top-moedas');
+    lista.innerHTML = '';
+    
+    moedasTop.forEach(m => {
+      if (dados[m.id]) {
+        const preco = dados[m.id].usd;
+        const variacao = dados[m.id].usd_24h_change;
+        const ehPos = variacao >= 0;
+        
+        lista.innerHTML += `
+          <div class="item-moeda">
+            <div class="esq-moeda">
+              <div class="icone-moeda ${m.classe}">${m.simbolo.slice(0,2)}</div>
+              <div>
+                <strong>${m.simbolo}</strong><br>
+                <span style="font-size:0.75rem; color:var(--texto-fraco);">${m.nome}</span>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <strong>${formatarPreco(preco)}</strong><br>
+              <span class="${ehPos ? 'variacao-positiva' : 'variacao-negativa'}">
+                ${ehPos ? '+' : ''}${variacao.toFixed(2)}%
+              </span>
+            </div>
+          </div>
+        `;
+      }
+    });
+    
+    // Atualizar BTC e ETH no destaque
+    if (dados.bitcoin) {
+      document.getElementById('btc-preco').textContent = formatarPreco(dados.bitcoin.usd);
+      const btcVar = dados.bitcoin.usd_24h_change;
+      document.getElementById('btc-var').textContent = (btcVar >= 0 ? '+' : '') + btcVar.toFixed(2) + '%';
+      document.getElementById('btc-var').className = btcVar >= 0 ? 'variacao-positiva' : 'variacao-negativa';
+    }
+    if (dados.ethereum) {
+      document.getElementById('eth-preco').textContent = formatarPreco(dados.ethereum.usd);
+      const ethVar = dados.ethereum.usd_24h_change;
+      document.getElementById('eth-var').textContent = (ethVar >= 0 ? '+' : '') + ethVar.toFixed(2) + '%';
+      document.getElementById('eth-var').className = ethVar >= 0 ? 'variacao-positiva' : 'variacao-negativa';
+    }
+    
+    atualizarHora();
+  } catch (erro) {
+    console.log('Usando dados de referência:', erro);
+  }
+}
+
+// Navegação entre abas principais
+document.querySelectorAll('.nav-btn').forEach(botao => {
+  botao.addEventListener('click', () => {
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('ativo'));
+    botao.classList.add('ativo');
+    
+    document.querySelectorAll('section').forEach(sec => sec.classList.add('oculto'));
+    document.getElementById(`pag-${botao.dataset.pagina}`).classList.remove('oculto');
+  });
+});
+
+// Navegação entre abas do gráfico
+document.querySelectorAll('.aba').forEach(aba => {
+  aba.addEventListener('click', () => {
+    document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
+    aba.classList.add('ativa');
+  });
+});
+
+// Inicializar
+gerarGrafico();
+buscarDadosReais();
+setInterval(buscarDadosReais, 30000); // Atualiza a cada 30s
+</script>
+
+</body>
+</html>
+
+      
       
 
 
