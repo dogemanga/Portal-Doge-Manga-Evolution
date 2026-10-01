@@ -1,1 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+<title>Doge Manga Exchange</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#050816;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:#080b1b;
+    border-bottom:1px solid #20243d;
+    padding:15px;
+}
+
+.header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#facc15;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+}
+
+.logo strong{
+    font-size:18px;
+}
+
+.logo small{
+    display:block;
+    color:#888;
+    margin-top:3px;
+}
+
+/* MENU */
+
+.menu{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding-top:15px;
+}
+
+.menu button{
+    border:0;
+    padding:9px 15px;
+    border-radius:20px;
+    background:#15192c;
+    color:#aaa;
+    white-space:nowrap;
+}
+
+.menu button.active{
+    background:#facc15;
+    color:#000;
+    font-weight:bold;
+}
+
+/* CONTAINER */
+
+.container{
+    width:100%;
+    max-width:900px;
+    margin:auto;
+    padding:18px;
+}
+
+/* SALDO */
+
+.balance{
+    background:linear-gradient(135deg,#121733,#1b1740);
+    border:1px solid #282d50;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:18px;
+}
+
+.balance-title{
+    color:#999;
+    font-size:14px;
+}
+
+.balance-value{
+    font-size:32px;
+    font-weight:bold;
+    margin:8px 0 15px;
+}
+
+.balance-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.balance-actions button{
+    padding:13px;
+    border:0;
+    border-radius:12px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.deposit{
+    background:#22c55e;
+    color:white;
+}
+
+.withdraw{
+    background:#ef4444;
+    color:white;
+}
+
+/* MERCADO */
+
+.section-title{
+    font-size:20px;
+    margin:25px 0 12px;
+}
+
+.market{
+    background:#0c1022;
+    border:1px solid #20243d;
+    border-radius:18px;
+    overflow:hidden;
+}
+
+.coin{
+    display:grid;
+    grid-template-columns:1fr 100px 90px;
+    align-items:center;
+    padding:15px;
+    border-bottom:1px solid #20243d;
+}
+
+.coin:last-child{
+    border-bottom:0;
+}
+
+.coin-name{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.coin-icon{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#24294b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.coin-name strong{
+    display:block;
+}
+
+.coin-name small{
+    color:#777;
+}
+
+.price{
+    text-align:right;
+}
+
+.change{
+    text-align:right;
+    font-weight:bold;
+}
+
+.up{
+    color:#22c55e;
+}
+
+.down{
+    color:#ef4444;
+}
+
+/* CARTEIRA */
+
+.wallet{
+    background:#0c1022;
+    border:1px solid #20243d;
+    border-radius:18px;
+    padding:5px;
+}
+
+.asset{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px;
+    border-bottom:1px solid #20243d;
+}
+
+.asset:last-child{
+    border-bottom:0;
+}
+
+.asset-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.asset-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#24294b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.asset-value{
+    text-align:right;
+}
+
+.asset-value small{
+    display:block;
+    color:#777;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    color:#666;
+    padding:30px 15px 90px;
+    font-size:12px;
+}
+
+/* MENU INFERIOR */
+
+.bottom{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index:30;
+    background:#080b1b;
+    border-top:1px solid #20243d;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    padding:10px 5px;
+}
+
+.bottom button{
+    border:0;
+    background:none;
+    color:#888;
+    font-size:12px;
+}
+
+.bottom button span{
+    display:block;
+    font-size:21px;
+    margin-bottom:3px;
+}
+
+.bottom button.active{
+    color:#facc15;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    z-index:100;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal-box{
+    width:100%;
+    max-width:420px;
+    background:#10142a;
+    border:1px solid #30365b;
+    border-radius:20px;
+    padding:22px;
+}
+
+.modal-box h2{
+    margin-bottom:15px;
+}
+
+.modal-box input,
+.modal-box select{
+    width:100%;
+    padding:14px;
+    margin:7px 0;
+    border-radius:10px;
+    border:1px solid #30365b;
+    background:#080b1b;
+    color:#fff;
+}
+
+.modal-box button{
+    width:100%;
+    padding:14px;
+    margin-top:10px;
+    border:0;
+    border-radius:10px;
+    background:#facc15;
+    color:#000;
+    font-weight:bold;
+}
+
+.close{
+    background:#292d45!important;
+    color:#fff!important;
+}
+
+@media(max-width:600px){
+
+    .coin{
+        grid-template-columns:1fr 85px 75px;
+    }
+
+    .price{
+        font-size:14px;
+    }
+
+    .change{
+        font-size:14px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-top">
+
+        <div class="logo">
+
+            <div class="logo-icon">🐕</div>
+
+            <div>
+                <strong>Doge Manga</strong>
+                <small>Exchange</small>
+            </div>
+
+        </div>
+
+        <div>🔔</div>
+
+    </div>
+
+    <div class="menu">
+
+        <button class="active">Favoritos</button>
+        <button>À vista</button>
+        <button>Novas</button>
+        <button>TokenStocks</button>
+        <button>Mais</button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+    <!-- SALDO -->
+
+    <section class="balance">
+
+        <div class="balance-title">
+            Patrimônio estimado
+        </div>
+
+        <div class="balance-value">
+            R$ 0,00
+        </div>
+
+        <div class="balance-actions">
+
+            <button class="deposit"
+                    onclick="openModal('deposit')">
+                📥 Depositar
+            </button>
+
+            <button class="withdraw"
+                    onclick="openModal('withdraw')">
+                📤 Sacar
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- MERCADO -->
+
+    <h2 class="section-title">
+        Mercado
+    </h2>
+
+    <section class="market">
+
+
+        <div class="coin">
+
+            <div class="coin-name">
+
+                <div class="coin-icon">₿</div>
+
+                <div>
+                    <strong>BTC / USDT</strong>
+                    <small>Bitcoin</small>
+                </div>
+
+            </div>
+
+            <div class="price">
+                $67.420
+            </div>
+
+            <div class="change up">
+                +2.41%
+            </div>
+
+        </div>
+
+
+        <div class="coin">
+
+            <div class="coin-name">
+
+                <div class="coin-icon">◎</div>
+
+                <div>
+                    <strong>SOL / USDT</strong>
+                    <small>Solana</small>
+                </div>
+
+            </div>
+
+            <div class="price">
+                $145.20
+            </div>
+
+            <div class="change up">
+                +3.18%
+            </div>
+
+        </div>
+
+
+        <div class="coin">
+
+            <div class="coin-name">
+
+                <div class="coin-icon">Ξ</div>
+
+                <div>
+                    <strong>ETH / USDT</strong>
+                    <small>Ethereum</small>
+                </div>
+
+            </div>
+
+            <div class="price">
+                $3.820
+            </div>
+
+            <div class="change down">
+                -1.21%
+            </div>
+
+        </div>
+
+
+        <div class="coin">
+
+            <div class="coin-name">
+
+                <div class="coin-icon">D</div>
+
+                <div>
+                    <strong>DGM / USDT</strong>
+                    <small>Doge Manga</small>
+                </div>
+
+            </div>
+
+            <div class="price">
+                0.000001
+            </div>
+
+            <div class="change up">
+                +8.52%
+            </div>
+
+        </div>
+
+
+        <div class="coin">
+
+            <div class="coin-name">
+
+                <div class="coin-icon">₮</div>
+
+                <div>
+                    <strong>USDT</strong>
+                    <small>Tether</small>
+                </div>
+
+            </div>
+
+            <div class="price">
+                $1.00
+            </div>
+
+            <div class="change up">
+                +0.01%
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- CARTEIRA -->
+
+    <h2 class="section-title">
+        Minha carteira
+    </h2>
+
+    <section class="wallet">
+
+
+        <div class="asset">
+
+            <div class="asset-left">
+
+                <div class="asset-icon">◎</div>
+
+                <div>
+                    <strong>SOL</strong>
+                    <small>Solana</small>
+                </div>
+
+            </div>
+
+            <div class="asset-value">
+                0 SOL
+                <small>R$ 0,00</small>
+            </div>
+
+        </div>
+
+
+        <div class="asset">
+
+            <div class="asset-left">
+
+                <div class="asset-icon">₮</div>
+
+                <div>
+                    <strong>USDT</strong>
+                    <small>Tether</small>
+                </div>
+
+            </div>
+
+            <div class="asset-value">
+                0 USDT
+                <small>R$ 0,00</small>
+            </div>
+
+        </div>
+
+
+        <div class="asset">
+
+            <div class="asset-left">
+
+                <div class="asset-icon">D</div>
+
+                <div>
+                    <strong>DGM</strong>
+                    <small>Doge Manga</small>
+                </div>
+
+            </div>
+
+            <div class="asset-value">
+                0 DGM
+                <small>R$ 0,00</small>
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    Doge Manga Exchange<br>
+    Plataforma em desenvolvimento
+
+</footer>
+
+
+<!-- MENU INFERIOR -->
+
+<nav class="bottom">
+
+    <button class="active">
+        <span>⌂</span>
+        Início
+    </button>
+
+    <button>
+        <span>📊</span>
+        Mercado
+    </button>
+
+    <button>
+        <span>⇄</span>
+        Negociar
+    </button>
+
+    <button>
+        <span>👛</span>
+        Ativos
+    </button>
+
+</nav>
+
+
+<!-- MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <h2 id="modalTitle">
+            Depositar
+        </h2>
+
+        <select>
+            <option>SOL — Solana</option>
+            <option>USDT — USDT</option>
+            <option>DGM — Doge Manga</option>
+            <option>BTC — Bitcoin</option>
+            <option>ETH — Ethereum</option>
+        </select>
+
+        <input
+            type="text"
+            placeholder="Endereço da carteira"
+        >
+
+        <input
+            type="number"
+            placeholder="Quantidade"
+        >
+
+        <button onclick="alert('Função disponível após integração blockchain.')">
+            Confirmar
+        </button>
+
+        <button class="close"
+                onclick="closeModal()">
+            Fechar
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function openModal(type){
+
+    const modal =
+        document.getElementById("modal");
+
+    const title =
+        document.getElementById("modalTitle");
+
+    if(type === "deposit"){
+        title.innerText = "📥 Depositar criptomoeda";
+    }
+
+    if(type === "withdraw"){
+        title.innerText = "📤 Sacar criptomoeda";
+    }
+
+    modal.style.display = "flex";
+}
+
+
+function closeModal(){
+
+    document.getElementById("modal")
+        .style.display = "none";
+
+}
+
+
+window.onclick = function(event){
+
+    const modal =
+        document.getElementById("modal");
+
+    if(event.target === modal){
+        closeModal();
+    }
+
+};
+
+</script>
+
+</body>
+</html>
