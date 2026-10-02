@@ -8264,6 +8264,290 @@ setInterval(buscarDadosReais, 30000); // Atualiza a cada 30s
 </body>
 </html>
 
+<!-- =========================================================
+     RADAR DE VISITANTES — PORTAL DOGE MANGA
+     ========================================================= -->
+
+<div id="dogeMangaRadar" class="doge-radar">
+    <span class="doge-radar-light"></span>
+
+    <div class="doge-radar-info">
+        <strong id="dogeOnlineCount">0</strong>
+        <span id="dogeOnlineText">pessoas online</span>
+    </div>
+</div>
+
+<style>
+.doge-radar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: max-content;
+    max-width: 90%;
+
+    margin: 15px auto;
+    padding: 9px 17px;
+
+    background: rgba(5, 8, 22, 0.88);
+
+    border: 1px solid rgba(250, 204, 21, 0.35);
+    border-radius: 999px;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    box-shadow:
+        0 0 15px rgba(250, 204, 21, 0.08);
+}
+
+.doge-radar-light {
+    width: 11px;
+    height: 11px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 7px #22c55e,
+        0 0 15px rgba(34, 197, 94, 0.7);
+
+    animation: dogeRadarPulse 1.2s infinite;
+}
+
+.doge-radar-info {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+#dogeOnlineCount {
+    color: #facc15;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#dogeOnlineText {
+    color: #e5e7eb;
+    font-size: 13px;
+}
+
+@keyframes dogeRadarPulse {
+
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.35;
+        transform: scale(0.72);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+</style>
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* =========================================================
+   CONFIGURAÇÃO DO SUPABASE
+   COLOQUE AQUI OS DADOS DO SEU PROJETO
+   ========================================================= */
+
+const DOGE_SUPABASE_URL = "COLE_AQUI_SEU_SUPABASE_URL";
+
+const DOGE_SUPABASE_KEY = "COLE_AQUI_SUA_SUPABASE_ANON_KEY";
+
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+const dogeSupabase = window.supabase.createClient(
+    DOGE_SUPABASE_URL,
+    DOGE_SUPABASE_KEY
+);
+
+
+/* =========================================================
+   ELEMENTOS
+   ========================================================= */
+
+const dogeOnlineCount =
+    document.getElementById("dogeOnlineCount");
+
+const dogeOnlineText =
+    document.getElementById("dogeOnlineText");
+
+
+/* =========================================================
+   SALA DE PRESENÇA
+   ========================================================= */
+
+const dogePresenceChannel =
+    dogeSupabase.channel("doge-manga-online", {
+
+        config: {
+
+            presence: {
+
+                key:
+                    "visitante-" +
+                    crypto.randomUUID()
+
+            }
+
+        }
+
+    });
+
+
+/* =========================================================
+   ATUALIZAR CONTADOR
+   ========================================================= */
+
+function atualizarDogeOnline() {
+
+    const estado =
+        dogePresenceChannel.presenceState();
+
+    let total = 0;
+
+    Object.values(estado).forEach(lista => {
+
+        if (Array.isArray(lista)) {
+
+            total += lista.length;
+
+        }
+
+    });
+
+
+    /* Evita mostrar número negativo */
+
+    if (total < 0) {
+        total = 0;
+    }
+
+
+    dogeOnlineCount.textContent = total;
+
+
+    if (total === 1) {
+
+        dogeOnlineText.textContent =
+            "pessoa online";
+
+    } else {
+
+        dogeOnlineText.textContent =
+            "pessoas online";
+
+    }
+
+}
+
+
+/* =========================================================
+   EVENTOS DE PRESENÇA
+   ========================================================= */
+
+dogePresenceChannel
+    .on(
+        "presence",
+        {
+            event: "sync"
+        },
+        () => {
+
+            atualizarDogeOnline();
+
+        }
+    )
+
+    .on(
+        "presence",
+        {
+            event: "join"
+        },
+        () => {
+
+            atualizarDogeOnline();
+
+        }
+    )
+
+    .on(
+        "presence",
+        {
+            event: "leave"
+        },
+        () => {
+
+            atualizarDogeOnline();
+
+        }
+    );
+
+
+/* =========================================================
+   ENTRAR NO RADAR
+   ========================================================= */
+
+dogePresenceChannel
+    .subscribe(async status => {
+
+        if (status === "SUBSCRIBED") {
+
+            await dogePresenceChannel.track({
+
+                online: true,
+
+                pagina:
+                    window.location.pathname,
+
+                entrouEm:
+                    new Date().toISOString()
+
+            });
+
+            atualizarDogeOnline();
+
+        }
+
+    });
+
+
+/* =========================================================
+   LIMPEZA AO SAIR
+   ========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        dogePresenceChannel.untrack();
+
+    }
+);
+
+</script>
+
+      
       
       
 
