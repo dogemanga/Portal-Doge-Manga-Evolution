@@ -8552,4 +8552,315 @@ window.addEventListener(
       
 
 
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DGM AI Market Radar — Doge Manga</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --dourado:#facc15;
+    --verde:#22c55e;
+    --vermelho:#ef4444;
+    --fundo:#050816;
+    --card:#0f172a;
+    --borda:#1e293b;
+  }
+  body{
+    font-family:'Segoe UI','Roboto',sans-serif;
+    background:linear-gradient(135deg,var(--fundo),#111827);
+    color:#fff;min-height:100vh;padding:20px;
+  }
+  .radar{
+    max-width:620px;margin:0 auto;
+    background:var(--card);border-radius:20px;
+    border:2px solid var(--dourado);
+    box-shadow:0 0 30px rgba(250,204,21,0.25),
+               inset 0 0 20px rgba(250,204,21,0.05);
+    overflow:hidden;
+  }
+  .radar-header{
+    background:linear-gradient(90deg,#facc15,#f59e0b,#facc15);
+    background-size:200% 100%;animation:brilho 3s ease-in-out infinite;
+    color:#000;padding:18px;text-align:center;font-weight:bold;
+    font-size:22px;letter-spacing:0.5px;
+  }
+  @keyframes brilho{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+  }
+  .radar-body{padding:26px;}
+
+  .coin-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 14px;margin:10px 0;border-radius:12px;
+    background:var(--borda);border-left:4px solid #4b5563;
+    transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+    opacity:0;transform:translateY(10px);
+  }
+  .coin-row.visivel{opacity:1;transform:translateY(0);}
+  .coin-row.green{border-left-color:var(--verde);box-shadow:inset 3px 0 8px rgba(34,197,94,0.15);}
+  .coin-row.red{border-left-color:var(--vermelho);box-shadow:inset 3px 0 8px rgba(239,68,68,0.15);}
+  .coin-row:hover{transform:scale(1.02);background:#263449;}
+  .coin-name{font-weight:bold;font-size:17px;}
+  .coin-symbol{color:#94a3b8;font-size:13px;margin-top:2px;}
+  .coin-price{font-family:'SF Mono',monospace;font-size:19px;font-weight:bold;transition:color 0.3s;}
+  .coin-price.atualizado{animation:piscar 0.6s ease;}
+  @keyframes piscar{
+    0%{text-shadow:0 0 8px currentColor;}
+    100%{text-shadow:none;}
+  }
+  .change{
+    font-size:14px;padding:5px 10px;border-radius:8px;font-weight:bold;min-width:80px;
+    text-align:right;transition:all 0.3s;
+  }
+  .change.up{background:rgba(34,197,94,0.15);color:var(--verde);}
+  .change.down{background:rgba(239,68,68,0.15);color:var(--vermelho);}
+
+  .fluxo-container{margin-top:28px;}
+  .fluxo-barra{
+    height:14px;background:var(--borda);border-radius:10px;overflow:hidden;margin:12px 0;
+    box-shadow:inset 0 2px 6px rgba(0,0,0,0.3);
+  }
+  .fluxo-preencher{
+    height:100%;background:linear-gradient(90deg,var(--verde),var(--dourado));
+    border-radius:10px;transition:width 1s cubic-bezier(0.4,0,0.2,1);
+    position:relative;overflow:hidden;
+  }
+  .fluxo-preencher::after{
+    content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+    animation:passa 2s linear infinite;
+  }
+  @keyframes passa{
+    0%{transform:translateX(-100%);}
+    100%{transform:translateX(100%);}
+  }
+
+  .leitura{
+    background:var(--borda);padding:20px;border-radius:14px;margin-top:22px;
+    border:1px solid #334155;position:relative;overflow:hidden;
+  }
+  .leitura::before{
+    content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+    background:linear-gradient(180deg,var(--dourado),var(--verde));
+  }
+  .pulse-valor{
+    font-size:26px;font-weight:bold;color:var(--dourado);margin-top:10px;
+    font-family:monospace;
+  }
+  .status-live{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(34,197,94,0.15);color:var(--verde);
+    padding:4px 10px;border-radius:20px;font-size:12px;margin-bottom:10px;
+  }
+  .ponto-live{
+    width:8px;height:8px;background:var(--verde);border-radius:50%;
+    animation:pulso 1.5s ease-in-out infinite;
+  }
+  @keyframes pulso{
+    0%,100%{opacity:1;transform:scale(1);}
+    50%{opacity:0.4;transform:scale(0.7);}
+  }
+  .atualizacao{text-align:right;margin-top:14px;font-size:12px;color:#64748b;}
+  .carregando{text-align:center;padding:30px;color:#94a3b8;}
+  .erro-dgm{color:#facc15;font-size:13px;margin-top:5px;}
+</style>
+</head>
+<body>
+
+<div class="radar">
+  <div class="radar-header">🐕 DGM AI MARKET RADAR</div>
+  <div class="radar-body">
+
+    <div class="status-live">
+      <span class="ponto-live"></span>
+      <span>DADOS EM TEMPO REAL • COINGECKO & SOLANA</span>
+    </div>
+
+    <div id="lista-moedas" class="carregando">
+      🔄 Sincronizando com o mercado...
+    </div>
+
+    <div class="fluxo-container">
+      <h3 style="color:var(--dourado);font-size:18px">🔥 FLUXO DO MERCADO</h3>
+      <div class="fluxo-barra"><div class="fluxo-preencher" id="barra-fluxo"></div></div>
+      <p id="texto-fluxo" style="margin-top:10px;font-size:14px;color:#cbd5e1;"></p>
+    </div>
+
+    <div class="leitura">
+      <h3 style="color:var(--dourado);font-size:16px">🧠 LEITURA DO RADAR</h3>
+      <p id="texto-leitura" style="margin-top:12px;line-height:1.7;color:#e2e8f0;">Analisando movimento do mercado...</p>
+      <div class="pulse-valor">DGM PULSE: <span id="valor-pulse">--</span>/100</div>
+    </div>
+
+    <p class="atualizacao" id="ultima-atualizacao">Última verificação: --</p>
+  </div>
+</div>
+
+<script>
+// =============== MOEDAS — DGM JÁ COM ENDEREÇO ===============
+const moedas = [
+  {id:'bitcoin', simbolo:'BTC', nome:'Bitcoin', cor:'#f7931a'},
+  {id:'ethereum', simbolo:'ETH', nome:'Ethereum', cor:'#627eea'},
+  {id:'solana', simbolo:'SOL', nome:'Solana', cor:'#00ffa3'},
+  {id:'doge-manga', simbolo:'DGM', nome:'Doge Manga', cor:'#facc15',
+   dexAddress:'E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE'},
+];
+
+let dadosMercado = {};
+let precosAnteriores = {};
+
+// =============== BUSCA DADOS ===============
+async function buscarPrecos() {
+  try {
+    // CoinGecko → BTC, ETH, SOL
+    const idsCG = moedas.filter(m=>!m.dexAddress).map(m=>m.id).join(',');
+    let dadosCG = {};
+    if(idsCG){
+      const resCG = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${idsCG}&vs_currencies=usd&include_24hr_change=true`);
+      if(resCG.ok) dadosCG = await resCG.json();
+    }
+
+    // DexScreener → DGM DIRETO DA SOLANA
+    const dgm = moedas.find(m=>m.simbolo==='DGM');
+    if(dgm && dgm.dexAddress){
+      try{
+        const resDex = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${dgm.dexAddress}`);
+        if(resDex.ok){
+          const dataDex = await resDex.json();
+          if(dataDex.pairs && dataDex.pairs.length>0){
+            const parSol = dataDex.pairs.find(p=>p.chainId==='solana') || dataDex.pairs[0];
+            if(parSol){
+              dadosMercado['doge-manga'] = {
+                precoUSD: parseFloat(parSol.priceUsd),
+                variacao24h: parSol.priceChange?.h24 || 0,
+                volume24h: parSol.volume?.h24 || 0,
+                ...dgm
+              };
+            }
+          }
+        }
+      }catch(e){console.log('DexScreener indisponível')}
+    }
+
+    // Monta BTC, ETH, SOL
+    moedas.forEach(moeda=>{
+      if(dadosMercado[moeda.id]) return;
+      if(dadosCG[moeda.id]){
+        dadosMercado[moeda.id] = {
+          precoUSD: dadosCG[moeda.id].usd,
+          variacao24h: dadosCG[moeda.id].usd_24h_change || 0,
+          ...moeda
+        };
+      }
+    });
+
+    renderizar();
+    atualizarLeitura();
+
+  }catch(erro){
+    console.error('Falha:', erro);
+  }
+}
+
+// =============== MOSTRA NA TELA ===============
+function renderizar() {
+  const container = document.getElementById('lista-moedas');
+  container.innerHTML = '';
+
+  moedas.forEach((moeda, idx) => {
+    const d = dadosMercado[moeda.id];
+    if(!d) {
+      container.innerHTML += `<div class="carregando erro-dgm">⏳ ${moeda.nome} — aguardando dados...</div>`;
+      return;
+    }
+
+    const subindo = d.variacao24h >= 0;
+    const classe = subindo ? 'green' : 'red';
+    const sinal = subindo ? '+' : '';
+    const precoMudou = precosAnteriores[moeda.id] !== undefined && 
+                       precosAnteriores[moeda.id] !== d.precoUSD;
+    precosAnteriores[moeda.id] = d.precoUSD;
+
+    const div = document.createElement('div');
+    div.className = `coin-row ${classe}`;
+    div.style.animationDelay = `${idx * 0.1}s`;
+    div.innerHTML = `
+      <div>
+        <div class="coin-name" style="color:${moeda.cor}">${moeda.nome}</div>
+        <div class="coin-symbol">$${moeda.simbolo}</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="coin-price ${precoMudou?'atualizado':''}" 
+             style="color:${subindo?'var(--verde)':'var(--vermelho)'}">
+          $${d.precoUSD.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:6})}
+        </div>
+        <div class="change ${subindo?'up':'down'}">${sinal}${d.variacao24h.toFixed(2)}%</div>
+      </div>
+    `;
+    container.appendChild(div);
+    setTimeout(()=>div.classList.add('visivel'), 10);
+  });
+
+  const agora = new Date();
+  document.getElementById('ultima-atualizacao').textContent = 
+    `Última verificação: ${agora.toLocaleTimeString('pt-BR')}`;
+}
+
+// =============== ANÁLISE AUTOMÁTICA ===============
+function atualizarLeitura() {
+  const btc = dadosMercado['bitcoin'];
+  const sol = dadosMercado['solana'];
+  const dgm = dadosMercado['doge-manga'];
+  if(!btc || !sol) return;
+
+  let pulse = 50;
+  if(btc.variacao24h < 0) pulse += 12;
+  if(sol.variacao24h > 1) pulse += 15;
+  if(sol.variacao24h > 3) pulse += 8;
+  if(dgm && dgm.variacao24h > 0) pulse += 15;
+  if(dgm && dgm.variacao24h > 5) pulse += 10;
+  pulse = Math.min(pulse, 95);
+
+  document.getElementById('valor-pulse').textContent = pulse;
+  document.getElementById('barra-fluxo').style.width = `${pulse}%`;
+
+  let leitura = '';
+  if(btc.variacao24h < -1 && sol.variacao24h > 0){
+    leitura = 'Capital migrando do BTC para altcoins! Solana e ecossistema ganhando força.';
+  } else if(btc.variacao24h >= -1 && sol.variacao24h > 2){
+    leitura = 'Mercado aquecido! BTC estável + altcoins em alta.';
+  } else if(btc.variacao24h < -2 && sol.variacao24h < 0){
+    leitura = 'Correção geral. Fique atento às oportunidades de entrada.';
+  } else {
+    leitura = 'Mercado em movimento. Acompanhe volume e força das altcoins.';
+  }
+
+  if(dgm){
+    if(dgm.variacao24h > 3) leitura += ' 💎 $DGM mostrando MUITA força!';
+    else if(dgm.variacao24h > 0) leitura += ' 💎 $DGM em alta!';
+    else if(dgm.variacao24h < -3) leitura += ' ⚠️ $DGM sob pressão.';
+  }
+
+  document.getElementById('texto-leitura').textContent = `"${leitura}"`;
+  document.getElementById('texto-fluxo').innerHTML = `
+    ${pulse>75?'🚀 Mercado aquecido • ':'📊 Monitorando • '}
+    ${pulse>60?'Volume crescente':'Mercado estável'}
+  `;
+}
+
+// =============== INICIALIZA ===============
+buscarPrecos();
+setInterval(buscarPrecos, 25000); // Atualiza a cada 25 segundos
+</script>
+</body>
+</html>
+
+      
+
       
