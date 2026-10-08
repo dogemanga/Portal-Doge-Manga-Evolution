@@ -1,37 +1,186 @@
+/* =====================================================
+   DOGE MANGA — SPLASH PROFISSIONAL
+   USA A IMAGEM ORIGINAL DO PORTAL
+   ===================================================== */
 
+#splash{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    min-height:100dvh;
+    overflow:hidden;
 
-/* DOGE MANGA EVOLUTION - STYLE CSS */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
-*{
+    z-index:999999;
+
+    background:#020617;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+/* IMAGEM ORIGINAL COMO FUNDO DA ABERTURA */
+#splash::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(2,6,23,.20),
+            rgba(2,6,23,.72)
+        ),
+        url("IMG-20260727-WA0036(7).jpg");
+
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+
+    transform:scale(1.04);
+
+    filter:saturate(1.12) contrast(1.05);
+
+    animation:splashZoom 8s ease-in-out infinite alternate;
+}
+
+/* BRILHO DOURADO POR CIMA */
+#splash::after{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(250,204,21,.16) 0%,
+            rgba(250,204,21,.05) 30%,
+            transparent 65%
+        );
+
+    pointer-events:none;
+}
+
+/* CONTEÚDO */
+#splash > *{
+    position:relative;
+    z-index:3;
+}
+
+/* IMAGEM ORIGINAL CENTRAL */
+#splash img{
+    width:min(72vw,360px);
+    height:min(72vw,360px);
+
+    object-fit:cover;
+    object-position:center;
+
+    border-radius:50%;
+
+    border:5px solid #facc15;
+
+    box-shadow:
+        0 0 20px rgba(250,204,21,.65),
+        0 0 50px rgba(250,204,21,.35),
+        0 0 100px rgba(250,204,21,.15);
+
+    animation:
+        splashLogo 3s ease-in-out infinite alternate;
+
+    margin-bottom:24px;
+}
+
+/* TEXTO */
+#splash h2{
+    position:relative;
+    z-index:3;
+
     margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
 
-body{
-    font-family:Arial, sans-serif;
-    background:#050816;
-    color:white;
-}
+    font-size:clamp(22px,6vw,34px);
+    font-weight:800;
 
-
-/* HEADER */
-
-header{
-    text-align:center;
-    padding:50px 20px;
-    background:linear-gradient(135deg,#111827,#050816);
-}
-
-header h1{
-    font-size:42px;
     color:#facc15;
+
+    letter-spacing:2px;
+
+    text-align:center;
+
+    text-shadow:
+        0 0 10px rgba(250,204,21,.6),
+        0 0 30px rgba(250,204,21,.25);
 }
 
-header p{
-    margin-top:15px;
-    font-size:18px;
+/* PEQUENA LINHA DE STATUS */
+#splash h2::after{
+    content:"SOLANA • $DGM • WEB3";
+
+    display:block;
+
+    margin-top:10px;
+
+    font-size:10px;
+    letter-spacing:3px;
+
+    color:rgba(255,255,255,.72);
 }
 
+/* ANIMAÇÕES */
 
-/* BOTÕES */
+@keyframes splashLogo{
+    0%{
+        transform:scale(.96);
+        box-shadow:
+            0 0 20px rgba(250,204,21,.55),
+            0 0 45px rgba(250,204,21,.25);
+    }
+
+    100%{
+        transform:scale(1.03);
+        box-shadow:
+            0 0 30px rgba(250,204,21,.85),
+            0 0 75px rgba(250,204,21,.40);
+    }
+}
+
+@keyframes splashZoom{
+    0%{
+        transform:scale(1.04);
+    }
+
+    100%{
+        transform:scale(1.10);
+    }
+}
+
+/* CELULAR */
+@media(max-width:600px){
+
+    #splash img{
+        width:72vw;
+        height:72vw;
+        max-width:310px;
+        max-height:310px;
+
+        border-width:4px;
+    }
+
+    #splash h2{
+        font-size:24px;
+        letter-spacing:1.5px;
+    }
+}
+
+/* TELAS GRANDES */
+@media(min-width:900px){
+
+    #splash img{
+        width:360px;
+        height:360px;
+    }
+}
