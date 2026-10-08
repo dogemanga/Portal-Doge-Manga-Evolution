@@ -5542,4 +5542,324 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- FIM — BOLHAS RÁPIDAS + CLIQUE + GRÁFICO -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ==================================================
+     DOGE MANGA — NOTÍCIAS AO VIVO
+     Atualiza sozinha · Fontes reais · 100% automático
+     ================================================== -->
+<style>
+:root {
+  --dgm-dark: #050816;
+  --dgm-gold: #facc15;
+  --dgm-border: rgba(250, 204, 21, 0.25);
+  --dgm-text: #e5e7eb;
+  --dgm-muted: #9ca3af;
+  --dgm-green: #22c55e;
+}
+
+.dgm-news-section {
+  width: 100%;
+  max-width: 920px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.dgm-news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dgm-news-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--dgm-gold);
+  text-shadow: 0 0 15px rgba(250,204,21,0.3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dgm-news-status {
+  font-size: 13px;
+  color: var(--dgm-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dgm-dot-live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dgm-green);
+  box-shadow: 0 0 8px var(--dgm-green);
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.dgm-news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 18px;
+}
+
+.dgm-news-card {
+  background: linear-gradient(145deg, #0f172a, #050816);
+  border: 1px solid var(--dgm-border);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.dgm-news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(250,204,21,0.15);
+  border-color: var(--dgm-gold);
+}
+
+.dgm-news-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  background: #1e293b;
+}
+
+.dgm-news-content {
+  padding: 18px;
+}
+
+.dgm-news-source {
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: rgba(250,204,21,0.1);
+  color: var(--dgm-gold);
+}
+
+.dgm-news-headline {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dgm-text);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.dgm-news-time {
+  font-size: 11px;
+  color: var(--dgm-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dgm-loading {
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--dgm-muted);
+}
+
+.dgm-spinner {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 2px solid rgba(250,204,21,0.2);
+  border-top-color: var(--dgm-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 12px;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .dgm-news-grid { grid-template-columns: 1fr; }
+  .dgm-news-title { font-size: 22px; }
+}
+</style>
+
+<!-- 📰 ÁREA DE NOTÍCIAS -->
+<div class="dgm-news-section">
+  <div class="dgm-news-header">
+    <h2 class="dgm-news-title">📰 NOTÍCIAS DO MERCADO</h2>
+    <div class="dgm-news-status">
+      <span class="dgm-dot-live"></span>
+      Atualiza a cada 15 min
+    </div>
+  </div>
+
+  <div class="dgm-news-grid" id="dgmNewsGrid">
+    <div class="dgm-loading">
+      <div class="dgm-spinner"></div>
+      <p>Carregando notícias em tempo real...</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==============================================
+// NOTÍCIAS AO VIVO — DOGE MANGA
+// Fontes: CoinTelegraph + CoinDesk + Decrypt
+// ==============================================
+
+const FEEDS = [
+  {
+    nome: 'CoinTelegraph',
+    cor: '#facc15',
+    rss: 'https://cointelegraph.com/rss/tag/cryptocurrency'
+  },
+  {
+    nome: 'CoinDesk',
+    cor: '#22c55e',
+    rss: 'https://www.coindesk.com/arc/outboundfeeds/rss/'
+  },
+  {
+    nome: 'Decrypt',
+    cor: '#3b82f6',
+    rss: 'https://decrypt.co/feed'
+  }
+];
+
+const PROXY = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+async function carregarTodasNoticias() {
+  let todasNoticias = [];
+
+  for (const feed of FEEDS) {
+    try {
+      const res = await fetch(PROXY + encodeURIComponent(feed.rss));
+      const data = await res.json();
+      
+      if (data.items) {
+        const noticias = data.items.slice(0, 4).map(item => ({
+          fonte: feed.nome,
+          cor: feed.cor,
+          titulo: item.title,
+          link: item.link,
+          imagem: item.enclosure?.link || item.thumbnail || '',
+          data: new Date(item.pubDate)
+        }));
+        todasNoticias.push(...noticias);
+      }
+    } catch (e) {
+      console.log('Erro ao carregar:', feed.nome);
+    }
+  }
+
+  // Ordena: mais novas primeiro
+  todasNoticias.sort((a, b) => b.data - a.data);
+  
+  // Mostra só as 9 mais recentes
+  renderizar(todasNoticias.slice(0, 9));
+}
+
+function renderizar(lista) {
+  const grid = document.getElementById('dgmNewsGrid');
+  
+  if (!lista.length) {
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:30px;color:#9ca3af;">
+      Tente novamente em instantes...
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = '';
+  
+  lista.forEach(noticia => {
+    const card = document.createElement('a');
+    card.href = noticia.link;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    card.className = 'dgm-news-card';
+
+    const tempo = tempoDesde(noticia.data);
+
+    card.innerHTML = `
+      <img 
+        src="${noticia.imagem}" 
+        alt="${noticia.titulo}" 
+        class="dgm-news-img"
+        onerror="this.src='https://via.placeholder.com/400x150/0b1220/facc15?text=${encodeURIComponent(noticia.fonte)}'"
+      >
+      <div class="dgm-news-content">
+        <span class="dgm-news-source" style="color:${noticia.cor};background:rgba(${hexToRgb(noticia.cor)},0.1)">
+          ${noticia.fonte}
+        </span>
+        <h3 class="dgm-news-headline">${noticia.titulo}</h3>
+        <span class="dgm-news-time">🕐 ${tempo}</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function tempoDesde(data) {
+  const agora = new Date();
+  const diff = Math.floor((agora - data) / 60000);
+  if (diff < 60) return `há ${diff} min`;
+  const h = Math.floor(diff / 60);
+  if (h < 24) return `há ${h}h`;
+  return `há ${Math.floor(h/24)}d`;
+}
+
+function hexToRgb(hex) {
+  const shorthand = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthand, (_,r,g,b) => r+r+g+g+b+b);
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? `${parseInt(result[1],16)},${parseInt(result[2],16)},${parseInt(result[3],16)}` : '250,204,21';
+}
+
+// Carrega ao abrir
+document.addEventListener('DOMContentLoaded', carregarTodasNoticias);
+
+// Atualiza a cada 15 minutos
+setInterval(carregarTodasNoticias, 900000);
+</script>
+
+<!-- FIM — NOTÍCIAS AO VIVO DOGE MANGA -->
+
+
       
