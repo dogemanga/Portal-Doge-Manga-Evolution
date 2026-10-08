@@ -5006,39 +5006,120 @@ document.getElementById('btn-abrir-chat').addEventListener('click', function() {
 
 
 
-
 <!-- ==================================================
-     DOGE MANGA — BOLHAS FLUTUANTES PREÇOS REAIS
-     Fonte: CoinGecko + Binance | Atualização: 30s
+     BOLHAS FLUTUANTES CRYPTO — VERSÃO PROFISSIONAL
+     Dados: CoinGecko / Binance / DexScreener
+     Logos oficiais, preços reais, Market Cap,
+     animação contínua e layout sem sobreposição
      ================================================== -->
+
 <style>
-.dgm-bolhas-container {
-  position: relative;
-  width: 100%;
-  min-height: 460px;
-  background: radial-gradient(ellipse at top, #1a1a3e 0%, #050816 60%, #000 100%);
-  border-radius: 24px;
-  margin: 25px 15px;
-  padding: 20px 15px;
-  overflow: hidden;
-  border: 2px solid rgba(250,204,21,.25);
-  box-shadow: inset 0 0 60px rgba(0,0,0,.8), 0 0 30px rgba(250,204,21,.1);
+:root {
+  --dgm-bg: #050816;
+  --dgm-card-bg: rgba(10, 14, 28, 0.92);
+  --dgm-gold: #facc15;
+  --dgm-green: #22c55e;
+  --dgm-red: #ef4444;
+  --dgm-blue: #3b82f6;
+  --dgm-border: rgba(250, 204, 21, 0.25);
+  --dgm-text: #e5e7eb;
+  --dgm-text-muted: #9ca3af;
 }
 
-/* Estrelas de fundo */
-.dgm-estrela {
+.dgm-bolhas-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(59, 130, 246, 0.14), transparent 25%),
+    radial-gradient(circle at 90% 20%, rgba(250, 204, 21, 0.14), transparent 28%),
+    linear-gradient(180deg, #0b1220 0%, #050816 48%, #000000 100%);
+  border-radius: 26px;
+  margin: 30px auto;
+  padding: 18px;
+  overflow: hidden;
+  border: 1px solid var(--dgm-border);
+  box-shadow:
+    inset 0 0 80px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(250, 204, 21, 0.08);
+}
+
+.dgm-top-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding: 0 8px;
+}
+
+.dgm-title {
+  color: var(--dgm-gold);
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 18px rgba(250, 204, 21, 0.35);
+}
+
+.dgm-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--dgm-text-muted);
+  font-size: 13px;
+}
+
+.dgm-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--dgm-green);
+  box-shadow: 0 0 12px var(--dgm-green);
+  animation: dgmPulse 1.6s infinite;
+}
+
+@keyframes dgmPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.dgm-countdown {
+  color: var(--dgm-gold);
+  font-weight: 700;
+  min-width: 38px;
+  text-align: right;
+}
+
+.dgm-sources {
+  font-size: 11px;
+  color: var(--dgm-text-muted);
+  margin-top: 2px;
+}
+
+.dgm-canvas-area {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  overflow: hidden;
+}
+
+.dgm-star {
   position: absolute;
   background: white;
   border-radius: 50%;
-  animation: brilho 3s infinite alternate;
+  opacity: 0.45;
+  animation: dgmTwinkle 3.5s infinite alternate;
 }
-@keyframes brilho {
-  0% { opacity: .2; }
+
+@keyframes dgmTwinkle {
+  0% { opacity: 0.2; }
   100% { opacity: 1; }
 }
 
-/* Bolha — TAMANHO REDUZIDO ✅ */
-.dgm-bolha {
+.dgm-bubble {
   position: absolute;
   border-radius: 50%;
   display: flex;
@@ -5046,299 +5127,597 @@ document.getElementById('btn-abrir-chat').addEventListener('click', function() {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all .4s ease;
-  box-shadow: inset 0 -6px 15px rgba(0,0,0,.4), 0 0 20px rgba(250,204,21,.12);
-  animation: flutuar 6s infinite ease-in-out;
-}
-@keyframes flutuar {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-.dgm-bolha:nth-child(odd) { animation-duration: 7s; }
-.dgm-bolha:nth-child(3n) { animation-duration: 8s; }
-
-.dgm-bolha:hover {
-  transform: scale(1.1);
-  z-index: 10;
-  box-shadow: inset 0 -6px 15px rgba(0,0,0,.4), 0 0 30px rgba(250,204,21,.3);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.08), transparent 35%),
+    linear-gradient(145deg, rgba(18, 24, 42, 0.96), rgba(10, 14, 28, 0.98));
+  border: 1px solid rgba(250, 204, 21, 0.22);
+  box-shadow:
+    inset 0 -8px 18px rgba(0, 0, 0, 0.55),
+    0 0 18px rgba(250, 204, 21, 0.12);
+  will-change: transform;
 }
 
-.dgm-bolha-simbolo {
-  font-size: 16px;
-  font-weight: 900;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0,0,0,.5);
+.dgm-bubble:hover {
+  transform: scale(1.08) !important;
+  z-index: 20;
+  box-shadow:
+    inset 0 -8px 18px rgba(0, 0, 0, 0.55),
+    0 0 28px rgba(250, 204, 21, 0.22);
 }
-.dgm-bolha-preco {
-  font-size: 11px;
-  color: #e5e7eb;
-  margin-top: 2px;
-  font-weight: 600;
-}
-.dgm-bolha-variacao {
-  font-size: 10px;
-  font-weight: 700;
-  margin-top: 1px;
-}
-.dgm-bolha-cap {
-  font-size: 8px;
-  color: #9ca3af;
-  margin-top: 1px;
-}
-.dgm-up { color: #22c55e; }
-.dgm-down { color: #ef4444; }
 
-/* Cabeçalho */
-.dgm-topo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px 15px;
-  position: relative;
-  z-index: 5;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.dgm-titulo {
-  color: #facc15;
-  font-size: 18px;
-  font-weight: 900;
-}
-.dgm-atualizacao {
-  color: #94a3b8;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.dgm-ponto {
-  width: 8px;
-  height: 8px;
-  background: #22c55e;
+.dgm-bubble-logo {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
   border-radius: 50%;
-  animation: piscar 1.5s infinite;
+  margin-bottom: 4px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.18);
 }
-@keyframes piscar {
-  0%,100% { opacity: 1; }
-  50% { opacity: .3; }
+
+.dgm-bubble-symbol {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--dgm-text);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-.dgm-contador {
-  color: #facc15;
+
+.dgm-bubble-price {
+  font-size: 12px;
+  color: var(--dgm-text);
+  margin-top: 2px;
   font-weight: 700;
+}
+
+.dgm-bubble-change {
+  font-size: 11px;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.dgm-bubble-cap {
+  font-size: 9px;
+  color: var(--dgm-text-muted);
+  margin-top: 2px;
+}
+
+.dgm-up { color: var(--dgm-green); }
+.dgm-down { color: var(--dgm-red); }
+.dgm-neutral { color: var(--dgm-text-muted); }
+
+.dgm-dgm-glow {
+  border-color: var(--dgm-gold);
+  box-shadow:
+    inset 0 -8px 18px rgba(0, 0, 0, 0.55),
+    0 0 22px rgba(250, 204, 21, 0.18);
+}
+
+.dgm-dgm-glow .dgm-bubble-symbol {
+  color: var(--dgm-gold);
+}
+
+@media (max-width: 768px) {
+  .dgm-bolhas-wrapper {
+    min-height: 460px;
+    margin: 20px 10px;
+    padding: 14px;
+  }
+
+  .dgm-title {
+    font-size: 17px;
+  }
+
+  .dgm-canvas-area {
+    height: 400px;
+  }
+
+  .dgm-bubble {
+    width: 78px !important;
+    height: 78px !important;
+  }
+
+  .dgm-bubble-logo {
+    width: 28px;
+    height: 28px;
+  }
+
+  .dgm-bubble-symbol {
+    font-size: 13px;
+  }
+
+  .dgm-bubble-price {
+    font-size: 11px;
+  }
+
+  .dgm-bubble-change {
+    font-size: 10px;
+  }
+
+  .dgm-bubble-cap {
+    font-size: 8px;
+  }
 }
 </style>
 
-<!-- 🐕 ÁREA DAS BOLHAS -->
-<div class="dgm-bolhas-container" id="dgmContainer">
-  <div class="dgm-topo">
-    <h3 class="dgm-titulo">🐕 DOGE MANGA — Mercado Ao Vivo</h3>
-    <div class="dgm-atualizacao">
-      <span class="dgm-ponto"></span>
-      CoinGecko + Binance · Atualiza em: <span class="dgm-contador" id="dgmContador">30</span>s
+<div class="dgm-bolhas-wrapper">
+  <div class="dgm-top-bar">
+    <div>
+      <div class="dgm-title">🐕 DOGE MANGA — MERCADO CRYPTO AO VIVO</div>
+      <div class="dgm-sources">Dados: CoinGecko · Binance · DexScreener</div>
+    </div>
+    <div class="dgm-status">
+      <span class="dgm-status-dot"></span>
+      Atualiza em: <span class="dgm-countdown" id="dgmCountdown">30</span>s
     </div>
   </div>
 
-  <div id="dgmAreaBolhas"></div>
+  <div class="dgm-canvas-area" id="dgmCanvas"></div>
 </div>
 
 <script>
-// ==============================================
-// 🐕 MOEDAS — TAMANHOS REDUZIDOS ✅
-// ==============================================
-const MOEDAS = [
-  { id: 'bitcoin', simbolo: 'BTC', tam: 100, x: 32, y: 15, cor: '#f7931a', binance: 'BTCUSDT' },
-  { id: 'ethereum', simbolo: 'ETH', tam: 92, x: 62, y: 18, cor: '#627eea', binance: 'ETHUSDT' },
-  { id: 'dogecoin', simbolo: 'DOGE', tam: 96, x: 85, y: 12, cor: '#facc15', binance: 'DOGEUSDT' },
-  { id: 'solana', simbolo: 'SOL', tam: 88, x: 8, y: 20, cor: '#00ffa3', binance: 'SOLUSDT' },
-  { id: 'ripple', simbolo: 'XRP', tam: 80, x: 95, y: 28, cor: '#23292f', binance: 'XRPUSDT' },
-  
-  { id: 'binancecoin', simbolo: 'BNB', tam: 84, x: 22, y: 40, cor: '#f3ba2f', binance: 'BNBUSDT' },
-  { id: 'tron', simbolo: 'TRX', tam: 76, x: 48, y: 38, cor: '#ff0013', binance: 'TRXUSDT' },
-  { id: 'pepe', simbolo: 'PEPE', tam: 84, x: 72, y: 42, cor: '#4ede47', binance: 'PEPEUSDT' },
-  { id: 'shiba-inu', simbolo: 'SHIB', tam: 80, x: 92, y: 45, cor: '#ffa409', binance: 'SHIBUSDT' },
-  { id: 'cardano', simbolo: 'ADA', tam: 80, x: 5, y: 45, cor: '#0033ad', binance: 'ADAUSDT' },
-  
-  { id: 'avalanche-2', simbolo: 'AVAX', tam: 76, x: 15, y: 58, cor: '#e84142', binance: 'AVAXUSDT' },
-  { id: 'chainlink', simbolo: 'LINK', tam: 76, x: 35, y: 55, cor: '#2a5ada', binance: 'LINKUSDT' },
-  { id: 'polkadot', simbolo: 'DOT', tam: 72, x: 55, y: 58, cor: '#e6007a', binance: 'DOTUSDT' },
-  { id: 'matic-network', simbolo: 'MATIC', tam: 72, x: 75, y: 55, cor: '#8247e5', binance: 'MATICUSDT' },
-  { id: 'litecoin', simbolo: 'LTC', tam: 72, x: 92, y: 60, cor: '#bfbbbb', binance: 'LTCUSDT' },
-  
-  { id: 'dgm-token', simbolo: '$DGM', tam: 90, x: 50, y: 75, cor: '#facc15', isDGM: true }
+const COIN_LIST = [
+  {
+    id: 'bitcoin',
+    symbol: 'BTC',
+    logo: 'https://assets.coingecko.com/coins/images/1/small/bitcoin.png',
+    size: 86,
+    binance: 'BTCUSDT',
+    priority: 1
+  },
+  {
+    id: 'ethereum',
+    symbol: 'ETH',
+    logo: 'https://assets.coingecko.com/coins/images/279/small/ethereum.png',
+    size: 82,
+    binance: 'ETHUSDT',
+    priority: 2
+  },
+  {
+    id: 'binancecoin',
+    symbol: 'BNB',
+    logo: 'https://assets.coingecko.com/coins/images/825/small/bnb-icon2_2x.png',
+    size: 74,
+    binance: 'BNBUSDT',
+    priority: 3
+  },
+  {
+    id: 'solana',
+    symbol: 'SOL',
+    logo: 'https://assets.coingecko.com/coins/images/4128/small/solana.png',
+    size: 72,
+    binance: 'SOLUSDT',
+    priority: 4
+  },
+  {
+    id: 'ripple',
+    symbol: 'XRP',
+    logo: 'https://assets.coingecko.com/coins/images/44/small/xrp-symbol-white-128.png',
+    size: 70,
+    binance: 'XRPUSDT',
+    priority: 5
+  },
+  {
+    id: 'dogecoin',
+    symbol: 'DOGE',
+    logo: 'https://assets.coingecko.com/coins/images/5/small/dogecoin.png',
+    size: 68,
+    binance: 'DOGEUSDT',
+    priority: 6
+  },
+  {
+    id: 'cardano',
+    symbol: 'ADA',
+    logo: 'https://assets.coingecko.com/coins/images/975/small/cardano.png',
+    size: 66,
+    binance: 'ADAUSDT',
+    priority: 7
+  },
+  {
+    id: 'avalanche-2',
+    symbol: 'AVAX',
+    logo: 'https://assets.coingecko.com/coins/images/12559/small/Avalanche_Circle_RedWhite_Trans.png',
+    size: 64,
+    binance: 'AVAXUSDT',
+    priority: 8
+  },
+  {
+    id: 'chainlink',
+    symbol: 'LINK',
+    logo: 'https://assets.coingecko.com/coins/images/877/small/chainlink-new-logo.png',
+    size: 62,
+    binance: 'LINKUSDT',
+    priority: 9
+  },
+  {
+    id: 'litecoin',
+    symbol: 'LTC',
+    logo: 'https://assets.coingecko.com/coins/images/2/small/litecoin.png',
+    size: 62,
+    binance: 'LTCUSDT',
+    priority: 10
+  },
+  {
+    id: 'tron',
+    symbol: 'TRX',
+    logo: 'https://assets.coingecko.com/coins/images/1093/small/tron.png',
+    size: 60,
+    binance: 'TRXUSDT',
+    priority: 11
+  },
+  {
+    id: 'polkadot',
+    symbol: 'DOT',
+    logo: 'https://assets.coingecko.com/coins/images/12171/small/polkadot.png',
+    size: 60,
+    binance: 'DOTUSDT',
+    priority: 12
+  },
+  {
+    id: 'matic-network',
+    symbol: 'MATIC',
+    logo: 'https://assets.coingecko.com/coins/images/4713/small/matic-token-icon.png',
+    size: 60,
+    binance: 'MATICUSDT',
+    priority: 13
+  },
+  {
+    id: 'pepe',
+    symbol: 'PEPE',
+    logo: 'https://assets.coingecko.com/coins/images/29850/small/pepe-token.jpeg',
+    size: 58,
+    binance: 'PEPEUSDT',
+    priority: 14
+  },
+  {
+    id: 'shiba-inu',
+    symbol: 'SHIB',
+    logo: 'https://assets.coingecko.com/coins/images/11939/small/shiba.png',
+    size: 58,
+    binance: 'SHIBUSDT',
+    priority: 15
+  },
+
+  // 🐕 $DGM — PREENCHER AQUI QUANDO TIVER OS DADOS
+  {
+    id: 'dgm-token',
+    symbol: '$DGM',
+    logo: 'https://your-official-dgm-logo.com/logo.png', // Coloque o logo oficial
+    size: 78,
+    binance: '', // Ex: 'DGMUSDT'
+    contractSolana: '', // Ex: '9WzDXwBbmkg8ZTbNMqUxvQRAyrZzDsGYdLVL9zYtAWWM'
+    isDGM: true,
+    priority: 0
+  }
 ];
 
-let tempoRestante = 30;
-let cacheDados = {};
+let priceData = {};
+let animationFrameId = null;
+let bubbles = [];
 
-// ==============================================
-// ⭐ ESTRELAS DE FUNDO
-// ==============================================
-function criarEstrelas() {
-  const container = document.getElementById('dgmContainer');
-  for (let i = 0; i < 50; i++) {
-    const estrela = document.createElement('div');
-    estrela.className = 'dgm-estrela';
-    estrela.style.left = Math.random() * 100 + '%';
-    estrela.style.top = Math.random() * 100 + '%';
-    estrela.style.width = estrela.style.height = (Math.random() * 2 + 1) + 'px';
-    estrela.style.animationDelay = Math.random() * 3 + 's';
-    container.appendChild(estrela);
+function createStars() {
+  const canvas = document.getElementById('dgmCanvas');
+  for (let i = 0; i < 60; i++) {
+    const star = document.createElement('div');
+    star.className = 'dgm-star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    canvas.appendChild(star);
   }
 }
 
-// ==============================================
-// 🔄 BUSCA COINGECKO — Preço + Market Cap
-// ==============================================
-async function buscarCoinGecko() {
+function formatPrice(value) {
+  if (value === null || value === undefined || isNaN(value)) return '--';
+  if (value < 0.00001) return '$' + value.toFixed(10);
+  if (value < 0.01) return '$' + value.toFixed(6);
+  if (value < 1) return '$' + value.toFixed(4);
+  return '$' + value.toLocaleString('en-US', { maximumFractionDigits: 2 });
+}
+
+function formatMarketCap(value) {
+  if (!value || isNaN(value)) return '--';
+  if (value >= 1e12) return `$${(value / 1e12).toFixed(2)}T`;
+  if (value >= 1e9) return `$${(value / 1e9).toFixed(2)}B`;
+  if (value >= 1e6) return `$${(value / 1e6).toFixed(2)}M`;
+  return '$' + value.toLocaleString();
+}
+
+async function fetchCoinGecko() {
   try {
-    const ids = MOEDAS.filter(m => !m.isDGM).map(m => m.id).join(',');
+    const ids = COIN_LIST.filter(c => !c.isDGM && c.id).map(c => c.id).join(',');
     const res = await fetch(
       `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
     );
-    const lista = await res.json();
-    
-    const dados = {};
-    lista.forEach(coin => {
-      dados[coin.id] = {
-        preco: coin.current_price,
-        variacao: coin.price_change_percentage_24h,
-        marketCap: coin.market_cap
+    const list = await res.json();
+    const data = {};
+    list.forEach(coin => {
+      data[coin.id] = {
+        price: coin.current_price,
+        change24h: coin.price_change_percentage_24h,
+        marketCap: coin.market_cap,
+        source: 'CoinGecko'
       };
     });
-    return dados;
+    return data;
   } catch (e) {
-    console.log('CoinGecko indisponível');
-    return null;
+    console.warn('CoinGecko falhou:', e);
+    return {};
   }
 }
 
-// ==============================================
-// 🔄 BUSCA BINANCE — Preço em tempo real
-// ==============================================
-async function buscarBinance() {
+async function fetchBinance() {
   try {
     const res = await fetch('https://api.binance.com/api/v3/ticker/price');
-    const lista = await res.json();
-    
-    const dados = {};
-    lista.forEach(ticker => {
-      dados[ticker.symbol] = parseFloat(ticker.price);
+    const list = await res.json();
+    const data = {};
+    list.forEach(ticker => {
+      data[ticker.symbol] = parseFloat(ticker.price);
     });
-    return dados;
+    return data;
   } catch (e) {
-    console.log('Binance indisponível');
+    console.warn('Binance falhou:', e);
+    return {};
+  }
+}
+
+async function fetchDexScreener(contractAddress) {
+  if (!contractAddress) return null;
+  try {
+    const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${contractAddress}`);
+    const json = await res.json();
+    if (!json.pairs || json.pairs.length === 0) return null;
+
+    const pair = json.pairs[0];
+    return {
+      price: pair.priceUsd ?? null,
+      change24h: pair.priceChange?.h24 ?? null,
+      marketCap: pair.fdv ?? pair.liquidity?.usd ?? null,
+      source: 'DexScreener'
+    };
+  } catch (e) {
+    console.warn('DexScreener falhou:', e);
     return null;
   }
 }
 
-// ==============================================
-// 🎨 FORMATA VALORES
-// ==============================================
-function formatarPreco(valor) {
-  if (valor === null || valor === undefined) return '--';
-  if (valor < 0.0001) return '$' + valor.toFixed(8);
-  if (valor < 1) return '$' + valor.toFixed(4);
-  return '$' + valor.toLocaleString('en-US', { maximumFractionDigits: 2 });
-}
-
-function formatarCap(valor) {
-  if (!valor) return '';
-  if (valor >= 1e12) return `$${(valor/1e12).toFixed(2)}T`;
-  if (valor >= 1e9) return `$${(valor/1e9).toFixed(2)}B`;
-  if (valor >= 1e6) return `$${(valor/1e6).toFixed(2)}M`;
-  return '$' + valor.toLocaleString();
-}
-
-// ==============================================
-// 🎨 RENDERIZA AS BOLHAS
-// ==============================================
-async function renderizarBolhas() {
-  const [cgDados, bnDados] = await Promise.all([
-    buscarCoinGecko(),
-    buscarBinance()
+async function fetchAllPrices() {
+  const [cgData, bnData] = await Promise.all([
+    fetchCoinGecko(),
+    fetchBinance()
   ]);
 
-  const area = document.getElementById('dgmAreaBolhas');
-  area.innerHTML = '';
+  const newPriceData = {};
 
-  MOEDAS.forEach(moeda => {
-    let preco, variacao, marketCap;
+  for (const coin of COIN_LIST) {
+    let price = null;
+    let change24h = null;
+    let marketCap = null;
+    let source = '';
 
-    if (moeda.isDGM) {
-      preco = '--';
-      variacao = '--';
-      marketCap = 'Aguardando';
-    } else {
-      // Prioriza Binance, senão usa CoinGecko
-      if (bnDados && moeda.binance && bnDados[moeda.binance]) {
-        preco = bnDados[moeda.binance];
-      } else if (cgDados && cgDados[moeda.id]) {
-        preco = cgDados[moeda.id].preco;
-      } else {
-        preco = null;
+    if (coin.isDGM && coin.contractSolana) {
+      const dexData = await fetchDexScreener(coin.contractSolana);
+      if (dexData) {
+        price = dexData.price;
+        change24h = dexData.change24h;
+        marketCap = dexData.marketCap;
+        source = dexData.source;
       }
-      
-      variacao = cgDados?.[moeda.id]?.variacao ?? null;
-      marketCap = cgDados?.[moeda.id]?.marketCap ?? null;
+    } else {
+      if (coin.binance && bnData[coin.binance]) {
+        price = bnData[coin.binance];
+        source = 'Binance';
+      }
+
+      if (coin.id && cgData[coin.id]) {
+        change24h = cgData[coin.id].change24h;
+        marketCap = cgData[coin.id].marketCap;
+        if (!price) {
+          price = cgData[coin.id].price;
+          source = 'CoinGecko';
+        }
+      }
     }
 
-    const ehPositivo = variacao >= 0;
-    const classeVar = variacao === null || variacao === 0 ? '' : (ehPositivo ? 'dgm-up' : 'dgm-down');
-    const sinal = variacao >= 0 ? '+' : '';
+    newPriceData[coin.symbol] = {
+      price,
+      change24h,
+      marketCap,
+      source
+    };
+  }
 
-    const precoStr = formatarPreco(preco);
-    const variacaoStr = variacao !== null && variacao !== undefined 
-      ? `${sinal}${variacao.toFixed(2)}%` 
-      : '--';
-    const capStr = formatarCap(marketCap);
+  priceData = newPriceData;
+}
 
-    const bolha = document.createElement('div');
-    bolha.className = 'dgm-bolha';
-    bolha.style.width = bolha.style.height = moeda.tam + 'px';
-    bolha.style.left = `calc(${moeda.x}% - ${moeda.tam/2}px)`;
-    bolha.style.top = `calc(${moeda.y}% - ${moeda.tam/2}px)`;
-    bolha.style.background = `radial-gradient(circle at 30% 30%, ${moeda.cor}33, ${moeda.cor}11, rgba(0,0,0,.6))`;
-    bolha.style.border = `2px solid ${moeda.cor}66`;
-    bolha.style.animationDelay = (Math.random() * 3) + 's';
+function createBubbles() {
+  const canvas = document.getElementById('dgmCanvas');
+  canvas.innerHTML = '';
+  bubbles = [];
 
-    bolha.innerHTML = `
-      <div class="dgm-bolha-simbolo">${moeda.simbolo}</div>
-      <div class="dgm-bolha-preco">${precoStr}</div>
-      <div class="dgm-bolha-variacao ${classeVar}">${variacaoStr}</div>
-      ${capStr ? `<div class="dgm-bolha-cap">MCap: ${capStr}</div>` : ''}
+  const positions = [
+    { x: 12, y: 18 },
+    { x: 30, y: 12 },
+    { x: 50, y: 8 },
+    { x: 70, y: 12 },
+    { x: 88, y: 18 },
+    { x: 8, y: 38 },
+    { x: 28, y: 42 },
+    { x: 50, y: 38 },
+    { x: 72, y: 42 },
+    { x: 92, y: 38 },
+    { x: 12, y: 62 },
+    { x: 32, y: 66 },
+    { x: 50, y: 62 },
+    { x: 68, y: 66 },
+    { x: 88, y: 62 },
+    { x: 50, y: 82 }
+  ];
+
+  COIN_LIST.forEach((coin, index) => {
+    const pos = positions[index % positions.length];
+    const bubble = document.createElement('div');
+    bubble.className = 'dgm-bubble' + (coin.isDGM ? ' dgm-dgm-glow' : '');
+    bubble.style.width = coin.size + 'px';
+    bubble.style.height = coin.size + 'px';
+
+    const startX = pos.x + (Math.random() - 0.5) * 8;
+    const startY = pos.y + (Math.random() - 0.5) * 8;
+
+    bubble.style.left = startX + '%';
+    bubble.style.top = startY + '%';
+    bubble.style.transform = `translate(-50%, -50%)`;
+
+    bubble.innerHTML = `
+      <img src="${coin.logo}" alt="${coin.symbol}" class="dgm-bubble-logo" onerror="this.src='https://via.placeholder.com/64/0b1220/facc15?text=${coin.symbol}'">
+      <div class="dgm-bubble-symbol">${coin.symbol}</div>
+      <div class="dgm-bubble-price" data-symbol="${coin.symbol}">--</div>
+      <div class="dgm-bubble-change" data-symbol="${coin.symbol}">--</div>
+      <div class="dgm-bubble-cap" data-symbol="${coin.symbol}">--</div>
     `;
 
-    area.appendChild(bolha);
+    canvas.appendChild(bubble);
+
+    bubbles.push({
+      element: bubble,
+      coin,
+      baseX: startX,
+      baseY: startY,
+      phaseX: Math.random() * Math.PI * 2,
+      phaseY: Math.random() * Math.PI * 2,
+      phaseRot: Math.random() * Math.PI * 2,
+      speed: 0.006 + Math.random() * 0.012
+    });
   });
 }
 
-// ==============================================
-// ⏲️ CONTADOR DE 30s
-// ==============================================
-setInterval(() => {
-  tempoRestante--;
-  document.getElementById('dgmContador').textContent = tempoRestante;
-  
-  if (tempoRestante <= 0) {
-    renderizarBolhas();
-    tempoRestante = 30;
-  }
-}, 1000);
+function updateBubblePrices() {
+  bubbles.forEach(bubble => {
+    const { coin } = bubble;
+    const data = priceData[coin.symbol];
+    if (!data) return;
 
-// ==============================================
-// 🚀 INICIA TUDO
-// ==============================================
+    const priceEl = bubble.element.querySelector(`.dgm-bubble-price[data-symbol="${coin.symbol}"]`);
+    const changeEl = bubble.element.querySelector(`.dgm-bubble-change[data-symbol="${coin.symbol}"]`);
+    const capEl = bubble.element.querySelector(`.dgm-bubble-cap[data-symbol="${coin.symbol}"]`);
+
+    if (priceEl) priceEl.textContent = formatPrice(data.price);
+
+    if (changeEl) {
+      const value = data.change24h;
+      if (value === null || value === undefined || isNaN(value)) {
+        changeEl.textContent = '--';
+        changeEl.className = 'dgm-bubble-change dgm-neutral';
+      } else {
+        const sign = value >= 0 ? '+' : '';
+        changeEl.textContent = `${sign}${value.toFixed(2)}%`;
+        changeEl.className = 'dgm-bubble-change ' + (value >= 0 ? 'dgm-up' : 'dgm-down');
+      }
+    }
+
+    if (capEl) capEl.textContent = `MCap: ${formatMarketCap(data.marketCap)}`;
+  });
+}
+
+function animateBubbles() {
+  const canvas = document.getElementById('dgmCanvas');
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+
+  const time = performance.now() * 0.001;
+
+  bubbles.forEach(bubble => {
+    const { element, baseX, baseY, phaseX, phaseY, phaseRot, speed } = bubble;
+
+    const floatX = Math.sin(time * speed + phaseX) * 2.5;
+    const floatY = Math.cos(time * speed + phaseY) * 3.5;
+    const rotation = Math.sin(time * speed * 0.7 + phaseRot) * 1.5;
+
+    const x = baseX + floatX;
+    const y = baseY + floatY;
+
+    const minX = 6;
+    const maxX = 94;
+    const minY = 6;
+    const maxY = 94;
+
+    const clampedX = Math.max(minX, Math.min(maxX, x));
+    const clampedY = Math.max(minY, Math.min(maxY, y));
+
+    element.style.left = clampedX + '%';
+    element.style.top = clampedY + '%';
+    element.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+  });
+
+  animationFrameId = requestAnimationFrame(animateBubbles);
+}
+
+let countdown = 30;
+
+function startCountdown() {
+  setInterval(() => {
+    countdown--;
+    const el = document.getElementById('dgmCountdown');
+    if (el) el.textContent = countdown;
+
+    if (countdown <= 0) {
+      fetchAllPrices().then(() => {
+        updateBubblePrices();
+      });
+      countdown = 30;
+    }
+  }, 1000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  criarEstrelas();
-  renderizarBolhas();
+  createStars();
+  createBubbles();
+  fetchAllPrices().then(() => {
+    updateBubblePrices();
+  });
+  animateBubbles();
+  startCountdown();
 });
 </script>
 
-<!-- FIM — BOLHAS FLUTUANTES PREÇOS REAIS -->
+<!-- FIM — BOLHAS FLUTUANTES CRYPTO PROFISSIONAL -->
 
       
 
-      
+
+
+
+
+
+
+
+
+
+
+
 
       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
