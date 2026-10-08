@@ -4918,6 +4918,64 @@ document.getElementById('dm-ativar').addEventListener('click', async () => {
 });
 </script>
 
+
+
+<!-- 🐕 DOGE MANGA — Botão Abrir Chat -->
+<div style="
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+">
+  <button id="btn-abrir-chat" style="
+    background: linear-gradient(135deg, #facc15, #eab308);
+    color: #000;
+    border: none;
+    padding: 14px 22px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(250, 204, 21, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  " onmouseover="this.style.transform='scale(1.05)'" 
+     onmouseout="this.style.transform='scale(1)'">
+    💬 Abrir Chat
+  </button>
+</div>
+
+<script>
+// Ação do botão — abre o chat que já existe no portal
+document.getElementById('btn-abrir-chat').addEventListener('click', function() {
+  // Se o chat tiver um ID específico, substitui abaixo
+  const chatElement = document.getElementById('chat');
+  
+  if (chatElement) {
+    // Se o chat tá escondido, mostra ele
+    chatElement.style.display = chatElement.style.display === 'none' ? 'block' : 'block';
+    chatElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+    // Efeito visual no botão
+    this.textContent = '✅ Chat Aberto';
+    this.style.background = '#22c55e';
+    setTimeout(() => {
+      this.textContent = '💬 Abrir Chat';
+      this.style.background = 'linear-gradient(135deg, #facc15, #eab308)';
+    }, 2000);
+  } else {
+    // Se não achou o elemento, rola pra onde o chat fica
+    window.scrollTo({
+      top: document.body.scrollHeight / 2,
+      behavior: 'smooth'
+    });
+    alert('🔍 Rola a página que o chat aparece!');
+  }
+});
+</script>
+
       
 
       
