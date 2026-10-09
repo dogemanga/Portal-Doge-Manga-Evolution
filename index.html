@@ -6371,6 +6371,302 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- DOGE MANGA WHALE RADAR | DASHBOARD -->
+<section id="dmWhale">
+<style>
+#dmWhale{background:#030712;color:#f8fafc;font:14px Arial,sans-serif;max-width:1250px;margin:20px auto;border:1px solid #26354a;border-radius:16px;overflow:hidden}
+#dmWhale *{box-sizing:border-box}
+#dmWhale .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:14px 18px;border-bottom:1px solid #26354a;background:#070d1b}
+#dmWhale .brand{font-size:22px;font-weight:900;color:#facc15}
+#dmWhale .nav{display:flex;gap:15px;flex-wrap:wrap;color:#cbd5e1;font-size:12px}
+#dmWhale .nav span{cursor:pointer}
+#dmWhale .hero{position:relative;min-height:250px;padding:30px 22px;display:flex;align-items:center;background:radial-gradient(ellipse at 75% 50%,#164e6388,transparent 45%),linear-gradient(110deg,#090d1a,#111827 65%,#382500);border-bottom:2px solid #eab308}
+#dmWhale .hero h2{font-size:clamp(27px,5vw,48px);line-height:1.03;font-weight:900;color:#facc15;margin:0 0 14px;max-width:600px;text-transform:uppercase}
+#dmWhale .hero p{color:#e2e8f0;max-width:440px;line-height:1.6}
+#dmWhale .hero .whale{position:absolute;right:4%;top:50%;transform:translateY(-50%);font-size:clamp(90px,18vw,190px);filter:drop-shadow(0 0 24px #eab30866);opacity:.92}
+#dmWhale .btn{display:inline-block;background:linear-gradient(135deg,#fde047,#f59e0b);border:0;border-radius:30px;padding:12px 20px;font-weight:900;color:#111827;text-decoration:none;cursor:pointer}
+#dmWhale .section{padding:18px}
+#dmWhale .section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+#dmWhale h3{margin:0;font-size:17px}
+#dmWhale .muted{font-size:12px;color:#94a3b8;line-height:1.6}
+#dmWhale .ticker{background:#081426;border:1px solid #23344a;border-radius:10px;padding:12px;display:flex;gap:20px;overflow:auto;white-space:nowrap;color:#4ade80;font-weight:bold;margin-bottom:16px}
+#dmWhale .coins{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+#dmWhale .coin{min-width:0;background:linear-gradient(160deg,#0b172b,#050b17);border:1px solid #263a53;border-radius:12px;padding:13px}
+#dmWhale .coinhead{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+#dmWhale .coinicon{width:34px;height:34px;flex-shrink:0;border-radius:50%;display:grid;place-items:center;background:#17243a;border:1px solid #eab308;color:#facc15;font-weight:bold}
+#dmWhale .coinname{font-weight:bold;overflow-wrap:anywhere}
+#dmWhale .symbol{color:#94a3b8;font-size:11px;margin-top:3px}
+#dmWhale .price{font-size:18px;font-weight:900;margin:12px 0 5px;overflow-wrap:anywhere}
+#dmWhale .change{font-weight:bold;font-size:13px}
+#dmWhale .green{color:#4ade80}
+#dmWhale .red{color:#fb7185}
+#dmWhale .stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:13px 0}
+#dmWhale .statlabel{font-size:10px;color:#94a3b8}
+#dmWhale .statvalue{font-size:12px;font-weight:bold;margin-top:4px;overflow-wrap:anywhere}
+#dmWhale .outline{display:block;width:100%;padding:9px 5px;border:1px solid #b98b13;color:#facc15;border-radius:20px;text-align:center;background:transparent;font-size:11px;font-weight:bold;cursor:pointer}
+#dmWhale .lower{display:grid;grid-template-columns:minmax(0,2fr) minmax(240px,1fr);gap:14px;margin-top:16px}
+#dmWhale .panel{background:#071020;border:1px solid #263a53;border-radius:13px;padding:15px;min-width:0}
+#dmWhale .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+#dmWhale .tab{border:1px solid #334155;background:#111c30;color:#cbd5e1;border-radius:20px;padding:8px 12px;cursor:pointer}
+#dmWhale .tab.active{background:#facc15;color:#111827;border-color:#facc15;font-weight:bold}
+#dmWhale .chartframe{width:100%;height:440px;border:0;border-radius:8px;background:#050816}
+#dmWhale .rankrow{display:flex;align-items:center;gap:9px;padding:12px 0;border-bottom:1px solid #1e293b}
+#dmWhale .ranknum{color:#facc15;font-weight:900;width:18px}
+#dmWhale .rankname{flex:1;min-width:0}
+#dmWhale .rankchange{font-weight:bold;color:#4ade80;white-space:nowrap}
+#dmWhale .whalerow{padding:12px 0;border-bottom:1px solid #1e293b}
+#dmWhale .whalerow strong{color:#facc15}
+#dmWhale .footer{text-align:center;padding:18px;color:#94a3b8;border-top:1px solid #26354a;font-size:12px}
+#dmWhale .loading{color:#94a3b8;font-size:12px;line-height:1.6}
+@media(max-width:900px){#dmWhale .coins{grid-template-columns:repeat(2,minmax(0,1fr))}#dmWhale .lower{grid-template-columns:1fr}#dmWhale .hero .whale{opacity:.3;right:2%}}
+@media(max-width:450px){#dmWhale .coins{grid-template-columns:1fr 1fr}#dmWhale .coin{padding:10px}#dmWhale .price{font-size:16px}#dmWhale .section{padding:12px}#dmWhale .chartframe{height:350px}#dmWhale .hero{padding:24px 16px}}
+</style>
+
+<header class="top">
+  <div class="brand">🐕 DOGE MANGA</div>
+  <nav class="nav">
+    <span onclick="document.getElementById('dmMarket').scrollIntoView({behavior:'smooth'})">⌂ Início</span>
+    <span onclick="document.getElementById('dmMarket').scrollIntoView({behavior:'smooth'})">▥ Mercado</span>
+    <span onclick="document.getElementById('dmWhales').scrollIntoView({behavior:'smooth'})">🐋 Radar</span>
+    <span onclick="document.getElementById('dmChart').scrollIntoView({behavior:'smooth'})">📈 Gráficos</span>
+  </nav>
+  <a class="btn" href="https://phantom.com/" target="_blank" rel="noopener">Phantom ↗</a>
+</header>
+
+<!-- BANNER -->
+<div class="hero">
+  <div style="position:relative;z-index:1;max-width:650px">
+    <h2>As baleias estão movimentando o mercado!</h2>
+    <p>Acompanhe memecoins da Solana, veja preços, volume, liquidez e gráficos de mercado.</p>
+    <button class="btn" onclick="document.getElementById('dmMarket').scrollIntoView({behavior:'smooth'})">▥ VER MOEDAS</button>
+  </div>
+  <div class="whale" aria-hidden="true">🐋</div>
+</div>
+
+<div class="section" id="dmMarket">
+  <div class="section-title">
+    <h3>🚀 MEMECOINS EM DESTAQUE</h3>
+    <span class="muted" id="dmUpdated">Carregando dados...</span>
+  </div>
+  <div class="ticker" id="dmTicker">
+    <span>● SOLANA MARKET RADAR</span>
+    <span>Dados públicos em carregamento...</span>
+  </div>
+  <div class="coins" id="dmCoins">
+    <div class="panel loading">Consultando dados públicos do mercado...</div>
+  </div>
+
+  <div class="lower">
+    <!-- GRAFICO -->
+    <div class="panel" id="dmChart">
+      <div class="section-title">
+        <h3>📈 GRÁFICO DE MERCADO</h3>
+        <span class="muted" id="dmChartTitle">Selecione uma moeda</span>
+      </div>
+      <div id="dmChartTabs" class="tabs"></div>
+      <div id="dmChartArea">
+        <p class="loading">O gráfico será carregado após encontrar um par de negociação.</p>
+      </div>
+      <p class="muted">Gráfico fornecido pelo DexScreener. A disponibilidade depende do par selecionado.</p>
+    </div>
+
+    <!-- RADAR DE BALEIAS -->
+    <div class="panel" id="dmWhales">
+      <h3>🐋 RADAR DE BALEIAS</h3>
+      <p class="muted">Acompanhe transações públicas na blockchain Solana.</p>
+      <div class="whalerow">
+        <strong>Movimentações on-chain</strong>
+        <p class="muted">Acompanhar transações grandes exige dados de carteiras e valores transferidos; este painel não inventa compradores nem valores.</p>
+      </div>
+      <div class="whalerow">
+        <strong>Explore as transações</strong>
+        <p class="muted">Consulte atividade pública da rede no explorador Solscan.</p>
+        <a href="https://solscan.io/" target="_blank" rel="noopener" class="btn">ABRIR SOLSCAN ↗</a>
+      </div>
+      <div class="whalerow">
+        <strong>Como interpretar</strong>
+        <p class="muted">Uma transferência grande pode ser entre carteiras próprias, uma exchange ou um pool. Sozinha, ela não prova compra ou venda.</p>
+      </div>
+      <h3 style="margin-top:20px">🔥 MAIORES ALTAS</h3>
+      <div id="dmRanking"><p class="loading">Calculando com dados disponíveis...</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong style="color:#facc15">◆ DOGE MANGA</strong><br>
+  Radar de mercado da Solana • Dados de terceiros • Não é aconselhamento financeiro.<br>
+  Preços e indicadores podem atrasar ou não estar disponíveis.
+</div>
+
+<script>
+(function(){
+  const root=document.getElementById('dmWhale');
+  if(root.dataset.started)return;
+  root.dataset.started='1';
+
+  const DGM='E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE';
+  const tokens=[
+    {name:'Doge Manga',symbol:'DGM',mint:DGM},
+    {name:'Pepe',symbol:'PEPE',query:'PEPE'},
+    {name:'Shiba Inu',symbol:'SHIB',query:'SHIB'},
+    {name:'Bonk',symbol:'BONK',query:'BONK'},
+    {name:'Fartcoin',symbol:'FARTCOIN',query:'FARTCOIN'}
+  ];
+
+  let loaded=[];
+  const $=id=>document.getElementById(id);
+
+  function safeText(s){
+    return String(s??'').replace(/[&<>"']/g,c=>({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+  }
+  function money(n){
+    if(n==null||!Number.isFinite(Number(n)))return 'N/D';
+    return Number(n).toLocaleString('en-US',{
+      style:'currency',currency:'USD',
+      maximumFractionDigits:Number(n)<0.01?8:2
+    });
+  }
+  function compact(n){
+    if(n==null||!Number.isFinite(Number(n)))return 'N/D';
+    return Number(n).toLocaleString('en-US',{
+      notation:'compact',maximumFractionDigits:2
+    });
+  }
+  function pct(n){
+    if(n==null||!Number.isFinite(Number(n)))return 'N/D';
+    return (n>0?'+':'')+Number(n).toFixed(2)+'%';
+  }
+
+  async function findToken(t){
+    let pairs=[];
+    if(t.mint){
+      const r=await fetch('https://api.dexscreener.com/latest/dex/tokens/'+encodeURIComponent(t.mint));
+      if(!r.ok)throw Error('API');
+      const d=await r.json();
+      pairs=(d.pairs||[]).filter(p=>p.chainId==='solana'&&p.baseToken?.address===t.mint);
+    }else{
+      const r=await fetch('https://api.dexscreener.com/latest/dex/search/?q='+encodeURIComponent(t.query));
+      if(!r.ok)throw Error('API');
+      const d=await r.json();
+      pairs=(d.pairs||[]).filter(p=>
+        p.chainId==='solana' &&
+        p.baseToken?.symbol?.toUpperCase()===t.symbol
+      );
+    }
+    pairs.sort((a,b)=>(Number(b.liquidity?.usd)||0)-(Number(a.liquidity?.usd)||0));
+    return pairs[0]?{...t,pair:pairs[0],pairCount:pairs.length}: {...t,pair:null,pairCount:0};
+  }
+
+  function renderCard(t){
+    if(!t.pair){
+      return '<article class="coin"><div class="coinhead"><div class="coinicon">?</div><div><div class="coinname">'+safeText(t.name)+'</div><div class="symbol">'+safeText(t.symbol)+'</div></div></div><p class="muted">Par não encontrado na pesquisa atual.</p></article>';
+    }
+    const p=t.pair;
+    const ch=p.priceChange?.h24;
+    const cls=ch>0?'green':ch<0?'red':'';
+    return '<article class="coin">'+
+      '<div class="coinhead"><div class="coinicon">'+safeText(t.symbol.slice(0,3))+'</div><div><div class="coinname">'+safeText(t.name)+'</div><div class="symbol">$'+safeText(t.symbol)+'</div></div></div>'+
+      '<div class="price">'+money(Number(p.priceUsd))+'</div>'+
+      '<div class="change '+cls+'">'+pct(ch)+'</div>'+
+      '<div class="stats">'+
+      '<div><div class="statlabel">MARKET CAP</div><div class="statvalue">'+money(p.marketCap)+'</div></div>'+
+      '<div><div class="statlabel">VOLUME 24H</div><div class="statvalue">'+money(p.volume?.h24)+'</div></div>'+
+      '<div><div class="statlabel">LIQUIDEZ</div><div class="statvalue">'+money(p.liquidity?.usd)+'</div></div>'+
+      '<div><div class="statlabel">FDV</div><div class="statvalue">'+money(p.fdv)+'</div></div>'+
+      '</div>'+
+      '<button class="outline" data-chart="'+safeText(p.pairAddress)+'" data-symbol="'+safeText(t.symbol)+'">📈 VER GRÁFICO</button>'+
+      '<p class="muted">Par: '+safeText(p.dexId||'DEX')+'</p>'+
+      '<a href="https://dexscreener.com/solana/'+encodeURIComponent(p.pairAddress)+'" target="_blank" rel="noopener">Ver par ↗</a>'+
+      '</article>';
+  }
+
+  function openChart(t){
+    if(!t||!t.pair)return;
+    const p=t.pair;
+    $('dmChartTitle').textContent=t.name+' ('+t.symbol+')';
+    $('dmChartArea').innerHTML=
+      '<iframe class="chartframe" title="Gráfico '+safeText(t.symbol)+' no DexScreener" loading="lazy" allowfullscreen src="https://dexscreener.com/solana/'+encodeURIComponent(p.pairAddress)+'?embed=1&theme=dark&trades=0&info=0"></iframe>';
+    $('dmChart').scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function bindCards(){
+    $('dmCoins').querySelectorAll('[data-chart]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const t=loaded.find(x=>x.pair&&x.pair.pairAddress===btn.dataset.chart);
+        openChart(t);
+      });
+    });
+  }
+
+  function renderRanking(){
+    const list=loaded.filter(t=>t.pair&&Number.isFinite(Number(t.pair.priceChange?.h24)));
+    list.sort((a,b)=>(Number(b.pair.priceChange.h24)||0)-(Number(a.pair.priceChange.h24)||0));
+    $('dmRanking').innerHTML=list.length?list.map((t,i)=>
+      '<div class="rankrow"><span class="ranknum">'+(i+1)+'</span><div class="rankname">'+safeText(t.name)+'<div class="muted">'+safeText(t.symbol)+'</div></div><span class="rankchange">'+pct(t.pair.priceChange.h24)+'</span></div>'
+    ).join(''):'<p class="muted">Não há dados de variação disponíveis.</p>';
+  }
+
+  function renderTicker(){
+    const rows=loaded.filter(t=>t.pair);
+    $('dmTicker').innerHTML=rows.map(t=>
+      '<span>'+safeText(t.symbol)+' '+money(Number(t.pair.priceUsd))+' '+pct(t.pair.priceChange?.h24)+'</span>'
+    ).join('')||'<span>Dados indisponíveis neste momento.</span>';
+  }
+
+  async function load(){
+    $('dmUpdated').textContent='Consultando API pública...';
+    const results=await Promise.allSettled(tokens.map(findToken));
+    loaded=results.filter(r=>r.status==='fulfilled').map(r=>r.value);
+    $('dmCoins').innerHTML=loaded.map(renderCard).join('')||
+      '<p class="muted">Não foi possível carregar os dados. Tente atualizar a página.</p>';
+    bindCards();
+    renderTicker();
+    renderRanking();
+    $('dmUpdated').textContent='Última consulta: '+new Date().toLocaleTimeString('pt-BR');
+    const first=loaded.find(t=>t.pair);
+    if(first)openChart(first);
+  }
+
+  load().catch(()=>{
+    $('dmUpdated').textContent='Falha ao consultar dados.';
+    $('dmCoins').innerHTML='<p class="muted">A API não respondeu. Verifique a conexão e tente novamente.</p>';
+  });
+})();
+</script>
+</section>
+<!-- FIM DOGE MANGA WHALE RADAR -->
+
+
+      
+
+
+
+
       
       
 
