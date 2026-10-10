@@ -7142,6 +7142,291 @@ nav a:hover, nav a.active {
 
 
 
+
+
+
+
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doge Manga Global Intelligence</title>
+<style>
+:root{--bg:#050816;--panel:#0d1426;--panel2:#111c31;--line:#24314b;--gold:#facc15;--purple:#8b5cf6;--text:#eef2ff;--muted:#9aa9c4;--green:#34d399;--red:#fb7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#14213c 0,#050816 55%);color:var(--text);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.wrap{max-width:1180px;margin:auto;padding:18px}.top{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;padding:14px 0 20px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,var(--gold),#f59e0b);display:grid;place-items:center;color:#101827;font-size:24px;font-weight:900;box-shadow:0 0 28px #facc1533}
+h1{font-size:clamp(20px,4vw,29px);margin:0;letter-spacing:.3px} .sub{color:var(--muted);font-size:12px;letter-spacing:1.2px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}button{border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:10px 14px;border-radius:11px;font-weight:700;cursor:pointer}button.primary{background:var(--gold);color:#111827;border-color:var(--gold)}button:disabled{opacity:.55;cursor:wait}
+.banner{border:2px solid var(--gold);background:linear-gradient(100deg,#241f12,#101729);border-radius:16px;padding:14px 16px;margin-bottom:15px;display:flex;gap:12px;align-items:flex-start}.banner strong{color:var(--gold)}.banner p{margin:3px 0 0;color:#c5cee0;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}.card{background:linear-gradient(145deg,#101a2d,#0a1020);border:1px solid var(--line);border-radius:16px;padding:15px;min-width:0}.label{font-size:12px;color:var(--muted)}.value{font-size:clamp(20px,3vw,27px);font-weight:800;margin:5px 0;overflow-wrap:anywhere}.small{font-size:12px;color:var(--muted)}.section{display:grid;grid-template-columns:1.5fr 1fr;gap:14px;margin-bottom:14px}.section h2{font-size:16px;margin:0 0 12px}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{font-size:11px;border:1px solid var(--line);border-radius:999px;padding:5px 8px;color:var(--muted)}.chip.ok{color:var(--green);border-color:#1d654f}.chip.wait{color:var(--gold);border-color:#5b4b17}.chip.dgm{background:var(--gold);color:#111827;border-color:var(--gold);font-weight:bold}.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:460px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid #202b40;font-size:13px}th{font-size:11px;color:var(--muted);font-weight:600}td strong{display:block}td .ticker{font-size:11px;color:var(--muted)}.positive{color:var(--green)}.negative{color:var(--red)}.alerts{display:grid;gap:9px}.alert{border:1px solid var(--line);border-radius:12px;padding:11px;background:#0b1221}.alert.dgm{border-color:var(--gold);background:#1a1605}.alert b{display:block;font-size:13px;margin-bottom:3px}.alert p{margin:0;color:var(--muted);font-size:12px}.footer{color:var(--muted);font-size:11px;text-align:center;padding:15px 4px}.status{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:6px}.error{color:var(--red)}.loading{opacity:.7}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section{grid-template-columns:1fr}.wrap{padding:13px}.card{padding:12px}.top{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">DM</div><div><h1>DOGE MANGA <span style="color:var(--gold)">INTELLIGENCE</span></h1><div class="sub">GLOBAL CRYPTO RADAR · TOKEN OFICIAL</div></div></div>
+    <div class="actions"><button id="refreshBtn" class="primary" onclick="refreshAll()">↻ Atualizar dados</button><button onclick="showInfo()">Fontes e limitações</button></div>
+  </header>
+
+  <div class="banner">
+    <div style="font-size:22px">🐕</div>
+    <div>
+      <strong>Token $DGM — Doge Manga Evolution</strong>
+      <p>Contrato Solana: <code style="color:#facc15;font-size:11px">E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</code><br>
+      Dados em tempo real direto do DexScreener + Binance + CoinGecko</p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card" style="border-color:var(--gold);box-shadow:0 0 15px #facc1522">
+      <div class="label" style="color:var(--gold)">🐕 $DGM · DOGE MANGA</div>
+      <div class="value" id="dgmPrice">Carregando…</div>
+      <div class="small" id="dgmChange">DexScreener · Solana</div>
+    </div>
+    <div class="card"><div class="label">Bitcoin · BTC</div><div class="value" id="btcPrice">Carregando…</div><div class="small" id="btcChange">Binance · preço spot</div></div>
+    <div class="card"><div class="label">Ethereum · ETH</div><div class="value" id="ethPrice">Carregando…</div><div class="small" id="ethChange">Binance · preço spot</div></div>
+    <div class="card"><div class="label">Solana · SOL</div><div class="value" id="solPrice">Carregando…</div><div class="small" id="solChange">Binance · preço spot</div></div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <h2>📊 Mercado em destaque</h2>
+      <div class="chips" style="margin-bottom:10px">
+        <span class="chip dgm" id="dgmStatus">$DGM: buscando</span>
+        <span class="chip" id="cgStatus">CoinGecko: aguardando</span>
+        <span class="chip" id="binanceStatus">Binance: aguardando</span>
+        <span class="chip" id="dexStatus">DexScreener: aguardando</span>
+      </div>
+      <div class="tablewrap"><table><thead><tr><th>Ativo</th><th>Preço USD</th><th>24h</th><th>Volume/Liquidez</th></tr></thead><tbody id="marketRows"><tr><td colspan="4">Carregando dados de mercado…</td></tr></tbody></table></div>
+    </div>
+    <div class="card">
+      <h2>📡 Radar de Atividade</h2>
+      <div class="alerts" id="radarAlerts">
+        <div class="alert"><b>Preparando o radar</b><p>Monitorando $DGM e mercado em tempo real…</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <h2>🪙 $DGM — Dados do Token</h2>
+      <div class="tablewrap"><table><thead><tr><th>Par</th><th>Rede</th><th>Preço USD</th><th>Variação</th><th>Liquidez</th></tr></thead><tbody id="dgmRows"><tr><td colspan="5">Buscando dados do contrato…</td></tr></tbody></table></div>
+      <p class="small">Fonte: DexScreener · Contrato: E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE</p>
+    </div>
+    <div class="card">
+      <h2>🔗 Links Oficiais</h2>
+      <div class="alerts">
+        <div class="alert dgm">
+          <b>📈 Gráfico ao vivo</b>
+          <p><a href="https://dexscreener.com/solana/E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE" target="_blank" style="color:var(--gold)">Abrir no DexScreener →</a></p>
+        </div>
+        <div class="alert">
+          <b>💱 Comprar $DGM</b>
+          <p>Disponível na rede Solana · confirme sempre o contrato correto!</p>
+        </div>
+        <div class="alert">
+          <b>⚠️ Atenção</b>
+          <p>Nunca compartilhe sua chave privada · Sempre confira o endereço do contrato.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="card">
+      <h2>🌐 Outros pares Solana</h2>
+      <div class="tablewrap"><table><thead><tr><th>Par</th><th>Dex</th><th>Preço</th><th>Liquidez</th></tr></thead><tbody id="dexRows"><tr><td colspan="4">Carregando…</td></tr></tbody></table></div>
+    </div>
+    <div class="card">
+      <h2>🧠 Próximos passos</h2>
+      <div class="alerts">
+        <div class="alert"><b>✅ $DGM Conectado</b><p>Agora puxa dados direto do DexScreener!</p></div>
+        <div class="alert"><b>🔔 Alertas de movimento</b><p>Em breve: aviso quando $DGM mover forte.</p></div>
+        <div class="alert"><b>📊 Gráfico integrado</b><p>Em desenvolvimento: gráfico direto no portal.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Doge Manga Global Intelligence · Protótipo independente · Não é recomendação financeira.</div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const DGM_CONTRACT = 'E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE';
+const state = {sources:{binance:false,coingecko:false,dexscreener:false,dgm:false}, market:[], dex:[], dgmData:null};
+
+const usd = n => Number.isFinite(Number(n)) ? Number(n).toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:Number(n)<0.01?8:Number(n)<1?4:2}) : '—';
+const compact = n => Number.isFinite(Number(n)) ? '$'+Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:2}).format(Number(n)) : '—';
+const pct = n => Number.isFinite(Number(n)) ? `${Number(n)>=0?'+':''}${Number(n).toFixed(2)}%` : '—';
+
+function setStatus(id,label,ok){$(id).textContent=label+': '+(ok?'conectado':'indisponível');$(id).className='chip '+(ok?'ok':'wait');}
+async function jsonFetch(url){const r=await fetch(url,{headers:{'accept':'application/json'}});if(!r.ok)throw new Error('HTTP '+r.status);return r.json();}
+
+// === BUSCAR DADOS DO $DGM DIRETO PELO CONTRATO ===
+async function loadDGM(){
+  try{
+    const data = await jsonFetch(`https://api.dexscreener.com/latest/dex/tokens/${DGM_CONTRACT}`);
+    const pairs = data.pairs || [];
+    const solPair = pairs.find(p=>p.chainId==='solana' && p.baseToken?.address === DGM_CONTRACT) || pairs[0];
+    
+    if(solPair){
+      state.dgmData = solPair;
+      state.sources.dgm = true;
+      $('dgmStatus').textContent = '$DGM: ao vivo';
+      $('dgmStatus').className = 'chip dgm';
+      
+      const price = Number(solPair.priceUsd);
+      $('dgmPrice').textContent = usd(price);
+      
+      const change = solPair.priceChange?.h24;
+      if(Number.isFinite(change)){
+        $('dgmChange').innerHTML = `${pct(change)} nas últimas 24h`;
+        $('dgmChange').className = 'small '+(change>=0?'positive':'negative');
+      }
+      
+      // Renderiza tabela do DGM
+      $('dgmRows').innerHTML = `
+        <tr>
+          <td><strong>${escapeHtml(solPair.baseToken?.symbol||'DGM')}/${escapeHtml(solPair.quoteToken?.symbol||'SOL')}</strong>
+          <span class="ticker">${escapeHtml(solPair.dexId||'Raydium')}</span></td>
+          <td>${escapeHtml(solPair.chainId||'Solana')}</td>
+          <td>${usd(solPair.priceUsd)}</td>
+          <td class="${Number(solPair.priceChange?.h24)>=0?'positive':'negative'}">${pct(solPair.priceChange?.h24)}</td>
+          <td>${compact(solPair.liquidity?.usd)}</td>
+        </tr>
+      `;
+    } else {
+      $('dgmStatus').textContent = '$DGM: sem pares';
+      $('dgmStatus').className = 'chip wait';
+      $('dgmRows').innerHTML = '<tr><td colspan="5">Token encontrado, mas sem par de negociação ativo ainda.</td></tr>';
+    }
+  }catch(e){
+    console.warn('DGM:',e);
+    $('dgmStatus').textContent = '$DGM: indisponível';
+    $('dgmStatus').className = 'chip wait';
+    $('dgmRows').innerHTML = '<tr><td colspan="5">Não foi possível consultar agora. Tente novamente em instantes.</td></tr>';
+  }
+}
+
+async function loadBinance(){
+  const pairs=[['BTCUSDT','btcPrice','btcChange'],['ETHUSDT','ethPrice','ethChange'],['SOLUSDT','solPrice','solChange']];
+  const results=await Promise.all(pairs.map(async p=>{
+    const d=await jsonFetch('https://api.binance.com/api/v3/ticker/24hr?symbol='+p[0]);
+    return d;
+  }));
+  results.forEach((r,i)=>{
+    $(pairs[i][1]).textContent=usd(r.lastPrice);
+    $(pairs[i][2]).innerHTML=`${pct(r.priceChangePercent)} nas últimas 24h`;
+    $(pairs[i][2]).className='small '+(Number(r.priceChangePercent)>=0?'positive':'negative');
+  });
+  state.sources.binance=true;setStatus('binanceStatus','Binance',true);
+}
+
+async function loadCoinGecko(){
+  const data=await jsonFetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=volume_desc&per_page=10&page=1&sparkline=false');
+  state.market=data;state.sources.coingecko=true;setStatus('cgStatus','CoinGecko',true);renderMarket();
+}
+
+async function loadDex(){
+  const data=await jsonFetch('https://api.dexscreener.com/latest/dex/search?q=SOL');
+  state.dex=(data.pairs||[]).filter(p=>p.chainId==='solana').sort((a,b)=>(Number(b.liquidity?.usd)||0)-(Number(a.liquidity?.usd)||0)).slice(0,6);
+  state.sources.dexscreener=true;setStatus('dexStatus','DexScreener',true);renderDex();
+}
+
+function renderMarket(){
+  const rows = state.market.slice(0,10).map(c=>`<tr>
+    <td><strong>${escapeHtml(c.name)}</strong><span class="ticker">${escapeHtml((c.symbol||'').toUpperCase())}</span></td>
+    <td>${usd(c.current_price)}</td>
+    <td class="${Number(c.price_change_percentage_24h)>=0?'positive':'negative'}">${pct(c.price_change_percentage_24h)}</td>
+    <td>${compact(c.total_volume)}</td>
+  </tr>`).join('');
+  $('marketRows').innerHTML = rows || '<tr><td colspan="4">Nenhum dado retornado.</td></tr>';
+}
+
+function renderDex(){
+  $('dexRows').innerHTML = state.dex.map(p=>`<tr>
+    <td><strong>${escapeHtml(p.baseToken?.symbol||'?')}/${escapeHtml(p.quoteToken?.symbol||'?')}</strong>
+    <span class="ticker">${escapeHtml(p.dexId||'DEX')}</span></td>
+    <td>${escapeHtml(p.dexId||'Raydium')}</td>
+    <td>${usd(p.priceUsd)}</td>
+    <td>${compact(p.liquidity?.usd)}</td>
+  </tr>`).join('') || '<tr><td colspan="4">Nenhum par encontrado.</td></tr>';
+}
+
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function renderAlerts(){
+  const alerts=[];
+  
+  // Alerta do DGM
+  if(state.dgmData){
+    const dgmChange = Number(state.dgmData.priceChange?.h24);
+    if(Number.isFinite(dgmChange) && Math.abs(dgmChange)>=5){
+      alerts.push({
+        title:`🐕 $DGM ${dgmChange>=0?'subiu':'caiu'} ${pct(dgmChange)} em 24h`,
+        desc:`Variação observada no DexScreener. Acompanhe o gráfico e confirme sempre o contrato.`
+      });
+    }
+  }
+  
+  const top=state.market.filter(c=>Number(c.price_change_percentage_24h)>=10).slice(0,3);
+  top.forEach(c=>alerts.push({title:`${c.symbol.toUpperCase()} subiu ${pct(c.price_change_percentage_24h)}`,desc:`Movimento forte de alta. Confira antes de investir.`}));
+  const volatile=state.market.filter(c=>Number(c.price_change_percentage_24h)<=-10).slice(0,2);
+  volatile.forEach(c=>alerts.push({title:`${c.symbol.toUpperCase()} caiu ${pct(c.price_change_percentage_24h)}`,desc:`Movimento forte de baixa — não é garantia de direção.`}));
+  
+  if(!alerts.length)alerts.push({title:'✅ Mercado estável',desc:'Sem movimentos extremos detectados neste momento.'});
+  $('radarAlerts').innerHTML=alerts.map(a=>`<div class="alert ${a.title.includes('$DGM')?'dgm':''}"><b>${escapeHtml(a.title)}</b><p>${escapeHtml(a.desc)}</p></div>`).join('');
+}
+
+async function refreshAll(){
+  const btn=$('refreshBtn');btn.disabled=true;btn.textContent='Consultando…';
+  
+  ['dgmStatus','cgStatus','binanceStatus','dexStatus'].forEach(id=>{ const el=$(id); if(el)el.className='chip wait'; });
+  
+  await Promise.all([
+    loadDGM().catch(e=>console.warn('DGM:',e)),
+    loadBinance().catch(e=>console.warn('Binance:',e)),
+    loadCoinGecko().catch(e=>{renderMarket();}),
+    loadDex().catch(e=>console.warn('Dex:',e))
+  ]);
+  
+  renderAlerts();
+  btn.disabled=false;btn.textContent='↻ Atualizar dados';
+}
+
+function showInfo(){alert(
+  '📡 Fontes:\n'+
+  '• $DGM: DexScreener pelo contrato Solana\n'+
+  '• Binance: BTC, ETH, SOL em tempo real\n'+
+  '• CoinGecko: Top do mercado\n'+
+  '• DexScreener: pares Solana\n\n'+
+  '🔄 Atualize sempre que quiser ver os dados mais recentes!\n'+
+  'Confirme o contrato: E9qgVy6urPUrKBv3wymPSgSPbDGM5z77ZnVok4YvUmqE'
+);}
+
+refreshAll();
+setInterval(refreshAll,30000); // Atualiza a cada 30s automaticamente
+</script>
+</body>
+</html>
+
+
+      
+
+
+
+
+
+
+
+
+
+
+
       
       
       
